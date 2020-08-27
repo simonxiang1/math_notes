@@ -1,0 +1,68 @@
+\section{Lecture 1: Complex Variables (8/27/20)}
+We talk about functions $ f \colon \C \to \C$ that map variables $z \mapsto f(z)$. This course is "not a very hard course" (it's a fun course!). Holomorphic functions have very nice properties automatically that real valued differentiable functions simply don't have.
+\subsection{Epsilon Delta Limits}
+\begin{definition}[Complex Addition]
+    We define complex numbers as ordered pairs $z=(x,y)$ where $x,y \in \R$, with the binary operation of complex addition being defined as \[
+        (x_1,y_1)=(x_2+y_2)=(x_1+x_2,y_1+y_2),
+    \]
+   where $+$ denotes addition on the reals. 
+\end{definition}
+Once we define multiplication and additive/multiplicative inverses, we will have (almost) formed the field $\C$. 
+\begin{definition}[Complex Multiplication]
+    For $x,y \in \C$, we have 
+    \[
+    (x_1,y_1)(x_2)(y_2)=(x_1x_2-y_1y_2,\,x_1y_2+y_1x_2).
+    \]
+\end{definition}
+Note: for $a \in \R$, we define \[
+    a(x,y)=(ax,ay).
+\]
+Recall $(a,0)(x,y)=(ax,ay).$ So one can understand that $a\in\R$ is simply the real analog of $(a,0)$ (or simply, $\operatorname{Re}(a,0)=a \in \R$).
+
+How do we define multiplication of a complex number by a real number? We can think of the reals acting (in a group sense) on the complex numbers, with the operation being the standard multiplication.
+
+\begin{example}
+    Take $(1,0)(x,y)=(x,y).$ So $1(x,y)=(x,y)$ (where $1 \in \R).$
+\end{example}
+
+\begin{example}[Complex Addition is Commmutative]
+    
+We have already defined the sum of two complex numbers $z_1+z_2$ as $z_3=z_1+z_2=(x_1+x_2,y_1+y_2).$ Since addition is commutative on the real numbers, we have  \[
+  (x_1+x_2,y_1+y_2)=(x_2+x_1,y_2+y_1)=z_2+z_1,
+\]
+so complex addition is commutative.
+\end{example}
+
+Claim: multiplication of complex numbers is commutative. You can verify this at home.
+
+\begin{theorem}[Distributive Law]
+   We have \[
+       z_1(z_2+z_3)=z_1z_2+z_1z_3,
+   \]
+   for $z_1,z_2,z_3 \in \C$. 
+\end{theorem}
+\begin{proof}
+    This follows from the fact that $\C$ has a ring structure.
+\end{proof}
+
+\begin{definition}
+    If $z=(x,y)$, then $x=\operatorname{Re}z$ and $y=\operatorname{Im}z.$ Furthermore, we can associate a complex number with a point in the plane in many ways:
+\end{definition}
+(insert figure 1 later)
+
+\vspace{3mm}
+
+Point: the plane is just a plane. The plane doesn't have to have a coordinate system (coordinate axes don't have to be perpendicular). Any coordinate system is "useful" for adding complex numbers. For example, you can interpret complex addition as simply vector addition in the plane (no need for orthogonal axes!).
+
+\begin{definition}[Additive Inverse]
+    We have \[
+        -(x,y)=(-1)(x,y)=(-x,-y).
+    \]
+    So $(x,y)+[-(x,y)]=(0,0)$.
+\end{definition}
+
+Note: $(x,y)(0,1)=(-y,x)$, a \textit{rotation} of $(x,y)$ by $90^{\circ}$.
+Another note: We have $(x,y)\in\C \cong x+iy$ and $i=(0,1).$ So 
+\[
+(x,y) \cong x+iy \cong (x,0)+(0,1)(y,0).
+\]
