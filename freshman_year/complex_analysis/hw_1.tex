@@ -1,10 +1,58 @@
-\section*{Homework 1}
-\begin{problem}
-    Prove that the PDE is linear
+\section*{Homework 1 (8/27/20)}
+\textbf{Section 2:} Problems $1, 4, 10$. Let $P$ represent the ordered set of problems under the $<$ relation (note that $<$ is a strict total ordering), e.g. $\{ 1,4,10 \}$ for Homework $1$. We accept the Axiom of Choice: then problem numbers in this \LaTeX{} document are represented by the inverse image $f^{-1}(p)$ of some $p \in P$, where $f \colon \N \to P$ is the natural order surjection ($f$ is not injective unless we restrict its domain to the subset $A_n \subset \N$, where $A_n = \{1,2, ... , n\}$, $n=|P|$). We have $1 \mapsto p_1$, where $p_1$ is the least element of $P$ (which exists by the Well-Ordering Theorem, if you view $P$ as a non-empty subset of the set of all problems $\mathscr{P}$). Similarly, $2 \mapsto p_2$, where $p_2$ is the next element such that $p_2 > p_1$ but for every $p \in P$ not equal to $p_1$ or $p_2$, $p > p_2.$ Continuing on, we map elements of $\N$ onto $P$ in this way. For example, even though I may be working on the question $4 \in P$, in reality it is denoted in the \LaTeX{} document by question $2 \in \N$, since $f^{-1}(4)=2$ (that is, problem $4$ is the second problem in the list).
+
+\begin{problem}[Question 1]
+    Verify that
+    \begin{enumerate}
+        \item[(a)] $(\sqrt{2} - i) - i(1-\sqrt{2} i)=-2i;$ 
+        \item[(b)] $(2,-3)(-2, 1) = (-1,8);$ 
+        \item[(c)] $(3,1)(3,-1)\left( \frac{1}{5},\frac{1}{10} \right) =(2,1)$
+    \end{enumerate}
 \end{problem}
 \begin{solution}
-   \[
-why helppp[
-   \]
+    The solutions follow from some computations.
+    \begin{enumerate}
+        \item[(a)] $(\sqrt{2} -i)-i(1-\sqrt{2} i)  = (\sqrt{2} -i-i+i^2\sqrt{2} ) = \sqrt{2} -2i-\sqrt{2} = -2i$.
+        \item[(b)] $(2,-3)(-2,1)=(\left( 2\cdot-2 \right)  - \left( 1\cdot -3 \right) , \left( -3\cdot -2 \right)  + \left( 2\cdot1 \right) ) = (-4+3, 6+2)=(-1,8).$
+        \item[(c)] $(3,1)(3,-1)\left( \frac{1}{5},\frac{1}{10} \right) = (9+1,3-3)\left( \frac{1}{5},\frac{1}{10} \right) = (10,0)\left( \frac{1}{5},\frac{1}{10} \right) = (2-0, 0+1)=(2,1). $
+    \end{enumerate}
 \end{solution}
+    
+\begin{problem}[Question 2, not assigned. Safe to ignore]
+    Show that 
+    \begin{enumerate}
+        \item[(a)] $\operatorname{Re}(iz)= - \operatorname{Im}z;$
+        \item[(b)] $\operatorname{Im}(iz) = \operatorname{Re}z.$
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    The solutions follow from some algebraic manipulation. 
+    \begin{enumerate}
+        \item[(a)] Let $z \in \C$, then $z = a+bi$ for $a,b \in \R.$ Note that $\operatorname{Re}z=a$ and $\operatorname{Im}z = b.$ Then $\operatorname{Re}(iz) = \operatorname{Re}(i(a+bi))=\operatorname{Re}(ia+i^2b)=\operatorname{Re}(-b+ia)=-b=\operatorname{Im}z.$ 
+        \item[(b)] Let $z \in \C$, then $\operatorname{Im}(iz)=\operatorname{Im}(i(a+bi))=\operatorname{Im}(ia+i^2b)=\operatorname{Im}(-b+ia)=a=\operatorname{Re}z.$
+    \end{enumerate}
+\end{solution}
+
+\begin{problem}[Question 4]
+    Verify that $z=1 \pm i$ satisfies the equation $z^2-2z+2=0.$
+\end{problem}
+\begin{solution}
+    Let $z = 1+i.$ Then $z^2-2z+2=(1+i)^2-2(1+i)+2=(1+2i-1)-2-2i+2=2i-2i=0.$ 
+    
+    Now let $z=1-i.$ Then $z^2-2z+2=(1-i)^2-2(1-i)+2=(1-2i-1)-2+2i+2=-2i+2i=0.$
+
+    Note that this is just an example of that fact that conjugate elements are defined as both being solutions to the minimal polynomial of an algebraic element over a field.
+\end{solution}
+
+\begin{problem}[Question 10]
+    Use $i=(0,1)$ and $y=(y,0)$ to verify that $-(iy)=(-i)y.$ Then show that the additive inverse of $z=x+iy \in \C$ can be written as $-z=-x-iy$ without ambiguity.
+\end{problem}
+\begin{solution}
+    We have $-(iy)=-\left( (0,1)\cdot(y,0) \right) = -\left( 0-0, y+0 \right) = -(0,y)=(0,-y)$. We also have $(-i)y=(0,-1)\cdot(y,0)=(0-0, -y+0)=(0,-y).$ We conclude that $-(iy)=(-i)y.$ 
+
+    To show that we can write the additive inverse of $z = x+iy \in \C$ (denoted by $-z$ ) as $-z=-x-iy$ without ambiguity: Our first possibility is that $-x-iy$ refers to $-x+\left( -(iy) \right) $ (denoted $-x-(iy)$ from now on). Then $-z+z=(-x-(iy))+(x+(iy))=(-x+x)+(-(iy)+(iy))$. Clearly $-x$ and $-(iy)$ are the additive inverses of $x$ and $(iy)$ respectively, so this sum is equal to zero plus zero which is just zero. The second possibility is that $-x-iy$ refers to $-x+((-i)y)$, in which case we have previously shown that $(-i)y=-(iy)$, so this sum is equal to $-x-(iy)$, and we are done.
+\end{solution}
+
+
+
 
