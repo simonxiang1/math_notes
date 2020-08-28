@@ -1,0 +1,64 @@
+\section{Lecture 2: Basic Group Theory (8/28/20)}
+\begin{lemma} Let $H \subset G$, $\langle G, \cdot \rangle$ a group and $H \neq \O.$ Then $H \leq G \iff h_1h_2^{-1}\in H$ if $h_1h_2 \in H.$
+\end{lemma}
+\begin{proof}
+    For all $h_2 \in H$, $h_2^{-1} \in H$ since $H$ is a group. $H$ is closed under $\cdot$ implies $h_1h_2^{-1}\in H$ for all $h_1,h_2 \in H$. Finish this later.
+\end{proof}
+
+\begin{definition}[Subgroup]
+    A \emph{subgroup} $H$ of $G$ is normal if $gHg^{-1}=H$ for all $g \in G$.
+\end{definition}
+\begin{example}
+    Let $G$ be abelian: then every subgroup is normal since $ghg^{-1}=gg^{-1}h=h$ for all $g \in G, h \in H$.
+\end{example}
+\begin{example}
+    Take $G=S_3.$ Then the subgroup $\langle (1,2,3) \rangle$ is normal, the subgroup $\langle (1,2) \rangle$ is not normal, since $(13)(12)(13)^{-1}=(23) \notin \langle(12)\rangle$.
+\end{example}
+\begin{example}
+    Take $SL_n(\R) \subset GL_n(\R)$, where $SL_n(\R)$ is the set of matrices such that $det(A)=1$ for $A \in SL_n(\R).$ $SL_n(\R)$ forms a subgroup. Question: is it normal? Answer: Yes. 
+    \[
+        det(ABA^{-1})=finish later
+    \]
+\end{example}
+
+Proposition: Let $H, K$ be subgroups of $G$, then $H \cap K$ is a subgroup of $G.$
+
+Note: is $H \cup K$ a subgroup? No!
+
+\begin{definition}[Product Groups]
+    Let $G,H$ be groups. We define the \emph{direct product} $G \times H$ with the group operation $(g_1,h_1)\cdot(g_2,h_2)=(g_1g_2,h_1h_2)$. Identity, Inverses. Ex: $\Z^2$
+\end{definition}
+
+\begin{example}[Quotient Groups]
+    Let $n \in \Z$, for example $\left( \frac{\Z}{n\Z}, + \right) $, equivalence relations: modulo $n$. $a,b \in \Z, a \equiv b \mod n \iff n \mid (a-b)$. Equivalence classes: $a+n\Z = \{ a+nk \mid k \in \Z \}$. Notation: $\bar{a}=a+n\Z=[a]$. Our set $\frac{\Z}{n\Z}=\{a+n\Z \mid a \in \Z \} = \{ a + n\Z \mid a=0, ... , n-1 \}$. $(a+n\Z)+(b+n\Z)=(a+b)+n\Z$, so this is a group operation. In this case, the identity is just $0+n\Z=n\Z$. We have the inverse of $(a+n\Z)$ equal to $(a+n\Z)^{-1}=-a+n\Z$.
+\end{example}
+
+Remark: $\left( \Z/n\Z,+ \right) $ is a quotient of the group $\left( \Z,+ \right)$ by the subgroup $\left( n\Z,+ \right) $. $<1>=\Z, <1+n\Z> = <\Z/n\Z>.$
+
+Quotient groups in general: $G$ a group, $H$ a \textbf{normal} subgroup. 
+
+\begin{definition}[Cosets]
+    Left cosets: $gH=\{ gh \mid h \in H \}.$
+    Right cosets: $Hg=\{ hg \mid h \in H \}.$
+    $G/H$ - set of left cosets.
+    $H\textbackslash G$ - set of right cosets.
+\end{definition}
+Observe: Left and right cosets are in bijection with one another. $gH \mapsto Hg$, $gh \mapsto g^{-1}(gh)g=hg$. You can verify that this is a bijection. Let $g_1,g_2 \in G$, what map maps $g_1H \to g_2H$? $g_1h \mapsto (g_2g_1^{-1})g_1h=g_2h.$
+
+Note: $\bigcup gH = G, g \in G$.
+
+Also: $g_1H \cap g_2H $ is either $\O$ or they are equal. (Equivalence relation).
+
+Proposition: If $G$ is finite and $H$ a subgroup of $G$, then $|H| \mid |G|$.
+
+\begin{proof}
+    By the (also), \[
+    G = \bigcup_{i=1}^{n}giH
+    \]
+    since $G$ is a finite $n \in \N$. Disjoin union. So \[
+        |G|= \sum_{i=1}^{n} |g_iH| = n \cdot |G| \implies |H| \mid |G|.
+    \]
+\end{proof}
+
+Quotient group: $G$ a group, $H$ a normal subgroup, $G/H = \{ gH \mid g \in G \}$. $g_1H \cdot g_2H = g_1g_2H$.
+
