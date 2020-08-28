@@ -1,39 +1,45 @@
-\section{Lecture 2: Basic Group Theory (8/28/20)}
-\begin{lemma} Let $H \subset G$, $\langle G, \cdot \rangle$ a group and $H \neq \O.$ Then $H \leq G \iff h_1h_2^{-1}\in H$ if $h_1h_2 \in H.$
+\section{Lecture 1}
+Unfortunately, I couldn't attend.
+\section{Lecture 2: Quotient Groups (8/28/20)}
+\begin{lemma} Let $H \subseteq G$, $\langle G, \cdot \rangle$ a group and $H \neq \O.$ Then $H$ is a subgroup of $G$ if and only if $h_1h_2 \in H \implies h_1h_2^{-1}\in H$.
 \end{lemma}
 \begin{proof}
-    For all $h_2 \in H$, $h_2^{-1} \in H$ since $H$ is a group. $H$ is closed under $\cdot$ implies $h_1h_2^{-1}\in H$ for all $h_1,h_2 \in H$. Finish this later.
+    For all $h_2 \in H$, $h_2^{-1} \in H$ since $H$ is a group. $H$ is closed under multiplication implies $h_1h_2^{-1}\in H$ for all $h_1,h_2 \in H$. Conversely, assume that $h_1h_2\in H\implies h_1h_2^{-1}\in H.$ Then for $h\in H$, $hh^{-1}\in H$ so $1\in H$. Now that we know $1\in H$, then for $h\in H$ we have $1\cdot h \in H \implies h^{-1}\cdot 1\in H$, so $H$ is closed under inverses. Finally, associativity follows from the fact that  $H \subseteq G \implies \forall h \in H, h \in G$ where $G$ is a group, and we are done.
 \end{proof}
 
-\begin{definition}[Subgroup]
+\begin{definition}[Normal Subgroup]
     A \emph{subgroup} $H$ of $G$ is normal if $gHg^{-1}=H$ for all $g \in G$.
 \end{definition}
 \begin{example}
     Let $G$ be abelian: then every subgroup is normal since $ghg^{-1}=gg^{-1}h=h$ for all $g \in G, h \in H$.
 \end{example}
 \begin{example}
-    Take $G=S_3.$ Then the subgroup $\langle (1,2,3) \rangle$ is normal, the subgroup $\langle (1,2) \rangle$ is not normal, since $(13)(12)(13)^{-1}=(23) \notin \langle(12)\rangle$.
+    Take $G=S_3.$ Then the subgroup $\langle (123) \rangle$ is normal. However, the subgroup $\langle (1,2) \rangle$ is not normal, since $(13)(12)(13)^{-1}=(23) \notin \langle(12)\rangle$.
 \end{example}
 \begin{example}
-    Take $SL_n(\R) \subset GL_n(\R)$, where $SL_n(\R)$ is the set of matrices such that $det(A)=1$ for $A \in SL_n(\R).$ $SL_n(\R)$ forms a subgroup. Question: is it normal? Answer: Yes. 
+    Take $\textrm{SL}_n\R \subseteq \textrm{GL}_n\R$, where $\textrm{SL}_n\R$ is the set of matrices with $\det(A)=1$ for $A \in \textrm{SL}_n\R$. We know $\textrm{SL}_n\R$ forms a subgroup. Question: is $\textrm{SL}_n\R$ normal? Answer: yes.
     \[
-        det(ABA^{-1})=finish later
+        \det(ABA^{-1})=\det(A)\det(B)\det(A^{-1})=\det(A)\det(A)^{-1}\det(B)=\det(B).
     \]
 \end{example}
 
-Proposition: Let $H, K$ be subgroups of $G$, then $H \cap K$ is a subgroup of $G.$
+\begin{prop}
+    Let $H, K$ be subgroups of $G$, then $H \cap K$ is a subgroup of $G.$ You can verify this in your free time.
+\end{prop}
 
-Note: is $H \cup K$ a subgroup? No!
+\textbf{Note:} is $H \cup K$ a subgroup? No!
 
 \begin{definition}[Product Groups]
-    Let $G,H$ be groups. We define the \emph{direct product} $G \times H$ with the group operation $(g_1,h_1)\cdot(g_2,h_2)=(g_1g_2,h_1h_2)$. Identity, Inverses. Ex: $\Z^2$
+    Let $G,H$ be groups. We define the \emph{direct product} $G \times H$ with the group operation $(g_1,h_1)\cdot(g_2,h_2)=(g_1g_2,h_1h_2)$. The identity is just $(1_G,1_H)$ where $1_G$ and $1_H$ denotes the respective identities for $G$ and $H$. Finally, the inverse is similarly defined as $(g_1^{-1},h_1^{-1})$ where $g_1^{-1}$ and $h_1^{-1}$ are the respective inverses for $g_1\in G$, $h_1\in H$.
 \end{definition}
 
+Some examples of product groups include $\Z \times \Z$ ($\Z$ denotes $\langle \Z,+ \rangle )$, and $\Z \times \langle \R\setminus\{0\} , \cdot \rangle $
+
 \begin{example}[Quotient Groups]
-    Let $n \in \Z$, for example $\left( \frac{\Z}{n\Z}, + \right) $, equivalence relations: modulo $n$. $a,b \in \Z, a \equiv b \mod n \iff n \mid (a-b)$. Equivalence classes: $a+n\Z = \{ a+nk \mid k \in \Z \}$. Notation: $\bar{a}=a+n\Z=[a]$. Our set $\frac{\Z}{n\Z}=\{a+n\Z \mid a \in \Z \} = \{ a + n\Z \mid a=0, ... , n-1 \}$. $(a+n\Z)+(b+n\Z)=(a+b)+n\Z$, so this is a group operation. In this case, the identity is just $0+n\Z=n\Z$. We have the inverse of $(a+n\Z)$ equal to $(a+n\Z)^{-1}=-a+n\Z$.
+    Let $n \in \Z$, for example $ \langle \Z /n\Z, + \rangle $, equivalence relations: modulo $n$. $a,b \in \Z, a \equiv b \mod n \iff n \mid (a-b)$. Equivalence classes: $a+n\Z = \{ a+nk \mid k \in \Z \}$. Notation: $\bar{a}=a+n\Z=[a]$. Our set $\Z /n\Z=\{a+n\Z \mid a \in \Z \} = \{ a + n\Z \mid a=0, ... , n-1 \}$. $(a+n\Z)+(b+n\Z)=(a+b)+n\Z$, so this is a group operation. In this case, the identity is just $0+n\Z=n\Z$. We have the inverse of $(a+n\Z)$ equal to $(a+n\Z)^{-1}=-a+n\Z$.
 \end{example}
 
-Remark: $\left( \Z/n\Z,+ \right) $ is a quotient of the group $\left( \Z,+ \right)$ by the subgroup $\left( n\Z,+ \right) $. $<1>=\Z, <1+n\Z> = <\Z/n\Z>.$
+Remark: $ \langle \Z/n\Z,+  \rangle $ is a quotient of the group $\langle \Z,+ \rangle $ by the subgroup $\langle n\Z,+  \rangle $. $\langle 1 \rangle =\Z, \langle 1+n\Z \rangle = \langle \Z/n\Z \rangle.$
 
 Quotient groups in general: $G$ a group, $H$ a \textbf{normal} subgroup. 
 
@@ -41,24 +47,33 @@ Quotient groups in general: $G$ a group, $H$ a \textbf{normal} subgroup.
     Left cosets: $gH=\{ gh \mid h \in H \}.$
     Right cosets: $Hg=\{ hg \mid h \in H \}.$
     $G/H$ - set of left cosets.
-    $H\textbackslash G$ - set of right cosets.
+    $H\setminus G$ - set of right cosets.
 \end{definition}
 Observe: Left and right cosets are in bijection with one another. $gH \mapsto Hg$, $gh \mapsto g^{-1}(gh)g=hg$. You can verify that this is a bijection. Let $g_1,g_2 \in G$, what map maps $g_1H \to g_2H$? $g_1h \mapsto (g_2g_1^{-1})g_1h=g_2h.$
 
-Note: $\bigcup gH = G, g \in G$.
-
+\begin{note} We have
+   \[
+\bigcup_{g\in G} gH = G.
+   \]
 Also: $g_1H \cap g_2H $ is either $\O$ or they are equal. (Equivalence relation).
+\end{note}
 
-Proposition: If $G$ is finite and $H$ a subgroup of $G$, then $|H| \mid |G|$.
+
+
+\begin{prop}
+If $G$ is finite and $H$ a subgroup of $G$, then $|H| \mid |G|$.
+\end{prop}
+
 
 \begin{proof}
-    By the (also), \[
-    G = \bigcup_{i=1}^{n}giH
+    By the statement above,
+    \[
+    G = \bigcup_{i=1}^{n}g_iH
     \]
-    since $G$ is a finite $n \in \N$. Disjoin union. So \[
-        |G|= \sum_{i=1}^{n} |g_iH| = n \cdot |G| \implies |H| \mid |G|.
+    since $G$ is finite for $n \in \N$. Note that this is a disjoint union. So \[
+        |G|= \sum_{i=1}^{n} |g_iH| = n \cdot |H| \implies |H| \mid |G|.
     \]
 \end{proof}
+Quotient group: $G$ a group, $H$ a normal subgroup, $G/H = \{ gH \mid g \in G \}$. The multiplication is defined as $g_1H \cdot g_2H = g_1g_2H$. You can verify this operation is well defined (given that $H$ is normal).
 
-Quotient group: $G$ a group, $H$ a normal subgroup, $G/H = \{ gH \mid g \in G \}$. $g_1H \cdot g_2H = g_1g_2H$.
 

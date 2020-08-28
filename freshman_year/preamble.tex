@@ -1,10 +1,12 @@
 \usepackage{amsmath, amssymb, amsthm, mathrsfs}
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
 \theoremstyle{definition}
 \newtheorem{problem}{Problem}
-\newtheorem{definition}{Definition}
-\newtheorem{example}{Example}
+\newtheorem*{note}{Note}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
 \newenvironment{solution}
   {\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[Solution]}
   {\end{proof}}
