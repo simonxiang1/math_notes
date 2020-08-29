@@ -6,4 +6,5 @@
 *.fdb_latexmk
 applications
 math_papers
+other_classes
 /*/*/general_info

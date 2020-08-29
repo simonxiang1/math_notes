@@ -1,10 +1,107 @@
-\section{Partial Differential Equations (8/27/20)}
-\begin{problem}
-    Prove that the PDE is linear
-\end{problem}
-\begin{solution}
-   \[
-why helppp
-   \]
-\end{solution}
+\section{First Order Linear Differential Equations (8/27/20)}
+\begin{definition}[Order]
+    We have the \emph{order} of a differential equation the highest derivative of a function $y$ that appears in the equation. For example, the order of the differential equation \[
+        \frac{dy}{dt}=3y^2\sin(t+y)
+    \]
+    is $1$, while the order of \[
+    \frac{d^3y}{dt^3}=e^{-y}+t+\frac{d^2y}{dt^2}
+    \]
+    is $3$. We would call the first example a \emph{first-order differential equation} and the second a \emph{third order differential equation}.
+\end{definition}
+\begin{definition}[Solution]
+    The \emph{solution} of a differential equation is a continuous function $y(t)$ that together with its derivatives satisfies the given relationship.
+\end{definition}
+\begin{example}
+    The function \[
+        y(t)=2\sin t - \frac{1}{3}\cos 2t
+    \]
+    is the solution of the second-order differential equation \[
+        \frac{d^2y}{dt^2}+y= \cos 2t
+    \]
+    since 
+    \begin{align*}
+        \frac{d^2}{dt^2}\left( 2\sin t - \frac{1}{3}\cos 2t \right) + \left( 2\sin t - \frac{1}{3}\cos 2t \right) \\
+        = \left( -2\sin t + \frac{4}{3} \cos 2t \right) + 2 \sin t - \frac{1}{3}\cos 2t = \cos 2t.
+    \end{align*}
+\end{example}
 
+Goal: Given a differential equation of the form \[
+    \frac{dy}{dt}=f(t,y)
+\]
+and the function $f(t,y)$, find all functions $y(t)$ that satisfy the equation above.
+
+What we have: As of now, all we can solve is a differential equation of the form \[
+    \frac{dy}{dt}=g(t)
+\]
+given $g(t)$ is integrable. Very sad!
+\begin{definition}[Linear ODE]
+    The general first-order linear differential equation is of the form \[
+        \frac{dy}{dt}+a(t)y=b(t),
+    \]
+    where $a(t)$ and $b(t)$ are continuous (assumed to be functions of time).
+\end{definition}
+\begin{definition}[Homogeneous Linear ODE]
+    The equation \[
+        \frac{dy}{dt}+a(t)y=0
+    \]
+    is called the \emph{homogeneous} first-order linear differential equation, and the previous definition is called the \emph{nonhomogeneous} first-order linear differential equation for $b(t)$ not necessarily zero.
+\end{definition}
+\begin{example}
+    Let us solve the homogeneous first-order linear differential equation. Rewrite it in the form \[
+        \frac{\frac{dy}{dt}}{y}=-a(t).
+    \]
+    Second, note that \[
+        \frac{\frac{dy}{dt}}{y}\equiv \frac{d}{dt}\ln |y(t)|.
+    \] Then we can write the differential equation in the form \[
+    \frac{d}{dt}\ln |y(t)| = -a(t),
+    \] so we have \[
+    \ln|y(t)|= - \int a(t) \, dt + c_1.
+    \] Continuing on, \[
+    |y(t)|=\exp\left( -\int a(t) \, dt + c_1 \right) = c \exp \left( - \int a(t) \, dt \right) 
+    \]
+    or \[
+        \left| \, y(t)\exp\left( \int a(t) \, dt \right)  \right| = c.
+    \]
+    Now $y(t)\exp \left( \int a(t) \, dt \right) $ is continuous and we know its absolute value is constant which implies that the function itself is constant (which follows from the IVT, assuming $g(t_1)=c$ and $g(t_2)=-c$ for $g$ a function, $c$ a constant. So we have $y(t)\exp\left( \int a(t) \, dt \right) = c$, or 
+    \begin{equation}\label{eq 1}
+        y(t) = c \exp \left( - \int a(t) \, dt \right) .
+    \end{equation}
+    Equation \eqref{eq 1} is the \emph{general solution} of the homogeneous equation. Note that there exist infinitely many solutions since for all $c$ we have a distinct $y(t)$.
+\end{example}
+\begin{example}
+    To solve the Linear ODE \[
+    \frac{dy}{dt}+2ty=0,
+    \]
+    simply apply Equation \eqref{eq 1} to yield \[
+        y(t)=c\exp\left( -\int 2t \, dt \right) = c\exp\left(-t^2 \right) .
+    \] (This is taking too long! I'll type notes with less rigor next time).
+\end{example}
+Usually scientists are not interested in the general solution given by Equation \eqref{eq 1}, rather we look for solutions to a specific $y(t)$ which at some time $t_0$ has the value $y_0$, or we want to determine a $y(t)$ such that \[
+    \frac{dy}{dt}+a(t)y=0, \quad y(t_0)=y_0.
+\]
+Please accept the derivation that a general solution to this type of problem is 
+\begin{equation}\label{eq_2}
+    y(t)=y_0\exp\left( -\int_{t_0}^{t} a(s) \, ds \right)  
+\end{equation}
+without proof (there is nothing of interest about the derivation process).
+\begin{example}
+    To solve \[
+        \frac{dy}{dt}+(\sin t)y=0, \quad y(0)=\frac{3}{2},
+    \]
+    let  $a(t)=\sin t$, $t_0=0$, $y_0=\frac{3}{2}$. Then \[
+        y(t)=\frac{3}{2}\exp\left( -\int_{0}^{t} \sin s \, ds \right)  =\frac{3}{2} \exp \left( \cos t - 1 \right).
+    \]
+\end{example}
+\begin{example}
+    To solve the initial value problem \[
+        \frac{dy}{dt}+ \exp(t^2)y=0, \quad y(1)=2,
+    \]
+    simply PLUG IT IN (reee) to get \[
+        y(t)=2\exp\left( -\int_{1}^{t} e^{s^2} \, ds \right).
+    \]
+    Recall that this is the \emph{Gaussian Integral} and can be solved by a change to double integration by polar coordinates (yielding $\int_{-\infty}^{\infty} e^{-x^2} \, dx = \sqrt{\pi}$), but in general has no closed form solution.
+\end{example}
+
+
+
+    
