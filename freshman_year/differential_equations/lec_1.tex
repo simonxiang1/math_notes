@@ -102,6 +102,70 @@ without proof (there is nothing of interest about the derivation process).
     Recall that this is the \emph{Gaussian Integral} and can be solved by a change to double integration by polar coordinates (yielding $\int_{-\infty}^{\infty} e^{-x^2} \, dx = \sqrt{\pi}$), but in general has no closed form solution.
 \end{example}
 
+Recall the non-homogeneous linear differential equation of the form $\frac{dy}{dt}+a(t)y=b(t)$. Let $\mu(t)$ be a continuous function. Then multiply both sides by a continuous function $\mu(t)$ to get \[
+    \mu(t)\frac{dy}{dt}+a(t)\mu(t)y=\mu(t)b(t),
+\]
+which is equivalent to the above form of a non-homogeneous linear differential equation. What we want: $\mu(t)\frac{dy}{dt}+a(t)\mu(t)y$ equal to the derivative of some simple expression. To get this, notice that \[
+    \frac{d}{dt} \mu(t)y=\mu(t)\frac{dy}{dt}+\frac{d\mu}{dt}y
+\]
+by the product rule, so if $\frac{d\mu(t)}{dt}=a(t)\mu(t)$, our expression above will simply be equal to the derivative of $\mu(t)y$. Since our new expression is just a linear homogeneous differential equation, we have \[
+    \mu(t)=\exp\left( \int a(t) \, dt \right) .
+\]
+Now the expressions \[
+    \frac{d}{dt} \mu(t)y=\mu(t)\frac{dy}{dt}+\frac{d\mu}{dt}y \\
+\] and \[
+\frac{d}{dt} \mu(t)y=\mu(t)b(t)
+\]
+are equivalent, so we can integrate both sides to obtain \[
+    \mu(t)y=\int \mu(t)b(t) \, dt+c
+\]
+or \[
+    y=\frac{1}{\mu(t)}\left( \int \mu(t)b(t) \, dt +c\right)=\exp\left( -\int a(t) \, dt \right) \left( \int \mu(t)b(t) \, dt+c \right) .
+\]
+A similar integration between $t_0$ and $t$ yields \[
+    \mu(t)y-\mu(t_0)y_0=\int_{t_0}^{t} \mu(s)b(s) \, ds
+\] or \[
+y=\frac{1}{\mu(t)}\left( \mu(t_0)y_0+\int_{t_0}^{t} \mu(s)b(s) \, ds \right),
+\]
+solving initial-value problems. Remark: $\mu(t)$ is called an \emph{integrating factor} for the nonhomogeneous equation since after multiplying both sides by $\mu(t)$ we can immediately integrate to find all solutions.
+\begin{example}
+    We find the general solution of the differential equation \[
+    \frac{dy}{dt}-2ty=t.
+    \]
+    We know the integrating factor $\mu(t)$ is equal to $\exp\left( \int -2t \, dt \right) = e^{-t^2},$ so multiplying both sides by $\mu(t)$ yields \[
+        e^{-t^2}\left( \frac{dy}{dt}-2ty \right) =e^{-t^2}t
+    \] which is equivalent to \[
+    \frac{d}{dt} \left( e^{-t^2}y \right) = e^{-t^2}t
+    \]
+    by our choice of $\mu(t)$. So \[
+        \int \frac{d}{dt} \left( e^{-t^2}y \right)  \, dt = \int t e^{-t^2} \, dt, 
+    \]
+    and by the Fundamental Theorem we have \[
+    e^{-t^2}y=-\frac{1}{2} e^{-t^2} + c.
+    \]
+     Finally, we conclude that \[
+     y=-\frac{1}{2}+ce^{t^2}.
+     \]
+\end{example}
+\begin{example}
+    Here we solve an initial value problem. Let \[
+        \frac{dy}{dx}+xy=xe^{x^2/2}, \quad y(0)=1.
+    \] The integrating factor $\mu(x)$ is equal to $\exp\left( \int x\, dx \right) = e^{x^2/2}$. Multiply both sides by $\mu(x)$ to obtain \[
+    e^{x^2/2}\left( \frac{dy}{dx}+xy \right) =e^{x^2}\left( xe^{x^2/2} \right),
+    \] which is equivalent to
+    \[
+        \frac{d}{dx}\left( e^{x^2/2} y \right) = xe^{x^2}
+    \]
+    by our choice of $\mu(x)$. By the Fundamental Theorem, we have \[
+    e^{x^2/2}y=\int xe^{x^2} \, dx=\frac{1}{2}e^{x^2}+c.
+    \]
+    Let $x=0$ and $y=1$, then  $1=\frac{1}{2}+c$, so $c=\frac{1}{2}$. We conclude that \[
+        y(x)=\frac{1}{2}e^{x^2/2}+\frac{1}{2}e^{-x^2/2}.
+\] We can simplify this to \[
+y(x) = \frac{1}{2}e^{x^2/2}\left( 1+e^{-x^2} \right) .
+\]
+\end{example}
 
 
-    
+
+
