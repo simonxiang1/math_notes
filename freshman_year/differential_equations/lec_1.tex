@@ -1,4 +1,5 @@
 \section{First Order Linear Differential Equations (8/27/20)}
+\subsection{Definitions}
 \begin{definition}[Order]
     We have the \emph{order} of a differential equation the highest derivative of a function $y$ that appears in the equation. For example, the order of the differential equation \[
         \frac{dy}{dt}=3y^2\sin(t+y)
@@ -40,6 +41,8 @@ given $g(t)$ is integrable. Very sad!
     \]
     where $a(t)$ and $b(t)$ are continuous (assumed to be functions of time).
 \end{definition}
+
+\subsection{Homogeneous Linear Ordinary Differential Equations}
 \begin{definition}[Homogeneous Linear ODE]
     The equation \[
         \frac{dy}{dt}+a(t)y=0
@@ -76,6 +79,8 @@ given $g(t)$ is integrable. Very sad!
         y(t)=c\exp\left( -\int 2t \, dt \right) = c\exp\left(-t^2 \right) .
     \] (This is taking too long! I'll type notes with less rigor next time).
 \end{example}
+
+\subsection{Initial Value Problems}
 Usually scientists are not interested in the general solution given by Equation \eqref{eq 1}, rather we look for solutions to a specific $y(t)$ which at some time $t_0$ has the value $y_0$, or we want to determine a $y(t)$ such that \[
     \frac{dy}{dt}+a(t)y=0, \quad y(t_0)=y_0.
 \]
@@ -102,6 +107,7 @@ without proof (there is nothing of interest about the derivation process).
     Recall that this is the \emph{Gaussian Integral} and can be solved by a change to double integration by polar coordinates (yielding $\int_{-\infty}^{\infty} e^{-x^2} \, dx = \sqrt{\pi}$), but in general has no closed form solution.
 \end{example}
 
+\subsection{Non-homogeneous Linear Differential Equations}
 Recall the non-homogeneous linear differential equation of the form $\frac{dy}{dt}+a(t)y=b(t)$. Let $\mu(t)$ be a continuous function. Then multiply both sides by a continuous function $\mu(t)$ to get \[
     \mu(t)\frac{dy}{dt}+a(t)\mu(t)y=\mu(t)b(t),
 \]
@@ -127,7 +133,9 @@ A similar integration between $t_0$ and $t$ yields \[
 \] or \[
 y=\frac{1}{\mu(t)}\left( \mu(t_0)y_0+\int_{t_0}^{t} \mu(s)b(s) \, ds \right),
 \]
-solving initial-value problems. Remark: $\mu(t)$ is called an \emph{integrating factor} for the nonhomogeneous equation since after multiplying both sides by $\mu(t)$ we can immediately integrate to find all solutions.
+solving initial-value problems. 
+\subsection{Integrating Factor}
+Remark: $\mu(t)$ is called an \emph{integrating factor} for the nonhomogeneous equation since after multiplying both sides by $\mu(t)$ we can immediately integrate to find all solutions.
 \begin{example}
     We find the general solution of the differential equation \[
     \frac{dy}{dt}-2ty=t.

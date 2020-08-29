@@ -1,8 +1,11 @@
-\usepackage{amsmath, amssymb, amsthm, mathrsfs}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\usepackage{hyperref}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}{Lemma}[section]
 \theoremstyle{definition}
 \newtheorem{problem}{Problem}
+\newtheorem*{prob}{Problem}
 \newtheorem*{note}{Note}
 \newtheorem{prop}{Proposition}[section]
 \newtheorem{definition}{Definition}[section]
@@ -20,5 +23,15 @@
 \newcommand\F{\ensuremath{\mathbb{F}}}
 \newcommand\E{\ensuremath{\mathbb{E}}}
 \renewcommand\qedsymbol{$\boxtimes$}
+
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\Syl}{Syl}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\GL}{GL} 
+\DeclareMathOperator{\SL}{SL}
+
+\renewcommand*{\sectionformat}{\S\thesection\autodot\enskip}
+\renewcommand*{\subsectionformat}{\S\thesubsection\autodot\enskip}
 
 \author{Simon Xiang}

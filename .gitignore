@@ -4,6 +4,7 @@
 *.toc
 *.fls
 *.fdb_latexmk
+*.out
 applications
 math_papers
 other_classes

@@ -1,6 +1,9 @@
-\section{Lecture 1}
-Unfortunately, I couldn't attend.
-\section{Lecture 2: Quotient Groups (8/28/20)}
+\section{August 26, 2020}
+\subsection{Oops}
+Unfortunately, I couldn't attend Lecture 1.
+\section{August 28, 2020}
+
+\subsection{Subgroups and Normal Subgroups}
 \begin{lemma} Let $H \subseteq G$, $\langle G, \cdot \rangle$ a group and $H \neq \O.$ Then $H$ is a subgroup of $G$ if and only if $h_1h_2 \in H \implies h_1h_2^{-1}\in H$.
 \end{lemma}
 \begin{proof}
@@ -29,6 +32,7 @@ Unfortunately, I couldn't attend.
 
 \textbf{Note:} is $H \cup K$ a subgroup? No!
 
+\subsection{Product and Quotient Groups}
 \begin{definition}[Product Groups]
     Let $G,H$ be groups. We define the \emph{direct product} $G \times H$ with the group operation $(g_1,h_1)\cdot(g_2,h_2)=(g_1g_2,h_1h_2)$. The identity is just $(1_G,1_H)$ where $1_G$ and $1_H$ denotes the respective identities for $G$ and $H$. Finally, the inverse is similarly defined as $(g_1^{-1},h_1^{-1})$ where $g_1^{-1}$ and $h_1^{-1}$ are the respective inverses for $g_1\in G$, $h_1\in H$.
 \end{definition}
@@ -43,6 +47,7 @@ Remark: $ \langle \Z/n\Z,+  \rangle $ is a quotient of the group $\langle \Z,+ \
 
 Quotient groups in general: $G$ a group, $H$ a \textbf{normal} subgroup. 
 
+\subsection{Left and Right Cosets}
 \begin{definition}[Cosets]
     Left cosets: $gH=\{ gh \mid h \in H \}.$
     Right cosets: $Hg=\{ hg \mid h \in H \}.$
@@ -58,8 +63,7 @@ Observe: Left and right cosets are in bijection with one another. $gH \mapsto Hg
 Also: $g_1H \cap g_2H $ is either $\O$ or they are equal. (Equivalence relation).
 \end{note}
 
-
-
+\subsection{Lagrange's Theorem}
 \begin{prop}
 If $G$ is finite and $H$ a subgroup of $G$, then $|H| \mid |G|$.
 \end{prop}
