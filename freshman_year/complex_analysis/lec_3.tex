@@ -1,0 +1,99 @@
+\section{September 3, 2020}
+\subsection{Fractional Powers}
+Let $z_0\in \C$, and define the fractional power $(z_0)^{\frac{1}{m}}$ for $m\geq 2$. This is a complex number such that 
+\[
+    \left[ (z_0)^{\frac{1}{m}} \right]^{m}=z_0.
+\]
+This many not be unique. To determine the value of the fractional power $(z_0)^{\frac{1}{m}}$, let $z_0=r_0e^{i\theta_0}, \, r_0=|z_0|, \, \theta_0\in \operatorname{Arg} z_0$. Then \[
+    (z_0)^{\frac{1}{m}}=(r_0)^{\frac{1}{m}}e^{i\frac{\theta_0}{m}}.
+\]
+\begin{example}
+   In polar form, $z_0=i=e^{i \frac{\pi}{2}}$. We want $i^{\frac{1}{6}},$ one value is $e^{i \frac{\pi}{12}}$. Also, 
+   \[
+   e^{i \frac{\left[ \frac{\pi}{2}+2\pi \right] }{6}}=e^{i\left[ \frac{\pi}{12}+\frac{\pi}{3} \right] }=e^{i \frac{5\pi}{12}}.
+   \]
+   In general, $i=e^{i \left[ \frac{\pi}{2}+2\pi m\right] }$, so $e^{i \left[ \frac{\pi}{12}+ \frac{m\pi}{3} \right] }$ is a value of $i^{\frac{1}{6}}$ for any $m$. In particular, consider the choices $m=0,1,..,5$. Then 
+
+   (insert figure later- it has to do with roots of unity on the circle group tho)
+
+   This method gives all possible $n$-th roots. In particular, in the circle group $U_1$, each "walk" is equal to a multiplication of $\zeta$.
+\end{example}
+We will eventually generalize the fractional power $z_0^{\sfrac{p}{q}}$ to $z_0^{w}$. Yada yada no exponentials allowed reeee. If you're going to formalize do it right or don't do it at all. Half baked rigor is about as useful as a potato (at least a potato can feed your family).
+
+\subsection{Point Set Topology}
+Why are we studying abstract nonsense? We need topology to define limits of complex numbers. We will eventually define a derivative as a quotient of deltas, eg \[
+    \frac{\Delta f}{\Delta z} \to \frac{df}{dz} \quad \text{as} \ \Delta z \to 0.
+\]
+We'll talk about open and closed sets and accumulation points and such (basic things needed for limits). Consider \[
+    \widetilde{S}= \{z  \mid |z| \leq 1 \ \text{and} \ |z| \neq 1 \ \text{if} \ \operatorname{Re} z < 0\}. 
+\]
+\begin{definition}[Open Ball]
+    We define an open ball \[
+        B(z_0, \epsilon) = \{z \mid |z-z_0|<\epsilon\}.
+    \]
+\end{definition}
+
+\subsection{Interior, Closure, Boundary}
+\begin{definition}[Interior Point]
+    We have an \emph{interior point} a point in a set such that there exists an open ball centered at the point entirely contained in the set. We define the set of all interior points of a set $X$ as $\operatorname{Int}(X)$.
+\end{definition}
+    Note that $\operatorname{Int}(S)= \{z  \mid |z|<1.\} $
+\begin{definition}[Exterior Point]
+    A point $z_0$ is an exterior point of $S$ if there exists a ball  \[
+        B(z_0, \epsilon) \subseteq S^{c},
+    \]
+    ie, $z_0\in \operatorname{Int}(S^{c}).$ 
+\end{definition}
+\begin{definition}[Boundary Point]
+    A point $z_0$ is a boundary point of $S$ if for ball $B(z_0,\epsilon)$ centered at $z_0$, $B(z_0,\epsilon)\cap S \neq \O$ and $B(z_0,\epsilon)\cap S^{c} \neq \O$. We define the \emph{boundary} of a set $S$ as the set of all boundary points, denoted $\partial S$.
+\end{definition}
+Basic things: points can't be both in the interior and exterior, boundary and interior, etc etc.
+\begin{theorem}
+    For any set $S$, $\operatorname{Int}(S)$ , $\operatorname{Ext}(S)$ , and $\partial S$ form a partition of $S$.
+\end{theorem}
+We will use  $S^{\circ}$ to denote the interior and $(S^{c})^{\circ}$ to denote the exterior of a set from now on.
+\begin{example}
+    $\partial \widetilde{S} = \{z  \mid  |z|=1\} $.
+\end{example}
+\begin{example}
+    We have the unit circle $S = \{z  \mid  |z|=1\} \cup zi$ (where $zi$ is a point). $S^{\circ}=\O$, $zi \in \partial S$, any point on the rim  $\in \partial S$, so $\partial S = S$. By our previous theorem, $(S^{c})^{\circ}=S^{c}.$ (Who even studies the exterior of a set??)
+\end{example}
+
+\subsection{Open and Closed Sets}
+From now on a set refers to a subset of $\C$.
+\begin{definition}[Open Sets]
+    A set is open if it contains none of its boundary. Alternatively, a set is open iff  $S=S^{\circ}$.
+\end{definition}
+\begin{example}
+    $\C$ is open (and closed)! Furthermore, $\partial \C=\O$ (which is an alternate condition for a set to be clopen). Note that $\O$ is also both open and closed, since $\partial \O = \O$. This also makes sense if we look at it from the interior perspective (no interior points in $\O$, every point has an open ball in $\C$).
+\end{example}
+\begin{definition}[Closed Sets]
+    A set is closed if it contains all of its boundary. (What do you mean not the complement of open???) 
+\end{definition}
+\begin{theorem}
+    $S$ is closed $\iff S^{c}$ is open.
+\end{theorem}
+\begin{proof}
+    Immediate. In general topology, we define open sets this way.
+\end{proof}
+\begin{example}
+    Like I said earlier, both $\C$ and $\O$ are closed. In general topology, we define both $S, \O \in \tau$, since they're complements of course they're both open and closed. Exercise: prove that no other sets are both open and closed.
+\end{example}
+\begin{definition}[Closure]
+    The closure $\bar{S}$ of $S$ is the union \[
+    S \cup \partial S.
+    \]
+    Clearly $\bar{S}$ is always closed (by our definition).
+\end{definition}
+\begin{theorem}
+    $S^{\circ}$ is open for any $S$.
+\end{theorem}
+Doesn't this follow from the definition too??
+
+\subsection{Jank Connectedness}
+\begin{definition}[Path-connectedness]
+    A set  $S$ is path-connected if every pair of points $z_1,z_2\in S$ is connected by a continuous path in $S$. 
+\end{definition}
+Every path-connected set is connected (can be written as the union of two disjoint sets). Something about polygonal paths?? Dr.\ Radin is right, this is most definitely not standard. Is this what physicists do to topology?
+
+Now he's talking about the Topologist's sine curve (the classic counterexample). This is a counterexample to the (false) idea that connected implies path-connected  by exhibiting a set that is connected but not path-connected (but we haven't even talked about the standard definition of connectedness yet!).
