@@ -1,0 +1,118 @@
+\section{September 4, 2020}
+\subsection{Group Actions}
+\begin{definition}[Group Action]
+    An \emph{action} of a group $G$ on a set $X$ is a map \[
+        a \colon G \times X \to X, \quad (g,x) \mapsto g\cdot x
+    \]
+    such that 
+    \begin{enumerate}
+        \item $(1_G,x) \mapsto x$,
+        \item $g_1(g_2\cdot x)=(g_1g_2)\cdot x$
+    \end{enumerate}
+    for all $x\in X$, $g_1,g_2\in G$. Notation: $G \hookrightarrow X$, $G$ acts on $X$.
+\end{definition}
+\begin{prop}
+    Let $G$ be a group and $X$ a set. Actions of $G$ on $X \,(a \colon G\times X \to X)$ are in bijection with homomorphisms $\phi \colon G \to S_X$.
+\end{prop}
+\begin{proof}
+    Given an action $a \colon G\times X \to X$, define $\phi_a \colon G \to S_X, \, g \mapsto (x \mapsto a(g,x))$, $a(g,x)\in X$. Verify that 
+    \begin{enumerate}
+        \item $x\mapsto a(g,x)$ is a bijection on $X$ ($\iff [x \mapsto a(g,x)]\in S_x$),
+        \item $\phi_a$ is a homomorphism.
+    \end{enumerate}
+\end{proof}
+Given $\phi \colon G \to S_X$ a homomorphism, define $a_{\phi} \colon G\times X \to X$, $(g,x) \mapsto \phi(g)(x) \in X$. We have to verify that 
+\begin{enumerate}
+    \item $a_{\phi}$ is a group action, i.e., $a_{\phi}$ is a well-defined map.
+    \item $a_{\phi}(1_G,x)=x$. $\phi(1_G)(x)=1_{S_X}(x)=\operatorname{id}_X(x)=x$.
+
+    \item $a_{\phi}(g_1,a_{\phi}(??)$
+    %come back for this too
+\end{enumerate}
+Finally, we must verify that \[
+a \mapsto \phi_a \mapsto a_{\phi_a}=a
+\]
+and \[
+\phi \mapsto a_{\phi}\mapsto \phi_{a_{\phi}}=\phi.
+\]
+
+\subsection{Orbits and Stabilizers}
+Given an action $a \colon G\times X \to X$ and an element $x\in X$, we can talk about the \emph{orbit} of this action under $x$.
+\begin{definition}[Orbits]
+    We define an \emph{orbit} of $x$ as \[
+    G\cdot x = \{g\cdot x \mid g\in G\}.
+    \]
+\end{definition}
+The \emph{stabilizer} of $x$ stabilizes $x$.
+\begin{definition}[Stabilizer]
+    We define the \emph{stabilizer} of $x$ as \[
+    G_x= \{g\in G \mid g\cdot x=x\} .
+    \]
+\end{definition}
+\begin{remark}
+ We have $1_G\in G_x$ for all $x\in X$.
+\end{remark}
+\begin{claim}
+    $G_x$ is a subgroup of $G$.
+    \begin{enumerate}
+        \item $1_G\in G_x \impliedby (1_G,x)=x,$
+        \item $g\in G_x, \quad g^{-1}\in G_x$.
+    \end{enumerate}
+    %missed some things here
+\end{claim}
+%missed a big chunk
+\begin{definition}[Transitive Action]
+    An action is \emph{transitive} if \[
+    Gx=X
+    \]
+    for some $x\in X$. Prove that if you have this property \emph{for some} $x\in X$, then this is the same as \emph{every} $x\in X$ having this property.
+\end{definition}
+\begin{lemma}
+    If $x,y \in X$ lie in the same orbit (there exists a $g \in G$ such that $gx=y$), then $G_x=g^{-1}G_yg$.
+\end{lemma}
+\begin{proof}
+    Let $h\in G_y \iff hy=y \implies hgx=gx \implies g^{-1}hgx=g^{-1}(gx)=(g^{-1}g)x=x$. So $ghg^{-1}\in G_x$, and $g^{-1}G_yg\in G_x$. ???
+        %missed some more things
+\end{proof}
+\begin{lemma}
+    Let $G \hookrightarrow X$. Then two orbits are either equal or disjoint.
+\end{lemma}
+\begin{proof}
+    $G_x \cap G_y \neq \O \implies  G_x=G_y$. Let $z\in G_x \cap G_y \implies G_x=G_z=G_y$.
+\end{proof}
+General idea of group actions: for every element of the set, you have its stabilizer, and you can look at its orbits (are the same or are they disjoint?).
+
+\subsection{Quotient Group of Orbits}
+Let $G \hookrightarrow X$, $x\in X$. Consider the map \[
+G/G_x \to G_x, \quad gG_x \mapsto g\cdot x.
+\]
+Notice this is well defined because $gh \mapsto gh\cdot x = g(hx)=gx$ since $h\in G_x$.
+
+\begin{claim}
+    The map $G/G_x \mapsto G_x$ is a bijection.
+\end{claim}
+Surjectivity follows from the definition of an orbit, and injectivity ... is up to you to prove. (Not hard, think about the definitions). But what does this mean?
+\begin{prop}
+    If $G$ is finite, then the size of each orbit divides the size of $G$. 
+\end{prop}
+\begin{proof}
+    $x\in X$, $G_x \leftrightarrow G/G_x \implies |G_x|=|G/G_x| \, \big| \, |G|$.
+\end{proof}
+\begin{example}
+    Every group acts on itself in three different ways, that is, $G \hookrightarrow X, \, X=G$.
+    \begin{enumerate}
+        \item Left multiplication: $g\cdot x=gx$,
+        \item Conjugation: $g\cdot x=gxg^{-1}$,
+        \item Right multiplication: $g\cdot x=xg^{-1}$ (if we define it as $xg$ some properties of group actions will not hold). Why? $(g_1g_2)^{-1}=g_2^{-1}g_1^{-1}$.
+    \end{enumerate}
+    Orbits and Stabilizers WRT the above actions: 
+    \begin{enumerate}
+        \item $Gx=X=G$ for all $x\in X$, $G_x={1_G}$,
+        \item  $Gx=$ conjugacy class of $x$, $G_x=$centralizer of $x = \{g\in G \mid gx=xg\} $,
+        \item $Gx=X=G$ for all $x\in X$, $G_x$ = ??
+            %something else to fix
+    \end{enumerate}
+\end{example}
+\begin{prop}
+    Let $G$ be a group of order $n$, then $G \simeq $ subgroup of $S_n$.
+\end{prop}
