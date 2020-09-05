@@ -43,24 +43,22 @@ Given an action $a \colon G\times X \to X$ and an element $x\in X$, we can talk 
     G\cdot x = \{g\cdot x \mid g\in G\}.
     \]
 \end{definition}
-The \emph{stabilizer} of $x$ stabilizes $x$.
 \begin{definition}[Stabilizer]
     We define the \emph{stabilizer} of $x$ as \[
     G_x= \{g\in G \mid g\cdot x=x\} .
     \]
 \end{definition}
 \begin{remark}
- We have $1_G\in G_x$ for all $x\in X$.
+ We have $1_G\in G_x$ for all $x\in X$. 
 \end{remark}
 \begin{claim}
-    $G_x$ is a subgroup of $G$.
+    $G_x$ is a subgroup of $G$. To show this, note that
     \begin{enumerate}
         \item $1_G\in G_x \impliedby (1_G,x)=x,$
-        \item $g\in G_x, \quad g^{-1}\in G_x$.
+        \item $g\in G_x \implies g^{-1}\in G_x$. To see this, note that $g^{-1}(gx)=g^{-1}x$ (since $g$ is in the stabilizer subgroup) and $(g^{-1}g)x=1_{G}x=x$, which implies $g^{-1}x=x$, so $g^{-1}\in G_x.$
+        \item $g_1,g_2\in G_x \implies g_1g_2\in G_x$. $(g_1g_2)x=g_1(g_2x)=g_1(x)$ since $g_2$ stabilizes $x$, which implies $g_1x=x$ since $g_1$ also stabilizes $x$, and we are done.
     \end{enumerate}
-    %missed some things here
 \end{claim}
-%missed a big chunk
 \begin{definition}[Transitive Action]
     An action is \emph{transitive} if \[
     Gx=X
@@ -70,9 +68,19 @@ The \emph{stabilizer} of $x$ stabilizes $x$.
 \begin{lemma}
     If $x,y \in X$ lie in the same orbit (there exists a $g \in G$ such that $gx=y$), then $G_x=g^{-1}G_yg$.
 \end{lemma}
-\begin{proof}
-    Let $h\in G_y \iff hy=y \implies hgx=gx \implies g^{-1}hgx=g^{-1}(gx)=(g^{-1}g)x=x$. So $ghg^{-1}\in G_x$, and $g^{-1}G_yg\in G_x$. ???
-        %missed some more things
+\begin{proof} We have
+    \begin{align*}
+        h\in G_y &\iff hy=y\\
+                 &\implies hgx=gx\\ 
+                 &\implies g^{-1}hgx=g^{-1}(gx)=(g^{-1}g)x=x.
+    \end{align*}
+        So $g^{-1}hg\in G_x$, which implies $g^{-1}G_yg \subseteq G_x$. To prove the reverse inclusion, let $h\in G_x$. Then 
+    \begin{align*}
+        h\in G_x &\iff hx=x\\
+                 &\implies hg^{-1}y=g^{-1}y\\ 
+                 &\implies ghg^{-1}y=g(g^{-1}y)=(gg^{-1})y=y.
+    \end{align*}
+    So $ghg^{-1}\in G_y \implies gG_xg^{-1}\subseteq G_y \implies G_x \in g^{-1}G_yg$, and we are done. 
 \end{proof}
 \begin{lemma}
     Let $G \hookrightarrow X$. Then two orbits are either equal or disjoint.
@@ -109,8 +117,7 @@ Surjectivity follows from the definition of an orbit, and injectivity ... is up 
     \begin{enumerate}
         \item $Gx=X=G$ for all $x\in X$, $G_x={1_G}$,
         \item  $Gx=$ conjugacy class of $x$, $G_x=$centralizer of $x = \{g\in G \mid gx=xg\} $,
-        \item $Gx=X=G$ for all $x\in X$, $G_x$ = ??
-            %something else to fix
+        \item $Gx=X=G$ for all $x\in X$, $G_x={1_G}.$
     \end{enumerate}
 \end{example}
 \begin{prop}

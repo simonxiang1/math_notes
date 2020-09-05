@@ -18,9 +18,9 @@ A cycle in $S_n$: $(\alpha_x , ... , \alpha_k)$ is a $k$-cycle. $\alpha_1 ,...,\
 \begin{equation*}
     (\alpha_1,...,\alpha_k)(m) = 
 \begin{cases}
-    m \qquad \mbox{if}\, m \neq \alpha_i \ \forall i=1,...,k\\
-    \alpha_{i+1} \quad \mbox{if} \, m=\alpha_i, \, i\in \{1,...,k-1\} \\
-    \alpha_1 \qquad \mbox{if} \, m=\alpha_k.
+    m \quad &\mbox{if}\, m \neq \alpha_i \ \forall i=1,...,k\\
+    \alpha_{i+1} \quad &\mbox{if} \, m=\alpha_i, \, i\in \{1,...,k-1\} \\
+    \alpha_1 \quad &\mbox{if} \, m=\alpha_k.
 
 \end{cases}
 \end{equation*}
@@ -59,9 +59,21 @@ A cycle in $S_n$: $(\alpha_x , ... , \alpha_k)$ is a $k$-cycle. $\alpha_1 ,...,\
    \begin{note}
        $c_1, \, c_2$ are disjoint cycles.
    \end{note}
-   \textbf{Step 3}: $I_2=i_1\setminus \{k_2,s(k_2),...,s^{e_2-1}(k_2)\} $. If $I_2=\O$ then we are done, verify $s=c_1c_2$. If $I_2\neq\O$ then $k_3=\operatorname{min}I_2$. Repeat the steps until $I_j = \O \implies s=c_1 ... c_j$ disjoint cycles by construction. Verify the uniqueness in your free time.
+\noindent\textbf{Step 3}: $I_2=i_1\setminus \{k_2,s(k_2),...,s^{e_2-1}(k_2)\} $. If $I_2=\O$ then we are done, verify $s=c_1c_2$. If $I_2\neq\O$ then $k_3=\operatorname{min}I_2$. Repeat the steps until $I_j = \O \implies s=c_1 ... c_j$ disjoint cycles by construction. Verify the uniqueness in your free time.
 \end{proof}
-missed a big section, see ss
+\begin{note}
+    $s\in S_n \implies s=\prod_{i=1}^{n}c_i$, where the $c_{i}$ are \emph{disjoint} cycles.
+\end{note}
+\begin{claim}
+   The order of $s$ defined as \[
+       \operatorname{ord} s:= \operatorname{min} \{k\in \N  \mid s^{k}=1_{S_n}\}  
+   \]
+   is equal to \[
+       \operatorname{lcm}\{\operatorname{ord} c_i  \mid i=1,\cdots,j\},
+   \]
+   where each $\operatorname{ord} c_i$ is the length of each cycle $c_i$.
+\end{claim}
+Verify that this claim holds in your free time.
 \begin{note}
     We will show next time that every finite group is a subgroup of $S_n$ for some $n\in \N$ (Cayley's Theorem). This shows the importants of permutation groups: they contain all the information you need to know about groups.
 \end{note}
