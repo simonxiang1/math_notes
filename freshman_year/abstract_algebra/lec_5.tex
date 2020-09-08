@@ -123,3 +123,19 @@ Surjectivity follows from the definition of an orbit, and injectivity ... is up 
 \begin{prop}
     Let $G$ be a group of order $n$, then $G \simeq $ subgroup of $S_n$.
 \end{prop}
+
+Let $a,b\in H$. Then we WTS  $a*b\in H$. Let  $x\in S$, then $a*b*s=a*s*b$ (since $b\in H$) $=s*a*b$ since $a\in H$ and we are done.
+
+Let $a,b\in H$. We WTS $a*b\in H$. We have $(a*b)*(a*b)=a*(b*a)*b$ since $*$ is associative  $=a*(a*b)*b$ since $*$ is commutative $=(a*a)*(b*b)$ since $*$ is associative $=a*b$ since $a,b \in H$, and we are done.
+
+Try $a*(b*c)*(b*c)$
+
+Let $a,b,c\in S$. First, we want to show $(a*b)*c=a*(b*c)$. We have $(a*b)*c=(a*(b*b))*c=((b*b)*c)*a=((b*c)*b)*a=(b*a)*(b*c)=($
+
+$((a*a)*(b*b))*c=((a*(b*b))*a)*c$
+
+Let $a,b\in S$. Then $a*b=(a*a)*b=(a*a)*(b*b)=(a*(b*b))*a=((b*b)*a)*a$
+\begin{proof}
+Let $a,b\in S$. Then $a*b=(a*b)*(a*b)=(b*(a*b))*a=((a*b)*a)*b=((b*a)*a)*b=((a*a)*b)*b=(b*b)*(a*a)=b*a$. Associativity follows, $(a*b)*c=(b*c)*a=a*(b*c)$ by our newly established commutativity.
+\end{proof}
+

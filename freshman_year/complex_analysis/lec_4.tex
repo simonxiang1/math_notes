@@ -1,0 +1,96 @@
+\section{September 8, 2020}
+\subsection{Accumulation Points}
+\begin{definition}
+    A connected open set is a \emph{domain}.
+\end{definition}
+\begin{definition}
+    A \emph{region} is a domain that contains none, some, or all of its boundary. 
+\end{definition}
+\begin{definition}[Bounded Set]
+    A set $S$ is bounded if \[
+        S \subseteq B(x_0,\epsilon).
+    \] for some $x_0\in \C$, $\epsilon>0$.
+\end{definition}
+\begin{definition}[Accumulation Points]
+    $z_0$ is an accumulation point of $S$ if for all balls $B(z_0,\frac{1}{m})$ centered at $z_0$, we have \[
+    B(z_0,\frac{1}{m})\setminus \{z_0\} \cap S \neq \O.
+    \]
+\end{definition}
+\begin{example}
+    Let $S=\Q$. Then $\frac{1}{2},\sqrt{2} $ etc are accumulation points of $S$ (this relies on the fact that $\Q$ is \emph{dense} in $\R$). This example shows that accumulation points don't have to be in the set themselves.
+\end{example}
+\begin{theorem}
+    We have $S$ is closed if and only if $S$ contains all of its accumulation points, the set of which is denoted $S'$. Furthermore, the closure of $S$ denoted $\bar{S}$ is equal to $S\cup S'$.
+\end{theorem}
+\begin{proof}
+    $\implies $Accumulation points are either in the boundary of $S$ or in $S$ itself. Since $S$ is closed, we have $S'\subseteq S$.\\
+    $\impliedby$ If $z_0\in \partial S \cap S^{c}$ it would be an accumulation point of $S$, a contradiction. So $\partial S \subseteq S\implies S$ is closed. (I'll try to write a better proof later).
+\end{proof}
+A quick summary of basic p-set topology:
+\begin{enumerate}
+    \item $S$ is open $\iff S=S^{\circ}$,
+    \item $S$ is closed $\iff S^{c}$ is open,
+    \item $S$ is open $\iff S$ contains none of $\partial S$,
+    \item $S$ is closed $\iff $ $S$ contains all of $\partial S$,
+    \item $S$ is closed  $\iff S$ contains all of $S'$.
+\end{enumerate}
+
+\subsection{Limits}
+Consider a map $f \colon \operatorname{Dom}(f) \to \C$, $\operatorname{Ran}(f)\subseteq \C$ (I prefer the notation $f \colon X \to \C$ where $X \subseteq \C$, and $\operatorname{Ran}(f)=f[X]$. The fact that $f$ is well defined on $X$ holds because define $X$ to be a set on which $f$ is well defined, duh).
+
+We want to talk about whether a function is continuous or not. Intuitively, a function is continuous if points in the image being ``close'' together imply that points in the preimage are also ``close'' together (the preimage of an open set is open).
+\begin{definition}[Epsilon Delta Limits]
+    For $z_0$ an accumulation point of some subset $X$ of $\C$ (a region), $\lim_{z\to z_0}f(z)$ exists and has a value of $L$ $\iff$ for all $\epsilon>0$, there exists a $\delta >0$ such that \[
+        0<|z-z_0|<\delta \implies |f(z)-L|<\epsilon,
+    \] where $z\in X$. The modulus is just a distance metric: so the epsilon delta definition is the same as what I said earlier, if points are close to each other in the codomain ($|f(z)-L|<\epsilon$), then such points are close to each other in the domain ($0<|z-z_0|<\delta$).
+\end{definition}
+Some notes: the limit is only defined when $z_0$ is an accumulation point. This why accumulation points are also sometimes referred to as \emph{limit points}.
+
+\subsection{Continuity}
+\begin{definition}[Continuity]
+    $f$ is continuous at $z_0$ if $\lim_{z\to z_0}f(z)=f(z_0)$. $f$ is said to be continuous on a set $X$ if for all $x\in X$, $f$ is continuous at $x$.
+\end{definition}
+We want to \emph{analyze} a function $f(z)$, let $z=(x,y)$ and $f(z)=f(x,y)=u(x,y)+iv(x,y)$. $u(x,y)=\operatorname{Re}f$ and $v(x,y)=\operatorname{Im}f$.
+\begin{theorem}
+    We have \[
+        \lim_{z\to z_0}f(z)=L \iff
+        \begin{cases}
+            \lim_{z\to z_0}\operatorname{Re}f(z) \to \operatorname{Re}L\\
+            \lim_{z\to zo}\operatorname{Im}f(z) \to \operatorname{Im}L.
+        \end{cases}
+    \]
+\end{theorem}
+\begin{proof}
+    Homework.
+\end{proof}
+
+\begin{theorem}
+    Let $f \colon X \to \C, g \colon Y \to \C$. For an accumulation point $z_0$ of $X\cap Y$, if $\lim_{z\to z_0}f(z)=L$ and $\lim_{z\to z_0}g(z)=M$, then (excuse the abuse of notation)
+    \begin{enumerate}
+        \item $\lim(f+g)=L+M$,
+        \item $\lim fg=LM$,
+        \item $\lim \frac{f}{g}=\frac{L}{M}$ if $M\neq 0$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Same as the ones you'd find in any analysis course.
+\end{proof}
+Continuity of sums, products, and quotients of functions follow from the above theorem. Now we turn our attention to the composition of functions.
+\begin{theorem}
+    Suppose  $f \colon \C \to \C$ and $g \colon X \to \C$. Let $z_0$ be an accumulation point of $X$. Then if $f$ is continuous at $z_0$ and $g$ is continous at $f(z_0)$, we have $f \circ g$ continuous at $z_0$.
+\end{theorem}
+\begin{example}
+    $f(z)=|z^m|$ for a fixed $m$ is equal to $(g\circ h)(z)$ where  $h(z)=z^m$ and $g(w)=|w|$. Both $h$ and $g$ are continuous on $\C$, so $|z^m|$ is also continuous everywhere.
+\end{example}
+\begin{example}
+    The identity map is continuous. This is trivial (let $\delta = \epsilon$). It follows that maps of the form $z^{n}$ is continuous for some positive integer $n$.
+\end{example}
+\begin{cor}
+    Functions of the form \[
+        f(z)=\frac{p(z)}{q(z)}
+    \]
+    where $p(z)$ and $g(z)$ are polynomials are continuous given $g(z) \neq 0$.
+\end{cor}
+\begin{example}
+    Let $f(z)=\frac{z}{\bar{z}}, \, z \neq 0$. Consider $z=x+iy$ near $0$ with $x\neq 0, y=0$, then $f(z)=1$. If $x=0, y\neq 0$ then $f(z)=-1$. Therefore $\lim_{z\to z_0}\frac{z}{\bar{z}}$ does not exist (standard technique for proving multivariate limits don't exist).
+\end{example}
