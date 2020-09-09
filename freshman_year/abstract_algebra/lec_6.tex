@@ -1,5 +1,5 @@
 \section{September 9, 2020}
-\subsection{Applications of Group Actions}
+\subsection{Transitive and Faithful Actions}
 Group actions are connected to Representation Theory, a step forward from group actions (eg a group acting on a vector space). Then you can understand your ``random group'' through Linear Algebra.
 \begin{prop}
     Let $G$ be a group of order $n$, then $G$ is isomorphic to a subgroup of $S_n$.
@@ -25,6 +25,7 @@ Group actions are connected to Representation Theory, a step forward from group 
     g\cdot xHx^{-1}=gxHx^{-1}g^{-1},
 \] which works because $gxH(gx)^{-1}\in X$. Then $O_{xHx^{-1}}=X$ for all $x\in G$ (so the action is transitive). What is the stabilizer of an element? Let $x=1_G$, then $G_H=\{g\in G \mid gHg^{-1}=H\} =: N_G(H) $ ($N_G(H)$ denotes the normalizer of $H$ in $G$). Verify that $G_{xHx^{-1}}=xN_G(H)x^{-1}$.
 \end{example}
+\subsection{Normal Subgroups from Group Actions}
 \begin{theorem}
     Let $H \leq G$ be a subgroup of index $n$. Then there exists an $N \trianglelefteq G$ such that $N \leq H$, $|G/N| \,\big|\, n!$.
 \end{theorem}
@@ -44,7 +45,7 @@ Consider $G \hookrightarrow G/H$, $g\cdot xH=gxH$. Observe that $|G/H|=n$. Then 
     We have $H \leq G$ such that $[G:H]=p$. Then by our theorem, there exists some normal subgroup $N \trianglelefteq H$ such that $N \leq H$, $|G/N \,\big|\, p!$. $p!=p\cdot (p-1)!$, which is only divisible by primes smaller than $p$. But $|G|$ is not divisible by any primes smaller than $p$, or any of the $(p-1)!$, so $\gcd\left( |G /N, (p-1)! \right)=1 $, which implies $|G /N|=p \implies N=H$, so $H$ is normal.
 \end{proof}
 
-\subsection{More on Group Actions}
+\subsection{The Class Equation}
 Let $G \hookrightarrow X$ ($Z(G)$ denotes the center of the group). Then 
 \begin{enumerate}
     \item $G /G_x \longleftrightarrow G_x$ a bijection $\implies [G:G_x]=|G_x|$. This is a bijection because $gG_x=\{gh \mid h\in G_x\} \mapsto ghx=gx$.
