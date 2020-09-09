@@ -36,7 +36,7 @@ A quick summary of basic p-set topology:
 \end{enumerate}
 
 \subsection{Limits}
-Consider a map $f \colon \operatorname{Dom}(f) \to \C$, $\operatorname{Ran}(f)\subseteq \C$ (I prefer the notation $f \colon X \to \C$ where $X \subseteq \C$, and $\operatorname{Ran}(f)=f[X]$. The fact that $f$ is well defined on $X$ holds because define $X$ to be a set on which $f$ is well defined, duh).
+Consider a map $f \colon \operatorname{Dom}(f) \to \C$, $\operatorname{Ran}(f)\subseteq \C$ (I prefer the notation $f \colon X \to \C$ where $X \subseteq \C$, and $\operatorname{Ran}(f)=f[X]$). The fact that $f$ is well defined on $X$ holds because define $X$ to be a set on which $f$ is well defined, duh).
 
 We want to talk about whether a function is continuous or not. Intuitively, a function is continuous if points in the image being ``close'' together imply that points in the preimage are also ``close'' together (the preimage of an open set is open).
 \begin{definition}[Epsilon Delta Limits]
@@ -50,7 +50,7 @@ Some notes: the limit is only defined when $z_0$ is an accumulation point. This 
 \begin{definition}[Continuity]
     $f$ is continuous at $z_0$ if $\lim_{z\to z_0}f(z)=f(z_0)$. $f$ is said to be continuous on a set $X$ if for all $x\in X$, $f$ is continuous at $x$.
 \end{definition}
-We want to \emph{analyze} a function $f(z)$, let $z=(x,y)$ and $f(z)=f(x,y)=u(x,y)+iv(x,y)$. $u(x,y)=\operatorname{Re}f$ and $v(x,y)=\operatorname{Im}f$.
+We want to \emph{analyze} a function $f(z)$, let $z=(x,y)$ and $f(z)=f(x,y)=u(x,y)+iv(x,y)$, $u(x,y)=\operatorname{Re}f$ and $v(x,y)=\operatorname{Im}f$.
 \begin{theorem}
     We have \[
         \lim_{z\to z_0}f(z)=L \iff

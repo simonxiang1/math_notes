@@ -1,0 +1,57 @@
+\section{September 9, 2020}
+\subsection{Applications of Group Actions}
+Group actions are connected to Representation Theory, a step forward from group actions (eg a group acting on a vector space). Then you can understand your ``random group'' through Linear Algebra.
+\begin{prop}
+    Let $G$ be a group of order $n$, then $G$ is isomorphic to a subgroup of $S_n$.
+\end{prop}
+\begin{proof}
+    Consider $G \hookrightarrow G$, $g \mapsto [x \mapsto gx]$, with the corresponding homomorphism $\varphi \colon G \to S_G \simeq S_n$. $\operatorname{Ker}\varphi=?$ $g\in \operatorname{Ker}\varphi \iff \varphi(g)=1_G$, since $x\mapsto gx$, $x=gx \implies g=1_G$. $\varphi$ is an injective homomorphism implies that $\varphi \colon G \to \operatorname{im}\varphi \trianglelefteq S_n$ is an isomorphism.
+\end{proof}
+
+\begin{definition}[Faithful Group Actions]
+    Let $G \hookrightarrow X$. Then the group action is faithful if \[
+    \bigcap_{x\in X} G_x = \{1_G\} .
+\] (Recall that the $G_x$ are the stabilizing sets of $x$).
+\end{definition}
+\begin{example}
+    Let $G$ be a group, $H$ some subgroup of $G$. Consider $X=G/H$ to be the set of left cosets. Then $G \hookrightarrow X$, $g\cdot (xH)=gxH$.
+
+    Orbits: $O_{xH}=G/H$, since $(yx^{-1})xH=yH$ for all $x,y \in G$. This is an example of a \emph{transitive} group action.
+
+    Stabilizers: $G_{xH}=\{y\in G \mid yxH=xH\}$. $yxH=xH \iff x^{-1}yxH=H \iff x^{-1}yx \in H \iff y\in xHx^{-1}$. So $G_{xH}=xHx^{-1}$.
+\end{example}
+\begin{example}
+    Let $G \hookrightarrow X$, $X=\{xHx^{-1} \mid x\in G\}, H \trianglelefteq G$. Then the action is given by \[
+    g\cdot xHx^{-1}=gxHx^{-1}g^{-1},
+\] which works because $gxH(gx)^{-1}\in X$. Then $O_{xHx^{-1}}=X$ for all $x\in G$ (so the action is transitive). What is the stabilizer of an element? Let $x=1_G$, then $G_H=\{g\in G \mid gHg^{-1}=H\} =: N_G(H) $ ($N_G(H)$ denotes the normalizer of $H$ in $G$). Verify that $G_{xHx^{-1}}=xN_G(H)x^{-1}$.
+\end{example}
+\begin{theorem}
+    Let $H \leq G$ be a subgroup of index $n$. Then there exists an $N \trianglelefteq G$ such that $N \leq H$, $|G/N| \,\big|\, n!$.
+\end{theorem}
+\begin{proof}
+Consider $G \hookrightarrow G/H$, $g\cdot xH=gxH$. Observe that $|G/H|=n$. Then \[
+\varphi \colon G \to S_{G/H} \simeq S_n.
+\] Let $N=\operatorname{Ker}\varphi=\bigcap_{x\in G} G_{xH}$. $x=1_G \implies G_H=H, gH=H$. Since $N$ is the kernel of a group homomorphism, it is automatically a normal subgroup of $G$. $\operatorname{Ker}\varphi=N \implies  \varphi: G/N \hookrightarrow S_n$. $G/N \simeq \operatorname{im}\varphi \leq S_n$ which implies $|G/N| = |\operatorname{im}\varphi \,\big| \, |S_n| = n! \implies |G/N| \,\big|\, n!$.
+
+\end{proof}
+\begin{cor}
+    If $G$ has a group of finite index, then $G$ has a normal subgroup of finite index.
+\end{cor}
+\begin{cor}
+    Let $G$ be a finite group and $p$ be the smallest prime that divides $|G|$. Then every subgroup of index $p$ is normal.
+\end{cor}
+\begin{proof}
+    We have $H \leq G$ such that $[G:H]=p$. Then by our theorem, there exists some normal subgroup $N \trianglelefteq H$ such that $N \leq H$, $|G/N \,\big|\, p!$. $p!=p\cdot (p-1)!$, which is only divisible by primes smaller than $p$. But $|G|$ is not divisible by any primes smaller than $p$, or any of the $(p-1)!$, so $\gcd\left( |G /N, (p-1)! \right)=1 $, which implies $|G /N|=p \implies N=H$, so $H$ is normal.
+\end{proof}
+
+\subsection{More on Group Actions}
+Let $G \hookrightarrow X$ ($Z(G)$ denotes the center of the group). Then 
+\begin{enumerate}
+    \item $G /G_x \longleftrightarrow G_x$ a bijection $\implies [G:G_x]=|G_x|$. This is a bijection because $gG_x=\{gh \mid h\in G_x\} \mapsto ghx=gx$.
+    \item $X$ is a disjoint union of the distinct orbits. $1_Gx=x \to x\in G_x$ and two orbits are equal or disjoint. So  $|x|=$ number of orbits of size $1+\sum$ sizes of other larger distinct orbits. If $Gx=\{x\} , x$ is a fixed point of the action, so the number of orbits of size $1$ are the fixed points of the action. $G \hookrightarrow G$ by conjugation, $g\cdot x=gxg^{-1} \implies |G|=|Z(G)|+\sum$ larger distinct conjugacy classes. This is known as \emph{the class equation}. Formally, \[
+            |G|=|Z(G)|+\sum\left[  G:C_G(g)\right] , \, C_G(g)=G_g.
+        \] The conjugacy class of $x\in G=Gx=[G:G_x]$.
+\end{enumerate}
+What can we tell from the class equation? If $|G|=p^n$ for $p$ a prime, then $x \notin Z(G) \implies \left[ G:C_G(x) \right] $ is divisible by $p$. $p^n=|Z(G)|+p\cdot m$ for $m\in \Z$. In addition, $Z(G) \ni 1_G \implies p \, \big| \, |Z(G)|$. Non trivial by the way.
+
+
