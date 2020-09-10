@@ -1,0 +1,138 @@
+\section{September 10, 2020}
+\subsection{More on Continuity}
+Last time we talked about the function $\frac{z}{\overline{z}}$. What if we define the domain as $\C\setminus \{0\} $? Does $\lim_{z\to z_0}\frac{z}{\overline{z}}$ exist? (AKA: is $\frac{z}{\overline{z}}$ continuous on its domain?)
+\begin{theorem}
+    Let $f \colon \C \to \C$ be defined as $f=u+iv$. If $f$ is continuous at $z_0$, then
+    \begin{enumerate}
+        \item  $\overline{f}=u-iv$ is continuous at $z_0$. We can also write $\overline{f}$ as $g\circ f$ where $g(w)=\overline{w}$.
+        \item   $\frac{f+\overline{f}}{2}=\operatorname{Re}(f)$ is continuous at $z_0$.
+        \item  $\frac{f-\overline{f}}{2i}=\operatorname{Im}(f)$ is continuous at $z_0.$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    We prove that $f(z)=\overline{z}$ is continuous at any $z_0$. Given $\varepsilon > 0$, consider \[
+        |f(z)-f(z_0)|=|\overline{z}-\overline{z_0}|.
+    \]
+   We need a $\delta > 0$ such that \[
+   0<|z-z_0|<\delta \implies |\overline{z}-\overline{z_0}| < \varepsilon.
+   \]
+   Claim: If $S=\varepsilon$, $|\overline{z}-\overline{z_0}|=|\overline{(z-z_0)}|=|z-z_0|=\delta=\varepsilon$. This is easy to see, so we are done.
+\end{proof}
+\begin{note}
+    To show that \[
+        \lim_{z\to z_0}f(z)=L,
+    \]
+    we consider neighborhoods (open sets around $L$), or the set of $z$ such that $|f(z)-L|<\varepsilon$ (equivalently, the $z$ such that $f(z) \in B(L, \varepsilon)$). Also, $\lim_{z\to z_0}f(z)-L \iff \lim_{z\to z_0}(f(z)-L)=0 \iff \lim_{z-z_0\to 0}(f(z)-L)=0$.
+\end{note}
+
+\subsection{Limits near Infinity}
+Infinity is not a complex number!! Consider the limits \[
+    \lim_{z\to \infty}f(z)
+\]
+and \[
+    \lim_{z\to z_0}f(z)=\infty.
+\] To define these, we use neighborhoods of ``$\infty$ ''. There is no notion of ``$\pm\infty$'' in the complex numbers. The definition is similar to the one you encountered in Real Analysis: $z$ is ``large'' if $|z|>R$ for all $R \in \R$.
+\begin{definition}[Limits at Infinity]
+    For $z_0\in \C$ we say \[
+        \lim_{z\to z_0}f(z)=\infty
+    \]
+    if given some $R>0, \, R \in \R$, there exists some $\delta > 0$ such that \[
+        0<|z-z_0|<\delta \implies |f(z)|>R.
+    \]
+\end{definition}
+\begin{example}
+    We have $\lim_{z\to 0}(\frac{1}{z})=\infty$ since given $R>0,$ there exists a $\delta > 0$ such that $0<|z-0|<\delta$ implies $|\frac{1}{z}|>R$, namely, $\delta = \frac{1}{R}$, because
+    \begin{equation*}
+        |z|<\frac{1}{R}\implies \frac{1}{|z|}>R\iff \left| \frac{1}{z} \right| >R.
+    \end{equation*}
+\end{example}
+\begin{definition}[Limits to Infinity]
+    We say $\lim_{z\to \infty}f(z)=L$, $L\in \C$ if and only if for all $\varepsilon >0$, there exists some $R>0$ such that \[
+        |z|>R \implies |f(z)-L|<\varepsilon.
+    \]
+\end{definition}
+\begin{example}
+    We have $\lim_{z\to \infty}\frac{1}{z}=0$, let $\varepsilon>0$, $R=\frac{1}{\varepsilon}$. Then $|f(z)-L|=\left| \frac{1}{z} \right| $, so \[
+    |z|>R \implies |z|>\frac{1}{\varepsilon}\implies \varepsilon>\frac{1}{|z|}=\left| \frac{1}{z} \right| ,
+    \] and we are done.
+\end{example}
+\begin{definition}
+    Finally, we say \[
+        \lim_{z\to \infty}f(z)=\infty
+    \]
+    if (for $R_1,R_2 \in \C$) given some $R_1>0$, there exists an $R_2>0$ such that \[
+        |z|>R_2 \implies |f(z)|>R_1.
+    \]
+\end{definition}
+\begin{example}
+    We have $\lim_{z\to \infty}z^2=\infty$ since $|z^2|>R$ whenever $|z|>\sqrt{R} $.
+\end{example}
+
+\subsection{Derivates}
+We are finally ready to define the derivative of a function (the good stuff). Given a function $f \colon X \to \C$, we will only define the derivative of $f$ at a point $z\in X^{\circ}$. Recall that $X^{\circ}=\{z\in X \mid B(z,\gamma)\subseteq X\}$ for some $\gamma> 0$.
+\begin{definition}[Complex Derivative]
+    A function $f \colon X \to \C$ is said to be \emph{differentiable} at $z_0\in X^{\circ}$ if \[
+        \lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0}
+    \]
+    exists in $\C$ (so limits to infinity are not allowed. We will examine these ``poles'' later in the course). If the limit exists, we denote this limit as $f'(z_0)$.
+\end{definition}
+\begin{example}
+    Let  $f \colon \C \to \C$, $z \mapsto 7$. We claim that $f'(z)=0$ for all $z$, since \[
+        \frac{f(z)-f(z_0)}{z-z_0}=\frac{7-7}{z-z_0}=0.
+    \]We only look at the points $z$ ``near'' (accumulation points) $z_0$, so we don't have to worry about the case where $z=z_0$. So given $\varepsilon > 0$, \[
+    |z-z_0|<\delta \implies \left| \frac{f(z)-f(z_0)}{z-z_0} \right| < \varepsilon
+    \]
+    for any $\delta > 0$.
+\end{example}
+\begin{example}
+    Let $f \colon  \C \to \C$, $z \mapsto z$. We claim $f'(z)=1$ since \[
+        \frac{f(z)-f(z_0)}{z-z_0}=\frac{z-z_0}{z-z_0}=1
+    \]
+    for any $z \neq 0$. This limit is one since \[
+        \left| \frac{f(z)-f(z_0}{z-z_0}-1 \right| = \left| \frac{z-z_0}{z-z_0} \right| =0.
+    \]
+\end{example}
+\begin{example}
+    Let $f \colon  \C \to \C$, $f(z)=z^2.$ We will show $f'(z_0)=2z_0$. We want to find a $\delta>0$ such that \[
+        0<|z-z_0|<\delta \implies \left| \frac{f(z)-f(z_0)}{z-z_0}-2z_0 \right| <\varepsilon.
+    \]
+   So 
+   \begin{equation*}
+       \left| \frac{z^2-z_0^2}{z-z_0}-2z_0 \right| =\left| (z+z_0)-2z_0 \right| =|z-z_0|<\varepsilon
+   \end{equation*} if $|z-z_0|<\delta$ with $\delta=\varepsilon$.
+  There aren't any limit signs because we directly invoked the epsilon-delta definition. 
+\end{example}
+\begin{example}
+    Consider $f(z)=|z|$ (maps will map $\C\to \C$ unless otherwise stated from now on). We have showed $f$ is continuous for all $z$, but $f$ isn't differentiable at $0$. Use the technique at the end of the last example (write out the piecewise definition of the absolute value and show that the limits don't agree). 
+
+    What about $z_0\neq 0$? Is $f \colon \C\setminus \{0\}  \to C$ differentiable? Let $z_0\in C\setminus \{0\} $, then \[
+        \frac{f(z)-f(z_0)}{z-z_0}=\frac{|z|-|z_0|}{z-z_0} = \frac{r-r_0}{re^{i\theta}-r_0e^{i\theta_0}}. 
+    \] We let $z$ get close to $z_0$ in two different ways. First, assume $r=r_0$ but $\theta\neq\theta_0$ (vary the angle, but all having length $r$). Then \[
+    \frac{r-r_0}{re^{i\theta}-r_0e^{i\theta_0}}=\frac{0}{r(e^{i\theta}-e^{i\theta_0})}=0.
+\] Next, assume $r\neq r_0$ but $\theta=\theta_0$ (points on a line with angle $\theta$, vary the length). Then \[
+\frac{r-r_0}{re^{i\theta}-r_0e^{i\theta_0}}=\frac{r-r_0}{e^{i\theta}(r-r_0)}=e^{-i\theta}\neq 0.
+\] So $f$ is nowhere differentiable.
+\end{example}
+
+\subsection{Product, Quotient, and Chain Rules}
+To get $f'(z)$ for $f(z)=z^{m}$, we want a formula. Time for induction!
+\begin{theorem}
+    If $f'(z_0)$ and $g'(z_0)$ exist for two functions $f$ and $g$, then so do the derivatives
+    \begin{enumerate}
+        \item $(f+g)'(z_0)=f'(z_0)+g'(z_0)$,
+        \item $(fg)'(z_0)=f'(z_0)g(z_0)+f(z_0)g'(z_0)$,
+        \item $(\frac{f}{g})'(z_0)=\frac{f'(z_0)g(z_0)-f(z_0)g'(z_0)}{[g(z_0)]^2}$ provided $g(z_0)\neq 0$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+    If $g$ is differentiable at $z_0$ and $f$ is differentiable at $g(z_0)$ then $f\circ g$ is differentiable at $z_0$ and \[
+        (f\circ g)'(z_0)=f'[g(z_0)]g'(z_0).
+    \]
+\end{theorem}
+\begin{note}[Leibniz Rule]
+   Suppose we have $f_1,f_2,...,fn$ functions all differentiable at $z_0$. Then \[
+       (f_1f_2f_3\cdots f_n)'(z_0)=f_1'f_2f_3\cdots f_n + f_1f_2'f_3\cdots f_n + f_1f_2f_3'f_4\cdots f_n+\cdots.
+   \]
+   In particular, $(z^{n})'=n(z'z^{n-1})=nz^{n-1}$ (just take $f_i=f$ and it becomes clear that this is true). 
+\end{note}
