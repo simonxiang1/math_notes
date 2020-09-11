@@ -1,0 +1,43 @@
+\section{September 11, 2020}
+Last time: we had a proposition that said let $p$ be a prime, $G$ a group of order $p^{n}$ for some $n\in \N$. Then $G$ has a non-trivial center, more precisely, $|Z(G)|=p^{m}$ for some $m \geq 1$.
+\subsection{Cauchy's Lemma}
+Dr. Ciperiani assumes we already know the Sylow theorems... why UNT.
+\begin{lemma}[Cauchy's Lemma]
+   Let $p$ be a prime such that $p \,\big|\, |G|$. Then $G$ has an element of order $p$.
+\end{lemma}
+\begin{proof}
+    Consider $X=\{(a_1\cdots a_p)\} $ such that $a_i \in G$, $a_1\cdots a_p=1_{G}$. Observe $|X|=|G|^{p-1}$ ($p$ is uniquely determined by varying the values of $a_1\cdots a_{p-1}$ and letting $p$ equal the inverse of such elements). The group $\Z /p\Z$ acts on $X$ as such: $\overline{1}(a_1\cdots a_p):=(a_2\cdots a_pa_1), \, \overline{n}(a_1\cdots a_p):=(a_{1+n},\cdots a_p, a_1, \cdots a_n)$. Verify that this is a group action. Since $|\Z /p\Z|=p$, we have $|O_{(a_1\cdots a_p)}|=1$ or $p$. $|O_{(a_1\cdots a_p)}|=1 \iff O_{(a_1\cdots a_p)}=\{(a_1\cdots a_p)\} \iff a_1=a_2=...=a_p=a$. $(a\cdots a)\in X \implies a^{p=1}$, so $(1_G \cdots 1_G)\in X$. $O_x=\{x\} \iff x\in X^{G}$. So $X=X^{G}\cup (\cup\, \text{distinct orbits with more than 1 element})$, and all of these are disjoint unions. This implies  $|X|=|X^G|+\sum$ sizes of nontrivial distinct orbits, which are all equal to $p$. So $|G|^{p-1}=|X|^{G}+pk$, where $k$ is the number of distinct non-trivial orbits. This implies $|X^{G}|=|G|^{p-1}-pk$ which is divisible by $p \implies p \,\big|\, |X^G|$, furthermore $(1_G\cdots 1_G)\in X^G\implies |X^G|\geq 1$.  $p\,\big|\, |X^G| \implies \exists a \in G\setminus 1_G$ such that $(a\cdots a)\in X^G\implies a^{p}=1_G, a\neq 1_G \implies a=p$.
+\end{proof}
+\subsection{p-groups}
+$p$-groups are groups $G$ such that $|G|=p^{n}$ for $n\in \N$.
+\begin{prop}
+    Let $p$ be a prime, $G$ a group of order $p^{n}$. Then $G$ has a chain of normal subgroups of order $p^{k}$ for all $k \leq n$. For example, there exists \[
+    \{1_G\} \trianglelefteq G_1 \trianglelefteq G_2 \cdots \trianglelefteq G_n=G
+    \] such that $G_i \trianglelefteq G$ for all $0\leq i \leq n$, $|G_i|=p^{i}$.
+\end{prop}
+\begin{proof}
+    We prove this proposition by induction. Assume $n\geq 1$. Then $|Z(G)|=p^k$ for some $k\geq 1$. By Cauchy's Lemma, there exists some $g\in Z(G)$ such that $g$ has order $p$. Set $N=\langle g \rangle \trianglelefteq G$. $n=1: \{1_G\} \trianglelefteq G$, $|\{1_G\}| =p^{0}, |G|=p^{1}$. Assume the hypothesis is true for $|G|=p^{n-1}$. To show the hypothesis is true for $|G|=p^{n}$: Consider $\pi \colon G \to G /N$. We have $|G /N|=\frac{|G|}{|N|}=\frac{p^{n}}{p}=p^{n-1}$. By the induction hypothesis there exists $\{1_G\} \trianglelefteq \overline{G_1}\trianglelefteq \overline{G_2}\cdots \trianglelefteq \overline{G_{n-1}}=G /N$. Verify that $G_{i+1}:=\pi^{-1}(\overline{G_i})\trianglelefteq G$, $\left| \pi^{-1}(\overline{G_i})\right|=p^{i+1}$, and $\{1_G\} \trianglelefteq G_1 \trianglelefteq \cdots \trianglelefteq G_n=G$ ($G_1$ has order $p$). It is crucial that $n$ is in the center of $G$.
+\end{proof}
+
+\subsection{Sylow Theorems}
+$p$ denotes a prime, and $G$ a group of order $p^{r}m$ where $p \nmid m, r \in \N$.
+\begin{definition}[Sylow] %fix
+   A \emph{Sylow p-subgroup} of $G$ is a subgroup of $G$ of order $p^{r}$. 
+\end{definition}
+\begin{theorem}
+    $G$ is a group of order $p^{r}m$ where $p$ is a prime, $p\nmid m, \, m\in \N, \, r\in \N$. Then 
+    \begin{enumerate}
+        \item Sylow $p$-subgroups exist,
+        \item They are all conjugate (in particular they are isomorphic),
+        \item Every $p$-subgroup of $G$ lies within a Sylow $p$-subgroup,
+        \item $n_p:=$ the number of Sylow $p$-subgroups of $G$, $n_p=[G:N_G(P)]$ where  $P$ is a Sylow $p$-subgroup ($P$-Sylow a $p$-subgroup). In particular, $n_p \mid m$,
+        \item $n_p \equiv 1 \pmod p$,
+        \item  $n_p=1 \iff $ there is a unique Sylow $p$-subgroup which is normal in $G$.
+    \end{enumerate}
+\end{theorem}
+When you do the proof, things will just ``click'' together.
+\begin{example}
+   Let $G$ be a group of order $6=2\cdot 3$. So $2$-Sylows, $3$-Sylows exists. $n_2\equiv 1 \pmod 2$, $n_2 \mid 3 \implies  n_2=1$ or $3$. $n_3\equiv 1 \pmod 3$, $n_3 \mid 2 \implies n_3=1$. $n_2=n_3=1 \implies  G \simeq  P_2\times P_3$ where $P_2$ is the $2$-Sylow and $P_3$ is the $3$-Sylow. $n_2=3$ and $n_3=1$ happens when $G\simeq S_3$.
+\end{example}
+Wow, this was a dense lecture.
+
