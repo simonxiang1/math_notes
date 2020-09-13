@@ -5,7 +5,7 @@ Last time: Homomorphisms, Isormorphisms, Automorphisms, trivial maps.
     Let $X$ be a finite set. Let \[
         S_x := \{ f \colon X \to X  \mid f \, \text{is bijective}\} 
     \]
-    Bijections on $X$ preserve $X$: think of this set as the \emph{group of automorphisms} on $X$, defined as $\Aut(X)$. The group operation is simply function composition. Then the identity element is the identity map, and the inverse of any $f\in S_x$ is $f^{-1}\in S_x$.
+    Bijections on $X$ preserve $X$: think of this set as the \emph{group of automorphisms} on $X$, defined as $\operatorname{Aut}(X)$. The group operation is simply function composition. Then the identity element is the identity map, and the inverse of any $f\in S_x$ is $f^{-1}\in S_x$.
 \end{example}
 Assume that $ g \colon X \to Y$ is a bijection. Then $g$ gives rise to a homomorphism $ \phi_g \colon S_y \to S_x$, $f \mapsto g^{-1}fg$. Verify that this map is well defined and a group homomorphism. Is $\phi_g$ an isomorphism? If $\phi_g^{-1} \colon S_x \to S_y$ were well-defined, then $\phi_g$ is a bijection. Consider $S_y (\phi_g) \to S_x (\phi_g^{-1}) \to S_y$, $f \mapsto g^{-1}fg \mapsto g(g^{-1}fg)g^{-1}=(gg^{-1})f(gg^{-1})=f$. So $\phi_{g^{-1}} \colon S_{x} \to S_{y}$, $h \mapsto (g^{-1})^{-1}fg^{-1}=gfg^{-1}$.
 
