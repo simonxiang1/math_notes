@@ -1,7 +1,14 @@
+%basic math stuff
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{mathrsfs}
 \usepackage{hyperref}
 \usepackage{xfrac}
+
+%microtype, font
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\usepackage{mathpazo}
+
+%good stuff
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem{cor}{Corollary}[section]
@@ -19,6 +26,7 @@
   {\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[Solution]}
   {\end{proof}}
 
+%self explanatory
 \newcommand\N{\ensuremath{\mathbb{N}}}
 \newcommand\R{\ensuremath{\mathbb{R}}}
 \newcommand\Z{\ensuremath{\mathbb{Z}}}
@@ -27,17 +35,13 @@
 \newcommand\C{\ensuremath{\mathbb{C}}}
 \newcommand\F{\ensuremath{\mathbb{F}}}
 \newcommand\E{\ensuremath{\mathbb{E}}}
+
+%essential (thanks Dr. Urbanski)
 \renewcommand\qedsymbol{$\boxtimes$}
 
-\DeclareMathOperator{\Aut}{Aut}
-\DeclareMathOperator{\Inn}{Inn}
-\DeclareMathOperator{\Syl}{Syl}
-\DeclareMathOperator{\Gal}{Gal}
-\DeclareMathOperator{\im}{im}
-\DeclareMathOperator{\GL}{GL} 
-\DeclareMathOperator{\SL}{SL}
-
+%section symbol
 \renewcommand*{\sectionformat}{\S\thesection\autodot\enskip}
 \renewcommand*{\subsectionformat}{\S\thesubsection\autodot\enskip}
 
+%tis me
 \author{Simon Xiang}
