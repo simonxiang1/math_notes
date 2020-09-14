@@ -1,0 +1,71 @@
+\section{September 14, 2020}
+\subsection{Class Introductions (not math)}
+
+Zoom classes suck: time for brief introductions. About Dr.\ Ciperiani: Number Theory, Elliptic Curves, Princeton, Albania, Smith $\implies $ France, Colombia, MSRI, UT! Swimming and Traveling, two kids (2 and 6).
+
+CJ (Christopher Izzo), undergrad, math major, algebraic geometry (number theory)? Wyoming, cooking, hiking, dog
+
+Ella  
+
+ALlie Embry (Indiani) outside is nice
+
+Zhou Fang (Umich) first year PHD (representation theory)
+
+Jacob Wood (sophomore), dallas, on campus
+
+auditing dallas, freshman, dorm, running and reading/dog
+
+Luis (from berkeley)
+
+Luke T Timmerman (also a freshman) yay
+
+Xiantao Chen (physics phd)
+
+Elijah (sophomore) %edit this section out later
+
+I'm omitting the rest of the personal introductions for privacy, but all my class mates are very interesting and cool people.
+
+\subsection{Sylow Theory}
+Last time: Sylow Theorems. Let $p$ be a prime.
+\begin{theorem}
+    Let $G$ be a group of order $p^{r}m$ where $p \nmid m, r\in \N$. Then
+    \begin{enumerate}
+        \item Sylow $p$-subgroups exist,
+        \item They are all conjugate,
+        \item Every $p$-subgroup of $G$ lies in some Sylow $p$-subgroup of $G$,
+        \item Let $n_p:=$ the number of Sylow $p$-subgroups of $G$, $P$ be a Sylow $p$-subgroup. Then $n_p=[G:N_G(P)]$, where $N_G(P)$ is the normalizer of $P$ in $G$. In particular, $n_p  \mid m = [G:P]$.
+\item $n_p \equiv 1 \pmod p$,
+        \item $n_p = 1$ if and only if $P \trianglelefteq G$.
+    \end{enumerate}
+\end{theorem}
+We introduce our key lemma:
+\begin{lemma}
+    Let $P$ denote any maximal $p$-subgroup of $G$, $N=N_G(P) $. If $Q$ is any $p$-subgroup of $N$, then $Q \subseteq P$. Consequently, $p \nmid [N:P]$.
+\end{lemma}
+\begin{proof}
+    Consider the map \[
+    \pi \colon N \to \overline{N} = N /P.
+\] Then $\pi(Q)=\overline{Q}.$ $Q$ a $p$-subgroup $\implies |\overline{Q}|=p^{m}$. $\pi^{-1}(\overline{Q})=QP \supseteq P$, $|QP|=|\overline{Q}|\cdot |P|=p^{m}\cdot |P| \implies QP=P$, $P$ is maximal. So $QP$ is a $p$-subgroup, $p^{m}=1$, $p \mid [\overline{N}:P]\implies p  \mid |N /P| \implies $ by Cauchy's Lemma that there exists a $g\in N /P$ such that $\operatorname{ord}g=p$. Take $\pi^{-1}\langle g \rangle =\langle P,g \rangle $, $|\pi^{-1}\langle g \rangle|=p |P|$. $\pi \colon \langle P,g \rangle  \to \langle g \rangle $, $\operatorname{ker}\pi|_{\langle P,g \rangle }=P$. \[
+O \to \underset{\operatorname{ker}\pi}{P} \to \langle P,g \rangle \overset{\pi}{\to } \underset{\operatorname{im}\pi}{\langle g \rangle} \to O
+\] implies \[
+kP, g>|=|\operatorname{im}\pi|\cdot |\operatorname{ker}\pi|=p|P|,
+\] $\langle P,g \rangle \not\supseteq P$, since $P$ is maximal.
+\end{proof}
+Now let's prove the theorem.
+\begin{proof}
+    Let $P$ be a maximal $p$-subgroup of $G$. We have \[
+    X= \{gPg^{-1} \mid g\in \} 
+    \] Observe that 
+    \begin{enumerate}
+        \item $|X|=[G:N_G(P)]$,
+        \item Every element of $X$ is a maximal $p$-subgroup of $G$, $gPg^{-1} \not \subseteq Q$ a $p$-subgroup $\implies P \not\subseteq g^{-1}Qg$ which is false since $P$ is a maximal $p$-subgroup,
+    \end{enumerate} Fine. (One of Dr.\ Ciperiani's (lovingly) idiosyncracies).
+    We have $P$ acting on $X$ by conjugation. The only fixed point of $X$ under the action of $P$ is $P$, ie, $X^{P}=P$. 
+\begin{claim}
+    If $gPg^{-1}\in X^{p}\iff P \subseteq N_G(gPg^{-1})$, ie, $h(gPg^{-1})h^{-1}=gPg^{-1}$ for all $h\in P$, then (??) $P=gPg^{-1}$.
+\end{claim}
+The first claim said that $|X^{P}|=|\{p\}|=1$. Nontrivial orbits of $X$ under the action of $P$ have size dividing $|P|$. This implies that the size is equal to $p^{k}$ for some $k \in \N$. $|X|=|X^{P}|+\sum$ sizes of distinct larger orbits, all of which are powers of $p$. Since $X^{P}|=1$, we have $|X| \equiv 1 \pmod p$. Whoops, we're a little overtime. We have one more claim to prove before completing the proof of the Sylow Theorems, then we will be done.
+\end{proof}
+
+
+
