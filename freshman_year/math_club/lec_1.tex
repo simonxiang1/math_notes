@@ -1,0 +1,53 @@
+\section{The Borsuk-Ulam Theorem (9/15/20)}
+Today's speaker is Hannah Turner, a 6th year Ph.D student. We'll be talking about the Borsuk Ulam Theorem!
+\subsection{Continuous Maps}
+We talk about maps from $n$-dimensional spheres to $\R^{n}$. Usually we talk about maps $f \colon  \R \to \R$ that are continuous, ``don't lift your pencil''. In topology, preimage of open sets are open, AKA for $f \colon  X \to Y$, points are close in $Y$ imply sets are close in $X$. For the scope of this talk, assume topological spaces are metrizable.
+\begin{definition}[Sphere]
+    We have $\R^{n}=(x_1,x_2,\cdots,x_n)$ for $x_i\in \R$. We define the \emph{sphere} notated $S^{n-1}$ as the set \[
+    \{x_i \,\big|\,|x_i|=1\},
+    \] or the set of points that are a distance $1$ from the origin. For example, $S^{1}  \subseteq \R^2$, $S^{2} \subseteq \R^3$.
+\end{definition}
+Let talk about maps $S^{1} \to \R$. Deform the circle into squiggly things then smash it. Or you can turn it into a square then squish it. Yay for deformation retractions! Also: $S^{1} $ is compact, so it maps onto a closed and bounded interval. Note this map isn't onto.
+
+\subsection{The Borsuk-Ulam Theorem}
+\begin{theorem}[Borsuk-Ulam]
+    Any map $f \colon S^{n} \to \R^{n}$ sends two antipodal points $(v \sim-v)$ in $S^{n}$ to the same point in $\R^{n}$.
+\end{theorem}
+\begin{example}
+    Any map $S^{1} \overset{f}{\to }\R$ sends two antipodal points in $S^{1} $ to the same point in $\R$. Look at $g(x)=f(x)-f(-x)$, where  $g \colon S^{1}  \to \R$. Our new goal: show that $g(x)$ has a zero (this shows BU for $n=1$). Pick our favorite point $x_0\in S^{1} $, and assume $g(x_0)\neq 0$. So $g(x_0)$ is either positive or negative, that is $g(x_0)>0$ or $g(x_0)<0$.
+
+    Assume $g(x_0)>0$: what happends to $-x_0$, the antipodal point? \[
+        g(-x_0)=f(-x_0)-f(-(-x_0))=f(-x_0)-f(x_0)=-(f(x_0)-f(-x_0))=-g(x_0).
+    \] The $g(-x_0)<0$. Now we apply the IVT, but we have to be a little careful. For the usual $\R \overset{f}{\to } \R$, say $f(x)=5$, $f(y)=7$, we hit every value in between $5$ and $7$. What's important: $S^{1} $ is \emph{path-connected} (so the IVT still applies, since $f$ is a function from a path-connected space into $\R$). Then there exists some $x\in S^{1} $ such that $g(x)=0$, finishing the example.
+\end{example}
+The proof in higher dimensions is more difficult. There are three flavors:
+\begin{enumerate}
+    \item Algebraic Topology: Assign an algebraic invariant. Weird equation: $H_{*}(\R P_i^{n}\F_2)$
+    \item Combinatorics: Tucker's Lemma,
+    \item Set covering (Lusternik-Schnirelmann): For $S^{n}$, any $n+1$ open sets covering one of the sets must contain antipodal points (in at least one of the covering sets).
+\end{enumerate}
+\subsection{Corollaries of BU}
+\begin{definition}[Homeomorphisms]
+    A \emph{homeomorphism} is a continuous function $f \colon  X \to Y$ which has a continuous inverse $f^{-1} \colon  Y \to X$, $f\circ f^{-1}=\operatorname{id}_X$. 
+\end{definition}
+\begin{example}
+    A map which is not injective cannot have an inverse! Because then one point would map to two, breaking the rules and causing society to fall into a complete collapse.
+\end{example}
+\begin{example}
+    Take the map from the half open interval to the circle, that is, $f \colon [0,1) \to S^{1} $. $f$ is continuous, has an inverse, but the inverse isn't continuous. Intuition: points at the place where the ``endpoints'' are identified are now very far away in the preimage of the inverse. So $f$ is a bijection but its inverse is not continuous, so $f$ is NOT a homeomomorphism.
+\end{example}
+\begin{cor}
+    There is no homeomorphism from $S^{n}\to \R^{n}$. Any continuous function $f \colon  S^{n} \to \R^{n}$ has $f(x)=f(-x)$, not even one to one!
+\end{cor}
+\subsection{Pancakes!}
+\begin{cor}[Pancake Theorem]
+    Any two disks in the place can be cut exactly in half by one slice. This includes weirdly shaped disks! In general, if we have $n$ amount of $n$-dimensional blobs, we would have an $n$-dimensional hyperplane (locally homeo to $\R^{n-1}$) in $\R^{n}$ that slices each $n$-dimensional blob exactly in half.
+\end{cor}
+\begin{proof}
+    Sketch of a proof: take our $3$ objects $A_1,A_2,A_3$. Something about normal vectors and perpendicular planes. Measure the volume? (Measures??) Pick the plane that gives half of the sandwich. Repeat for every plane in the sphere, call each plane $P_x$ (where half of the sandwich is on each side of any $P_x$). Define a map $f \colon  S^{2}  \to \R^2$ by $x \mapsto (\operatorname{vol}(A_2)$ on the positive side of $P_x, \, \operatorname{vol}(A_3)$ on the positive side of $P_x)$. We know there are  $x_0$ and $-x_0$ with $f(x_0)=f(-x_0)$ by BU. Man, I wish I could \TeX{} figures in real time. So 
+    \begin{gather*}
+        x_0 \mapsto (\operatorname{vol}(A_2)P_{x_0}^{+},\operatorname{vol}(A_3)P_{x_0}^{+}), \\
+        -x_0 \mapsto (\operatorname{vol}(A_2)P_{-x_0}^{+},\operatorname{vol}(A_3)P_{-x_0}^{+}),
+    \end{gather*}
+    which are equal. The point is, we get the same plane but we're looking at it from two different directions, because $(\operatorname{vol}(A_2)P_{-x_0}^{+},\operatorname{vol}(A_3)P_{-x_0}^{+})=\left( \operatorname{vol}(A_2)P_{x_0}^{-},\operatorname{vol}(A_3) P_{x_0}^{-}\right) $. $\operatorname{vol}(A_2)$ is cut in half by $P_{x_0},\,\operatorname{vol}(A_3)$ is cut in half by $P_{x_0}$.
+\end{proof}
