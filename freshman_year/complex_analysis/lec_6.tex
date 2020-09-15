@@ -37,6 +37,8 @@ f'(z_0)=\frac{\partial u}{\partial x}(x_0,y_0)+i \frac{\partial v}{\partial x}(x
         \frac{g(z)-g(0)}{z-0}=\frac{|z|^2-0}{z-0}=\frac{\overline{z}z}{z}=\overline{z}.
     \] Does $\lim_{z\to 0}\overline{z}$ exist? Yes, and it's equal to $0$. So $g'(0)$ exists and is equal to $0$.
 \end{example}
+
+\subsection{Weak Converse of CR Equations}
 Let's talk about the opposite of the CR equations.
 \begin{theorem}[Weak Converse of Cauchy-Riemann Equations]
     Let $f=u+iv$ be defined on a neighborhood of $z_0=x_0+iy_0$. Suppose the partial derivatives of $u$ and $v$ exist in that neighborhood, and are continuous at $z_0$. Furthermore, suppose the functions $u$ and $v$ satisfy the CR-equations at $z_0$. Then $f'(z_0)$ exists.
@@ -53,7 +55,10 @@ Now the next topic is very important.
 \end{example}
 We will eventually denote this function as $\exp(z)$. Notee: if we use Euler's formula $e^{i\theta}=\cos\theta+i\sin \theta$, then \[
     \exp(z)=e^{x}e^{iy}=e^{x+iy}=e^{z}.
-\] But we have to make sure we can add the exponents first. Before discussing this further, consider polar coordinates for $z$. For any function $g$, write $f(z)=u(r,\theta)+iv(r,\theta)$. Then after the change of coordinates we have \[
+\] But we have to make sure we can add the exponents first. 
+
+\subsection{CR Equations in Polar Coordinates}
+Before discussing this further, consider polar coordinates for $z$. For any function $g$, write $f(z)=u(r,\theta)+iv(r,\theta)$. Then after the change of coordinates we have \[
 \frac{\partial u}{\partial r}=\frac{\partial u}{\partial x}\frac{\partial x}{\partial r}+\frac{\partial u}{\partial y}\frac{\partial y}{\partial r}
 \] and \[
 \frac{\partial u}{\partial \theta}=\frac{\partial u}{\partial x}\frac{\partial x}{\partial \theta}+\frac{\partial u}{\partial y}\frac{\partial y}{\partial \theta}.
