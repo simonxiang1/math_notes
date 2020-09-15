@@ -1,0 +1,68 @@
+\section{September 15, 2020}
+I could be studying fundamental groups right now, but instead I'm sitting here verifying limits and derivatives by hand. Why?? OK so Gradescope is a meme. Anything new?
+
+Everything so far has been awfully boring. But now it gets interesting. Finally, I've been waiting for this.
+
+\subsection{Cauchy-Riemann Equations}
+Suppose we have a function $f \colon \C \to \C$, write it as $f(z)=u(x,y)=iv(x,y)$. Assume $f'(z_0)$ exists, and is equal to \[
+    \lim_{(x,y)\to (x_0,y_0)}\frac{\left( u(x,y)+iv(x,y) \right) -\left( u(x_0,y_0)+iv(x_0,y_0) \right) }{(x+iy)-(x_0+iy_0)}.
+\] Then we rewrite this to get \[
+f'(z_0)=\lim_{(x,y)\to (x_0,y_0)}\frac{u(x,y)-u(x_0,y_0)+i\left[ v(x,y)-v(x_0,y_0) \right] }{(x-x_0)+i(y-y_0)}.
+\] Consider two special ways $(x,y)$ can be ``near'' $(x_0,y_0)$. First, let $x=x_0$ but $y\neq y_0$. Then the quotient becomes 
+\begin{gather*}
+\frac{u(x_0,y)-u(x_0,y_0)+i[v(x_0,y)-v(x_0,y_0)]}{i(y-y_0)}=\\
+\frac{u(x_0,y)-u(x_0,y_0)}{i(y-y_0)}+\frac{v(x_0,y)-v(x_0,y_0)}{y-y_0}.
+\end{gather*} Then the limit is equal to \[
+\frac{1}{i}\frac{\partial u}{\partial y}(x_0,y_0)+\frac{\partial v}{\partial y}(x_0,y_0).
+\] Now let $y=y_0$ but $x\neq x_0$. Then the quotient becomes \[
+\frac{u(x,y_0)-u(x_0,y_0)+i\left[ v(x,y_0)-v(x_0,y_0) \right] }{x-x_0}=\frac{u(x,y_0)-u(x_0,y_0)}{x-x_0}+\frac{i\left[ v(x,y_0)-v(x_0,y_0) \right]}{x-x_0} ,
+\] so the limit $f'(z_0)$ is equal to \[
+\frac{\partial u(x_0,y_0)}{\partial x}+i \frac{\partial v}{\partial x}(x_0,y_0).
+\]  Why are we doing this? It's because if the limit exists, it should be the same whichever direction you approach it from, so you can derive some cool equalities.
+
+The two equations must agree, so \[
+    \frac{1}{i} \frac{\partial u}{\partial y}(x_0,y_0)+ \frac{\partial v}{\partial y}(x_0,y_0)=\frac{\partial u}{\partial x}(x_0,y_0)+i \frac{\partial v}{\partial x}(x_0,y_0).
+\] Examine the real and imaginary parts, so we have 
+\begin{equation}
+\frac{\partial v}{\partial y}(x_0,y_0)=\frac{\partial u}{\partial x}(x_0,y_0) \quad \text{and} \quad \frac{\partial v}{\partial x}(x_0,y_0)=- \frac{\partial u}{\partial y}(x_0,y_0).
+\end{equation}
+ These are known as the \emph{Cauchy-Riemann Equations}. Furthermore, \[
+f'(z_0)=\frac{\partial u}{\partial x}(x_0,y_0)+i \frac{\partial v}{\partial x}(x_0,y_0)=\frac{\partial v}{\partial y}(x_0,y_0)-i \frac{\partial u}{\partial y}(x_0,y_0).
+\] What does this tell us? If your function is differentiable at a point, then we have a way to compute the derivative at that point. The converse does not hold, that is, if the Cauchy-Riemann equations hold this doesn't necessarily guarantee the existence of a derivative at that point.
+
+\begin{example}
+    Recall that the function $f(z)=|z|$ is nowhere differentiable. However, consider $g(z)=|z|^2=x^2+y^2=u(x,y)+iv(x,y)$, where $v(x,y)=0$ and $u(x,y)=x^2+y^2$. Let's check to see if this function satisfies the Cauchy-Riemann equations. $\frac{\partial u}{\partial x}=2x,\, \frac{\partial u}{\partial y}=2y, \, \frac{\partial v}{\partial x}=0,\, \frac{\partial v}{\partial y}=0$. Does $\frac{\partial u}{\partial x}=\frac{\partial v}{\partial y}?$ Only if $2x=0 \implies x=0$. Does $\frac{\partial u}{\partial y}=-\frac{\partial v}{\partial x}?$ Only if $2y=0\implies y=0$. So this function only satisfies the Cauchy-Riemann equations at the origin, which implies that the function is nowhere differentiable at any other point ($g'(z_0)$ does not exists if $z_0\neq 0$). Now it does satisfy the CR equations at $0$, but we don't have the existence of the derivative guaranteed.
+
+    Let's check the case if $z_0=0$. \[
+        \frac{g(z)-g(0)}{z-0}=\frac{|z|^2-0}{z-0}=\frac{\overline{z}z}{z}=\overline{z}.
+    \] Does $\lim_{z\to 0}\overline{z}$ exist? Yes, and it's equal to $0$. So $g'(0)$ exists and is equal to $0$.
+\end{example}
+Let's talk about the opposite of the CR equations.
+\begin{theorem}[Weak Converse of Cauchy-Riemann Equations]
+    Let $f=u+iv$ be defined on a neighborhood of $z_0=x_0+iy_0$. Suppose the partial derivatives of $u$ and $v$ exist in that neighborhood, and are continuous at $z_0$. Furthermore, suppose the functions $u$ and $v$ satisfy the CR-equations at $z_0$. Then $f'(z_0)$ exists.
+\end{theorem}
+\begin{note}
+    We claim the hypotheses hold for $|z|^2: u(x,y)=u^2+y^2,\, v(x,y)=0$. Oops, I went to the restroom here. I don't think I missed anything interesting though.
+\end{note}
+Now the next topic is very important. 
+\begin{example}
+    Let $f(x,y)=e^{x}(\cos(y)+i\sin(y))=e^{x}\cos(y)+ie^{x}\sin(v)$. Note: $u$ and $v$ are \emph{nice}. Let's compute the CR equations: $\frac{\partial u}{\partial x}=e^{x}\cos(y)=\frac{\partial v}{\partial y}=e^{x}\cos(y)$. We also have $\frac{\partial u}{\partial y}=-e^{x}\sin(y)=-\frac{\partial v}{\partial x}=-e^{x}\sin(y)$. Then $f$ is differentiable everywhere, furthermore, 
+    \[
+    f'=\frac{\partial u}{\partial x}+i \frac{\partial v}{\partial x}=e^{x}\cos(y)+ie^{x}\sin(y)=e^{x}(\cos(y)+i\sin(y))=f.
+\] So $f$ is equal to its derivative everywhere. This is probably the single most important function in the entire course. 
+\end{example}
+We will eventually denote this function as $\exp(z)$. Notee: if we use Euler's formula $e^{i\theta}=\cos\theta+i\sin \theta$, then \[
+    \exp(z)=e^{x}e^{iy}=e^{x+iy}=e^{z}.
+\] But we have to make sure we can add the exponents first. Before discussing this further, consider polar coordinates for $z$. For any function $g$, write $f(z)=u(r,\theta)+iv(r,\theta)$. Then after the change of coordinates we have \[
+\frac{\partial u}{\partial r}=\frac{\partial u}{\partial x}\frac{\partial x}{\partial r}+\frac{\partial u}{\partial y}\frac{\partial y}{\partial r}
+\] and \[
+\frac{\partial u}{\partial \theta}=\frac{\partial u}{\partial x}\frac{\partial x}{\partial \theta}+\frac{\partial u}{\partial y}\frac{\partial y}{\partial \theta}.
+\] where $x=r\cos\theta$, $y=r\sin \theta$. We have $\frac{\partial x}{\partial r}=\cos\theta,\, \frac{\partial x}{\partial r}=\sin \theta,\, \frac{\partial x}{\partial \theta}=-r\sin \theta,\, \frac{\partial y}{\partial \theta}=r\cos\theta$. Use these to get \[
+\frac{\partial u}{\partial r}=\frac{\partial u}{\partial x}\cos\theta+\frac{\partial u}{\partial y}\sin\theta
+\] and \[
+\frac{\partial u}{\partial \theta}=-\frac{\partial u}{\partial x}r\sin\theta + \frac{\partial u}{\partial y}r\cos\theta.
+\] If $f$ is differentiable, $\frac{\partial u}{\partial x}=\frac{\partial v}{\partial y}$, $\frac{\partial u}{\partial y}=-\frac{\partial v}{\partial x}$
+Plugging these into the CR equations, we get \[
+\frac{\partial u}{\partial r}=\frac{1}{r}\frac{\partial v}{\partial \theta},\, ?? stop moving the page
+\] 
+Next time: no. We'll do it next time. We have a test in 2 weeks BTW.
