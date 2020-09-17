@@ -119,7 +119,7 @@ This is very very useful for us (people who are doing algebraic topology) becaus
 \subsection{Natural Transformations}
 We talked about maps between objects which led to categories, and then maps between categories which lead to functors. Now let's talk about maps between functors, the natural transformation: this is actually not too strange (recall the homotopy, a ``deformation'' from a map to another map).
 
-In this case, we also want to pull a map (functor) $G$ to another map $G$ by composing a bunch of arrows in the target space $\mathcal{B}$.
+In this case, we also want to pull a map (functor) $F$ to another map $G$ by composing a bunch of arrows in the target space $\mathcal{B}$.
 \newpage
 \begin{definition}[Natural Transformations]
     Let $F,G \colon \mathcal{A} \to \mathcal{B}$ be two functors. A \emph{natural transformation} $\alpha \colon F \to G$ denoted
@@ -169,7 +169,7 @@ Natural transformations can be composed. Take two natural transformations $\alph
             \end{figure}
             We say $\alpha$ is a \emph{natural isomorphism}. Then $F(A)\cong G(A)$ \emph{naturally} in $A$ (and $\beta$ is an isomorphism too!) We write $F\cong G$ to show that the functors are naturally isomorphic.
 \begin{example}
-    If $F \colon \mathsf{Set} \to \mathsf{Grp}$ is the free functor that sends a set to the free group on such set and $U \colon \mathsf{Grp} \to \mathsf{Set}$ is the forgetful functor sending a free group to its generating set, then we have a natural inclusion of $S\hookrightarrow UF(S)$. THe functors $F$ and $U$ are left and right adjoint to each other, in the sense that we have a natural isomorphism \[
+    If $F \colon \mathsf{Set} \to \mathsf{Grp}$ is the free functor that sends a set to the free group on such set and $U \colon \mathsf{Grp} \to \mathsf{Set}$ is the forgetful functor sending a free group to its generating set, then we have a natural inclusion of $S\hookrightarrow UF(S)$. The functors $F$ and $U$ are left and right adjoint to each other, in the sense that we have a natural isomorphism \[
         \mathsf{Grp}(F(S),A)\cong \mathsf{Set}(S,U(A))
     \] for a set $S$ and an abelian group $A$. This expresses the ``universal property'' of free objects: a map of sets $S\to U(A)$ extends uniquely to a homomorphism of groups $F(S)\to A$. 
 \end{example}

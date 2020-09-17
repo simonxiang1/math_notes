@@ -1,0 +1,63 @@
+\section{September 17, 2020}
+
+\subsection{CR Equations (cont)}
+Last time: Cauchy Riemann equations for $f=u+iv=u(x,y)+iv(x,y)$. They are \[
+\frac{\partial u}{\partial x}=\frac{\partial v}{\partial y},\quad\frac{\partial u}{\partial y}=- \frac{\partial v}{\partial x}.
+\] Also discussed this for polar coordinates, yada yada.
+\begin{example}
+    Let $f(z)=\frac{1}{z^{4}}.$ \[
+        \frac{1}{z^{4}}=\frac{1}{r^{4}e^{i4\theta}}=\frac{1}{r^{4}}e^{-i 4\theta}=\frac{1}{r^{4}}[\cos(4\theta)-i \sin(4\theta)].
+    \] So 
+    \begin{align*}
+        f'&=e^{-i\theta}\left( -\frac{4}{r^{5}}\cos(4\theta)+i \frac{4}{r^{5}}\sin(4\theta) \right) \\
+          &=- \frac{4}{r^{5}}e^{-i\theta}(e^{-i 4\theta})\\
+          &=- \frac{4}{r^{5}}e^{-5i\theta}=- \frac{4}{r^{5}e^{5i\theta}}\\
+          &=-\frac{4}{z^{5}},
+    \end{align*} which is a known formula for the derivative.
+\end{example}
+
+\subsection{Analytic Functions}
+\begin{definition}[Analytic]
+    A function $f$ is said to be analytic at $z_0$ if $f$ is differentiable at all $z$ in some ball centered at $z_0$. $f$ is said to be analytic on a set $S$ if for all $z_0\in S$, $f$ is analytic at $z_0$.
+\end{definition}
+\begin{example}
+    Let $f(z)=z^{m}$, $m\in \N$. Then $f'(z_0)=mz_0^{m-1}$ for all $z_0$. So such $f$ are analytic in $\C$. If $m\in \Z\setminus \N$, this formula still holds for $z_0$ nonzero. So $f$ is analytic on the punctured plane $\C\setminus \{0\} $.
+\end{example}
+\begin{definition}[Entire function]
+    We say a function $f$ is \emph{entire} if $f$ is analytic on $\C$. For example, $f(z)=z^3$ is entire. More generally, all polynomials are entire.
+\end{definition}
+\begin{theorem}
+    If $f'(z)=0$ for all $z\in D$ a domain, then $f$ is constant in $D$. (Is this weak Liouville's Theorem?)
+\end{theorem}
+\begin{proof}
+    We will show that for any pair $z_1,z_2\in D$, $f(z_1)=f(z_2)$. Let $z_1,z_2\in D$, then there is some finite set of straight lines connecting $z_1$ and $z_2$ (what is this definition reeee). Consider $f$ on a segment $z=z(t)$, $0\leq t \leq 1$. Then $F(t)=f[z(t)],$ $0\leq t \leq 1$ which is equal to $u[x(t),y(t)]+iv[x(t),y(t)]$ So  \[
+    \frac{dF}{dt}=\frac{\partial u}{\partial x}\frac{\partial y}{\partial t}+\frac{\partial u}{\partial y}\frac{\partial y}{\partial t}+i\left[ \frac{\partial v}{\partial x}\frac{\partial x}{\partial t}+\frac{\partial v}{\partial y}\frac{\partial y}{\partial t} \right] .
+    \] By assumption, $\frac{df}{dz}=0$ in $D$. We can write this in two ways: $\frac{\partial u}{\partial x}+i \frac{\partial v}{\partial x}=\frac{\partial v}{\partial y}-i \frac{\partial u}{\partial y}=0.$ So $\frac{\partial u}{\partial x}=0=\frac{\partial v}{\partial x}=\frac{\partial u}{\partial y}=\frac{\partial x}{\partial y}$ in $D$, and so $\frac{dF}{dt}=0$, $0\leq t \leq 1$.
+
+    Consider $\operatorname{Re}[F(t)]=u[x(t),y(t)]$. It follows that $\frac{d}{dt} u(x(t),y(t))=0,$ $0\leq t \leq 1$. It follows that $u(x(t),y(t))$ is constant, since \[
+        \int_{0}^{1} \frac{d}{dt} u(x(t),y(t)) \, dt=0. 
+    \] Similarly, $V(x(1),y(1))-V(x(0),y(0))=0$. So $F(t)=f(z(t))$ has the same values at $z_a$ and $z_b$. (What?? Why??) Once we get Louiville's theorem we will get a less bad proof. This proof was big bad.
+\end{proof}
+We will show later that if $f=u+iv$ is analytic at $z_0$, then $u(x,y)$ and $v(x,y)$ have partial derivatives of all orders in a neighborhood of $z_0$. If a function is analytic, then it is infinitely differentiable: what?? Complex analysis is crazy. 
+
+\subsection{Harmonic Equations}
+\begin{definition}[Harmonic]
+If $u_{x x}+u_{yy}=0$, $u$ is \emph{harmonic} in that nbd of $z_0$, similarly for $v$. Laplace equation.
+\end{definition}
+\begin{definition}
+   We say $v$ is a \emph{harmonic conjugate} of $u$ in some region $D$ if $u$ and $v$ are harmonic in $D$, and $u,v$ satisfy the CR equations. 
+\end{definition}
+   \begin{note}
+       For some analytic function $f$ its true that $\overline{f(z)}=f(z)$.
+   \end{note}
+\begin{theorem}[The Reflection Principle]
+   ``Apparently this is famous, but I've never used it'' -Dr.\ Radin
+   
+   Suppose $f$ is analytic in a domain $D$ which is symmetric WRT the $x$-axis. Then for all $z\in D$, \[
+       \overline{f(z)}=f(\overline{z})\iff f \, \text{is real on the segment of the}\, x\text{-axis in }D. 
+   \] 
+\end{theorem}
+\begin{note}
+I've been taking less notes because I'm simultaneously doing my weekly Differential Equations quiz while \TeX{}ing notes. Just wanted to say that
+\end{note}
+

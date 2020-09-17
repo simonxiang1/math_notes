@@ -1,0 +1,52 @@
+\section{September 16, 2020}
+Last time: we were proving a big theorem. Let's move onto our second claim:
+\subsection{Proving the Sylow Theorems}
+\begin{claim}
+    $X$ contains all maximal $p$-subgroups of $G$.
+\end{claim}
+\begin{proof}
+    Suppose $Q$ is a maximal $p$-subgroup of $G$ such that $Q\notin X$. Consider the action of $Q$ on $X$ by conjugation (since $Q$ is a subgroup of $G$).Examine $X^{Q}$, the set of fixed points of $X$ under the action of $Q$. $X^G\ni gPg^{-1}$ for some $g\in G$. Then \[
+        X^Q \ni gPg^{-1} \iff Q\subseteq N_G(gPg^{-1}).
+    \] But by our key lemma, $Q\subseteq gPg^{-1}$, both sets are maximal. So $Q=gPg^{-1}$, a contradiction, since we assumed $Q\notin X$.
+\end{proof}
+\begin{claim}
+    This is the second claim: $X^Q=\O$ implies $X=\amalg$ nontrivial orbits of $X$ under the action of $Q$. But all of the orbits have size $p^k$ for some $k\in \N$, which implies \[
+    |X|=\sum_{i=1}^{} p^{k_i}\equiv 0 \pmod p
+    \] for $k_i\in \N$, a contradiction. Wait, did we just reach a contradiction twice? We assumed the assumtion failed and then got this, concluding the proof of Claim 2.
+\end{claim}
+We want to find the order of $P$: We have 
+            \begin{figure}[H]
+                \centering
+                \begin{tikzcd}
+G \arrow[d, no head] \arrow[d, "{[G:N_G(P)]=|X|\equiv 1\pmod p}", no head, bend left, shift left=3]                                \\
+N_G(P) \arrow[d, no head] \arrow[d, "{[N_G(P):P]\not\equiv 0 \pmod p \quad\text{by the lemma}}", no head, bend left, shift left=3] \\
+P                                                                                                                                 
+\end{tikzcd}
+            \end{figure}
+            which implies  $P \mid [G:P]$. $|G|=[G:P]\cdot |P|  \implies |P|=p\implies P$ is a Sylow $p$-subgroup of $G$. Claim 2 implies $n_p=|X|=[G:N_G(P)]$. Then this implies $n_p  \mid [G:P]=\frac{m\cdot p^{r}}{p^{r}}=m$. For 5, $n_p=|X|\equiv 1 \pmod p$ by Claim 1(b), and for 6, $n_p=1\iff |X|=1\iff X=\{p\} \iff p \trianglelefteq G,$ and we are done.$\quad\boxtimes$
+
+\subsection{Applications to Simple Groups}
+\begin{definition}[Simple Groups]
+    A group $G$ is simple if its only normal subgroups are $\{1_G\} $ and $G$.
+\end{definition}
+\begin{example}
+    Let $G$ be a $p$-group, ie $|G|=p^{n}$ for $n\in \N$. $Z(G)=p^{r}$, $r\geq 1\implies $ there exists a $g\in Z(G)$ such that $\operatorname{ord}g=p$. This implies $\langle g \rangle \trianglelefteq G$ has order $p$. So $G$ is normal if and only if $|G|=p$. (Was it supposed to be simple?)
+\end{example}
+\begin{example}
+    Let $G$ be a group of order $pq$ where $p,q$ are primes, $p\neq q$. Assume $p< q$. Then $n_q \mid p$ and $n_q \equiv 1\pmod q$. Together, these imply that $n_q=1 \implies p$-Sylow of $G$ is normal in $G$. So $G$ is not simple.
+\end{example}
+
+\subsection{Groups of Order 12 Are Not Simple}
+\begin{example}
+    Let $G$ be a group of order $p^2q$ where $p,q$ are distinct primes. Say $p>q$. Then $n_p\equiv 1 \pmod p$ and $n_p \mid q$, which together imply that   $n_p=1$ and $G$ is not simple. 
+
+    Now assume $p<q$: then $n_p\equiv 1\pmod p$ and $n_p \mid q$. So we have two possibilities: $n_p=1$ or $q$ (if $q\equiv 1\pmod p$). Look at the $q$-Sylows, so we have $n_q\equiv 1 \pmod p$ and $n_q \mid p^2$. This implies $n_q=1$ or $p^2$ if $p^2\equiv 1\pmod q$. We just argued that $q\nmid p-1$ since $p<q$, so $q \mid p+1$. The only way this happens is if the equality with $p^2$ holds. So $p=2$ and $q=3$, there's no other scenario.
+
+    We conclude that $G$ is not simple $(n_q=1)$ or $|G|=2^2\cdot 3$. Can this group be simple? Also, can we have $|G|=p^2q$ such that $p<q$ and $n_p=p$, $n_q=p^2$? $n_q=p^2\implies G$ has $p^2$ distinct subgroups of order $q\implies $ has $(q-1)\cdot p^2$ distinct elements of order $q$.  $S$ is the set of elements of $G$ with order $q$. $G\setminus S\supseteq$ Sylow $p$-subgroups, $|G\setminus S|=p^2q-(q-1)p^2=p^2$. So we have space for exactly one Sylow $p$-subgroup. Therefore $n_p=1$, a contradiction, so $G$ is not simple.
+\end{example}
+\begin{cor}
+    Let $G$ be a nontrivial group of order less than 60. Then $G$ is simple if and only if $|G|$ is prime.
+\end{cor}
+\begin{proof}
+    $|G|\in \{p^{n},pq,p^2q,2\cdot 3\cdot 5,2^3\cdot 3,2^3\cdot 5,2^3\cdot 7,3^3\cdot 2\} $, where $p,q$ are distinct primes. We have to refute these possibilites, to be continued next time.
+\end{proof}

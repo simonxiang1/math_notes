@@ -1,5 +1,5 @@
 \section{Free Groups}
-Not to be confused with free \emph{abelian} groups. Whether or not we can count is uncertain, but can we even spell? These notes will follow Fraleigh \S 39 and Hatcher \S 1.2.
+Not to be confused with free \emph{abelian} groups. Whether or not we can count is uncertain, but can we even spell? These notes will follow Fraleigh \S 39,40 and Hatcher \S 1.2.
 \subsection{Words and Reduced Words}
 Let $A_i$ be a set of elements (not necessarily finite). We say $A$ is an \emph{alphabet} and think of the $a_i\in A$ as \emph{letters}. Symbols of the form $a_{i}^{n}$ are \emph{syllables} and \emph{words} are a finite string of syllables. We denote the \emph{empty word} $1$ as the word with no syllables.
 \begin{example}
@@ -99,4 +99,20 @@ A basic property of the free product $*_{\alpha}G_{\alpha}$ is that any collecti
 \begin{example}
     For a free product $G*H$, the inclusions $G\hookrightarrow G\times H$ and $H\hookrightarrow G\times H$ induce a surjective homomorphism $G*H\to G\times H$.
 \end{example}
+\subsection{Group Presentations}
+Apparently, I never took group theory. Let's talk about group presentations! 
+Motivation: form a group by giving generators and having them follow certain relations. We want the group as free (free indeed) as possible on these generators.
+\begin{example}
+    Suppose $G$ has generators $x$ and $y$ and is \emph{free except for the relation} $xy=yx$, or $xyx^{-1}y^{-1}=1$. This makes sure $G$ is abelian, and so $G$ is isomorphic to $F[\{x,y\} ]$ modulo its commutator subgroup, the smallest normal subgroup containing $xyx^{-1}y^{-1}$. This is because any normal subgroup containing $xyx^{-1}y^{-1}$ gives rise to an abelian factor group and thus contians the commutator subgroup (by a previous theorem).
+\end{example}
+This example illustrates what we want: let $F[A]$ be a free group and we want a new group as free as possible, with certain equations satisfied. We can always write these equations with the RHS equal to 1, so we consider the equations to be $r_i=1$ for $i\in I$, where $r_i\in F[A]$. If $r_i=1$, then \[
+    x(r_i^n)x^{-1}=1
+\] for any $x\in F[A],\, n\in \Z$. Any product of elements equal to $1$ again equals $1$, so any finite product of the form \[
+\prod_{j}^{} x_{j}\left( r_{i_j}^{n_j} \right) x_{j}^{-1}
+\] where $r_{i_j}$ need not be distinct equals $1$ in the new group. It can be seen that the set of all these finite products is a normal subgroup $R$ of $F[A]$. Then any group that looks like $F[A]$ given $r_i=1$ also has $r=1$ for all $r\in R$. But $F[A]/R$ looks like $F[A]$, except that $R$ has been collapsed to form the identity $1$. Hence the group we are after is (at least isomorphic to) $F[A]/R$. We can view this group as described by the generating set $A$ and the set $\{r_i \mid i\in I\} $, abbreviated $\{r_i\} $.
+\begin{definition}[Group Presentations]
+    Let $A$ be a set and $\{r_i\} \subseteq F[A]$. Let $R$ be the least normal subgroup of $F[A]$ containing the $r_i$. An isomorphism $\phi$ of $F[A]/R$ onto a group $G$ is a \emph{presentation of} $G$. The sets $A$ and $\{r_i\} $ give a \emph{group presentation}. The set $A$ is the set of \emph{generators for the presentation} and each $r_i$ is a \emph{relator}. Each $r\in R$ is a \emph{consequence of} $\{r_i\} $. An equation $r_i=1$ is a \emph{relation}. A \emph{finite presentation} is one in which both $A$ and $\{r_i\} $ are finite sets.
+\end{definition}
+Refer back to Example 2.1: $\{x,y\}$ is our set of generators and $xyx^{-1}y^{-1}$ is the only relator. The equation $xyx^{-1}y^{-1}=1$ or $xy=yx$ is a relation— this was an example of a finite presentation.
+
 

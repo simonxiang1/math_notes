@@ -15,7 +15,11 @@ Van Kampen says under fairly broad hypotheses that this determines all of $\Phi$
     \] 
 \end{theorem}
 \begin{example}[Wedge Sums]
-    I like the visual of the wedge sum but the terminology of the smash product. We define the wedge sum $\bigvee_{\alpha}X_{\alpha}$ with basepoints $x_{\alpha}\in X_{\alpha}$ as the disjoint union $\amalg_{\alpha}X_{\alpha}$ with all the basepoints $x_{\alpha}$ identified to a single point.
+    I like the visual of the wedge sum but the terminology of the smash product. If only we could keep the \texttt{\textbackslash vee} symbol ($\vee$) and say we ``smash the spaces together'' at a point. 
+
+    We define the wedge sum $\bigvee_{\alpha}X_{\alpha}$ with basepoints $x_{\alpha}\in X_{\alpha}$ as the disjoint union $\amalg_{\alpha}X_{\alpha}$ with all the basepoints $x_{\alpha}$ identified to a single point. If each $x_{\alpha}$is a deformation retract of an open neighborhood $U_{\alpha }$ in $X_{\alpha }$, then $X_{\alpha }$ is a deformation retract of its open neighborhood $A_{\alpha }=X_{\alpha }\bigvee_{\beta\neq\alpha }U_{\beta}$. The intersection of two or more distinct $A_{\alpha }$'s is $\bigvee_{\alpha }U_{\alpha }$, which deformation retracts to a point. Then by van Kampens theorem, \[
+        \Phi \colon *_{\alpha }\pi_1(X_{\alpha }) \to \pi_1(\bigvee_{\alpha }X_{\alpha })
+    \] is an isomorphism, provided each $X_{\alpha }$ is path-connected, hence also each $A_{\alpha }$. Therefore for a wedge sum of circles, $\pi_1(\bigvee_{\alpha }S_{\alpha }^{1})$ is a free group, the free product of copies of $\Z$.
 \end{example}
 
 
