@@ -1,0 +1,70 @@
+\section{September 18, 2020}
+Last time: proving a corollary. I wish I was in the Canvas... We deal with many many cases.
+\begin{example}
+$|G|=2\cdot 3\cdot 5$. 
+    \begin{itemize}
+        \item $n_5=1$ or $6 \implies G$ has $(5-1)6$ elements of order $5$.
+        \item $n_3=1$ or $10 \implies G$ has $(3-1)6$ elements of order $3$.
+    \end{itemize}
+    So  $|G|>4\cdot 6+20=44$, which is false since $|G|=30$. Now let $|G|=2\cdot 3\cdot 7$. $n_7=1\implies G$ is not simple. $|G|=2^3\cdot \implies n_3=1$ or $4$, $n_2=1$ or $3$. Let $P_2$ be the $2$-Sylow: $[G:P_2]=3$. We have an older theorem: there exists an $N<P_2$ such that $N\trianglelefteq G$ and $3\leq[G:N]  \mid 3!=6$, which implies $N$ is nontrivial or the full group, so $G$ is not simple.
+\end{example}
+
+\subsection{Representation Theory}
+We have group actions connected to some representations, and we use these representations to talk about our groups. Representation theory is the study of linear algebra to deduce things about groups.
+
+\begin{claim}
+    Group actions of $G$ gives rise to representations of $G$. (The other way holds, but is not as useful).
+\end{claim}
+We have seen for a group $G$ acting on a set $X$, we have a bijective map $\varphi \colon G \to S_X$ a group homomorphism. Each group action corresponds to a homomorphism, that is, \[
+    g\cdot x \longrightarrow \varphi \colon g \mapsto (x\mapsto g\cdot x).
+\] For the other way around, \[
+g\cdot x:= \varphi (g)(x)\longleftarrow \varphi .
+\] 
+\begin{definition}[Representations]
+    A representation of $G$ on an $\F$-vector space $V$ is a homomorphism  \[
+        \varphi \colon G \to \operatorname{GL}(V),
+    \] where $\operatorname{GL}(V)$ is just the set of automorphisms $\operatorname{Aut}(V\to V)$ from $V$ onto $V$ (automorphisms are just invertible linear maps). 
+\end{definition}
+
+\subsection{Linear Actions}
+How are group actions related to representation theory?
+\begin{definition}
+   A group action $G$ on the vector space $V$ is \emph{linear} if the maps induced by the elements of your group $v\to g\cdot v$ are linear for all $g\in G$.
+\end{definition}
+\begin{prop}
+    Linear actions of $G$ are in bijection with representations of $G$. To see this, $g\cdot v \longrightarrow \varphi \colon g\mapsto (v\mapsto g\cdot v)$, $v\in V,\,g\in G$. Verify that $\varphi $ is a homomorphism. For the other way, $\varphi \colon G \to \operatorname{GL}(V)$, $g\cdot v=\varphi (g)(v)$.
+\end{prop}
+\begin{proof}
+   Things we have to do:
+   \begin{enumerate}
+       \item Verify that $g\cdot v$ is a linear group action.
+       \item Verify that $\varphi (g)\in \operatorname{GL}(V)$. Also verify that $\varphi $ is a homomorphism (this is trivial).
+   \end{enumerate}
+\end{proof}
+Let $G$ a group acting on a set $X$. We want to construct a linear action of $G$ using this given action. Let $V=\bigoplus\F e_x$, where $e_x$ is a basis element. Then the action of $G$ on $V$ is defined as follows: let \[
+v\in V\implies v=\sum_{x\in X}^{} a_x e_x
+\] where $a_x\in \F$, $a_x=0$ for all but finitely many $x\in X$ (denoted by the convention ``almost all''). Then \[
+g\cdot := \sum_{}^{} a_x e_{g\cdot x}\in V.
+\] 
+\begin{claim}
+    The action of $G$ on $V$ is linear. Verify this in your free time.
+\end{claim}
+
+\subsection{Regular Representations}
+\begin{definition}[Regular Representations]
+Consider the corresponding representation $\varphi \colon G \to \operatorname{GL}(V)$. This representation has a special name: observe $\varphi (g)$ is a \emph{permutation matrix}  whos entries are $0$ or $1$ if $x$ is finite. Permutation matrices simply permute (rearrange) the basis elements. This is called the \emph{regular} representation.
+\end{definition}
+\begin{example}
+    Consider the action $G$ on $G$ by left multiplication. Then \[
+        V_{\text{reg}}:=\bigoplus_{g\in G}\F e_g, \quad \varphi _{\text{reg}} \colon G \to \operatorname{GL}(V_{\text{reg}}).
+    \] is the regular representation of $G$. If $G$ is finite, then $V_{\text{reg}}$ is finite dimensional. Multiplicity, irreducability (throwback to last semester!). We call a space irreducable if we can't find a subspace such that we can restrict this homomorphism to the subspace.
+
+    If this is gibberish, just know that the regular representation will contain \textbf{all} the information you need to know about your group (wow!).
+\end{example}
+\begin{definition}
+    Let $V$ be a finite dimensional vector space over $\F$. Then the \emph{character} of a representation $\varphi \colon G \to \operatorname{GL}(V)$ is defined as \[
+        \operatorname{char}\varphi  \colon G \to F,\quad g\mapsto \operatorname{tr}\varphi (g).
+    \] 
+\end{definition}
+The amazing thing is that your character will determine your representation uniquely. Let's continue this next time (this is making much more sense than Sylow whatever).
+
