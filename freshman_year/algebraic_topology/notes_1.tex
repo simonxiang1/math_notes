@@ -54,6 +54,67 @@ From now on, $A\in \mathcal{A}$ is the same as $A\in \operatorname{obj}(\mathcal
         \item Finally, we have a category $\mathsf{Set}$ of sets, arrows denote any map between sets.
     \end{itemize}
 \end{example}
+\begin{definition}[Isomorphism]
+    An arrow $A_1\overset{f}{\to }A_2$ is an \emph{isomorphism} if there exists $A_2\overset{g}{\to }A_1$ such that $f\circ g=\operatorname{id}_{A_2}$ and $g\circ f=\operatorname{id}_{A_1}$. We say $A_1$ and $A_2$ are \emph{isomorphic}, denoted $A_1\cong A_2$.
+\end{definition}
+\begin{remark}
+    In the category $\mathsf{Set}$, $X\cong Y \iff |X|=|Y|$.
+\end{remark}
+In other fields, we can tell a lot about the structure of an object by looking at maps between them. In category theory, we \emph{only} look arrows, and ignore what the objects themselves are.
+\begin{example}[Posets are Categories]
+   Let $\mathcal{P} $ be a poset. Then we can construct a category $P$ for it as follows:
+   \begin{itemize}
+       \item The objects of $P$ are elements of $\mathcal{P} $.
+    \item We define the arrows of $P$ as follows:
+        \begin{itemize}
+            \item For every object $p\in P$, we add an identity arrow $\operatorname{id}_p$, and 
+            \item For any pair of distinct objects $p\leq q$, we add a single arrow $p\to q$. 
+        \end{itemize}
+        There are no other arrows.
+    \item We compose arrows in the only way possible, examining the order of the first and last object.
+   \end{itemize}
+   Here's a figure depicting the category of a poset $\mathcal{P} $ on four objects $\{a,b,c,d\} $ with $a\leq b$ and $a\leq c\leq d$.
+            \begin{figure}[H]
+                \centering
+                \begin{tikzcd}
+                                                                          & {[a]} \arrow[dd, "a\leq d" description] \arrow[rd, "a\leq c" description] \arrow[ld, "a\leq b" description] \arrow["\operatorname{id}_a"', loop, distance=2em, in=125, out=55] &                                                                                                            \\
+{[b]} \arrow["\operatorname{id}_b"', loop, distance=2em, in=215, out=145] &                                                                                                                                                                                & {[c]} \arrow[ld, "c\leq d" description] \arrow["\operatorname{id}_c"', loop, distance=2em, in=35, out=325] \\
+                                                                          & {[d]} \arrow["\operatorname{id}_d"', loop, distance=2em, in=305, out=235]                                                                                                      &                                                                                                           
+\end{tikzcd}
+            \end{figure}
+            Note that no two distinct objects of a poset are isomorphic.
+\end{example}
+This shows that categories don't have to refer to just structure preserving maps between sets (these are called ``concrete categories''.
+\begin{example}[Groups as a category with one object]
+   A group $G $ can be thought of as a category $\mathcal{G} $ with one object $*$, all of whos arrows are isomorphisms. 
+
+            If the universe were structured differently and kids learned category theory before groups, symmetries transforming $X$ into itself would be a natural extension of categories that transform $X$ into other objects, a special case in which all the maps are invertible. Alas, this is not the right timeline.
+\end{example}
+\begin{example}[Deriving Categories]
+We can make categories from other categories!
+   \begin{enumerate}
+       \item[(a)] Given a category $\mathcal{A} $, we can construct the \emph{opposite category} $A^{\text{op}}$, which is the same as $\mathcal{A} $ but with all the arrows reversed.
+       \item[(b)] Given categories $\mathcal{A} $ and $\mathcal{B} $, we can construct the \emph{product category}  $\mathcal{A} \times \mathcal{B} $ as follows: the objects are pairs $(A,B)$ for $A\in \mathcal{A} $, $B\in \mathcal{B} $, and the arrows from $(A_1,B_1)$ to $(A_2,B_2)$ are pairs \[
+               \left( A_1 \overset{f}{\to }A_2, B_1\overset{g}{\to }B_2 \right) .
+       \] The composition is just pairwise composition, and the identity is the pair of identity functions on $A$ and $B$.
+   \end{enumerate} 
+\end{example}
+
+\subsection{Special objects in categories}
+Some categories have things called \emph{initial objects}. For example the empty set $\O$, the trivial group, the empty space, initial element in a poset, etc. More interestingly: the initial object of $\mathsf{CRing} $ is the ring $\Z$.
+\begin{definition}[Initial object]
+    An \emph{initial object} of $\mathcal{A} $ is an object $A_{\text{init}}\in \mathcal{A} $ such that for any $A\in \mathcal{A} $ (possibly $A=A_{\text{init}}$), there is exactly one arrow from $A_{\text{init}}$ to $A$.
+\end{definition}
+The yang to this yin is the \emph{terminal object}:
+\begin{definition}[Terminal object]
+    A \emph{terminal object} of $\mathcal{A} $ is an object $A_{\text{final}}\in \mathcal{A} $ such that for any $A\in \mathcal{A} $ (possibly $A=A_{\text{final}}$, there is exactly one arrow from $A$ to $A_{\text{final}}$. 
+\end{definition}
+For example, the terminal object of $\mathsf{Set} $ is $\{*\} $, $\mathsf{Grp} $ is $\{1\} $, $\mathsf{CRing} $ is the zero ring, $\mathsf{Top} $ is the single point space, and a poset its maximal element (if one exists).
+
+\subsection{Monic and epic maps}
+Injectivity and surjectivity don't really make sense when talking about categories. todo
+
+
 \subsection{Functors}
 Motivation: maps between categories, objects rising from other objects. 
 \begin{example}[Basic Functors]
@@ -116,6 +177,28 @@ This is very very useful for us (people who are doing algebraic topology) becaus
 \begin{note}
     As a meme (or not really, but it's still funny), we can construct the category $\mathsf{Cat}$ whose objects are categories and arrows are functors.
 \end{note}
+
+\subsection{Homotopy Categories and Homotopy Equivalence}
+Let $\mathsf{Top}_*$ be the category of pointed topological spaces. Then the fundamental group gives a functor $\mathsf{Top} _* \to \mathsf{Grp} $. When we have a suitable relation of homotopy between maps in a category $\mathcal{C} $, we define the homotopy category $\mathsf{Ho} (\mathcal{C} )$ to be the category sharing the same objects as $\mathcal{C} $, but morphisms the homotopy classes of maps. On $\mathsf{Top} _*$, we require homotopies to map basepoint to basepoint, and we get the homotopy category $\mathsf{hTop}_* $ of pointed spaces.
+
+Homotopy equivalences in $\mathcal{C} $ are isomorphisms in $\mathsf{Ho} (\mathcal{C} )$. More concretely, recall that a map $f \colon X \to Y$ is a homotopy equivalence if there is a map $g \colon Y \to X$ such that both $g\circ f \simeq \operatorname{id}_X$ and $f\circ g \simeq \operatorname{id}_Y$. In the language of category theory, we can obtain the analogous notion of a pointed homotopy equivalence. Functors carry isomorphisms to isomorphisms, so then the pointed homotopy equivalence will induce an isomorphism of fundamental groups. This also holds, but less obviously, for the category of non pointed homotopy equivalences.
+\begin{theorem}
+    If $f \colon X \to Y$ is a homotopy equivalence, then \[
+        f_* \colon \pi_1(X,x) \to \pi_1(Y,f(x))
+    \] is an isomorphism for all $x\in X$.
+\end{theorem}
+\begin{proof}
+    Let $g \colon Y \to X$ be a homotopy inverse of $f$. By our homotopy invariance diagram, we see that the composites \[
+        \pi_1(X,x)\overset{f_*}{\longrightarrow }\pi_1(Y,f(x))\overset{g_*}{\longrightarrow}\pi_1(X,(g\circ f)(x))
+    \] and \[
+    \pi_1(Y,y)\overset{g_*}{\longrightarrow}\pi_1(X,g(y))\overset{f_*}{\longrightarrow}\pi_1(Y,(f\circ g)(y))
+\] are isomorphisms determined by paths between basepoints given by chosen homotopies $g\circ f \simeq \operatorname{id}_X$ and $f\circ g \simeq \operatorname{id}_Y$. Then in each displayed composite, the first map is a monomorphism and the second is an epimorphism. Taking $y=f(x)$ in the second composite, we see that the second map in the first composite is an isomorphism. Therefore so is the first map, and we are done.
+\end{proof}
+A space $X$ is said to be contractible if it is homotopy equivalent to a point.
+\begin{cor}
+    The fundamental group of a contractible space is zero.
+\end{cor}
+
 \subsection{Natural Transformations}
 We talked about maps between objects which led to categories, and then maps between categories which lead to functors. Now let's talk about maps between functors, the natural transformation: this is actually not too strange (recall the homotopy, a ``deformation'' from a map to another map).
 
@@ -176,6 +259,13 @@ Natural transformations can be composed. Take two natural transformations $\alph
 \begin{definition}
     Two categories $\mathcal{A}$ and $\mathcal{B}$ are equivalent if there are functors $F \colon \mathcal{A} \to \mathcal{B}$ and $G \colon \mathcal{B} \to \mathcal{A}$ and natural isomorphisms $FG \to \operatorname{Id}$ and $GF \to \operatorname{Id}$, where the $\operatorname{Id}$ are the respective identity functors.
 \end{definition}
-\subsection{Homotopy Categories and Homotopy Equivalence}
-Todo
 
+\subsection{The Yoneda lemma}
+\begin{definition}[The functor category]
+    The \emph{functor category} of two categories $\mathcal{A} $ and $\mathcal{B} $, denoted $[\mathcal{A} ,\mathcal{B} ]$ is defined as follows:
+    \begin{itemize}
+        \item The objects of $[\mathcal{A} ,\mathcal{B} ]$ are (covariant) functors $F \colon \mathcal{A}  \to \mathcal{B} $, and 
+        \item The morphisms are natural transformations $\alpha \colon F \to G$.
+    \end{itemize}
+\end{definition}
+todo
