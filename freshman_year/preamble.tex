@@ -1,4 +1,6 @@
+%small margins
 \usepackage[margin=1in]{geometry}
+
 %basic math stuff
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{mathrsfs}
@@ -10,6 +12,7 @@
 
 %microtype, font, color support, cl
 \usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\usepackage{adforn}
 \usepackage{mathpazo}
 
 %good stuff
@@ -42,6 +45,22 @@
 
 %essential (thanks Dr. Urbanski)
 \renewcommand\qedsymbol{$\boxtimes$}
+
+%link colors
+\hypersetup{
+ colorlinks,
+ linkcolor={red!50!black},
+ citecolor={green!50!black},
+ urlcolor={blue!80!black}
+}
+
+%cool section divider
+\newcommand{\orbreak}{
+\begin{center}
+    \adforn{25}\adforn{14}\adforn{53}
+ \vspace{0.2cm}
+\end{center}
+}
 
 %section symbol
 \renewcommand*{\sectionformat}{\S\thesection\autodot\enskip}
