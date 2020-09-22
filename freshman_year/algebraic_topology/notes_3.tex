@@ -54,14 +54,14 @@ U\cap V \arrow[ru, "i"] \arrow[rd, "j"'] &                    & X \\
                                                                                 & {\pi_1(V,q)} \arrow[ru, "l_*"'] \arrow[u, "\iota_V" description] &             
 \end{tikzcd}
             \end{figure}
-            Finally, define a map $F \colon \pi_1(U\cap V,q) \to \pi_1(U,q)*\pi_1(V,q)$ by setting $F(\gamma)=(i_*\gamma)^{-1}(j_*\gamma)$\footnote{$F$ is not a homomorphism.}. Let $\overline{F(\pi_1(U\cap V,q))}$ denote the \emph{normal closure} of the image of $F$ in $\pi_1(U,q)*\pi_1(V,q)$\footnote{The \emph{normal closure} of a set means the smallest normal subgroup that contains such set.}.
+            Finally, define a map $F \colon \pi_1(U\cap V,q) \to \pi_1(U,q)*\pi_1(V,q)$ by setting $F(\gamma)=(i_*\gamma)^{-1}(j_*\gamma)$\footnote{$F$ is not a homomorphism.}. Let $\overline{F(\pi_1(U\cap V,q))}$ denote the \emph{normal closure}\footnote{the \emph{normal closure} of a set means the smallest normal subgroup that contains such set.} of the image of $F$ in $\pi_1(U,q)*\pi_1(V,q)$.
 
 \begin{theorem}[Seifert-Van Kampen]
     Let $X$ be a topological space. Suppose $U,V\subseteq X$ are open, $U\cap V=X$, and $U,V$, and $U\cap V$ are path-connected. Then for any $q\in U\cap V$, the homomorphism $\Phi$ is surjective, and its kernel is $\overline{F(\pi_1(U\cap V,q))}$. Therefore we have \[
         \pi_1(X,q)\cong \pi_1(U,q)*\pi_1(V,q) \big/ \overline{F(\pi_1(U\cap V,q))}.
     \] 
 \end{theorem}
-When the fundamental groups in question are finitely presented\footnote{Finitely presented just means being presented by finitely many relations.}, the theorem has a useful reformulation in terms of generators and relations.
+When the fundamental groups in question are finitely presented, the theorem has a useful reformulation in terms of generators and relations.
 \begin{cor}
     In addition to the hypothesis of van Kampen, assume that the fundamental groups of $U,V$, and $U\cap V$ have the following finite presentations:
     \begin{gather*}
@@ -73,5 +73,23 @@ When the fundamental groups in question are finitely presented\footnote{Finitely
         \pi_1(X,q)\cong \langle \alpha_1,\cdots,\alpha_m,\,\beta_1,\cdots,\beta_n \mid \rho_1,\cdots,\rho_r,\,\sigma_1,\cdots,\sigma_s,\,u_1=v_1,\cdots,u_p=v_p \rangle 
     \] where for each $a=1,\cdots,p$, $u_a$ is an expression for $i_*\gamma_a\in \pi_1(U,q)$ in terms of the generators $\{\alpha_1,\cdots,\alpha_m\} $, and $v_a$ similarly expresses $j_*\gamma_a\in \pi_1(V,q)$ in terms of $\{\beta_1,\cdots,\beta_n\} $.
 \end{cor}
+\subsection{The fundamental groupoid}
+We backtrack a little to talk about categorical nonsense. This doesn't fit too well with the section on category theory, so it's here. These will follow May \S 2.5.
+\orbreak
+We often talk of pointed spaces, but it would to nice to talk about spaces without making such a choice. We define the fundamental groupoid $\prod_{}^{} (X) $ of a space $X$ to be the category whose objects are the points of $X$ and whose morphism $x \to y$ are the equivalence classes of paths from $x$ to $y$\footnote{Recall Example 1.4 of a group being realized as a category with all its arrows isomorphisms.}. Then the set of endomorphisms of the object $x$ is the fundamental group $\pi_1(X,x)$.
+
+We say ``groupoid'' because a group is simply a groupoid with only one object (the class of morphisms or symmetries on an object). However, the category of groupoids has several objects. We also defined groupoids as categories whose morphisms are all isomorphisms. If morphisms are functors, then we have the category $\mathsf{Grpd} $ of groupoids. So we can see $\prod $ as a functor $\mathsf{hTop} \to \mathsf{Grpd} $.
+
+Let's talk about skeletons. We have the skeleton of a category $\mathcal{C} $ denoted by $\operatorname{sk}(\mathcal{C}) $. This is a ``full'' subcategory with one object from each isomorphism class of objects of $\mathcal{C} $, ``full'' meaning that the morphisms between two objects of $\operatorname{sk}(\mathcal{C} )$ are all of the morphisms between these objects in $\mathcal{C} $. The inclusion functor $J \colon \operatorname{sk}(\mathcal{C} ) \to \mathcal{C} $ is an equivalence of categories. We can find an inverse functor $F \colon \mathcal{C}  \to \operatorname{sk}(\mathcal{C} )$ by letting $F(A)$ be the unique object in $\operatorname{sk}(\mathcal{C} )$ that is isomorphic to $A$, choosing an isomorphism $\alpha _A \colon A \to F(A)$, and defining $F(f)=\alpha _B \circ f \circ \alpha_A^{-1}$ for a morphism $f \colon  A \to B$ in $\mathcal{C} $. Choose $\alpha $ to be the identity morphisms if $A\in \operatorname{sk}(\mathcal{C} )$, then $FJ=\operatorname{id}_{\operatorname{sk}(\mathcal{C} )}$; the $\alpha _A$ specify a natural isomorphism $\alpha \colon \operatorname{id} \to JF $.
+
+A category is connected if any two objects can be connected by a sequence of morphisms. Then a groupoid is connected iff any two of its objects are isomorphic. The group of endomorphisms of any object $C$ is then a skeleton of $\mathcal{C} $, so we can generalize our results about skeletons to give the relationship between a fundamental group and a fundamental groupoid of a path connected space $X$.
+\begin{prop}
+    Let $X$ be a path connected space. Then for each $x\in X$, the inclusion $\pi_1(X,x) \to \prod (X)$ is an equivalence of categories.
+\end{prop}
+\begin{proof}
+    View $\pi_1(X,x)$ as a groupoid with on object $x$: then $\pi_1(X,x)$ is a skeleton of $\prod (X)$ and we are done.
+\end{proof}
+May's presentation and proofs are very concise and elegant. I like this.
+
 
 
