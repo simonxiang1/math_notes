@@ -1,0 +1,52 @@
+\section{September 22, 2020}
+Last time: for any $z=(x,y)\in \C$, $\exp(z)=e^{x}[\cos y+i\sin y]=e^{x}e^{iy}$. $e^{z}=\operatorname{Exp}(z)=\exp(z)$. We showed this function is differentiable on $\C$ and that its derivative is itself.
+\orbreak
+The product of complex numbers $e^{z_1}e^{z_2}=(e^{x_1}e^{iy_1})(e^{x_2}e^{iy_2})$. Since multiplication is commutative, we have $(e^{x_1}e^{x_2})(e^{iy_1}e^{iy_2})=e^{x_1+x_2}e^{i(y_1+y_2)}=e^{z_1+z_2}$. This follows from our defintions, its not an assumption.
+\begin{cor}
+    $e^{z}e^{-z}=e^0=1$. So $e^{-z}=\frac{1}{e^{z}}$. Also, for $m=1,2,\cdots$  $(e^{z})^m=e^{mz}$. This also holds for negative integers. Finally, by our differentiation rules, \[
+    \frac{d}{dz} e^{az^n}=naz^{n-1}e^{az^n}.
+    \] 
+\end{cor}
+So far we've covered how to differentiate polynomials (or more generally, rational functions), and now we've added $e^{z}$ to our arsenal. Let's introduce some more basic functions to our list. Why do we differentiate? This is a course in functions of a complex variable, differentiating them, integrating the, etc. (I wish we covered analytic continuity). The next set of functions are trig functions. 
+
+\subsection{Trig functions}
+Recall that $e^{ix}=\cos x + i\sin x $, $e^{-ix}=\cos x -i \sin x$, so $\frac{e^{ix}+e^{-x}}{2}=\cos x$,  $\frac{e^{ix}-e^{-x}}{2}= \sin x$. (Not sure if I got the definitions right). We can extend these to the complex plane, we define $\cos z = (e^{iz}+e^{-iz}) /2$, $\sin z = (e^{iz}-e^{-iz}) / 2i$ for all $z$\footnote{Note that $e^{iz}$ is differentiable, and $\frac{d}{dz}e^{iz}=ie^{iz}$.}. So $\frac{d}{dz}\cos z = (ie^{iz}-ie^{-iz})/2=i^2 \sin z=-\sin z$. Similarly, $\frac{d}{dz}\sin z = (ie^{iz}+ie^{-iz}) / 2i=\cos z$. So these formulas agree with their real analog. We write the definitions again for clarity:
+\begin{definition}
+    We define the trigonometric functions $\sin z $ and $\cos z$ on $\C$ as \[
+    \sin z = \frac{e^{iz}-e^{-iz}}{2i},\quad \cos z = \frac{e^{iz}+e^{-iz}}{2}.
+    \] 
+\end{definition}
+\noindent Now by our new definitions of trig functions,  
+\[
+    \cos z + i \sin z = \frac{e^{iz}+e^{-iz}}{2}+i \frac{e^{iz}-e^{-iz}}{2i}=e^{iz}.
+\] 
+From our definition, \[
+    \sin (z_1+z_2)= \frac{e^{i(z_1+z_2)}-e^{-i(z_1+z_2)}}{zi}.
+\] We claim that this is equal to $\sin z_1 \cos z_2 + \cos z_2 \sin z_1$. This is just a bunch of tedious manual labor. I don't really want to type this out, but here I am. We have this equal to 
+\begin{gather*}
+\left( \frac{e^{iz_1}-e^{iz_1}}{2i} \right) \left( \frac{e^{iz_2}+e^{-iz_2}}{2} \right) + \left( \frac{e^{iz_1}+e^{-iz_1}}{2} \right) \left( \frac{e^{iz_2}-e^{-iz_2}}{2i} \right) \\
+=\frac{1}{4i}\left[ e^{i(z_1+z_2)}+e^{i(z_1-z_2)}-e^{i(-z_1+z_2)}-e^{i(-z_1-z_2)} +e^{i(z_1+z_2)}-e^{i(z_1-z_2)}+e^{i(z_1+z_2)}-e^{i(-z_1-z_2)}\right] \\
+=\frac{1}{4i}\left[ 2e^{i(z_1+z_2)}-2e^{i(-z_1-z_2)} \right] \\
+=\frac{1}{2i}\left[ e^{i(z_1+z_2)}-e^{i(-z_1-z_2)} \right] \\
+=\sin(z_1+z_2).
+\end{gather*}
+I think I may have typed the second (long) equation incorrectly, but I am not in the mood for going back and double checking this. Manual labor should be reserved for homework (and even then, I am still unwilling to do it).
+
+We have a special case: $\sin(z+2\pi)=\sin(z)\cos(2\pi)+\cos(z)\sin(2\pi)=\sin(z)$. Clearly this generalizes to $\sin(z+2\pi n)$ for $n\in \Z$. So $\sin$ is periodic.
+\begin{definition}[Tangent]
+    Let \[
+    \tan z = \frac{\sin z }{\cos z}.
+    \]  Note that this isn't defined at $\cos z =0$: when does this happen? I stopped taking notes here for a little bit.
+\end{definition}
+
+\subsection{Hyperbolic trig functions}
+Let's look at another class of functions: the cool dudes, hyperbolic trig functions ($\sinh$ is pronounced ``sinch'', $\cosh$ is pronounced ``coush'', etc). This gives me good memories of my first Calculus class with Dr.\ Neal Brand at UNT.
+\begin{definition}
+    We define the hyperbolic trig functions $\cosh z$ and $\sinh z $ as \[
+    \cosh z = \frac{e^{z}+e^{-z}}{z},\quad \sinh z = \frac{e^{z}-e^{-z}}{z}.
+    \] Similarly, $\tanh z$ is defined as \[
+    \tanh z = \frac{e^{z}-e^{-z}}{e^{z}+e^{-z}}.
+    \] 
+\end{definition}
+
+
