@@ -1,0 +1,46 @@
+\section{September 21, 2020}
+Last time: Representation Theory. Recall that if $X$ is finite and we have a group $G$ acting on $X$, then we have a representation $\varphi \colon G \to \operatorname{GL}(V)$, where $V=\bigoplus_{x\in X}\F e_x$ for $\F$ a field. Recall again that the matrix corresponding to $\varphi (g)$ consists of $0$'s and $1$'s. When does the following hold? \[
+    \varphi (g)=
+    \begin{pmatrix}
+        1 & \cdots \\
+        \vdots & \ddots
+    \end{pmatrix}
+\] Note that $\varphi (g)_{ii}=1 \iff gx_i=x_i, \, \varphi (g)_{ii}=0\iff gx_i \neq x_i$. Let $\chi:=\operatorname{char}\varphi $. Then $\chi(g)=\operatorname{tr}\varphi (g)=| \{x\in X \mid gx=x\} =x^{g}$. Note that $\chi(g)$ is an integer.
+    \subsection{Not entirely sure what happened today...}
+    \begin{theorem}
+        Let $G$ be a group, $X$ a finite set such that $G$ acts on $X$. Let $\chi$ be the character of the representation induced from the action of $G$ on $X$. Then the number of orbits is equal to  \[
+            \frac{1}{|G|}\sum_{g\in G}^{} \chi(g).
+        \] 
+    \end{theorem}
+\begin{proof}
+    Consider \[
+        S=\{(x,g) \mid x\in X, g\in G\,\text{such that}\, gx=x \} .
+    \] Computer the number of $\#S$ in two different ways:
+    \begin{enumerate}
+        \item Fix $g\in G$. Then $\# \{(x,g)\in S \mid g\, \text{is fixed}\} =\#x^g=\chi(g)$. Define the set above as $S_g$: then $S=\amalg_{g\in G} S_g$ which implies $\#S=\sum_{g\in G}^{} \chi(g)$.
+        \item Let $S=\{(x,g) \mid x\in X,\,g\in G,gx=x\} $. Fix $x$ such that $S_x=\{(x,g)\in S \mid x \,\text{is fixed}\} $. Then the number of $S_x $'s is equal to $|G_x|$ where $G_x$ denotes the stabilizer of $x$. Recall $x'<g_0\cdot x \implies G_{x'}=g_0G_xg_0^{-1}$. Then 
+            \begin{align*}
+                S=\amalg_{x\in X}S_x\implies \#S&=\sum_{x\in X}^{} \# S_x\\
+                 &=\sum_{x\in X}^{} |G_x|\\
+                 &=\sum_{\text{distinct orbits}}^{\text{missed some stuff}} 
+            \end{align*}
+    \end{enumerate}
+    Then $(1)$ and $(2)$ together imply the number of orbits is equal to $\frac{1}{|G|}\sum_{g\in G}^{} \chi(g).$
+\end{proof}
+\begin{cor}
+    Let $G$ act on $X$ transitively. Assume that $|X|>1$. Then there exists a $g\in G$ such that fixes no element of $x$ (ie, $\#x^g=0$).
+\end{cor}
+\begin{proof}
+    We have by the theorem that the number of orbits is equal to $\frac{1}{|G|}\sum_{g\in G}^{} |x^g|.$ Since we only have one orbit (since the action is transitive),  $|G|=\sum_{g\in G}^{} \#X^g$ and the number of $x^g \in \N$, together these imply that the number of $X^g$ is equal to $1$. This is false since the number of $X^{1_G}=|X|>1$, therefore the number of $x^g=0$ for some $g\in G$.
+\end{proof}
+\begin{cor}
+    If $H$ is a proper subgroup of $G$ and $G$ is finite, then \[
+    G\neq  \bigcup_{g\in G} gHg^{-1}.
+    \] 
+\end{cor}
+\begin{proof}
+    Let $G$ act on $G /H$ by left multiplication. Let $k\in G$. Then $g\in G_{kH}\iff gkH=kH \iff gk\in kH\iff g\in kHk^{-1}$. Let $g\in G$: then $X^g=\{ kH \mid g\in kHk^{-1}\} $. If $G=\bigcup_{k\in G} kHk^{-1}$, then for every $g\in G$, there exists some $k_0$ such that $g\in k_0Hk_0^{-1}$. This subsequently implies that for all $g\in G$, $x^g \ni k_0H$ for some $k_0$, contradicting Corollary one and two (insert ref later, just the previous two).
+\end{proof}
+
+
+

@@ -1,0 +1,18 @@
+\section{Holomorphic Functions}
+I want to do some real math! These notes will follow Stein and Shakarchi \S 1.2.
+\subsection{Continuous functions}
+We've already seen the standard epsilon-delta definition of continuity. An equivalent definition is the sequential definition, that is, for every sequence $\{z_1,z_2,\cdots\} \subseteq \Omega \subseteq \C$ such that $\lim z_n=z_0$, then $f$ is continuous at $z_0$ if $\lim f(z_n)=f(z_0)$. Since the notions for convergence of complex numbers and $\R^2$ is the same, $f$ of $z=x+iy$ is continuous iff it's continuously viewed as a function of two real variables $x$ and $y$. If $f$ is continuous, then the real valued function defined by $z\mapsto |f(z)|$ is clearly continuous (by the triangle inequality).
+
+We say $f$ attains a \emph{maximum} at the point $z_0\in \Omega$ if \[
+    |f(z)|\leq |f(z_0)| \,\,\text{for all}\,\,  z\in \Omega.
+\] The definition of a minimum is what you think it is.
+\begin{theorem}
+    A continuous function on a compact set $\Omega$ is bounded and attains a maximum and minimum on $\Omega$.
+\end{theorem}
+\begin{proof}
+    Same as the any one you'd find in a Real Analysis course.
+\end{proof}
+\subsection{Holomorphic functions}
+Let's talk about the good stuff.
+
+

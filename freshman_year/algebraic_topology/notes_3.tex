@@ -1,6 +1,6 @@
 \section{Van Kampen's Theorem}
-OK guys, let's decompose big spaces into smaller ones and compute their fundamental groups. These notes follow Hatcher \S 1.2.
-\subsection{The van Kampen Theorem}
+OK guys, let's decompose big spaces into smaller ones and compute their fundamental groups. These notes follow Hatcher \S 1.2, Lee \S 10, and May \S 2.7.
+\subsection{The van Kampen Theorem (Hatcher)}
 Let's take a space $X$ and say it's the union of path-connected open subsets $A_{\alpha}$, each of which contains the basepoint $x_0\in X$. Then the homomorphisms $j_{\alpha} \colon \pi_1(A_{\alpha}) \to \pi_1(X)$ induced by the inclusions $A_{\alpha}\hookrightarrow X$ extend to a homomorphism $\Phi \colon *_{\alpha}\pi_1(A_{\alpha}) \to \pi_1(X)$. The van Kampen theorem will say that $\Phi$ is often onto but in general, we can expect $\Phi$ to have a nontrivial kernel. 
 
 For if $i_{\alpha\beta} \colon  \pi_1(A_{\alpha}\cap A_{\beta}) \to \pi_1(A_{\alpha})$ is the homomorphism induced by the inclusion $A_{\alpha}\cap A_{\beta}\hookrightarrow A_{\alpha}$ then $j_{\alpha}i_{\alpha\beta}=j_{\beta}i_{\beta\alpha}$, both of these compositions being induced by the inclusion $A_{\alpha}\cap A_{\beta}\hookrightarrow X$, so the kernel of $\Phi$ contains all the elements of the form $i_{\alpha\beta}(\omega)i_{\beta\alpha}(\omega)^{-1}$ for $\omega \in \pi_1(A_{\alpha}\cap A_{\beta})$. 
@@ -21,5 +21,57 @@ Van Kampen says under fairly broad hypotheses that this determines all of $\Phi$
         \Phi \colon *_{\alpha }\pi_1(X_{\alpha }) \to \pi_1(\bigvee_{\alpha }X_{\alpha })
     \] is an isomorphism, provided each $X_{\alpha }$ is path-connected, hence also each $A_{\alpha }$. Therefore for a wedge sum of circles, $\pi_1(\bigvee_{\alpha }S_{\alpha }^{1})$ is a free group, the free product of copies of $\Z$.
 \end{example}
+\orbreak
+I know it always helps to see something done somewhere else. For me, the above definition fails to make any sense at all whatsoever. So, let's revisit van Kampens from two more lens: one from the words of Lee (\emph{Introduction to Topological Manifolds}) and another from the categorical perspective.
+\subsection{The van Kampen Theorem (Lee)}
+Let's say we have a space $X$ that's made up of the union of two open subsets $U,V\subseteq X$. We know how to compute the fundamental groups of $U,V$, and $U\cap V$ (each of which is path-connected). Every loop can be written as a product of loops in $U$ or $V$ (visualized as the free product $\pi_1(U)*\pi_1(V)$), but any loop in $U\cap V$ only represents a single element of $\pi_1(X)$, even though it represents two distinct elements of the free product (one in $\pi_1(U)$ and one in $\pi_1(V)$). So $\pi_1(X)$ can be though of as the quotient of this free product modulo some relations from $\pi_1(U\cap V)$ that express this redundancy.
+
+Let's do some setup so we can state a precise version of van Kampens. Let $X$ be a topological space and $U,V\subseteq X$ such that $U \cup V=X$ and $U\cap V\neq \O$. Let $q\in U\cap V$. Then the four inclusion maps shown below,
+            \begin{figure}[H]
+                \centering
+                \begin{tikzcd}
+                                         & U \arrow[rd, "k"]  &   \\
+U\cap V \arrow[ru, "i"] \arrow[rd, "j"'] &                    & X \\
+                                         & V \arrow[ru, "l"'] &  
+\end{tikzcd}
+            \end{figure}
+            induce fundamental group homomorphisms as shown below.
+                        \begin{figure}[H]
+                \centering
+                \begin{tikzcd}
+                                                        & {\pi_1(U,q)} \arrow[rd, "k_*"] &              \\
+{\pi_1(U\cap V,q)} \arrow[ru, "i_*"] \arrow[rd, "j_*"'] &                                & {\pi_1(X,q)} \\
+                                                        & {\pi1(V,q)} \arrow[ru, "l_*"'] &             
+\end{tikzcd}
+            \end{figure}
+            Now insert the free product $\pi_1(U,q)*\pi_1(V,q)$ in the middle of the diagram and let $\iota_U \colon \pi_1(U,q) \hookrightarrow \pi_1(U,q)*\pi_1(V,q)$ and $\iota_V \colon \pi_1(V,q) \hookrightarrow \pi_1(U,q)*\pi_1(V,q)$ be the canonical injections. By the characteristic property (unique induced homomorphisms) of the free product, $k_*$ and $l_*$ induce a homomorphism $\Phi \colon \pi_1(U,q)*\pi_1(V,q) \to \pi_1(X,q)$ such that the right half of the following diagram commutes:
+
+                        \begin{figure}[H]
+                \centering
+                \begin{tikzcd}
+                                                                                & {\pi_1(U,q)} \arrow[rd, "k_*"] \arrow[d, "\iota_U" description]  &              \\
+{\pi_1(U\cap V, q)} \arrow[ru, "i_*"] \arrow[rd, "j_*"'] \arrow[r, "F", dotted] & {\pi_1(U,q)*\pi_1(V,q)} \arrow[r, "\Phi"]                        & {\pi_1(X,q)} \\
+                                                                                & {\pi_1(V,q)} \arrow[ru, "l_*"'] \arrow[u, "\iota_V" description] &             
+\end{tikzcd}
+            \end{figure}
+            Finally, define a map $F \colon \pi_1(U\cap V,q) \to \pi_1(U,q)*\pi_1(V,q)$ by setting $F(\gamma)=(i_*\gamma)^{-1}(j_*\gamma)$\footnote{$F$ is not a homomorphism.}. Let $\overline{F(\pi_1(U\cap V,q))}$ denote the \emph{normal closure} of the image of $F$ in $\pi_1(U,q)*\pi_1(V,q)$\footnote{The \emph{normal closure} of a set means the smallest normal subgroup that contains such set.}.
+
+\begin{theorem}[Seifert-Van Kampen]
+    Let $X$ be a topological space. Suppose $U,V\subseteq X$ are open, $U\cap V=X$, and $U,V$, and $U\cap V$ are path-connected. Then for any $q\in U\cap V$, the homomorphism $\Phi$ is surjective, and its kernel is $\overline{F(\pi_1(U\cap V,q))}$. Therefore we have \[
+        \pi_1(X,q)\cong \pi_1(U,q)*\pi_1(V,q) \big/ \overline{F(\pi_1(U\cap V,q))}.
+    \] 
+\end{theorem}
+When the fundamental groups in question are finitely presented\footnote{Finitely presented just means being presented by finitely many relations.}, the theorem has a useful reformulation in terms of generators and relations.
+\begin{cor}
+    In addition to the hypothesis of van Kampen, assume that the fundamental groups of $U,V$, and $U\cap V$ have the following finite presentations:
+    \begin{gather*}
+\pi_1(U,q)\cong \langle \alpha_1,\cdots,\alpha_m \mid \rho_1,\cdots,\rho_r \rangle;\\
+\pi_1(V,q)\cong\langle \beta_1,\cdots,\beta_n \mid \sigma_1,\cdots,\sigma_s \rangle; \\
+\pi_1(U\cap V,q)\cong \langle \gamma_1,\cdots,\gamma_p \mid \tau_1,\cdots,\tau_t \rangle .
+    \end{gather*}
+    Then $\pi_1(X,q)$ has the presentation \[
+        \pi_1(X,q)\cong \langle \alpha_1,\cdots,\alpha_m,\,\beta_1,\cdots,\beta_n \mid \rho_1,\cdots,\rho_r,\,\sigma_1,\cdots,\sigma_s,\,u_1=v_1,\cdots,u_p=v_p \rangle 
+    \] where for each $a=1,\cdots,p$, $u_a$ is an expression for $i_*\gamma_a\in \pi_1(U,q)$ in terms of the generators $\{\alpha_1,\cdots,\alpha_m\} $, and $v_a$ similarly expresses $j_*\gamma_a\in \pi_1(V,q)$ in terms of $\{\beta_1,\cdots,\beta_n\} $.
+\end{cor}
 
 
