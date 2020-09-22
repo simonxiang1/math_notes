@@ -1,0 +1,36 @@
+\section{What's the Putnam? (9/22/20)}
+Announcements: the reading groups are ready! We're studying analytic number theory, graph theory, and complexity theory. Also: social this Friday, Tiffs treats! Next week: Quantum computing, stay tuned.
+\orbreak
+Today's speaker is Dr.\ Rusin, an assistant professor here in the math department. He likes working with students that make their lives difficult for themselves (by doing hard problems). Some alternatives:
+\begin{itemize}
+    \item The Bennett competition (only for calculus students). Problems that are not allowed to go on a final exam because they're hard. (I've read these on the walls before!) We also have linear algebra and differential equations exams.
+    \item ``Spy people'' are mathematicians working for the NSA. In other words, traitors. There is some competition for math modeling that runs in February, in teams of three. It's the ``anti-Putnam''.
+\end{itemize}
+
+\subsection{About the Putnam}
+Now let's talk about the Putnam: it's an annual math competition, open to undergraduates in the US and Canada (no more than $4$, no bachelors). Mathematics only, once a year (historically, the first Saturday in December). It runs all day, from 9:00 to 3:00 in two groups of six questions. Reset your progress at the lunch break? \texttt{[Yes:No]}. College level topics: calculus, linear algebra, differential equations, number theory, topology, real analysis, abstract algebra, even statistics and mathematical physics. The questions are quite ``accessible'' on the surface: syke!
+
+Some are about games: flashbacks to Fishman's Banach-Mazur game (Alice and Bob). It was actually me, linear algebra! Some practice strategies include working on old questions, learn the tricks. By tradition, the questions are arranged from easier to harder. So most people try the first question. The classic: the median score out of 120 is 1.
+
+\subsection{Problem A1 2019}
+\begin{prob}[2019 Putnam Question A1]
+   Determine all possible values of the expression \[
+   A^3+B^3+C^3-3ABC,
+   \] where $A,B,$ and $C$ are nonnegative integers. 
+\end{prob}
+What do? Let's see... looks like number theory or linear algebra to me. Does this remind me of a group I know? Find a pattern, generalize the pattern, determine the relation, write a proof. If $A=B=C$, then $3A^3-3AAA=0$, taking care of the trivial case. I hate how Zoom kills my battery.
+
+By FLT?? Complete madlad. Unfortunately it's not relevant (very sad). I wish I could see more examples of proof by overkill. What if we have the numbers of the form $A-1,A,A+1$? Expanding the cubes, we get $3A^3+6A-3ABC=3A^3+6A-3A(A^2-1)=9A$. So we have all multiples of $9$ at the least. Is the output all integers, and we just show it this way? Seems easier than classifying stuff in the domain (close integers, etc). Similarly, for $A,A,A+1$, we have \[
+    \sum = A^3+A^3+A^3+3A^2+3A+1-3A^2(A+1)=3A^3-3A^3+3A^2-3A^2+3A+1=3A+1.
+\] Eventually, you keep plugging stuff in but you can't find a solution set with some and some, anything congruent to $3$ or $6\pmod 9$. Then the fact that the domain is non-negative, that messes with the output formulas, eventually only non-negative outputs. This follows from the AM-GM inequality (oldest trick in the book).
+
+We're not done yet: factor the polynomial, plug it into a matrix. There's a connection with something called a \emph{circulant} matrix, do stuff with the eigen-whatever. Not all solutions have to be elegant, just solve them. Let's look at the winners: all from MIT, great. But we got honorable mention yay!
+
+\orbreak
+This year, the tentative date for the Putnam is February 20, 2021. If everyone's back and running on campus, they intend to hold the competition as usual. Backup plan: they're still going to run the competition, but no prizes and no winners. Maybe hybrid too. Look at the web pages at the math department (Dr.\ Rusin's website) for the Zoom link. Hook' em!
+\orbreak
+Digest this problem in your free time: you can prove it in two words. ???
+\begin{prob}
+     Given a lattice grid, you can make triangles with the vertices as points. Is there an equilateral triangle with integer coordinates?
+\end{prob}
+
