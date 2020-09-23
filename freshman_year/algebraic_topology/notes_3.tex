@@ -1,5 +1,23 @@
-\section{Van Kampen's Theorem}
+\section{The Fundamental Group}
 OK guys, let's decompose big spaces into smaller ones and compute their fundamental groups. These notes follow Hatcher \S 1.2, Lee \S 10, and May \S 2.7.
+\subsection{Fundamental group of the circle(todo)}
+If this is a first introduction to fundamental groups, then our first fundamental group of real interest is $\pi_1(S^{1} )=\Z$. Before we do this, let's do a quick calculation to show $\pi_1(\R)=0$. Take the origin as a convenient basepoint. Define $k \colon \R\times I \to \R$ by $k(s,t)=(1-t)s$. Then $k$ is a homotopy from the identity to the constant map at $0$. For a loop $f \colon I \to \R$ at $0$, define $h(s,t)=k(f(s),t).$ Then $f$ is equivalent to a constant $c_0$ by the homotopy $h$.
+\orbreak
+Now let's talk about circles: we can view $S^{1} $ as the circle group (let's denote it $U^1$), that is, \[
+U^1 = \{z\in \C\mid |z|=1\}.
+\] Multiplication is continuous, so this is a topological group. Take the identity $1$ as a convenient basepoint for  $S^{1} $.
+\begin{theorem}
+    We have the fundamental group of a circle isomorphic to the integers, that is, \[
+        \pi_1(S^{1} ,1)\cong\Z.
+    \] 
+\end{theorem}
+\begin{proof}
+    For all $n\in \Z$, define a loop $f_n$ in $S^{1} $ by $f_n(s)=e^{2\pi i ns}$. This is the same as composing the map $I\to S^{1},\, s\mapsto e^{2\pi is}$ and the $n$th power map on $S^{1} $. If we identiy the boundary points $0$ and $1$ of $I$, then the first map $(I \to S^{1} )$ induces the evident identification of $I / \partial I$ with $S^{1} $. By complex exponentiation, we have $[f_m][f_n]=[f_{m+n}]$: define a homomorphism $i \colon \Z \to \pi_1(S^{1} ,1)$ by $i(n)=[f_n]$. We claim $i$ is an isomorphism. The main idea is to use the fact that (locally) $S^{1} $ looks like $\R$, ie, $S^{1} $ is a $1$-manifold.
+
+    ***FINISH LATER***
+\end{proof}
+
+
 \subsection{The van Kampen Theorem (Hatcher)}
 Let's take a space $X$ and say it's the union of path-connected open subsets $A_{\alpha}$, each of which contains the basepoint $x_0\in X$. Then the homomorphisms $j_{\alpha} \colon \pi_1(A_{\alpha}) \to \pi_1(X)$ induced by the inclusions $A_{\alpha}\hookrightarrow X$ extend to a homomorphism $\Phi \colon *_{\alpha}\pi_1(A_{\alpha}) \to \pi_1(X)$. The van Kampen theorem will say that $\Phi$ is often onto but in general, we can expect $\Phi$ to have a nontrivial kernel. 
 

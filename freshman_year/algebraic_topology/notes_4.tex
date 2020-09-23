@@ -1,0 +1,56 @@
+\section{Covering Spaces}
+Today we talk about covering spaces, another central topic in algebraic topology. These notes will follow Hatcher \S 1.3. (maybe Lee and May?)
+
+\subsection{Covering spaces (Hatcher)}
+We've already seen these briefly when we calculated $\pi_1(S^{1} )$, using the projection $\R\to S^{1} $ of a helix onto a circle. Covering spaces can be used to calculated fundamental groups of other spaces as well, but the connection runs much deeper than this. We can talk about algebraic aspects of the fundamental group through the geometric language of covering spaces, exemplified in one of the main results in this section: a one to one correspondence between connected covering spaces of a space $X$ and subgroups of $\pi_1(X)$ (spoilers, smh). This is really really similar to Galois theory, where we looked at the towers of field extensions and related them to the subgroup lattice of the Galois group of automorphisms\footnote{I actually know this! Thank goodness for an entire semester of algebra to understand an example.}.
+\begin{definition}[Covering space]
+    A \emph{covering space} of a space $X$ is a space $\widetilde X$ together with a map $p \colon \widetilde X \to X$\footnote{We say $p$ is a \emph{covering map}.} satisfying the following condition: Each point $x\in X$ has an open neighborhood $U$ in $X$ such that $p^{-1}(U)$ is a union of disjoint open sets in $\widetilde X$, each of which is mapped homeomorphically onto $U$ by $p$. Then we say $U$ is \emph{evenly covered} and the disjoint open sets in $\widetilde X$ that project homeomorphically to $U$ by $p$ are called \emph{sheets} of $\widetilde X$ over $U$.
+\end{definition}
+If $U$ is connected these sheets are the connected components of $p^{-1}(U)$ so they're uniquely determined by $U$. If $U$ is not connected, however, the decomposition of $U$ into sheets may not be unique. $p ^{-1}(U)$ is allowed to be empty, so $p$ doesn't have to be onto. The number of sheets over $U$ can be given by the cardinality of $p ^{-1}(x)$, given $x\in U$. This number is a constant if $X$ is connected.
+\begin{example}
+A prototypical example (or way to wrap your head around) this section is the helix embedded in $\R^3$: if you think of it projecting on a circle, then $p^{-1}(U)$ is just $\amalg_{\alpha }U_{\alpha }$, where each $U_{\alpha }$ corresponds to the $U$ of a coil or wind of the helix.
+\end{example}
+\begin{example}
+    Another example is the helicoid surface $S\subseteq \R^3$ given by $(s \cos 2\pi t, s \sin 2\pi t, t)$ for $(s,t)\in (0,\infty)\times \R$. This projects onto $\R^2\setminus \{0\} $ via the map $(x,y,z) \mapsto (x,y)$, and defines a covering space $p \colon S \to \R^2\setminus \{0\} $ since each point of $\R^2\setminus \{0\} $ is contained in an open disk $U$ in $\R^2\setminus \{0\} $ with $p ^{-1}(U)$ consisting of countably many disjoint open disks in $S$ projecting homeomorphically onto $U$. (I can't really see this example...)
+\end{example}
+\begin{example}
+    We also have the map $p \colon S^{1}  \to S^{1} $, $p(z)=z^n$ where we view $z$ as a complex number with $|z|=1$ and $n$ any positive integer\footnote{Something about the order of $z$ I realized when thinking about this example: $z^n$ means $z$ coils around in $S^{1} $ $n$ times. So if $z$ was a fifth root of unity, the covering space would be a circle with five coils projecting onto $S^{1} $. Now what if $z$ has infinite order. Can $z$ even have infinite order? I'm not entirely sure...\\Edit: elements that are irrational multiples of $2\pi$ have infinite order. So does that mean it never winds back to itself? How is this isomorphic to $S^{1} $? ???}. This projection is as described in the footnote, but intersects itself in $n-1$ points (that one can't really imagine as intersections). To see this without the defect, embed $S^{1} $ in the boundary torus of a solid torus $S^{1} \times D^2$ such that it winds $n$ times monotonically around the $S^{1}$ factor without self-intersections, then restrict the projection $S^{1} \times D^2 \to S^{1} \times \{0\} $ to this embedded circle. What?\footnote{Whenever I read Hatcher, it feels like I'm eternally confused...}
+\end{example}
+
+We usually restrict our attention to connected covering spaces, as these contain all the interesting examples.
+
+\subsection{More on covering spaces (Lee)}
+The definition of a covering space is the same as Hatcher except: the covering space $\widetilde X$ must be connected. Once again, the only interesting covering spaces are connected ones, and so we eliminate the need to frit fret around about details when introducing new theorems and just make sure covering spaces are connected in the definition.
+\begin{example}
+    The exponential quotient map $\varepsilon \colon \R \to S^{1} $ given by $x \mapsto e^{2\pi ix}$ is a covering map. Another example: define $E \colon \R^n \to \mathbb{T}^n$ by \[
+        E(x_1,\cdots,x_n)=(\varepsilon(x_1),\cdots,\varepsilon(x_n)).
+    \] We will show in an exercise that a product of covering maps is a covering map. So $E$ is a covering map.
+\end{example}
+\begin{lemma}[Elementary properties of covering maps]
+   Every covering map is a local homeomorphism, an open map, and a quotient map. An injective covering map is a homeomorphism.
+\end{lemma}
+\begin{proof}
+    Left as an exercise to the reader.
+\end{proof}
+\newpage
+\subsection{Lifting properties}
+Here we'll talk about some important lifting properties, that we discussed when we proved that $\pi_1(S^{1} )$ is isomorphic to $\Z$. Recall: if $p \colon \widetilde X \to X$ is a covering map and $\varphi \colon B \to X$ is any continuous map, a \emph{lift} of $\varphi $ is a continuous map $\widetilde\varphi \colon B \to \widetilde X$ such that $p \circ \widetilde\varphi =\varphi $. See the commutative diagram below for reference.
+            \begin{figure}[H]
+                \centering
+\begin{tikzcd}
+                                                         & \widetilde X \arrow[d, "p"] \\
+B \arrow[r, "\varphi"'] \arrow[ru, "\widetilde \varphi"] & X                          
+\end{tikzcd}
+            \end{figure}
+            \begin{prop}[Unique lifting property]
+  Let $p \colon \widetilde X \to X$ be a covering map. Suppose $B$ is connected, $\varphi \colon B \to X$ is continuous, and $\widetilde\varphi_1 \widetilde\varphi_2 \colon B \to \widetilde X$ are lifts of $\varphi $ that agree at some point of $B$. Then $\widetilde \varphi_1\equiv \widetilde \varphi_2$, that is, lifts are unique.
+\end{prop}
+\begin{proof}
+    We show that the set \[
+        \mathcal{S}=\{b\in B \mid \widetilde \varphi_1 (b)=\widetilde\varphi_2(b)  \} 
+    \] is both open and closed in $B$, contradicting the connectedness of $B$ if $\mathcal{S} $ is a proper nontrivial subset of $B$. We conclude that $\mathcal{S} $ must be all of $B$ since $\widetilde \varphi_1 $ and $\widetilde\varphi_2 $ agree at a point (so $\mathcal{S} $ is nontrivial) and therefore $\widetilde\varphi_1 $ and $\widetilde\varphi_2 $ are unique.
+
+    Let $b\in \mathcal{S} $ and $U\subset X$ be an evenly covered neighborhood of $\varphi (b)$, and let $U_{\alpha }$ be the component of $p ^{-1}$ containing $\widetilde \varphi_1(b)=\widetilde \varphi_2(b)  $. I don't really want to write out the rest of the proof, let's call it a day.
+\end{proof}
+
+
