@@ -1,0 +1,27 @@
+\section{September 24, 2020}
+Last time: hyperbolic trig functions. We have some functions and theorems to deal with them, like rational functions $\sfrac{p}{q}$, trig functions $\cos z, \sin z, \tan z$, and hyperbolic trig functions $\cosh z, \sinh z$, the exponential function $\exp(z)$, etc. Where these functions are defined they are analytic.
+\subsection{Logarithmic functions}
+Let $f$ be a function. Then $f(z)=w \iff z=f^{-1}(w)$. This is only a function if $f$ is onto. Consider the case where $f(z)=e^{z}$ and $e^{z}=w$. 
+\begin{definition}[Logarithm]
+    We define the functional inverse of the exponentatial function as the \emph{logarithm}, that is, \[
+    \log w = \{z \mid e^z=w\},
+    \] that is, $\log=\exp^{-1}$.
+Suppose $z=x+iy$, so $e^z=e^{x+iy}=e^{x}(\cos x +i\sin y)=w$. Write $w$ in polar form, so $w=|w|e^{i\operatorname{arg}w}$. What values of $z$ give rise to this? We want $e^{x}=|w|$, $e^{iy}=e^{i\operatorname{arg}w}$. $e^{x}=|w|\iff x=\ln|w|$, so $y\in \operatorname{arg}w$. Therefore we have \[
+    \log w=\ln|w|+i\operatorname{arg}w
+\] for $w\neq 0$. So this function is multivariate.
+\end{definition}
+We want to do calculus with this function. We are not terribly interested in multivalued things (actual functions lmao). One way to get an actual function is to define \[
+    \operatorname{Log}w=\ln|w|+i\operatorname{Arg}(w)
+\] for $w\neq 0$. But that's not enough: we also want functions to be differentiable, etc. Note that this function $\operatorname{Log}$ wouldn't be continuous on the negative real axis. If $w\in S^{1} $, then ... I stopped paying attention here. Because of the discontinuity (which I was not paying attention for), we define $\operatorname{Log}(w)=\ln|w|+i\operatorname{Arg}w$ only for $w$ not a negative real number. 
+
+\begin{claim}
+    $\operatorname{Log}$ satisfies the CR equations. Verify this in your free time.
+\end{claim}
+Note that $\frac{d}{dz}\operatorname{Log}z=e^{-i\theta}(u_r+iv_r)=e^{-i\theta}(\frac{1}{r}+0)=\frac{1}{z}$ on its domain. This is very cool, thank you logarithm. This is useful, but we need other ways to get ``honest'' functions from $\log w=\ln|w|+i\operatorname{arg}w$.
+\subsection{Branches of the logarithm(todo)}
+aa hayaku ouchi ni kaeritai
+
+Recall the identity that $\operatorname{arg}(z_1z_2)=\operatorname{arg}z_1+\operatorname{arg}z_2$, with addition being componentwise for the infinite sets. So $\log (z_1z_2)=\ln |z_1z_2|+i\operatorname{arg}(z_1z_2)=\ln|z_1|+\ln|z_2|+i\operatorname{arg}z_1+i\operatorname{arg}z_2=\log z_1+\log z_2$. 
+\orbreak
+Where are we headed? To the next class of functions $z^{\alpha }$ and beyond.
+

@@ -1,0 +1,49 @@
+\section{September 23, 2020}
+Last time: we finished a corollary that a group is never a union of conjugates of a subgroup. It is essential that $G$ is finite. For example, $\operatorname{GL}_n(\C)$ is a union of conjugate subgroups\footnote{The subgroups are the upper triangular matrices.}.
+\subsection{Group Automorphisms}
+Today we'll talk about automorphisms of a group. We'll notate this as \[
+    \operatorname{Aut}(G)=\,\text{the group of automorphisms}\, G\to G,
+\] the operation is clearly composition. We can think of this as a subgroup of $S_G$, but in general, we won't have equality here. For any normal subgroup $H\trianglelefteq G$, we have a map $\varphi  \colon G \to \operatorname{Aut}H$, where $g\mapsto (h\mapsto ghg^{-1})$. It's easy to see that $\varphi $ is a group homomorphism.
+\begin{prop}
+    Let $H$ be a subgroup of $G$. Then the normalizer of $H$ in $G$ quotient the centralizer of $H$ in $G$, denoted $N_G(H) / C_G(H)$, is isomorphic to a subgroup of the automorphism group of $H$ denoted $\operatorname{Aut}H$. In particular, $G /Z(G) \hookrightarrow \operatorname{Aut}G$. There won't be a proof for this, but just find a map from the normalizer to $\operatorname{Aut}H$, and look at the kernel of $\varphi $. Then it will follow from the FHT.
+\end{prop}
+\begin{definition}[]
+    Let $G$ be a group. The image of $G /Z(G)$ in $ \operatorname{Aut}G$ is the group of inner automorphisms of $G$, denoted $\operatorname{Inn}(G)$. The inner automorphisms of $G$ can be given by \[ 
+        \operatorname{Inn}G=\{[G\to G \mid g\mapsto g_0g_0^{-1}] \mid g_0\in G\} .
+    \] 
+\end{definition}
+Here's something that make sense when you think about it: a group $G$ is abelian iff $\operatorname{Inn}G=\{\operatorname{id}_G\} $. So inner automorphisms tell you nothing about an abelian group.
+\begin{example}
+    What is $\operatorname{Aut}(\Z /n\Z)$? $\Z /n\Z$ is abelian which implies $\operatorname{Inn}(\Z /n\Z)=\{\operatorname{id}\} $. Let $\varphi \colon \Z /n\Z \to \Z /n\Z$ be an isomorphism. The thing about cyclic groups is that if we know where something sends a generator, then we are done. Let's say $n=6$ and $1\mapsto 2$: is this possible? Since these are automorphisms, we have to send generators to generators, so no. So $\varphi_a(\overline{k})=\overline{ak} $. So $\varphi _a$ is uniquely determined by $a=\varphi [1+n\Z]$. $\varphi _a$ is surjective implies that $a$ is a generator of $\Z /n\Z$, which his equivalent to the fact that $a\in \Z,\, \gcd (a,n)=1$\footnote{Finally, I understand when she tells me something is obvious that it is indeed, obvious.}. Recall that $\Z /n\Z$ is a ring, so $a\in (\Z /n\Z)^*$, the group of units. Hence \[
+        \operatorname{Aut}(\Z /n\Z)\cong(\Z /n\Z)^*,
+    \] and $\operatorname{Aut}(\Z /n\Z) < \operatorname{Inn}(\Z /n\Z)=\{\operatorname{id}\} $.
+\end{example}
+
+\subsection{Inner automorphisms of $S_n$}
+\begin{example}
+    We have our other extreme: in the symmetric group on $n$ letters (it's leaking!), we have \[
+        \operatorname{Aut}(S_n)=\operatorname{Inn}(S_n)\cong S_n
+    \] for all $n\neq 6$. Observe that $\operatorname{Inn}(S_n) < \operatorname{Aut}S_n$, and that $\operatorname{Inn}(S_n)\cong S_n / Z(S_n)$. What's the center of $S_n$? Since every element of $S_n$ can be written as a product of disjoint cycles. If we understand what conjugation does to cycles, we understand what conjugation does to an element of $S_n$. Let $\sigma, \tau \in S_n$, where $\sigma \colon i \to \sigma(i)$\footnote{Very informal abuse of notation here, think of it intuitively.}. Then $\tau\sigma\tau^{-1} \colon \tau(i) \to \tau\sigma(i) \to \tau(\sigma(i))$. So if $\sigma = (a_1,\cdots,a_{k_1})(b_1,\cdots,b_{k_1})\cdots$ a product of disjoint cycles, then \[
+    \tau\sigma\tau^{-1}=\big(\tau(a_1)\tau(a_2)\cdots(\tau(a_{k_1})\big)\big(\tau(b_1)\tau(b_2)\cdots(\tau(b_{k_2})\big)\cdots
+    \] 
+    \begin{lemma}
+        If $n>2$, then $\Z(S_n)=\operatorname{id}$. 
+    \end{lemma}
+    \begin{lemma}
+        For every $\sigma,\tau \in S_n$, $\sigma$ and $\tau\sigma\tau^{-1}$ have the same\footnote{By ``same'', we mean they have the same length.} cycle composition into disjoint cycles.
+    \end{lemma}
+   \begin{prop}
+       Two elements of $S_n$ are conjugate in $S_n$ if and only if they have the same cycle decomposition.
+   \end{prop}
+   \begin{proof}
+       ($\implies $) follows from our lemma.
+
+       ($\impliedby $) Let $\sigma_1,\sigma_2\in S_n$ with the same cycle decomposition. Write $\sigma_1$ and $\sigma_2$ are a product of disjoint cycles by ordering the cycles in increasing length including all $1$-cycles. Let $\tau$ be the $i$th element of the cycle deomposition of $\sigma_1$, which must map to the $i$th element of the cycle decomposition of $\sigma_2$. Together, these give the fact that $\tau\in S_n$: all the elements appear (including $1$-cycles) and no elements repeat because these are disjoint cycles. Notice that $\tau\in S_n$ and $\sigma_2=\tau\sigma_1\tau^{-1}$, then this finishes the proof.
+   \end{proof}
+   \begin{cor}
+       The number of conjugacy classes of $S_n$ is equal to the number of partitions of $n$. 
+   \end{cor}
+Eg, you can break up $n=3$ as $n=1+1+1, 1+2, 3$. So $S_3$ has three conjugacy classes.
+Observe that this proposition implies that $\operatorname{Aut}S_n=\operatorname{Inn}S_n$ iff every automorphism $\varphi \colon S_n \to S_n$ preserves the cycle decomposition, that is, $(\sigma, \varphi (\sigma))$ have the same cycle decomposition. We start with an automorphism, and we have to show that it sends $a$-cycles to $a$-cycles for $1\leq a \leq n$, and then everything follows. So we start with $2$-cycles, and that's when it breaks: a $2$-cycle can go to a disjoint product of $3$-cycles.
+\end{example}
+Apparently today we only covered half of what Dr.\ Ciperiani thought we would cover. Should we go faster?? Hmm...
