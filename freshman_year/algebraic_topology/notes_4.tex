@@ -1,7 +1,37 @@
 \section{Covering Spaces}
-Today we talk about covering spaces, another central topic in algebraic topology. These notes will follow Hatcher \S 1.3. (maybe Lee and May?)
+Today we talk about covering spaces, another central topic in algebraic topology. The notes will follow various texts, including Hatcher, Lee, and May.
+\orbreak
+\subsection{Some preliminary definitions}
+Sometimes we need to know what words mean so we can talk about big concepts that are path-connected. These notes will follow May \S 3. We can talk about the theory of covering spaces on \emph{locally contractible} spaces that are path-connected, that is, spaces with a base of contractible spaces, that is, open sets that are contractible when viewed as a space under the subspace topology. However, to get the full picture, we must talk about \emph{locally path-connected} spaces. 
+\begin{definition}[Locally path-connected]
+    A space $X$ is \emph{locally path-connected} if for any $x\in X$ and any neighborhood $U$ of $x$, there exists a smaller neighborhood $V$ of $x$, with each of whose points can be connected to $x$ by a path in $U$. We could also say $X$ has a base consisting of open sets that are path-connected (under the subspace topology).
+\end{definition}
+Note that if $X$ is connected and locally path-connected, then it is path-connected. From now on\footnote{By this, we mean any sections following May.}, we assume that spaces are connected and locally path-connected. Let's look at how May defines covering spaces.
+\begin{definition}[Covering space]
+    A map $p \colon E \to B$ is a covering (or cover, covering space) if it is onto and if each point $b\in B$ has an open neighborhood $V$ such that each component of $p^{-1}(V)$ is open in $E$ and is mapped homeomorphically onto $V$ by $p$. We say that a path connected open subset $V$ with this property is a fundamental neighborhood of $B$. We call $E$ the total space, $B$ the base space, and $F_b = p ^{-1}(b)$ a fiber of the covering $p$.
+\end{definition}
+Some notes: in other texts, we have
+\begin{itemize}
+    \item covering $\rightarrow $ covering map,
+    \item $U$ is a fundamental neighborhood $\rightarrow U$ is evenly covered,
+    \item total space $\rightarrow $ covering space,
+    \item base space $\rightarrow $ ??,
+    \item $F_b=p^{-1}(b)$ is a fiber of $p \,\longrightarrow\, F_b$ is the preimage of $b$ (points) in the union of sheets of $\widetilde X$ over $U_b$.
+\end{itemize}   This is kind of out of place, but now we'll state Lebesgue's number lemma. It's useful when dealing with compact metric spaces.
+\begin{lemma}[Lebesgue's number lemma]
+    If a metric space $(X,d)$ is compact and we have an open cover of $X$, then there exists a $\delta>0$ such that every subset of $X$ having a diameter less than $\delta$ is contained in some member of the cover. We say $\delta$ is the \emph{Lebesgue number} of such cover.
+\end{lemma}
+\begin{proof}
+    If the subcover is trivial then any $\delta>0$ will suffice. Otherwise, if $\bigcup_{i \in  I} A_i$ is a finite subcover, then for $i\in I$, define $C_i :=X\setminus A_i$ (note that $C_i$ is nonempty since the subcover is nontrivial). Define a function \[
+        f \colon X \to R,\quad x \mapsto \frac{1}{n} \sum_{i=1}^{n} d(x,C_i).
+    \] Since $f$ is continuous on a compact set, it obtains a minimum $\delta$. The key thing to note is that every $x$ is in some $A_i$, so by the extreme value theorem $\delta >0$. To show that this $\delta$ is indeed the Lebesgue number of the cover, let $x_0\in Y$, where $\operatorname{diam}(Y)<\delta$, such that $Y\subseteq B(x_0,\delta)$. Since $f(x_0)\geq \delta$, there exists at least one $i$ such that $d(x_0,C_i)\geq \delta$. But then $B(x_0,\delta)\subseteq A_i$, and so $Y\subseteq A_i$.
+\end{proof}
 
-\subsection{Covering spaces (Hatcher)}
+
+\subsection{Covering spaces}
+These notes will follow Hatcher \S 1.3.
+\vspace{0.25cm}
+\newline
 We've already seen these briefly when we calculated $\pi_1(S^{1} )$, using the projection $\R\to S^{1} $ of a helix onto a circle. Covering spaces can be used to calculated fundamental groups of other spaces as well, but the connection runs much deeper than this. We can talk about algebraic aspects of the fundamental group through the geometric language of covering spaces, exemplified in one of the main results in this section: a one to one correspondence between connected covering spaces of a space $X$ and subgroups of $\pi_1(X)$ (spoilers, smh). This is really really similar to Galois theory, where we looked at the towers of field extensions and related them to the subgroup lattice of the Galois group of automorphisms\footnote{I actually know this! Thank goodness for an entire semester of algebra to understand an example.}.
 \begin{definition}[Covering space]
 A \emph{covering space} of a space $X$ is a space $\widetilde X$ together with a map $p \colon \widetilde X \to X$ (we say $p$ is a \emph{covering map}) satisfying the following condition: Each point $x\in X$ has an open neighborhood $U$ in $X$ such that $p^{-1}(U)$ is a union of disjoint open sets in $\widetilde X$, each of which is mapped homeomorphically onto $U$ by $p$. Then we say $U$ is \emph{evenly covered} and the disjoint open sets in $\widetilde X$ that project homeomorphically to $U$ by $p$ are called \emph{sheets} of $\widetilde X$ over $U$.
@@ -14,26 +44,39 @@ A prototypical example (or way to wrap your head around) this section is the hel
     Another example is the helicoid surface $S\subseteq \R^3$ given by $(s \cos 2\pi t, s \sin 2\pi t, t)$ for $(s,t)\in (0,\infty)\times \R$. This projects onto $\R^2\setminus \{0\} $ via the map $(x,y,z) \mapsto (x,y)$, and defines a covering space $p \colon S \to \R^2\setminus \{0\} $ since each point of $\R^2\setminus \{0\} $ is contained in an open disk $U$ in $\R^2\setminus \{0\} $ with $p ^{-1}(U)$ consisting of countably many disjoint open disks in $S$ projecting homeomorphically onto $U$. (I can't really see this example...)
 \end{example}
 \begin{example}
-    We also have the map $p \colon S^{1}  \to S^{1} $, $p(z)=z^n$ where we view $z$ as a complex number with $|z|=1$ and $n$ any positive integer\footnote{Something about the order of $z$ I realized when thinking about this example: $z^n$ means $z$ coils around in $S^{1} $ $n$ times. So if $z$ was a fifth root of unity, the covering space would be a circle with five coils projecting onto $S^{1} $. Now what if $z$ has infinite order. Can $z$ even have infinite order? I'm not entirely sure...\\Edit: elements that are irrational multiples of $2\pi$ have infinite order. So does that mean it never winds back to itself? How is this isomorphic to $S^{1} $? ???}. This projection is as described in the footnote, but intersects itself in $n-1$ points (that one can't really imagine as intersections). To see this without the defect, embed $S^{1} $ in the boundary torus of a solid torus $S^{1} \times D^2$ such that it winds $n$ times monotonically around the $S^{1}$ factor without self-intersections, then restrict the projection $S^{1} \times D^2 \to S^{1} \times \{0\} $ to this embedded circle. What?\footnote{Whenever I read Hatcher, it feels like I'm eternally confused...}
+    We also have the map $p \colon S^{1}  \to S^{1} $, $p(z)=z^n$ where we view $z$ as a complex number with $|z|=1$ and $n$ any positive integer\footnote{Something about the order of $z$ I realized when thinking about this example: $z^n$ means $z$ coils around in $S^{1} $ $n$ times. So if $z$ was a fifth root of unity, the covering space would be a circle with five coils projecting onto $S^{1} $. Now what if $z$ has infinite order. Can $z$ even have infinite order? I'm not entirely sure...\\Edit: elements that are irrational multiples of $2\pi$ have infinite order. So does that mean it never winds back to itself? How is this isomorphic to $S^{1} $?}. This projection is as described in the footnote, but intersects itself in $n-1$ points (that one can't really imagine as intersections). To see this without the defect, embed $S^{1} $ in the boundary torus of a solid torus $S^{1} \times D^2$ such that it winds $n$ times monotonically around the $S^{1}$ factor without self-intersections, then restrict the projection $S^{1} \times D^2 \to S^{1} \times \{0\} $ to this embedded circle. What?
 \end{example}
 
 We usually restrict our attention to connected covering spaces, as these contain all the interesting examples.
 
 \subsection{The covering spaces of $S^{1} \vee S^{1} $ (todo figures)}
-Covering spaces of $S^{1} \vee S^{1} $ form a rich family that demonstrate the general theory very concretely. For convenience, let $X=S^{1} \vee S^{1} $. View it as a graph with one vertex and two edges, with the edges labeled $a$ and $b$. Let $\widetilde X$ be any other graph with four edges connected to each point, like $X$ at its singular vertex, and that each edge has been assigned an orientation like the ones assigned to each edge of $X$. That is, for each vertex there are two $a$-edges and $b$-edges oriented toward and away from the vertex. Help I can't include figures that are the proper size! Let's call $\widetilde X$ a $2$-oriented graph.
+Covering spaces of $S^{1} \vee S^{1} $ form a rich family that demonstrate the general theory very concretely. For convenience, let $X=S^{1} \vee S^{1} $. View it as a graph with one vertex and two edges, with the edges labeled $a$ and $b$. 
+\begin{figure}[H]
+    \centering
+    \incfig[0.3]{s1xs1}
+    \caption{The graph of $S^{1} \times S^{1} $.}
+    \label{s1xs1}
+\end{figure}
+Let $\widetilde X$ be any other graph with four edges connected to each point, like $X$ at its singular vertex, and that each edge has been assigned an orientation like the ones assigned to each edge of $X$. That is, for each vertex there are two $a$-edges and $b$-edges oriented toward and away from the vertex. Help I can't include figures that are the proper size! Let's call $\widetilde X$ a $2$-oriented graph.
 
 Given a $2$-oriented graph $\widetilde X$ we can construct a map $p \colon \widetilde X \to X$ that sends all vertices of $\widetilde X$ to the vertex of $X$, and all edges of $\widetilde X$ to the edge of $X$ with the same label. Say $p$ is a homeomorphism on the regions bounded by the edges, and preserves the orientation of the edges. Then $p$ is a covering map. Conversely, every covering space of $X$ is a graph that inherits a $2$-orientation from $X$. It can be shown that every graph with four edges at each vertex can be $2$-oriented: the proof follows from graph theory. We could also generalize this to $n$-oriented graphs, which are covering spaces of the wedge sum of $n$ circles.
 
 How would we generate a simply-connected covering space of $X$? Start with the open intervals $(-1,1)$ in $\R^2$ (one per coordinate axis). Then for a fixed $\lambda,\,0<\lambda < \sfrac{1}{2}$, say $\lambda =\sfrac{1}{3}$, adjoin four open segments of length $2\lambda$ to the ends of the previous segments, and shift each back by a distance of $\lambda$. These new adjoined segments are perpendicular and bisected by the old ones: continue with four more new segments of distance $2\lambda^2$ at a distance $\lambda^2$ to the (now 12) end segments, and so on. Then at the $n$-th iteration, we would be adding open segments of length $\lambda^{2n-1}$ at a distance $\lambda^{n-1}$ from the previous endpoints. Then the union of the segments is a graph (the Cayley graph of the fundamental group of $S^{1} $!), with vertices the intersections, labeling horizontal edges $a$ and orienting them to the right, and vertical edges $b$, orienting them upward.
 
-This covering space is called the \emph{universal cover} of $X$, because it covers every connected covering spcae of $X$.
-
-\subsection{More on covering spaces (Lee)}
+This covering space is called the \emph{universal cover} of $X$, because it covers every connected covering space of $X$.
+\orbreak
+\subsection{More on covering spaces}
+These notes will follow Lee \S 11.
+\vspace{0.25cm}
+\newline
 The definition of a covering space is the same as Hatcher except: the covering space $\widetilde X$ must be connected. Once again, the only interesting covering spaces are connected ones, and so we eliminate the need to frit fret around about details when introducing new theorems and just make sure covering spaces are connected in the definition.
 \begin{example}
     The exponential quotient map $\varepsilon \colon \R \to S^{1} $ given by $x \mapsto e^{2\pi ix}$ is a covering map. Another example: define $E \colon \R^n \to \mathbb{T}^n$ by \[
         E(x_1,\cdots,x_n)=(\varepsilon(x_1),\cdots,\varepsilon(x_n)).
     \] We will show in an exercise that a product of covering maps is a covering map. So $E$ is a covering map.
+\end{example}
+\begin{example}
+    Define a map $\pi \colon S^n \to \R P^n$ (where $n\geq 1$) by sending each point $x$ in the sphere to the line through the origin and $x$, thought of as a point in $\R P^n$. Then $\pi$ is a covering map, and the fiber of each point in $\R P^n$ is a pair of antipodal points $\{x,-x\} $.
 \end{example}
 \begin{lemma}[Elementary properties of covering maps]
    Every covering map is a local homeomorphism, an open map, and a quotient map. An injective covering map is a homeomorphism.
@@ -41,7 +84,16 @@ The definition of a covering space is the same as Hatcher except: the covering s
 \begin{proof}
     Left as an exercise to the reader.
 \end{proof}
-\newpage
+\begin{prop}
+    For any covering map $p \colon \widetilde X \to X$, the cardinality of each fiber $p ^{-1}(q)$ is the same for any fiber.
+\end{prop}
+\begin{proof}
+    If $U$ is any evenly covered open set in $X$, each sheet in $p ^{-1}(U)$ contains exactly one point of each fiber. Then for any $q,q'\in U$, there are one-to-one correspondences \[
+        p ^{-1}(q) \longleftrightarrow \{\text{sheets of}\,p ^{-1}(U)\} \longleftrightarrow p ^{-1}(q'),
+    \] which shows that the number of sheets is constant on $U$. It follows that the set of points $q'\in X$ such that $p ^{-1}(q')$ has the same cardinality as $p ^{-1}(q)$ is open. Now let $q\in X$, and let $A$ be the set of points in $X$ whose fibers have the same cardinality as $p ^{-1}(q)$. Then $A$ is open, and $X\setminus A$ is open since it's a union of open sets (one open set for each cardinality not equal to $p ^{-1}(q)$). Since $X$ is connected and nonempty, we have $A=X$.
+\end{proof}
+If $p \colon \widetilde X \to X$ is a covering map, then the cardinality of any fiber is the \emph{number of sheets} of the covering. For example, the $n$-th power map ($S^{1} \to S^{1} $) is an $n$-sheeted covering, $\pi \colon S^n \to \R P^n$ is a two sheeted covering, and $\varepsilon \colon \R \to S^{1} $ is a countably sheeted covering.
+
 \subsection{Lifting properties}
 Here we'll talk about some important lifting properties, that we discussed when we proved that $\pi_1(S^{1} )$ is isomorphic to $\Z$. Recall: if $p \colon \widetilde X \to X$ is a covering map and $\varphi \colon B \to X$ is any continuous map, a \emph{lift} of $\varphi $ is a continuous map $\widetilde\varphi \colon B \to \widetilde X$ such that $p \circ \widetilde\varphi =\varphi $. See the commutative diagram below for reference.
             \begin{figure}[H]
@@ -59,7 +111,14 @@ B \arrow[r, "\varphi"'] \arrow[ru, "\widetilde \varphi"] & X
         \mathcal{S}=\{b\in B \mid \widetilde \varphi_1 (b)=\widetilde\varphi_2(b)  \} 
     \] is both open and closed in $B$, contradicting the connectedness of $B$ if $\mathcal{S} $ is a proper nontrivial subset of $B$. We conclude that $\mathcal{S} $ must be all of $B$ since $\widetilde \varphi_1 $ and $\widetilde\varphi_2 $ agree at a point (so $\mathcal{S} $ is nontrivial) and therefore $\widetilde\varphi_1 $ and $\widetilde\varphi_2 $ are unique.
 
-    Let $b\in \mathcal{S} $ and $U\subset X$ be an evenly covered neighborhood of $\varphi (b)$, and let $U_{\alpha }$ be the component of $p ^{-1}$ containing $\widetilde \varphi_1(b)=\widetilde \varphi_2(b)  $. I don't really want to write out the rest of the proof, let's call it a day.
-\end{proof}
+    Let $b\in \mathcal{S} $ and $U\subset X$ be an evenly covered neighborhood of $\varphi (b)$, and let $U_{\alpha }$ be the component of $p ^{-1}$ containing $\widetilde \varphi_1(b)=\widetilde \varphi_2(b)  $. On the neighborhood $V=\widetilde \varphi_1^{-1}(U_{\alpha })\cap \widetilde \varphi_2^{-1}(U_{\alpha }) $ of $b$, we have $\varphi =p\circ \widetilde \varphi_1= p \circ \widetilde \varphi_2  $. Since $p$ is 1-1 on $U_{\alpha }$, this implies $\widetilde \varphi_1=\widetilde \varphi_2  $ on $V$, so $\mathcal{S} $ is open. 
 
+    OTOH, for $b\notin \mathcal{S} $, if $U$ is an evenly covered neighborhood of $\varphi (b)$, there are disjoint components $U_1,U_2$ of $p ^{-1}(U)$ containing $\widetilde \varphi_1(b),\,\widetilde \varphi_2(b)  $ such that $p$ is a homeomorphism from each $U_i$ to $U$. Letting $V=\widetilde \varphi_1^{-1}(U_1)\cap \widetilde \varphi_2^{-1}(U_2)  $, we conclude that $\widetilde \varphi_1\neq \widetilde \varphi_2  $ on $V$, so $\mathcal{S} $ is closed. This proof is much easier to follow if you trace everything out with all the inverse relations on the commutative diagram above.
+\end{proof}
+\begin{prop}[Path lifting property]
+    Let $p \colon \widetilde X \to X$ be a covering map. Suppose $f \colon I \to X$ is any path, and $\widetilde q_0\in \widetilde X$ is any point in the fiber of $p$ over $f(0)$. Then there exists a unique lift $f \colon I \to X$ of $f$ such that $\widetilde f(0)=\widetilde q_0$. 
+\end{prop}
+\begin{proof}
+    ok
+\end{proof}
 
