@@ -116,9 +116,52 @@ B \arrow[r, "\varphi"'] \arrow[ru, "\widetilde \varphi"] & X
     OTOH, for $b\notin \mathcal{S} $, if $U$ is an evenly covered neighborhood of $\varphi (b)$, there are disjoint components $U_1,U_2$ of $p ^{-1}(U)$ containing $\widetilde \varphi_1(b),\,\widetilde \varphi_2(b)  $ such that $p$ is a homeomorphism from each $U_i$ to $U$. Letting $V=\widetilde \varphi_1^{-1}(U_1)\cap \widetilde \varphi_2^{-1}(U_2)  $, we conclude that $\widetilde \varphi_1\neq \widetilde \varphi_2  $ on $V$, so $\mathcal{S} $ is closed. This proof is much easier to follow if you trace everything out with all the inverse relations on the commutative diagram above.
 \end{proof}
 \begin{prop}[Path lifting property]
-    Let $p \colon \widetilde X \to X$ be a covering map. Suppose $f \colon I \to X$ is any path, and $\widetilde q_0\in \widetilde X$ is any point in the fiber of $p$ over $f(0)$. Then there exists a unique lift $f \colon I \to X$ of $f$ such that $\widetilde f(0)=\widetilde q_0$. 
+    Let $p \colon \widetilde X \to X$ be a covering map. Suppose $f \colon I \to X$ is any path, and $\widetilde q_0\in \widetilde X$ is any point in the fiber of $p$ over $f(0)$. Then there exists a unique lift $\widetilde f \colon I \to \widetilde X$ of $f$ such that $\widetilde f(0)=\widetilde q_0$. 
 \end{prop}
 \begin{proof}
-    ok
+    By the Lebesgue number lemma, $n$ can be chosed large enough that $p$ maps each subinterval $[k/n,(k+1)/n]$ into an evenly covered open subset of $X$. Starting with $\widetilde f(0)=\widetilde q_0, \widetilde f$ is defined inductively by choosing an evenly covered neighborhood $U_k$ containing $f[k /n,(k+1)/n]$, a local section\footnote{A \emph{local section} of a continuous map is a continuous right inverse defined on some open subset. This exists here by Lee's Lemma 11.7, which shows the existence of local sections of covering maps.} $\sigma_k \colon U_k \to \widetilde X$ such that $\sigma_k(f(k /n))=\widetilde f(k /n)$, and setting $f=\sigma_k\circ f$ on $[k /n,(k+1)/n]$. Because $p\circ \widetilde f=(p\circ \sigma_k)\circ f=f$, this is indeed a lift, and it is unique by the unique lifting property.
 \end{proof}
+\begin{prop}[Homotopy lifting property]
+    Let $p \colon \widetilde X \to X$ be a covering map. Suppose $f_0,f_1 \colon I \to X$ are path homotopic, and $\widetilde f_0,\widetilde f_1 \colon I \to \widetilde X$ are lifts of $f_0$ and $f_1$ such that $\widetilde f_0(0)=\widetilde f_1(0)$. Then $\widetilde f_0 \sim \widetilde f_1$. 
+\end{prop}
+\begin{proof}
+    If $H \colon f_0 \sim f_1$ is a path homotopy, by the Lebesgue number lemma we can choose $n$ large enough that $H$ maps each square of side $\frac{1}{n}$ into an evenly covered open set. Labeling the squares $S_{ij}=[i /n,(i+1)/n]\times [j /n,(j+1)/n]$, we define a lift $\widetilde H$ of $H$ square by square along the bottom row, then the next row, and so on by induction. On each square $S_{ij}$, set $\widetilde H=\sigma \circ H$, for an appropiate local section $\sigma$ chosen such that the new definition of $\widetilde H$ matches the previous one at the corner point $(i /n,j /n)$. Then since two such definitions agree on a line segment (by restricting $H$ to it), they are equal by the unique lifting property.
+
+    On the left-hand and right-hand edges of $I\times I$, where $s=0$ or $s=1$, $\widetilde H$ is a lift of the constant loop and therefore constant. The restriction $\widetilde H_0$ to the bottom edge where $t=0$ is a lift of $f_0$ starting at $\widetilde f_0(0)$, and therefore is equal to $\widetilde f_0$, similarly $\widetilde H_1=\widetilde f_1$. Therefore $\widetilde H$ is the required path homotopy between $\widetilde f_0$ and $\widetilde f_1$.
+\end{proof}
+
+\subsection{Connections to the fundamental group}
+Back to Hatcher \S 1.3.
+\vspace{0.25cm}
+\newline
+Here are some applications of the lifting properties with respect to the fundamental group.
+\begin{prop}
+    The map $p_* \colon  \pi_1(\widetilde X,\widetilde x_0) \to \pi_1(X,x_0)$ induced by a covering space $p \colon (\widetilde X,\widetilde x_0) \to (X,x_0)$ is injective. The image subgroup $p_*(\pi_1(\widetilde X,\widetilde x_0))$ in $\pi_1(X,x_0)$ consists of the homotopy classes of loops in $X$ based at $x_0$ whose lifts to $\widetilde X$ starting at $\widetilde x_0$ are loops.
+\end{prop}
+\begin{proof}
+    An element of the kernel of $p_*$ is represented by a loop $\widetilde f_0 \colon I \to \widetilde X$ with a homotopy $f_t \colon I \to X$ of $f_0=p \widetilde f_0$ to the trivial loop $f_1$. By the homotopy lifting property, there is a lifted homotopy of loops $\widetilde f_t$ starting with $\widetilde f_0$ and ending with a constant loop. Basically, since elements of the kernel start with the same point, and there exist unique lifts to them that are nullhomotopic, we conclude the kernel is trivial and $p_*$ is 1-1.
+
+    For the second part of the proposition, loops at $x_0$ lifting to loops at $\widetilde x_0$ represent elements of the image of $p_* \colon \pi_1(\widetilde X,\widetilde x_0) \to \pi_1(X,x_0)$. Conversely, a loop representing an element of the image $p_*$ is homotopic to a loop having such a lift, and by the homotopy lifting property, this loop must also have such a lift.
+\end{proof}
+\begin{prop}
+    The number of sheets (cardinality of a fiber) of a covering space $p \colon (\widetilde X,\widetilde x_0) \to (X,x_0)$ with $X $ and $\widetilde X$ path-connected equals the index of $p_*(\pi_1(\widetilde X,\widetilde x_0))$ in $\pi_1(X,x_0)$.    
+\end{prop}
+\begin{proof}
+    For a loop $g$ in $X$ based at $x_0$, let $\widetilde g$ be its lift to $\widetilde X$ starting at $\widetilde x_0$. A product $h\cdot g$ with $[h]\in H=p_*(\pi_1(\widetilde X,\widetilde x_0))$ has the lift $\widetilde h \cdot \widetilde g$ ending at the same point as $\widetilde g$ since $\widetilde h$ is a loop ($\widetilde h$ denotes the same lift as $\widetilde g$, just of $h$ instead). All this is saying is that you can lift a product of loops by a product of loops, and we're choosing one loop to the in the image subgroup of $p_*$. Then we can define a function $\Phi$ from cosets $H[g]$ to $p ^{-1}(x_0)$ by sending $H[g]$ to $\widetilde g(1)$. $H[g]$ denotes $h\cdot g$, where $h\in H$, the coset of $g$. If you think about it, these are cosets since we just vary $g$: and so the number of cosets is the index of the subgroup $p_*(\pi_1(\widetilde X,\widetilde x_0))$ in $\pi_1(X,x_0)$. Now we just have to show $\Phi$ is a bijection to complete the proof.
+
+    $\Phi$ is onto by the path-connectedness of $\widetilde X$, since $\widetilde x_0$ can be joined to any point in $p ^{-1}(x_0)$ by a path $\widetilde g$ projecting to a loop $g$ at $x_0$. To show $\Phi$ is 1-1, note that $\Phi(H[g_1])=\Phi(H[g_2])$ implies that $g_1\cdot \overline{g_2}$ lifts to a loop in $\widetilde X$ based at $\widetilde x_0$, so $[g_1][g_2]^{-1}\in H$ and hence $H[g_1]=H[g_2]$.
+\end{proof}
+\subsection{Lifting criterion (todo)}
+Question: for a continuous map $\varphi \colon Y \to X$, does $\varphi $ admit a lift $\widetilde \varphi $ to a covering space $\widetilde X$ of $X$? The lifting criterion can help us out.
+\begin{theorem}[Lifting criterion]
+    Suppose given a covering space $p \colon (\widetilde X,\widetilde x_0) \to (X,x_0)$ and a map $f \colon (Y,y_0) \to (X,x_0)$ with $Y$ path-connected and locally path-connected. Then a lift $\widetilde f \colon (Y,y_0) \to (\widetilde X,\widetilde x_0) $ of $f$ exists if and only if $f_*(\pi_1(Y,y_0))\subseteq p_*(\pi_1(\widetilde X,\widetilde x_0))$.
+\end{theorem}
+\begin{proof}
+    cliffhanger!
+\end{proof}
+
+
+
+
+
 
