@@ -1,0 +1,299 @@
+\section{First Test Review}
+As you can see, I gave up taking notes for this class. It's no fun. I don't care about logistic equations or manually calculating things. If I lived in a world where all I did was proofs, life would be much better. Alas, I have a test in two days, and this is not the case. So, here we are.
+\orbreak
+We didn't cover some basic stuff that everyone should know (variation of parameters, proving uniqueness-existence, Picard iteration, series solutions), you know, basically what I signed up for this class to learn. So we'll cover those later with proper sections in my free time.
+\subsection{First-order linear differential equations (homogeneous)}
+First order linear ODE's are of the form 
+\begin{equation}
+    \frac{dy}{dt}+a(t)y=b(t).
+\end{equation}
+We solve the homogeneous case, $\frac{dy}{dt}+a(t)y=0$ by (intuitively) dividing by $y$ and writing $\frac{y'}{y}=\frac{dy}{dt}/y$ as $\frac{d}{dt} \ln|y(t)|$. Then it pretty much immediately follows that \[
+    y(t)=\exp \left( -\int a(t) \, dt \right) .
+\] 
+\subsection{Initial value problem homogeneous 1st order ODE}
+Above gives solution sets of infinite order. Sometimes engineers care about initial value problems, that is, we want to solve equations of the form 
+\begin{equation}
+    \frac{dy}{dt}+a(t)y=0,\quad y(t_0)=y_0.
+\end{equation}
+If we just follow the same steps as earlier and integrate with bounds, we get 
+\[
+    y(t)=y_0\exp\left( -\int_{t_0}^{t} a(s) \, ds \right) .
+\] 
+\subsection{Nonhomogeneous linear 1st order ODEs}
+They are of the form
+\begin{equation}
+    \frac{dy}{dt}+a(t)y=b(t).
+\end{equation}
+Multiply by a continuous $\mu(t)$ such that we have $\frac{dy}{dy}\mu(t)+a(t)\mu(t)y=\mu(t)b(t)$: if $\frac{d}{dt} \mu(t)y=\frac{d\mu}{dt}y+\frac{dy}{dt}\mu$, then simply replace the left half of the expression with this, and notice that they're equal if $ \frac{d\mu(t)}{dt}=a(t)\mu(t)$. So $\mu(t)=c\exp\left( \int a(t) \, dt \right) $. Therefore we have \[
+    \frac{d}{dt} \mu(t)y=\mu(t)b(t) \implies y=\frac{1}{\mu(t)}\left( \int \mu(t)b(t) \, dt +c\right),
+\] which is the general solution.
+\subsection{Initial value nonhomogeneous linear 1st order ODE}
+We're given something that looks like 
+\begin{equation}
+    \frac{dy}{dt}+a(t)y=b(t),\quad y(t_0)=y_0.
+\end{equation}
+To solve this, literally just integrate on the bounds. We get that solutions are of the form \[
+    y=\frac{1}{\mu(t)}\left( y_0\mu(t_0) +\int_{t_0}^{t} \mu(s)b(s) \, ds\right) .
+\] 
+\subsection{Separable equations}
+They are of the form 
+\begin{equation}
+    \frac{dy}{dx}=g(x)f(y).
+\end{equation}
+Because you can just do this: $\frac{dy}{dx}=\frac{g(x)}{h(y)}$, where $h=f^{-1}$ given $f\neq 0$ on its domain. Nobody knows what a differential form actually is, but it's apparent how to solve it (nonrigorously).
+\subsection{The logistic equation}
+I hope this doesn't show up or I'm gonna lose my mind.
+\begin{equation}
+    p(t)=\frac{ap_0}{bp_0+(a-bp_0)e^{-a(t-t_0)}}
+\end{equation}
+\subsection{Second order linear homogenous differential equations}
+They are of the form 
+\begin{equation}\label{sode}
+    \frac{d^2y}{dt^2}+p(t)\frac{dy}{dt}+q(t)y=0.
+\end{equation}
+By the existence-uniqueness theorem, there exists a unique solution $y(t)$ satisfying this ODE on an open interval (with given initial conditions $y(t_0)=y_0,\,y'(t_0)=y_0'$).  Let's define an operator by\[
+    L[y](t)=y''(t)+p(t)y'(t)+q(t)y(t).
+\] This is just a natural transformation if we view maps as functors from $\R$ to $\R$ (category theory ftw). If $L[cy]=cL[y]$ and $L[y_1+y_2]=L[y_1]+L[y_2]$ for $c\in \R$, $y_1,y_2 \colon \R \to \R$, we say $L$ is a \emph{linear operator}. You can verify that $L[y](t)$ defined above is linear. Clearly just solve for $L[y](t)$ and we get the solutions to the second-order ODE. Here's the useful thing: by this fact, we get that \[
+c_1y_1(t)+c_2y_2(t)     
+\] is the general form of solutions to \cref{sode}, where $c_1,c_2\in \R$ and $y_1,y_2$ are particular solutions to \cref{sode}. You can see this by evaluating $L[c_1y_1(t)+c_2y_2(t)]$ and applying linearity properties. In particular, \emph{all} solutions to \cref{sode} are of that form, by a quick application of the existence uniqueness theorem, given that the gradient vectors are linearly independent (checking this is just a quick calculation to see that the Wronskian is nonzero). We say $\{y_1,y_2\} $ is a \emph{fundamental set} of solutions of \cref{sode}.
+\subsection{Second order ODE constant coefficients}
+General method for constant coefficients: let's say they're of the form 
+\begin{equation}\label{soc}
+    L[y]=a \frac{d^2y}{dt^2}+b \frac{dy}{dt}+cy=0,
+\end{equation}
+where $a,b,c$ are constants and $a$ nonzero. Then just look at the characteristic polynomial $P(r)=ar^2+br+c$, and examine the roots $r_1,r_2$ such that $(r-r_1)(r-r_2)=0$. If $r_1\neq r_2,\ r_1,r_2\in \R$, then $e^{r_1x},e^{r_2x}$ are LI solutions to \cref{soc} so the general solution is of the form \[
+y=c_1e^{r_1x}+c_2e^{r_2x}.
+\] If $r_1=r_2=r, \ r_1,r_2\in \R$, then $e^{rx},xe^{rx}$ are LI solutions and the general solution is of the form \[
+y=c_1e^{rx}+c_2xe^{rx}.
+\] Finally, if $r_1\in \C$ (that is, $r_1=a+bi)$ for $a,b\in \R$), then $r_2$ is the complex conjugate of $r_1$ (that is, $r_2=\overline{r_1}=a-bi$) and the functions $e^{ax}\cos(bx),\,e^{ax}\sin(bx)$ are LI solutions to \cref{soc} and the general solution is of the form \[
+y=c_1e^{ax}\cos(bx)+c_2e^{ax}\sin(bx).
+\] 
+\subsection{Nonhomogeneous second order ODEs}
+Let's turn our attention to the big boy, the nonhomogeneous second order differential equation given by
+\begin{equation}\label{nsode}
+    L[y]=\frac{d^2y}{dt^2}+p(t) \frac{dy}{dt}+q(t)y=g(t),
+\end{equation}
+where the functions $p(t),q(t)$ and $g(t)$ are continuous on an open interval.
+\begin{theorem}
+    Every solution of \cref{nsode} is of the form \[
+        y(t)=c_1y_1(t)+c_2y_2(t)+\psi(t)
+    \] where $y_1,y_2$ are LI solutions to \cref{sode}, $\psi(t)$ is a particular solution to \cref{nsode}, and $c_1,c_2$ are constants.
+\end{theorem}
+\begin{proof}
+    We need a lemma.
+    \begin{lemma}\label{dnh}
+    The difference of any two solutions of \cref{nsode} is a solution of \cref{sode}.
+\end{lemma}
+\begin{proof}
+    If $y_1,y_2$ are two solutions of \cref{nsode}, then $L[y_1-y_2]=L[y_1]-L[y_2]=g(t)-g(t)=0.$
+\end{proof}
+Now returning to the proof of the theorem, we know $y(t)$ is a solution of \cref{nsode} by definition. Then by \cref{dnh}, $\phi (t)=y(t)-\psi(t)$ is a solution of \cref{sode}. But since every solution of \cref{sode} is of the form $c_1y_1(t)+c_2y_2(t)$, we have \[
+    y(t)=\phi(t)=\psi(t)=c_1y_1(t)+c_2y_2(t)+\psi(t).
+\] 
+\end{proof}
+\subsection{The method of judicious guessing}
+Is this the actual name of the method? We try to guess solutions for equations of the form 
+\begin{equation}\label{ncsode}
+    a \frac{d^2y}{dt^2}+b \frac{dy}{dt}+cy=g(t),
+\end{equation}
+where $a,b,c\in \R$ and $g(t)$ is of a certain form, described below.
+
+\vspace{0.25cm}
+\noindent\textbf{Case 1:} The differential equation is of the form \[
+    L[y]=a \frac{d^2y}{dt^2}+b \frac{dy}{dt}+cy=a_0+a_1t+\cdots +a_nt^n.
+\] It can be shown that there is a solution of the form \[
+\psi(t)=
+\begin{cases}
+    A_0+A_1t+\cdots+A_nt^n,&\quad c\neq 0,\\
+    t(A_0+A_1t+\cdots+A_nt^n),&\quad c=0,\,b\neq 0,\\
+    t^2(A_0+A_1t+\cdots+A_nt^n),&\quad c=b=0.
+\end{cases}
+\] 
+\noindent\textbf{Case 2:} The differential equation is of the form \[
+    L[y]=a  \frac{d^2y}{dt^2}+b \frac{dy}{dt}+cy=(a_0+a_1t+\cdots + a_nt^n)e^{\alpha t}.
+\] Then it can be shown that there is a particular solution of the form \[
+\psi(t)=
+\begin{cases}
+    (A_0+A_1t+\cdots+A_nt^n)e^{\alpha t},&\quad \text{if}\, e^{\alpha t}\, \text{is not a solution of the homogeneous equation,}\\
+    t(A_0+A_1t+\cdots+A_nt^n)e^{\alpha t},&\quad \text{if}\, e^{\alpha t}\, \text{is a solution of the homogeneous equation, but}\,te^{\alpha t}\,\text{is not,}\\
+    t^2(A_0+A_1t+\cdots+A_nt^n)e^{\alpha t},&\quad \text{if}\, e^{\alpha t}\, \text{and}\,te^{\alpha t}\,\text{are both solutions of the homogeneous equation.}\\
+\end{cases}
+\] Equivalently, we have\[
+\psi(t)=
+\begin{cases}
+    (A_0+A_1t+\cdots+A_nt^n)e^{\alpha t},&\quad \text{if}\, \alpha\, \text{is not a solution of the characteristic equation,}\\
+    t(A_0+A_1t+\cdots+A_nt^n)e^{\alpha t},&\quad \text{if}\, \alpha \, \text{is one of two distinct solutions of the characteristic,}\\
+    t^2(A_0+A_1t+\cdots+A_nt^n)e^{\alpha t},&\quad \text{if}\, \alpha\, \text{is the only solution of the characteristic equation.}
+\end{cases}
+\] 
+\noindent\textbf{Case 3:} Let $\phi(t)=u(t)+iv(t)$ be a particular solution of  \[
+    a \frac{d^2y}{dt^2}+b \frac{dy}{dt}+cy=(a_0+a_1t+\cdots+a_nt^n)e^{i\omega t}.
+\] All you have to do is look at the real and imaginary parts to get $\operatorname{Re}(\phi(t))=u(t)$ a solution of $ay''+by'+cy=(a_0+a_1t+\cdots+a_nt^n)\cos(\omega t)$, and similarly $\operatorname{Im}(\phi(t))=v(t)$ a solution of $ay''+by'+cy=(a_0+a_1t+\cdots+a_nt^n)\sin(\omega t)$.
+
+
+
+
+\section{Examples}
+\subsection{Homogeneous 1st order ODE}
+\begin{prob}
+    Find the general solution of \[
+    \frac{dy}{dt}+2ty=0.
+    \] 
+\end{prob}
+\begin{solution}
+    $y=c \exp \left(-\int 2t \, dt  \right) =c\exp\left( -t^2 \right) $.
+\end{solution}
+\subsection{Homogeneous first order ODE initial value}
+\begin{prob}
+    Find the solution of \[
+        \frac{dy}{dt}+(\sin t)y=0,\quad y(0)=\frac{3}{2}.
+    \] 
+\end{prob}
+\begin{solution}
+    $y=\frac{3}{2}\exp\left( -\int_{0}^{t} \sin t \, dt \right) =\frac{3}{2}\exp(\cos t -1)$.
+\end{solution}
+\begin{prob}
+    Solve \[
+        \frac{dy}{dt}+e^{t^2}y=0,\quad y(1)=2.
+    \] 
+\end{prob}
+\begin{solution}
+    $y=2\exp\left( -\int_{1}^{t} e^{t^2} \, dt \right) $. This function isn't integrable (to be precise, no closed form solution exists) so we're done.
+\end{solution}
+\subsection{Nonhomogeneous first order}
+\begin{prob}
+    Solve \[
+    \frac{dy}{dt}-2ty=t.
+    \] 
+\end{prob}
+\begin{solution}
+    Let $\mu(t)= \exp\left( \int -2t \, dt \right) =\exp\left( -t^2 \right) $. So $\frac{d}{dt} y\cdot \exp\left( -t^2 \right) =\exp\left( -t^2 \right) t \implies y\cdot \exp(-t^2)=-\frac{1}{2}e^{-t^2}+c\implies y=-\frac{1}{2}+ce^{t^2}$.
+\end{solution}
+\begin{prob}
+    Solve \[
+   x \frac{dy}{dx}+y=\cos x,\, x>0. 
+    \] 
+\end{prob}
+\begin{solution}
+    We have $\frac{dy}{dx}+\frac{y}{x}=\frac{\cos x}{x}$. So $\mu(x)=e^{|\ln(x)|}=x$ for all $x$ strictly positive. Then $\frac{d}{dx}yx=x  \frac{\cos x}{x}=\cos x$. So $xy=\sin x +c\implies y= \frac{\sin x}{x}+\frac{c}{x}$.
+\end{solution}
+\subsection{Nonhomogeneous first order initial value}
+\begin{prob}
+    Solve \[
+        \frac{dy}{dt}+2ty=t,\quad y(1)=2.
+    \] 
+\end{prob}
+\begin{solution}
+    We have $\mu(t)=e^{t^2}$. So $\frac{d}{dt} y e^{t^2}=te^{t^2}\implies ye^{t^2}=\frac{1}{2}e^{t^2}+c\implies y=\frac{1}{2}+ce^{-t^2}.$ At $y(1)=2$, we have $\frac{3}{2}=\frac{c}{e}\implies c=\frac{3}{2}e$. So the solution is $y=\frac{1}{2}+\frac{3}{2}e^{(-t^2+1)}$.
+\end{solution}
+\begin{prob}
+    Solve \[
+        \frac{dy}{dx}+xy=xe^{\frac{x^2}{2}},\quad y(0)=1.
+    \] 
+\end{prob}
+\begin{solution}
+    Now $\mu(t)=e^{\frac{x^2}{2}}.$ So $\frac{d}{dx}ye^{\frac{x^2}{2}}=xe^{x^2}$, and $ye^{\frac{x^2}{2}}=\frac{1}{2}e^{x^2}+c\implies y=\frac{1}{2}e^{\frac{x^2}{2}}+ce^{-\frac{x^2}{2}}$. At $y(0)=1$, we have $1=\frac{1}{2}+c$, so $c=\frac{1}{2},$ and the general solution is of the form $y=\frac{1}{2}e^{\frac{x^2}{2}}+\frac{1}{2}e^{-\frac{x^2}{2}}=\frac{1}{2}e^{\frac{x^2}{2}}\left( 1+e^{-x^2} \right) $.
+\end{solution}
+\subsection{Separable equations}
+\begin{prob}
+    Solve \[
+    \frac{dy}{dx}=\frac{x^2}{y^2}.
+    \] 
+\end{prob}
+\begin{solution}
+    $y^3=x^3+c\implies y=\sqrt[3]{x^3+3c} $.
+\end{solution}
+\begin{prob}
+    Solve \[
+    \frac{dy}{dx}=\frac{6x^2}{2y+\cos y}.
+    \] 
+\end{prob}
+\begin{solution}
+   $\int 2y+\cos y \, dy=2x^3\implies y^2+\sin y+c=2x^3$. Now what? I think it's over.
+\end{solution}
+\begin{prob}
+    Solve  \[
+    y'=x^2y.
+    \] 
+\end{prob}
+\begin{solution}
+    $\ln|y|=\frac{x^3}{3}+c\implies y=\pm e^{\frac{x^3}{3}+c}\implies y=Ce^{\frac{x^3}{3}}$.
+\end{solution}
+\subsection{Second order homogeneous ODEs}
+\begin{prob}
+    Find the solutions of \[
+   \frac{d^2y}{dt^2}+y=0.
+    \] 
+\end{prob}
+\begin{solution}
+    Clearly two particular solutions are $y_1(t)=\cos t$, $y_2(t)=\sin t$, then by the existence uniqueness thm the general solution is of the form $y(t)=c_1 \cos t+c_2 \sin t$.
+\end{solution}
+\begin{prob}
+    Calculate the Wronskian for $y_1,y_2$.
+\end{prob}
+\begin{solution}
+    Why am I doing this??? I have better things to do.
+\end{solution}
+\subsection{Second order ODE constant coefficients}
+\begin{prob}
+    Determine all solutions to the differential equation \[
+    y''+y'-6y=0
+    \] of the form $e^{rx}$.
+\end{prob}
+\begin{solution}
+    $y'=re^{rx},y''=r^2e^{rx}$. So we have $e^{rx}(r^2+r-6)=0$ for the differential equation. Clearly $r=2,-3$ satisfy this equation, so the solutions are $y_1=e^{2x},y_2=e^{-3x}$. These are LI, so the general solution is of the form $c_1e^{2x}+c_2e^{-3x}$.
+\end{solution}
+\begin{prob}
+    Solve \[
+    y''+y=0.
+    \] 
+\end{prob}
+\begin{solution}
+    The characteristic is $r^2+1$, so $r_1=i$ and $r_2=-i$. Then solutions are of the form $c_1e^{0}\cos(1x)+c_2e^{0}\sin(1x)=c_1\cos x+c_2 \sin x$.
+\end{solution}
+\begin{prob}
+    Solve \[
+    y''+6y'+25y=0.
+    \] 
+\end{prob}
+\begin{solution}
+    The solutions to the characteristic polynomial $r^2+6r+25$ are simply $r=-3\pm 4i$. So the general solution is of the form $c_1e^{-3x}\cos(4x)+c_2e^{-3x}\sin(4x)$.
+\end{solution}
+\begin{prob}
+    Solve the following initial value problem: \[
+        y''+4y'+4y=0,\quad y(0)=1,\,y'(0)=4.
+    \] 
+\end{prob}
+\begin{solution}
+    Clearly the general solution is of the form $c_1e^{-2x}+c_2xe^{-2x}$. At $y(0)=1$, we have $1=c_1$. Then $y'=-2e^{-2x}+c_2e^{-2x}+-2c_2xe^{-2x}$, so at $y'(0)=4$ we have $4=-2+c_2$. So $c_2=6$, and the general solution is of the form $e^{-2x}+6xe^{-2x}$.
+\end{solution}
+\subsection{Nonhomogeneous second order ODEs}
+\begin{prob}
+    Three solutions of some second-order nonhomogeneous ODE are \[
+        \varphi_1 (t)=t, \varphi_2(t)=t+e^{t},\,\text{and}\, \varphi_3(t)=1+t+e^{t}.  
+    \] Find the general solution of the equation.
+\end{prob}
+\begin{solution}
+    By our lemma, $\varphi_2-\varphi_1=e^{t}  $ and $\varphi_3-\varphi_2=1  $ are clearly LI solutions to the nonhomogeneous equation. Then the general solution is of the form $c_1+c_2e^{t}+t$. Our choices of $\varphi_i $ don't really matter, just trust the theorems.
+\end{solution}
+\begin{prob}
+    gotta find more problems for these
+\end{prob}
+\subsection{Judicious guessing (nonhomogeneous second order with constant coefficients)}
+\begin{prob}
+    Find a particular solution $\psi(t)$ of the equation \[
+        L[y]=\frac{d^2y}{dt^2}+\frac{dy}{dt}+y=t^2.
+    \] 
+\end{prob}
+\begin{solution}
+    Since $c\neq 0$, we have a solution $\psi(t)$ of the form $A_0+A_1t+A_2t^2$. Plug that in and solve for the constants.
+\end{solution}
+\begin{prob}
+    do some more of these too
+\end{prob}
+
+
+
+
+
+
