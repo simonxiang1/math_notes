@@ -1,0 +1,19 @@
+\section{Common Topological Structures}
+We'll take this section to digress a little bit and explore some examples of our favorite spaces that we work with a lot in topology.
+\subsection{Manifolds (todo)}
+\subsection{Cell complexes (todo)}
+\subsection{The real projective plane $\R P^n$ (todo)}
+Credit to Cameron Krulewski at UChicago, who wrote up a paper on $\R P^n$ for a Math 132 project, whose notes I am following today.
+\orbreak
+Manifolds are often talked about as subsets of $\R^n$, for example, we often discuss $k$-manifolds embedded in at most $\R^{2k+1}$. What is the real projective $n$-space $\R P^n$ exactly? It's the space of lines through the origin in $\R^{n+1}$. For $\R P^2$ (the real projective plane), this doesn't embed in $\R^3$, but it does immerse. This won't make sense the higher we go up. A better way to think of abstract manifolds like $\R P^n$ is as a \textbf{quotient space} by identifying points of another manifold.
+\begin{claim}
+    The real projective $n$-space is homeomorphic to an $n$-sphere with antipodal points identified, that is, $\R P^n \cong S^n/ (v \sim -v)$.
+\end{claim}
+Why is this true? Let's look at the cases. In the trivial case, let $n=0$. Then $\R P^0$ consists of just one line $\{\R\} $, so it's hoemomorphic to a singleton. What is $S^0$? It's two singletons, so if you identify them you get your expected result.
+
+Now let's look at $n=1$: we want to show that $\R P^1$ is homeomorphic to the circle $S^{1} $. Let's parametrize the lines by their slopes, that is, the angle $\tan \left( \frac{y}{x} \right) $ for any positive pair $(x,y)$ on any given line. We choose $(x,y)$ positive since the lines extend in both directions and looking at both would mean a redundancy. Then these lines hit every angle from $0$ to $\pi$, and the $x$-axis given by $\R\times \{0\} $ has an angle of both $0$ and $\pi$ (identifying the two together). So we get that $\R P^1 \cong S^{1} $. How is this homeomorphic to $S^{1} / (v \sim -v)$, as we claimed? Identifying antipodal points gets a semicircle, but the endpoints of the semicircle are also antipodal and get identified, so suprisingly $S^{1} \cong S^{1} /(v\sim -v)$.
+
+
+
+
+
