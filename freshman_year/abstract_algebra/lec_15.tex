@@ -1,0 +1,36 @@
+\section{September 30, 2020}
+Last time: if we proved that if $n\geq 5$, then $A_n$ is simple in $S_n$. Today we'll talk about products of groups. We've pretty much seen this before, let's breeze through it.
+\subsection{Direct products}
+Recall direct products: we start with two group $G_1$ and $G_2$. The cartesian product $G_1\times G_2$ is the direct product of $G_1$ and $G_2$, we associate this with a binary operation componentwise by letting \[
+    (g_1,g_2)(g_1',g_2')=(g_1g_1',g_2g_2').
+\] You can verify that this is well defined and the group satisfies the group axioms. We often use these to understand bigger groups by letting them be the direct product of smaller groups. If $H,K$ are two normal subgroups such that \[
+\begin{cases}
+    H \cap K =\{1_G\} \\
+    HK=G,\, HK:=\{hk \mid h\in H,k\in K\} 
+\end{cases}
+\] as sets, then $G \simeq H \times K$. How do we show this? We need a map: simply take $(h,k) \mapsto hk$. To verify that it's a group homomorphism, we need normality: surjectivity is by the second condition, and injectivity follows from the fact that the intersection is trivial.
+
+\subsection{Semidirect products}
+Now let's talk about semidirect products. These are a little more interesting, a generalization of direct products. Let $G$ be a group and $H,K$ two subgroups of $G$ such that only one of them (say $H$) is normal in $G$, their intersection is the identity, and $HK=G$. Then $G$ is the \emph{semidirect product} of $H$ and $K$ in $G$, ie, $G\simeq H \rtimes K$. We could also write the conditions as \[
+\begin{cases}
+    H \trianglelefteq G\\
+    H\cap K=\{1_G\} \\
+    HK=G.
+\end{cases}
+\] 
+\begin{remark}
+    We have $H \rtimes K=H\times K$ as sets. How will define a multiplication on this set? We have \[
+        (h,k)(h',k')=hkh'k'=h(kh'k^{-1})kk'=(h(kh'k^{-1}),kk')
+    \] since $(kh'k^{-1})\in H$ by the normality of $H$. Notice that the conjugation action of $K$ on $H$ determines the product operation on $H \rtimes K$. Here $\varphi \colon K \to \operatorname{Aut}H,\, k\mapsto (h \mapsto khk^{-1})$ an automorphism. More generally, if we have two groups $G_1,G_2$ and a homomorphism $\varphi \colon G_2 \to \operatorname{Aut}G_1$, then we can define the corresponding semidirect product $G_1 \rtimes G_2=G_1\times G_2$ (as sets) by \[
+    (g_1,g_2)(g_1',g_2')=(g_1\varphi (g_2)(g_1'),g_2g_2').
+\] From here, it's easy to see that if $\varphi $ is the trivial map, then this is simply the direct product of the two sets, that is, $\varphi (G_2)=\{\operatorname{id}_{G_1}\} \iff G_1 \rtimes G_2\simeq G_1\times G_2$.
+\end{remark}
+We use this concept to understand bigger groups in terms of their subgroups. Consider groups of order $pq$ where $p,q$ are distinct primes. $G$ has a $p$-Sylow $P$ and a $q$-Sylow $Q$. If $Q$ is normal, then $n_q\equiv 1 \pmod q$, $nq  \mid p \implies n_q=1$. $|Q|=q\implies Q\simeq\Z /q\Z$ and $|P|=p\implies P\simeq\Z /p\Z$. Together, we have $Q\cap P=\{1_G\} , (|Q|,|P|)=1, |QP|=\frac{|Q|\cdot |P|}{|Q\cap P|}=\frac{pq}{1}$. So we have $Q\trianglelefteq G,Q\cap P=\{1_G\} ,QP=G$, and we conclude that $G=Q \rtimes P$.
+
+To understand this fully we need to look at the homomorphisms $\varphi \colon P \to \operatorname{Aut}Q$. We have \[
+    \varphi \colon \Z /p\Z \to \operatorname{Aut}\left( \Z /q\Z \right)  \simeq \left( \Z /q\Z \right)^* ,\, (n\mapsto kn)\mapsto k,
+\] where $q\nmid k.$ This map is uniquely determined up to isomorphisms of  $\Z /p\Z$ itself. We have two possibilities:
+\begin{enumerate}
+    \item $q\not\equiv 1 \pmod p$. Then $\varphi (P)=\{1_G\} .$ Hence $G\simeq Q\times P$. 
+    \item $q\equiv 1 \pmod p$. Then $\varphi $?? Something happened, but I gotta run to my next class.
+\end{enumerate}
