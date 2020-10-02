@@ -56,7 +56,7 @@ By the existence-uniqueness theorem, there exists a unique solution $y(t)$ satis
 \] This is just a natural transformation if we view maps as functors from $\R$ to $\R$ (category theory ftw). If $L[cy]=cL[y]$ and $L[y_1+y_2]=L[y_1]+L[y_2]$ for $c\in \R$, $y_1,y_2 \colon \R \to \R$, we say $L$ is a \emph{linear operator}. You can verify that $L[y](t)$ defined above is linear. Clearly just solve for $L[y](t)$ and we get the solutions to the second-order ODE. Here's the useful thing: by this fact, we get that \[
 c_1y_1(t)+c_2y_2(t)     
 \] is the general form of solutions to \cref{sode}, where $c_1,c_2\in \R$ and $y_1,y_2$ are particular solutions to \cref{sode}. You can see this by evaluating $L[c_1y_1(t)+c_2y_2(t)]$ and applying linearity properties. In particular, \emph{all} solutions to \cref{sode} are of that form, by a quick application of the existence uniqueness theorem, given that the gradient vectors are linearly independent (checking this is just a quick calculation to see that the Wronskian is nonzero). We say $\{y_1,y_2\} $ is a \emph{fundamental set} of solutions of \cref{sode}.
-\subsection{Second order ODE constant coefficients}
+\subsection{Second order homogeneous ODE constant coefficients}
 General method for constant coefficients: let's say they're of the form 
 \begin{equation}\label{soc}
     L[y]=a \frac{d^2y}{dt^2}+b \frac{dy}{dt}+cy=0,
@@ -129,6 +129,9 @@ where $a,b,c\in \R$ and $g(t)$ is of a certain form, described below.
 \noindent\textbf{Case 3:} Let $\phi(t)=u(t)+iv(t)$ be a particular solution of  \[
     a \frac{d^2y}{dt^2}+b \frac{dy}{dt}+cy=(a_0+a_1t+\cdots+a_nt^n)e^{i\omega t}.
 \] All you have to do is look at the real and imaginary parts to get $\operatorname{Re}(\phi(t))=u(t)$ a solution of $ay''+by'+cy=(a_0+a_1t+\cdots+a_nt^n)\cos(\omega t)$, and similarly $\operatorname{Im}(\phi(t))=v(t)$ a solution of $ay''+by'+cy=(a_0+a_1t+\cdots+a_nt^n)\sin(\omega t)$.
+\begin{remark}
+    To find solutions where the function on the right is of the form $e^{2t}+e^{-3t}$ or $t\sin t +e^{t}$ or something like that, simply find solutions to the two componenents and add them.
+\end{remark}
 
 
 
@@ -277,8 +280,13 @@ where $a,b,c\in \R$ and $g(t)$ is of a certain form, described below.
     By our lemma, $\varphi_2-\varphi_1=e^{t}  $ and $\varphi_3-\varphi_2=1  $ are clearly LI solutions to the nonhomogeneous equation. Then the general solution is of the form $c_1+c_2e^{t}+t$. Our choices of $\varphi_i $ don't really matter, just trust the theorems.
 \end{solution}
 \begin{prob}
-    gotta find more problems for these
+    Three solutions of some second order nonhomogeneous linear ODE are \[
+        \phi_1(t)=t^2,\,\phi_2(t)=t^2+e^{2t},\,\text{and}\,\phi_3(t)=1+t^2+2e^{2t}.
+    \] Find the general solution of the equation.
 \end{prob}
+\begin{solution}
+    Just take the difference of two, it'll work out.
+\end{solution}
 \subsection{Judicious guessing (nonhomogeneous second order with constant coefficients)}
 \begin{prob}
     Find a particular solution $\psi(t)$ of the equation \[
@@ -289,11 +297,5 @@ where $a,b,c\in \R$ and $g(t)$ is of a certain form, described below.
     Since $c\neq 0$, we have a solution $\psi(t)$ of the form $A_0+A_1t+A_2t^2$. Plug that in and solve for the constants.
 \end{solution}
 \begin{prob}
-    do some more of these too
+    Find a particular solution 
 \end{prob}
-
-
-
-
-
-
