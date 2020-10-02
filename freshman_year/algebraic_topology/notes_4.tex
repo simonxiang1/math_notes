@@ -17,7 +17,14 @@ Some notes: in other texts, we have
     \item total space $\rightarrow $ covering space,
     \item base space $\rightarrow $ ??,
     \item $F_b=p^{-1}(b)$ is a fiber of $p \,\longrightarrow\, F_b$ is the preimage of $b$ (points) in the union of sheets of $\widetilde X$ over $U_b$.
-\end{itemize}   This is kind of out of place, but now we'll state Lebesgue's number lemma. It's useful when dealing with compact metric spaces.
+\end{itemize}   
+Another definition that will come in handy when classifying covering spaces is the notion of something being semilocally simply-connected, that is, given a ``hole'' (of genus one), we can always find a neighborhood contained in that hole such that the fundamental group induced by the inclusion map is trivial in $\pi_1$ of the entire space.
+\begin{definition}[Semilocally simply-connected]
+    A space $X$ is \emph{semilocally simply-connected}  if for all $x\in X$, there exists a neighborhood $U_x$ containing $x$ such that the inclusion map $U \hookrightarrow X$ induces the trivial map, that is, $\pi_1(U,x)\to \pi_1(X,x)$ is trivial.
+\end{definition}
+We'll define this again when we need it, and talk a little more about what it means for a space to be semilocally simply-connected.
+\orbreak
+This is kind of out of place, but now we'll state Lebesgue's number lemma. It's useful when dealing with compact metric spaces.
 \begin{lemma}[Lebesgue's number lemma]
     If a metric space $(X,d)$ is compact and we have an open cover of $X$, then there exists a $\delta>0$ such that every subset of $X$ having a diameter less than $\delta$ is contained in some member of the cover. We say $\delta$ is the \emph{Lebesgue number} of such cover.
 \end{lemma}
@@ -151,7 +158,7 @@ Here are some applications of the lifting properties with respect to the fundame
 
     $\Phi$ is onto by the path-connectedness of $\widetilde X$, since $\widetilde x_0$ can be joined to any point in $p ^{-1}(x_0)$ by a path $\widetilde g$ projecting to a loop $g$ at $x_0$. To show $\Phi$ is 1-1, note that $\Phi(H[g_1])=\Phi(H[g_2])$ implies that $g_1\cdot \overline{g_2}$ lifts to a loop in $\widetilde X$ based at $\widetilde x_0$, so $[g_1][g_2]^{-1}\in H$ and hence $H[g_1]=H[g_2]$.
 \end{proof}
-\subsection{Lifting criterion (todo)}
+\orbreak
 Question: for a continuous map $\varphi \colon Y \to X$, does $\varphi $ admit a lift $\widetilde \varphi $ to a covering space $\widetilde X$ of $X$? The lifting criterion can help us out.
 \begin{theorem}[Lifting criterion]
     Suppose we are given a covering space $p \colon (\widetilde X,\widetilde x_0) \to (X,x_0)$ and a map $f \colon (Y,y_0) \to (X,x_0)$ with $Y$ path-connected and locally path-connected. Then a lift $\widetilde f \colon (Y,y_0) \to (\widetilde X,\widetilde x_0) $ of $f$ exists if and only if $f_*(\pi_1(Y,y_0))\subseteq p_*(\pi_1(\widetilde X,\widetilde x_0))$.
@@ -159,3 +166,63 @@ Question: for a continuous map $\varphi \colon Y \to X$, does $\varphi $ admit a
 \begin{proof}
 If a lift $\widetilde f$ exists, then $p\widetilde f=f$, so $f_*=p_* \widetilde f_*$
 \end{proof}
+
+\subsection{Classification of covering spaces (todo split it up)}
+How can we catch all the covering spaces? This whole topic deals closely with its analogue in algebra, Galois theory, with a 1-1 correspondence between connected covering spaces of $X$ (towers of field extensions) and subgroups of $\pi_1(X)$ (subgroups of $\operatorname{Gal}(\mathbb{E} /\F)$). This comes from the function that assigns each covering space $p \colon (\widetilde X,\widetilde x_0) \to (X,x_0)$ to the subgroup $p_* (\pi_1(\widetilde X,\widetilde x_0))$ of $\pi_1(X,x_0)$.
+
+\begin{definition}[Semilocally simply-connected]
+    A space $X$ is semilocally simply-connected if for all $x\in X$, there exists a neighborhood $U_x$ containing $x$ such that the inclusion map $U \hookrightarrow X$ induces the trivial map, that is, $\pi_1(U,x)\to \pi_1(X,x)$ is trivial.
+\end{definition}
+Basically, the fundamental group of $U$ is trivial \emph{inside} the fundamental group of $X$, that is, loops in $\pi_1(U,x)$ are nullhomotopic in $X$ (not necessarily $U$, if that were the case, $U$ would be locally simply connected). Intuitively, there are lower bounds on the size of holes (genus-wise): if theres a hole, you can find a neighborhood smaller than it so that loops are still trivial. For example, take the Hawaiian earring: loops here are very very small, and at the base every neighborhood will contain a hole, so it's not semilocally simply-connected (a ``bad'' space)\footnote{Does anyone reading this know of a space that's path-connected but not locally path-connected? I know of many counterexamples for the converse, but without a counterexample to the implication I don't see why local path-connectedness is a necessary condition on top of path-connectedness.}.
+
+\begin{prop}\label{main}
+    If $X$ is a path-connected, locally path-connected, and semilocally simply-connected space, then for every subgroup $H$ of $\pi_1(X,x_0)$, there is a covering space $(\widetilde X,\widetilde x_0)\overset{p}{\to }(X,x_0)$ such that $p_*(\pi_1(\widetilde X,\widetilde x_0))=H$.
+\end{prop}
+We'll prove \cref{main} much later, let's talk about it first. If $H=1$, then $\widetilde X$ is simply-connected, so $\widetilde X$ is the universal cover of $X$. Now given an evenly covered open set $U$, any loop in $U$ will lift to a sheet in $\widetilde X$, which implies it's nullhomotopic in $\widetilde X$, and therefore nullhomotopic in $X$ (we don't know if it's nullhomotopic in $U$), we can see this just by projecting the loop with $p$. This implies that if $U \overset{\iota}{\hookrightarrow }X$ denotes the inclusion of $U$ in $X$, then $\iota_*(\pi_1(U))=1$ in $\pi_1(X)$. So $X$ must be semilocally simply-connected. The following claim shows why we need these claims for $X$ to be a ``nice'' space.
+\begin{claim}
+    If $X$ is path-connected, locally path-connected, and semilocally simply-connected, then there exists a universal cover of $X.$
+\end{claim}
+\begin{proof}
+    We prove this by directly constructing a universal cover of $X$ through the fundamental groupoid. First assume that $X$ has a universal cover $\widetilde X\overset{p}{\to }X$. Let $\widetilde x_0\in \widetilde X$. Then for some other $\widetilde x\in \widetilde X$, there is a unique path homotopy class of paths from $\widetilde x_0$ to $\widetilde x$. So points in $\widetilde X$ are in a 1-1 correspondence of path homotopy classes of paths starting at $\widetilde x_0$. But by the path lifting property, these are all homotopic.
+
+    Let's turn this around and define the universal cover of $X$ by its path homotopy classes, that is, let \[
+        \widetilde X := \{[f]\in \Pi_1(X) \mid f(0)=x_0\},
+    \] where $\Pi_1(X)$ denotes the fundamental groupoid of $X$. The covering is given by $p \colon \widetilde X \to X,\, [f]\mapsto f(1)$. We want to define a topology on $\widetilde X$ that makes $p$ continuous and a covering map. To do this, we define a basis $\mathscr{B}$ and check to see if the inverse image of open sets in the \emph{basis} are continuous. Albin, 24 min lecutre 8 unfinished
+\end{proof}
+\orbreak
+Now that we've proved that for every subgroup we have a covering space, the next question is how many covering spaces per subgroup? We have two covering spaces $p_1 \colon (\widetilde X_1,\widetilde x_1)\to (X,x_0) $ and $p_2 \colon (\widetilde X_2,\widetilde x_2) \to (X,x_0)$ are \emph{equivalent} if there is a homeomorphism $f \colon (\widetilde X_1,\widetilde x_1) \to (\widetilde X_2,\widetilde x_2)$ such that $p_1=p_2\circ f$, or such that the following diagram commutes:
+            \begin{figure}[H]
+                \centering
+                \begin{tikzcd}
+{(\widetilde X_1,\widetilde x_1)} \arrow[rr, "f"] \arrow[rdd, "p_1"'] &           & {(\widetilde X_2, \widetilde x_2)} \arrow[ldd, "p_2"] \\
+                                                                      &           &                                                       \\
+                                                                      & {(X,x_0)} &                                                      
+\end{tikzcd}
+            \end{figure}
+
+If so, it's easy to see that this is an equivalence relation.
+\begin{theorem}
+    The covering spaces $(\widetilde X_i,\widetilde x_i) \overset{p_i}{\to } (X,x_0)$, where $i \in \{1,2\} $ and $X$ is path-connected, locally path-connected are equivalent if and only if $p_{1_*}(\pi_1(\widetilde X_1,\widetilde x_1))=p_{2_*}(\pi_1(\widetilde X_2,\widetilde x_2))$.
+\end{theorem}
+So it turns out the answer to the question above is just one.
+\begin{proof}
+    One direction is easy: look at the diagram of induced fundamental groups, and notice that the homeomorphism induces an isomorphism on the subgroups of $\pi_1(X)$. The other direction is more interesting. Let $H_1=p_{1_*}(\pi_1(\widetilde X_1,\widetilde x_1))$ and $H_2=p_{2_*}(\pi_1(\widetilde X_2,\widetilde x_2))$. Since $H_1 \subseteq H_2$ and $p_2$ is a covering map and $X$ is path-connected and locally path-connected, there exists a lift of $\widetilde p_1$ to a map $f\colon(\widetilde X_1,\widetilde x_1) \to (\widetilde X_2,\widetilde x_2)$ by the lifting criterion, making the diagram commute. Similarly, $H_2\subseteq H_1$, so there's a lift of $p_2$ to a map $g \colon (\widetilde X_2,\widetilde x_2) \to (\widetilde X_1,\widetilde x_1)$ making the appropiate diagram commute. In particular, we have 
+            \begin{figure}[H]
+                \centering
+                \begin{tikzcd}
+{(\widetilde X_1,\widetilde x_1)} \arrow[rr, "g\circ f"] \arrow[rdd, "p_1"'] &           & {(\widetilde X_1, \widetilde x_1)} \arrow[ldd, "p_1"] \\
+                                                                      &           &                                                       \\
+                                                                      & {(X,x_0)} &                                                      
+\end{tikzcd}
+            \end{figure}
+            Since the identity is also a lift of $p_1$ to $(\widetilde X_1,\widetilde x_1)$, by uniqueness of lifts we have $g\circ f$ equal to the identity, that is, $g\circ f= \operatorname{id}_{\widetilde X_1}$. Similarly, we have $f\circ g = \operatorname{id}_{\widetilde X_2}$. So $f$ is a homeomorphism. \footnote{I don't understand where $f$ came from: how can we guarantee its existence?}
+\end{proof}
+Now for the theorem we all came here for.
+\begin{theorem}\label{galois}
+    Let $X$ be a path-connected, locally path-connected, and semilocally simply-connected space. Then there is a bijection between the coverings $(\widetilde X,\widetilde x_0) \overset{p}{\to }(X,x_0)$ up to equivalence and the subgroups of $\pi_1(X,x_0)$. This bijection is given by $p \mapsto p_*(\pi_1(\widetilde X,\widetilde x_0))$. Furthermore, we also have a 1-1 correspondence between the non pointed covering spaces $\widetilde X \overset{p}{\to }X$ and the conjugacy classes of subgroups, given by the same map  $p\mapsto [p_*(\pi_1(\widetilde X))]$.
+\end{theorem}
+It's important that we have a covering space and choice of basepoint: if we change the basepoint, we might not necessarily give the same group. Changing the basepoint gives a conjugacy isomorphisms between fundamental groups. This conjugacy isomorphism might give rise to different subgroups, conjugating by some element of the group possibly gives a different subgroup. Hence the second part of the theorem.
+
+It turns out there's an equivalence of posets between covers of a space $(X,x_0)$ (for $X$ a ``nice'' space) and subgroups of $\pi_1(X,x_0)$, known as the Galois correspondence. The partial order is given by defining two elements to be comparable if one is a cover of another.
+\subsection{Actions on the fibers}
+If $p \colon \widetilde X \to X$ a cover, $\alpha \in \pi_1(X,x_0)$, define $L_{\alpha }\in \operatorname{Sym}(p^{-1}(x_0))$ by $L_{\alpha}\widetilde x=\widetilde \alpha (0),$ where $\widetilde \alpha $ is the lift of $x$ to a path ending at $\widetilde x$. We have $L_{\alpha \beta }=L_{\alpha }\circ L_{\beta }$, since $L_{\alpha \beta }(\widetilde x)=\widetilde{\alpha \beta }(0)=L_{\alpha }(\widetilde \beta(0))=L_{\alpha }(L_{\beta }(\widetilde x)).  $ This is why we defined $L_{\alpha }(\widetilde x)$ starting at the left endpoint $0$. Albin lecture 9, 36 minutes
