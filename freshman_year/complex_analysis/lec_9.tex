@@ -18,10 +18,107 @@ We want to do calculus with this function. We are not terribly interested in mul
     $\operatorname{Log}$ satisfies the CR equations. Verify this in your free time.
 \end{claim}
 Note that $\frac{d}{dz}\operatorname{Log}z=e^{-i\theta}(u_r+iv_r)=e^{-i\theta}(\frac{1}{r}+0)=\frac{1}{z}$ on its domain. This is very cool, thank you logarithm. This is useful, but we need other ways to get ``honest'' functions from $\log w=\ln|w|+i\operatorname{arg}w$.
-\subsection{Branches of the logarithm(todo)}
+
 aa hayaku ouchi ni kaeritai
 
 Recall the identity that $\operatorname{arg}(z_1z_2)=\operatorname{arg}z_1+\operatorname{arg}z_2$, with addition being componentwise for the infinite sets. So $\log (z_1z_2)=\ln |z_1z_2|+i\operatorname{arg}(z_1z_2)=\ln|z_1|+\ln|z_2|+i\operatorname{arg}z_1+i\operatorname{arg}z_2=\log z_1+\log z_2$. 
 \orbreak
 Where are we headed? To the next class of functions $z^{\alpha }$ and beyond.
+\section{October 1, 2020}
+Last time: we had a test. Today we'll talk about branches and next time move onto integration, finally. So I had a test until 11 today, and I probably won't take many (any) notes because I'm doing my homework (due at 2) during the lecture. (If anybody wants to send me notes, please do, my email is \url{simonxiang@utexas.edu}).
+\subsection{Catching up: logarithms and branches}
+So I didn't pay attention for the last week and now I'm paying for it, because I have to take extra notes to stay on track (and finish the homework). A side note: if we think of branches as sheets and the logarithm only being defined on simply connected domains, this is suprisingly similar to the theory of covering spaces in algebraic topology. Maybe I can find a way to connected a fundamental group to the codomain of the logarithm... or am I just spouting nonsense?
+\orbreak
+Motivation: solve equations of the form $e^{w}=z$, $z$ is nonzer0 (or else the earth collapses). Write this as $e^{u}e^{iv}=re^{i\Theta}$ where $w=u+iv$, $\Theta=\operatorname{Arg}\theta$. Since $r_1e^{i\theta_1}=r_2e^{i\theta_2}\iff r_1=r_2,\, \theta_1=\theta_2+2\pi n$ for some $n\in \Z$, we have \[
+    e^{u}e^{iv}=re^{i\Theta}\iff e^{u}=r \ \text{and}\ v=\Theta+2\pi n
+    \] for some $n\in \Z$. Now $e^{u}=r \implies u=\ln r$ in the traditional real valued sense. So $e^{w}=z$ if and only if \[
+    w=\ln r+i(\Theta+2\pi n)
+\] for some $n\in \Z$. If we write $\log z=\ln r+i(\Theta +2\pi n)$, then $e^{\log z}=z$ for $z\neq 0$.
+\begin{definition}[Multivalued logarithm]
+    We have $\log z$ for $z\in \C,\,z\neq 0$ defined by \[
+        \log z=\ln r + i(\Theta + 2\pi n),
+    \] where $n\in \Z$, $z=re^{i\Theta}$, $\Theta=\operatorname{Arg}\theta$.
+\end{definition}
+\begin{example}
+    Let $z=-1-\sqrt{3}i $, then $r=2$ and $\Theta=-\frac{2\pi}{3}$. So \[
+        \log(z)=\ln 2+i-\left( \frac{2\pi}{3}+2\pi n \right) =\ln 2+2\pi i\left( n-\frac{1}{3} \right) 
+    \] for $n\in \Z$.
+\end{example}
+Note that $\log(e^{z})=z$ does not necessarily hold. We can write $\log z= \ln|z| +i \operatorname{arg}z$, which implies \[
+    \log(e^{z})=\ln|e^{z}|+i \operatorname{arg}(e^{z})=\ln(e^{x})+i(y+2\pi n )=(x+iy)+2i\pi n,
+\] since $|e^{z}|=e^{x}$ and $\operatorname{arg}(e^{z})=y+2\pi n$ for some $n\in \Z$ (this can be seen by writing $\exp z$ as $e^{x}e^{iy}$). So \[
+\log(e^{z})=z+2\pi in
+\] for $n$ an integer. I'm sick of this. From now on, $n$ denotes an integer, that is, some $n\in \Z$. You can figure out when this abuse of quantifiers ends by context. We can define the principle value of $\log z$ at $n=0$ by \[
+\operatorname{Log}z=\ln r+i \Theta.
+\] Note that $\operatorname{Log}z$ is well-defined and single-valued when $z\neq 0$, furthermore, $\log z = \operatorname{Log}z+2\pi in$. If $z\in \R$, this is just the standard logarithm from calculus.
+\begin{example}
+    Here's a cool trick: we can define the logarithm of negative numbers now (something we couldn't do in calculus), since $\log (-1)=\ln 1+i(\pi +2\pi n)=i\pi(2n+1),\, \operatorname{Log}(-1)=i\pi$.
+\end{example}
+\subsection{Branches of the logarithm}
+If we restrict $\theta$ such that for some $\alpha \in \R$, $\alpha <\theta<\alpha +2\pi$, then $\log z=\ln r+i\theta$ with components $u(r,\theta)=\ln r$ and $v(r,\theta)=\theta$ is single-valued and cointuous in the stated domain (?). It's defined from the $x$-axis to the angle it makes with $\alpha $— note that it isn't defined on the ray $\theta=\alpha $, because some neighborhood of $z$ (on such ray) will contain points near $\alpha $ and $\alpha +2\pi$. Not only is this restricted logarithm continuous, but it's also analytic on its domain, because of CR. Then by the derivative of polar stuff, we have \[
+    \frac{d}{dz}\log z =e^{-i\theta}(u_r+iv_r)=e^{-i\theta}\left( \frac{1}{r}+i\theta \right) =\frac{1}{re^{i\theta}}.
+\] So $\frac{d}{dz}\log z=\frac{1}{z}$ when $|z|>0,\,\alpha <\operatorname{arg z}<\alpha +2\pi$. In particular, $\frac{d}{dz}\operatorname{Log}=\frac{1}{z}$ for $|z|>0,\,-\pi<\operatorname{Arg z}<\pi$.
 
+A \emph{branch} of a multivalued function $f$ is any single-valued function $F$ that's analytic in some domain $\Omega$, where for any $z\in \Omega$ we have $F(z)$ one of the values of $f$. Whoever wrote this textbook needs to stop overusing references, please. Note that for $\alpha \in \R$, $\log$ restricted to $\alpha $ is a branch of the general logarithm. We say $\operatorname{Log}z = \ln r+i\Theta$ for $r>0,\,-\pi<\Theta<\pi$ is the principal branch. A \emph{branch cut} is a portion a line or curve that is introduced in order to define a branch $F$ of a multivalued function $f$. Point on the branch cut are singular (have no well-defined nbd) and any point common to every branch cut of $f$ is a branch point. For example, the branch cut for the principal branch is the origin plus the ray $\Theta=\pi$, and the origin is a branch point for $\log$.
+
+\begin{example}
+    Take the principle branch $\operatorname{Log}z=\ln r+i\Theta$. Then $\operatorname{Log}(i^3)=\operatorname{Log}(-i)=\ln 1-i \frac{\pi}{2}=-i \frac{\pi}{2}$, but $3 \operatorname{Log}i=3\left( \ln 1+ i\frac{\pi}{2} \right) =i\frac{3\pi}{2}$. So $\operatorname{Log}(i^3)\neq 3\operatorname{Log}i$.    
+\end{example}
+
+\subsection{Logarithmic identities}
+These derivations aren't interesting IMO. If $z_1,z_2\in \C$, we have  
+\begin{equation}
+    \log(z_1z_2)=\log z_1+\log z_2,
+\end{equation}
+\begin{equation}
+    \log\left( \frac{z_1}{z_2} \right) =\log z_1-\log z_2.
+\end{equation}
+Let $z\in \C$. Then if you write $z=re^{i\theta}$, it can be seen that
+\begin{equation}
+    z^{n}=e^{n\log z}.
+\end{equation} Furthermore, for $z\neq 0$, $k\in \N$, we have 
+\begin{equation}
+    z^{\sfrac{1}{k}}=\exp\left( \frac{1}{k}\log z \right),
+\end{equation}
+\begin{equation}
+    \exp\left( \frac{1}{k}\log z \right) = \sqrt[\leftroot{0}k]{r} \exp \left[ i\left( \frac{\Theta}{k}+\frac{2\pi n}{k} \right)  \right] .
+\end{equation}
+\subsection{Complex exponents}
+\begin{definition}[Complex exponential function]
+For $z\neq 0$, $c\in \C$, we have the function $z^{c}$ defined as 
+\begin{equation}
+z^{c}=e^{c \log z}.
+\end{equation}
+\end{definition}
+ We already know this holds for $c=n$ or $c=\frac{1}{n}$. Usually powers of $z$ are multivalued.
+ \begin{example}
+     We have $i^{-2i}=\exp (-2i \log i)$, where $\log i = \ln 1 + i\left( \frac{\pi}{2}+2\pi n \right) =i\pi\left( 2n+\frac{1}{2} \right).$ Then $i^{-2i}=\exp[\pi(4n+1)]$. Note that every value of $i^{-2i}$ lies in $\R$.
+ \end{example}
+ Since $1 /e^{z}=e^{-z}$, then $\frac{1}{z^{c}}=\frac{1}{\exp(c \log z)}=\exp(-c \log z)=z^{-c}$. So $1 /i^{2i}=i^{-2i}$, and we have $\frac{1}{2i}=\exp[\pi(4n+1)]$. For $z=re^{i\theta}$ and $\alpha \in \R$, the branch $\log z$ of $\alpha $ is single-valued and analytic on its domain. Using that branch, it follows that $z^{c}=\exp(c\log z)$ is also single-valued and analytic on such domain. Then the derivtive of that branch of $z^{c}$ is given by \[
+     \frac{d}{dz}z^{c}=\frac{d}{dz}\exp(c \log z)=\frac{c}{z}\exp (c \log z)=c \frac{\exp(c \log z)}{\exp(\log z)}=c\exp[(c-1)\log z]=cz^{c-1},
+ \] for $|z|>0,\, \alpha<\operatorname{arg}z<\alpha +2\pi $. The principle value is what you think it is: $\operatorname{P.V.}z^{c}=e^{c \operatorname{Log}z}$, and so is the principal branch of $z^{c}$, when $|z|>0$, $-\pi<\operatorname{Arg}z<\pi$.
+ \begin{example}
+     The principal value of $(-i)^{i}$ is \[
+         \exp[i\operatorname{Log}(-i)]=\exp\left[ i\left( \ln 1-i \frac{\pi}{2} \right)  \right] =\exp \frac{\pi}{2},
+     \] that is, $\operatorname{P.V.}(-i)^{i}=\exp \frac{\pi}{2}$.
+ \end{example}
+ \begin{example}
+     The principle branch of $z^{\sfrac{2}{3}}$ can be written as \[
+         \exp\left( \frac{2}{3}\operatorname{Log}z \right) =\exp\left( \frac{2}{3}\ln r + \frac{2}{3}i\Theta \right) =\sqrt[\leftroot{0}3]{r^2} \exp\left( i \frac{2\Theta}{3} \right) .
+     \] So $\operatorname{P.V.}z^{\sfrac{2}{3}}=\sqrt[\leftroot{0}3]{r^2}\cos \frac{2\Theta}{3}+i\sqrt[\leftroot{0}3]{r^2} \sin \frac{2\Theta}{3}. $ 
+ \end{example}
+ \begin{example}
+     Let $z_1=1+i,\,z_2=1-i,\,z_3=-1-i$. Then $(z_1z_2)^{i}=2^i=e^{i \ln 2}$, and 
+     \begin{gather*}
+         z_1^{i}=e^{i\operatorname{Log}(1+i)}=e^{i(\ln\sqrt{2} +i\pi /4}=e^{-\pi /4}e^{i(\ln 2) /2},\\
+         z_2^i=e^{i\operatorname{Log}(1-i)}=e^{i(\ln\sqrt{2} -i\pi /4)}=e^{\pi /4}e^{i(\ln 2) /2}.
+     \end{gather*}
+     So $(z_1z_2)^i=z_1^{i}z_2^i$ as expected. But do some similar stuff with $(z_2z_3)^i=e^{-\pi}e^{i\ln2}$, $z_3^i=e^{3\pi /4}e^{i(\ln 2) /2}$, and we find that $z_2^iz_3^i=e^{2\pi}(z_2z_3)^i$.
+ \end{example}
+We have the exponential with base $c$ defined as \[
+c^{z}=e^{z\log c}
+\] for $c$ a nonzero constant in $\C$. When we specify a value for $\log c$, this function is entire, and \[
+\frac{d}{dz}c^{z}=\frac{d}{dz}e^{z\log c}=e^{z \log c}\log c=c^{z}\log c.
+\] 
+ 
+ 

@@ -13,6 +13,19 @@ We say $f$ attains a \emph{maximum} at the point $z_0\in \Omega$ if \[
     Same as the any one you'd find in a Real Analysis course.
 \end{proof}
 \subsection{Holomorphic functions}
-Let's talk about the good stuff.
+Let's talk about the good stuff. Let $\Omega \subseteq \C$ be open and $f \colon \Omega \to \C$. Then $f$ is \emph{holomorphic at the point} $z_0 \in \Omega$ if the quotient \[
+    \frac{f(z_0+h)-f(z_0)}{h}
+\] converges to a limit when $h\to 0$. Here $h\in \C$ and $h\neq 0$ with $z_0+h\in \Omega$, such that the quotient is well-defined. This limit is called the \emph{derivative of} $f$ and $z_0$, and is denoted by \[
+f'(z_0) = \lim_{h\to 0}\frac{f(z_0+h)-f(z_0)}{h}.
+\] Note that $h$ approaches $0$ from any direction. The function $f$ is said to be \emph{holomorphic on $\Omega$} if $f$ is holomorphic at every point of $\Omega$. If $C\subseteq \C$ is closed, then $f$ is \emph{holomorphic on $C$} if $f$ is holomorphic on some open set containing $C$. Finally, if $f$ is holomorphic on $\C$ then $f$ is said to be \emph{entire}. Sometimes the terms \emph{regular} or \emph{complex differentiable} are used in place of holomorphic, but holomorphic functions are much much nicer than real values differentiable functions. Furthermore, every holomorphic function is analytic (that is, it has a power series expansion near every point), and so we also use the term \emph{analytic} to refer to holomorphic functions. Once again, things are not as nice in Real Analysis, with infinitely differentiable real valued functions not having power series expansions.
+\begin{example}
+    We have any polynomial $p(z)=a_0+a_1z+\cdots+a_nz^n$ entire, and $f(z)=\frac{1}{z}$ holomorphic on the punctured plane $\C\setminus \{0\} $. However, $f(z)=\frac{\overline{z}}{z}$ is not entire, as $\frac{f(z_0+h)-f(z_0)}{h}=\frac{\overline{h}}{h}$, which has no limit as $h\to 0$.
+\end{example}
+If we write the definition of a holomorphic function as $f$ being holomorphic at $z_0\in \C$ iff there exists an $a\in \C$ such that\[
+    f(z_0+h)-f(z_0)-ah=h\psi(h),
+\] where $\psi$ is a function defined for all ``small'' $h$, and $\lim_{h\to 0}\psi(h)=0$, we can see that $f$ is holomorphic implies $f$ is continuous (clearly $a=f'(z_0)$). The basic stuff, distribution over addition, product rule, quotient rule, chain rule, yada yada all apply.
+\subsection{Complex-valued functions as mappings}
+OK, here's the difference between real and complex valued functions again. In terms of real variables, $f(z)=\overline{z}$ corresponds to $F \colon (x,y) \to (x,-y)$, which is differentiable in the real sense, its derivative at a point being the map corresponding to its Jacobian. In fact, $F$ is linear and is equal to its derivative at any point, and is therefore infinitely differentiable. So a complex valued function having a real derivative need not imply the complex valued function is holomorphic.
+
 
 

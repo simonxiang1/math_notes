@@ -1,0 +1,33 @@
+\section{October 6, 2020}
+
+\subsection{Parametrized curves}
+Let's talk about integration! Define $I=\int f(z) \, dz$ for \emph{parametrized curves} $\Gamma$, given by $w \colon [a,b] \to \C$. We say the set of points \[
+    \{w(t) \mid a\leq t \leq b\} 
+\] is the ``trace'' of the curve $w$, denoted $\operatorname{tr}w$\footnote{Wait, I'm not sure all of a sudden. If this notation is non-standard call me a fool, but this is how it works in linear algebra.}. 
+\begin{example}
+    Let $w(t)=e^{i2\pi t}$ for $t\in [0,\frac{1}{2}]$. Unfortunately, I'm not cool enough to live-\TeX{} figures in class, so try to use your imagination to see what this curve would look like (a semicircle). Also consider $w(t)=(1+i)t$ for $t\in [1,3]$. This one looks like a straight line.
+\end{example}
+\begin{example}
+    Consider $w(t)=e^{it}$ for $t\in [0,4\pi]$. What is $\operatorname{tr}w$? It's simply the unit circle.
+\end{example}
+Given a parametrized $\Gamma$ and a function $f(z)$ defined on at least $\operatorname{tr}\Gamma$, we define $\int_{\Gamma} f(z) \, dz$ by a limit of Riemann sums (inb4 not as powerful as integration by Lebesgue measure). I know we never defined what $t$ is, but in each interval $[t_j,t_{j+1}]$ pick some $\hat{t}_{j+i}$ and compute $f(\hat{t}_{1})[w(t_1)-w(t_0)]+f(\hat{t}_2)[w(t_2)-w(t_1)]+\cdots$. Using summation notation, we have the sum written as \[
+    \sum_{j=1}^{m} f(w(\hat{t}_j))[w(t_j)-w(t_{j-1})].
+\] 
+\begin{example}
+    Consider $w(t)=e^{i2\pi t}$ for $t\in [0,1]$, and $f(z)=z^3$. Choose $t_j=\frac{j}{m}$, so $t_0=0$ and $t_m=1$. Let $\hat{t}_j=t_j$.Consider the approximations of $\int_{\Gamma}z^3  \, dz$, given by 
+    \begin{align*}
+        &\sum_{j=1}^{m} f[w(t_j)][w(t_j)-w(t_{j-1})]=\\
+        &\sum_{j=1}^{m} f[e^{i2\pi t_j}][e^{i2\pi t_j}-e^{i2\pi t_{j-1}}]=\\
+        &\sum_{j=1}^{m} f[e^{i2\pi \frac{j}{m}}][e^{\frac{i2\pi j}{m}}-e^{\frac{i2\pi (j-1)}{m}}]=\\
+        &\sum_{j=1}^{m} f[e^{i2\pi \frac{j}{m}}][e^{\frac{i2\pi j}{m}}-e^{\frac{i2\pi (j-1)}{m}}]=\cdots\\
+    \end{align*}
+    Unfortunately I was too slow to finish the work. This simplifies to \[
+        \left( 1-e^{\frac{2\pi i}{m}} \right) \sum_{j=1}^{m} \left( e^{i \frac{8\pi }{m}} \right) ^{j}, 
+    \] which is a geometric series of the form $S=\sum_{j=K}^{L} a^{j}$ and are easy to compute. We have $aS=S-a^{K}+a^{L+1}$, so $(1-a)S=a^{K}-a^{L+1}\implies S=\frac{a^{K}-a^{L+1}}{1-a}$. This proof is pretty much the same as any one in a calculus course. For $S=\sum_{j=1}^{m} e^{\left( \frac{i_8\pi}{m} \right) ^j},$ we have 
+     \begin{gather}
+         S=\frac{e^{\frac{i8\pi}{m}}-\left( e^{i \frac{8\pi}{m}} \right) ^{m+1}}{1-e^{i \frac{8\pi}{m}}}    
+     \end{gather} I missed something else big, gotta get faster. So $\int _{\Gamma}z^3 \, dz=0$.
+\end{example}
+
+
+
