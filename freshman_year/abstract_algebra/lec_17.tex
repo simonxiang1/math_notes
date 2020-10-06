@@ -1,0 +1,51 @@
+\section{October 5, 2020}
+Last time: I missed a section on group extensions. I hope they're similar to field extensions, and splitting fields.
+\subsection{Composition series of groups}
+Preview: Jordan Holder theorem. 
+\begin{definition}[Composition series]
+   Let $G$ be a group. Then the \emph{composition series} of $G$ is a sequence of subgroups such that \[
+   G=G_0 \triangleright G_1 \triangleright G_2 \triangleright\cdots \triangleright G_r=1,
+   \] where $G_i /G_{i+1}$ is simple for all $i$. The $G_i /G_{i+1}$ are called \emph{composition factors} of $G$, and $r$ is the length of the composition series.
+\end{definition}
+Question: do we know the composition series exist? Are they unique? Some information about the composition series are their length ($r$) and their composition factors. The existence is obvious once you think about it: take $G_1$ a maximal normal subgroup, that is, $G_1$ is not contained in a normal subgroup $H \trianglelefteq G$ such that $H\neq G$. Then $G_2$ is a maximal normal subgroup of $G_1$, etc. The reason why we want $G_1$ maximal is so that the factor group $G_0 /G_1$ is simple. So we know that the composition series exists. What about uniqueness? That turns out to fail.
+\begin{example}
+    Take $S_4 \triangleright A_4 \triangleright \{1,(12)(34),(13)(24),(14)(23)\} $ (note that two transpositions have order $2$, so the last group is isomorphic to $\Z /2\Z\times \Z /2\Z$ since there are four elements of order 2). From here, you can find two distince composition series $\{1,(12)(34)\} \triangleright 1$ and $\{1,(13)(24)\} \triangleright 1$, showing that uniqueness of composition series does not hold.
+\end{example}
+
+\subsection{The Jordan-H\"older theorem}
+\begin{theorem}[Jordan-H\"{o}lder theorem]
+   Any two composition series of $G$ are \emph{equivalent}: that is, they have the same length and the same composition factors up to reordering.
+\end{theorem}
+\begin{proof}
+    We do this proof by induction. Recall the second isomorphism theorem, which says that if we have $A$ and $B$ are subgroups of a group $G$ such that one of them (say $B$) is normal in $G$, then $AB\leq G$, $B\trianglelefteq AB$, $A\cap B \trianglelefteq A$, and $AB /B \simeq A /A\cap B$.
+Say we have two composition series of $G$ such that 
+            \begin{figure}[H]
+                \centering
+                \begin{tikzcd}
+A_0=G \arrow[d, no head]         & B_0=G \arrow[d, no head]         \\
+A_1 \arrow[d, no head]           & B_1 \arrow[d, no head]           \\
+A_2 \arrow[d, "\vdots", phantom] & B_2 \arrow[d, "\vdots", phantom] \\
+A_r=1                            & B_s=1                           
+\end{tikzcd}
+            \end{figure}
+
+Assume $r\leq s$. Use induction on $\operatorname{min}(r,s)$. If $r=1$, then $G$ is simple implies $s=1$ (this is the base case). Now assume $r>1$: if $A_1=B_1$, then we can use the induction hypothesis on $A_1=B_1=G$. Now if $A_1\neq B_1$, then $A_1B_1=A_0$ or $B_0=G$ by the maximality of $A_1,$ since $A_1B_1\trianglelefteq G$. Define $C_2=A_1\cap B_1$, then we construct an intermediate series as follows:
+            \begin{figure}[H]
+                \centering
+                \begin{tikzcd}
+A_0=G \arrow[d, no head]                             &                                  & B_0=G                                                                   \\
+A_1 \arrow[d, "\vdots", phantom] \arrow[rd, no head] &                                  & B_1 \arrow[ld, no head] \arrow[d, "\vdots", phantom] \arrow[u, no head] \\
+A_r=1                                                & C_2 \arrow[d, no head]           & B_s=1                                                                   \\
+                                                     & C_3 \arrow[d, "\vdots", phantom] &                                                                         \\
+                                                     & C_t=1                            &                                                                        
+\end{tikzcd}
+            \end{figure}
+Note that $A_1 /C_2 \simeq A_1B_1 /B_1 \simeq B_0 /B_1$, $B_1 /C_2 \simeq A_0 /A_1$. Use the induction hypothesis to compare the branch of $A_1=C_1$ into $A_2$ and $C_2$, which implies $r=t$ and $A_i /A_{i+1}$ corresponds to $C_j /C_{j+1}$ up to reordering, for $i,j\geq 2$. $\langle visible \, confusion \rangle $: similarly, we can do the same thing with the branch $B_1$ into $C_2$ and $B_2$, all the way down to $C_r=1$ and $B_s=1$. Then by the induction hypothesis, $r=s$ and $C_j / C_{j+1}\simeq B_i /B_{i+1}$, where $\{j_i  \mid i=1\cdots r\} =\{1\cdots r\} $.
+\end{proof}
+
+For finite simple groups, this tells us nothing. Are we talking about the classification of finite simple groups now?? They have been classified up to isomorphism as $\Z /p\Z$ for $p$ a prime, $A_n$ for $n\geq 5$, group of Lie type $\operatorname{PSL}(n,q)$ (the quotient by diagonal matrices), and $26$ sporadic groups.
+
+\subsection{Solvable groups}
+From Dr.\ Ciperiani's point of view, these are the most beautiful groups. For $G$ finite, we have $G=G_0\triangleright G_1\triangleright\cdots\triangleright G_r=1$, $G_i /G_{i+1}$ simple. $G$ is \emph{solvable} if and only if $G_i/ G_{i+1}$ is cyclic, which implies they're isomorphic to cyclic groups of prime order, since they are simple. An equivalent definition is that $G$ has a subnormal series with abelian quotients, ie for $G=G_0\triangleright G_1\triangleright\cdots\triangleright G_r=1$, $G_i /G_{i+1}$ abelian. The other direction is really easy if we have the classification of finitely generated abelian groups.
+
+
