@@ -1,0 +1,39 @@
+\section{October 8, 2020}
+
+\subsection{More on integration}
+Last time: we were defining definite integrals on functions $f(z)$ on parametrized curves $\Gamma$, denoted by $\int _{\Gamma}f(z) \, dz$. He's talking about Riemann integration by adding squares, we learned this back in high school. The difference is that the $\Delta z_i$'s are occurring on a curve rather than an axis or interval. Wait, I missed something important. We have 
+\[
+    I= \int_{a}^{b} f[w(t)]w'(t) \, dt.
+    \] This is how we actually define $\int _{\Gamma}f(z) \, dz$. Since $f[w(t)]w'(t)=g_1(t)+ig_2(t)$, where the $g_i$ for $i\in \{1,2\} $ are real, we have $\int_{a}^{b} f[w(t)]w'(t) \, dt$ equal to \[
+\int_{a}^{b} g_1(t) \, dt+ i \int_{a}^{b} g_2(t) \, dt.
+\] Now it's just first year calculus.
+\begin{example}
+    For $\Gamma$, $z=w(t)=e^{i\pi t},\, 0\leq t\leq 1$ a semicircle, we have $f(z)=z^2$. Then \[
+        I=\int _{\Gamma}f(z) \, dz= \int_{a}^{b} f[w(t)]w'(t) \, dt=\int_{0}^{1} e^{2\pi it}i\pi e^{i\pi t} \, dt=i\pi \int_{0}^{1} e^{3\pi it} \, dt.
+    \] Recall that $\frac{d}{dz}e^{cz}=ce^{cz}$. So this result is just a special case of something we already know. We claim this integral is equal to $i\pi \frac{e^{3\pi it}}{3\pi i}\Big|^1_0$. Refer to earlier, then assume $g_1(t)=\frac{dG_1(t)}{dt},\,g_2(t)=\frac{dG_2(t)}{dt}$. Then \[
+    I=\big(G_1(b)-G_1(a)\big)+i\big(G_2(b)-G_2(a)\big)=[G_1(b)+iG_2(b)]-i[G_1(a)+iG_2(a)].
+\] If $g_1+ig_2=\frac{d}{dt}[G_1+iG_2]$, (not sure about the logical stuff I'm just writing words at this point), we have $I=(G_1+iG_2)b-(G_1+iG_2)a$. So the fundamental theorem ``generalizes''.  Going back to the claim, the integral is equal to $i\pi \frac{e^{3\pi i}-1}{3\pi i}=-\frac{2}{3}$.
+\end{example}
+\begin{example}
+    Let $\Gamma_1 \colon z=w(t)=e^{i\pi t},\, 0\leq t \leq \frac{1}{4}$, a cheesecake slice of the unit circle up to $e^{i \frac{\pi}{4}}$, with the function $f(z)=z^3$. So \[
+    I_1= \int_{0}^{\frac{1}{4}}e^{i 3\pi t}i\pi e^{i \pi t} \, dt=i\pi \int_{0}^{\frac{1}{4}} e^{i\pi 4t} \, dt=i\pi \frac{e^{i\pi 4t}}{4\pi i}\Big|^{\frac{1}{4}}_0=\frac{1}{4}[e^{i\pi}-1]=-\frac{1}{2}.
+    \] 
+\end{example}
+\begin{example}
+    More example spam. $\Gamma_2 \colon w(s)=e^{i\pi ^2},\,a\leq s\leq \frac{1}{2}$, where $f(z)=z^3$. Then $I_2= \int_{0}^{\frac{1}{2}}  e^{i3\pi s^2}2i\pi s e^{i\pi s^2}\, ds$. Why are we changing variables back to the previous example? Something about the invariance principle, I'll read more on this later. I'm barely paying attention, but I think what's happening is that depedence on the orientation of parametrization or the actual parametrization itself isn't that important, as it should: why would changing the direction screw up the entire integral? Well, it might somewhere else, but not here.
+\end{example}
+\subsection{Numerical methods for estimating integrals}
+Welcome to the section where those who only talk in abstract nonsense stop paying attention (aka, how is it even fathomable that the things you study might be \emph{applied} to a \textbf{real life} scenario?? Unacceptable!). I didn't intend to actually stop paying attention, but I spent too much time figuring out how to get rainbow colors and emoji in \LaTeX{} that I missed a big chunk of information. Conclusion: $|I|\leq ML$. We get an upper bound on the integral. A slightly more complicated upper bound is 
+\begin{align*}
+    \left| \sum_{j}^{} f(w(\hat{t}_j))w'(t)[t_j-t_{j-1}] \right| &\leq \sum_{}^{} \left| f(w(\hat{t}_j))w'(t)[t_j-t_{j-1}] \right|\\
+                                                                 &\leq \langle please \,give\, me\, some\, time \,to \,copy \,down\, the \,equations \rangle 
+\end{align*}
+What about $\Gamma_1,\Gamma_2, \Gamma_1\neq\Gamma_2$? Nah.
+\begin{example}[important]
+    Let $\Gamma \colon e^{it},\,0\leq t \leq 2 \pi$, where $f(z)=\frac{1}{z}$. We have \[
+    I=\int_{0}^{2\pi} e^{-it}ie^{it} \, dt=2\pi i.
+\] What we're doing is integrating over the full circle, where the function is bad on the origin but nice on the circle. What if we did it on the open circle $\widetilde{\Gamma}$ instead (homeomorphic to $0,1)$)? Then $\int _{\widetilde{\Gamma}} $ is approximately $2\pi i$.
+\end{example}
+
+
+
