@@ -55,7 +55,7 @@ Much better. Time for theorem spam.
 A nontrivial proper subgroup of a free group is free.    
 \end{theorem}
 \begin{proof}
-    Back ``to the literature''.
+    Back ``to the literature'', says Fraleigh. This can be proving with the theory of covering spaces in algebraic topology.
 \end{proof}
 \begin{example}
     Let $F[\{x,y\}]$ be the free group on $\{x,y\} $. Let \[
@@ -119,7 +119,56 @@ This example illustrates what we want: let $F[A]$ be a free group and we want a 
 Refer back to Example 2.1: $\{x,y\}$ is our set of generators and $xyx^{-1}y^{-1}$ is the only relator. The equation $xyx^{-1}y^{-1}=1$ or $xy=yx$ is a relation— this was an example of a finite presentation.
 
 \subsection{Free Abelian Groups (todo)}
-todo
+Finally, another missing part of group theory has come back to bite me at a crucial moment. Today we talk about free \emph{abelian} groups, needed to define chain groups in homology. Some notation stuff (since we're dealing with abelian groups): for an abelian group $G$, $0$ is the identity, $+$ is the operation, and
+\[
+\begin{drcases}
+    &na=\underset{n\,\text{times}}{\underbrace{a+\cdots+a}}\\
+    -\!\!\!\!\!\!\!\!\!\!\!&na=\underset{n\,\text{times}}{\underbrace{(-a)+\cdots+(-a)}}
+    %very janky solution to get rid of unintended whitespace
+\end{drcases}
+    \text{for}\ n \in \Z^+ \ \text{and} \ a\in G.
+\] We also have $0a=0$, where the LHS $0\in \Z$, and the RHS $0\in G$.
+\begin{note}
+    $\{(1,0),(0,1)\} $ is a generating set for $\Z\times \Z$, since $(n,m)=n(1,0)=m(0,1)$ for any $(n,m)\in \Z\times \Z$. Note that each element can be \emph{uniquely} expressed in such form, that is, $n,m$ are unique. Linear algebra much?
+\end{note}
+\begin{theorem}\label{fga}
+    Let $X\subseteq G$ for $G$ a nonzero abelian group. Then TFAE:
+    \begin{enumerate}
+        \item Every nonzero $a\in G$ can be expressed \emph{uniquely} (up to order of summands) in the form $a=n_1x_1+n_2x_2+\cdots+n_rx_r$ for $n_i\neq 0\in \Z$ and distinct $x_i\in X$.
+        \item $X$ generates $G$, and $n_1x_1+n_2x_2+\cdots+n_rx_r=0$ for $n_i\in \Z$ and distinct $x_i\in X \iff n_1=n_2=\cdots=n_r=0$.
+    \end{enumerate}
+\end{theorem}
+This is looking an awful lot like linear algebra. Inb4 $\Z$-modules?
+\begin{proof}
+    Suppose Condition 1 holds, then $G\neq \{0\} \implies X\neq \{0\}.$ To show $0\notin X$, if $x_i=0$ and $x_j=0$, then $x_j=x_i+x_j$ contradicting uniqueness of the expression of $x_j$. Condition 1 implies that $X$ generates $G$, and $n_1x_1+n_2x_2+\cdots+n_rx_r=0$ if $n_1=n_2=\cdots n_r=0$. Suppose $n_1x_2+n_2x_2+\cdots+n_rx_r=0$ for some $n_i\neq 0$: if we drop the zero terms and relabel, we can assume all $n_i\neq 0$. Basically, we've created something from nothing (which is equal to nothing), from which we can derive our contradiction. Then 
+   \[
+       x_1=x_1+(n_1x_1+x_2x_2+\cdots+n_rx_r)=(n_1+1)x_1+n_2x_2+\cdots n_rx_r,
+   \] two ways of writing some nonzero $x_1$, contradicting uniqueness. So every $n_i$ must equal zero, which implies Condition 2.
+
+   Let's go the other way around. Let $a\in G$, since $X$ generates $G$ we have $a=n_1x_1+n_2x_2+\cdots+n_rx_r$. Using the standard technique for proving uniqueness, assume another expression for $a $, that is, $a=n_1x_1+m_2x_2+\cdots+m_rx_r$. So \[
+       0=(n_1-m_1)x_1+(n_2-m_2)x_2+\cdots+(n_r-m_r)x_r,
+   \] and by Condition two, we have $n_i=m_i$ for $1\leq i \leq r$. We conclude the coefficients must be unique, finishing the proof.
+\end{proof}
+\begin{definition}[Free abelian group]
+    A \emph{free abelian} group is a group with a generating set $X$ that satistifies the conditions stated in \cref{fga}. We say $X$ is a \emph{basis} for the group.
+\end{definition}
+\begin{example}
+    The group $\Z\times \Z$ is free abelian with $\{(1,0),(0,1)\} $ a basis. We also have a basis for the free abelian group $\Z\times \Z\times \Z$ as $\{(1,0,0),(0,1,0),(0,0,1)\} $. So finite direct products of $\Z$ are free abelian groups. However, $\Z_n$ is not free abelian, for $nx=0$ for all $x\in \Z_n$, and since $n\neq 0$ this contradicts Condition 2 of being a free abelian group.
+\end{example}
+Suppose $G$ is free abelian with basis $X=\{x_1,x_2,\cdots,x_r\} $. If $a\in G$ and $a\neq 0$, then $a$ has a unique expression of the form \[
+    a=n_1x_1+n_2x_2+\cdots+n_rx_r\quad \text{for} \ n_i\in \Z.
+\] Something about free abelian groups not having to have all coefficients nonzer and infinite bases? Note that we use all of the generating set this time, so ig that's why some of the coefficients are allowed to be zero. Define \[
+\phi \colon G \to \overset{r \ \text{factors}}{\overbrace{\Z\times \Z\times \cdots \times \Z}}
+\] by $\phi(a)=(n_1,n_2,\cdots,n_r)$ and $\phi(0)=(0,0,\cdots,0)$. This leads us to our next theorem.
+\begin{theorem}
+    If $G$ is a nonzero free abelian group with rank\footnote{The \emph{rank} of $G$ free abelian is the number of elements in a basis for $G$ (since they all have the same number of elements) We'll show this soon.} $r$
+\end{theorem}
+
+
+
+
+
+
 \subsection{Semidirect products and Commutators(todo)}
 I had an existential crisis when Dr.\ Allcock said to simply observe that one group is a semidirect of another by such and such group. These notes will follow Dummit and Foote \S 5.
 \orbreak
