@@ -1,0 +1,63 @@
+\section{October 7, 2020}
+Last time: I missed something about solvable arbitrary groups. We have $G$ is solvable $\iff$ there exists a subnormal series of abelian quotients $\iff G^{(k)}=1$ for some $k$, where $G^{(0)}=G,\,G^{(k)}=[G^{(k-1)},G^{(k-1)}]$, the commutator subgroup of $G^{(k-1)}$. This is defined as $\{ghg^{-1}h^{-1} \mid g,h\in G^{(k-1)}\} $. 
+\begin{lemma}
+    If $N \triangleleft G$ and $G /N$ is abelian, then $N>[G,G]$.
+\end{lemma}
+\begin{proof}
+    ($\impliedby $) We have \[
+        G=G^{(0)}\triangleright G^{(1)}\triangleright \cdots\triangleright G^{(k)}=1,
+    \] $G^{(i)} / G^{(i+1)}$ abelian.
+
+    ($\implies $) We have $G=G_0\triangleright G_1\triangleright\cdots\triangleright G_r=1$, $G_i /G_{i+1}$ abelian for all $0\leq i < r$. By our lemma, $G_1 \supseteq G^{(1)}$, which implies $G_2 \supseteq G^{(2)}$, and continue on in this way.
+\end{proof}
+\subsection{Big theorems (Burnside, Feit-Thompson)}
+Do not quote the theorems... what? 
+\begin{theorem}[Burnside's theorem]
+   For $G$ a group, if $|G|=p^aq^b$ for $p,q$ primes, then $G$ is solvable. 
+\end{theorem}
+\begin{theorem}[Feit-Thompson theorem]
+    If $|G|$ is odd, then $G$ is solvable.
+\end{theorem}
+\begin{prop}
+    Let $G$ be a group and $H\leq G$. Then 
+    \begin{enumerate}
+        \item $G$ is solvable $\implies H$ is solvable.
+        \item For $H\trianglelefteq G$, if $G$ is solvable, then $G /H$ is solvable.
+        \item For $H\trianglelefteq G$, if $H$ and $G /H$ are solvable, then $G$ is solvable.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    ok
+\begin{enumerate}
+    \item $G^{(k)}=1$ for some $k$. $H\subseteq G \implies H^{(k)}\subseteq G^{(k)}=\{1\} \implies H^{(k)}=\{1\} \implies H$ is solvable.
+    \item $G^{(k)}=\{1\} \implies G^{k}$. $G \twoheadrightarrow G /H \implies G^{(k)}\twoheadrightarrow G/H^{(k)}$ \footnote{The notation $\twoheadrightarrow$ means the map is a surjection.}, together these imply that $G /H ^{(k)}=1$.
+    \item I only had time to make a fancy diagram.
+                    \begin{figure}[H]
+                \centering
+                \begin{tikzcd}
+G \arrow[r, "\varphi", two heads]             & \overline{G}=G/H \arrow[d, "\triangledown", phantom]          \\
+G_1                                           & \overline{G_1} \arrow[l, dotted] \arrow[d, "\vdots", phantom] \\
+                                              & \triangledown \arrow[d, "\vdots", phantom]                    \\
+H_0=H=G_r \arrow[d, "\triangledown", phantom] & \overline{G_r}=1 \arrow[l, dotted]                            \\
+H_1 \arrow[d, "\vdots", phantom]              &                                                               \\
+H_s=\{1_G\}                                   &                                                              
+\end{tikzcd}
+            \end{figure}
+\end{enumerate}    
+I'm not entirely sure what happened here either...
+\end{proof}
+\begin{prop}
+    $G$ is nilpotent implies that $G$ is solvable.
+\end{prop}
+\begin{example}
+    $S_3$ is solvable but not nilpotent. $S_3^1=A_3=S_3^k$ for all $k$.
+\end{example}
+\begin{example}
+    Any finite $p$-group is nilpotent. Key input: the center of such groups is nontrivial.
+\end{example}
+\begin{theorem}
+    For $G$ a finite group, $G$ is nilpotent if and only if all of its Sylow subgroups are normal. This implies that $G$ is a direct product of all its Sylow subgroups.
+\end{theorem}
+Outline of a proof: the key step is that if $G$ is nilpotent, then $G\not\leq G\implies N_G(H)\not\geq H$. Set $N:=N_G(P)$, where $P$ is a Sylow subgroup of $G$. Prove that $N_G(N)=N$, hence $N=G$.
+\subsection{Classification of finite abelian groups}
+Let $G$ be a finite abelian group. Then $|G|=\prod_{i=1}^{r} p_i^{e_i} $, where $p_i\neq p_j$ for all $i=j$. Let $P_i$ be the $p_i$-Sylow of $G$. $G$ is abelian implies that $P_i\trianglelefteq G$. $P_i\cap P_j=1$ since their orders are coprime for all $i\neq j$. $P_i\trianglelefteq G$ for all $i$, and $\prod_{}^{} |P_i|=|G| $. Together, these imply that $G\simeq P_1\times \cdots\times P_r$. Later, we'll analyze the abelian $p$-groups. Til next time.
