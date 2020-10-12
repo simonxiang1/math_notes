@@ -20,6 +20,31 @@
 \usepackage{adforn}
 \usepackage[charter]{mathdesign}
 
+%\newcommand*{\institution}[1]{\newcommand{\@institution}{#1}}
+%\newcommand*{\coursenum}[1]{\newcommand{\@coursenum}{#1}}
+%\newcommand*{\coursename}[1]{\newcommand{\@coursename}{#1}}
+%\newcommand*{\semester}[1]{\newcommand{\@semester}{#1}}
+%\newcommand*{\teacher}[1]{\newcommand{\@teacher}{#1}}
+%\renewcommand*{\email}[1]{\newcommand{\@email}{#1}}
+%\renewcommand{\@thanks}{\@empty}
+%\renewcommand{\thanks}[1]{\renewcommand{\@thanks}{#1}}
+%%
+%\let\@oldauthor\author
+%\newcommand*{\d@e}{\@empty}
+%\renewcommand*{\author}[1]{\renewcommand{\@author}{#1}}
+%\renewcommand*{\date}[1]{\renewcommand{\d@e}{#1}}
+%
+%\title{\@coursenum{} Notes: \MakeUppercase{\@coursename}}
+ %\@oldauthor{\@author\\\d@e}
+
+\usepackage{fancyhdr}
+\fancyhf{}
+ \fancyhead[RO,LE]{\small\thepage}
+ \fancyhead[LO]{\small\itshape\nouppercase{\leftmark}}
+ \fancyhead[RE]{\small\itshape \@coursenum{} (\@coursename) Lecture Notes}
+ \setlength{\headheight}{11.0pt}
+\pagestyle{fancy}
+
 %figures
 \usepackage{import}
 \usepackage{xifthen}
