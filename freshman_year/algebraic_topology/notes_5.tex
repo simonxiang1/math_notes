@@ -19,7 +19,7 @@ Imagine a circle with two antipodal points $x$ and $y$, with four arrows $a,b,c,
     \caption{The graph $X_1$, consisting of two vertices and four edges.}
     \label{x1}
 \end{figure}
-Usually loops are nonabelian, so suppose we abelianize the loops. That is, the loops $ab^{-1}$ and $b^{-1}a$ are ``the same circle'' (but with a different starting point), so we'll just say they're equal. Formally (not really), rechooisng the basepoint just permutes the letters cyclically, so by abelianizing we can cast off our silly worries about the basepoint. So we make the transition from loops (chosen basepoint) $\longrightarrow$ cycles (no chosen basepoint).
+Usually loops are nonabelian, so suppose we abelianize the loops. That is, the loops $ab^{-1}$ and $b^{-1}a$ are ``the same circle'' (but with a different starting point), so we'll just say they're equal. Formally (not really), rechoosing the basepoint just permutes the letters cyclically, so by abelianizing we can cast off our silly worries about the basepoint. So we make the transition from loops (chosen basepoint) $\longrightarrow$ cycles (no chosen basepoint).
 
 Now we abelian, and all the cool abelian groups use additive notation. So a cycle looks something like $a-b+c-d$ now, a linear combination of edges with integer coefficients. We'll call these linear combinations \textbf{chains} of edges. We can decompose these into cycles by several ways, eg $(a-c)+(b-d)=(a-d)+(b-c)$, so it's better just to say cycles are any LC of edges st at least one decomposition makes geometric sense. When is a chain a cycle? Cycles are distinguished by the fact that they enter and exit a vertex the same amount of times. So for an arbitrary chain $ka+lb+mc+nd$, it enters $y$ about $k+l+m+n$ times (one for each thing) and enters $x$ (or leaves it) $-k-l-m-n$ times. So if we want $ka+lb+mc+nd$ to be a cycle, we just need to require $k+l+m+n=0$.
 
@@ -63,7 +63,7 @@ The idea of a $\Delta $-complex is to generalize these constructions to $n$-dime
 \end{figure}
 For example, we have the standard $n$-simplex given by \[
     \Delta ^n =\{(t_0,\cdots,t_n )\in \R^{n+1} \mid \sum_{i}^{} t_i=1 \ \text{and} \ t_i \geq 0 \ \text{for all} \ i\},
-\] whose vertices are the unit vectors along the coordinate axes. Think of this as taking the unit vectors, and drawing a triangle from each of their endpoints. For homology, orientation of vertices is really important, so $n$-simplex really means $n$-simplex with an ordering on its vertices. Ordering the vertices will determine an orientation on its subscripts, as can be seen in \cref{simp}. This also determines a canonical linear homeomorphism from the standard $n$-simplex $\Delta ^n $ onto any other simplex $[v_0,\cdots,v_n]$ that preserves the order of the vertices, given by 
+\] whose vertices are the unit vectors along the coordinate axes. Think of this as taking the unit vectors, and drawing a triangle from each of their endpoints. This works because the difference vectors are LI. For homology, orientation of vertices is really important, so $n$-simplex really means $n$-simplex with an ordering on its vertices. Ordering the vertices will determine an orientation on its subscripts, as can be seen in \cref{simp}. This also determines a canonical linear homeomorphism from the standard $n$-simplex $\Delta ^n $ onto any other simplex $[v_0,\cdots,v_n]$ that preserves the order of the vertices, given by 
 \[
 (t_0,\cdots,t_n )\mapsto \sum_{i}^{} t_iv_i.
 \] We say the coefficients $t_i$ are the \textbf{barycentric coordinates} of the point $\sum_{i}^{} t_i v_i \in [v_0,\cdots,v_n ].$ Deleting a vertex of a $n$-simplex yields something that spans an $(n-1)$-simplex, called a \textbf{face} of $[v_0,\cdots,v_n ]$. We'll adopt the following convention:
@@ -73,6 +73,31 @@ That sounds reasonable enough. We say the union of all faces of $\Delta ^n $ is 
 A $\mathbf{\Delta }$\textbf{-complex} structure on a space $X$ is a collection of maps $\sigma_{\alpha } \colon \Delta ^n  \to X$, with $n$ depending on the index $\alpha $, such that:
 \begin{enumerate}
     \item The restriction $\sigma_{\alpha }|\mathring{\Delta }^n $ is onto, and each point of $X$ is in the image of exactly one restriction $\sigma_{\alpha }|\mathring{\Delta }^n $.
-    \item Each restriction of $\sigma_{\alpha }$ to a face of $\Delta ^n $ is one of the maps $\sigma_{\beta } \colon \Delta ^{n-1} \to X$. Here we are identifying the fact of $\Delta ^n $ with $\Delta ^{n-1}$ by the canonical linear order-preserving homeomorphism.
+    \item Each restriction of $\sigma_{\alpha }$ to a face of $\Delta ^n $ is one of the maps $\sigma_{\beta } \colon \Delta ^{n-1} \to X$. Here we are identifying the face of $\Delta ^n $ with $\Delta ^{n-1}$ by the canonical linear order-preserving homeomorphism.
     \item A set $A\subseteq X$ is open if and only if $\sigma_{\alpha }^{-1}(A)$ is open in $\Delta ^n $ for each $\sigma_{\alpha }$.
 \end{enumerate}
+A consequence of $(3)$ is that $X$ can be built as a quotient space of a collection of disjoint simplices $\Delta _{\alpha }^n $, one for each $\sigma_{\alpha } \colon \Delta ^n  \to X$, the quotient space obtained by idenfying each face of a $\Delta _{\alpha }^n $ with the $\Delta _{\beta }^{n-1}$ corresponding to the restriction $\sigma_{\beta }$ of $\sigma_{\alpha }$ to the face in question. You can think of this as basically cell complexes, attaching $0$-simplices (cells) to $1$-simplices and $2$-simplices, and so on. 
+
+In general, we can make $\Delta $-complexes from collections of disjoint simplices by identifying various subspaces spanned by subsets of the vertices, with identifications performed by the canonical order-preserving linear homeomorphisms. Note that if we think of a $\Delta $-complex $X$ as a quotient space of disjoint simplices, then $X$ must be Hausdorff. Each restriction $\left.\sigma_{\alpha }  \right| \mathring{\Delta }^n $ is a homeomorphism onto its image by condition $(3)$, which is an open simplex in $X$. Then these open simplices are the cells $e_{\alpha }^n $ of a CW complex structure on $X$ with the $\sigma_{\alpha }$'s as characteristic maps (we won't use this fact yet).
+
+\subsection{Simplicial homology}
+Goal: define simplicial homology groups of a $\Delta $-complex $X$. Let $\Delta _n (X)$ be the free abelian group with basis the open $n$-simplices $e_{\alpha }^n $ of $X$. Formally, we can write elements of $\Delta _n (X)$ as finite formal sums $\sum_{\alpha }^{} n_{\alpha }e_{\alpha }^n $ with coefficients $n_{\alpha }\in \Z$, called \textbf{n-chains.} We could also write $\sum_{\alpha }^{} n_{\alpha }\sigma_{\alpha }$, where $\sigma_{\alpha }\colon \Delta ^n  \to X$ is the characteristic map of $e_{\alpha }^n $, with image the closure of $e_{\alpha }^n $. Such a sum can be thought of as a finite collection, or `chain', of $n$-simplices in $X$.
+
+Take a look at $\partial [v_0,v_1]=[v_1]-[v_0]$, $\partial [v_0,v_1,v_2]=[v_1,v_2]-[v_0,v_2]+[v_0,v_1],$ and $\partial [v_0,v_1, v_2,v_3]=[v_1,v_2,v_3]-[v_0,v_2,v_3]+[v_0,v_1,v_3]-[v_0,v_1,v_2]$. Na\"ively, one might assume the boundary of an $n$-simplex to be the sum of the faces delete a point, denoted by $[v_0,\cdots ,\hat{v}_i ,\cdots ,v_n] $ where $v_i $ is the vertex to be deleted. However, note the signs to take orientations into account, it just happens that they work out based on the position of $v_i $. So we have \[
+    \partial [v_0,\cdots ,v_n ]=\sum_{i}^{} (-1)^i [v_0,\cdots ,\hat{v}_i ,\cdots v_n ].
+\] Keeping this in mind, let's define a \textbf{boundary homomorphism} $\partial _n \colon \Delta _n (X) \to \Delta _{n-1}(X)$ for $X$ a general $\Delta $-complex by specifying its values on basis elements: 
+\[
+    \partial _n (\sigma_{\alpha })=\sum_{i}^{} (-1)^i \left. \sigma_{\alpha }\right| [v_0,\cdots ,\hat{v}_i ,\cdots ,v_n ].
+\] 
+\begin{lemma}
+    The composition $\Delta _n (X) \overset{\partial _n }{\longrightarrow}\Delta _{n-1}(X)\overset{\partial _{n-1}}{\longrightarrow}\Delta _{n-2}(X)$ is zero.
+\end{lemma}
+\begin{proof}
+    Note that \[
+        \partial _{n-1}\partial _n (\sigma)=\sum_{j<i}^{} (-1)^i (-1)^{j}\left.\sigma\right|  [v_0,\cdots ,\hat{v}_j ,\cdots ,\hat{v}_i ,\cdots ,v_n ]+\sum_{j>i}^{} (-1)^i (-1)^{j-1}\left.\sigma\right|  [v_0,\cdots ,\hat{v}_i ,\cdots ,\hat{v}_{j},\cdots ,v_n ].
+    \] Then after switching $i$ and $j$ in the second term, it becomes the negative of the first.
+\end{proof}
+What we have here is a sequence of homomorphisms of abelian groups \[
+    \cdots \to C_{n+1}\overset{\partial _{n+1}}{\longrightarrow} C_n \overset{\partial _n }{\longrightarrow} C_{n-1}\to \cdots \to C_1\overset{\partial_1}{\longrightarrow}C_0\overset{\partial_0}{\longrightarrow}0 
+\] with $\partial _n \partial _{n+1}=0$ for all $n$. This is called a \textbf{chain complex}. Note that  we've extended the sequence to $0$, with $\partial_0=0 $. The equation $\partial _n \partial _{n+1}=0$ is equivalent to the inclusion $\operatorname{im}\partial _{n+1}\subseteq \ker \partial _n $, so we can define the $\mathbf{n}^{\text{\textbf{th}}}$ \textbf{homology group} of the chain complex as $H_n =\ker \partial_n  / \operatorname{im} \partial _{n+1}$. Elements of $\ker \partial _n $ are called \textbf{cycles} and elements of $\operatorname{im}\partial _{n+1}$ are called boundaries. Elements of $H_n $ are cosets of $\operatorname{im}\partial _{n+1}$, called \textbf{homology classes}. Two cycles representing the same homology class are said to be \textbf{homologous}, that is, their difference is a boundary. When $C_n=\Delta _n (X)$, the homology group $\ker \partial _n / \operatorname{im}\partial _{n+1} $ will be denoted by $H_n ^{\Delta }(X)$ and called the $\mathbf{n}^{\text{\textbf{th}}}$ \textbf{simplicial homology group} of $X$.
+
