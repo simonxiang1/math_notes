@@ -1,3 +1,101 @@
 \section{October 9, 2020}
 Unfortunately, I had homework for alg top due at 1:00, and couldn't make it today.
 \section{October 12, 2020}
+\subsection{Ring theory}
+New topic! We've officially finished group theory, and now we're talking about rings. We'll go a little slower since most undergrad courses spend a lot of time on groups but not so much on rings, however, we won't go as slow as an undergrad course.
+\begin{definition}[Ring]
+    A \textbf{ring}  is a set $R$ with two binary operations, denoted ``$+$'' and ``$\cdot $'' such that 
+    \begin{enumerate}
+        \item $\langle R,+ \rangle $ is an abelian group.
+        \item Multiplication is associative, that is, $(ab)c=a(bc)=abc$ for $a,b,c \in R$.
+        \item Distributive laws hold, that is,
+           \[
+           \begin{cases}
+               (a+b)c=ac+bc\\
+               a(b+c)=ab+ac.
+           \end{cases}
+           \]  
+    \end{enumerate}
+    A ring is \textbf{commutative} if multiplication is commutative, ie, $ab=ba$ for all $a,b\in R$. We always have an additive identity since $R$ is an abelian group, but not always a multiplicative identity. A ring is said to have multiplicative identity if there exists some $1_R\in R$ such that $1_R\cdot a=a\cdot 1_R=a$ for all $a\in R$, and we say $R$ is a \textbf{unital ring}. Notation: usually we denote $1_R$ with $1$.
+\end{definition}
+\begin{example}
+    Some basic examples of rings:
+    \begin{itemize}
+        \item $\langle \Z,+,\cdot  \rangle $ with the standard addition and multiplication is a commutative unital ring. 
+        \item For $n\in \N$ where $n\neq 1$, $\langle n\Z,+,\cdot  \rangle $ is also a commutative ring, but it has no unity.
+        \item $\langle \Q,+,\cdot  \rangle ,\,\R,\,\C,\,\Z /n\Z$ for $n\in \Z$ are all rings. We'll leave out the addition and multiplication symbols when it's clear by context what they are. In particular, all the rings above are commutative.
+        \item $\langle M_{n\times n}(\R),+,\cdot  \rangle $ is a non-commutative ring with identity.
+        \item The quaternions $\mathbb{H}=\{a+bi+cj+dk \mid i^2=j^2=k^2=-1,\,ij=-ji=k,\,jk=-kj=i\} $ form a ring for $a,b,c\in \R$ \footnote{We denote this with $\mathbb{H}$ because $\mathbb{H}$ is for ``Hamilton''.}. The addition is given by $(a_1+b_1i+c_1j+d_1k)+(a_2+b_2i+c_2j+d_2k)=(a_1+a_2)+(b_1+b_2)i+(c_1+c_2)j+(d_1+d_2)k$, and multiplication is defined similarly, that is, 
+            \begin{align*}
+                (a_1&+b_1i+c_1j+d_1k)\cdot (a_2+b_2i+c_2j+d_2k)\\
+                    &=a_1a_2+a_1b_2i+a_2c_2j+a_1d_2j\\
+                     &+b_1a_2i+b_1b_2i^2+b_1c_2ij+b_1d_2ik\\
+                     &+\cdots \\
+                     &+\cdots \\
+                     &=a_1a_2+a_1b_2i+a_1c_2j+a_1d_2k\\
+                     &+(-b_1b_2)+b_1a_2i-b_1d_2j+b_1c_2k\\
+                     &+\cdots\\
+                     &+\cdots\\
+            \end{align*}
+            Note that $\mathbb{H}$ is a unital with with $1=1_{\mathbb{H}}$, furthermore, every element of $\mathbb{H}$ as a multiplicative inverse, because \[
+                \cdot (a+bi+cj+dk)^{-1}=\frac{a-bi-cj-dk}{a^2+b^2+c^2+d^2}.
+            \] Hence $\mathbb{H}$ is a non-commutative division ring. 
+    \end{itemize}
+\end{example}
+\begin{definition}[Division ring]
+    A unital ring $R$ is called a \textbf{division ring} if for all $r\in R\setminus \{0\} $, there exists an $r^{-1}\in R$ such that $r\cdot r^{-1}=r^{-1}\cdot r=1_R$. Verify that it's unique in your free time.
+\end{definition}
+\begin{definition}[Zero divisors and units]
+    An element $a\in R\setminus \{0\} $ is called a \textbf{zero divisor} if there exists some $b\in R\setminus \{0\} $ such that $ab=0$ or $ba=0$. An element $a\in R$ is called a \textbf{unit} is there exists some $b\in R$ such that $ab=ba=1_R$. Verify that zero divisors can't be units and the other way around, unless we're dealing with the trivial field $\F=\{0\} $.
+\end{definition}
+\begin{prop}
+    If $R$ is a ring, then
+    \begin{enumerate}
+        \item $0\cdot a=a\cdot 0=0$ for all $a\in R$,
+        \item $(-a)b=a(-b)=-ab$,
+        \item $(-a)(-b)=ab$,
+        \item The multiplicative identity is unique, and $(-1)a=-a$ for all $a\in R$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    Somewhat basic.
+\end{proof}
+\begin{cor}
+    Let $R$ be a unital ring. If $R\neq \{0\} $ then $1_R\neq 0$.
+\end{cor}
+\begin{lemma}
+Let $R$ be a unital ring, and $R^{\times }:=$ the set of units of $R$. Then $\langle R^{\times } \rangle $ is a group.
+\end{lemma}
+Note that this doesn't hold if $R$ doesn't have unity, since there is no such thing as an empty group.
+\begin{example}
+    Let $R=\langle M_{n\times n}(\R),+,\cdot  \rangle $. Then \[
+        R^{\times }=\{A\in M_{n\times n}(\R)  \mid \det (A)\neq 0\} =\operatorname{GL}_n(\R).
+    \] 
+\end{example}
+\begin{lemma}[Left cancellation]\label{lc}
+    Let $R$ be a ring, $a,b,c\in R$, and $a$ not a zero divisor. Then $ab=ac$ implies that either $a=0$ or $b=c$.
+\end{lemma}
+\begin{proof}
+    $ab=ac \implies a(b-c)=0$ which implies either $a=0$ or $b-c=0$ since $a$ is not a zero divisor, and we are done.
+\end{proof}
+\begin{definition}[Integral domain]
+    A commutative ring with multiplicative identity $1\neq 0$ is called an \textbf{integral domain} if it has no zero divisors.
+\end{definition}
+\begin{definition}[Field]
+    A commutative unital ring $R$ such that $R\setminus \{0\} =R^{\times }$ is called a \textbf{field}.
+\end{definition}
+\begin{prop}
+    A finite integral domain is a field.
+\end{prop}
+\begin{proof}
+    Let $R$ be a finite integral domain. We want to show that every $a\in R\setminus \{0\} $ is a unit. Let $a\in R\setminus \{0\} $, then $R=\{0,a_1,\cdots ,a_n \} $, where $a_i \neq a_{j}$ for all $i\neq j$, and $a_i \neq 0$ for all $i$. We have $aR=\{0,aa_1,\cdots ,aa_n \} \subseteq R$, so $aR\subseteq R$. Equality holds if and only if the sets are in bijection, or $|aR|=|R|$. Now $|aR|\leq n$ if and only if $aa_i =0$ for some $i$ or $aa_i =aa_{j}$ for some $i\neq j$. The first condition is automatically ruled out by assumption, since $a$ cannot be a zero divisor. Similarly, $aa_i =aa_{j}$ where $a_i \neq a_j$ (since $i\neq j$) implies that $a=0$ or $a_i=a_j$ by \cref{lc}, both of which are false. Therefore $|aR|=n+1=|R|\implies aR=R$. $1\in R=aR$ implies that there exists some $i\in \{1,\cdots ,n\} $ such that $aa_i =1$. Hence $\R\setminus \{0\} =\R^{\times }$.
+\end{proof}
+Next time: we'll talk about subrings and stuff.
+
+
+
+
+
+
+
+
