@@ -1,0 +1,66 @@
+\section{October 13, 2020}
+\subsection{More on integration}
+Soon we'll get to Cauchy's theorem, the most important theorem in this course (integral on a closed curve is equal to zero). Thank goodness I read the other book, it covered in two pages what we cover in two weeks (sans calculations).
+\begin{theorem}
+   Suppose $f$ is continuous on a domain $D$. Then TFAE:
+   \begin{enumerate}
+       \item $f$ has a primitive $F$ on $D$.
+       \item $\int_{\Gamma }^{} f(z) \, dz$ along paths $\Gamma \subseteq D$ only depend on the endpoints of $\Gamma $.
+       \item $\oint_{\Gamma }^{0} f(z) \, dz=0$ for all $\Gamma$ a closed path.
+   \end{enumerate}
+\end{theorem}
+\begin{proof}
+    ($1\implies 2) $ Assume $f=\frac{df}{dz}$ in $D$. Then
+    \begin{align*}
+        \int_{\Gamma }^{} f \, dz&=\int_{a}^{b} f[(w(t)]w'(t) \, dt\\
+                                 &=\int_{a}^{b} \frac{dF}{dz}[w(t)]w'(t) \, dt\\
+                                 &=\int_{a}^{b} \frac{d}{dt}F[w(t)] \, dt\\
+                                 &=F[w(b)]-F[w(a)]
+    \end{align*} by the FTC, finishing the first implication.
+
+    ($2\implies 3)$ Assume $\Gamma $ is closed loop, choose a basepoint $\gamma$, then $\oint_{\Gamma }f(z)\,dz=F[w(\gamma)]-F[w(\gamma)]=0$. Wait, is my proof wrong? Dr.\ Radin is splitting the curve in two, then noting that they have opposite orientation, implying that the left and right derivatives will cancel.
+
+    ($3\implies 1$) Assume that $\oint_{\Gamma }f(z)\,dz=0$ for $\Gamma $ a closed path. Define $F(w)=\int_{\Gamma }^{} f(z) \, dz$ where $w$ is an endpoint of $\Gamma $. From here, it's not hard to show that $\frac{dF}{dz}=f$, finising the proof.
+\end{proof}
+RIP for Dr.\ Radin's internet, we lost a good one.
+
+\begin{example}
+    Let $\Gamma \colon w(t)=e^{it}$, where $-\frac{\pi}{2}\leq t \leq \frac{\pi}{2}$. Let $f(z)=z^4$. Then \[
+        I=\int_{\Gamma }^{} f(z) \, dz=\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}}e^{4it}ie^{it}  \, dt=i \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} e^{5it} \, dt= \left.i \frac{e^{5it}}{5i}  \right|_{-\frac{\pi}{2}}^{\frac{\pi}{2}}=\frac{1}{5[2i]}=\frac{2i}{5}.
+    \] Alternatively, use the theorem above.
+\end{example}
+\begin{example}
+    Let $D$ be the annulus and $\Gamma $ be a path in the annulus, then $\oint_{\Gamma }f(z)dz=0$.
+\end{example}
+\begin{example}
+    Let $w(t)=e^{it}$ for $0\leq t \leq 2\pi$, set $f(z)=\frac{1}{z}$. Now $f$ has an antiderivative, say $F=\operatorname{Log}(z)$, but $F$ is not defined on any $D$ containing $\Gamma $, so we can't directly apply the theorem. Trick: define $I_{\varepsilon }=\int_{\Gamma _{\varepsilon }}^{} \frac{1}{z} \, dz$, where $\Gamma _{\varepsilon }$ is the open interval $I\setminus B(z_0,\varepsilon )$ for some basepoint $z_0$, $\varepsilon >0$. Then this integral is equal to $\operatorname{Log}(-1+\varepsilon i)-\operatorname{Log}(-1-\varepsilon i)=\ln |-1+\varepsilon i|+i\operatorname{Arg}(-1+i\varepsilon ) - \ln|-1-\varepsilon i|-i \operatorname{Arg}(-1-i\varepsilon )$. After some estimates, the $\ln$'s reduce to approximately zero, and we get $\sim \pi i -(\sim -\pi i)\cong 2\pi i $.
+\end{example}
+\begin{definition}[Simple curve]
+    A parametrized path is simple if $w(t)\neq w(t')$ for $t\neq t'$. If $\Gamma $ is closed, we can make an exception for the endpoints $w(a)=w(b)$.
+\end{definition}
+\subsection{Cauchy's Theorem}
+Here we are.
+\begin{theorem}[Cauchy's Theorem]
+   If $f$ is analytic on $\Gamma ^{\circ }$ for $\Gamma $ a simple closed curve, then \[
+       \oint_{\Gamma }^{} f(z) \, dz=0. 
+   \] 
+\end{theorem}
+Basically, when we talk about interiors we mean the connected open bounded region made from a simple closed path, which exists by the Jordan curve theorem. This is really powerful, since we don't require the existence of an antiderivative, we just need $f$ to be analytic. The earlier theorem is quite elementary, but Cauchy's theorem is much more advanced. Once we prove this, it will follow that analytic functions $f$ have antiderivatives, and we can go on to say that $f$ has second, third, and so on derivatives. This is one of the first ``cool'' theorems of complex analysis in that it demonstrates how much nicer analytic functions are compared to real valued functions. No proof, unfortunately.
+
+We want to get some consequences from this theorem.
+\begin{definition}[Simply connected]
+    A domain $D$ is simply connected if every loop $\gamma$ is nullhomotopic, that is, the fundamental group $\pi_1(D)$ is trivial. How it's formulated in complex analysis: the interior of every loop is contained in the domain.
+\end{definition}
+\begin{cor}
+    If $f$ is analytic in a simply-connected domain $D$, then \[
+        \oint_{\Gamma }^{} f(z) \, dz=0
+    \] for any closed $\Gamma \subseteq D$.
+\end{cor}
+\begin{proof}
+    Since the interio(unfinished)
+\end{proof}
+\begin{cor}
+    If $f$ is analytic in a simply-connected domain, then $f$ has an antiderivative there.
+\end{cor}
+
+
