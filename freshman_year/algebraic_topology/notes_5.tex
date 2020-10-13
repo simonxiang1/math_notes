@@ -95,8 +95,13 @@ Take a look at $\partial [v_0,v_1]=[v_1]-[v_0]$, $\partial [v_0,v_1,v_2]=[v_1,v_
 \begin{proof}
     Note that \[
         \partial _{n-1}\partial _n (\sigma)=\sum_{j<i}^{} (-1)^i (-1)^{j}\left.\sigma\right|  [v_0,\cdots ,\hat{v}_j ,\cdots ,\hat{v}_i ,\cdots ,v_n ]+\sum_{j>i}^{} (-1)^i (-1)^{j-1}\left.\sigma\right|  [v_0,\cdots ,\hat{v}_i ,\cdots ,\hat{v}_{j},\cdots ,v_n ].
-    \] Then after switching $i$ and $j$ in the second term, it becomes the negative of the first.
+            \] Then after switching $i$ and $j$ in the second term, it becomes the negative of the first. Alternate proof from Dr.\ Allcock: note that $\partial \sigma:= \sum_{i=0}^{n} (-1)^i \sigma \circ[v_0,\cdots ,\hat{v}_i ,\cdots ,v_n ]$. Then \[
+            \partial \partial \sigma = \sum_{i=0}^{n} (-1)^i \partial \left( \sigma\circ[v_0,\cdots ,\hat{v}_i ,\cdots ,v_n ] \right) ,
+        \] which distributes because $C_{n-1}$ is free on $\{\text{singular}\ (n-1)\text{-simplex}\} $. So defining any function $\{\text{singular}\ (n-1)\text{-simplex}\} \to C _{n-2}$ extends to a $\Z$-linear map $C_{n-1}\to C_{n-2}$. Then \[
+        \partial \partial \sigma = \sum_{i=0}^{n} (-1)^i \left( \sum_{j=0}^{i-1} \sigma \circ [v_0,\cdots ,\hat{v}_j,\cdots ,\hat{v}_i ,\cdots ,v_n ](-1)^{j}+\sum_{j=i+1}^{n} \sigma \circ [v_0,\cdots ,\hat{v}_i ,\cdots ,\hat{v}_j,\cdots ,v_n ](-1)^{j-1} \right) ,
+        \] which is equal to zero by cancellation\footnote{The proof from Dr.\ Allcock was for singular homology, but the idea is the same.}.
 \end{proof}
+
 What we have here is a sequence of homomorphisms of abelian groups \[
     \cdots \to C_{n+1}\overset{\partial _{n+1}}{\longrightarrow} C_n \overset{\partial _n }{\longrightarrow} C_{n-1}\to \cdots \to C_1\overset{\partial_1}{\longrightarrow}C_0\overset{\partial_0}{\longrightarrow}0 
 \] with $\partial _n \partial _{n+1}=0$ for all $n$. This is called a \textbf{chain complex}. Note that  we've extended the sequence to $0$, with $\partial_0=0 $. The equation $\partial _n \partial _{n+1}=0$ is equivalent to the inclusion $\operatorname{im}\partial _{n+1}\subseteq \ker \partial _n $, so we can define the $\mathbf{n}^{\text{\textbf{th}}}$ \textbf{homology group} of the chain complex as $H_n =\ker \partial_n  / \operatorname{im} \partial _{n+1}$. Elements of $\ker \partial _n $ are called \textbf{cycles} and elements of $\operatorname{im}\partial _{n+1}$ are called boundaries. Elements of $H_n $ are cosets of $\operatorname{im}\partial _{n+1}$, called \textbf{homology classes}. Two cycles representing the same homology class are said to be \textbf{homologous}, that is, their difference is a boundary. When $C_n=\Delta _n (X)$, the homology group $\ker \partial _n / \operatorname{im}\partial _{n+1} $ will be denoted by $H_n ^{\Delta }(X)$ and called the $\mathbf{n}^{\text{\textbf{th}}}$ \textbf{simplicial homology group} of $X$.
