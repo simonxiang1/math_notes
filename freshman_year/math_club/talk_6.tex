@@ -1,0 +1,60 @@
+\section{Solving the word problem with geometry(10/13/20)}
+Today's speaker is Teddy Weisman, a 5\textsuperscript{th} year Ph.D student. We'll be talking about regular expression in computer science and their connection to geometry (connecting math and linux!) JK, I was baited :((( I really like regular expressions this is sad
+
+Favorite thing to do in math: see a weird abstract problem, look at it hard enough, it turns into geometry.
+\orbreak
+Here's a simple puzzle, take an alphabet, write a word (finite seq of letters), basically group presentations. We have the free group on four letters with relations $\langle a,b,c,d \mid [a,b],[a,c],[b,d] \rangle $: wait, you can replace the commutators $[a,c]$ and $[b,d]$ with the empty word $\{\} $, but not $[a,b]$. Goal: is every word trivial? 
+\begin{example}
+    $abcd\to bacd\to bd\to \{\} $, so that's trivial. $bac bd\to bbd \to b$, non trivial.
+\end{example}
+\begin{definition}[]
+    Two words are \textbf{equivalent} if you can get from one to the other with finitely many replacements.
+\end{definition}
+\subsection{The word problem}
+\textbf{Question:} Can you write an algorithm that determines if any word is equivalent to the empty word? 
+
+Answer: Yes, there is one. Rewrite our generating set as $a,b,a^{-1},b^{-1},\,ab=ba,\,aa^{-1}=a^{-1}a=\{\} ,\,bb^{-1}=b^{-1}b=\{\} $. This turns into algebra, take for example the word $aba^{-1}bbb^{-1}aa^{-1}ba$, we can switch around and simplify stuff. Furthermore, $ab^{-1}=b^{-1}a$ and $a^{-1}b=ba^{-1}$. How do we check if it's the empty word? Count the number of $a$'s, subtract the number of $a^{-1}$'s, for example the word from earlier is now $b^3a$ which is nontrivial.
+\orbreak
+\begin{definition}[]
+    A \textbf{string rewriting system} $S$ is a pair $S=(A,R)$, where $A$ is a finite set of letters and $R$ is a finite set of pairs of words in $A$. If each letter $a\in A$ has an inverse $a^{-1}\in A$, with a replacement rule $a^{-1}a=aa^{-1}=\{\} $, then $S$ is a group presentation.
+\end{definition}
+\textbf{Question:} Can you find an algorithm with takes as input a string writing system $S$ and a word in an alphabet for $S$, which determines if the word is equivalent to $1$ (trivial)? (I think the answer is no...)
+
+The answer is no! I got it right yay. Computers are not capable of doing this. No wonder the group presentations from van Kampens are so nasty. This is equivalent to the halting problem.
+
+    You can na\"ively try a \emph{brute force algorithm} :
+\begin{itemize}
+    \item Set $n=1$.
+    \item Apply all possible sequences of $n$ subsitutions to the original word.
+    \item If any are the empty word, we're done.
+    \item Otherwise, increment $n$ and try again.
+\end{itemize}
+However, if a word is nontrivial, this algorithm doesn't halt. It would work if: we know the max number (finite) of subsitutions we need to try, just try everything. The catch is we need to know this number, which we don't always know. 
+
+\subsection{Applying geometry}
+Let's go back to the original string rewriting system, with $A=\{a,a^{-1},b,b^{-1}\} $ and $R=\{[a,b],aa^{-1},a^{-1}a,bb^{-1},b^{-1}b\} $. Mapping works to $(x,y)$ pairs: consider \[
+    \{\text{words in} \ A\} \longrightarrow \{(x,y) \ \text{pairs}\} ,
+\] where $w \mapsto (x,y)$, $x=$ number of $a$'s minus number of $a^{-1}$'s, and $y=$ number of $b$'s minus the number of $b^{-1}$'s. There's a nice correspondence between equivalence classes of words to $(x,y)$ pairs. Equivalent words map to some $(x,y)$ pair, and inequivalent words map to different $(x,y)$ pairs. Unfortunately, now he's gonna draw a picture which I don't have the skills to do in real time yet. Think of the $(x,y)$ pairs as a grid, and draw some lines. Let $(0,0)=1,\,(0,1)=a,\,(1,0)=b,(1,1)=ab,(-1,0)=a^{-1},(-1,1)=a^{-1}b$ and so on. In this graph, the vertex set $V \mapsto \{\text{equivalence classes of words}\} $, and the edge set $E \mapsto \{\text{words}\} $. For example, for a word $aabba^{-1}a^{-1}b^{-1}$, draw a path starting at $a$ and you'll end up at $b$ (are these Cayley graphs??) Loops are special paths that correspond to trivial words. 
+
+We can think about operations geometrically: cancelling an inverse means getting rid of backtracking. Another operation is given by the commutator relation: it turns out this is the same thing as adding or deleting loops at a point on the path. For example, for a word $aab^{-1}b^{-1}a^{-1}a^{-1}bb$, which is a loop. Apply the commutator relation, then this word maps to $aab^{-1}b^{-1}a^{-1}[aba^{-1}b^{-1}]a^{-1}bb$, this adds a unit loop at $(1,-2)$. However, we can cancel inverses, and then examining the interior it looks like we deleted the aformentioned loop. 
+
+Idea: adding a substitution to a word changes the area enclosed by at most $1$. Good thing is, if our loop encloses an area $V$, then we need to apply at most $V$ substitutions to make it trivial. This is what we wanted for the brute force algorithm to work, the largest number of substitutions we can make.
+\textbf{Question:} How much area can a loop of length $L$ in $\R^2$ enclose? This problem is called \emph{Dido's problem}, in which she was told to enclose the land she was to receive with a finite string (she somehow managed to get all of Carthage?) We have $A=\frac{L^2}{4\pi}$ for an arc of length $L$ (not entirely sure). Given a word of length $L$:
+\begin{itemize}
+    \item Apply a substitution of the form $aba^{-1}b^{-1}=1$,
+    \item Get ride of backtracking,
+    \item Check if the word is $1$,
+    \item Keep going until we've applied $L^2$ subsitutions,
+    \item If the word isn't $1$, start over with a different sequence.
+\end{itemize}
+The idea is, there's only a finite amount of words with length $L^2$, so this algorithm will work.
+
+\subsection{Cayley graphs}
+Here we are: Given a group presentation $(A,R)$, where the vertices are just the equivalence classes of words in $A$. $v_1\sim v_2$ if a word representing $v_2$ is $w_1a$, where $w_1$ represents $v_1$ and $a\in A$. Basically, edges on the Cayley graph represent words and points are equivalence classes. We can also look at the Cayley graph of $F_2=\Z*\Z$, the free group on two letters. Regular graph: every vertex has the same degree, in this case every vertex can serve as the basepoint of the graph. Basically, $F_2$ is the universal cover of $S^{1} \vee S^{1} $. 
+
+\begin{example}
+    Complicated example: $A=\{a,b,c,d,e\} ,$ $R=\{aa=bb=cc=dd=ee\} $ plus a lot of other relations. Then this is a tiling with five things of $90^{\circ}$, doesn't work in Euclidian space but it works in non-Euclidian space. How does this help with solving the word problem? Look at loops in hyperbolic space.
+
+    Question: How much area can we enclose with a loop of length $L$ is the hyperbolic plane? This time, of length $L$, Area $\leq 3L+20$, need a long string to enclose less area. So this is a linear isometric inequality\footnote{I don't think I got the long words right...}. This solves the word problem! Go through $3L+20$ relations, if we aren't dont, it's not the identity. 
+\end{example}
+
