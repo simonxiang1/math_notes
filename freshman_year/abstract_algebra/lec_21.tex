@@ -1,0 +1,60 @@
+\section{October 14, 2020}
+I was a little bit late to class today, but let's talk about subrings.
+\subsection{Subrings}
+\begin{definition}[Subring]
+    Let $R$ be a ring. Then a subset $R'\subseteq R$ is a \textbf{subring} if 
+    \begin{enumerate}
+        \item $\langle R',+ \rangle $ is a subgroup of $\langle R,+ \rangle $,
+        \item $R'$ is closed under multiplication.
+    \end{enumerate}
+\end{definition}
+\begin{example}
+    We know $\langle \Z,+,\cdot  \rangle $ is a ring. Then $\langle n\Z,+,\cdot  \rangle $ is a subgroup of $\Z$, for $n\in \Z\setminus \{0\} $. 
+
+    More examples: let $X$ be a set, $R$ a ring. Let $F(X,R)$ be set of functions $f \colon X \to R$. Then $(f_1+f_2)(x):=f_1(x)+f_2(x)$ for all $x\in X$. That is, for all $f_1,f_2\in F(X,R)$, $f_1+f_2$ is a new function also in $F(X,R)$. Multiplication is defined similarly, for $f_1,f_2\in F(X,R)$, we have $(f_1f_2)(x)=f_1(x)f_2(x)\in F(X,R)$ for $x\in R$. Verify that $R$ a ring implies that $F(X,R)$ is also a ring. Additive identity: zero map, multiplicative identity: map that sends everything to $1$.
+    \begin{note}
+        IF $R'$ is a subring of $R$, then $F(X,R')$ is a subring of $F(X,R)$.
+    \end{note}
+\end{example}
+\begin{example}
+    Here are some examples from number theory: we know $\C=\R(i)$ for $i=\sqrt{-1} $. Then take the algebraic numbers $\overline{\Q}\subseteq \C$, where \[
+        \overline{\Q}=\{\alpha \in \C \mid \exists p(x) \in \Z[x] \ \text{s.t.} \ p(\alpha )=0\} .
+    \] Within the ring $\langle \C,+,\cdot  \rangle $, we have $\langle \overline{\Q},+,\cdot  \rangle $ a subring of $\C$. We can define the algebraic integers as the set $\{\alpha \in \C \mid \exists p(x) \ \text{monic} \ \in \Z[x] \ \text{s.t.} \ p(\alpha )=0\}$. In particular, algebriac integers are a subring of $\overline{\Q}$. Transcendental numbers, however, don't form a subring: $(-\pi)+(\pi+2)=2$ not transcendental.
+\end{example}
+\begin{example}
+    Some simpler examples: let $K=\Q[\sqrt{d} ]$\footnote{Recall the difference between a field adjoin an element (denoted with parentheses) and the field with ``division'' of elements (denoted with square brackets)!}, where $ d$ is a square-free integer. Then by definition we have \[
+        K=\{a_1+a_2\sqrt{d} +a_3(\sqrt{d} )^3+\cdots  \mid a_i \in \Q\} 
+    \] for a finite sequence of terms. Then this set is equal to $\{a_1+a_2\sqrt{d}  \mid a_i \in \Q\} $. Then $R=\Z[\sqrt{d} ]=\{a_1+a_2\sqrt{d}  \mid a_i \in \Z\} $ a subring of $\Q[\sqrt{d} ]=\Q(\sqrt{d} )$. Furthermore, $O_K\subseteq \R$ the set of algebraic integers that lie in $K$ is a subring of $K$, and the equality holds if  $d\equiv 2$ or $3 \pmod 4$. If $d \equiv 1\pmod 4$, then $O_K= \Z\left[ \frac{1+\sqrt{2} }{4} \right] \leftarrow$ (not sure if this last one is right).
+\end{example}
+\subsection{Polynomial rings}
+From now on rings will have identity, and will be denoted with just $R$.
+\begin{definition}[Polynomial ring]
+    Let $R$ be a ring. Then $R[x]$ is the set of polynomials with coefficients in $R$ and variable $x$. Note that $R[x]$ is a ring. Some properties of $R[x]$: it's commutative iff $R$ is (and vice versa). Note that $R\hookrightarrow $ constant polynomials $\subseteq R[x]$.
+\end{definition}
+\begin{prop}
+    If $R$ is an integral domain, then $R[x]$ is also an integral domain. Furthermore, the units of $R[x]$ are just the units of $R$, since $\deg(fg)=\deg  f + \deg g$ implies that $fg(x)=1_R \implies \deg f+\deg g=0$, which isn't possible in an integral domain. (wait, addition)?
+\end{prop}
+\orbreak
+\begin{definition}[Group rings]
+    Let $R$ be a commutative ring with identity, and $G$ a finite group $G=\{g_1,\cdots ,g_n \} $ (we define things this way for simplicity). Then \[
+    RG=\{\sum_{}^{} a_i g^i  \mid a_i \in \R\} .
+    \] Addition and multiplication are what you think they are:
+    \begin{gather*}
+        \left( \sum_{i=1}^{n} a_i g^i \right) +\left( \sum_{i=1}^{n} b_i g^i \right) := \sum_{i=1}^{n} (a_i +b_i )g_i \\
+        \left( \sum_{i=1}^{n} a_i g^i \right) \cdot \left( \sum_{j=1}^{n} b_jg_j \right) =\sum_{i,j=1}^{n} a_i j_j g_i g_j=\sum_{k=1}^{n} c_kg_k,
+    \end{gather*} where $c_j=\sum_{i,j=1}^{n} a_i b^j\in R$, $g_i g_j=g_k$. Note that $RG$ commutative implies that $G$ is abelian. Let's look at the zero divisors in $RG$: $(1-g)(1+g+\cdots +g^{n-1})=1-g^n =1-1=0$, so the set of zero divisors in $G$ is always nonempty\footnote{This wouldn't be true if every nontrivial element of $G$ had infinite order, so that's why we specified $G$ to be finite.} (given $G$ nontrivial). If $G$ is trivial then $RG=R$.
+\end{definition}
+
+\subsection{Ring homomorphisms}
+\begin{definition}[Ring homomorphism]
+    Let $R,S$ be rings. A map $\\varphi \colon R \to S$ is a ring homomorphism if 
+    \begin{enumerate}
+        \item $\varphi \colon \langle R,+ \rangle  \to \langle S,+ \rangle $ is a group homomorphism,
+        \item $\varphi (r_1r_2)=\varphi (r_1)\cdot \varphi (r_2)$.
+    \end{enumerate}
+    Note that $\varphi $ is a ring isomorphism if $\varphi $ is bijective.
+\end{definition}
+\begin{example}
+    Let $R$ be a ring, $X\neq \O$ a set. Let $a\in X$, define $\varphi_a \colon F(X,R) \to R$ by $f\mapsto f(a)$, then $\varphi_a$ is a ring homomorphism. $\varphi \colon \Z\to n\Z,\,x\mapsto nx$ is a ring homomorphisms iff $n=\pm 1$, $\varphi \colon \Z \to \Z /n\Z$, $\varphi (x):=x+n\Z$ is also a ring homomorphism.
+\end{example}
+
