@@ -1,0 +1,55 @@
+\section{October 15, 2020}
+Yay Dr.\ Radin fixed his internet
+\subsection{Cauchy's integral formula}
+Last time: see \cref{int} and \cref{ct}. Say we're working with domains that aren't simply connected, or multiply connected\footnote{A \textbf{multiply connected} set is a connected set that isn't simply connected.} domain, with loops $\Gamma_1,\,\Gamma_2  $ encircling the ``holes''. Say $f$ is analytic on the rest of the domain and continuous on $\Gamma\, ,\Gamma_1,\,\Gamma_2  $, where $\Gamma $ is the boundary of the domain.
+\begin{claim}
+    We claim that the sum \[
+        \int_{\Gamma }^{} f(z) \, dz + \int_{\Gamma_1 }^{} f(z) \, dz + \int_{\Gamma_2 }^{} f(z) \, dz=0.
+    \] To see this is true, just draw some loops to split the domain into two regions, and since $f$ is analytic on such regions we have the sum equal to zero (take care to note the orientations of the curves).
+\end{claim}
+This is cool because our result tells us about $\int_{\Gamma }^{} f(z) \, dz$ even though $f$ isn't differentiable everywhere in $\Gamma $.
+\orbreak
+\begin{theorem}[Cauchy's integral formula]\label{cif}
+   Let $f$ be analytic on a simple closed curve $\Gamma $ with positive orientation. Suppose $z_0\in \Gamma ^{\circ }$. Then \[
+       \frac{1}{2\pi i} \oint_{\Gamma }^{} \frac{f(z)}{z-z_0} \, dz=f(z_0).
+   \] 
+\end{theorem}
+This is called \textbf{Cauchy's integral formula}. Note to self: finish reading the section on power series so I can prove this. A disturbing trend in this course is presenting big, important theorems without proof.
+\begin{example}
+    Let $f(z)=k$ be a constant. We claim that \[
+        \int_{}^{} \frac{f(z)}{z-z_0} \, dz=k2\pi i.
+    \] To see this path in $\Gamma_1 $, $\int_{\Gamma }^{} \frac{k}{z-z_0} \, dz=\int_{\Gamma_1 }^{} \frac{k}{z-z_0} \, dz=k2\pi i$, by our earlier claim.
+\end{example}
+Now let's use this to get a formula for $f^{(m)}(z_0)$. Start with Cauchy's formula for $f(z)$ and $f(z+h)$, then \[
+    \frac{f(z+h)-f(z)}{h}=\frac{\frac{1}{2\pi i }\oint_{}^{} \left( \frac{f(w)}{w-(z+h)}-\frac{f(w)}{w-z} \right) \, dz 
+}{h}=\frac{1}{2\pi i} \oint_{\Gamma }^{} \frac{f(w)}{(w-z-h)(w-z)} \, dz.
+\] Consider 
+\begin{align*}
+    &\left| \frac{f(z+h)-f(z)}{h}-\frac{1}{2\pi i}\oint_{\Gamma }^{} \frac{f(w)}{(z-w)^2} \, dz \right| \\
+    =&\left| \frac{1}{2\pi i}\oint_{}^{} \left( \frac{f(w)}{(w-z-h)(w-z)} - \frac{f(w)}{(z-w)^2} \right)  \, dz\right| \\                                                                     =&\left| \frac{1}{2\pi i}\int \frac{f(w)h\cdot dz}{(w-z-h)(w-z)^2} \, d \right| \\
+    =&\frac{|h|}{2\pi}\left| \oint_{\Gamma }^{} \frac{f(w)}{(w-z-h)(w-z)^2} \, dz \right| \leq \operatorname{max}\left| \frac{f(w)}{(w-z-h)(w-z)^2} \right| \cdot \operatorname{length}(\Gamma ).
+\end{align*} This function doesn't blow up, so it goes to zero as $|h|\to 0$. So we've proven that \[
+\frac{1}{2\pi i}\oint \frac{f(w)}{(w-z)^2} \, dz = f^1(z).
+\] More generally, one can prove that \[
+\frac{m!}{2\pi i}\int \frac{f(w)}{(w-z)^{m+1}} \, dz=f^{(m)}(z)
+\] by induction. This prove that $f$ has derivatives of all orders (by explicitly stating them). 
+
+\subsection{Consequences of Cauchy's integral formula}
+Some consequences:
+\begin{cor}
+    If $f$ is analytic at $z$, then $f$ has derivatives of all orders at $z. $ 
+\end{cor}
+\begin{cor}
+    If $f$ is continuous on a domain $D$ and $\oint_{\Gamma }^{} f(z) \, dz=0$ for all closed $\Gamma \subseteq D$, then $f$ is analytic in $D$.
+\end{cor}
+\noindent Another consequence: suppose that $f$ is entire, and \[
+    f^{(m)}(z)= \frac{m!}{2\pi i}\oint \frac{f(z)}{(w-z)^{m+1}} \, dz
+\] where $\Gamma $ is the curve $w(t)=z+re^{it}$ for $0\leq t \leq 2\pi$. Then \[
+\left| f^{(m)}(z) \right| \leq \frac{m!}{2\pi}\cdot \frac{M_r}{r^{m+1}}\cdot 2\pi r \leq m! \frac{M_r}{r^m},
+\] where $M_r$ is a number such that $|f(z)|\leq M_r$ on the circle. This is called \textbf{Cauchy's inequality}. Reminder that $\left| \int_{\Gamma }^{} f(z) \, dz \right| \leq \operatorname{max}|g|\cdot missed \,sometihng \,here$. We apply this to $g(w)=\frac{f(w)}{(w-z)}^{m+1}$. 
+\begin{theorem}[Liouville's theorem]
+   The only bounded entire functions are constant. 
+\end{theorem}
+Wow, this is a lot of stuff.
+
+
