@@ -1,0 +1,69 @@
+\section{October 16, 2020}
+\subsection{sad times}
+Once again, I was busy with alg top homework ://
+\section{October 19, 2020}
+Last time: we talked about ideals.
+\subsection{Simple rings}
+\begin{definition}[Simple ring]
+    A ring $R$ is \textbf{simple} of $\{0\} $ and $R$ are the only ideals of $R$.
+\end{definition}
+\begin{remark}
+    If $R$ is a division ring, then $R$ must be simple. However, the converse doesn't necessarily hold, as we will see very soon.
+\end{remark}
+\begin{theorem}
+    Let $R$ be a division ring. Then the ring $M_n (R)$ is simple, where $M_n (R)$ is the set of $n\times n$ matrices with entries from $R$.
+\end{theorem}
+\begin{proof}
+    Let \[
+    E_{ij}=
+    \begin{bmatrix}
+        0 & 0 & 0& 0& 0\\
+        0 & \ddots & \vdots & \iddots & 0\\
+        0 & \cdots & 1 & \cdots & 0 \\
+        0 & \iddots & \vdots & \ddots & 0\\
+        0 & 0 & 0& 0& 0\\
+    \end{bmatrix},
+\] where the single $1$ is at the $i$'th and $j$'th positions. These matrices are called \textbf{elementary matrices}. Notice that $E_{ij}E_{kl}=S_{jk}E_{i\ell}$, where $S_{jk}=0$ if $j\neq k$ and $1$ if $j=k$. Let $I$ be an ideal of $M_n (R)$. Assume $I\neq 0$, which implies that there exists an $A\in I$ such that $A\neq 0$. Now $A=\sum_{}^{} a_{ij}E_{ij}$ where the $a_{ij}$ are entries of $A$. Now $A\neq 0$ if and only if $a_{ij}\neq 0$ for some pair $(i,j)$. Now \[
+I\ni E_{\ell i_0}A\,E_{j_0 k}=a_{i_0 j_0}E_{\ell k}
+\] by the theorem last week (I missed it). Since $R$ is a division ring, we can multiply by inverses to get $a^{-1}_{i_0j_0}a_{i_0j_0}E_{\ell k}\in I$. But wait, $a_{i_0j_0}^{-1}\notin$ the ideal! It still works, since we can see this as $a_{i_0j_0}^{-1}I_n \in M_n (R)$. This implies that $E_{\ell k}\in I$, for all $\ell,k\in \{1,\cdots ,n\} $. Then \[
+I_n =\sum_{\ell =1}^{n} E_{\ell \ell}\in I\implies I=M_n (R).
+\] concluding the proof.
+\end{proof}
+\begin{remark}
+    This shows that the condition for being simple is weaker than a division ring. Basically, are there zero divisors? If we take $E_{ij}\cdot E_{k\ell}$, this product is always equal to zero for all $i\neq k$, so these elementary matrices are zero divisors in $M_n (R)$. So $M_n (R) \setminus \{0\} $ aren't all units, therefore $M_n (R)$ is not a division ring.
+\end{remark}
+\subsection{Prime and maximal ideals}
+\begin{definition}[Maximal ideals]
+    Let $I$ be an ideal of a ring $R.$ Then $I$ is \textbf{maximal} if $I\neq R$ and $I$ is not included in any other proper ideal of $R$. That is, if $I\subseteq J$ where $I$ and $J$ are both ideals, then $I=J$ or $J=R$.
+\end{definition}
+\begin{prop}
+    Let $R$ be a unital ring. Then every proper ideal of $R$ is contained in a maximal ideal.
+\end{prop}
+General idea: take an ideal, if it's maximal, we're done, if not, it must be a subset of some other ideal. Keep going on and on: but what if the end isn't maximal? Then take the union: what if that isn't maximal? We need a lemma. 
+\begin{lemma}[Zorn's Lemma]\label{zorn}
+    Suppose that a poset\footnote{The reason why ideals are posets is because any two distinct ideals need not be comparable (that is, one doesn't have to be a sub-ideal of the other).} $P$ has the property that every chain (ie a totally ordered subset) has an upper bound. Then $P$ has a maximal element.
+\end{lemma}
+\begin{proof}
+Basically, work with the subset of ideals that form a chain: then this has to have a maximal element. Let $I$ be a proper ideal of a unital ring $R$. Define \[
+    P_I := \{J \ \text{an ideal of} \ R  \mid I\subseteq J\neq R\}.
+\] The proof proceeds by applying Zorn's lemma to $P_I$. We claim that every chain in $P_I$ has an upper bound. $I\subset J_1\subseteq J_2\subseteq \cdots \subseteq J_k\subseteq \cdots $ implies that $J=\bigcup_{k=1}^{\infty}J_k$ an ideal of $R$. To show that $J\in P_I$, note that this is equivalent to $I\subset J$ and $J\neq R$. The first condition is clear. Now $J\neq R \iff 1\in J$. If $1\in J$, then $1\in J_n $ for some $n$ which implies that $J_n =R$ which is false, since $J_n \subseteq P_I$. Now apply Zorn's lemma to $P_I$, which tells us that $P_I$ contains a maximal ideal, implying that $I$ is included in some maximal ideal, finishing the proof.
+\end{proof}
+\begin{prop}\label{max0f}
+    A commutative ring with identity is a field if and only if $\{0\} $ is a maximal ideal. 
+\end{prop}
+\begin{proof}
+    This isn't too surprising. Since $a\in R\setminus \{0\} $ implies that $aR\supsetneq \{0\} $ an ideal (which is nonzero since it contains $a\cdot 1_R=a$). Then this must be all of $R$, and $ab_{\alpha }=1_R$ for some $b_{\alpha }\in R$. $R$ is commutative implies that $b_{\alpha }a=1_R$, so $a$ is a unit. This finishes the nontrivial direction, the other direction is trivial and you should do it in your free time.
+\end{proof}
+\begin{cor}
+    Let $R$ be a commutative ring with unity, and $I$ an ideal of $R$. Then $R / I$ is a field if and only if $I$ is a maximal ideal.
+\end{cor}
+\begin{proof}
+    Apply \cref{max0f} to $R / I$, where the identity is $I$.
+\end{proof}
+\begin{cor}
+    Let $R$ be a field, and $\varphi \colon R \to S$ for $\varphi $ some non-zero ring homomorphism. Then $\varphi $ is injective.
+\end{cor}
+\begin{proof}
+    We know $\ker \varphi $ is an ideal of $R$ a field. Then by \cref{max0f}, $\ker \varphi =0$ or $R$ is, which isn't possible since $\varphi $ is nonzero.
+\end{proof}
+
