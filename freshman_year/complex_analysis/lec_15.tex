@@ -1,0 +1,41 @@
+\section{October 20, 2020}
+Reminder: we have an exam next week. Covers everything up until now, including stuff on the homework due today (still doing it whoops!). We might do new stuff, or we might review. Also, the homework due next week is due on Thursday, since we don't want it to interfere with studying for the exam.
+\subsection{The Fundamental Theorem of Algebra}
+Last time: we proved Liouville's theorem (\cref{liouville}), although I don't see a proof in my notes whoops. Let's talk about some applications (we're going to prove the Fundamental Theorem of Algebra, I can feel it!).
+\orbreak
+    Let $p(z)$ be a polynomial in $\C$ with real or complex coefficients, denoted by \[
+        p(z)=a_0+a_1z+a_2z^2+\cdots +a_mz^{m}
+    \] for $m\geq 1$, $a_m\neq 0$. Then this function is entire. 
+\begin{claim}
+    This polynomial has at least one root\footnote{So, apparently the proof of the fundamental theorem of algebra is left to the homework, RIP...}.
+\end{claim}
+\begin{proof}
+    Assume $p(z)\neq 0$ for all $z$. Consider $f(z)=\frac{1}{p(z)}$, which is also entire. We claim that there is some $M\in \R$ such that $|f(z)|\leq M$ for all $z$. It's easy to see that \[
+    |z_1+\cdots +z_i +\cdots +z_n | \geq |z_1|-\cdots|z_i |\cdots  -|z_n |
+    \]  by a simple application of the reverse triangle inequality, given $z_i \in \C$. So 
+\begin{gather}
+    |p(z)|\geq |a_mz^m|-|a_0|-|a_1z|-\cdots |a_{m-1}z^{m-1}| \implies \\
+    \frac{|p(z)|}{|z|^m}\geq |a_m|- \frac{|a_0|}{|z|^m}- \cdots - \frac{|a_{m-1}|}{|z|}.
+\end{gather}
+We can make each one smaller than $\frac{|a_m|}{|z|^m}$ or something like that, so $\frac{p(z)}{|z|^m}\geq |a_m|-\frac{|a_m|}{2}=\frac{|a_m|}{2}$. On the other hand, $|f(z)|=\frac{1}{|p(z)|}$ is continuous for $|z|\leq K$. So it has a maximum somewhere, say $M$, such that $|f(z)|\leq M$, $|z|\leq K$. This implies that $\left| \frac{1}{f(z)} \right| \geq M$ for $|z|\leq K$, but since $\left| \frac{1}{f(z)} \right| =|p(z)|$, and $|p(z)|\geq \frac{|a_m|}{2}|z|\geq \frac{|a_m|}{2}K^m$ for $|z|\geq K$, this is a contradiction. Don't ask how. When did we apply Liouiville's theorem? Oh right, it's coming up soon. Basically, all this work was to show that $|f(z)|$ is bounded (and entire), and therefore constant, and that's basically the proof.
+\end{proof} 
+The fundamental theorem of algebra is an application of a result from algebra (w0w) that states that $\C$ is an \textbf{algebraically closed field}, that is, every polynomial in $\C$ has a zero in $\C$. Since $\C$ is a field extension of $\R$, then every polynomial in $\R$ has solutions in $\C\supset \R$, which is our fundamental theorem. This shows that $\C$ is the \textbf{algebraic closure} of $\R$, and can be denoted $\R / \langle x^2+1 \rangle $.
+
+I also don't see why we need a contradiction for the proof above: we've shown that every polynomial with no roots is constant. The contrapositive is that every non-constant polynomial has a root. What else is there to see?
+
+\orbreak
+Suppose $f$ is analytic at $z_0$ and $|f(z)|\leq |f(z_0)|$ in some neighborhood of $z_0$. Consider $w(t)=z_0+\varepsilon e^{it}$ where $0\leq t \leq 2\pi$. I missed something, and don't feel like covering it. JK, it was actually a local version of Liouville's theorem, which was a consequence of Cauchy's integral theorem.
+
+OK, he said something about finding a better proof, I'm interested again.
+
+\begin{theorem}[Maximum modulus theorem]
+    If $f$ is analytic and non-constant in some domain, then $|f(z)|$ has no local maximum in such domain.
+\end{theorem}
+
+\subsection{Introduction to power series}
+
+OK, now we're finally gonna talk about power series. I've been waiting for this. Basically, we've been saying analytic functions, but we never knew that all along, analytic functions really just mean they have a convergent power series expansion around a nbd of such point. AHahahA
+
+We'll show that $f$ is analytic at $z_0$ if and only if \[
+    f(z)=\sum_{n\geq 0}^{} a_n (z-z_0)^n .
+\] 
