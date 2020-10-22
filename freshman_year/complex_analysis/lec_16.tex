@@ -1,0 +1,79 @@
+\section{October 22, 2020}
+Exam next tuesday, don't forget. Today, we'll review logarithms and branches, and after that, maybe cover some new material. Three problems, two on new material, one on old.
+\subsection{Review on logarithms and branches}
+Recall that \[
+    \log(z)=\ln|z|+i \operatorname{arg}(z).
+\] Here's how we define branches: choose a branch cut (the simplest way is to make a straight line), and choose some value for $\operatorname{arg}(z)$ for some $z_0\notin$ the branch cut: this defines a well-defined function \[
+\widetilde{\log}(z)=\ln|z|+i\, \widetilde {\operatorname{arg}}(z)
+\] It turns out this function is defined everywhere besides the branch, and the derivative of any branch is $\sfrac{1}{z}$. Now every logarithm with the same branch cut differs by a multiple of $2\pi$, so the constant difference will cancel. Question from me: why do two branches have the same derivative? It turns out because it extends uniquely by continuity, so the fixed $z_0$ will only vary by a constant.
+
+Question in class: why do we need branch cuts? Good question, the straight answer is that $\log$ wouldn't be well defined otherwise, because things will ``overlap''. Refer to the Riemann surface of a complex valued logarithm below:
+\begin{figure}[H]
+\centering
+        \includegraphics[width=0.5\linewidth]{hw_figures/log.jpg}
+        \caption{The Riemann surface of the complex logarithm.}
+\end{figure}
+Although I haven't really said what a Riemann surface is, you can see that it sort of represents the complex logarithm in $3$-d space. Note that it spirals up like a helix, so if you take a vertical line in the $z$-axis it'll hit the surface a (countable) number of times. So to get rid of this, take a random line outward (a branch), and start following the surface upward until you reach the line again but up one level. Then if you restrict the values of the logarithm to everything you just followed, this restricts the spiral to just one coil, starting and ending (not inclusive) at such branch (since at the branch, it'll be defined twice). This gives a well defined branch of the logarithm.
+
+That was my personal answer by the way, Dr.\ Radin said something different but to the same extent. Now we're talking about $\int_{\Gamma }^{} \widetilde{\log}z \, dz$. Say it's not defined at some number of points, is this a problem? Ohh, so $f$ has to be continuous on the curve. Of course this is true then. Basically, we want $\operatorname{tr}\Gamma $ to be a closed and bounded (and therefore compact) set, so any function on it will attain a min and a max.
+\orbreak
+\subsection{Basic notions of power series}
+Moving on: maybe at the end of this lecture, we'll have proven the equivalence of analycity and holomorphicity. Oh boy, let's have some fun with convergence of sequences and series (let's break out the epsilon's and delta's!).
+\begin{definition}[Sequence]
+    A \textbf{sequence} is an ordered set \[
+    \{z_1,z_2,\cdots \} ,
+    \] possibly with repeats. A sequence $\{z_j\} $ \textbf{converges} to $\widetilde z$ 
+    if for all $\varepsilon >0$ there exists some integer $N>0$ such that if $j\geq N$, we have \[
+    |z_j -\widetilde z|<\varepsilon .
+    \] In this case, we write $\{z_j \} \to \widetilde z$. A \textbf{Cauchy sequence} is a sequence such that for some positive integer $n$, for all $j,k\geq n$, we have \[
+    |z_j -z_k|<\varepsilon 
+\] for all $\varepsilon <0$ (I did this from memory from real analysis, it might be wrong).
+\end{definition}
+Some notes: Cauchy completeness has been discussed (equivalence of Cauchy sequences and convergent sequences in a complete metric space), limits of sequences are unique.
+\begin{definition}[Series]
+    A \textbf{series} is a sum $\sum_{j}^{} z_j $. A series $\sum_{j=j_0}^{\infty} z_j $ \textbf{converges} to some $s$ if the sequence of partial sums \[
+    \sum_{j_0}^{1} z_j ,\, \sum_{j_0}^{2} z_j ,\, \sum_{j_0}^{3} z_j , \cdots 
+    \] converges to $s$.
+\end{definition}
+\begin{theorem}
+    We have\[
+        \sum_{}^{\infty} z_j =s\iff
+    \begin{cases}
+       \sum_{}^{\infty} \operatorname{Re}z_j =\operatorname{Re}s\\
+       \sum_{}^{\infty} \operatorname{Im}z_j =\operatorname{Im}s
+    \end{cases}.
+    \] 
+\end{theorem}
+\begin{note}
+    In order that $\sum_{}^{\infty} a_m=s$, it must be the case that $a_m\to 0$. We can prove this by the Cauchy criterion. Obviously the converse doesn't hold.
+\end{note}
+\begin{definition}[Absolute convergence]
+    We say $\sum_{}^{\infty} a_m$ is absolutely convergent if $\sum_{}^{\infty} |a_m|$ is convergent. 
+\end{definition}
+There's a theorem that absolute convergence implies convergence, this should be clear. The converse doesn't hold! Take the alternating harmonic series $\sum_{}^{} \frac{(-1)^m}{m}$ is converges to $\ln 2$, but it doesn't converge conditionally (the standard harmonic series diverges). It's also not true that absolutely convergent series have to converge to real numbers, although I can see where this came from: something is absolutely convergent if the absolute value of the terms converge (clearly to a real number)— however, we're talking about what the original thing converges to, not the absolute value of it! It could be complex, for example, just plug $i$ behind everything for an easy counterexample.
+\begin{theorem}\label{ser}
+    If $f$ is analytic on some $B(z_0,R_0)$, then \[
+        f(z_0)+ \sum_{n=1}^{\infty} \frac{f^{(n)}(z_0)}{n!}(z-z_0)^{n}=f(z)
+    \] for such $z\in B(z_0,R_0).$
+\end{theorem}
+\begin{example}
+    We have \[
+        1+\sum_{n=1}^{\infty} z^n =\frac{1}{1-z}\quad \text{for} \ |z|<1,
+    \] since $\left. \left( \frac{1}{1-z} \right) ^{(n)} \right|_0=n! $. This is a computation that every first year calculus student has (or should have) done. We could also do this with geometric series, but here we just want to show that this follows from \cref{ser}.
+\end{example}
+
+Apparently this next theorem is the craziest in the course (I thought that Cauchy's theorem was already pretty crazy).
+\begin{theorem}[Laurent's Theorem]
+Suppose $f$ is analytic in an annulus $R_1<|z-z_0|<R_2,$ denoted by $A$. Then there exists a sequence of complex numbers $\{c_n \} $ such that for all $z\in A$, \[
+    \sum_{-\infty}^{\infty} c_n (z-z_0)^n =f(z),
+\] where $\sum_{-\infty}^{\infty} c_n (z-z_0)^n=\sum_{-\infty}^{-1} +c_0+\sum_{1}^{\infty} .$ Furthermore, \[
+C_n =\frac{1}{2\pi i}\oint_{\Gamma }^{} f(z)(z-z_0)^{-n-1} \, dz
+\] over any closed curve $\Gamma $ with positive orientation such that $\operatorname{tr}\Gamma \subseteq A$, $z_0<R_1$, and the loop $\Gamma $ around $z_0$ is nontrivial.
+\end{theorem}
+\begin{example}
+    Let $f(z)=\frac{1}{z}$, $z_0=0$, $R_1=1$, $R_2=3$. Take $c_{-1}=1$, $c_n =0$ for all other $n$. Then \[
+        \cdots +c_{-2}(z)^{-2}+c_{-1}(z)^{-1}+c_0+c_1(z)^{+1}+c_2(z)^{+2}+\cdots 
+    \] goes to $z_0$ for $c_0$ and $\frac{1}{z}$ for everything else.
+\end{example}
+
+
