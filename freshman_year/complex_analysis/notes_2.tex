@@ -58,8 +58,87 @@ Ah, so I was complaining about the jank-connectedness definition by polygonal pa
 \begin{proof}
     WLOG, let $D$ be a disk centered at the origin, $z\in D$ be a point. Consider a curve from $0$ to $z$ made by joining straight line segments, starting by joining $0$ to $\operatorname{Re}z$ then from $\operatorname{Re}z$ to $z$, with the orientation you'd expect. We'll denote this polygonal path by $\gamma_z$. Define the unique function $F(z)=\int_{\gamma_z}^{} f(w) \, dw$: we claim $F$ is holomorphic in $D$ and $F'(z)=f(z)$. Let $z,h\in \C$ and choose $h>0$ such that $z+h\in D$. Consider \[
         F(z+h)-F(z)=\int_{\gamma_{z+h}}^{} f(w) \, dw-\int_{\gamma_z}^{} f(w) \, dw.
-    \] 
+    \] Draw some lines and make a geometric argument that $F(z+h)-F(z)=\int_{\eta}^{} f(w) \, dw,$ where $\eta$ is the straight line segment from $z$ to $z+h$. Then since $f$ is continuous at $z$ we have $f(w)=f(z)+\psi(w)$, where $\psi(w)\to 0$ as $w\to z$. Therefore \[
+    F(z+h)-F(z)=\int_{\eta}^{} f(z) \, dw + \int_{\eta}^{} \psi(w) \, dw=f(z) \int_{\eta}^{}  \, dw + \int_{\eta}^{} \psi(w) \, dw.
+\] On one hand, $1$ has $w$ as a primitive, so the first integral is just $h$. On the other hand, we have the estimate \[
+\left| \int_{\eta}^{} \psi(w) \, dw \right| \leq \underset{w\in \eta}{\operatorname{sup}}|\psi(w)| |h|.
+\] Since the supremum goes to zero as $h\to 0$, we conclude that  \[
+\lim_{h\to 0}\frac{F(z+h)-F(z)}{h}=f(z).
+\] 
 \end{proof}
+Basically, every holomorphic function has a local primitive. It's crucial that this holds not only for arbitrary disks, but other sets as well.
+\begin{theorem}[Cauchy's theorem for a disc]
+If $f$ is holomorphic in a disk, then \[
+    \int_{\gamma}^{} f(z) \, dz=0
+\] for any closed curve $\gamma$ in that disc.
+\end{theorem}
+\begin{proof}
+    Since $f$ has a primitive, apply \cref{cor}.
+\end{proof}
+\begin{cor}
+    Suppose $f$ is holomorphic in an open set containing the circle $C$ and its interior. Then \[
+        \int_{C}^{} f(z) \, dz=0.
+    \] 
+\end{cor}
+\begin{proof}
+    Let $D$ be the disk with boundary circle $C$, then there exists a slightly larger disc  $D'$ containing $D$ such that $f$ is holomorphic on $D'$: apply Cauchy's theorem on $D'$ to conclude that $\int_{C}^{} f(z) \, dz=0$.
+\end{proof}
+Basically, \textbf{toy contours} are curves for which the notion of interior is clear. For a toy countour $\gamma$ we easily have \[
+    \int_{\gamma}^{} f(z) \, dz-0,
+\] if $f$ is holomorphic in an open set containing $\gamma$ and its interior. You might ask what about general curves? Maybe we'll talk about Jordan's theorem for pieceweise-smooth curves, which states that a simple closed piecewise-smooth curve has a well defined interior that is simply connected.
+\subsection{Evaluating some integrals}
+I was just thinking about the Fourier transform today! What a coincidence— also, this is the second book in a three part series, so I'm already expected to know what this is and what it means, yay.
+\begin{example}
+    If $\xi \in \R$, then \[
+    e^{-\pi \xi^2}=\int_{-\infty}^{\infty} e^{-\pi x^2}e^{-2\pi ix \xi} \, dx.
+    \] This shows that $e-\pi x^2$ is its own Fourier transform. If $\xi=0$, then this formula just becomes the Gaussian integral, which we know to be \[
+    \int_{-\infty}^{\infty} e^{-\pi x^2} \, dx=\sqrt{\frac{\pi}{\pi}} =1.
+\] Assume $\xi >0$, and consider $f(z)=e^{-\pi z^2}$ an entire function. Oh my gosh no I'm not finishing this proof.
+\end{example}
+\begin{example}
+    Another classical example is \[
+    \int_{0}^{\infty} \frac{1-\cos x}{x^2} \, dx=\frac{\pi}{2}.
+\] Consider $f(z)=(1-e^{iz}) / z^2$, and integrate over the indented semicircle in the upper half of the annulus in the positive plane, with $\gamma_{\varepsilon }^+$ and $\gamma_R^+$ denoting the semicircles of radii $\varepsilon $ and $R$ with negative and positive orientations, respectively (where $R>\varepsilon $). Then by Cauchy's theorem, we have \[
+\int_{-R}^{-\varepsilon } \frac{1-e^{ix}}{x^2} \, dx+ \int_{\gamma_{\varepsilon }^+}^{} \frac{1-e^{iz}}{z^2} \, dz+ \int_{\varepsilon }^{R} \frac{1-e^{ix}}{x^2} \, dx+ \int_{\gamma_R^+}^{} \frac{1-e^{iz}}{z^2} \, dz=0.
+\] Let $R\to \infty$, and note that \[
+\left| \frac{1-e^{iz}}{z^2} \right| \leq \frac{2}{|z|^2},
+\] so the integral over $\gamma_R^+$ goes to zero. Therefore \[
+\int_{|x|\geq \varepsilon }^{} \frac{1-e^{ix}}{x^2} \, dx=- \int_{\gamma_{\varepsilon }^+}^{} \frac{1-e^{iz}}{z^2} \, dz.
+\] Next, note that $f(z)=\frac{-iz}{z^2}+E(z)$, where $E(z)$ is bounded at $z\to 0$, while on $\gamma_{\varepsilon }^+$ we have $z=\varepsilon  e^{i\theta}$ and $dz=i\varepsilon  e^{i\theta}d\theta$. Therefore \[
+\int_{\gamma_{\varepsilon }^+}^{} \frac{1-e^{iz}}{z^2} \, dz\to \int_{\pi}^{0} (-ii) \, d\theta=-\pi \quad \text{as} \ \varepsilon \to 0.
+\] Taking real parts yields \[
+\int_{-\infty}^{\infty} \frac{1-\cos x}{x^2} \, dx=\pi.
+\] Since the integrand is even, we are done.
+\end{example}
+
+\subsection{Cauchy's integral formula (todo skipped some stuff)}
+This is nice because we can learn about the behavior of functions on big sets by looking at small sets.
+\begin{theorem}[Cauchy's integral formula]\label{cif}
+    Suppose $f$ is holomorphic in an open set that contains the closure of a disk $D$. If $C$ denotes the boundary circle of the disk with positive orientation, then \[
+        f(z)=\frac{1}{2\pi i}\int_{C}^{} \frac{f(\zeta)}{\zeta-z} \, d\zeta \quad \text{for any point} \ z\in D.
+    \] 
+\end{theorem}
+\begin{proof}
+    keyhole
+\end{proof}
+\begin{cor}
+    If $f$ is holomorphic in an open set $\Omega$, then $f$ has infinitely many complex derivatives in $\Omega$. Moreover, if $C\subseteq \Omega$ is a circle whose interior is also contained in $\Omega$, then \[
+        f^{(n)}(z)=\frac{n!}{2\pi i}\int_{C}^{}\frac{f(\zeta)}{(\zeta-z)^{n+1}}  \, d\zeta
+    \] for all $z\in C^{\circ }$.
+\end{cor}
+\begin{proof}
+    induction, base case is CIF
+\end{proof}
+There are hereby known as the \textbf{Cauchy integral formulas}.
+\begin{theorem}[Liouville's theorem]
+    If $f$ is entire and bounded, then $f$ is constant.
+\end{theorem}
+\begin{proof}
+    If suffices to prove that $f'=0$, since $\C$ is connected, then we can apply \cref{cor2}.
+\end{proof}
+
+
+
 
 
 
