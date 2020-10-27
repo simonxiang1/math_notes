@@ -1,0 +1,65 @@
+\section{Knot Groups and Bi-orderability (10/13/20)}
+Today's speaker is Jonathan Johnson, a 4\textsuperscript{th} year Ph.D student. Whoops, I came thirty minutes late into the talk. Good thing in Zoom, doors don't slam so the thing where everybody awkwardly stares at you for a sec doesn't happen.
+
+\orbreak
+I feel like we talked about group presentations last talk (the last time I was here, about geometry and group theory), hmm....
+\begin{example}
+    We have $\langle a,b \mid [a,b] \rangle \simeq \Z\oplus \Z$. Also, note that $\langle x_1,\cdots ,x_n  \rangle $ is the \textbf{free group} on $n$-letters\footnote{OK, I know this is not what you're supposed to call it. Just let me have my fun!} (of rank $n$).
+\end{example}
+
+\subsection{Bi-orderability}
+\begin{definition}[Bi-order]
+    A \textbf{bi-order} of a group is a total order of the groups elements which is invariant under both left and right multiplication. That is, for all $a,b,g\in G$, if $a<b$ then $ga<gb$, $ag<bg$. The term ``bi'' comes from the fact that it works with both left and right multplication (people spend a lot of time studying just right multiplication). 
+
+    A group is said to be \textbf{bi-orderable} if it admits a bi-order.
+\end{definition}
+\begin{example}
+    Our favorite groups $\Z,\Q,$ and $\R$ are BO (bi-orderable). Now consider $\Z /4$. If $\Z /4$ were to be BO, then $0<1<2<3<0$, a contradiction.
+\end{example}
+\begin{prop}
+    If a group has a non-trivial torsion element, then it isn't BO. By torsion element, we mean that for $g\in G$, $g$ is a \textbf{torsion element} if $g\neq 1$ and $g^{k}=1$ for some $k\in \Z^{+}$. In other words, $g$ has \emph{finite order}.
+\end{prop}
+As an example, take the group $G=\langle a,b \mid aba^{-1}=b^{-1} \rangle $. Assume $1<b\implies b^{-1}<1$. Then $1=a_1a^{-1}<aba^{-1}=b^{-1}$, a contradiction. So this group isn't bi-orderable either.
+\subsection{Knots}
+Let's talk about knots.
+\begin{definition}[Knot]
+    A \textbf{knot} is a (smooth) simple closed curve in $\R^3$. Two knots are equivalent if one can be \textbf{isotoped} to the other. A \textbf{knot diagram} is a projection of a knot of a knot onto a plane with no triple intersections and remembering crossing information. AAAAaaah Dehn presentations!!!
+\end{definition}
+\begin{example}
+    No pictures, sadly. We can talk about knots like the trefoil knot, the unknot ($S^{1} $), cool looking twist (pretzel knot), and the figure-eight knot.
+\end{example}
+Turns out given a knot $K$, we can get a group from it, called the \textbf{knot group} . AAAAAAAAAAAAAAAAA w\"irt\"inger presentations 
+
+Steps:
+\begin{enumerate}
+    \item Draw an oriented diagram of $K$.
+    \item Use a generator for each overstrand.
+    \item For each crossing, write a relator according to the rule below: Wirtinger I think...
+\end{enumerate}
+\begin{example}
+For example, $\pi(\mathsf{Tref} )\simeq \langle a,b,c \mid ab=bc,ca=ab,bc=ca \rangle $.
+\end{example}
+
+\noindent\textbf{Question:} When are knot groups bi-orderable?
+\noindent Answer: This turns out to be quite hard.
+
+Recall $\pi(\mathsf{Tref} )$, let's try to make this group a bit simpler. We can eliminate a generator by noting that $c=aba^{-1}$, so our new presentation is given by $\langle a,b \mid ab=baba^{-1},baba^{-1}=ab \rangle $. Both of these relations are saying that $aba=bab$, so our new nice presentation is finalized by \[
+    \pi(\mathsf{Tref} )=\langle a,b \mid aba=bab \rangle .
+\] So $a$ and $b$ don't commute, and $a\neq bab^{-1}$. Suppose $a<bab^{-1}$, and so $a=aaa^{-1}<abab^{-1}a^{-1}$ (we can arrange them weirdly cuz of bi-orderability). On the right side, stuff cancels out and we get $b$, so $a<b$. But then $b^{-1}<a^{-1}$, so 
+\begin{gather*}
+    ab^{-1}a^{-1}<aa^{-1}a^{-1}\\
+    ab^{-1}a^{-1}<a^{-1}\\
+    bab^{-1}a^{-1}b^{-1}<ba^{-1}b^{-1}.
+\end{gather*}
+Return to our old relation $aba=bab$, so $bab^{-1}a^{-1}b^{-1}=a^{-1}$. Some more relation magic happens, then $a^{-1}>bab^{-1}$, a contradiction. So $\pi(\mathsf{Tref} )$ doesn't admit a bi-order.
+
+\begin{theorem}[Perran-Roltsen]
+    $\pi(\mathsf{Fig \,8} )$ is bi-orderable. 
+\end{theorem}
+No proof, but a general idea is that we can write \[
+ \pi(\mathsf{Fig \,8} )=\langle a,b,t \mid tat^{-1}=b^{-1},tbt^{-1}=ba \rangle .
+\] Some relation magic happens, then $t^{-1}at=ab,t^{-1}bt=a^{-1}$. Suppose $w\in \langle a,b \rangle $, then conjugation by $t$,  $twt^{-1}$ and $t^{-1}wt$ are in $<a,b>$. This group ends up being $\langle a,b \rangle \rtimes \langle t \rangle $ given by those relations (semidirect product). What does this mean? Every element of $\pi(\mathsf{Fig\,8}) $ is of the from $t ^n w$ where $n\in \Z$ and $w\in \langle a,b \rangle $. This conjugation here is really defining an isomorphism, say $\varphi_t \colon \langle a,b \rangle  \to \langle a,b \rangle  $, given by $\varphi _t(w)=twt^{-1}$. Here's the fun fact that makes it all worth it.
+\begin{prop}
+    There is a bi-order on $\langle a,b \rangle $ which is invariant under $\varphi _t$.
+\end{prop}
+By this proposition, we can bi-order the knot group of the figure eight. Say $g_1,g_2\in \pi(\mathsf{Fig\, 8} )$. Then $g_1=t ^n_1 w_1$, $g_2=t ^n_2w_2 $ for $n_1,n_2\in \Z$, $w_1,w_2\in \langle a,b \rangle $. Then $g_1<g_2$ if and only if $n_1<n_2$ (or $n_1=n_2$ and $w_1<_F w_2$), where $<_F$ is the supposed bi-order on $\pi_1 (\mathsf{Fig\,8} )$. Note that the theorem actually showed this for a whole class of groups, as opposed to just the figure eight.
