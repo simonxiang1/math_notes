@@ -1,0 +1,53 @@
+\section{October 29, 2020}
+\begin{quote}
+    ``\textit{This is just philosophy}.''\\
+—Dr.\ Radin
+\end{quote}
+
+\subsection{Laurent's theorem}
+This is just \cref{laurent} from last time. Note that a disk is just an annulus with $R_1\geq 0$, and the complex plane is just a disk with $R_2\leq\infty$. These are degenerate (missed the terminology). So Taylor's theorem is just a special case of Laurent's theorem, where all the negative $c_n $'s are zero.
+
+Let's ``visualize'' the result (Laurent's theorem). The conclusion can be expressed as such: there exists $f_1(z),f_2(z)$ where $f_1(w)=\sum_{n\geq 0}^{} a_n w^n , \, f_2(w)=\sum_{n\geq 1}^{} b_n w^n $ such that \[
+    f(z)=f_1(z-z_0)+f_2\left( \frac{1}{z-z_0} \right) .
+\] Where does this come from? Just look around. Indeed, negative indices look strange. Aha, he said the philosophy quote again! Note that $f_1(w)$ has a radius of convergence $\geq R_2$, while $f_1(w)$ has a radius of convergence $\geq R_1$. Note that these series are not only convergent, but also absolutely convergent and uniformly convergent. Let's talk about uniform convergence: it means that for all $\varepsilon >0$, there exists an $\N_0>0$ such that\[
+\left| \sum_{n\geq N}^{} c_n (z-z_0)^n - \operatorname{limit} \right| <\varepsilon 
+\] for $N\geq N_0$, for \emph{all} of those $z$. Basically the idea is the same as uniform continuity in that the difference is in the quantifiers: rather than ``delta'' corresponding to \emph{one} ball $|z-z_0|$, now \emph{a single delta} works \emph{for every} ball $|z-z_0|$. This (uniform continuity) is the condition for which a function needs to be integrable.
+\subsection{Applications}
+\begin{example}
+    Let $f(z)=e^{\frac{1}{z}}$ for $z\neq 0$, then $f(z)$ is analytic for $z\neq 0$ by the chain rule. Note: $
+    e^{w}=\sum_{n\geq 0}^{} \frac{w^n}{n!} 
+    $ for all $w$ by ``Taylor's theorem'', ie the radius of convergence is infinity. So for $z\neq 0$, \[
+    e^{\frac{1}{z}}=\sum_{n\geq 0}^{} \frac{\left( \frac{1}{z} \right) ^n }{n!}=1+\sum_{n\geq 1}^{} \frac{1}{z^n  n!}.
+\] I'm interested to hear why Dr.\ Radin takes out the first term. Maybe it's to signify the application of Laurent's theorem. Yep, it is.
+\end{example}
+Reminder: you can compute
+$S_{a,b}=z^a+z^{a+1}+\cdots +z^b=\sum_{n=a}^{b} z^n $. Rewrite this as \[
+zS_{a,b}=S_{a,b}-z^a+z^{b+1},
+\] and solve $(z-1)S_{a,b}=z^{b+1}-z^a$. Then \[
+S_{a,b}=\frac{z^{b+1}-z^a}{z-1}. \] It's clear that if we start at zero and go to infinity, this converges to $\frac{1}{1-z}$.
+
+\begin{example}[Important!]
+    Let $f(z)=\frac{1}{5-z},\, z_0=2$. We can do two different applications: one with the annulus $|z-2|<3$, and the other with another annulus $|z-2|>3$. Now the $c_n $'s are uniquely defined, but we have to specify which annulus we're in.
+    \begin{enumerate}
+        \item This is the case where $|z-2|<3$. Don't try to understand, just make sure what we're doing isn't illegal. 
+            \begin{align*}
+                \frac{1}{5-z}&= \frac{1}{3-(z-2)}\\
+                             &=\frac{1}{3\left( 1-\frac{z-2}{3} \right) }\\
+                             &=\frac{1}{3}\cdot \left( \frac{1}{1-\left( \frac{z-2}{3} \right) } \right) \\
+                             &=\frac{1}{3}\left( \sum_{n\geq 0}^{} \left( \frac{z-2}{3} \right) ^n  \right) \\
+                             &=\sum_{n\geq 0}^{} \frac{(z-2)^n }{3^{n+1}}.
+            \end{align*}
+            So $c_n =0$ for $n\geq -1$, $c_n =\frac{1}{3^{n+1}}$ for $n\geq 0$. OMG I just realized that Dr.\ Radin has been writing $n$'s this entire time, his handwriting makes it look horribly like an ``$m$''. I thought I was being a rule breaker by substituting each ``$m$'' for an $n$, turns out his handwriting just sucks.
+        \item This is the second case where $|z-2|>3$.
+            \begin{align*}
+                \frac{1}{5-z}&=\frac{1}{3-(z-2)}\\
+                             &=\frac{\left( \frac{1}{z-2} \right) }{\left( \frac{3-(z-2)}{z-2} \right) }\\
+                             &=\frac{1}{z-2}\left( \frac{1}{\frac{3}{z-2}-1} \right) \\ 
+                             &=-\frac{1}{(z-2)}\left( \frac{1}{1-\frac{3}{z-2}} \right) \\
+                             &=-\left( \frac{1}{z-2} \right) \sum_{n\geq 0}^{} \left( \frac{3}{z-2} \right) ^n \\
+                             &=\sum_{m\geq 1}^{} -(3^{m-1})\frac{1}{(z-2)^m},
+            \end{align*} where $m=n+1$, and $n=m-1$. Since $z$ is large, the quotient is small, which is why we can do the penultimate step. Now that $m$'s and $n$'s coexist, the confusion only multiplies.
+    \end{enumerate}
+\end{example}
+Those examples we just did were very important. Yeaaahhh, we're out of time, see you next week.
+
