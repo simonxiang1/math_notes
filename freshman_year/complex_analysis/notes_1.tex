@@ -71,8 +71,82 @@ The relations described in \cref{cr} are known as the \textbf{Cauchy-Riemann} eq
 \end{proof}
 
 
-\subsection{Power series (todo)}
-I was wondering when we were going to cover these?
+
+\subsection{Power series }
+I was wondering when we were going to cover these? The prime example of a power series is the complex \textbf{exponential} function, defined for $z\in \C$ by \[
+e^z = \sum_{n=0}^{\infty} \frac{z^n }{n!}.
+\] When $z$ is real, this is the same as the usual exponential function, and the series converges absolutely for all $z\in \C$. To see this, note that $ 
+\left| \frac{z^n }{n!} \right| = \frac{|z|^n }{n!},
+$ so compare $|e^z|$ to $\sum_{}^{} |z|^n  / n!=e^{{z}}<\infty.$ This shows that the series defining $e^z$ is uniformly convergent in every disk in $\C$. We'll prove that $e^z$ is entire, and that its derivative can be found by termwise differentiation of the power series expansion. Hence \[
+(e^z)'=\sum_{n=0}^{\infty} n \frac{z^{n-1}}{n!}=\sum_{m=0}^{\infty} \frac{z^m}{m!}=e^z
+\] for $m=n-1$, which shows that $e^z$ is its own derivative. In contrast, the geometric series $\sum_{n=0}^{\infty} z^n$ converges absolutely only in the disk $|z|<1$, and the sum is equal to $\frac{1}{1-z}$, which is holomorphic in the punctured plane $\C\setminus \{1\} $. The proof is the same as the one for real variables: observe that \[
+\sum_{n=0}^{N} z^n = \frac{1-z^{N+1}}{1-z},
+\] then note that if $|z|<1$ we have $\lim_{N\to \infty}z^{N+1}=0$.
+\begin{definition}[Power series]
+    In general, a \textbf{power series} is an expansion of the form \[
+    \sum_{n=0}^{\infty} a_n z^n , 
+    \] where $a_n \in \C$.
+\end{definition}
+Testing for absolute convergence involves looking at the sum $\sum_{n=0}^{\infty} |a_n | |z|^n $, and if $\sum_{n=0}^{\infty} a_n z^n $ converges absolutely for some $z_0$, then it converges for all $z$ in the disk $|z|\leq|z_0|$. Now we prove a theorem that there always exists an open disk (possibly empty)\footnote{Wait, this theorem is pretty lame then.} on which the power series converges absolutely.
+\begin{theorem}
+    Given a power series $\sum_{n=0}^{\infty} a_n z^n $, there exists $0\leq R\leq \infty$ such that 
+    \begin{enumerate}[label=(\roman*)]
+        \item If $|z|<R$ the series converges absolutely.
+        \item If $|z|>R$ the series diverges.
+    \end{enumerate}
+    Moreover, if we use the convention that $1 /0=\infty$ and $1 /\infty=0$, then $R$ is given by Hadamard's formula \[
+    \frac{1}{R}=\limsup |a_n |^{\frac{1}{n}}.
+    \] 
+\end{theorem}
+    We say that $R$ is the \textbf{radius of convergence} of the power series, and the region $|z|<R$ is the \textbf{disc of convergence} . In particular, $R=\infty$ for $\exp$, and $R=1$ for the geometric series.
+\begin{proof}
+    Let $L=1 /R$, and suppose that $L\neq 0,\infty$\footnote{These two cases are exercises for the reader.}. If $|z|<R$, choose a small $\varepsilon >0$ such that \[
+        (L+\varepsilon )|z|=\frac{1+\varepsilon R}{R}\cdot ``R"=r<1.
+    \] By the definition of $L$, we have that $|a_n |^{\frac{1}{n}}\leq L+\varepsilon $ for all large $n$, therefore \[
+    |a_n | |z|^n \leq \{(L+\varepsilon )|z|\} ^n =r^n .
+    \] Comparing this with the geometric series $\sum_{}^{} r^n $ shows that $\sum_{}^{} a_n z^n $ converges. If $|z|>R$, then a similar argument shows that there exists a sequence in terms of the series whose absolute value goes to infinity, so the series diverges.
+\end{proof}
+\begin{remark}
+    Things are much more delicate when we deal with the boundary of the disk of convergence, where $|z|=R$. Here, we can have either convergence or divergence.
+\end{remark}
+More examples include the \textbf{trigonometric functions}, defined by \[
+    \cos z= \sum_{n=0}^{\infty} (-1)^n \frac{z^{2n}}{(2n)!}\quad \text{and}\quad \sin z =\sum_{n=0}^{\infty} (-1)^n  \frac{z^{2n+1}}{(2n+1)!},
+\] which agree with the usual cosine and sine of a real argument when $z\in \R$. A simple calculation yields \[
+\cos z=\frac{e^{iz}+e^{-iz}}{2}\quad \text{and} \quad \sin z = \frac{e^{iz}-e^{-iz}}{2i}.
+\] These are the \textbf{Euler formulas} for cosine and sine.
+\begin{theorem}\label{analytic}
+    The power series $f(z)=\sum_{n=0}^{\infty} a_n z^n $ defines a holomorphic function in its disc of convergence. The derivative of $f$ is also a power series obtained by differentiating term by term the series for $f$, that is, \[
+        f'(z)= \sum_{n=0}^{\infty} na_n z^{n-1}.
+    \] Moreover, $f'$ has the same radius of convergence as $f$.
+\end{theorem}
+\begin{proof}
+    To show that $f'$ has the same radius of convergence as $f$, refer to Hadamard's formula. Indeed, $\lim_{n\to \infty}n^{1 /n}=1$, and therefore \[
+   \limsup |a_n |^{\frac{1}{n} } =\limsup |na_n |^{\frac{1}{n}} ,
+    \] so $\sum_{}^{} a_n z^n $ and $\sum_{}^{} na_n z^n $ have the same radius of convergence, and therefore so do $\sum_{}^{} a_n x^n$ and $\sum_{}^{} na_n z^{n-1}$. Now for the first assertion, we need to show that \[
+    g(z)=\sum_{n=0}^{\infty} na_n z^{n-1} 
+\] gives a description of $f'$. Let $R$ be the radius of convergence of $f$, and suppose that $|z_0|<r<R$. Write $
+f(z)=S_N(z)+E_N(z),
+$ where \[
+    S_N(z)=\sum_{n=0}^{N} a_n z^n\quad \text{and} \quad E_N(z)=\sum_{n=N+1}^{\infty} a_n z^n.
+\] Some crazy stuff happened, and we'll omit the rest of the proof.
+\end{proof}
+\begin{cor}
+    A power series is infinitely complex differentiable in its disc of convergence, and the higher derivatives are also power series obtained by termwise differentiation.
+\end{cor}
+\begin{definition}[Power series not centered at the origin]
+    We can define a power series centered at $z_0\in \C$ by \[
+        f(z)=\sum_{n=0}^{\infty} a_n (z-z_0)^n .
+    \]  
+\end{definition}
+The disk of convergence is now centered at $z_0$ and the radius is still given by Hadamard's formula. In fact, if $
+    g(z)=\sum_{n=0}^{\infty} a_n z^n,
+$ then $f$ is simply obtained by translating $g$, where $f(z)=g(w)$, $w=z-z_0$. So everything we know about $g$ works for $f,$ in particular, by the chain rule we have \[
+f'(z)=g'(w)=\sum_{n=0}^{\infty} na_n (z-z_0)^{n-1}.
+\] 
+A function $f$ defined on an open set $\Omega$ is \textbf{analytic} (or has a \textbf{power series expansion}) if at a point $z_0\in \Omega$ there exists a power series $\sum_{}^{} a_n (z-z_0)^n $ centered at $z_0$, with positive radius of convergence, such that \[
+    f(z)=\sum_{n=0}^{\infty} a_n (z-z_0)^n 
+\] for all $z$ in a nbd of $z_0$. If $f$ has a power series expansion for all $z_0\in \Omega$, then $f$ is \textbf{analytic on} $\mathbf{\Omega}$. By \cref{analytic}, an analytic function on $\Omega$ is also holomorphic there. Next chapter we prove a deep theorem that every holomorphic function is analytic, which is why we use the terms holomorphic and analytic interchangeably.
+
 
 \subsection{Integration along curves}
 \begin{definition}[Parametrized curve]
@@ -165,7 +239,7 @@ Suppose $f$ is define on some open set $\Omega\in \C$. A \textbf{primitive} for 
 \begin{proof}
     Let $\omega_0\in \Omega$. We WTS that $f(\omega)=f(\omega_0)$ for all $\omega\in \Omega$: since $\Omega$ is connected we can find a curve (path) joining $\omega_0$ and $\omega$. Clearly $f$ is a primitive for $f'$. Then \[
         \int_{\gamma}^{} f'(z) \, dz = f(\omega)-f(\omega_0)=0
-    \] by assumption, which implies that $f(\omega)=f(\omega_0)$, finishing the proof.
+    \] by assumption, which implies that $f(\omega)=f(\omega_0)$, finishing the proof. 
 \end{proof}
 
 
