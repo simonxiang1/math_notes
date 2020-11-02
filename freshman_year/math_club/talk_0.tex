@@ -1,0 +1,190 @@
+\section{All voting systems are fundamentally screwed (9/08/20)}
+Today's speaker is Tom Gannon, a Ph.D student who made his entire website without any help from outsite sources. We'll be talking about why all voting systems are fundamentally screwed! (AKA, Arrow's impossibility theorem)\footnote{Sorry for the clickbait title.}.
+\begin{note}
+    I'm actually taking the notes on November 2nd, 2020. Although I did attend this talk, I didn't take notes because I was still figuring out my live-\TeX{} setup. Now seems like an appropiate time to revisit this topic, given that my government test is today and the election is tomorrow.
+\end{note}
+\subsection{What's a voting system?}
+Let's declare a list of \emph{alternatives} to choose from. It's not always just voting for the thing that's on top, we make a total preference. Informally, a voting system take as input the following:
+\begin{itemize}
+    \item A \emph{personal preference} list of the alternatives for each person.
+\end{itemize}
+And output the following:
+\begin{itemize}
+    \item A \emph{societal preference list} of the alternatives.
+\end{itemize}
+\begin{example}
+    Who should be the math club president? Whoops, they are the president and vice-president.
+    \begin{itemize}
+        \item \emph{Alternatives:} $\{\text{Ryan, Shannon}\} $
+        \item \emph{Voters:} The people in this Zoom call 
+    \end{itemize}
+    So how are we gonna rank them? Here are some of our options for a voting system.
+    \begin{itemize}
+        \item \textbf{First Past the Post}: Order the societal preference list by how many times the person appeared as the top preference.
+        \item \textbf{`Weighted FPTP'}: Same as FPTP, but the current president's vote counts for two votes.
+        \item \textbf{Last Past the Post}: This isn't a real system, but serves to demonstrate how things can get wonky when we're allowed to change people's parameters: order the societal preference list by who got the least votes. By definition, this is a voting system.
+        \item \textbf{Dictatorship}: Declare the societal preference list to be the same as the dictator's preference list.
+    \end{itemize}
+
+    \subsection{The Pareto condition and independence of irrelevant alternatives}
+\end{example}
+There are some properties of voting systems: the first thing we want is something called the Pareto condition.
+\begin{definition}[Pareto condition]
+    If, when every person puts in the \emph{same} personal preference list, the voting system returns that list as the societal preference list, we say a voting system satisfies \textbf{the Pareto condition}.
+    \begin{itemize}
+        \item \emph{Examples:} First Past the Post, `Weighted FPTP', Dictatorships
+        \item \emph{Non-examples:} Last Past the Post
+    \end{itemize}
+\end{definition}
+\begin{example}
+    Our new question: who should win the 2000 election?
+    \begin{itemize}
+        \item \emph{Alternatives:} $\{\text{George W. Bush, Al Gore, Ralph Nader}\} $ 
+        \item \emph{Voters:} Eligible Florida residents
+    \end{itemize}
+    \begin{figure}[H]
+    \centering
+    \begin{tabular}{l|c}
+        Candidate & Number of Votes\\
+        \hline
+        \hline
+        George W. Bush & 2,912,790\\
+        Al Gore & 2,912,253\\
+        Ralph Nader & 97,488
+    \end{tabular}
+    \label{election}
+    \caption{FPTP Election Results, Florida 2000}
+    \end{figure}
+    This is an example of something of mathematical interest: if everyone who voted for Ralph Nader had Al Gore as their second choice, then if we took into account a ranked preference list the outcome of the election would have been totally different. This is called \textbf{Instant Runoff Voting}— here voters rank all preferences. Declare the person who got the least amount of votes last on the preference list, eliminate them, and repeat.
+\end{example}
+So the Pareto condition is a weak condition that's really easy to satisfy. Pretty much any reasonable voting system should satisfy it. Now let's introduce another reasonable condition that things should satisfy.
+\begin{definition}[Independence of irrelevant alternatives]
+    We say that a voting system is \textbf{independent of irrelevant alternatives} if (informally) for every pair of alternatives $x,y$ we can know the relevant position of $x$ and $y$ on the societal preference list just from knowing the relative position of $x$ and $y$ on all the individual's preference list.
+\end{definition}
+As an exercise, Tom suggest defining voting systems and independence of irrelevant alternatives using set theory. Let's try it:
+\begin{definition}[]
+    Let $A$ be an ordered set of alternatives. Then if $x\in X$ where $X$ is the set of people, then a \emph{personal preference list} is a permutation of $A$, denoted $\sigma_x$. Then a \textbf{voting system} is a function $f \colon S_X \to S_A$, where $S_A$ denotes the permutation group on $A$, and $S_X$ denotes the set of set of personal preferences for all $x\in X$. By this definition, a voting system satisfies the pareto condition if for all $x_1,x_2\in X$, $\sigma_{x_1}=\sigma_{x_2}$, then $f(\sigma_{x_1}=\sigma_{x_2})=\sigma_{x_1}=\sigma_{x_2}\in S_A$, and is \textbf{independent of irrelevant alternatives} if for all $x,y\in A$, the order of $x$ and $y$ in: wait, this entire definition is screwed, I'm only taking in one permutation and returning the societal preference list. Why helpppppp
+\end{definition}
+    OK, I looked it up, I was kind of close. The idea was to use the set of all total orders on a set of outcomes.
+\begin{definition}[Actual definition]
+Let $A$ be a set of outcomes and $N$ a set of voters. Denote the set of all full linear orderings of $A$ by $L(A)$. Then a (strict) \textbf{social welfare function} (preference aggregation rule or voting system) is a function \[
+    F \colon L(A)^N \to L(A)
+\] that aggregates voter's preferences into a single preference order on $A$. An $N$-tuple $(R_1,\cdots ,R_N)\in L(A)^N$ of voters preferences is called a \emph{preference profile}. Here's how we precisely define the stuff we talked about earlier:
+\begin{itemize}
+    \item \textbf{Pareto condition} (unanimity): if an alternative $a$ is strictly greater than $b$ for all total orderings $R_1,\cdots ,R_N$, then $a$ is strictly greater than $b$ by $F(R_1,R_2,\cdots , R_N)$.
+    \item \textbf{Dictatorships}: A \emph{dictator} is an individual $i$ such that for all $(R_1,\cdots ,R_N)\in L(A)^N$, $a$ strictly greater than $b$ by $R_i $ implies that $a$ strictly greater than $b$ by $F(R_1,R_2,\cdots ,R_N)$ \emph{for all} $a,b$.
+    \item \textbf{Independence of irrelevant alternatives}: For two preference profiles $(R_1,\cdots ,R_N)$ and $(S_1,\cdots , S_N)$ such that for all individuals $i$, alternatives $a$ and $b$ have the same order in $R_i $ as in $S_i $, then alternatives $a$ and $b$ have the same order in $F(R_1,\cdots ,R_N)$ as in $F(S_1 ,\cdots ,S_N)$.
+\end{itemize}
+\end{definition}
+\noindent\textbf{Question:} Is there a voting system which satisfies both the pareto condition and is independent of irrelevant alternatives?
+
+\noindent\textbf{Answer:} Yes, a dictatorship! Just look at the dictator's list.
+\subsection{Arrow's Impossibility Theorem}
+Well, are there any other voting systems that satisfy these two conditions then? The answer turns out to be no!
+\begin{theorem}[Arrow's impossibility theorem]
+    Assume that $V$ is a voting system with more than two alternatives which satisfies the Pareto condition and is independent of irrelevant alternatives. Then $V$ is a dictatorship.
+\end{theorem}
+As a corollary, the contrapositive of this theorem says that there are no voting systems with more than two alternatives which satisfy the Pareto condition, are independent of irrelevant alternatives, and are not a dictatorship.
+\orbreak
+\begin{prop}[No ties]
+   Assume we have a voting ssytem with more than two alternatives which satisfies Pareto and IIA. Then the voting system can produce no ties. 
+\end{prop}
+\begin{proof}
+    We do this by contradiction. 
+
+    If 
+    \begin{tabular}{c|c}
+        Left side of Room & Right side of Room \\
+        \hline
+        $a>b$ & $b>a$
+    \end{tabular} $\mapsto a=b$,
+
+    then \begin{tabular}{c|c}
+        Left side of Room & Right side of Room \\
+        \hline
+        $a>c>b$ & $c>b>a$
+    \end{tabular} $\mapsto c>b=a$,
+
+    and \begin{tabular}{c|c}
+        Left side of Room & Right side of Room \\
+        \hline
+        $a>b>c$ & $b>c>a$
+    \end{tabular} $\mapsto a=b>c$.
+
+    By IIA, \begin{tabular}{c|c}
+        Left side of Room & Right side of Room \\
+        \hline
+        $a>c$ & $c>a$
+    \end{tabular} $\mapsto c>a$ and $a>c$, a contradiction.
+
+    Therefore, there are no ties. \textreferencemark
+\end{proof}
+\begin{definition}[Dictating sets]
+    We say a subset $S$ of voters are a \textbf{dictating set} if, whenever everyone in $S$ puts in the same personal preference list into the voting system, that list is the societal preference list, regardless of what anyone else votes.
+    \begin{itemize}
+        \item \emph{Example:} The set of all voters is a dictating set by Pareto.
+        \item \emph{Note:} If $S$ is a set with one element, then $S$ is a dictating set if and only if the person in $S$ is a dictator.
+    \end{itemize}
+\end{definition}
+\begin{definition}[Monotonic]
+    A voting system is \textbf{monotonic} if for all alternatives $a,b,$ the following property holds: If
+
+    \begin{tabular}{c|c}
+        Left side of Room & Right side of Room \\
+        \hline
+        $a>b$ & $b>a$
+    \end{tabular} $\mapsto a>b$.
+
+    and some people in the `everyone else' part switch their vote to $a>b$ then the societal preference list still has $a>b$.
+\end{definition}
+Basically, this allows us to focus on the worst case scenario.
+\begin{definition}[Forcing]
+    Given two alternatives $a,b$, we say a subset $S$ of voters can \textbf{force} $a>b$ if 
+
+    \begin{tabular}{c|c}
+        People in S & Everyone Else\\
+        \hline
+        $a>b$ & ???
+    \end{tabular} $\mapsto a>b$.
+\end{definition}
+Difference between forcing and a dictating set? Forcing is for two specific alternatives, while dictating is about everything else.
+
+\subsection{Proof of Arrow's impossibility theorem}
+The proof will follow from a lemma and a proposition:
+\begin{lemma}[Forcing lemma]\label{forcing}
+   If a subset of voters $X$ that can force $a>b$ and we partition $X=L\amalg M$, then for any third alternative $c$, either $L$ can force $a>c$ or $M$ can force $c>b$. 
+\end{lemma}
+\begin{prop}\label{prop}
+    If $X$ can force some element $a$ over some element $b$, then $X$ can force \emph{any} element over \emph{any} other element, i.e. $X$ is a dictating set.
+\end{prop}
+To see why these two things would prove the theorem, let $X$ be the entire set for the forcing lemma by Pareto (pareto implies that $X$ is a dictating set): then after a disjoint partition, either it becomes a dictating set or the others do. So there exists a strictly smaller dictating set, since $X$ is finite repeat until we have a dictator. 
+\begin{proof}
+  Here's the proof of the forcing lemma, the core essence of the proof is using the fact that we have no ties. We know \begin{tabular}{c|c|c}
+      L& M & Everyone Else\\
+        \hline
+      $a>b>c$ & $c>a>b$ & $b>c>a$
+  \end{tabular} $\mapsto a>b$ (but we don't know where $c$ lies). We get that either $c>a>b$ and $a>c$ (by no ties): if $c>a>b $, then $M$ can force $c>b$ by definition. If the output is $a>c$, then $L$ forces $a>c$ by defintion.
+
+    \item \emph{Question:} What happens if $M=\O$? If $L=\O$?
+\end{proof}
+\begin{cor}[Forcing lemma for $\O$ ]\label{new}
+   If a subset $X$ can force $a>b$ for two distinct alternatives $a,b,$ then $X$ can force $a>c$ and $c>b$ for any third alternative $c\notin \{a,b\} $. 
+\end{cor}
+\begin{cor}\label{swap}
+    If a subset $X$ can force $a>b$ for two distinct alternatives $a,b$, then $X$ can force $b>a$.
+\end{cor}
+\begin{proof}
+    \,
+    \begin{itemize}
+        \item $X$ can force $a>b \underset{\text{Forcing} \ a>b}{\implies } X$ can force $a>c$.
+        \item $X$ can force $a>c \underset{\text{Forcing} \ a>c}{\implies } X$ can force $b>c$.
+        \item $X$ can force $b>c \underset{\text{Forcing} \ b>c}{\implies } X$ can force $b>a$.
+    \end{itemize}
+\end{proof}
+\begin{prob}
+    Use the forcing lemma to show that if $X$ can force $a>b$ then for \emph{any} distinct alternatives $c,d$, $X$ can force $c>d$.
+\end{prob}
+\begin{proof}
+    Let $A$ be the set of alternatives, assume we can force $a>b$. Then by \cref{new}, we can force $a>c$ and $c>b$ for some alternative $c\notin \{a,b\} $. Apply \cref{new} again to get that $a>d$ and $d>c$ for some alternative $d\notin \{a,b,c\} $, given $a>c$. But then by \cref{swap}, we can ``swap'' $d$ and $c$ to get $c>d$, and this applies for any alternatives $c,d\notin \{a,b\}$, finishing the proof.
+\end{proof}
+This proves the proposition, and ergo our theorem!
