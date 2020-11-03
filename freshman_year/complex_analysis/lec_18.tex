@@ -1,0 +1,77 @@
+\section{November 3, 2020}
+\subsection{More on Laurent's theorem}
+\begin{theorem}
+    For any power series \[
+        \sum_{n\geq 0}^{} a_n (z-z_0)^n =a_0+a_1(z-z_0)+\cdots 
+    \] there exists a ``radius'' $R$ where $0\leq R\leq \infty$ such that 
+    \begin{enumerate}
+        \item The series converges \emph{absolutely} for $|z-z_0|<R$,
+        \item The series \emph{diverges} for $|z-z_0|$.
+    \end{enumerate}
+\end{theorem}
+What happens on $\partial $ of the circle? Who knows.
+\begin{example}
+    Here are some examples:
+    \begin{enumerate}
+        \item $\sum_{n\geq 0}^{} z^n $ (think of it as $\sum_{}^{} (z-z_0)^n $ with $z_0=0$) has $R=1$ and diverges for any $|z-z_0|=R$.
+        \item $\sum_{n\geq 1}^{} \frac{1}{n}z^n ,\, R=1$ since this diverges for $z=+1$ and converges for $z=-1$.
+        \item $\sum_{}^{} \frac{1}{n^2}z^n $ converges for all $|z|=1=R$.
+    \end{enumerate}
+\end{example}
+Recall ``Taylor's'' theorem: if $f$ is analytic in $|z-z_0|<R_0$, then for those $z$, \[
+    \sum_{n\geq 0}^{} \frac{f^{(n)}(z_0)}{n!}(z-z_0)^n 
+\] converges. Also recall \cref{laurent}. Note that the radius of converges is greater than or equal to $R_0$.
+\begin{theorem}[Power series are holomorphic]
+    Suppose we have a power series $\sum_{n=0}^{\infty} a_n (z-z_0)^n $: then this is holomorphic inside its radius of convergence.\footnote{OK, so we started off this course on a bad note and used ``analytic'' instead of holomorphic. Holomorphic means differentiable, and analytic means has a power series expansion: being analytic is a much stronger condition, as we're showing right now (analytic implies holomorphic). However, the converse doesn't hold generally (see real analysis), but it does in complex analysis because holomorphic functions are really really nice. So the two notions are equivalent. Which is why it's OK if we use analytic all the time, but if we don't clarify the difference we get weird tautologies like proving that analytic functions are analytic, which is what Radin is saying rn (it's supposed to by analytic functions are holomorphic).} This defines  \[
+        S(z)=\sum_{}^{} a_n (z-z_0)^n 
+    \] for $|z-z_0|<R$ the radius. 
+\end{theorem}
+Is there no proof?
+\begin{theorem}
+    Let $\Gamma $ be a curve inside the circle of convergence of $\sum_{n=0}^{\infty} a_n (z-z_0)^n $. Then for any continuous $g(z)$, \[
+        \sum_{n=0}^{\infty} a_n \int_{\Gamma}^{} g(z)(z-z_0)^n  \, dz
+    \] converges to \[
+    \int_{\Gamma}^{} g(z)\left( \sum_{n=0}^{\infty} a_n (z-z_0)^n  \right)  \, dz=\int_{\Gamma}^{} g(z)S(z) \, dz.
+    \] 
+\end{theorem}
+\begin{theorem}
+    If $\sum_{n=0}^{\infty} a_n (z-z_0)^n =S(z)$, then $a_n =\frac{S^{(n)}(z_0)}{n!}$.
+\end{theorem}
+The proof is immediate from the uniqueness of \cref{laurent}.
+\begin{cor}
+    Suppose we have $\sum_{}^{} a_n (z-z_0)^n $ and $\sum_{}^{} b_n (z-z_0)^n $ centered at the same $z_0$, and suppose they're equal for $|z-z_0|<R$. Then
+    \begin{enumerate}
+        \item \begin{align*}
+&\left( \sum_{n=0}^{\infty} a_n (z-z_0)^n \right)\left( \sum_{n=0}^{\infty} b_n (z-z_0)^n  \right)\\
+&=\sum_{}^{} c_n (z-z_0)^n 
+            \end{align*}   with $c_n =\sum_{j=0}^{n} a_j b_{n-j}$.
+        \item If $b_0\neq 0$, \[
+                \frac{\sum_{n=0}^{\infty} a_n (z-z_0)^n }{\sum_{n=0}^{\infty} b_n (z-z_0)^n }=\sum_{n=0}^{\infty} d_n (z-z_0)^n ,
+        \] and we can get the $d$'s by ``dividing polynomials'' for $|z-z_0|<\widetilde R$ where $\widetilde R$ is the distance to the closest zero of the denominator.
+    \end{enumerate}
+\end{cor}
+No, I will not type up notes for long division. I refuse, yada, let me out. Here we witness a room full of mathematicians who can't do arithmetic (including me and you), I knew this was going to happen, which is why I didn't even bother trying to add two numbers. It simply a far too difficult task for our miniscule craniums.
+
+So why are we doing this? Good question. Dr.\ Radin just assigned homework for \S 64, which doesn't exist. The creation of the exercises in \S 64 are left as an exercise to the reader.
+
+\subsection{Singularities}
+Finally, let's talk about singularities and poles! Maybe we'll talk about meromorphic functions and Cauchy's residue theorem.
+\begin{definition}[Singularities]
+    A point $\widetilde z$ is a \textbf{singular point of} $f$ if $f$ is not \emph{analytic} at $\widetilde z$, but $f$ is analytic at some other points $z_n $ such that $z_n \to \widetilde z$. That's a pretty neat definition.
+\end{definition}
+\begin{example}
+    The function $\operatorname{Log}(z)$ has a singularity at $z=0$.
+\end{example}
+\begin{definition}[]
+    A singular point $\widetilde z$ of $f$ is \textbf{isolated} if $f$ is analytic for $0<|z-\widetilde z|<\varepsilon $ for some $\varepsilon >0$.
+\end{definition}
+\begin{example}
+    We have the point $i$ an isolated singularity of the function $\frac{1}{z-i}$.
+\end{example}
+Suppose that $z_0$ is an isolated singularity of $f$. Then there exists some $\varepsilon >0$ such that $f$ is analytic for \[
+0=R_1<|z-z_0|<R_2=\varepsilon .
+\] Then we can apply Laurent's theorem, so \[
+f(z)=\sum_{n=0}^{\infty} a_n (z-z_0)^n +\sum_{n=1}^{\infty} b_n (z-z_0)^{-n}.
+\] Recall that we have a formula for these coefficients, that is, \[
+b_n =\frac{1}{2\pi i}\int_{\Gamma }^{} f(z)(z-z_0)^{n-1} \, dz
+\] for a particular curve $\Gamma $. In particular, we're interested in $b_1=\frac{1}{2\pi i}\int_{\Gamma}^{} f(z) \, dz$, called the \textbf{residue} of $f$ at $z_0$. Soon we'll be talking about residues, computing residues, doing stuff with residues (good). 
