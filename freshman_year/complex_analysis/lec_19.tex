@@ -1,0 +1,24 @@
+\section{November 5, 2020}
+Last time I made a comment about how differentiable $\iff$ analytic: I was wrong, sorry. But nobody really cares about differentiability at an isolated point, we only really care about nbds. So holomorphic $\iff $ analytic, which are the only type of functions sane people work with.
+\begin{note}
+    For $f(z)=\operatorname{Log}(z)$, $0$ is a singularity (along with the branch), but not an \emph{isolated} singularity. Remember, the function doesn't have to be defined there to be a singularity (recall accumulation points don't have to be defined either).
+\end{note}
+Recall that if $\widetilde z$ is an isolated singularity of $f$, we can apply Laurent's theorem with an annulus centered at $\widetilde z$. 
+\subsection{Computing residues}
+\begin{example}
+    We claim $\operatorname{R es}_i \left( \frac{5}{z-i} \right) =5$. Let's compute  $\operatorname{Res}_i  \left( \frac{5}{z-i} \right) $. This is already in the form of Laurent's theorem. Then \[
+        \frac{5}{z-i}=\sum_{n=0}^{\infty} a_n (z-i)^n +\sum_{n=1}^{\infty} b_n (z-i)^{-n}
+    \] iff $a_n =0$ for all $n$, $b_n =0$ for $n\neq 1$, $b_1=5$.
+\end{example}
+Sorry, I didn't pay attention to the next example (as usual, if you have notes, I would be very pleased if I could take a look at them and transcribe them, email: \texttt{simonxiang@utexas.edu}).
+\begin{example}
+    New example. Let $f(z)=\frac{1}{z(z-i)^2}$. Again, 
+    \begin{align*}
+        f(z)&=\left[ g(i)+g'(i)(z-i)+\frac{g''(i)}{2}(z-i)^2+\cdots  \right] \frac{1}{(z-i)^2}\\
+            &=\frac{g(i)}{(z-i)^2}+\frac{g'(i)}{z-i}+\frac{g''(i)}{z}+\cdots 
+    \end{align*}
+    What is $\operatorname{R es}_i f=g'(i)=-\frac{1}{(i)^2}=1$, and $\operatorname{R es}_0 f=-1$.
+\end{example}
+\begin{example}
+    Let's compute $\operatorname{R es}_0 e^{\frac{1}{z^2}}$. `Now that's a mess.' This function is analytic everywhere besides zero, you can see this by composing domains ($\exp$ is entire while $\frac{1}{z^2}$ is analytic everywhere besides zero). Sorry, I'm too hungry to pay attention yet again. I'm going to have to leave to get pizza. See y'all next week.
+\end{example}
