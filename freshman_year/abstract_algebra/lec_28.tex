@@ -64,3 +64,12 @@ This is a way of proving that things aren't PID's (irreducible elements that are
     I_1 \subsetneq I_2 \subsetneq I_3 \subsetneq \cdots \subsetneq I_j  \subsetneq \cdots \subsetneq I,
 \] where $I_j =(r_1,\cdots,r_j )$. Since $I$ isn't finitely generated, there exists an $r_{j+1}\in I \setminus I_j $, set $I_{j+1}=(r_1,\cdots ,r_j ,r_{r+1})$. This produces an infinite strictly increasing chain of ideals, which is not possible since $R$ is Noetherian.
 \end{proof}
+
+\begin{prob}
+Show that a finite group $G$ cannot be written as the union of two of its proper subgroups. Does the same hold for three?
+\end{prob}
+\begin{solution}
+    Let $G$ be a finite group with $H,K<G$. Let $a\in G\setminus H$. Then $a\in K$, similarly we have $b\in G\setminus K$ such that $b\in H$. But $ab\in G=H\cup K$ implies that $ab\in H$ or $ab\in K$, a contradiction since $a\notin H$ and $b\notin K$: they can't both be in either $H$ or $K$, and we are done.
+
+    Counter example: let $\mathbb{H}=\langle i,j,k \mid i^2=j^2=k^2=ijk \rangle $, where the identity is $1$, denote the common element by $-1$. Then $\langle i \rangle \cup \langle j \rangle \cup \langle k \rangle =\mathbb{H}$, where each subgroup is proper.
+\end{solution}

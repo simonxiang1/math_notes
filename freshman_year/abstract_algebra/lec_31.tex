@@ -1,0 +1,22 @@
+\section{November 4, 2020}
+Why did I miss this class again? 
+\section{November 6, 2020}
+Alg top fridays
+\section{November 9, 2020}
+Came a little (20 minutes) late to class.
+
+\subsection{UFD's and primitive elements}
+\begin{lemma}
+    Let $R$ be a UFD, $f(x)\in R[x]$, and $d=\gcd$ of the coefficients of $f(x)$. Then $f(x)=df^*(x)$ where $f^*(x)\in R[x]$ and $f^*$ is primitive.
+\end{lemma}
+\begin{proof}
+    Let $f(x)=a_n x^n +\cdots a_0$, $a_i \in R$, and $d=\gcd(a_n ,\cdots ,a_0)\implies a_i '=a_i/ a \in R$. This implies that $f=df^*$ where $f(x)^*=a_n'x^n +\cdots a_0'$. What is $\gcd(a_n ',\cdots ,a_0')=c=?$ Not entirely sure what's going on anymore. In this case, I think primite refers to a generator of the multiplicative groups of a finite field.
+\end{proof}
+\begin{lemma}
+    Let $R$ be a UFD, $f(x)\in (\operatorname{Frac}R)[x]$. THen $f(x)=\left( \frac{a}{b} \right)f^{\times }(x) $ where $a,b\in R$ such that $\gcd(a,b)$ a unit, and $f^{\times }(x)\in R[x]$ and $f^*$ is primitive. Moreover, $(a,b,f^*)$ uniquely determine $R$ up to units.
+\end{lemma}
+\begin{proof}
+        Let $f(x)=\left( \frac{a_n }{b_n }\right) x^n +\cdots + \frac{a_0}{b_0}$ such that $a_i ,b_i \in R$, and $\gcd (a_i ,b_i )=1$ for all $i$. Then define $b:=\operatorname{lcm}(b_n ,\cdots ,b_0)$, this tells us that $f(x)=\frac{1}{b}\left( a_n 'x^n +\cdots +a_0' \right) $ where $a_i '=b \frac{a_i }{b_i }\in R$. Set $a=\gcd(a_n ',\cdots ,a_0')$, then $a_n 'x^n +\cdots +a_0'=a(a_n ''x''+\cdots +a_0''')$ where $a_i ' =\frac{a_i '}{a}\in R$. Our lemma says that $f^{\times }(x)=a_n ''x''+\cdots +a_0''\in R[x]$ a primitive. Hence $f(x)=\frac{a}{b}f^{\times }(x)$ for $a,b\in R$, $f^{\times }(x)$ primitive. 
+
+            How do we know that $\gcd(a,b)$ is a unit? This is true iff there is no irreducible $p\in R$ such that $p \mid \gcd(a,b)$, which is true iff $p \mid a$, $p \mid b$. Now $p \mid a=\gcd(a_n ',\cdots ,a_0')$ iff $p \mid |a_i '$ for all $i$, and $p \mid b=\operatorname{lcm}(b_0,\cdots ,b_n )$ iff there exists an $i_0$ such that $p \mid b_{i_0}$. $p$ irreducible dividing both $b_{i_0}$ and $p \mid b \frac{a_{i_0}}{b_{i_0}}$ implies that $p \mid (b_{i_0},a_{i_0})=$ a unit, a contradiction.
+\end{proof}
