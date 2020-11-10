@@ -1,0 +1,69 @@
+\section{November 10, 2020}
+Showed up late to class, was studying at PCL. Yes this course isn't for math majors, I can tell because I've been complaining about how the course is taught this entire time. However, Dr.\ Radin is right: Complex analysis can lead to some beautiful computations for some rather nasty integrals. So I'll pay attention, I guess.
+
+\subsection{The three types of singularities}
+\begin{example}
+    This is an example of a function with non-isolated singularities. Let \[
+        f(z)=\frac{1}{\sin \left( \frac{\pi}{z} \right) }, 
+    \] defined when $\sin\left( \frac{\pi}{z} \right) \neq 0$. Now this is true iff $\sfrac{\pi}{z}\neq n\pi$ for $n\in \N$, that is, $z\neq \frac{1}{n}$. This function is analytic everywhere else by the chain rule, and at $0$ we have a non-isolated singularity (it's an accumulation point). Let's discuss the behavior of $f$ at both isolated and non-isolated singularities. 
+\end{example}
+\begin{remark}[Important!]\label{singularity}
+        There are three ``types'' of isolated singularities.
+        \begin{enumerate}
+            \item \textbf{Removable singularities}: For example, take $f(z)=\frac{\sin z}{z}$ for $z\neq 0$. Since $f$ isn't defined at $z=0$ but is analytic everywhere else, this is indeed a singularity of $f$. But if we ``put'' $f(0)=1$ back in (define it piecewise), it works out. So basically these are singularities you can ``take out'' and it would only fail there (simply changing the value at one point)\footnote{Dr.\ Radin said something about series but this is the general idea.}. These aren't too interesting.
+            \item \textbf{Poles}: we have $z_0$ a \textbf{pole of order} $\mathbf N$ if $C_{-N}\neq 0$ and $C_n =0$, $n<-N\leq -1$, i.e.,  \[
+                    f(z)=C_{-N}(z-z_0)^{-N}+\cdots +c_0+c_1(z-z_0)+\cdots 
+                \] Note that there can only be finitely many negative powers.
+            \item \textbf{Essential singularities}: An isolated singularity is ``essential'' if it isn't removable and not a pole. So basically, everything that's left over.
+        \end{enumerate}
+    \end{remark}
+\begin{example}
+Let
+\begin{equation*}
+    e^{\frac{1}{z}}=\sum_{-\infty}^{0} \frac{z^n }{n!}=\cdots +\frac{1}{2z^2}+\frac{1}{z}+1. 
+\end{equation*} So no pole.
+\end{example}
+\begin{note}
+    $\operatorname{Log}z$ has a singularity at all $z=x+iy$, $y=0$, $x\leq 0$. But none of these singularities are isolated, so they don't fit any of the singularities described by \cref{singularity}. Help, where is the branch cut for $\operatorname{Log}$?? Nobody knows.
+\end{note}
+\subsection{Poles}
+We can learn a lot about functions near poles. Assume $f(z)=\sum_{n=-N}^{\infty} c_n (z-z_0)^n $ for $c_{-N}\neq 0$, $N\geq 1$. Consider 
+\begin{align*}
+    (z-z_0)^Nf(z)&=(z-z_0)^N \left[ c_{-N}(z-z_0)^{-N}+c_{-N+1}(z-z_0)^{-N+1}+\cdots  \right] \\
+                 &=c_{-N}+c_{-N+1}(z-z_0)+c_{-N+2}(z-z_0)^2+\cdots 
+\end{align*} which is a convergent power series! This is representing something that is analytic at $z_0$. So $z_0$ was a singularity of $f$, but $(z-z_0)^Nf(z)$ has a removable singularity at $z_0$, with value $C_{-N}$ at $z=z_0$.
+
+Conversely, suppose that $\varphi (z)$ is analytic at $z_0$, so $\varphi (z)=a_0+a_1(z-z_0)+\cdots $ and $\varphi (z_0)=a_0\neq 0$. Then for $z\neq z_0$, \[
+    \frac{\varphi (z)}{(z-z_0)^N}=\frac{a_0}{(z-z_0)^N}+a_1(z-z_0)^{-N+1}.
+\] So $\frac{\varphi (z)}{(z-z_0)^N}$ has a pole of order $N$. In short, $f$ has a pole of order $N$ at $z_0\iff \varphi (z):=(z-z_0)^Nf(z)$ has a removable singularity at $z_0$ and $(z-z_0)^{N-1}f(z)$ has a pole at $z_0$.
+    \orbreak
+Moreover, if $f$ has a pole of order $N$ at $z_0,$ we have \[
+\underset{z=z_0}{\operatorname{R es}f} =
+\begin{cases}
+    \varphi (z_0),\quad &\text{if} \ N=1\\
+    \frac{\varphi ^{(N-1)}(z_0)}{(N-1)!} &\text{if} \ N\geq 2.
+\end{cases}
+\] 
+\begin{example}
+    We claim that \[
+        \frac{z^4+5}{(z-i)^3}
+    \] has a pole of order $3$ at $z=i$ since $\varphi (z)=z^4+5$. So \[
+    \underset{i}{\operatorname{R es}f} =\frac{\varphi ''(i)}{2}=-\frac{12}{2}=-6.
+    \] 
+\end{example}
+\subsection{Zeroes of order $n$}
+This will be a short topic. We'll invent a new term ``zeroes of order $n$'' to talk about one over poles of order $n$.
+\begin{definition}[]
+    We say that ``$f$ has a zero of order $n$'' for $n\neq 1$ at $z_0$ if for $|z-z_0|<\varepsilon $, \[
+        f(z)=a_n (z-z_0)^n +a_{n+1}(z-z_0)^{n+1}+\cdots 
+    \] 
+\end{definition}
+\begin{lemma}
+    $f$ has a zero of order $n$ at $z_0\iff$ there is some $g(z)$ analytic at $ z_0$ with $g(z_0)\neq 0$, such that $f(z)=(z-z_0)^{-n}g(z)$ means $z_0$.
+\end{lemma}
+\subsection{Integration of real valued functions}
+Here's the good stuff. Say we have $f\colon \R \to \R$ and we want to compute \[
+    \int_{a}^{b} f(x) \, dx.
+\] Is he going to talk about analytic continuation? To compute this integral, we invent a function $\widetilde f(z)$ and a curve $\Gamma $ containing $[a,b]$. Then we'll compute \[
+\int_{\Gamma }^{} \widetilde f(z) \, dz
+\] by Cauchy's residue theorem. This involves certain tricks, like how to construct the function $\widetilde f$ and the curve $\Gamma $, which takes experience. IDK when we'll get to this, but not this week. 
