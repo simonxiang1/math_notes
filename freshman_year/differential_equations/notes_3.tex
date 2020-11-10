@@ -57,9 +57,94 @@ To show things are LI or not, just reduce them: if there's a zero column, then d
 Do I even need to take notes? Recall that if $A$ is triangular then we can just multiply along the diagonal (be lazy! –Dr. Tran). Swapping two rows (WLOG, since for columns note that $\det A= \det A^T$) gives a negative determinant, multiplying rows by a scalar $k$ gives $k\det A$, adding two rows does nothing.
 
 \subsection{Solutions of Simultaneous Linear Equations}
-Do you know how to multiply matrices? Do you know about noncommutative rings? (OHO big scary) Do you know that cancellation only holds in integral domains (which $M_{n\times n}(\R)$ isn't due to the existence of zero divisors)? OK good.
+Do you know how to multiply matrices? Do you know about noncommutative rings? (OHO big scary) Do you know that cancellation only holds in integral domains (which $M_{n\times n}(\R)$ isn't due to the existence of zero divisors)? OK good. Also, can you invert matrices?
+\begin{theorem}[Cramer's rule]
+   Let $A$ be an invertible $n\times n$ matrix. For any $b\in \R^n $, the unique solution $x$ of $Ax=b$ has entries given by \[
+       x_i =\frac{\det A_i (b)}{\det A},\quad i\in \N.
+   \] 
+\end{theorem}
+To make sense of this, imagine replacing the column vector representing $x_i $ in the matrix with the vector $b$ and taking its determinant, then dividing by $\det A$.
 
+\subsection{Linear Transformations}
+If you've heard of 3Blue1Brown, then you probably know that matrices just represent linear transformations (maps) $\R^n\to \R^m $. Hence the name, transformations are linear, so $T(u+v)=T(u)+T(v)$ and $T(cu)=cT(u)$ for all $u,v\in V$ and $c$ scalars.
+\begin{theorem}\label{9}
+    The equation $Ax=b$ has a unique solution if the columns of $A$ are LI, and has either no solution or infinitely many solutions if the columns of $A$ are linearly dependent. 
+\end{theorem}
+Elementary row operations are adding a multiple of a row to another, multiplying a row by a nonzero constant, and interchanging two rows. REF is where zero rows are at the bottom, leading entries are to the right of the leading entry of the row above it, and all entries in a column below a leading entry are zero. RREF is when the leading entries are all pivots (1), and each leading 1 is the only nonzero entry in its column.
+\begin{definition}[]
+    A \textbf{pivot position} in a matrix is a location in $A$ that corresponds to a leading 1 in the RREF of $A$. A pivot column is a column that contains a pivot, variables that correspond to pivot columns are \textbf{basic variables}, while the other variables are \textbf{free variables}. A system having free variables means infinitely many solutions.
+\end{definition}
+\begin{lemma}
+    The columns of an $n\times n$ matrix are LI iff $\det A\neq 0$.
+\end{lemma}
+\begin{proof}
+Here's a neat proof.
+\begin{enumerate}[label=(\arabic*)]
+    \item The cols of $A$ are LI iff $Ax=b$ has a unique solution for all $b\in \R^n $ by \cref{9}.
+    \item The equation $Ax=b$ has a unique solution $x$ for all $b$ iff the linear transformation $T(x)=Ax$ has an inverse.
+    \item This this is true iff $A^{-1}$ exists.
+    \item Which is true iff $\det A\neq 0$.
+\end{enumerate}
+\end{proof}
+\begin{theorem}
+    The equation $Ax=b$ has a unique solution $x=A^{-1}b$ if $\det A\neq 0$. $Ax=b$ has either no solutions or infinitely many solutions if $\det A=0$.
+\end{theorem}
+\begin{cor}
+    The equation $Ax=0$ has a nontrivial solution iff $\det A=0$.
+\end{cor}
 
+\subsection{The Eigenvalue-Eigenvector Method of Finding Solutions}
+\begin{definition}[Eigenblah]
+    An \textbf{eigenvector} of an $n\times n$ matrix is a nonzero vector $x$ such that $Ax=\lambda x$ for some scalar $\lambda$, we say $\lambda$ is an \textbf{eigenvalue} of $A$. The set of all solutions of the equation $(A-\lambda I)=0$ is the \textbf{eigenspace} of $A$ corresponding to $\lambda$. $\det (A-\lambda I)$ is the \textbf{characteristic polynomial} of $A$ and $\det (A-\lambda I)=0$ is the \textbf{characteristic equation} of $A$.
+\end{definition}
+For $\dot x=Ax$, we want to find $n$ LI solutions $x^1(t),\cdots ,x^n (t)$. 
+\begin{theorem}\label{eigen}
+    We have $x(t)=e^{\lambda t}v$ a solution of $\dot x=Ax$ iff $\lambda$ is an eigenvalue and $v$ is an eigenvector of $A$.
+\end{theorem}
+\begin{proof}
+    Exponential functions are invariant under reduction, so let's make an educated guess that $x(t)=e^{\lambda t}v$ is a solution. Since $\frac{d}{dt}e^{\lambda t}v=\lambda e^{\lambda t}v$ and $A(e^{\lambda t}v)=e^{\lambda t}Av$, we have $\dot x=\lambda e^{\lambda t}v=Ax=e^{\lambda t}Av$, so $Av=\lambda v$, hence $x(t)=e^{\lambda t}v$ is a solution of $\dot x=Ax$ iff $\lambda$ is an eigenvalue and $v$ is an eigenvector of $A$.
+\end{proof}
+
+\subsection{Complex Roots}
+If $\lambda=\alpha +i\beta $ is a complex eigenvalue of $A$ with eigenvector $v=v^1+iv^2$, then $x(t)+e^{\lambda t}v$ is a complex valued solution of the differential equation $\dot x=Ax$.
+\begin{lemma}\label{complex}
+    Let $z(t)=x(t)+iy(t)$ be a complex valued solution of $\dot x=Ax$. Then $\operatorname{Re}z$ and $\operatorname{Im}z$ (AKA $x(t)$ and $y(t)$) are both real valued solutions of $\dot x=Ax$, and are LI.
+\end{lemma}
+
+\subsection{Equal Roots}
+What if the characteristic has a root with multiplicity greater than one? Suppose $A_{n\times n}$ has $k<n$ LI eigenvectors, then the differential equation $\dot x=Ax$ only has $k$ LI solutions of the form $e^{\lambda t}$, and our goal is to find $n-k$ more LI solutions. This is how we'll do it: recall that $x(t)=e^{at}c$ is a solution of the scalar differential equation $\dot x=ax$ for every constant $c$. What we want: $x(t)=e^{At}v$ a solution for $\dot x=Ax$ for all constant vectors $v$. But $e^{At}$ isn't defined if $A$ is a matrix, turns out this isn't too bad of an issue.
+Since $e^x=\sum_{n=0}^{\infty} \frac{x^n }{n!},$ define $e^{At}:=I+At+\frac{A^2t^2}{2!}+\frac{A^3t^3}{3!}+\cdots +\frac{A^n  t^n}{n!}+\cdots $. This converges, and we can differentiate termwise to get \[
+\frac{d}{dt}e^{At}=A=A^2+\frac{A^3t^2}{2!}+\cdots +\frac{A^{n+1}t ^n }{n!}+\cdots =Ae^{At},
+\] which implies that $e^{At}v$ is a solution of $\dot x=Ax$ for every constant vector $v$, since $\frac{d}{dt}e^{At}v=Ae^{At}v=A(e^{At}v)$. Warning! $e^{At+Bt}=e^{At}e^{Bt}\iff AB=BA$. This leads us to our general algorithm for finding more solutions:
+    \begin{enumerate}[label=(\arabic*)] 
+        \item Find all eigenvalues and eigenvectors of $A$: if there are $n$ of them, we are done.
+        \item If we only found $k<n$ eigenvalues and eigenvectors, then to find additional solutions, we pick an eigenvalue $\lambda$ of $A$ and find all vectors $v$ such that $(A-\lambda I)^2v=0,\quad \text{but} \ (A-\lambda I)v\neq 0.$ For each such vector $v,$ \[
+                e^{At}v=e^{\lambda t}e^{(A-\lambda I)t}=e^{\lambda t}\left[ v+t(A-\lambda I)v \right] 
+            \] is an additional solution of $\dot x=Ax$. The equation holds since $e^{At}v=e^{(A-\lambda I + \lambda I)t}v=e^{\lambda t}e^{(A-\lambda I)t}v$, which is true because the matrices commute. We do this for all eigenvalues of $A$.
+        \item If we still don't have enough solutions, then we find all vectors $v$ such that $(A-\lambda I)v^3=0$, but $(A-\lambda I)v^2\neq 0$. For each such $v$,\[
+                e^{At}v=e^{\lambda t}\left[ v+t(A-\lambda I)v+ \frac{t^2}{2!}(A-\lambda I)^2v \right] 
+            \] is an additional solution of $\dot x=Ax$. The reason why this algorithm works is because if $(A-\lambda I)^m=0$, then the series $e^{(A-\lambda I)t}v$ terminates after $m$ terms. Indeed, if $(A-\lambda I)^m=0$, then $(A-\lambda I)^{m+\ell}v=0$ as well, since $(A-\lambda I)^{m+\ell}v=(A-\lambda I)^{\ell}\left[ (A-\lambda I)^mv \right] =0$. As a consequence, $e^{(A-\lambda I)t}v=v+t(A-\lambda I)v+\frac{t^2}{2!}(A-\lambda I)^2v+\cdots + \frac{t ^{m-1}}{(m-1)!}(A-\lambda I)^m v$, which implies that \[
+            e^{At}v=e^{\lambda}=e^{\lambda t}e^{(A-\lambda I)t}v=e^{\lambda t}\left[ v+t(A-\lambda I)v +\frac{t^2}{2!}(A-\lambda I)^2v+\cdots + \frac{t^{m-1}}{(m-1)!}(A-\lambda I)^{m-1}v \right] .
+            \] 
+    \item We continue in this manner until, hopefully, we obtain $n$ LI solutions.
+    \end{enumerate}
+
+\subsection{Fundamental Matrix Solutions; $e^{At}$}
+If $x^1(t)\langle \cdots x^n (t) \rangle $ are $n$ LI solutions of the differential equation $\dot x=Ax$, then every solution $x(t)$ can be written in the form $x(t)=c_1x^1(t)+c_2x^2(t)+\cdots +c_n x^n (t)$. Let $X(t)$ be the matrix whose columns are $x^1(t),\cdots ,x^n (t)$. Then we can write the previous equation in the form $x(t)=X(t)c$, where $c=
+\begin{bmatrix}
+    c_1\\ \vdots \\ c_n 
+\end{bmatrix}$.
+\begin{definition}[Fundamental matrix]
+    A matrix $X(t)$ is called a \textbf{fundamental matrix solution} of $\dot x=Ax$ if its columns form a set of $n$ LI solutions.
+\end{definition}
+\begin{theorem}
+    Let $X(t)$ be a fundamental matrix solution of the differential equation $\dot x=Ax$. Then $e^{At}=X(t)X^{-1}(0)$. In other words, the product of any fundamental solution with its inverse at $t=0$ gives $e^{At}$.
+\end{theorem}
+\begin{lemma}
+    A matrix $X(t)$ is a fundamental matrix solution of $\dot x=Ax$ iff $\dot X(t)=AX(t)$ and $\det X(0)\neq 0$. We can rewrite the first condition to say that $A=\dot X(t)X^{-1}(t)$.
+\end{lemma}
+
+\newpage
 \section{Examples}
 
 \subsection{Algebraic Properties of Solutions of Linear Systems}
@@ -146,5 +231,305 @@ Do you know how to multiply matrices? Do you know about noncommutative rings? (O
 
 \subsection{The Theory of Determinants}
 zzz
+
 \subsection{Solutions of Simultaneous Linear Equations}
+\begin{example}
+   To solve $Ax=b$ where $A=
+   \begin{bmatrix}
+       1 & -2 \\
+       3 & 4
+   \end{bmatrix}$, $x=
+   \begin{bmatrix}
+       x_1\\
+       x_2
+   \end{bmatrix}$, and $b=
+   \begin{bmatrix}
+       1\\
+       -7
+   \end{bmatrix}$, by Cramer's rule we have \[
+   x_1=\frac{
+   \begin{vmatrix}
+       1 & -2 \\
+       -7 & 4
+   \end{vmatrix}}{
+   \begin{vmatrix}
+       1 & -2\\
+       3 & 4
+   \end{vmatrix}}=\frac{-10}{10}=-1,\quad x_2=
+   \frac{
+   \begin{vmatrix}
+       1 & 1 \\
+       3 & -7
+   \end{vmatrix}}{
+   \begin{vmatrix}
+       1 & -2\\
+       3 & 4
+   \end{vmatrix}}=-\frac{10}{10}=-1\implies x=
+   \begin{bmatrix}
+       -1\\
+       -1
+   \end{bmatrix}.
+   \] 
+\end{example}
+
+\subsection{Linear Transformations}
+\begin{example}
+    You can show transformations are linear by encoding them with a matrix, for example, considering the mapping $T\colon x\mapsto 
+    \begin{bmatrix}
+        x_1+x_2+x_3\\
+        x_1+x_2-x_3\\
+        x_1
+    \end{bmatrix}$, we show this is linear by noting that the matrix $A=
+    \begin{bmatrix}
+        1 & 1 & 1 \\
+        1 & 1 & -1\\
+        1 & 0 & 0
+    \end{bmatrix}$ encodes this transformation. Also, the standard matrix for clockwise rotation about the origin for an angle $\phi $ is given by $A=
+\begin{bmatrix}
+    \cos \phi & -\sin \phi\\
+    \sin \phi & \cos \phi
+\end{bmatrix}$.
+\end{example}
+\begin{prob}
+    When does the equation $Ax=0$ have a nontrivial solution? \[
+    A=\begin{bmatrix}
+        1 & \lambda & \lambda \\
+        1 & 0 & 1\\
+        1 & 1 & 1 
+    \end{bmatrix}
+    \] 
+\end{prob}
+\begin{solution}
+    We want $\det A=0$, since if not $A$ would be invertible and so would uniquely have the trivial solution. So $\lambda=1$.
+\end{solution}
+
+\subsection{The Eigenvalue-Eigenvector Method of Finding Solutions}
+\begin{example}
+    To find the general solution of $\dot x =Ax$ where $A=
+    \begin{bmatrix}
+        7 & 4\\
+        -3 & -1
+    \end{bmatrix}$, note that $p(\lambda)=\lambda^2-6\lambda+5$, so the eigenvalues are $\lambda=1$ and $\lambda=5$. The corresponding eigenvectors are then $
+    \begin{bmatrix}
+       -2\\
+       3
+    \end{bmatrix}$ and $
+    \begin{bmatrix}
+        -2\\
+        1
+    \end{bmatrix}$, therefore by \cref{eigen} they're solutions, and since any LC of solutions are also solutions, we have that the solutions are of the form \[
+    x(t)=c_1e^{t}
+    \begin{bmatrix}
+        -2\\
+        3
+    \end{bmatrix}+c_2e^{5t}
+    \begin{bmatrix}
+        -2\\
+        1
+    \end{bmatrix}=
+    \begin{bmatrix}
+        -2c_1e^{t}-2c_2e^{5t}\\
+        3c_1e^{t}+c_2e^{5t}
+    \end{bmatrix}.
+    \] 
+\end{example} 
+
+\subsection{Complex Roots}
+\begin{example}
+To solve the IVP $\dot x=Ax$, where $A=
+\begin{bmatrix}
+    1 & 0 & 0\\
+    0 & 1 & -1 \\
+    0 & 1 & 1 
+\end{bmatrix}$ and $x(0)=
+\begin{bmatrix}
+    1\\1\\1
+\end{bmatrix},$ note that the characteristic is $(1-\lambda)(\lambda^2-\lambda+2)$, and so the eigenvalues are $\lambda=1,1\pm i$. For $\lambda=1$, the corresponding eigenvector is $
+\begin{bmatrix}
+    1\\0\\0
+\end{bmatrix}$, and so $x^1(t)=e^{t}
+\begin{bmatrix}
+    1\\0\\0
+\end{bmatrix}$ is a solution of the differential equation. For $\lambda=1+i$, an eigenvector is $
+\begin{bmatrix}
+    0\\i\\1
+\end{bmatrix}$, so $x(t)=e^{(1+i)t}
+\begin{bmatrix}
+    0\\i\\1
+\end{bmatrix}$ is a complex-valued solution of $\dot x=Ax.$ Now $e^{(1+i)t}=e^{t}\left( \cos\theta+i\sin\theta \right) $, so we can rewrite this solution as \[
+\begin{bmatrix}
+    0\\ie^{t}(\cos\theta+i\sin\theta)\\e^{t}(\cos\theta+i\sin\theta)
+\end{bmatrix}=
+\begin{bmatrix}
+    0\\-e^{t}\sin\theta+ie^{t}\cos\theta\\e^{t}\cos\theta+ie^{t}\sin\theta
+\end{bmatrix}=e^{t}
+\begin{bmatrix}
+    0\\-\sin\theta\\ \cos\theta
+\end{bmatrix}+ie^{t}
+\begin{bmatrix}
+    0\\ \cos\theta\\ \sin\theta
+\end{bmatrix}.
+\] By \cref{complex}, $x^2(t)=e^{t}
+\begin{bmatrix}
+    0\\-\sin\theta\\ \cos\theta
+\end{bmatrix}$ and $x^3(t)=e^{t}
+\begin{bmatrix}
+    0\\ \cos\theta\\ \sin\theta
+\end{bmatrix}.$ The solutions $x^i (t)$ for $i\in \{1,2,3\} $ are LI since $x^1(0)=
+\begin{bmatrix}
+    1\\0\\0
+\end{bmatrix}$, $x^2(0)=
+\begin{bmatrix}
+    0\\0\\1
+\end{bmatrix}$ and $x^3(t)=
+\begin{bmatrix}
+    0\\1\\0
+\end{bmatrix}$ which are clearly LI (they form a standard basis for $\R^3$). So a solution must be of the form \[
+x(t)=c_1e^{t}
+\begin{bmatrix}
+    1\\0\\0
+\end{bmatrix}+c_2e^{t}
+\begin{bmatrix}
+    0\\-\sin\theta\\ \cos\theta
+\end{bmatrix}+c_3e^{t}
+\begin{bmatrix}
+    0\\ \cos \theta \\ \sin\theta
+\end{bmatrix}. 
+\] At $t=0$, note that $
+\begin{bmatrix}
+   c_1\\c_2\\c_3         
+\end{bmatrix}=
+\begin{bmatrix}
+    1\\1\\1
+\end{bmatrix}$, so we conclude that \[
+x(t)=e^{t}
+\begin{bmatrix}
+    1\\0\\0
+\end{bmatrix}+e^{t}
+\begin{bmatrix}
+    0\\-\sin\theta\\ \cos\theta
+\end{bmatrix}+e^{t}
+\begin{bmatrix}
+    0\\ \cos \theta \\ \sin\theta
+\end{bmatrix}=e^{t}
+\begin{bmatrix}
+   1\\ \cos\theta-\sin\theta \\ \cos\theta+\sin\theta
+\end{bmatrix}.
+\] Just pretend that I didn't switch around $t$ and $\theta$ for the entire problem.
+\end{example}
+
+\subsection{Equal Roots}
+To solve $\dot x=Ax$ where $A=
+\begin{bmatrix}
+    1 & 0 \\ 2 & 1
+\end{bmatrix},$ note that in the characteristic $(1-\lambda )^2$, the eigenvalue $1$ has a multiplicity of two, and the eigenvector corresponding to it is $
+\begin{bmatrix}
+   0\\1 
+\end{bmatrix}$. So $x^1(t)=e^{t}
+\begin{bmatrix}
+    0\\1
+\end{bmatrix}$ is one solution. Applying step (2) of the algorithm, we want to find all solutions for $(A-\lambda I)^2v=0$ with $\lambda=1$: note that $A-\lambda I$ is a zero divisor when squared, so we conveniently choose $v=
+\begin{bmatrix}
+    1\\0
+\end{bmatrix},$ since it isn't a multiple of $
+\begin{bmatrix}
+    0\\1
+\end{bmatrix}$ and hence doesn't satisfy the equation $(A-\lambda I)v=0$. Therefore, \[
+x^2(t)=e^{At}v=e^{\lambda t}\left[ v+t(A-\lambda I)v \right] =e^{t}
+\begin{bmatrix}
+    1\\2t
+\end{bmatrix}
+\] is a second solution of $\dot x=Ax$. So $x(t)=c_1x^1(t)+c_2x^2(t)=
+c_1e^{t}
+\begin{bmatrix}
+0\\1
+\end{bmatrix}+c_2e^{t}
+\begin{bmatrix}
+    1\\2t
+\end{bmatrix}=
+\begin{bmatrix}
+   c_2e^{t}\\c_1e^{t}+2c_2te^{t} 
+\end{bmatrix}.$ 
+\begin{example}
+    We want to find three LI solutions for $\dot x=Ax$, where $A=
+    \begin{bmatrix}
+        1 & 1 & 0\\ 0 & 1 & 0\\ 0 & 0 & 2
+    \end{bmatrix}x$. Do this as practice tomorrow.
+\end{example}
+
+\subsection{Fundamental Matrix Solutions; $e^{At}$}
+\begin{example}
+    To find a fundamental matrix solution for the system \[
+    \dot x = 
+    \begin{bmatrix}
+        1 & -1 & 4 \\ 3 & 2 & -1 \\ 2 & 1 & -1
+    \end{bmatrix}x,
+    \] since we have \[
+    e^{t}
+    \begin{bmatrix}
+        -1 \\ 4 \\1
+    \end{bmatrix},\quad e^{3t}
+    \begin{bmatrix}
+        1 \\ 2 \\ 1
+    \end{bmatrix}\quad \text{and} \quad e^{-2t}
+    \begin{bmatrix}
+        -1 \\ 1 \\ 1
+    \end{bmatrix}
+    \] three LI solutions, it can be seen that the fundamental matrix is \[
+    X(t)=
+    \begin{bmatrix}
+        -e^{t}& e^{3t} & -e^{-2t}\\
+        4e^{t}& 2e^{3t}& e^{-2t}\\
+        e^{t}& e^{3t}& e^{-2t}
+    \end{bmatrix}.
+    \] 
+\end{example}
+\begin{example}
+    We'll show that $X(t)=e^{2t}
+    \begin{bmatrix}
+        4 & 1+4t\\ 2 & 2t
+    \end{bmatrix}$ is a fundamental matrix solution for some $A$, and we'll also determine $A$. Now $X(0)=
+    \begin{bmatrix}
+        4 & 1 \\ 2 & 0
+        \end{bmatrix}$ and thus has nonzero determinant. If $X(t)$ is a fundamental matrix solution of $\dot x=Ax$, then $A=\dot X(t)X^{-1}(t)$. We have\[
+    \dot X(t)=\left( e^{2t} \right) '
+    \begin{bmatrix}
+        4 & 1+4t \\ 2 & 2t
+    \end{bmatrix}+ e^{2t}
+    \begin{bmatrix}
+        4' & (1+4t)'\\2' & (2t)'
+    \end{bmatrix}=2e^{2t}
+    \begin{bmatrix}
+        4 & 3+4t\\
+        2 & 1+2t
+    \end{bmatrix},\quad X^{-1}(t)=-\frac{1}{2e^{2t}}
+    \begin{bmatrix}
+        2t & -1-4t\\-2 & 4
+    \end{bmatrix}.
+    \] 
+So 
+\begin{align*}
+    A&=\dot X(t)X^{-1}(t)\\
+     &=2e^{2t}
+    \begin{bmatrix}
+        4 & 3+4t\\
+        2 & 1+2t
+    \end{bmatrix}\cdot \left(- \frac{1}{2e^{2t}} \right) 
+    \begin{bmatrix}
+        2t & -1-4t \\ -2 & -4
+    \end{bmatrix}\\
+     &=-\begin{bmatrix}
+        4 & 3+4t\\
+        2 & 1+2t
+    \end{bmatrix}
+    \begin{bmatrix}
+        2t & -1-4t \\ -2 & -4
+    \end{bmatrix}\\
+     &=
+     \begin{bmatrix}
+         6 & -8\\
+         2 & -2
+     \end{bmatrix}.
+\end{align*}
+\end{example}
 
