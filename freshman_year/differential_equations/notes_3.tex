@@ -1,0 +1,150 @@
+\section{Second Test Review}
+I really wish I had an RREF or eigen-blah calculator for the test.
+
+\subsection{Algebraic Properties of Solutions of Linear Systems}
+You can convert any $n$-th order differential equation to a system of $n$ first order differential equations. Just let \[
+    x_1=y, \ x_2=y', \ x_3=y'' \ ,  \cdots , \ x_n =y^{(n-1)}
+\] and everything will work out. Yes, you can write things as matrices. The rest of the section just goes on and on about manually plugging stuff in and solving by methods from previous sections.
+
+\subsection{Vector Spaces}
+If anybody wasn't annoyed enough already by the ridiculous memorization/plug and chug approach to computational lower level mathematics, here are ten axioms you should memorize about vector spaces. For $u,v,w\in V$ and $a,b,c\in \F$ we have the following:
+\begin{enumerate}[label=(\roman*)]
+    \item $u+v\in V$
+    \item $cu\in V$
+    \item $u+v=v+u$
+    \item $(u+v)+w=u+(v+w)$
+    \item  $\exists 0\in V\ni 0+u=u$
+    \item $\forall u\in V \ \exists (-u)\in V \ni u+(-u)=0$
+    \item $1\cdot u=u$
+    \item $a(bu)=(ab)u$
+    \item $a(u+v)=au+av$ 
+    \item $(a+b)u=au+bu$
+\end{enumerate}
+For example, $\R^n $, $\mathbb{P}^n, \R, \mathbb{P},\R^{\R},\{0\},\operatorname{GL}_n (\F)$ etc are all vector spaces. You know what a subspace is. And clearly subspaces form vector spaces themselves. You can show weird things are spaces by considering them as subspaces of $\R^n $. Also, linear combinations of vectors of a space form a subspace (and therefore a space).
+
+\subsection{Dimension of a Vector Space}
+\begin{definition}[Linear independence and dependence]
+    Vectors $v_1,\cdots ,v_p$ are \textbf{linearly dependent} if there exist scalars $c_1,\cdots ,c_p$ not all zero such that 
+    \begin{equation}\label{dep}
+    c_1v_1+\cdots +c_pv_p=0.
+\end{equation}If the only solution to \cref{dep} is the trivial one, that is, $c_i =0$ for all $i$, then the vectors are said to be \textbf{linearly independent}.
+\end{definition}
+To show things are LI or not, just reduce them: if there's a zero column, then dep, if you can get it into REF, then LI. This is the first method you learn. Note that vectors aren't LI iff one is a linear combo of the others, if there are only two this is equivalent to one being a scalar multiple of the other.
+\begin{definition}[Dimension]
+    The \textbf{dimension} of a vector space $V$, denoted by $\operatorname{dim}V$, is the order of any basis for $V$. Note that we can have zero dimensional vector spaces, for example take the trivial space $\{0\} $.
+\end{definition}
+
+\subsection{Applications of Linear Algebra to Differential Equations}
+\begin{theorem}[Existence-uniqueness]
+   There exists exactly one solution to the IVP \[
+       \dot x=Ax,\quad x(t_0)=x^{(0)}=
+       \begin{bmatrix}
+           x_1^{(0)}\\
+           x_2^{(0)}\\
+           \vdots\\
+           x_n ^{(0)}
+       \end{bmatrix}.
+   \]  
+\end{theorem}
+\begin{theorem}\label{lisol}
+    Let $x^{(1)},x^{(2)},\cdots ,x^{(k)}$ be $k$ solutions for $\dot x=Ax$. Then for some $t_0$ we have $x^{(1)},\cdots ,x^{(k)}$ LI solutions iff $x^{(1)}(t_0),\cdots ,x^{(k)}(t_0)$ are LI vectors in $\R^n $.
+\end{theorem}
+\begin{remark}
+    There is no square matrix $A$ with constant entries such that $x^{(1)}(t)$, $x^{(2)}(t)$ are solutions of $\dot x=Ax$.
+\end{remark}
+
+\subsection{The Theory of Determinants}
+Do I even need to take notes? Recall that if $A$ is triangular then we can just multiply along the diagonal (be lazy! –Dr. Tran). Swapping two rows (WLOG, since for columns note that $\det A= \det A^T$) gives a negative determinant, multiplying rows by a scalar $k$ gives $k\det A$, adding two rows does nothing.
+
+\subsection{Solutions of Simultaneous Linear Equations}
+Do you know how to multiply matrices? Do you know about noncommutative rings? (OHO big scary) Do you know that cancellation only holds in integral domains (which $M_{n\times n}(\R)$ isn't due to the existence of zero divisors)? OK good.
+
+
+\section{Examples}
+
+\subsection{Algebraic Properties of Solutions of Linear Systems}
+\begin{prob}
+    Convert the following differential equation into a system of two first order differential equations: \[
+    4 \frac{d^2y}{dt^2}+\frac{dy}{dt}+3y=0
+    \] 
+\end{prob}
+\begin{solution}
+    Let $x_1=y,$ $x_2=y'$. Then $x_1'=x_2$ and $x_2'=\frac{-x_2-3x_1}{4}$.
+\end{solution}
+\begin{prob}
+    Convert the following IVP.
+    \[
+        y'''+(y')^2+3y=e^t; \quad y(0)=1, \ y'(0)=0, \ y''(0)=0.
+    \] 
+\end{prob}
+\begin{solution}
+    Let $x_1=y$, $x_2=y'$, $x_3=y''$. Then $x_1'=x_2$, $x_2'=x_3$, $x_3'=e^t-x_2^2-3x_1$, given $x_1(0)=1$, $x_2(0)=0$, $x_3(0)=0$.
+\end{solution}
+
+\subsection{Vector Spaces}
+\begin{prob}
+    For $a,b$ scalars, show that the set of all matrices $H$ of the form below is a vector space. \[
+    \begin{bmatrix}
+       4a-b\\
+       2b\\
+       a-2b\\
+       a-b
+    \end{bmatrix}
+    \] 
+\end{prob}
+\begin{solution}
+    \[
+    \begin{bmatrix}
+       4a-b\\
+       2b\\
+       a-2b\\
+       a-b
+    \end{bmatrix}=
+    a
+    \begin{bmatrix}
+        4\\
+        0\\
+        1\\
+        1
+    \end{bmatrix}+b
+    \begin{bmatrix}
+        -1\\
+        2\\
+        -2\\
+        -1
+    \end{bmatrix},
+\] so for all $h\in H$, $h$ is a linear combination of vectors in $\R^4$ and is therefore a vector space.
+\end{solution}
+
+\subsection{Dimension of a Vector Space}
+\begin{example}
+    Let $V$ be the set of all solutions of the differential equation \[
+    \frac{d^2x}{dt^2}-x=0.
+\] Since solutions are of the form $x(t)=c_1e^t+c_2e^{-t}$, we have that $x_1(t)=e^t$ and $x_2(t)=e^{-t}$ span $V$. Note that $\operatorname{dim}(V)=2$.
+\end{example}
+
+\subsection{Applications of Linear Algebra to Differential Equations}
+\begin{example}
+    The vectors $x^{(1)}(t)=
+    \begin{bmatrix}
+        e^{t}\\
+        -3e^{t} /2
+    \end{bmatrix}$ and $x^{(2)}(t)=
+    \begin{bmatrix}
+        e^{5t}\\
+        -e^{5t}/2
+    \end{bmatrix}$ are LI since $x^{(1)}(0)=
+    \begin{bmatrix}
+        1\\
+        -\sfrac{3}{2}
+    \end{bmatrix}$ and $x^{(2)}(0)=
+    \begin{bmatrix}
+        1\\
+        -\sfrac{1}{2}
+    \end{bmatrix}$, which are not scalar multiples of each other.
+\end{example}
+
+\subsection{The Theory of Determinants}
+zzz
+\subsection{Solutions of Simultaneous Linear Equations}
+
