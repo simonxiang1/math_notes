@@ -1,0 +1,96 @@
+\section{November 12, 2020}
+Exam soon, a week from Tuesday! This exam is critical. Your entire life depends on your performance on this exam.
+\begin{quote}
+    \emph{``Any questions about anything? Anything at all. No? Alright, let's begin then.''}
+    \\
+    –Dr.\ Radin
+\end{quote}
+Tis the nature of school in the time of corona. 
+
+\subsection{More on poles and zeroes}
+Here we give an example of \cref{zpol}.
+\begin{example}
+    Let $f(z)=z(e^z-1)$, where $f(0)=0$. Then $0$ is a zero of order $2$ since 
+    \begin{align*}
+        z(e^z-1)&=z\left( 1+z+\frac{z^2}{2}+\cdots  \right) \\
+                &=z\left(z+\frac{z^2}{2}+\cdots \right)\\
+                &=z^2+\cdots 
+    \end{align*}
+\end{example}
+\begin{theorem}\label{zpole}
+    Assume $f$ and $g$ are analytic at $z_0$ and $f(z_0)\neq 0$. Then $\frac{f(z)}{g(z)}$ has a pole of order $m\geq 1$ at $z_0$ iff $g$ has a zero of order $m$ at $z_0$.
+\end{theorem}
+\begin{proof}
+    Not really a proof, but note that 
+    \begin{align*}
+        \frac{f(z)}{g(z)}&=\frac{f(z_0)+f'(z_0)(z-z_0)+\cdots }{g(z_0)+g'(z_0)(z-z_0)+\cdots }\\
+                         &=\frac{f(z_0)}{\cdots (z-z_0)^m}+\cdots 
+    \end{align*}which is a pole of order $m$.
+\end{proof}
+\begin{cor}
+    Assuming the assumptions given in \cref{zpole}, if $g(z_0)=0$ and $g'(z_0)\neq 0$, then \[
+        \underset{z_0}{\operatorname{R es}} \,\frac{f}{g}= \frac{f(z_0)}{g'(z_0)}
+    \]  
+\end{cor}
+\begin{example}
+    Consider $f(z)=\frac{z^2-4}{z^3-3z^2+5z-3}$. To compute $\underset{z=1}{\operatorname{R es}} \, f$, note that at $1$ the denominator is zero and thus there is an isolated singularity. All we need to know is the order of the pole, to do this let's compute the derivative of the denominator which is simply $3z^2-6z+5$. When $z=1$, this is $2$. So $\underset{z=1}{\operatorname{R es}} \, f=-\frac{3}{2}$.
+\end{example}
+Early in the course, we stated the following theorem without proof. We'll state it again for clarity.
+\begin{theorem}
+    Suppose $f$ is analytic on a domain $D$ and $f(z)=0$ on a curve $\Gamma \subseteq D$. Then $f(z)=0$ for all $z\in D$.
+\end{theorem}
+I think that the zeros just become ``anti'' isolated singularities, and extend to nbds which extend to nbds of nbds and so on, proceed by induction and eventually we'll cover $D$ since it's open. Dr.\ Radin says he found a hole in the the proof and fixing it requires Heine-Borel (in complete metric space, compact iff closed and bounded). Hmm, sounds interesting. 
+\begin{note}
+    Suppose $g,h$ are analytic in $D$ and $g(z)=h(z)$ on $\Gamma $. Then $g-h=0$ on $\Gamma $ and also in $D$. These are just three different ways of saying the same thing.
+\end{note}
+\begin{example}
+    Consider an entire function $f(z)=\sin^2(z)+\cos^2(z)-1$. This is entire since the $\sin$ and $\cos$ functions are entire. This function is equal to zero for all $z\in \R$. So it is equal to zero everywhere.
+\end{example}
+
+\begin{theorem}
+    Suppose $f$ is analytic and bounded on the punctured disk $0<|z-z_0|<R$. Then there exist $a_n $ such that \[
+        \sum_{n=0}^{\infty} a_n (z-z_0)^n       
+    \] converges to $f(z)$ for those $z$. So $f$ has at most a removable singularity at $z_0$. In other words, the only possibilities are that $f$ is either analytic or has a removable singularity at $z_0$.
+\end{theorem}
+\begin{proof}
+    By our hypotheses, $f$ has a Laurent expansion in the punctured disk homeomorphic to an annulus. Then \[
+        f(z)=\sum_{n=0}^{\infty} c_n (z-z_0)^n ,\quad\text{with} \ c_n = \frac{1}{2\pi i}\int_{\Gamma }^{} \frac{f(z)}{(z-z_0)^{n+1}} \, dz.
+    \] Assume $|f(z)|\leq M$ on $\Gamma $, and take $\Gamma $ to be a circle of radius $\varepsilon <R$. Then \[
+    |c_n |\leq \frac{1}{2\pi}\cdot \frac{M}{\varepsilon ^{n+1}}\cdot 2\pi \varepsilon =\frac{M}{\varepsilon ^n }.
+\] Notice that $|c_n|\to 0$ as $\varepsilon \to $ if $n<0$. So $c_n =0$ for all $m<0$.
+\end{proof}
+    Assume that $f$ has an isolated singularity at $z=z_0$. If it's removable, then $|f|$ stays bounded near $z_0$. If $f$ has a pole at $z_0$, then it blows up. If $z_0$ is an essential singularity, what happens?
+    \begin{theorem}
+        Suppose $f$ has an essential singularity at $z_0$. Then for any fixed $N_0\in \C$, and all $\varepsilon >0$, $\delta >0$, there exists some $z$ where $0<|z-z_0|<\delta$ such that \[
+            |f(z)-N_0|<\varepsilon .
+        \] So $f$ attains all values near $z_0$. This is amazing!
+    \end{theorem}
+\begin{example}
+    $f(z)=e^{\frac{1}{z}}$ has an essential singularity at $z=0$, look at the series expansion \[
+        1+\frac{1}{z}+\frac{\left( \frac{1}{z} \right) ^2}{2}+\cdots 
+    \] 
+\end{example}
+
+\subsection{Real valued integration by residues}
+\begin{example}
+    \[
+    I=\int_{0}^{\infty} \frac{x^2}{x^6+1} \, dx=\lim_{R\to \infty }\int_{0}^{R} \frac{x^2}{x^6+1} \, dx.
+    \] 
+    \begin{note}
+        Consider the integral $\int_{-R}^{R} \frac{x^2}{x^6+1} \, dx$, we compute this integral by Cauchy's residue theorem and halve it to get our result.
+    \end{note}
+Then for \[
+I_R=\int_{\Gamma _R}^{} \frac{z^2}{z^6+1} \, dz,
+\] the denominator is zero at $e^{i \frac{\pi}{6}},e^{i\left( \frac{\pi}{6}+\frac{2\pi}{6} \right) },\cdots $, or the $6$th roots of $-1$. So \[
+I_R=2\pi i \left[  \underset{z_1}{\operatorname{R es}} \, \frac{z^2}{z^6+1}+ \underset{z_2}{\operatorname{R es}} \, \frac{z^2}{z^6+1}+ \underset{z_3}{\operatorname{R es}} \,\frac{z^2}{z^6+1}\right] .
+\] 
+We will show that \[
+    \left| \int_{\text{semicircle}}^{} f  \,\right| \to 0,\quad R\to \infty.
+\] Now $\left| \frac{z^2}{z^6+1} \right| \leq \frac{R^2}{R^6-1}$ on the semicircle. The length of the semicircle is $\pi R$, so \[
+\left| \int_{\text{s.c.}}^{} f \, \right| < \underset{R\to \infty}{\frac{\pi R\cdot  R^2}{R^6-1}} \to 0.
+\] Therefore\[
+\lim_{R\to \infty       } \int_{-R}^{R} \frac{z^2}{z^6+1} \, dz=2\pi i \left[ \underset{z_1}{\operatorname{R es}}\, \frac{z^2}{z^6+1}+ \underset{z_2}{\operatorname{ R es}} \, \frac{z^2}{z^6+1}+ \underset{z_3}{\operatorname{R es}}\frac{z^2}{z^6+1}  \right] =2 \lim _{R\to \infty}\int_{o}^{R} \frac{x^2}{x^6+1} \, dx=\frac{\pi}{6}.
+\] 
+\end{example}
+\orbreak
+The exam will only cover things up until this week. We will get new material \emph{and} homework on it, but it won't be on the exam. Yeahh, I want to go to Cypress bend. See you next week.
