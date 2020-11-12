@@ -106,7 +106,7 @@ For $\dot x=Ax$, we want to find $n$ LI solutions $x^1(t),\cdots ,x^n (t)$.
 \end{proof}
 
 \subsection{Complex Roots}
-If $\lambda=\alpha +i\beta $ is a complex eigenvalue of $A$ with eigenvector $v=v^1+iv^2$, then $x(t)+e^{\lambda t}v$ is a complex valued solution of the differential equation $\dot x=Ax$.
+If $\lambda=\alpha +i\beta $ is a complex eigenvalue of $A$ with eigenvector $v=v^1+iv^2$, then $x(t)=e^{\lambda t}v$ is a complex valued solution of the differential equation $\dot x=Ax$.
 \begin{lemma}\label{complex}
     Let $z(t)=x(t)+iy(t)$ be a complex valued solution of $\dot x=Ax$. Then $\operatorname{Re}z$ and $\operatorname{Im}z$ (AKA $x(t)$ and $y(t)$) are both real valued solutions of $\dot x=Ax$, and are LI.
 \end{lemma}
@@ -130,7 +130,7 @@ Since $e^x=\sum_{n=0}^{\infty} \frac{x^n }{n!},$ define $e^{At}:=I+At+\frac{A^2t
     \end{enumerate}
 
 \subsection{Fundamental Matrix Solutions; $e^{At}$}
-If $x^1(t)\langle \cdots x^n (t) \rangle $ are $n$ LI solutions of the differential equation $\dot x=Ax$, then every solution $x(t)$ can be written in the form $x(t)=c_1x^1(t)+c_2x^2(t)+\cdots +c_n x^n (t)$. Let $X(t)$ be the matrix whose columns are $x^1(t),\cdots ,x^n (t)$. Then we can write the previous equation in the form $x(t)=X(t)c$, where $c=
+If $x^1(t),\cdots ,x_n (t)$ are $n$ LI solutions of the differential equation $\dot x=Ax$, then every solution $x(t)$ can be written in the form $x(t)=c_1x^1(t)+c_2x^2(t)+\cdots +c_n x^n (t)$. Let $X(t)$ be the matrix whose columns are $x^1(t),\cdots ,x^n (t)$. Then we can write the previous equation in the form $x(t)=X(t)c$, where $c=
 \begin{bmatrix}
     c_1\\ \vdots \\ c_n 
 \end{bmatrix}$.
@@ -454,7 +454,45 @@ c_1e^{t}
     We want to find three LI solutions for $\dot x=Ax$, where $A=
     \begin{bmatrix}
         1 & 1 & 0\\ 0 & 1 & 0\\ 0 & 0 & 2
-    \end{bmatrix}x$. Do this as practice tomorrow.
+    \end{bmatrix}$. The characteristic is $(1-\lambda)^2(2-\lambda)$, so the solutions are $\lambda=1$ with a multiplicity of two, and $\lambda =2$. So $x^1(t)=e^t 
+    \begin{bmatrix}
+        1 \\ 0 \\ 0
+    \end{bmatrix}$ and $x^2(t)=e^{2t}
+    \begin{bmatrix}
+        0\\0\\1
+    \end{bmatrix}$ are two LI solutions. Now we want to find all solutions for $(A-\lambda I)^2v=0$, let $\lambda=1$. Then \[
+    (A-\lambda I)^2=
+    \begin{bmatrix}
+        (1-\lambda)^2 & 2(1-\lambda) & 0\\
+        0 & (1-\lambda)^2 & 0\\
+        0 & 0 & (2-\lambda)^2
+    \end{bmatrix}=
+    \begin{bmatrix}
+        0 & 0 & 0\\ 0 & 0 & 0 \\ 0 & 0 & 1
+    \end{bmatrix}
+    \] when evaluated. Then for $v=
+    \begin{bmatrix}
+        0 \\ 1 \\ 0
+    \end{bmatrix}$ this is zero but not zero at $(A-\lambda I)v$, since $v$ is LI with the other eigenvectors. Therefore \[
+    x^3(t)=e^{At}v=e^{\lambda t}\left[ v+t(A-\lambda I)v \right] = e^{t}
+    \begin{bmatrix}
+        t\\1\\0
+    \end{bmatrix}
+    \] is a third solution for the equation $\dot x=Ax$, and so a general solution is of the form \[
+    c_1e^{t}
+    \begin{bmatrix}
+        1\\0\\0
+    \end{bmatrix}+c_2e^{2t}
+    \begin{bmatrix}
+        0\\0\\1
+    \end{bmatrix}+c_3e^{t}
+    \begin{bmatrix}
+        t\\1\\0
+    \end{bmatrix}=
+    \begin{bmatrix}
+        c_1e^{t}+c_3te^{t}\\ c_3e^{t}\\c_2e^{2t}
+    \end{bmatrix}.
+    \] 
 \end{example}
 
 \subsection{Fundamental Matrix Solutions; $e^{At}$}
