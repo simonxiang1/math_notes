@@ -106,7 +106,7 @@ What we have here is a sequence of homomorphisms of abelian groups \[
     \cdots \to C_{n+1}\overset{\partial _{n+1}}{\longrightarrow} C_n \overset{\partial _n }{\longrightarrow} C_{n-1}\to \cdots \to C_1\overset{\partial_1}{\longrightarrow}C_0\overset{\partial_0}{\longrightarrow}0 
 \] with $\partial _n \partial _{n+1}=0$ for all $n$. This is called a \textbf{chain complex}. Note that  we've extended the sequence to $0$, with $\partial_0=0 $. The equation $\partial _n \partial _{n+1}=0$ is equivalent to the inclusion $\operatorname{im}\partial _{n+1}\subseteq \ker \partial _n $, so we can define the $\mathbf{n}^{\text{\textbf{th}}}$ \textbf{homology group} of the chain complex as $H_n =\ker \partial_n  / \operatorname{im} \partial _{n+1}$. Elements of $\ker \partial _n $ are called \textbf{cycles} and elements of $\operatorname{im}\partial _{n+1}$ are called boundaries. Cosets of $\operatorname{im}\partial _{n+1}$ in $H_n $ are called \textbf{homology classes}. Two cycles representing the same homology class are said to be \textbf{homologous}, that is, their difference is a boundary. When $C_n=\Delta _n (X)$, the homology group $\ker \partial _n / \operatorname{im}\partial _{n+1} $ will be denoted by $H_n ^{\Delta }(X)$ and called the $\mathbf{n}^{\text{\textbf{th}}}$ \textbf{simplicial homology group} of $X$.
 
-\subsection{Homological Algebra}
+\subsection{Homological algebra}
 We'll take this section to digress a bit and talk about some homological algebra. These notes will follow May \S 12.
 \orbreak
 Let $R$ be a commutative ring: the main example is $R=\Z$. A \textbf{chain complex} over $R$ is a sequence of $R$-modules \[
@@ -250,7 +250,8 @@ An exact sequence $0 \to A\to B\to C\to 0$ as in (iv) is called a \textbf{short 
 \begin{proof}
     If $r \colon D^n  \to \partial D^n $ is a retraction, then $ri=\mathbb{1}$ for $i \colon \partial D^n  \to D^n $ the inclusion map. The composition $\widetilde H_{n-1}(\partial D^n )\overset{i_*}{\longrightarrow} \widetilde H_{n-1}(D^n )\overset{r_*}{\longrightarrow} \widetilde H_{n-1}(\partial D^n )$ is then the identity map on $\widetilde H_{n_1}(\partial D^n )\simeq\Z$. But $i_*$ and $r_*$ are both $0$ since $\widetilde H_{n-1}(D^n )=0$, and we have a contradiction. For the fixed point portion, just replace $\pi_1$ with $H_n $ in \cref{fixed} and we're good.
 \end{proof}
-\subsection{Relative homology}
+
+\subsection{Relative homology (todo)}
 Sometimes ignoring things makes things easier, for example arithmetic modulo $n$ (ignoring multiples of $n$). Relative homology is another example: in this case, we ignore all singular chains in a subspace of a given space. 
 
 Given a space $X$ and a subspace $A\subseteq X$, let $C_n (X,A)$ be the quotient group $C_n (X) / C_n (A)$, thus chains in $A$ are trivial in $C_n (X,A)$. Since $\partial \colon C_n (X)  \to C_{n-1}(X)$ takes $C_n (A)$ to $C_{n-1}(A)$, it induces a quotient boundary map $\partial \colon C_n (X,A) \to C_{n-1}(X,A)$. Then we have a sequence of boundary maps \[
@@ -287,4 +288,92 @@ To do this, we'll go on our first diagram chase. Consider the diagram
 \end{figure}
 A diagram like this is called a \textbf{short exact sequence of chain complexes}. We'll show that this short exact sequence of chain complexes stretches out into a long exact sequence of homology groups \[
     \cdots \to H_n (A) \overset{i_*}{\longrightarrow} H_n (B) \overset{j_*}{\longrightarrow} H_n (C) \overset{\partial }{\longrightarrow} H_{n-1}(A)\overset{i_*}{\longrightarrow} H_{n-1}(B)\to \cdots 
-\] where $H_n(A)$ denotes the homology group $\ker \partial  / \operatorname{im}\partial $ at $A_n $ in the chain complex, $H_n (B)$ and $H_n (C)$ similarly defined. To define the boundary map $\partial \colon H_n (C) \to H_{n-1}(A)$, let $c\in C_n $ be a cycle. Then since $j$ is onto, $c=j(b)$ for some $b\in B_n $. Then $\partial b\in B_{n-1}$ is also in $\ker j$ since $j(\partial b)=\partial j(b)=\partial c=0$.
+\] where $H_n(A)$ denotes the homology group $\ker \partial  / \operatorname{im}\partial $ at $A_n $ in the chain complex, $H_n (B)$ and $H_n (C)$ similarly defined. To define the boundary map $\partial \colon H_n (C) \to H_{n-1}(A)$, let $c\in C_n $ be a cycle. Then since $j$ is onto, $c=j(b)$ for some $b\in B_n $. Then $\partial b\in B_{n-1}$ is also in $\ker j$ since $j(\partial b)=\partial j(b)=\partial c=0$. 
+
+\subsection{Degrees of maps $S^n \to S^n $ (todo)}
+
+
+\subsection{Cellular homology}
+Following Pierre Albin lecture 19 and Hatcher for more technical things. Recall that if $X$ is a $\Delta $-complex then $H_*^{\Delta }(X)\simeq H_*(X)$, and that $H_*^{\Delta }(X)$ is easy to compute and $H_*(X)$ is easy to prove theorems about. In an ideal world, we would like a similar equivalence for when $X$ is a CW complex since they're much more applicable, but we ran into an issue when figuring out how to define the boundary maps. 
+What we're going to do is defined a chain complex $C_n ^{\text{CW}}(X)$, and we want it to be free abelian on the $n$-cells of $X$.
+\begin{lemma}\label{cells}
+    If $X$ is a CW complex, then:
+    \begin{enumerate}[label=(\alph*)]
+        \item $H_k(X^n ,X^{n-1})$ is zero for $k\neq n$ and is free abelian for $k=n$, with a basis in one-to-one correspondence with the $n$-cells of $X$.
+        \item $H_k(X^n )=0$ for $k>n$. In particular, if $X$ is finite-dimensional then $H_k(X)=0$ for $k>\operatorname{dim}X$.
+        \item The map $H_k (X^n )\to H_k(X)$ induced by the inclusion $X^n \hookrightarrow X$ is an isomorphism for $k<n$ and surjective for $k=n$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Statement (a) follows immediately from the fact that $(X^n ,X^{n-1})$ is a good pair and $X^n  / X^{n-1}$ is a wedge sum of $n$-spheres, one for each $n$-cell of $X$ (it does!). Next consider the following part of the LES of the pair $X^n ,X^{n-1})$: \[
+        H_{k+1}(X^n ,X^{n-1})\to H_k(X^{n-1})\to H_k(X^n )\to H_k(X^n ,X^{n-1})
+    \] If $k\neq n$ the last term is zero by (a) so the middle map is surjective, while if $k\neq n-1$ then the first term is zero so the middle map is injective. Now look at the inclusion-induced homomorphisms: \[
+    H_k(X^0) \to H_k(X^1) \to \cdots \to H_k(X^{k-1}) \to H_k(X^k) \to H_k(X^{k+1})
+\] It follows that all of these maps are isomorphisms, except that the map to $H_k(X^k)$ may not be surjective and the map from $H_k(X^k)$ may not be injective. Then the first part the sequence gives (b) since $H_k(X^0)=0$ when $k>0$. The last part gives (c) when $X$ is finite-dimensional. The proof when $X$ is infinite-dimensional requires a little more work.
+\end{proof}
+Let $X$ be a CW complex. What we want is a boundary map $C_{n+1}^{\text{CW}}(X)\overset{\partial _{n+1}^{\text{CW}}}{\longrightarrow}C_n ^{\text{CW}}(X) $. By \cref{cells}, we have
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+C_{n+1}^{\text{CW}}(X) \arrow[rr, "\partial_{n+1}^{\text{CW}}", no head] \arrow[d, "\shortparallel", phantom] &                                  & C_n^{\text{CW}}(X) \arrow[d, "\shortparallel", phantom] \\
+{H_{n+1}(X^{n+1},X^n)} \arrow[r, "\partial_{n+1}"]                                                            & H_n(X^n) \arrow[r, "\partial_n"] & {H_n(X^n,X^{n-1})}                                     
+\end{tikzcd}
+\end{figure}
+The equalities are from \cref{cells}, and the boundary maps between homology groups are from the LES of the good pair $(X^n,X^{n-1})$. Then this naturally extends to the diagram shown in \cref{celldiagram}. 
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+                 &                                                                           &                                       &                                                                & 0                                       &                                      &        \\
+                 & 0 \arrow[rd]                                                              &                                       & H_n(X^{n+1})\approx H_n(X) \arrow[ru]                          &                                         &                                      &        \\
+                 &                                                                           & H_n(X^n) \arrow[ru] \arrow[rd, "j_n"] &                                                                &                                         &                                      &        \\
+    \cdots \arrow[r] & {H_{n+1}(X^{n+1},X^n)} \arrow[ru, "\partial_{n+1}"] \arrow[rr, "\partial_{n+1}^{\text{CW}}"] &                                       & {H_n(X^n,X^{n-1})} \arrow[rd, "\partial_n"'] \arrow[rr, "\partial_n^{\text{CW}}"] &                                         & {H_{n-1}(X^{n-1},X^{n-2})} \arrow[r] & \cdots \\
+                 &                                                                           &                                       &                                                                & H_{n-1}(X^{n-1}) \arrow[ru, "j_{n-1}"'] &                                      &        \\
+                 &                                                                           &                                       & 0 \arrow[ru]                                                   &                                         &                                      &       
+\end{tikzcd}
+\caption{The diagram for cellular homology.}
+\label{celldiagram}
+\end{figure}
+In this diagram, $\partial _{n+1}^{\text{CW}}$ and $\partial _n^{\text{CW}} $ are defined as the compositions $j_n \partial _{n+1}$ and $j_{n-1}\partial _n $, which are just `relativizations' of the boundary maps $\partial _{n+1}$ and $\partial _n $. The composition $\partial _n ^{\text{CW}}\partial _{n+1}^{\text{CW}}$ contains two successive maps in one of the exact sequences, hence is zero (since image maps onto kernel maps onto zero by exactness). The horizonal row in the diagram is a chain complex, called the \textbf{cellular chain complex} of $X$, since $H_n (X^n ,X^{n-1})$ is free with basis in one-to-one correspondence with the $n$-cells of $X$, so one can think of elements of $H_n (X^n ,X^{n-1})$ as linear combinations of $n$-cells of $X$. The resulting homology groups are called the \textbf{cellular homology groups} of $X$. We temporarily denote them $H_n ^{\text{CW}}(X)$.
+\begin{theorem}
+    $H_n ^{\text{CW}}(X)\simeq H_n (X)$.
+\end{theorem}
+\begin{proof}
+    We can identify $H_n (X)$ with $H_n (X^n ) / \operatorname{im}\partial _{n+1}$ by a simple application of the FHT and exactness. Since $j_n $ is injective, it maps $\operatorname{im}\partial _{n+1}$ isomorphically onto $\operatorname{im}(j_n \partial _{n+1})=\operatorname{im}\partial ^{\text{CW}}_{n+1}$ and $H_n (X^n )$ isomorphically onto $\operatorname{im}j_n =\ker \partial _n $. Since $j_{n-1}$ is injective, $\operatorname{ker}\partial _n =\operatorname{ker}\partial _n ^{\text{CW}}$. So $j_n $ induces an isomorphism of the quotient $H_n (X^n ) / \operatorname{im}\partial _{n+1}\simeq H_n (X)$ onto $\ker \partial _n ^{\text{CW}} / \operatorname{im}\partial _{n+1}^{\text{CW}}=H_n ^{\text{CW}}(X)$.
+\end{proof}
+Some immediate applications:
+\begin{enumerate}[label=(\roman*)]
+    \item $H_n (X)=0$ if $X$ is a CW complex with no $0$-cells.
+    \item More generally, if $X$ is a CW complex with $k$ $n$-cells, then $H_n (X)$ is generated by at most $k$ elements. For since $H_n (X^n ,X^{n-1})$ is free abelian on $k$ generators, the subgroup  $\ker \partial _n ^{\text{CW}}$ must be generated by at most $k$ elements, hence also the quotient $\ker \partial _n ^{\text{CW}} / \operatorname{im}\partial _{n+1}^{\text{CW}}$.
+    \item If $X$ is a CW complex having no two of its cells in adjacet dimensions, then $H_n (X)$ is free abelian with basis in one-to-one correspondence with the $n$-cells of $X$. This is because the cellular boundary maps $\partial _n ^{\text{CW}}$ are automatically zero in this case.
+\end{enumerate}
+\begin{example}
+    For $\C \mathrm P^n $ having a CW structure with one cell of each even dimension $2k\leq 2n$, we have \[
+        H_i (\C\mathrm P^n ) \approx 
+        \begin{cases}
+            \Z \quad& \text{for} \ i=0,2,4,\cdots ,2n,\\
+            0 &\text{otherwise.}
+        \end{cases}
+    \] Another example is $S^n \times S^n $ with $n>1$, using the product CW structure consisting of a $0$-cell, two $n$-cells, and a $2n$-cell.
+\end{example}
+\begin{theorem}[Cellular boundary formula]
+   We have \[
+       \partial _n ^{\text{CW}}(e_{\alpha }^n )=\sum_{\beta }^{} d_{\alpha \beta }e_{\beta }^{n-1},
+   \] where $d_{\alpha \beta }$ is the degree of the map $S_{\alpha }^{n-1}\to X^{n-1}\to S_{\beta }^{n-1}$ that is the composition of the attaching map of $e_{\alpha }^n $ with the quotient map collapsing $X^{n-1}\setminus  e_{\beta }^{n-1}$ to a point. 
+\end{theorem}
+Here we id
+%\begin{figure}[H]
+%\centering
+%\begin{tikzcd}
+                 %&                                                                            &                                         &                                                                 & 0                                        &                                      &        \\
+                 %&                                                                            &                                         &                                                                 &                                          &                                      &        \\
+                 %& 0 \arrow[rdd]                                                              &                                         & H_n(X^{n+1})\approx H_n(X) \arrow[ruu]                          &                                          &                                      &        \\
+                 %&                                                                            &                                         &                                                                 &                                          &                                      &        \\
+                 %&                                                                            & H_n(X^n) \arrow[ruu] \arrow[rdd, "j_n"] &                                                                 &                                          &                                      &        \\
+                 %&                                                                            &                                         &                                                                 &                                          &                                      &        \\
+%\cdots \arrow[r] & {H_{n+1}(X^{n+1},X^n)} \arrow[rr, "d_{n+1}"] \arrow[ruu, "\partial_{n+1}"] &                                         & {H_n(X^n,X^{n-1})} \arrow[rr, "d_n"] \arrow[rdd, "\partial_n"'] &                                          & {H_{n-1}(X^{n-1},X^{n-2})} \arrow[r] & \cdots \\
+                 %&                                                                            &                                         &                                                                 &                                          &                                      &        \\
+                 %&                                                                            &                                         &                                                                 & H_{n-1}(X^{n-1}) \arrow[ruu, "j_{n-1}"'] &                                      &        \\
+                 %&                                                                            &                                         &                                                                 &                                          &                                      &        \\
+                 %&                                                                            &                                         & 0 \arrow[ruu]                                                   &                                          &                                      &       
+%\end{tikzcd}
+%\end{figure}
