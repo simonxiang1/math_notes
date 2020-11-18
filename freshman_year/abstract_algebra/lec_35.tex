@@ -1,0 +1,56 @@
+\section{November 11, 2020}
+\section{November 13, 2020}
+Alg top fridays
+\section{November 16, 2020}
+\section{November 18, 2020}
+I think I was sick or busy for the last week, sadly. 
+
+\subsection{Units and irreducible elements in the Gaussian integers}
+
+Last time we were looking at the Gaussian integers $\Z[i]$ and proved that it's a Euclidian domain, which means it's a PID and subsequently a UFD. What are the irreducible elements of $\Z[i]$? We also proved that an element is a unit iff the norm is $1$. What are the irreducible elements then? 
+\begin{lemma}
+    Every irreducible element of $\Z[i]$ divides a prime of $\Z$.
+\end{lemma}
+\begin{proof}
+    Let $\pi\in \Z[i]$ irreducible, then $N(\pi)=\pi\cdot \overline{\pi}\in \Z^{+}$ for $\pi \cdot \overline{\pi}=p_1^{e_1}\cdots p_n ^{e_n }$ primes of $\Z$. Then since $\Z[i]$ is a UFD then $\pi  \mid p_i $ for some $\in \{1,\cdots ,n\} $.
+\end{proof}
+\noindent \textbf{Question:} Let $\pi\in \Z[i]$ be irreducible. What can we say about the factorization of $N(\pi)$?
+
+Note that $\alpha  \mid \beta$ in $\Z[i]$ implies that $\overline{\alpha } \mid \overline{\beta }$ in $\Z[i]$. $N(\pi)=\pi\cdot \overline{\pi}\in \Z\implies \pi\cdot \overline{\pi}=p_1^{e_1}\cdots p_n ^{e_n }$ in $\Z[i]$ a UFD. So $\pi \mid p_1$ (reorder the primes if necessary) if and only if $p_1=\pi\cdot \alpha $ for some $\alpha \in \Z[i]$ and so $p_1=\overline{p_1}=\overline{\pi}\cdot \overline{\alpha }$. So $\pi\nmid p_j$, and $\overline{\pi}\nmid p_j $ for all $j>1$. Hence $N(\pi)=\pi\cdot \pi=p_1^{e}$. What is $e$? $p=\pi\cdot \alpha $ implies that $N(p)=p^2=N(\pi)\cdot N(\alpha )$, so $N(\pi) \mid p^2$ and therefore $N(\pi)$ is equal to either $p$ or $p^2$, that is, $N(\pi)=p^e$ for $e\in \{1,2\} $. So that's the first step.
+
+\noindent \textbf{Conclusion:} Given a prime $p\in \Z$, either $p$ remains irreducible in $\Z[i]$ for $p=\alpha \cdot \overline{\alpha }$ where $\alpha \in \Z[i]$, $N(\alpha )=p$.
+\begin{prop}
+    Let $p$ be a prime in $\Z$. Then $p$ is not irreducible in $\Z[i]$ if and only if $p=a^2+b^2$ with $a,b\in \Z$.
+\end{prop}
+Observe that a prime $p \in \Z$ is of the form $p\equiv 1\pmod 4$, $p\equiv 2 \pmod 4$ (iff $p=2$), or $p\equiv 3\pmod 4$. Now $p=2$ implies that $2=(1+i)(1-i)$ which isn't irreducible in $\Z[i]$, but now $(1\pm i)$ is irreducible in $\Z[i]$. $p=a^2+b^2$ means that $a^2\equiv 0$ or $1\pmod 4$, and $b^2\equiv 0$ or $1\pmod 4$. Then $p$ is odd means that $\equiv 1\pmod 4$.
+\begin{prop}
+    For $p$ a prime in $\Z$, if $p\equiv 3\pmod 4$ then $p$ is irreducible in $\Z[i]$.
+\end{prop}
+\begin{prop}\label{prime}
+    For $p$ a prime in $\Z$, if $p\equiv 1\pmod 4$ then $p$ is not irreducible in $\Z[i]$. More precisely, $p=\pi\cdot \overline{\pi}$ where $\pi$ is irreducible in $\Z[i]$. 
+\end{prop}
+\begin{lemma}
+    Let $p$ be a prime of $\Z$. Then $p \mid (n^2+1)$ for some $n\in \Z$ if and only if $p=2$ or $p\equiv 1\pmod 4$.
+\end{lemma}
+\begin{proof}
+    For $p=2$, $2 \mid (1^2+1)$. Assume $p$ is odd. Then $p \mid (n^2+1)$ is the same as saying $n^2\equiv -1 \pmod p$. This is equivalent to the fact that $\operatorname{ord}(n)=4$ in $\left( \Z /p\Z \right)^{*} $. Now every finite subgroup of a multiplicative group of a field is cyclic (I slightly remember this from AA!), so $\left( \Z /p\Z \right)^* $ is cyclic. Hence $\left( \Z /p\Z \right)^* $ has an element of order $4$ iff $4 \, \big |\, \left| \left( \Z /p\Z \right)^*  \right| $ iff $4 \mid (p-1)$ iff $p\equiv 1\pmod 4.$ So if $p$ is odd then $p \mid (n^2+1)$ for some $n\in \Z$ iff $p\equiv 1\pmod 4$.
+\end{proof}
+\begin{proof}
+    This proof is for \cref{prime}. $p\equiv 1\pmod 4 \iff p \mid (n^2+1)$ with $n\in \Z$. Then $p \mid (n^2+1)=(n+i)(n-i)$ means that $p \mid (n+i)$ or $ p\mid (n-i)$. Notice that $p \mid (n+i)\implies p \mid \left( \overline{n+i} \right) \iff p \mid (n-i)$, and similarly $p \mid (n-i)\implies p \mid (n+i)$. Hence $p \mid (n\pm i) \implies  p \mid \left( (n+i)-(n-i) \right) =2i$. So $p \mid i\left( (i+1)(1-i) \right) $. If $p$ were irreducible in $\Z[i]$, then $p=(1\pm i)$ or $i\left( 1\pm i \right) $ or $\pm 1(1\pm i)$, which is clearly false since $p$ is a real number and the options are all complex. So $p$ is reducible in $\Z[i]$.
+\end{proof}
+\orbreak
+Here's a summary of the irreducibles of $\Z[i]$. They are 
+\begin{itemize}
+    \item $1\pm i$ 
+    \item $p\in \Z$ where $p$ is a prime, $p\equiv 3\pmod 4$
+    \item $a+ib$ where $a,b\in \N$ such that $a^2+b^2$ is an odd prime ($\equiv 1 \pmod 4)$.
+\end{itemize}
+\subsection{Fermat's two squares theorem}
+\begin{cor}
+    A prime in $\Z$ equals the sum of two squares of integers if and only if $p\equiv 1\pmod 4$.
+\end{cor}
+This is precisely Fermat's two square theorem. I don't know why this needed its entire own subsection, but it does.
+\orbreak
+Another summary. We have \[
+\text{Fields}  \subsetneq  \text{Euclidian domains}  \subsetneq  \text{PID's} \subsetneq \text{UFD's} \subsetneq \text{Integral domains} 
+\] For (counter)examples of the non-equalities in order, take $\Z$ a Euclidian domain not a field, $\Z\left[ \frac{1+\sqrt{-13} }{2} \right] $ a PID not a Euclidian domain, $R$ a  PID means $R$ a UFD but $R[x,y]$ a UFD not a PID, and $\Z[\sqrt{-5} ]$ an integral domain without unique factorization. Next time, we'll talk about modules.
