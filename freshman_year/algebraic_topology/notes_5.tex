@@ -21,7 +21,7 @@ Imagine a circle with two antipodal points $x$ and $y$, with four arrows $a,b,c,
 \end{figure}
 Usually loops are nonabelian, so suppose we abelianize the loops. That is, the loops $ab^{-1}$ and $b^{-1}a$ are ``the same circle'' (but with a different starting point), so we'll just say they're equal. Formally (not really), rechoosing the basepoint just permutes the letters cyclically, so by abelianizing we can cast off our silly worries about the basepoint. So we make the transition from loops (chosen basepoint) $\longrightarrow$ cycles (no chosen basepoint).
 
-Now we abelian, and all the cool abelian groups use additive notation. So a cycle looks something like $a-b+c-d$ now, a linear combination of edges with integer coefficients. We'll call these linear combinations \textbf{chains} of edges. We can decompose these into cycles by several ways, eg $(a-c)+(b-d)=(a-d)+(b-c)$, so it's better just to say cycles are any LC of edges st at least one decomposition makes geometric sense. When is a chain a cycle? Cycles are distinguished by the fact that they enter and exit a vertex the same amount of times. So for an arbitrary chain $ka+lb+mc+nd$, it enters $y$ about $k+l+m+n$ times (one for each thing) and enters $x$ (or leaves it) $-k-l-m-n$ times. So if we want $ka+lb+mc+nd$ to be a cycle, we just need to require $k+l+m+n=0$.
+Now we abelian, and all the cool abelian groups use additive notation. So a cycle looks something like $a-b+c-d$ now, a linear combination of edges with integer coefficients. We'll call these linear combinations \textbf{chains} of edges. We can decompose these into cycles by several ways, eg $(a-c)+(b-d)=(a-d)+(b-c)$, so it's better just to say cycles are any LC of edges st at least one decomposition make geometric sense. When is a chain a cycle? Cycles are distinguished by the fact that they enter and exit a vertex the same amount of times. So for an arbitrary chain $ka+lb+mc+nd$, it enters $y$ about $k+l+m+n$ times (one for each thing) and enters $x$ (or leaves it) $-k-l-m-n$ times. So if we want $ka+lb+mc+nd$ to be a cycle, we just need to require $k+l+m+n=0$.
 
 To generalize this, let $C_1$ be the free abelian group with a basis set $\{a,b,c,d\} $ (edges), and $C_0$ be the free abelian group with basis $\{x,y\} $ (vertices). Elements of $C_1$ are chains of edges, and elements of  $C_0$ are linear combinations of vertices. Define a homomorphism $\partial \colon C_1 \to C_0$ by sending each basis element to $y-x$, then $\partial (ka+lb+mc+nd)=(k+l+m+n)y-(k+l+m+n)x$, so cycles are precisely $\operatorname{ker}\partial $. It can be seen that $a-b,\,b-c,$ and $c-d$ form a basis for $\operatorname{ker}\partial $, so every cycle in $X_1$ is a unique linear combination of these three elts. Basically, $X_1$ has three ``holes'', the three gaps in between the four edges.
 
@@ -305,13 +305,29 @@ What we're going to do is defined a chain complex $C_n ^{\text{CW}}(X)$, and we 
     \end{enumerate}
 \end{lemma}
 \begin{proof}
-    Statement (a) follows immediately from the fact that $(X^n ,X^{n-1})$ is a good pair and $X^n  / X^{n-1}$ is a wedge sum of $n$-spheres, one for each $n$-cell of $X$ (it does!). Next consider the following part of the LES of the pair $X^n ,X^{n-1})$: \[
+    Statement (a) follows immediately from the fact that $(X^n ,X^{n-1})$ is a good pair and $X^n  / X^{n-1}$ is a wedge sum of $n$-spheres, one for each $n$-cell of $X$ (it does!). Next consider the following part of the LES of the pair $(X^n ,X^{n-1})$: \[
         H_{k+1}(X^n ,X^{n-1})\to H_k(X^{n-1})\to H_k(X^n )\to H_k(X^n ,X^{n-1})
     \] If $k\neq n$ the last term is zero by (a) so the middle map is surjective, while if $k\neq n-1$ then the first term is zero so the middle map is injective. Now look at the inclusion-induced homomorphisms: \[
     H_k(X^0) \to H_k(X^1) \to \cdots \to H_k(X^{k-1}) \to H_k(X^k) \to H_k(X^{k+1})
 \] It follows that all of these maps are isomorphisms, except that the map to $H_k(X^k)$ may not be surjective and the map from $H_k(X^k)$ may not be injective. Then the first part the sequence gives (b) since $H_k(X^0)=0$ when $k>0$. The last part gives (c) when $X$ is finite-dimensional. The proof when $X$ is infinite-dimensional requires a little more work.
 \end{proof}
 Let $X$ be a CW complex. What we want is a boundary map $C_{n+1}^{\text{CW}}(X)\overset{\partial _{n+1}^{\text{CW}}}{\longrightarrow}C_n ^{\text{CW}}(X) $. By \cref{cells}, we have
+%\begin{figure}[H]
+%\centering
+%\begin{tikzcd}
+                 %&                                                                            &                                         &                                                                 & 0                                        &                                      &        \\
+                 %&                                                                            &                                         &                                                                 &                                          &                                      &        \\
+                 %& 0 \arrow[rdd]                                                              &                                         & H_n(X^{n+1})\approx H_n(X) \arrow[ruu]                          &                                          &                                      &        \\
+                 %&                                                                            &                                         &                                                                 &                                          &                                      &        \\
+                 %&                                                                            & H_n(X^n) \arrow[ruu] \arrow[rdd, "j_n"] &                                                                 &                                          &                                      &        \\
+                 %&                                                                            &                                         &                                                                 &                                          &                                      &        \\
+%\cdots \arrow[r] & {H_{n+1}(X^{n+1},X^n)} \arrow[rr, "d_{n+1}"] \arrow[ruu, "\partial_{n+1}"] &                                         & {H_n(X^n,X^{n-1})} \arrow[rr, "d_n"] \arrow[rdd, "\partial_n"'] &                                          & {H_{n-1}(X^{n-1},X^{n-2})} \arrow[r] & \cdots \\
+                 %&                                                                            &                                         &                                                                 &                                          &                                      &        \\
+                 %&                                                                            &                                         &                                                                 & H_{n-1}(X^{n-1}) \arrow[ruu, "j_{n-1}"'] &                                      &        \\
+                 %&                                                                            &                                         &                                                                 &                                          &                                      &        \\
+                 %&                                                                            &                                         & 0 \arrow[ruu]                                                   &                                          &                                      &       
+%\end{tikzcd}
+%\end{figure}
 \begin{figure}[H]
 \centering
 \begin{tikzcd}
@@ -355,25 +371,17 @@ Some immediate applications:
         \end{cases}
     \] Another example is $S^n \times S^n $ with $n>1$, using the product CW structure consisting of a $0$-cell, two $n$-cells, and a $2n$-cell.
 \end{example}
-\begin{theorem}[Cellular boundary formula]
+\begin{prop}[Cellular boundary formula]
    We have \[
        \partial _n ^{\text{CW}}(e_{\alpha }^n )=\sum_{\beta }^{} d_{\alpha \beta }e_{\beta }^{n-1},
    \] where $d_{\alpha \beta }$ is the degree of the map $S_{\alpha }^{n-1}\to X^{n-1}\to S_{\beta }^{n-1}$ that is the composition of the attaching map of $e_{\alpha }^n $ with the quotient map collapsing $X^{n-1}\setminus  e_{\beta }^{n-1}$ to a point. 
-\end{theorem}
-Here we id
-%\begin{figure}[H]
-%\centering
-%\begin{tikzcd}
-                 %&                                                                            &                                         &                                                                 & 0                                        &                                      &        \\
-                 %&                                                                            &                                         &                                                                 &                                          &                                      &        \\
-                 %& 0 \arrow[rdd]                                                              &                                         & H_n(X^{n+1})\approx H_n(X) \arrow[ruu]                          &                                          &                                      &        \\
-                 %&                                                                            &                                         &                                                                 &                                          &                                      &        \\
-                 %&                                                                            & H_n(X^n) \arrow[ruu] \arrow[rdd, "j_n"] &                                                                 &                                          &                                      &        \\
-                 %&                                                                            &                                         &                                                                 &                                          &                                      &        \\
-%\cdots \arrow[r] & {H_{n+1}(X^{n+1},X^n)} \arrow[rr, "d_{n+1}"] \arrow[ruu, "\partial_{n+1}"] &                                         & {H_n(X^n,X^{n-1})} \arrow[rr, "d_n"] \arrow[rdd, "\partial_n"'] &                                          & {H_{n-1}(X^{n-1},X^{n-2})} \arrow[r] & \cdots \\
-                 %&                                                                            &                                         &                                                                 &                                          &                                      &        \\
-                 %&                                                                            &                                         &                                                                 & H_{n-1}(X^{n-1}) \arrow[ruu, "j_{n-1}"'] &                                      &        \\
-                 %&                                                                            &                                         &                                                                 &                                          &                                      &        \\
-                 %&                                                                            &                                         & 0 \arrow[ruu]                                                   &                                          &                                      &       
-%\end{tikzcd}
-%\end{figure}
+\end{prop}
+Here we identify the cells $e_{\alpha }^n $ and $e_{\beta }^{n-1}$ with generators of the corresponding summands of the cellular chain groups. The summation in the formula contains only finitely many terms since the attaching map of $e_{\alpha }^n $ has compact image, so this image meets only finitely many cells $e_{\beta }^{n-1}$. From now on, we'll denote $\partial _n ^{\text{CW}}$ by $d_n $.
+
+TODO commutative diagram and justification for cellular boundary formula
+
+\begin{example}
+    Let $M_g$ be the closed orientable surface of genus $g$ with its usual CW structure consisting of one $0$-cell, $2g$ $1$-cells, and one $2$-cell attached by the product of commutators $[a_1,b_1]\cdots [a_g,b_g]$. The associated cellular chain complex is \[
+    0\to \Z \overset{d_2}{\longrightarrow}\Z^{2g} \overset{d_1}{\longrightarrow}\Z \to 0
+\] As observed above, $d_1$ must be 0 since there is only one $0$-cell. Also, $d_2$ is 0 because each $a_i $ or $b_i $ appears with its inverse in $[a_1,b_1]\cdots [a_g,b_g]$, so the maps $\Delta _{\alpha \beta }$ are homotopic to constant maps. Since $d_1$ and $d_2$ are both zero, the homology groups of $M_g$ are the same as the cellular chain groups, namely, $\Z$ in dimensions 0 and 2, and $\Z^{2g}$ in dimension 1.
+\end{example}
