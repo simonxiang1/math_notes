@@ -1,0 +1,72 @@
+\section{Final exam notes}
+Oh look, I'm actually taking notes beforehand! The topics seemed kind of difficult, so here we are.
+
+\subsection{Equilibrium Points}
+Consider the differential equation $\dot x=f(t,x)$, where $x=
+\begin{bmatrix}
+    x_1(t)\\ \vdots \\ x_n (t)
+\end{bmatrix}$, and $f(t,x)=
+\begin{bmatrix}
+    f_1(t,x_1,\cdots ,x_n ) \\ \vdots \\ f_n (t,x_1,\cdots ,x_n) 
+\end{bmatrix}$ is a nonlinear function of $x_1,\cdots ,x_n $. We have no way to solve these types of differential equations explicitly, but sometimes that's not what we're after: sometimes we just want to know, do there exist $\xi_1,\xi_2$ such that $x_1(t)=\xi_1$, $x_2(t)=\xi_2$ is a solution of $\dot x=f(t,x)$? If $\xi_1,\xi_2$ exist they're called \textbf{equilibrium points} of the differential equation above.
+
+\subsection{Stability of Linear Systems}
+Consider $\dot x=f(x)$, where $x=
+\begin{bmatrix}
+    x_1(t)\\ \vdots \\x_n (t)
+\end{bmatrix}$ and $f(x)=
+\begin{bmatrix}
+    f_1(x_1,\cdots ,x_n ) \\ \vdots \\ f_n (x_1,\cdots ,x_n )
+\end{bmatrix}$. Let $x=\phi(t)=
+\begin{bmatrix}
+    \phi_1(t)\\ \vdots \\ \phi_n (t)
+\end{bmatrix}$ be a solution of $\dot x=f(t,x)$: we are interested in finding out whether $\phi(t)$ is stable or unstable, that is, we want to find all solutions $\psi(t)=
+\begin{bmatrix}
+    \psi_1(t) \\ \vdots \\ \psi_n (t)
+\end{bmatrix}$ where $\psi(t)$ ``stays close'' to $\phi(t)$ given it ``starts near'' to $\phi(t)$. Let's make this precise.
+\begin{definition}[Stability]
+    We say a solution $x=\phi(t)$ of $\dot x=f(t,x)$ is \textbf{stable} if for all $\varepsilon >0$, there exists a $\delta=\delta(\varepsilon )$\footnote{This notation just means that $\delta$ depends on $\varepsilon $.} such that \[
+        |\psi_j (0)-\phi_j (0)|<\delta \implies |\psi_j (t)-\phi_j (t)|<\varepsilon 
+    \] for all solutions $\psi(t)$, $j\in \N$. You can negate this to define \textbf{unstable} solutions (there exists a solution $\psi(t)$ such that for all $\delta>0$, there exists an $\varepsilon >0$ such that $|\psi_j (0)-\phi_j (0)|<\delta$ \emph{and} $|\psi_j (t)-\phi_j (t)|\geq \varepsilon $).
+\end{definition}
+\begin{theorem}
+    Consider the linear differential equation $\dot x=Ax$. Then 
+    \begin{enumerate}[label=(\alph*)]
+        \item Every solution $x=\phi(t)$ is stable if all the eigenvalues of $A$ have negative real part.
+        \item Every solution $x=\phi(t)$ is unstable if at least one eigenvalue of $A$ has positive real part.
+        \item Suppose that all eigenvalues of $A$ have real part $\leq 0$ and  that the eigenvectors $\lambda_1=ic_1,\, \lambda_2=ic_2, \cdots \lambda_n =ic_n $ have zero real part. Let $\lambda_i =ic_i $ have multiplicity $k_n $. Then the characteristic of $A$ can be factored into the form \[
+                p(\lambda)=(\lambda-ic_1)^{k_1}\cdots (\lambda-ic_n )^{k_n }q(\lambda),
+            \] where are the roots of $q(\lambda)$ have negative real part. Then every solution $x=\phi(t)$ is stable if $A$ has $k_i $ LI eigenvectors for each eigenvalue $\lambda_i =ic_i $. Otherwise every solution $\phi(t)$ is unstable.
+    \end{enumerate}
+\end{theorem}
+To see why this is true, recall that solutions are of the form $\sum_{i}^{} c_i e^{\lambda_i t}v_i $ for $\lambda_i $ eigenvalues, $v_i $ eigenvectors. Then plug in values for $\lambda_i $ and see whether or not they explode. For part (c), we're just carefully writing out the charateristic, and if any eigenvalue doesn't have the proper amount of LI eigenvectors, you add a $t$ (by judicious guessing) then it blows up.
+\begin{definition}[Asymptotic stability]
+    A solution $x=\phi(t)$ is \textbf{asymptotically stable} if it is stable, and every solution $\phi$
+\end{definition}
+
+\newpage
+\section{Examples}
+
+\subsection{Equilibrium Points}
+\begin{example}
+    To find all equilibrium values of the system of differential equations \[
+    \frac{dx_1}{dt}=1-x_2,\ \frac{dx_2}{xt}=x_1^3+x_2,
+    \] note that $x^0=
+    \begin{bmatrix}
+        x_1^0\\x_2^0
+    \end{bmatrix}$ is an equilibrium point iff $1-x_2^0=0$ and $(x_1^0)^3+x_2^0=0$, so $x_2^0=1$ and $x_1^0=-1$, so $
+    \begin{bmatrix}
+        -1\\1
+    \end{bmatrix}$ is the only equilibrium value of this system.
+\end{example}
+\begin{example}
+    To find all equilibrium values of \[
+        \frac{dx}{dt}=(x-1)(y-1), \ \frac{dy}{dt}=(x+1)(y+1),
+    \] consider $x^0=
+    \begin{bmatrix}
+        x_0\\y_0
+    \end{bmatrix}$ an equilibrium value iff $(x_0-1)(y_0-1)=0$ and $(x_0+1)(y_0+1)=0$. The first equation holds if either $x_0$ or $y_0$ is $1$, while the second holds if either $x_0$ or $y_0$ is $-1$. So the equilibrium values are $x=1,y=-1$ and $x=-1,y=1$.
+\end{example}
+
+\subsection{Stability of Linear Systems}
+
