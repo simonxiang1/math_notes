@@ -1,0 +1,85 @@
+\section{November 23, 2020}
+Came a little late, was making a big matrix.
+\subsection{Sums, products, and finitely generated modules}
+\begin{note}
+    A note on notation. We denote the set of $R$-module homomorphisms from $M\to N$ by $\operatorname{Hom}_R(M,N)$. You can verify in your free time that $\operatorname{Hom}_R(M,N)$ is itself an $R$-module.
+\end{note}
+\begin{prop}
+    Let $M,N$ be $R$-modules and $\varphi \colon M \to N$ be an $R$-module homomorphism. Then 
+    \begin{enumerate}
+        \item missed it
+    \end{enumerate}
+\end{prop}
+\begin{definition}[]
+    Let $M$ be an $R$-module and $N$ be an $R$-submodule of $M$. Then \[
+    M /N=\{m+N  \mid m\in M\} 
+    \] is an $R$-module. We say that $M /N$ is the \textbf{quotient module} of $M$ by $N$.
+\end{definition}
+    To verify that $M /N$ is an $R$-module, we need to show that:
+    \begin{enumerate}
+        \item $M$ is an abelian group, $N$ a subgroup implies that $M /N$ is an abelian group.
+        \item The map $R\times M /N \to M /N$ defined by $(r, m+N)\mapsto rm+N$ satisfies the necessary properties.
+    \end{enumerate}
+\begin{theorem}
+    Let $R$ be a ring, $M, N$ be $R$-modules, and $\varphi \colon M \to N$ be an $R$-module homomorphism. Then $M /\ker \varphi \simeq \operatorname{im}\varphi $.
+\end{theorem}
+\begin{definition}[]
+    Let $R$ be a ring, $M$ an $R$-module, and $A,B$ be submodules of $M$. Then \[
+    A+B:=\{a+b \mid a\in A,b\in B\} 
+    \] is a submodule of $M$.
+\end{definition}
+\begin{definition}[]
+    Let $R$ be a ring, $M$ be an $R$-module, and $A\subseteq M$. Then \[
+    RA:=
+    \begin{cases}
+        0 \quad &\text{if} \ A=\O,\\
+        \{\sum_{i=1}^{n} r_i a_i  \mid r_i \in R,a_i \in A\} &\text{otherwise} 
+    \end{cases}
+\] is an $R$-submodule of $M$. We say that $RA$ is \textbf{generated}  by $A$, or that $A$ is a \textbf{generating set}  for $RA$. We won't give any examples, because you already have plenty from linear algebra (consider the spanning set, etc). We also say that a submodule $N$ of $M$ is \textbf{finitely generated} if there exists a finite set $A$ such that $N=RA$.
+\end{definition}
+\begin{example}[Direct sums and products]
+    As a $\Q$-module, $\R^n $ is \emph{not} finitely generated, but $\Q^n \subseteq \R^n $ a submodule of $\R^n $ \emph{is} finitely generated.
+\end{example}
+\begin{definition}
+    Let $R$ be a ring, and $M,\cdots ,M_k$ be $R$-modules. Then $M_1\times \cdots \times M_k$ is an $R$-module with respect to componentwise addition and multiplication by $r\in R$. More generally, let $\{M_i  \mid i \in I\} $ be $R$-modules. Then \[
+        \bigoplus_{i\in I}M_i :=\left\{\sum_{i\in I}^{} a_i  \,\big|\,a_i =0 \ \text{for all but finitely many} \ i \in I\right\} 
+    \] is an $R$-module, and we call this the \textbf{direct sum}  of the $M_i $. Similarly,  \[
+    \prod _{i\in I}:= \left\{ {(a_i )}_{i\in I}\, \big|\, a_i \in M_i \right\} 
+    \] is defined as the \textbf{direct product} of the $M_i $ for $i\in I$ and is also an $R$-module.
+\end{definition}
+\begin{prop}
+    Let $M$ be an $R$-module, $N_1,\cdots ,N_K$ be submodules of $M$. Then the map \[
+        \pi \colon N_1\times \cdots \times N_k \to N_1+\cdots +N_k,\quad (n_1,\cdots ,n_k)\mapsto n_1+\cdots n_k
+    \] is a surjective $R$-module homomorphism.
+\end{prop}
+\begin{note}
+    Note that $\pi$ is injective iff $x\in N_1,\cdots ,N_k$ is written uniquely as a sum $x=\sum_{i=1}^{n} n_i $ with $n_i \in N_i $ iff $N_i \cap (N_1+\cdots + \hat{N}_i +\cdots N_k)=0$ for all $i$.
+\end{note}
+\begin{definition}[Free generators]
+    An $R$-module is \textbf{free} on the subset $A\subseteq M$ if for all $x\in M$, there exists a unique $(a_1,\cdots ,a_n )\in A$ and unique $r_1,\cdots ,r_n \in R$ such that $x=r_1a_1+\cdots +r_n a_n $. Then we say that $A$ is a set of \textbf{free generators} of $M$.
+\end{definition}
+\subsection{Simple modules and Schur's Lemma}
+
+\begin{definition}[Simple modules]
+    A $R$-module $M$ is \textbf{simple} if its only submodules are $0$ and itself.
+\end{definition}
+In group theory, simple groups are somewhat complicated, but for modules it's much ``simpler'' (hahaha) because we're dealing with \emph{abelian} groups.
+\begin{prop}
+    A simple $R$-module is isomorphic to $R/m$ for some $m$ a maximal ideal of $R$ or $R$ itself.
+\end{prop}
+\begin{proof}
+    Let $M$ be a simple $R$-module. If $M=0$, then $M=R /R$ so check. If $M\neq 0$, then we have some $x\in M\setminus \{0\} \implies Rx\subseteq M$, but $Rx\neq 0$ since $x\neq 0$, so $Rx=M$ since $M$ is simple. In essence, every non-zero element generates $M$. Consider the map $\varphi  \colon R\to Rx, \, r\mapsto rx$. Set $m=\ker \varphi $, this is an ideal of $R$. If this ideal isn't maximal, then $Rx \simeq R /\ker \varphi $ as $R$-modules (OK not sure if my logic is right here).
+\end{proof}
+\begin{note} The second item is presented without much context, and it's up to you to sit down and wrap your head around it (also very important).
+    \begin{enumerate}
+        \item An $R$-submodule of $R$ is an ideal of $R$.
+        \item Submodules of $R /\ker \varphi $ are in bijection with the ideals $I\subseteq R$ such that $I\supseteq \ker \varphi $.
+    \end{enumerate}
+    Hence $M$ is simple iff $\ker \varphi $ is maximal.
+\end{note}
+\begin{lemma}[Schur's Lemma]
+   Let $R$ be a ring, $M,N$ be simple $R$-modules. Then any non-zero homomorphism $\varphi \colon M \to N$ is an isomorphism.
+\end{lemma}
+\begin{proof}
+    Now $\ker \varphi =0$ whenever $\ker \varphi $ is a submodule of $M$ and $\varphi \neq $ the zero map. Furthermore, $\operatorname{im}\varphi $ is a submodule of $N$ and $\varphi \neq 0$ means that $\operatorname{im}\varphi =N$ since $N$ is simple. So $\ker \varphi =0$ and $\operatorname{im}\varphi =N$ together imply that $\varphi $ is 1-1 and onto, and therefore an isomorphism.
+\end{proof}

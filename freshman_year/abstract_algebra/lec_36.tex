@@ -1,0 +1,68 @@
+\section{November 20, 2020}
+I'm here on Friday?? Let's talk about modules.
+\subsection{Modules and submodules}
+\begin{definition}[Modules]
+    Let $R$ be a ring. A \textbf{left} $\mathbf{R}$\textbf{-module} is an abelian group $\langle M,+ \rangle $ endowed with a map $R\times M\to M,\, (r,m)\mapsto rm$ such that:
+    \begin{enumerate}[label=\arabic*)]
+        \item $\left( r+s \right) m=rm+sm$ (Distributive over $R$)
+        \item $(rs)m=r(sm)$ (Associative)
+        \item $r(m+n)=rm+rn$ (Distributive over $M$)
+    \end{enumerate}
+    If $R$ has a multiplicative identity, then assume that $1_Rm=m$. A similar definition follows for \textbf{right modules}, an abelian group with a map $M\times R\to M$ with corresponding properties.
+\end{definition}
+\begin{example}
+    Here are some examples of modules.
+    \begin{itemize}
+        \item Let $V$ be a vector space over some field $\F$. Then $V$ is an $\F$-module. In fact, any $\F$-module for $\F$ a field is simply a vector space.
+        \item If $G$ is an abelian group, then $G$ is a $\Z$-module. How do we define $mg$?
+            \begin{enumerate}
+                \item If $m>0$, then $mg=g\overset{m \text{-copies} }{\overbrace{+\cdots +}} g$. 
+                \item If $m<0$, then $mg=(-g)\overset{(-m)  \text{-copies} }{\overbrace{+\cdots +}} (-g)$. 
+                \item Finally, $0_{\Z}g=0_G$.
+            \end{enumerate}
+    \end{itemize}
+\end{example}
+\begin{note}
+    A note on terminology: If we say $M$ is an $R$-module, this means that $M$ is a left $R$-module unless otherwise explicitly stated. 
+\end{note}
+\begin{definition}[Submodules]
+    Let $R$ be a ring, $M$ an $R$-module. A subgroup $N$ of $M$ is an $R$-submodule of $M$ if $R\times N\to N$, ie $N$ is closed under multiplication by $R$, which is the same as saying that $rn\in N$ for all $n\in N$ and all $r\in R$.
+\end{definition}
+\subsection{Examples of modules}
+\begin{example}
+    We have $\R^n $ an $\R$-module. We can also view it as a $\Q$-module. $\Q^n \subseteq \R^n  $ is a $\Q$-submodule of $\R^n $, but it is NOT an $\R$-submodule of $\R^n $. (Multiply some rationals and irrationals together and see what happens).
+\end{example}
+Say we have $M$ an abelian group. We can look at its endomorphism ring \[
+    \operatorname{End}(M):= \{\varphi \colon M \to M  \mid \varphi \ \text{is a group homomorphism} \} ,
+\] which is a ring with respect to pointwise addition and function composition.
+\begin{prop}
+    Let $M$ be an abelian group and $R$ a ring. Then $M$ is an $R$-module if and only if there exists a homomorphism $R\to \operatorname{End}M$, such that if $R$ has unity then $1_R\mapsto \operatorname{id}_M$.
+\end{prop}
+\begin{proof}
+    ($\implies $) Assume $M$ is an $R$-module, we need to define $\varphi  \colon R \to \operatorname{End}(M)$, $r \mapsto (m \mapsto rm)$. To verify that $\varphi (r)\in \operatorname{End}M$, we want to show that $\varphi $ is a homomorphism and that if $R$ has unity then $\varphi (1_R)=\operatorname{id}_M$. You can do so in your free time.
+
+    ($\impliedby $) Assume that $\varphi \colon R \to \operatorname{End}(M)$ is a ring homomorphism and if $R$ has unity then $\varphi (1_R)=\operatorname{id}_M$. Now $M$ is an abelian group, hence $M$ is an $R$-module if we have a map $R\times M \to M  $ such that the module properties hold. Define $rm=\varphi (r)(m)$. You can verify that the properties hold in your free time.
+\end{proof}
+\begin{example}
+Let $G$ be a group, $X$ be a set. Then having a group homomorphism $G\to S_X$ is the same has having a $G$-action on $X$. Also, if $X$ is an abelian group, then $X$ is a $\Z[G]$-module, where \[
+    \Z[G]:=\left\{\sum_{g\in G}^{} a_gg \mid a_g\in \Z \right\}, \quad 
+    \left( \sum_{g\in G}^{} a_gg \right) \cdot x:= \sum_{g\in G}^{} a_g(g\cdot x)\in X.
+    \] 
+\end{example}
+\begin{example}
+    Another example. Say $V$ is a vector space over $\F$ a field. Let $\varphi \colon V \to V$ be a linear transformation. We can think of $V$ as an $\F[x]$-module, where for $p(x)\in \F[x]$, we define $p(x)v:=p(\varphi )(v)\in V$. Now $W$ is an $\F[x]$-submodule of $V$ if $W$ is a subspace of $V$ as a vector space, and $p(x)w\in W$ for all $w\in W$, $p(x)\in \F[x]$. Since $W$ is a subspace, this holds exactly when $xw\in W$ for all $w\in W$, which is the same as saying $\varphi (w)\in W$ for all $w\in W$. So $\varphi (W)\subseteq W$, that is, $W$ is closed under the linear transformation $\varphi $. 
+
+    In summary, $W$ is an $\F[x]$-submodule of $V$ if
+    \begin{enumerate}
+        \item $W$ is a subspace of $V$ as an $F$-vector space, and
+        \item $W$ is closed under $\varphi $, that is, $\varphi (W)\subseteq W$.
+    \end{enumerate}
+\end{example}
+\begin{example}
+    We have $V$ a vector space over $\F$ iff $V$ is an $\F[x]$ module if there exists a $\varphi \colon V \to V$ a linear transformation. So $V$ is an $\F[x,y]$-module if there exist $\varphi ,\psi \colon V \to V$ linear transformations such that $\varphi \psi =\psi \varphi $, where $p(x,y)v:=p (\varphi ,\psi)(v)$.
+\end{example}
+\begin{example}
+    If we have $G$ a finite group and $\F$ a field, then $V$ is an $\F[G]$-module iff $V$ is an $\F$-module which is equivalent to saying that $V$ is a vector space over $\F$ for a  homomorphism $G \to \operatorname{GL}(V)$.
+\end{example}
+
+
