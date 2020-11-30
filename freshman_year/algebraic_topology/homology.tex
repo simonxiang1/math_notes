@@ -1,0 +1,426 @@
+\section{Homology} 
+The big boy has arrived. These notes will follow Hatcher \S 2.1.
+\begin{remark}
+    This is something I heard even before I enrolled in this course. The homotopy groups are easy to define, but impossible to compute and work with. The homology groups take a lot of work to define, but the resulting groups are much nicer and easier to work with.
+\end{remark}
+\orbreak
+The fundamental group is a cool tool when dealing with low-dimensional spaces (the pride and joy of UT Austin), but it doesn't do well with higher dimensional spaces, for example, it can't distinguish between the $n$-spheres $S^n$ for $n\geq 2$. We can get rid of this limitation by considering the higher homotopy groups $\pi_n(X)$, which are defined in terms of maps from the $n$-dimensional cube $I^n$ and homotopies $I^n \times  I \to X$ of such maps. Cool things about higher homotopy groups: for $X$ a CW complex, $\pi_n(X)$ only depends on the $(n+1)$-skeleton, and $\pi_i(S^n)=0$ for $i<n$ and $\Z$ for $i=n$, as expected. However, the drawback is that they're extremely difficult to compute in general— take the ``simple'' task of computing $\pi_i(S^n)$ for $i>n$.
+
+Enter the homology groups $H_n(X)$. Similar to $\pi_n(X)$, $H_n(X)$ for $X$ a CW complex depends only on the $(n+1)$-skeleton, and for the spheres $H_i(S^n)\simeq \pi_i(S^n)$ for $1\leq i\leq n$, but the homology groups have the advantage in that $H_i(S^n)=0$ for $i>n$. However, everything has a price. How exactly do we define these so called homology groups? We start by motivating, then doing simplicial homology, before moving onto singular homology. Most efficient method for computing homology groups is called cellular homology. We'll also talk about Mayer-Vietoris sequences, the analogue of the van Kampens for the fundamental group.
+
+Something interesting about homology: most of the time we only use the basic properties of homology, not the definition itself. So we could almost invoke an axiomatic approach, which will happen soon. We could also skip the algebra and talk about geometry, but then Dr.\ Brand would be unhappy (and so would I), so we'll approach it with a mix of the two (talk about intuition first then state the axioms later).
+\subsection{The big idea of homology}
+Issues with homotopy groups: things get really wacky because $S^{2} $ has no cells of dimension greater than $2$, but some (infinitely many) of the higher homotopy groups $\pi_n(S^{2} )$ are nontrivial. $\langle god\, shattering\, star\, noises\rangle $ However, homology groups are (directly) related to cell structures, in that you can regard them as an algebraization of how cells of dimension $n$ attach to cells of dimension $n-1$.
+
+Imagine a circle with two antipodal points $x$ and $y$, with four arrows $a,b,c,d$ drawn in the direction from $x$ to $y$, which we'll denote by $X_1$.
+\begin{figure}[H]
+    \centering
+    \incfig[0.3]{homology_basic}
+    \caption{The graph $X_1$, consisting of two vertices and four edges.}
+    \label{x1}
+\end{figure}
+Usually loops are nonabelian, so suppose we abelianize the loops. That is, the loops $ab^{-1}$ and $b^{-1}a$ are ``the same circle'' (but with a different starting point), so we'll just say they're equal. Formally (not really), rechoosing the basepoint just permutes the letters cyclically, so by abelianizing we can cast off our silly worries about the basepoint. So we make the transition from loops (chosen basepoint) $\longrightarrow$ cycles (no chosen basepoint).
+
+Now we abelian, and all the cool abelian groups use additive notation. So a cycle looks something like $a-b+c-d$ now, a linear combination of edges with integer coefficients. We'll call these linear combinations \textbf{chains} of edges. We can decompose these into cycles by several ways, eg $(a-c)+(b-d)=(a-d)+(b-c)$, so it's better just to say cycles are any LC of edges st at least one decomposition make geometric sense. When is a chain a cycle? Cycles are distinguished by the fact that they enter and exit a vertex the same amount of times. So for an arbitrary chain $ka+lb+mc+nd$, it enters $y$ about $k+l+m+n$ times (one for each thing) and enters $x$ (or leaves it) $-k-l-m-n$ times. So if we want $ka+lb+mc+nd$ to be a cycle, we just need to require $k+l+m+n=0$.
+
+To generalize this, let $C_1$ be the free abelian group with a basis set $\{a,b,c,d\} $ (edges), and $C_0$ be the free abelian group with basis $\{x,y\} $ (vertices). Elements of $C_1$ are chains of edges, and elements of  $C_0$ are linear combinations of vertices. Define a homomorphism $\partial \colon C_1 \to C_0$ by sending each basis element to $y-x$, then $\partial (ka+lb+mc+nd)=(k+l+m+n)y-(k+l+m+n)x$, so cycles are precisely $\operatorname{ker}\partial $. It can be seen that $a-b,\,b-c,$ and $c-d$ form a basis for $\operatorname{ker}\partial $, so every cycle in $X_1$ is a unique linear combination of these three elts. Basically, $X_1$ has three ``holes'', the three gaps in between the four edges.
+
+Now let's attach a $2$-cell to $X_1$ to get $X_2$, as seen below.
+\begin{figure}[H]
+    \centering
+    \incfig[0.3]{x2}
+    \caption{$X_1$ with a $2$-cell attached, denoted $X_2$. Have you ever seen a $2$-cell that looks like cloth?}
+    \label{x2}
+\end{figure}
+The $2$-cell is attached along the cycle $a-b$, forming the $2$-skeleton $X_2$. Now the cycle is trivial (homotopically), which suggest we form a quotient by factoring out the subgroup generated by $a-b$. For example, $a-c$ and $b-c$ are now equivalent, since they're homotopic in $X_2$. Algebraically, we define a pair of homomorphisms $C_2 \overset{\partial_2}{\longrightarrow}C_1\overset{\partial_1}{\longrightarrow}C_0  $, where $C_2$ is the infinite cyclic group generated by $A$, and $\partial_2(A)=a-b$. $\partial_1 $ is the boundary homomorphism, defined earlier. We are interested in $\operatorname{ker}\partial_1 / \operatorname{im}\partial_2  $, that is, the $1$-dimensional cycles modulo the boundaries (multiples of $a-b$). Remember, factor groups collapse everything we don't like to the identity. This quotient group is the \textbf{homology group} $H_1(X_2)$. If we were to talk about $X_1,$ since it has no $2$-cells $C_2$ is simply zero, so $H_1(X_1)=\ker \partial_1 / \operatorname{im}\partial_2=\ker \partial_1  $, which is free abelian on three generators. $H_1(X_2)$ is free abelian on two generators ($b-c$ and $c-d$), which expresses the geometric observation that there are two holes remaining after filling one of them in with the $2$-cell $A$.
+
+Let's go farther. Add another $2$-cell to the pre-existing $2$-cell $A$, to get the $3$-complex $X_3$.
+\begin{figure}[H]
+    \centering
+    \incfig[0.3]{x3}
+    \caption{The $3$-complex  $X_3$, formed by attaching a $2$-cell to $X_2$.}
+    \label{x3}
+\end{figure}
+This gives a $2$-dimensional chain group $C_2$ consisting of linear combinations of $A$ and $ B$, and the boundary homomorphism $\partial_2 \colon C_2 \to C_1 $ sends $A,B$ to $a-b$. $H_1(X_3)=\ker \partial_1 / \operatorname{im}\partial_2  =H_1(X_2)$, but now $\partial_2 $ has a nontrivial kernel (the infinite cyclic group generated by $A-B$). We view $A-B$ as a $2$d cycle generating $H_2(X_3)=\ker \partial_2\simeq\Z $. The second homology detects the $2$d ``hole'' in $X_3$. 
+
+Unfortunately the diagrams will have to stop now, but let's go even farther and make the complex $X_4$ from $X_3$ by attaching a $3$-cell $C$ along the $2$-sphere by $A$ and $B$, creating a chain group $C_3$ generated by $C$. The boundary homomorphism $\partial_3 \colon C_3 \to C_2 $ that sends $C$ to $A-B$ should be seen as the boundary of $C$, similar to how $a-b$ is the boundary of $A$. Now we have a sequence of boundary homomorphisms $C_3 \overset{\partial_3}{\longrightarrow}C_2\overset{\partial_2}{\longrightarrow} C_1 \overset{\partial_1}{\longrightarrow}C_0$, and $H_2(X_4)=\ker \partial_2 /\operatorname{im}\partial_3  $ is now trivial. $H_3(X_4)=\ker \partial_3=0, $ note that $H_1(X_4)=H_1(X_3)\simeq\Z\times \Z$, so this is the only homology group of $X_4$ that isn't trivial.
+\orbreak
+You can pretty much see where this is going. For a cell complex $X$, we have chain groups $C_n(X)$ free abelian with basis the $n$-cells of $X$, with boundary homomorphisms $\partial_n \colon C_n(X) \to C_{n-1} (X)$, by which we define the homology group $H_n(X) = \ker \partial_n / \operatorname{im}\partial _{n+1} $. So what's the problem? It's how to define $\partial_n $ in general— for $n=1$ this is easy, it's the vertex head minus the one at the tail. For $n=2,$ it still isn't hard per say, if the cell is attached on a loop of edges, just take the cycle of edges, keeping in mind orientation. This is much tricker for higher dimension cells, even with restrictions to polyhedral cells and nice attaching maps we still have to worry about orientation and stuff.
+
+So what do we do? Use triangles, of course. We can subdivide arbitary polyhedra into certain special types of polyhedra called simplices (what we talked about in class day 1), so there isn't any loss of generality (but there is a loss of efficiency). This gives rise to our more basic \textbf{simplicial homology}, which deals with cell complexes from simplices. However, we are still quite limited in what we can do.
+
+So, what do we really do this time? Make things less simple, and make your life difficult by considering the collection of all possible continuous maps of simplices into a space $X$ (wow). The chain groups $C_n(X)$ are tremendously large, but the quotients $H_n(X)=\ker \partial_n / \operatorname{im}\partial _{n+1} $, the \textbf{singular homology groups}, are much smaller and easier to work with\footnote{For reasonably ``nice'' spaces $X$, of course.}. For example, in the examples above the singular homology groups coincide with the ones computed from cellular chains. Furthermore (as we will see later), singular homology lets us define these nice cellular homology groups for \textit{all} cell complexes, which solves the issue of how to define boundary maps for cellular chains.
+
+\subsection{The structure of $\Delta$-complexes}
+I have a feeling we're gonna be typing a lot of \texttt{\textbackslash Delta}'s. So basically, the only thing cool kids talk about is singular homology, but it's kinda complicated so we gotta talk about the inferior version for those who have the brain capacity of a literal ape\footnote{The book simply says ``primitive'' version, so I used my imagination a little bit.}, simplicial homology, first. We talk about simplicial homology in the domain of $\Delta $-complexes. Take the standard fundamental polygons with orientation for $\mathbb{T}^2,\,\R P^2,\,$ and the Klein bottle $K$. Cut the squares in half with a diagonal to get two triangles, from here we can get the original shape by identifying in pairs. We can do this with any $n$-gon, decomposing it into $n-2$ base triangles. So we can make any closed surface from triangles, furthermore, we could also make a larger class of spaces that aren't surfaces by allowing more than two edges to be glued together at the same time.
+
+The idea of a $\Delta $-complex is to generalize these constructions to $n$-dimensions. The $n$-dimensional triangle is the $n$-simplex, the smallest convex set in $\R^m$ containing $n+1$ points $v_0,\cdots,v_n$ that don't lie in a hyperplane of dimension less than $n$, where by ``hyperplane'' we mean the set of solutions to a system of linear equations. We could also just say that the difference vectors $v_1-v_0,\cdots,v_n-v_0$ are LI. The $v_i$ are \textbf{vertices} of the simplex, and the simplex itself is $[v_0,\cdots,v_n]$.
+\begin{figure}[H]
+    \centering
+    \incfig[0.5]{delta_simplex}
+    \caption{The $0$-simplex to the $3$-simplex, respectively (with ordered vertices and oriented edges).}
+    \label{simp}
+\end{figure}
+For example, we have the standard $n$-simplex given by \[
+    \Delta ^n =\{(t_0,\cdots,t_n )\in \R^{n+1} \mid \sum_{i}^{} t_i=1 \ \text{and} \ t_i \geq 0 \ \text{for all} \ i\},
+\] whose vertices are the unit vectors along the coordinate axes. Think of this as taking the unit vectors, and drawing a triangle from each of their endpoints. This works because the difference vectors are LI. For homology, orientation of vertices is really important, so $n$-simplex really means $n$-simplex with an ordering on its vertices. Ordering the vertices will determine an orientation on its subscripts, as can be seen in \cref{simp}. This also determines a canonical linear homeomorphism from the standard $n$-simplex $\Delta ^n $ onto any other simplex $[v_0,\cdots,v_n]$ that preserves the order of the vertices, given by 
+\[
+(t_0,\cdots,t_n )\mapsto \sum_{i}^{} t_iv_i.
+\] We say the coefficients $t_i$ are the \textbf{barycentric coordinates} of the point $\sum_{i}^{} t_i v_i \in [v_0,\cdots,v_n ].$ Deleting a vertex of a $n$-simplex yields something that spans an $(n-1)$-simplex, called a \textbf{face} of $[v_0,\cdots,v_n ]$. We'll adopt the following convention:
+\textit{The vertices of a face, or of any subsimplex spanned by a subset of the vertices,  will always be ordered according to their order in the larger simplex.}
+That sounds reasonable enough. We say the union of all faces of $\Delta ^n $ is the \textbf{boundary} of $\Delta ^n $, written $\partial \Delta ^n $. The \textbf{open simplex} $\mathring{\Delta }^n $ is equal to $\Delta ^n \setminus \partial \Delta ^n $, the interior of $\Delta ^n $. 
+
+A $\mathbf{\Delta }$\textbf{-complex} structure on a space $X$ is a collection of maps $\sigma_{\alpha } \colon \Delta ^n  \to X$, with $n$ depending on the index $\alpha $, such that:
+\begin{enumerate}
+    \item The restriction $\sigma_{\alpha }|\mathring{\Delta }^n $ is onto, and each point of $X$ is in the image of exactly one restriction $\sigma_{\alpha }|\mathring{\Delta }^n $.
+    \item Each restriction of $\sigma_{\alpha }$ to a face of $\Delta ^n $ is one of the maps $\sigma_{\beta } \colon \Delta ^{n-1} \to X$. Here we are identifying the face of $\Delta ^n $ with $\Delta ^{n-1}$ by the canonical linear order-preserving homeomorphism.
+    \item A set $A\subseteq X$ is open if and only if $\sigma_{\alpha }^{-1}(A)$ is open in $\Delta ^n $ for each $\sigma_{\alpha }$.
+\end{enumerate}
+A consequence of $(3)$ is that $X$ can be built as a quotient space of a collection of disjoint simplices $\Delta _{\alpha }^n $, one for each $\sigma_{\alpha } \colon \Delta ^n  \to X$, the quotient space obtained by idenfying each face of a $\Delta _{\alpha }^n $ with the $\Delta _{\beta }^{n-1}$ corresponding to the restriction $\sigma_{\beta }$ of $\sigma_{\alpha }$ to the face in question. You can think of this as basically cell complexes, attaching $0$-simplices (cells) to $1$-simplices and $2$-simplices, and so on. 
+
+In general, we can make $\Delta $-complexes from collections of disjoint simplices by identifying various subspaces spanned by subsets of the vertices, with identifications performed by the canonical order-preserving linear homeomorphisms. Note that if we think of a $\Delta $-complex $X$ as a quotient space of disjoint simplices, then $X$ must be Hausdorff. Each restriction $\left.\sigma_{\alpha }  \right| \mathring{\Delta }^n $ is a homeomorphism onto its image by condition $(3)$, which is an open simplex in $X$. Then these open simplices are the cells $e_{\alpha }^n $ of a CW complex structure on $X$ with the $\sigma_{\alpha }$'s as characteristic maps (we won't use this fact yet).
+
+\subsection{Simplicial homology}
+Goal: define simplicial homology groups of a $\Delta $-complex $X$. Let $\Delta _n (X)$ be the free abelian group with basis the open $n$-simplices $e_{\alpha }^n $ of $X$. Formally, we can write elements of $\Delta _n (X)$ as finite formal sums $\sum_{\alpha }^{} n_{\alpha }e_{\alpha }^n $ with coefficients $n_{\alpha }\in \Z$, called \textbf{n-chains.} We could also write $\sum_{\alpha }^{} n_{\alpha }\sigma_{\alpha }$, where $\sigma_{\alpha }\colon \Delta ^n  \to X$ is the characteristic map of $e_{\alpha }^n $, with image the closure of $e_{\alpha }^n $. Such a sum can be thought of as a finite collection, or `chain', of $n$-simplices in $X$.
+
+Take a look at $\partial [v_0,v_1]=[v_1]-[v_0]$, $\partial [v_0,v_1,v_2]=[v_1,v_2]-[v_0,v_2]+[v_0,v_1],$ and $\partial [v_0,v_1, v_2,v_3]=[v_1,v_2,v_3]-[v_0,v_2,v_3]+[v_0,v_1,v_3]-[v_0,v_1,v_2]$. Na\"ively, one might assume the boundary of an $n$-simplex to be the sum of the faces delete a point, denoted by $[v_0,\cdots ,\hat{v}_i ,\cdots ,v_n] $ where $v_i $ is the vertex to be deleted. However, note the signs to take orientations into account, it just happens that they work out based on the position of $v_i $. So we have \[
+    \partial [v_0,\cdots ,v_n ]=\sum_{i}^{} (-1)^i [v_0,\cdots ,\hat{v}_i ,\cdots v_n ].
+\] Keeping this in mind, let's define a \textbf{boundary homomorphism} $\partial _n \colon \Delta _n (X) \to \Delta _{n-1}(X)$ for $X$ a general $\Delta $-complex by specifying its values on basis elements: 
+\[
+    \partial _n (\sigma_{\alpha })=\sum_{i}^{} (-1)^i \left. \sigma_{\alpha }\right| [v_0,\cdots ,\hat{v}_i ,\cdots ,v_n ].
+\] 
+\begin{lemma}
+    The composition $\Delta _n (X) \overset{\partial _n }{\longrightarrow}\Delta _{n-1}(X)\overset{\partial _{n-1}}{\longrightarrow}\Delta _{n-2}(X)$ is zero.
+\end{lemma}
+\begin{proof}
+    Note that \[
+        \partial _{n-1}\partial _n (\sigma)=\sum_{j<i}^{} (-1)^i (-1)^{j}\left.\sigma\right|  [v_0,\cdots ,\hat{v}_j ,\cdots ,\hat{v}_i ,\cdots ,v_n ]+\sum_{j>i}^{} (-1)^i (-1)^{j-1}\left.\sigma\right|  [v_0,\cdots ,\hat{v}_i ,\cdots ,\hat{v}_{j},\cdots ,v_n ].
+            \] Then after switching $i$ and $j$ in the second term, it becomes the negative of the first. Alternate proof from Dr.\ Allcock: note that $\partial \sigma:= \sum_{i=0}^{n} (-1)^i \sigma \circ[v_0,\cdots ,\hat{v}_i ,\cdots ,v_n ]$. Then \[
+            \partial \partial \sigma = \sum_{i=0}^{n} (-1)^i \partial \left( \sigma\circ[v_0,\cdots ,\hat{v}_i ,\cdots ,v_n ] \right) ,
+        \] which distributes because $C_{n-1}$ is free on $\{\text{singular}\ (n-1)\text{-simplex}\} $. So defining any function $\{\text{singular}\ (n-1)\text{-simplex}\} \to C _{n-2}$ extends to a $\Z$-linear map $C_{n-1}\to C_{n-2}$. Then \[
+        \partial \partial \sigma = \sum_{i=0}^{n} (-1)^i \left( \sum_{j=0}^{i-1} \sigma \circ [v_0,\cdots ,\hat{v}_j,\cdots ,\hat{v}_i ,\cdots ,v_n ](-1)^{j}+\sum_{j=i+1}^{n} \sigma \circ [v_0,\cdots ,\hat{v}_i ,\cdots ,\hat{v}_j,\cdots ,v_n ](-1)^{j-1} \right) ,
+        \] which is equal to zero by cancellation\footnote{The proof from Dr.\ Allcock was for singular homology, but the idea is the same.}.
+\end{proof}
+
+What we have here is a sequence of homomorphisms of abelian groups \[
+    \cdots \to C_{n+1}\overset{\partial _{n+1}}{\longrightarrow} C_n \overset{\partial _n }{\longrightarrow} C_{n-1}\to \cdots \to C_1\overset{\partial_1}{\longrightarrow}C_0\overset{\partial_0}{\longrightarrow}0 
+\] with $\partial _n \partial _{n+1}=0$ for all $n$. This is called a \textbf{chain complex}. Note that  we've extended the sequence to $0$, with $\partial_0=0 $. The equation $\partial _n \partial _{n+1}=0$ is equivalent to the inclusion $\operatorname{im}\partial _{n+1}\subseteq \ker \partial _n $, so we can define the $\mathbf{n}^{\text{\textbf{th}}}$ \textbf{homology group} of the chain complex as $H_n =\ker \partial_n  / \operatorname{im} \partial _{n+1}$. Elements of $\ker \partial _n $ are called \textbf{cycles} and elements of $\operatorname{im}\partial _{n+1}$ are called boundaries. Cosets of $\operatorname{im}\partial _{n+1}$ in $H_n $ are called \textbf{homology classes}. Two cycles representing the same homology class are said to be \textbf{homologous}, that is, their difference is a boundary. When $C_n=\Delta _n (X)$, the homology group $\ker \partial _n / \operatorname{im}\partial _{n+1} $ will be denoted by $H_n ^{\Delta }(X)$ and called the $\mathbf{n}^{\text{\textbf{th}}}$ \textbf{simplicial homology group} of $X$.
+
+\subsection{Homological algebra}
+We'll take this section to digress a bit and talk about some homological algebra. These notes will follow May \S 12.
+\orbreak
+Let $R$ be a commutative ring: the main example is $R=\Z$. A \textbf{chain complex} over $R$ is a sequence of $R$-modules \[
+    \cdots \to X_{i+1}\overset{d_{i+1}}{\longrightarrow}X_i \overset{d_i }{\longrightarrow}X_{i-1}\to \cdots 
+\] such that $d_i \circ d_{i+1}=0$ for all $i$ (abbreviated $d=d_i $). A \textbf{cochain complex} over $R$ is an analogous sequence \[
+\cdots \to Y^{i-1}\overset{d^{i-1}}{\longrightarrow}Y^i \overset{d^i }{\longrightarrow}Y^{i+1}\to \cdots 
+\] with $d^i \circ d^{i+1}=0$. Usually $X_i =0$ for $i<0$ and $Y^i =0$ for $i<0$ (or else $\{X_i ,d_i \} \to \{X^{-i},d^{-i}\} $, making chain and cochain complexes equivalent). An element of the kernel of $d_i $ is a \textbf{cycle} and an element of the image of $d_{i+1}$ is a \textbf{boundary}. This makes a lot more sense if you picture the boundary map $d_i $ as removing a vertex to get an $n-1$ simplex each time. We say two cycles are \textbf{homologous} if their difference is a boundary, and write $B_i (X) \subseteq Z_i  (X) \subseteq X_i $ for the submodules of boundaries and cycles, respectively. Then we can define the $\mathbf{i}$\textbf{th homology group} $H_i (X)$ as the quotient module $Z_i (X) /B_i (X)$, and write $H_*(X)$ for the sequence of $R $-modules $H_i (X)$.
+To get things straight, we've defined things the following way:
+\begin{gather*}
+    Z_i (X)= \, \text{cycles} \, := \ker d_i \subseteq X_i  \\
+    B_i (X)= \, \text{boundaries} := \operatorname{im}d_{i+1} \subseteq X_i .
+\end{gather*}
+\orbreak
+A \textbf{chain map} $f \colon X \to X'$ of chain complexes is a sequence of maps of $R$-modules $f_i \colon X_i  \to X_i '$ such that $d_i '\circ f_i =f_{i-1}\circ d_i $ for all $i$. That is, the following diagram commutes for all $i$\footnote{May's diagram showed much less, but I feel this illustrates the idea much better: it also makes following around the chain homotopy homomorphisms easier.}:
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+\cdots \arrow[r] & X_{i+1} \arrow[r, "d_{i+1}"] \arrow[d, "f_{i+1}"] & X_i \arrow[r, "d_i"] \arrow[d, "f_i"] & X_{i-1} \arrow[r] \arrow[d, "f_{i-1}"] & \cdots \\
+\cdots \arrow[r] & X_{i+1}' \arrow[r, "d_{i+1}'"]                    & X_i' \arrow[r, "d_i'"]                & X_{i-1}' \arrow[r]                     & \cdots
+\end{tikzcd}
+\end{figure}
+It follows that $f_i (B_i (X))\subseteq B_i (X')$ and $f_i (Z_i (X))\subseteq Z_i (X')$. Therefore we have that $f$ induces a map of $R$-modules $f_*=H_i (f) \colon H_i (X)\to H_i (X') $. A \textbf{chain homotopy} $s \colon f \simeq g $ between chain maps $f,g \colon X \to X'$ is a sequence of homomorphisms $s_i \colon X_i  \to X_{i+1}'$ such that \[
+d_{i+1}'\circ s_i +s_{i-1}\circ d_i =f_i -g_i 
+\] for all $i$. Chain homotopy is an equivalence relation (this was an exercise) since if $t \colon g \simeq h$, then $s+t=\{s_i +t_i \} $ is a chain homotopy $f \simeq h$.
+\begin{lemma}
+    Chain homotopic maps induce the same homomorphism of homology groups.
+\end{lemma}
+\begin{proof}
+    Let $s \colon f \simeq g$, $f,g \colon X \to X'$. If $x\in Z_i (X)$, then $
+        f_i (x)-g_i (x)=d'_{i+1}s_i (x)
+$ such that $f_i (x)$ and $g_i (x)$ are homologous.
+\end{proof}
+\orbreak
+A sequence $M' \overset{f}{\to } M \overset{g}{\to } M''$ of modules is \textbf{exact} if $\operatorname{im}f=\ker g$. If $M'=0$, then $g$ is a monomorphism; if $M''=0$, then $f$ is an epimorphism. We proved this as an exercise! A longer sequence is exact if it is exact at each position. A \textbf{short exact sequence} of chain complexes is a sequence \[
+0\to X' \overset{f}{\to } X \overset{g}{\to } X''\to 0
+\] that is exact in each degree. Here $0$ denotes that chain complex that is the $0$ module in each degree.
+\begin{prop}
+    A short exact sequence of chain complexes naturally gives rise to a LES of $R$-modules \[
+        \cdots \to H_q(X')\overset{f}{\to} H_q(X)\overset{g_*}{\to } H_q(X'')\overset{\partial }{\to } H_{q-1}(X')\to \cdots .
+    \] 
+\end{prop}
+\begin{proof}
+    Let $[x]$ denote the homology class of a cycle $x$. Define the ``connecting homomorphism'' $\partial \colon H_q(X'') \to H_{q-1}(X')$ by $\partial [x'']=[x']$, where $f(x')=d(x)$ for some $x$ such that $g(x)=x''$. There exists such an $x$ because $g$ is an epimorphism, and $x'$ exists because $gd(x)=dg(x)=0$. Use a ``diagram chase'' to verify that $\partial $ is well defined and the sequence is exact. Naturality means that a commutative diagram of short exact sequences of chain complexes gives rise to a commutative diagram of long exact sequences of $R$-modules. The big idea is the naturality of the connecting homomorphism, which is left as an exercise to the reader.
+\end{proof}
+
+\subsection{Singular homology}
+These notes will follow Massey \S 2 and the rest of Hatcher \S 2.1.
+\orbreak
+Let's define $H_0(X)$ as such: let $Z_0(X)=C_0(X)$ and  $H_0(X)=Z_0(X) / B_0(X)=C_0(X) /B_0(X)$. Anoter way we could do this is is defining $C_n (X)=\{0\} $ for $n<0$, then defining $\partial _n \colon C_n (X) \to C_{n-1}(X)$ in the only possible way for $n\leq 0$ (i.e., $\partial _n =0$ for $n\leq 0$), and finally defining $Z_n (X)=\ker \partial_0 $. In general, we could define $Z_n (X)=\ker \partial_n  $for all integers $n$, $B_n (X)=\partial _{n-1}(C_{n+1}(X))\subseteq Z_n (X)$, and $H_n (X)=Z_n (X) / B_n (X)$ for all $n$, with $H_n (X)=\{0\} $ for $n<0$.
+
+Now let's define (not really, we'll ignore the definition) the reduced $0$-dimensional homology group $\widetilde H_0(X)$. Let's define a homomorphism $\varepsilon \colon C_0(X) \to \Z$, often called the \emph{augmentation}, made by the typical barycentric coordinate sum $\varepsilon \colon \sum_{i}^{} n_i \sigma_i \mapsto \sum_{i}^{} n_i $. Then $\varepsilon \circ \partial_1=0 $: to do this, show that $\varepsilon (\partial_1(T))=0 $ for some $1$-cube (not hard)\footnote{I'm glossing over formal stuff because everywhere else uses triangles instead of cubes. I just want results!}. Then we can define $\widetilde Z_0(X)=\ker \varepsilon $, and \[
+    \widetilde H_0(X)=\widetilde Z_0(X)/B_0(X).
+\] We say that $\widetilde H_0(X)$ is the \textbf{reduced} $\mathbf{0}$\textbf{-dimensional homology group} of $X$. To avoid weird stuff happening, assume $X\neq \O$. It's often convenient to set $\widetilde H_n (X)=H_n (X)$ for $n>0$.
+\orbreak
+JK, back to Hatcher. Some examples of simplicial homology:
+\begin{example}
+    Let $X=S^{1} $, with one vertex $v$ and an edge $e$. Then $\Delta_0(S^{1} )$ and $\Delta_1(S^{1} ) $ are both $\Z$ and the boundary map $\partial_1 $ is zero since $\partial e= v-v$. The groups $\Delta _n (S^{1} )$ are $0$ for $n\geq 2$ since there are no simplices in these dimensions. Therefore \[
+        H_n ^{\Delta }(S^{1} )\approx
+    \begin{cases}
+        \Z\quad & \text{for} \ n=0,1,\\
+        0 \quad & \text{for} \ n\geq 2.
+    \end{cases}
+    \] 
+\end{example}
+\begin{example}
+    Let $X=\mathbb{T}$, the torus with a $\Delta $-complex structure having one vertex, three edges $a,b,$ and $c,$, and two $2$-simplices $U$ and $L$. Since $\partial_1=0 $, $H_0^{\Delta }(\mathbb{T})\simeq\Z$. Since $\partial_2U=a+b-c=\partial_2L  $ and $\{a,b,a+b-c\} $ is a basis for $\Delta_1(\mathbb{T}) $, it follows that $H_1^{\Delta }(\mathbb{T})\simeq\Z\oplus \Z$ with basis the homology classes $[a]$ and $[b]$. Since there are no $3$-simplices, $H_2^{\Delta }(\mathbb{T})$ is equal to $\ker \partial_2 $, which is infinite cyclic generated by $U-L$. So
+    \[
+        H_n ^{\Delta }(\mathbb{T})\simeq
+        \begin{cases}
+            \Z\oplus \Z \quad &\text{for} \ n=1,\\
+            \Z \quad &\text{for} \ n=0,2,\\
+            0 \quad &\text{for} \ n\geq 3.
+        \end{cases}
+    \] 
+\end{example}
+Let's talk about \textbf{singular homology}. A \textbf{singular} $\mathbf{n}$\textbf{-simplex} in a space $X$ is just a map $\sigma \colon \Delta ^n  \to X$. The word `singular' is used to imply that the map doesn't have to be nice (look like a simplex) but can have weird `singularities'. Let $C_n (X)$ be the free abelian group with basis the set of singular $n$-simplices in $X$. Elements of $C_n (X)$, called $\mathbf{n}$\textbf{-chains} (more precisely, singular $n$-chains) are finite formal sums $\sum_{i}^{} n_i \sigma_i $ for $n_i \in \Z$ and $\sigma_i \colon \Delta ^n  \to X$. A boundary map $\partial_n \colon C_n (X) \to C_{n-1}(X) $ is defined by the same formula as before: \[
+    \partial _n (\sigma)=  \sum_{i}^{}\left. (-1)^i \right| [v_0,\cdots ,\hat{v}_i ,\cdots ,v_n ].
+    \] Then $\left. \sigma \right| [v_0,\cdots ,\hat{v}_i ,\cdots v_n ]$ is a map $\Delta ^{n-1}\to X$, that is , a singular $(n-1)$-simplex. We also have $\partial _n \partial _{n+1}=0$ (more concisely $\partial ^2=0$), so we define the singular homology group $H_n (x)= \ker \partial _n  / \operatorname{im}\partial _{n+1}$. Singular chain groups tend to be really large (often uncountable), but modding out makes the homology groups easier to work with. 
+        
+        \begin{prop}\label{dsum}
+    For a space $X$, there is an isomorphism $H_n (X)\simeq \bigoplus_{\alpha }H_n (X_{\alpha })$, where $X_{\alpha }$ denotes the path-components of $X$.
+\end{prop}
+\begin{proof}
+    Since a singular simplex always has a path-connected image, $C_n (X)$ splits as the direct sum of its subgroups $C_n (X_{\alpha })$. This is preserved by the boundary maps $\partial _n $ and similarly $\ker \partial _n $ and $\operatorname{im}\partial _{n+1}$.
+\end{proof}
+
+\begin{prop}
+    If $X$ is nonempty and path-connected, then $H_0(X)\approx  \Z$. hence for any space $X$, $H_0(X)$ is a direct sum of $\Z$'s, one for each path-component of $X$.
+\end{prop}
+\begin{proof}
+    We have $H_0(X) / \operatorname{im}\partial_1 $ since $\partial_0=0 $. Define a homomorphism $\varepsilon \colon C_0(X) \to \Z$ by $\varepsilon \left( \sum_{i}^{} n_i \sigma_i  \right) =\sum_{i}^{} n_i . $ This is onto if $X\neq \O$: we claim that $\ker \varepsilon =\operatorname{im}\partial_1 $ if $X$ is path-connected, and hence $ \varepsilon$ induces an isomoprhism $H_0(X)\approx \Z$. To see that this is true, observe that $\operatorname{im}\partial_1\subseteq \ker \varepsilon  $ since for a singular $1$-simplex $\sigma \colon \Delta ^1 \to X$ we have $\varepsilon \partial_1 (\sigma)=\varepsilon \left( \left. \sigma \right| [v_1]- \left. \sigma \right| [v_0] \right) =1-1=0$. To show that $\ker \varepsilon \subseteq \operatorname{im}\partial_1 $, suppose $\varepsilon \left( \sum_{i}^{} n_i \sigma_i \right)=0 $, so $\sum_{i}^{} n_i =0. $ The $\sigma_i $'s are singular $0 $-simplices, which are simply points of $X$. Choose a path $\tau_i \colon I \to X$ from a basepoint $x_0$ to $ \sigma_i (v_0)$ and let $\sigma_0$ be the singular $0$-simplex with image $x_0$. We can view $\tau_i $ as a singular $1 $-simplex, a map $\tau_i \colon [v_0,v_1] \to X$, then we have $\partial \tau_i =\sigma_i -\sigma_0$. Hence $\partial \left( \sum_{i}^{} n_i \tau_i  \right) =\sum_{i}^{} n_i \sigma_i -\sum_{i}^{} n_i \sigma_0=\sum_{i}^{} n_i \sigma_i $ since $\sum_{i}^{} n_i =0.$ So $\sum_{i}^{}n_i \sigma_i $ is a boundary, which shows that $\ker \varepsilon \subseteq \partial_1 $.
+\end{proof}
+\begin{prop}\label{point}
+    If $X$ is a point, then $H_n (X)=0$ for $n>0$ and $H_0(X)\approx \Z$.
+\end{prop}
+\begin{proof}
+    In this case there is a unique singular $n$-simplex $\sigma_n $ for each $n$, and $\partial (\sigma_n )=\sum_{i}^{} (-1)^i \sigma_{n-1}$, a sum of $n+1$ terms, which is therefore $0$ for $n$ odd and $\sigma_{n-1}$ for $n$ even, $n\neq 0$. So we have the chain complex \[
+    \cdots \to \Z \overset{\approx}{\longrightarrow}\Z \overset{0}{\longrightarrow} \Z \overset{\approx}{\longrightarrow} \Z \overset{0}{\longrightarrow} \Z\to0
+    \] with boundary maps alternately isomorphisms and trivial maps, except for the last $\Z$. So the homology groups of this complex are trivial for every group besides $H_0\simeq\Z$.
+\end{proof}
+Sometimes weird stuff happens with $H_0(X)$, as can be seen in \cref{point}. To avoid this, we can talk about the \textbf{reduced homology groups} $\widetilde H_n (X)$, defined to be the homology groups of the augmented chain complex \[
+    \cdots \to C_2(X) \overset{\partial_2 }{\longrightarrow } C_1(X) \overset{\partial_1 }{\longrightarrow} C_0(X) \overset{\varepsilon }{\longrightarrow} \Z\to 0
+\] where $\varepsilon $ is the same one as in our earlier proposition\footnote{My clever references aren't working??}. Since $\varepsilon \partial_1=0 $, $\varepsilon $ vanishes on $\operatorname{im}\partial_1 $ adn hence induces a map $H_0(X)\to \Z$ with kernel $\widetilde H_0(X)$, so $H_0(X)\simeq \widetilde H_0(X)\oplus \Z$. Obviously $H_n (X)\simeq \widetilde H_n (X)$ for $n>0$.
+\subsection{Exact sequences}
+\begin{definition}[Exact sequences]
+    A sequence of homomorphisms \[
+    \cdots \to A_{n+1}\overset{\alpha _{n+1}}{\longrightarrow} A_n \overset{\alpha _n }{\longrightarrow} A_{n-1}\to \cdots 
+    \] is said to be \textbf{exact} if $\ker \alpha _n =\operatorname{im}_{n+1}$ for each $n$. 
+\end{definition}The inclusions $\operatorname{im}\alpha _{n+1}\subseteq \ker \alpha _n $ are equivalent to $\alpha _n \alpha _{n+1}=0$, so the sequence is a chain complex, and the opposite inclusions $\ker \alpha _n \subseteq \operatorname{im}\alpha _{n+1}$ say that the homology groups of this chain complex are trivial. We can express a number of basic algebraic concepts in terms of exact sequences, for example:
+\begin{enumerate}[label={(\roman*)}]
+    \item $0\to A\overset{\alpha }{\to } B$ is exact iff $\ker \alpha =0$, i.e., $\alpha $ is injective.
+    \item $A\overset{\alpha }{\to } B\to 0$ is exact iff $\operatorname{im}\alpha =B$, i.e., $\alpha $ is surjective.
+    \item $0\to A\overset{\alpha }{\to } B\to 0$ is exact iff $\alpha $ is an isomorphism, by (i) and (ii).
+    \item $0\to A \overset{\alpha }{\to } B \overset{\beta }{\to } C\to 0$ is exact iff $\alpha $ is injective, $\beta $ is surjective, and $\ker \beta =\operatorname{im}\alpha $, so $\beta $ induces an isomorphism $C\simeq B / \operatorname{im}\alpha $. This can be written as $C\simeq B / A $ if we think of $\alpha $ as an inclusion of $A$ as a subgroup of $B$.
+\end{enumerate}
+An exact sequence $0 \to A\to B\to C\to 0$ as in (iv) is called a \textbf{short exact sequence}. These turn out to be the perfect tool for stuff, in particular, relating the homolofy groups of a space, a subspace, and the associated quotient space.
+\begin{theorem}
+    If $X$ is a space and $A$ is a nonempty closed subspace that is a deformation retract of some neighborhood in $X$, then there is an exact sequence \[
+        \cdots \to \widetilde H_n (A) \overset{i_*}{\longrightarrow} \widetilde H_n (X) \overset{j_*}{\longrightarrow} \widetilde H_n (X/A) \overset{\partial }{\longrightarrow} \widetilde H_{n-1}(A) \overset{i_*}{\longrightarrow} \widetilde H_{n-1}(X) \to \cdots \to \widetilde H_0(X /A)\to 0,
+    \] where $i$ is the inclusion $A\hookrightarrow X$ and $j$ is the quotient map $X\to X /A$.
+\end{theorem}
+\begin{proof}
+    Basically, construct $\partial $. The idea is that an element $x\in \widetilde H_n (X /A)$ can be represented by a chain $\alpha $ in $X$ with $\partial \alpha $ a cycle in $A$ whose homology class is $\partial x\in \widetilde H_{n-1}(A)$. The full proof will come later.
+    Pairs of spaces $(X, A)$ that satisfy the hypothesis of the theorem will be called \textbf{good pairs}\footnote{\textit{We're a good pair, you and I...}}.
+\end{proof}
+\begin{cor}
+    $\widetilde H_n (S^n )\simeq\Z$ and $\widetilde H_i (S^n )=0$ for $i\neq n$. 
+\end{cor}
+\begin{proof}
+    For $n>0$ take the good pair $(X,A)=(D^n ,S^{n-1})$ so $X/A=S^n $. Since $D^n $ is contractible the terms $\widetilde H_i (D^n )$ in the LES for this pair are zero. Then by the exactness of the sequence the maps $\widetilde H_i (S^n )\overset{\partial }{\longrightarrow}\widetilde H_{i-1}(S^{n-1}) $ are isomorphisms for $i>0$ and that $\widetilde H_0(S^n )=0$. Then our result follows by induction on $n$, in which the base case of $S^0$ holds by \cref{dsum} and \cref{point}.
+\end{proof}
+\begin{lemma}\label{fixed}
+    Every continuous map $h \colon D^2 \to D^2$ has a fixed point, that is, a point $x\in D^2$ with $h(x)=x$.
+\end{lemma}
+\begin{proof}
+    This was actually an earlier theorem in Hatcher. As you can see, this will lead into Brouwer's fixed point theorem. Suppose that $h(x)\neq x$ for all $x\in D^2$. Then we can define a map $r\colon D^2 \to S^{1} $ by letting $r(x)$ be the point of $S^{1} $ where the ray in $\R^2$ starting at $h(x)$ and passing through $x$ leaves $D^2$. Now $r$ is continuous, furthermore, $r(x)=x$ if $x\in S^{1} $. So $r$ is a retraction of $D^2$ onto $S^{1} $, but no such retraction exists: let $f_0$ be a loop in $S^{1} $. In $D^2$ there is a homotopy of $f_0$ to a constant loop, for example $f_t(s)=(1-t)f_0(s)+tx_0$ for $x_0$ the basepoint of $f_0$. Since the retraction $r$ is the identity on $S^{1} $, the composition $rf_t$ is a homotopy in $S^{1} $ from $rf_0=f_0$ to the constant loop at $x_0$: but this contradicts the fact that $\pi_1(S^{1} )$ is nonzero.
+\end{proof}
+\begin{cor}[Brouwer's fixed point theorem]
+    $\partial D^n $ is not a retract of $D^n $. Hence every map $f\colon D^n  \to D^n $ has a fixed point. 
+\end{cor}
+\begin{proof}
+    If $r \colon D^n  \to \partial D^n $ is a retraction, then $ri=\mathbb{1}$ for $i \colon \partial D^n  \to D^n $ the inclusion map. The composition $\widetilde H_{n-1}(\partial D^n )\overset{i_*}{\longrightarrow} \widetilde H_{n-1}(D^n )\overset{r_*}{\longrightarrow} \widetilde H_{n-1}(\partial D^n )$ is then the identity map on $\widetilde H_{n_1}(\partial D^n )\simeq\Z$. But $i_*$ and $r_*$ are both $0$ since $\widetilde H_{n-1}(D^n )=0$, and we have a contradiction. For the fixed point portion, just replace $\pi_1$ with $H_n $ in \cref{fixed} and we're good.
+\end{proof}
+
+\subsection{Relative homology (todo)}
+Sometimes ignoring things makes things easier, for example arithmetic modulo $n$ (ignoring multiples of $n$). Relative homology is another example: in this case, we ignore all singular chains in a subspace of a given space. 
+
+Given a space $X$ and a subspace $A\subseteq X$, let $C_n (X,A)$ be the quotient group $C_n (X) / C_n (A)$, thus chains in $A$ are trivial in $C_n (X,A)$. Since $\partial \colon C_n (X)  \to C_{n-1}(X)$ takes $C_n (A)$ to $C_{n-1}(A)$, it induces a quotient boundary map $\partial \colon C_n (X,A) \to C_{n-1}(X,A)$. Then we have a sequence of boundary maps \[
+    \cdots \to C_n (X,A) \overset{\partial }{\longrightarrow}C_{n-1} (X,A)\to \cdots 
+\] The relation $\partial ^2=0$ holds since it held before (then holds for quotients).
+\begin{definition}[Relative homology groups]
+    Given the chain complex above, the homology groups $\ker \partial  / \operatorname{im}\partial $ of the chain complex are the \textbf{relative homology groups} $H_n (X,A)$. We can see the following:
+    \begin{itemize}
+        \item Elements of $H_n (X,A)$ are represented by \textbf{relative cycles}: $n$-chains $\alpha \in C_n (X)$ such that $\partial \alpha \in C_{n-1}(A)$.
+        \item A relative cycle is trivial in $H_n (X,A)$ iff it is a \textbf{relative boundary}: $\alpha =\partial \beta +\gamma$ for some $\beta \in C_{n+1}(X)$ and $\gamma\in C_n (A)$.
+    \end{itemize}
+    These properties make precise the intuitive idea that $H_n (X,A)$ is `homology of $X$ modulo $A$'.
+\end{definition}
+Goal: show that the relative homology groups $H_n (X,A)$ for any pair $(X,A)$ fit into a long exact sequence \[
+    \cdots \to H_n (A)\to H_n (X)\to H_n (X,A)\to H_{n-1}(A) \to H_{n-1}(X)\to \cdots \to H_0(X,A)\to 0
+\] 
+To do this, we'll go on our first diagram chase. Consider the diagram
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+0 \arrow[r] & C_n(A) \arrow[r, "i"] \arrow[d, "\partial"] & C_n(X) \arrow[r, "j"] \arrow[d, "\partial"] & {C_n(X,A)} \arrow[r] \arrow[d, "\partial"] & 0 \\
+0 \arrow[r] & C_n(A) \arrow[r, "i"]                       & C_{n-1}(X) \arrow[r, "j"]                   & {C_{n-1}(X,A)} \arrow[r]                   & 0
+\end{tikzcd}
+\end{figure} where $i$ is the inclusion map and $j$ is the quotient map. If we let $n$ vary and draw the short exact sequences vertically instead of horizontally, we have a large commutative diagram like the one below, where the columns are exact and the rows are chain complexes denoted by $A$, $B,$ and $C$.
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+                 & 0 \arrow[d]                                  & 0 \arrow[d]                              & 0 \arrow[d]                      &        \\
+\cdots \arrow[r] & A_{n+1} \arrow[d, "i"] \arrow[r, "\partial"] & A_n \arrow[d, "i"] \arrow[r, "\partial"] & A_{n-1} \arrow[d, "i"] \arrow[r] & \cdots \\
+\cdots \arrow[r] & B_{n+1} \arrow[d, "j"] \arrow[r, "\partial"] & B_n \arrow[d, "j"] \arrow[r, "\partial"] & B_{n-1} \arrow[d, "j"] \arrow[r] & \cdots \\
+\cdots \arrow[r] & C_{n+1} \arrow[d] \arrow[r, "\partial"]      & C_n \arrow[d] \arrow[r, "\partial"]      & C_{n-1} \arrow[d] \arrow[r]      & \cdots \\
+                 & 0                                            & 0                                        & 0                                &       
+\end{tikzcd}
+\end{figure}
+A diagram like this is called a \textbf{short exact sequence of chain complexes}. We'll show that this short exact sequence of chain complexes stretches out into a long exact sequence of homology groups \[
+    \cdots \to H_n (A) \overset{i_*}{\longrightarrow} H_n (B) \overset{j_*}{\longrightarrow} H_n (C) \overset{\partial }{\longrightarrow} H_{n-1}(A)\overset{i_*}{\longrightarrow} H_{n-1}(B)\to \cdots 
+\] where $H_n(A)$ denotes the homology group $\ker \partial  / \operatorname{im}\partial $ at $A_n $ in the chain complex, $H_n (B)$ and $H_n (C)$ similarly defined. To define the boundary map $\partial \colon H_n (C) \to H_{n-1}(A)$, let $c\in C_n $ be a cycle. Then since $j$ is onto, $c=j(b)$ for some $b\in B_n $. Then $\partial b\in B_{n-1}$ is also in $\ker j$ since $j(\partial b)=\partial j(b)=\partial c=0$. 
+
+\subsection{Homology with coefficients (todo)}
+\subsection{Degrees of maps $S^n \to S^n $ (todo)}
+
+\subsection{Cellular homology}
+Following Pierre Albin lecture 19 and Hatcher for more technical things. Recall that if $X$ is a $\Delta $-complex then $H_*^{\Delta }(X)\simeq H_*(X)$, and that $H_*^{\Delta }(X)$ is easy to compute and $H_*(X)$ is easy to prove theorems about. In an ideal world, we would like a similar equivalence for when $X$ is a CW complex since they're much more applicable, but we ran into an issue when figuring out how to define the boundary maps. 
+What we're going to do is defined a chain complex $C_n ^{\text{CW}}(X)$, and we want it to be free abelian on the $n$-cells of $X$.
+\begin{lemma}\label{cells}
+    If $X$ is a CW complex, then:
+    \begin{enumerate}[label=(\alph*)]
+        \item $H_k(X^n ,X^{n-1})$ is zero for $k\neq n$ and is free abelian for $k=n$, with a basis in one-to-one correspondence with the $n$-cells of $X$.
+        \item $H_k(X^n )=0$ for $k>n$. In particular, if $X$ is finite-dimensional then $H_k(X)=0$ for $k>\operatorname{dim}X$.
+        \item The map $H_k (X^n )\to H_k(X)$ induced by the inclusion $X^n \hookrightarrow X$ is an isomorphism for $k<n$ and surjective for $k=n$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Statement (a) follows immediately from the fact that $(X^n ,X^{n-1})$ is a good pair and $X^n  / X^{n-1}$ is a wedge sum of $n$-spheres, one for each $n$-cell of $X$ (it does!). Next consider the following part of the LES of the pair $(X^n ,X^{n-1})$: \[
+        H_{k+1}(X^n ,X^{n-1})\to H_k(X^{n-1})\to H_k(X^n )\to H_k(X^n ,X^{n-1})
+    \] If $k\neq n$ the last term is zero by (a) so the middle map is surjective, while if $k\neq n-1$ then the first term is zero so the middle map is injective. Now look at the inclusion-induced homomorphisms: \[
+    H_k(X^0) \to H_k(X^1) \to \cdots \to H_k(X^{k-1}) \to H_k(X^k) \to H_k(X^{k+1})
+\] It follows that all of these maps are isomorphisms, except that the map to $H_k(X^k)$ may not be surjective and the map from $H_k(X^k)$ may not be injective. Then the first part the sequence gives (b) since $H_k(X^0)=0$ when $k>0$. The last part gives (c) when $X$ is finite-dimensional. The proof when $X$ is infinite-dimensional requires a little more work.
+\end{proof}
+Let $X$ be a CW complex. What we want is a boundary map $C_{n+1}^{\text{CW}}(X)\overset{\partial _{n+1}^{\text{CW}}}{\longrightarrow}C_n ^{\text{CW}}(X) $. By \cref{cells}, we have
+%\begin{figure}[H]
+%\centering
+%\begin{tikzcd}
+                 %&                                                                            &                                         &                                                                 & 0                                        &                                      &        \\
+                 %&                                                                            &                                         &                                                                 &                                          &                                      &        \\
+                 %& 0 \arrow[rdd]                                                              &                                         & H_n(X^{n+1})\approx H_n(X) \arrow[ruu]                          &                                          &                                      &        \\
+                 %&                                                                            &                                         &                                                                 &                                          &                                      &        \\
+                 %&                                                                            & H_n(X^n) \arrow[ruu] \arrow[rdd, "j_n"] &                                                                 &                                          &                                      &        \\
+                 %&                                                                            &                                         &                                                                 &                                          &                                      &        \\
+%\cdots \arrow[r] & {H_{n+1}(X^{n+1},X^n)} \arrow[rr, "d_{n+1}"] \arrow[ruu, "\partial_{n+1}"] &                                         & {H_n(X^n,X^{n-1})} \arrow[rr, "d_n"] \arrow[rdd, "\partial_n"'] &                                          & {H_{n-1}(X^{n-1},X^{n-2})} \arrow[r] & \cdots \\
+                 %&                                                                            &                                         &                                                                 &                                          &                                      &        \\
+                 %&                                                                            &                                         &                                                                 & H_{n-1}(X^{n-1}) \arrow[ruu, "j_{n-1}"'] &                                      &        \\
+                 %&                                                                            &                                         &                                                                 &                                          &                                      &        \\
+                 %&                                                                            &                                         & 0 \arrow[ruu]                                                   &                                          &                                      &       
+%\end{tikzcd}
+%\end{figure}
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+C_{n+1}^{\text{CW}}(X) \arrow[rr, "\partial_{n+1}^{\text{CW}}", no head] \arrow[d, "\shortparallel", phantom] &                                  & C_n^{\text{CW}}(X) \arrow[d, "\shortparallel", phantom] \\
+{H_{n+1}(X^{n+1},X^n)} \arrow[r, "\partial_{n+1}"]                                                            & H_n(X^n) \arrow[r, "\partial_n"] & {H_n(X^n,X^{n-1})}                                     
+\end{tikzcd}
+\end{figure}
+The equalities are from \cref{cells}, and the boundary maps between homology groups are from the LES of the good pair $(X^n,X^{n-1})$. Then this naturally extends to the diagram shown in \cref{celldiagram}. 
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+                 &                                                                           &                                       &                                                                & 0                                       &                                      &        \\
+                 & 0 \arrow[rd]                                                              &                                       & H_n(X^{n+1})\approx H_n(X) \arrow[ru]                          &                                         &                                      &        \\
+                 &                                                                           & H_n(X^n) \arrow[ru] \arrow[rd, "j_n"] &                                                                &                                         &                                      &        \\
+    \cdots \arrow[r] & {H_{n+1}(X^{n+1},X^n)} \arrow[ru, "\partial_{n+1}"] \arrow[rr, "\partial_{n+1}^{\text{CW}}"] &                                       & {H_n(X^n,X^{n-1})} \arrow[rd, "\partial_n"'] \arrow[rr, "\partial_n^{\text{CW}}"] &                                         & {H_{n-1}(X^{n-1},X^{n-2})} \arrow[r] & \cdots \\
+                 &                                                                           &                                       &                                                                & H_{n-1}(X^{n-1}) \arrow[ru, "j_{n-1}"'] &                                      &        \\
+                 &                                                                           &                                       & 0 \arrow[ru]                                                   &                                         &                                      &       
+\end{tikzcd}
+\caption{The diagram for cellular homology.}
+\label{celldiagram}
+\end{figure}
+In this diagram, $\partial _{n+1}^{\text{CW}}$ and $\partial _n^{\text{CW}} $ are defined as the compositions $j_n \partial _{n+1}$ and $j_{n-1}\partial _n $, which are just `relativizations' of the boundary maps $\partial _{n+1}$ and $\partial _n $. The composition $\partial _n ^{\text{CW}}\partial _{n+1}^{\text{CW}}$ contains two successive maps in one of the exact sequences, hence is zero (since image maps onto kernel maps onto zero by exactness). The horizonal row in the diagram is a chain complex, called the \textbf{cellular chain complex} of $X$, since $H_n (X^n ,X^{n-1})$ is free with basis in one-to-one correspondence with the $n$-cells of $X$, so one can think of elements of $H_n (X^n ,X^{n-1})$ as linear combinations of $n$-cells of $X$. The resulting homology groups are called the \textbf{cellular homology groups} of $X$. We temporarily denote them $H_n ^{\text{CW}}(X)$.
+\begin{theorem}
+    $H_n ^{\text{CW}}(X)\simeq H_n (X)$.
+\end{theorem}
+\begin{proof}
+    We can identify $H_n (X)$ with $H_n (X^n ) / \operatorname{im}\partial _{n+1}$ by a simple application of the FHT and exactness. Since $j_n $ is injective, it maps $\operatorname{im}\partial _{n+1}$ isomorphically onto $\operatorname{im}(j_n \partial _{n+1})=\operatorname{im}\partial ^{\text{CW}}_{n+1}$ and $H_n (X^n )$ isomorphically onto $\operatorname{im}j_n =\ker \partial _n $. Since $j_{n-1}$ is injective, $\operatorname{ker}\partial _n =\operatorname{ker}\partial _n ^{\text{CW}}$. So $j_n $ induces an isomorphism of the quotient $H_n (X^n ) / \operatorname{im}\partial _{n+1}\simeq H_n (X)$ onto $\ker \partial _n ^{\text{CW}} / \operatorname{im}\partial _{n+1}^{\text{CW}}=H_n ^{\text{CW}}(X)$.
+\end{proof}
+Some immediate applications:
+\begin{enumerate}[label=(\roman*)]
+    \item $H_n (X)=0$ if $X$ is a CW complex with no $0$-cells.
+    \item More generally, if $X$ is a CW complex with $k$ $n$-cells, then $H_n (X)$ is generated by at most $k$ elements. For since $H_n (X^n ,X^{n-1})$ is free abelian on $k$ generators, the subgroup  $\ker \partial _n ^{\text{CW}}$ must be generated by at most $k$ elements, hence also the quotient $\ker \partial _n ^{\text{CW}} / \operatorname{im}\partial _{n+1}^{\text{CW}}$.
+    \item If $X$ is a CW complex having no two of its cells in adjacet dimensions, then $H_n (X)$ is free abelian with basis in one-to-one correspondence with the $n$-cells of $X$. This is because the cellular boundary maps $\partial _n ^{\text{CW}}$ are automatically zero in this case.
+\end{enumerate}
+\begin{example}
+    For $\C \mathrm P^n $ having a CW structure with one cell of each even dimension $2k\leq 2n$, we have \[
+        H_i (\C\mathrm P^n ) \approx 
+        \begin{cases}
+            \Z \quad& \text{for} \ i=0,2,4,\cdots ,2n,\\
+            0 &\text{otherwise.}
+        \end{cases}
+    \] Another example is $S^n \times S^n $ with $n>1$, using the product CW structure consisting of a $0$-cell, two $n$-cells, and a $2n$-cell.
+\end{example}
+\begin{prop}[Cellular boundary formula]
+   We have \[
+       \partial _n ^{\text{CW}}(e_{\alpha }^n )=\sum_{\beta }^{} d_{\alpha \beta }e_{\beta }^{n-1},
+   \] where $d_{\alpha \beta }$ is the degree of the map $S_{\alpha }^{n-1}\to X^{n-1}\to S_{\beta }^{n-1}$ that is the composition of the attaching map of $e_{\alpha }^n $ with the quotient map collapsing $X^{n-1}\setminus  e_{\beta }^{n-1}$ to a point. 
+\end{prop}
+Here we identify the cells $e_{\alpha }^n $ and $e_{\beta }^{n-1}$ with generators of the corresponding summands of the cellular chain groups. The summation in the formula contains only finitely many terms since the attaching map of $e_{\alpha }^n $ has compact image, so this image meets only finitely many cells $e_{\beta }^{n-1}$. From now on, we'll denote $\partial _n ^{\text{CW}}$ by $d_n $.
+
+TODO commutative diagram and justification for cellular boundary formula
+
+\begin{example}
+    Let $M_g$ be the closed orientable surface of genus $g$ with its usual CW structure consisting of one $0$-cell, $2g$ $1$-cells, and one $2$-cell attached by the product of commutators $[a_1,b_1]\cdots [a_g,b_g]$. The associated cellular chain complex is \[
+    0\to \Z \overset{d_2}{\longrightarrow}\Z^{2g} \overset{d_1}{\longrightarrow}\Z \to 0
+\] As observed above, $d_1$ must be 0 since there is only one $0$-cell. Also, $d_2$ is 0 because each $a_i $ or $b_i $ appears with its inverse in $[a_1,b_1]\cdots [a_g,b_g]$, so the maps $\Delta _{\alpha \beta }$ are homotopic to constant maps. Since $d_1$ and $d_2$ are both zero, the homology groups of $M_g$ are the same as the cellular chain groups, namely, $\Z$ in dimensions 0 and 2, and $\Z^{2g}$ in dimension 1.
+\end{example}
+
+\subsection{Axioms for homology}
+Let's take a formal viewpoint at some properties that all homology theories share. 
+\begin{definition}
+A (reduced) \textbf{homology theory} assigns a sequence of abelian groups $\widetilde h_n (X)$ and a sequence of homomorphisms $f_* \colon \widetilde h_n (X) \to \widetilde h_n (Y)$ to each nonempty CW complex $X$ and each map $f \colon X \to Y$ between chain complexes. These groups and homomorphisms satisfy $(fg)_*=f_*g_*$ and $\mathbb{1}_*=\mathbb{1}$, and the following axioms:
+\begin{enumerate}[label=(\arabic*)]
+    \item If $f$ is homotopic to $g$, that is $f \simeq g \colon X \to Y$, then $f_*=g_* \colon \widetilde h_n (X) \to \widetilde h_n (Y)$.
+    \item There are boundary homomorphisms $\partial  \colon \widetilde h_n (X /A) \to \widetilde h_{n-1}(A)$ defined for each CW pair $(X,A)$,\footnote{A \textbf{CW pair} $(X,A)$ is just a CW complex $X$ equipped with a subcomplex inclusion $A\hookrightarrow X$.} fitting into an exact sequence \[
+            \cdots \overset{\partial }{\longrightarrow} \widetilde h_n (A) \overset{i_*}{\longrightarrow} \widetilde h_n (X) \overset{q_*}{\longrightarrow} \widetilde h_n (X /A) \overset{\partial }{\longrightarrow} \widetilde h_{n-1}(A)\overset{i_*}{\longrightarrow} \cdots 
+        \] where $i$ is the inclusion and $q$ is the quotient map. Furthermore the boundary maps are natural (as in natural transformation): For $f\colon (X,A) \to (Y,B)$ inducing a quotient map $\overline{f}\colon X /A \to Y /B$, there are commutative diagrams 
+        \begin{figure}[H]
+        \centering
+        \begin{tikzcd}
+\widetilde h_n(X/A) \arrow[d, "\bar f_*"] \arrow[r, "\partial"] & \widetilde h_{n-1}(A) \arrow[d, "f_*"] \\
+\widetilde h_n(Y/B) \arrow[r, "\partial"]                       & \widetilde h_{n-1}(B)                 
+\end{tikzcd}
+        \end{figure}
+    \item For a wedge sum $X=\bigvee _{\alpha }X_{\alpha }$ with inclusions $i_{\alpha }\colon X_{\alpha } \hookrightarrow X$, the direct sum map $\bigoplus_{\alpha }{i_{\alpha }}_* \colon \bigoplus_{\alpha }\widetilde h_n (X_{\alpha }) \to \widetilde h_n (X)$ is an isomorphism for all $n$.
+\end{enumerate}
+\end{definition}
+Some notes on this new definition for homology. Negative values of $n$ are allowed, in our standard singular homology theory they became zero by definition but there exist some interesting homology theories with nontrivial groups in negative dimensions. Also, the third axioms follows from the first two in the case of a finite wedge sum, but not an infinite one.
+
+You can also give axioms for unreduced homology theories, suppose we have relative groups $h_n (X,\,A)  $, define the absolute groups by $h_n (X)=h_n (X,\O)$. Then axiom (2) splits into two, one about long exact sequences with natural boundary maps, and one about excision (eg $h_n (X,A) \approx h_n (X /A,\, A /A)$ for CW pairs). In axiom (3) replace wedge sum with disjoint union. The axioms are essentially the same as the ones proposed seventy years ago in [Eilenberg \& Steenrod 1952], besides the fact that (3) was omitted (to focus on finite CW complexes). There was also an additional axiom called the \emph{dimension axiom} specifying that the groups $h_n (\text{point} )$ are zero for $n\neq 0$. At the time there were no interesting homology theories for which the dimension axiom doesn't hold, but now we have \emph{bordism} in which bordism groups of a point are nonzero in infinitely many dimensions. 
+
+Reduced and unreduced homology theories are essentially equivalent. We can get a reduced theory $\widetilde h$ from an unreduced theory $h$ by setting $\widetilde h_n (X)$ equal to the kernel of the canonical map $h_n (X)\to h_n (\text{point} )$. For the other direction, set $h_n (X)=\widetilde h_n (X\amalg \text{point} )$. You can show that these two transformation are each others inverses. We have $h_n (X)\approx \widetilde h_n (X)\oplus h_n (x_0)$ for any point $x_0\in X$, since the LES of the pair $(X,x_0)$ splits via the retraction of $X$ onto $x_0$. Also note that $\widetilde h_n (x_0)=0$ for all $n$, just look at the LES of the pair $(x_0,x_0)$.
+TODO more stuff on coefficients
+
+We can also get Mayer-Vietoris sequences from the axioms. For a CW complex $X=A\cup B$ with $A,B$ subcomplexes, the inclusion $(B,A\cap B)\hookrightarrow (X,\,A)$ induces a commutative diagram of exact sequences 
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+\cdots \arrow[r] & {h_{n+1}(B,A\cap B)} \arrow[d, "\approx"] \arrow[r] & h_n(A\cap B) \arrow[d] \arrow[r] & h_n(B) \arrow[d] \arrow[r] & {h_n(B,A\cap B)} \arrow[d, "\approx"] \arrow[r] & \cdots \\
+\cdots \arrow[r] & {h_{n+1}(X,A)} \arrow[r]                            & h_n(A) \arrow[r]                 & h_n(X) \arrow[r]           & {h_n(X,A)} \arrow[r]                            & \cdots
+\end{tikzcd}
+\end{figure}
+The vertical maps are isomorphisms since $B /(A\cap B)=X /A$. Then a diagram like this with every third vertical map an isomorphism gives rise to a LES with the remaining nonisomoprhic terms, which looks like \[
+    \cdots \to h_n (A\cap B) \overset{\varphi }{\longrightarrow} h_n (A)\oplus h_n (B) \overset{\psi }{\longrightarrow} h_n (X)\overset{\partial }{\longrightarrow} h_{n-1}(A\cap B)\to \cdots 
+\] (This is left as an exercise to the reader.)
+
