@@ -9,6 +9,7 @@
 \usepackage{xfrac}
 \usepackage{tikz-cd}
 \usepackage{float}
+\usepackage{enumitem}
 
 %table of contents formatting
 \usepackage{tocloft}
@@ -21,28 +22,11 @@
 \usepackage{adforn}
 \usepackage[charter]{mathdesign}
 
-%\newcommand*{\institution}[1]{\newcommand{\@institution}{#1}}
-%\newcommand*{\coursenum}[1]{\newcommand{\@coursenum}{#1}}
-%\newcommand*{\coursename}[1]{\newcommand{\@coursename}{#1}}
-%\newcommand*{\semester}[1]{\newcommand{\@semester}{#1}}
-%\newcommand*{\teacher}[1]{\newcommand{\@teacher}{#1}}
-%\renewcommand*{\email}[1]{\newcommand{\@email}{#1}}
-%\renewcommand{\@thanks}{\@empty}
-%\renewcommand{\thanks}[1]{\renewcommand{\@thanks}{#1}}
-%%
-%\let\@oldauthor\author
-%\newcommand*{\d@e}{\@empty}
-%\renewcommand*{\author}[1]{\renewcommand{\@author}{#1}}
-%\renewcommand*{\date}[1]{\renewcommand{\d@e}{#1}}
-%
-%\title{\@coursenum{} Notes: \MakeUppercase{\@coursename}}
- %\@oldauthor{\@author\\\d@e}
-
 \usepackage{fancyhdr}
 \fancyhf{}
  \fancyhead[RO,LE]{\small\thepage}
  \fancyhead[LO]{\small\itshape\nouppercase{\leftmark}}
- \fancyhead[RE]{\small\itshape \@coursenum{} (\@coursename) Lecture Notes}
+ \fancyhead[RE]{\small\itshape Lecture Notes}
  \setlength{\headheight}{11.0pt}
 \pagestyle{fancy}
 
@@ -74,6 +58,37 @@
 \newenvironment{solution}
   {\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[Solution]}
   {\end{proof}}
+
+%named theorems!
+\swapnumbers
+\theoremstyle{plain}
+\newcommand{\thistheoremname}{}
+%numbered
+\newtheorem{genericthm}[theorem]{\thistheoremname}
+\newenvironment{namedthmnum}[1]
+  {\renewcommand{\thistheoremname}{#1}%
+         \begin{genericthm}}
+        {\end{genericthm}}
+%unnumbered
+\newtheorem*{genericthm*}{\thistheoremname}
+\newenvironment{namedthm}[1]
+  {\renewcommand{\thistheoremname}{#1}%
+         \begin{genericthm*}}
+               {\end{genericthm*}}
+%general thing (definition, example, etc)
+\theoremstyle{definition}
+\newcommand{\thisthingname}{}
+\newtheorem{genericthing}[definition]{\thisthingname}
+\newenvironment{namedthingnum}[1]
+  {\renewcommand{\thisthingname}{#1}%
+         \begin{genericthing}}
+        {\end{genericthing}}
+%unnumbered thing
+\newtheorem*{genericthing*}{\thisthingname}
+\newenvironment{namedthing}[1]
+  {\renewcommand{\thisthingname}{#1}%
+         \begin{genericthing*}}
+               {\end{genericthing*}}
 
 %self explanatory
 \newcommand\N{\ensuremath{\mathbb{N}}}
@@ -109,13 +124,12 @@
 {\normalfont}
 {\filright
 \footnotesize
-\enspace Section \thesection\enspace}
+\enspace Lecture \thesection\enspace}
 {8pt}
 {\Large\bfseries\filcenter}
 
-%section symbol
-%\renewcommand*{\sectionformat}{\color{blue!50!black}\S\thesection\autodot\enskip}
-%\renewcommand*{\subsectionformat}{\color{blue!30!black}\S\thesubsection\autodot\enskip}
+  \titlespacing*{\section}
+{0pt}{5.5ex plus 1ex minus .2ex}{4.3ex plus .2ex}
 
 %tis me
 \author{Simon Xiang}
