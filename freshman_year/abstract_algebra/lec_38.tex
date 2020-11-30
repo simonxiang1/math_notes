@@ -1,0 +1,59 @@
+\section{November 30, 2020}
+What's a tensor? It's how to create a third module from two other modules.
+\subsection{Noetherian modules}
+\begin{definition}[Noetherian modules]
+    Let $M$ be a (left) $R$-module for $R$ a ring. Then $M$ is \textbf{Noetherian} $R$-module if it satisfies the ascending chain condition on submodules, ie every sequence of submodules \[
+    M_1\subseteq M_2\subseteq \cdots 
+    \] has a maximal element $M_m$, ie $M_k=M_m$ for all $k\geq m$. This is the same idea we talked about with Noetherian rings, in which every ascending chain of ideals terminates.
+\end{definition}
+\begin{note}
+    A ring $R$ is Noetherian iff $R$ is Noetherian as an $R$-module, since $R$-submodules of $R$ are just ideals of $R$.
+\end{note}
+\begin{theorem}
+   Let $R$ be a ring, and $M$ be an $R$-module. Then TFAE:
+   \begin{enumerate}[label=\arabic*)]
+       \item $M$ is Noetherian,
+       \item Every non-empty set of submodules of $M$ contains a maximal element with respect to inclusion,
+       \item Every submodule of $M$ is finitely generated, in particular, $M$ itself is finitely generated.
+   \end{enumerate}
+\end{theorem}
+\begin{proof}
+    The proof is the same as the one for Noetherian rings, it's also in the book.
+\end{proof}
+\begin{definition}[Rank]
+    Let $R$ be an integral domain, $M$ be an $R$-module. We define the notion of $\operatorname{rank}M:=$ maximal number of linear independent elements of $M$. Recall that $\{m_1,\cdots ,m_k \}\subseteq M   $ are linearly independent if $r_1m_1+\cdots +r_km_k=0 \implies r_1= \cdots =r_k=0$.
+\end{definition}
+\begin{prop}
+    Let $R$ be an integral domain, and $M$ be a free $R$-module of rank $n<\infty$. Then any $n+1$ elements of $M$ are linearly dependent over $R$.
+\end{prop}
+\begin{proof}
+    Let $F:=\operatorname{Frac}(R)$, and $M$ be free of rank $n$, which means that $M\simeq \overset{n \ \text{copies} }{\overbrace{R\times \cdots \times R}}\hookrightarrow F\times \cdots \times F$, $M\hookrightarrow F^n $, an $n$-dimensional vector space over $F$. Then $(n+1)$ elements of $M$ $\{m_1,\cdots ,m_{n+1}\} \subseteq M\hookrightarrow F^n $ implies that $\{m_1,\cdots ,m_{n+1}\} $ are linearly independent over $F$. Then there exist $(\alpha_1,\cdots ,\alpha _{n+1})\in F^{n+1}\setminus \{0\} $ such that $\sum_{i=1}^{m+1} \alpha _i m_i =0,$ and $\alpha _i \in F$ implies that $\alpha _i =a_i  /b_i $ for $a_i ,b_i \in R$, $b_i \neq 0$ for all $i$. Then \[
+    \sum_{i=1}^{n+1} r_i m_i =0 \ \text{with} \ r_i =a_i \frac{b}{b_i } \ \text{where} \ b=\prod_{i=1}^{n+1}b_i .
+\] So $(r_1,\cdots ,r_{n+1})\in R^{n+1}\setminus \{0\} $ since $R$ is an integral domain, which is what we wanted.
+\end{proof}
+\subsection{Annihilators and torsion}
+\begin{definition}[Torsion]
+    Let $R$ be an integral domain, $M$ be an $R$-module. Then we define the \textbf{torsion submodule} as \[
+    \operatorname{Tor}M:=\{m\in M \mid rm=0 \ \text{for some} \ r\in R\setminus 0 \} 
+    \] Note that this is defined as a set, but you can indeed verify that this is a submodule of $R$. If $M$ is free, then $\operatorname{Tor}M=0$, since there are no relations on any $m$.
+\end{definition}
+\begin{definition}[Annihilator]
+    Let $N$ be a submodule of $M$ an $R$-module. Then we define the \textbf{annihilator} of $N$ as \[
+        \operatorname{Ann}(N):=\{r\in R \mid rn=0 \ \forall n\in N\} .
+    \] Note that $\operatorname{Ann}(N)$ is an $R$-ideal. If $L\subseteq N$ are both submodules of $N$, then we have $\operatorname{Ann}(L)\supseteq \operatorname{Ann}(N)$. Clearly the annihilator of a free module is zero, since annihilating creates relations. 
+\end{definition}
+\begin{example}
+    Note that $\operatorname{Ann}(\operatorname{Tor}M)$ may or may not be trivial. For example, let $M=\Q /\Z=\left\{\frac{a}{b}+\Z \mid 0\leq a<b\right\} $ as a $\Z$-module (convince yourself of the equality as sets). Then $\operatorname{Tor}(M)=M$, since $b\left( \frac{a}{b} +\Z \right) =\Z=0_{\Q /\Z}$. So $\operatorname{Ann}(\operatorname{Tor}M)=\operatorname{Ann}(M)$, but $\operatorname{Ann}(\Q /\Z)=0$. To see this, let $r\in \Z$, then $r\left( \frac{1}{r+1}+\Z \right) =\frac{r}{r+1}+\Z\neq 0$ in $\Q /\Z$. So $\Q /\Z$ is an example of a non-Noetherian $\Z$-module (not finitely generated).
+\end{example}
+\subsection{Modules over PIDs}
+Now we get to state and prove the main theorem that we've been working toward.
+\begin{theorem}
+   Let $R$ be a PID, $M$ be a free module of rank $m$, and $N$ a submodule of $M$. Then 
+   \begin{enumerate}[label=\arabic*)]
+       \item $N$ is free of rank $n\leq m$,
+       \item There exists a basis of $M $ given by  $\{y_1,\cdots ,y_m\} $ such that $\{a_1y_1,\cdots ,a_n y_n \} $ is a basis of $N$ with $a_1,\cdots ,a_n \in R$ such that $a_1 \mid a_2 \mid \cdots  \mid a_n $.
+   \end{enumerate}
+\end{theorem}
+\begin{proof}
+    If $N=0$, then $M\simeq Ry_1+\cdots +Ry_m\simeq \overset{m \ \text{copies} }{\overbrace{R\times \cdots \times R}} $ since $M$ is free of rank $m$ and $n=0$ (nothing left to say here, think of this as an exceptional case). Now assume that $N\neq 0$. We'll finish this next time. This result leads into a lot of useful linear algebra results.
+\end{proof}
