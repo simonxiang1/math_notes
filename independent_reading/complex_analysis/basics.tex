@@ -1,0 +1,243 @@
+\section{The Basics}
+I want to do some real math! These notes will follow Stein and Shakarchi \S 1.2.
+\subsection{Continuous functions}
+We've already seen the standard epsilon-delta definition of continuity. An equivalent definition is the sequential definition, that is, for every sequence $\{z_1,z_2,\cdots\} \subseteq \Omega \subseteq \C$ such that $\lim z_n=z_0$, then $f$ is continuous at $z_0$ if $\lim f(z_n)=f(z_0)$. Since the notions for convergence of complex numbers and $\R^2$ is the same, $f$ of $z=x+iy$ is continuous iff it's continuously viewed as a function of two real variables $x$ and $y$. If $f$ is continuous, then the real valued function defined by $z\mapsto |f(z)|$ is clearly continuous (by the triangle inequality).
+
+We say $f$ attains a \textbf{maximum} at the point $z_0\in \Omega$ if \[
+    |f(z)|\leq |f(z_0)| \,\,\text{for all}\,\,  z\in \Omega.
+\] The definition of a minimum is what you think it is.
+\begin{theorem}
+    A continuous function on a compact set $\Omega$ is bounded and attains a maximum and minimum on $\Omega$.
+\end{theorem}
+\begin{proof}
+    Same as the any one you'd find in a Real Analysis course.
+\end{proof}
+\subsection{Holomorphic functions}
+Let's talk about the good stuff. Let $\Omega \subseteq \C$ be open and $f \colon \Omega \to \C$. Then $f$ is \textbf{holomorphic at the point} $z_0 \in \Omega$ if the quotient \[
+    \frac{f(z_0+h)-f(z_0)}{h}
+\] converges to a limit when $h\to 0$. Here $h\in \C$ and $h\neq 0$ with $z_0+h\in \Omega$, such that the quotient is well-defined. This limit is called the \textbf{derivative of} $f$ and $z_0$, and is denoted by \[
+f'(z_0) = \lim_{h\to 0}\frac{f(z_0+h)-f(z_0)}{h}.
+\] Note that $h$ approaches $0$ from any direction. The function $f$ is said to be \textbf{holomorphic on $\Omega$} if $f$ is holomorphic at every point of $\Omega$. If $C\subseteq \C$ is closed, then $f$ is \textbf{holomorphic on $C$} if $f$ is holomorphic on some open set containing $C$. Finally, if $f$ is holomorphic on $\C$ then $f$ is said to be \textbf{entire}. Sometimes the terms \textbf{regular} or \textbf{complex differentiable} are used in place of holomorphic, but holomorphic functions are much much nicer than real values differentiable functions. Furthermore, every holomorphic function is analytic (that is, it has a power series expansion near every point), and so we also use the term \textbf{analytic} to refer to holomorphic functions. Once again, things are not as nice in Real Analysis, with infinitely differentiable real valued functions not having power series expansions.
+\begin{example}
+    We have any polynomial $p(z)=a_0+a_1z+\cdots+a_nz^n$ entire, and $f(z)=\frac{1}{z}$ holomorphic on the punctured plane $\C\setminus \{0\} $. However, $f(z)=\frac{\overline{z}}{z}$ is not entire, as $\frac{f(z_0+h)-f(z_0)}{h}=\frac{\overline{h}}{h}$, which has no limit as $h\to 0$.
+\end{example}
+If we write the definition of a holomorphic function as $f$ being holomorphic at $z_0\in \C$ iff there exists an $a\in \C$ such that\[
+    f(z_0+h)-f(z_0)-ah=h\psi(h),
+\] where $\psi$ is a function defined for all ``small'' $h$, and $\lim_{h\to 0}\psi(h)=0$, we can see that $f$ is holomorphic implies $f$ is continuous (clearly $a=f'(z_0)$). The basic stuff, distribution over addition, product rule, quotient rule, chain rule, yada yada all apply.
+\subsection{Cauchy-Riemann equations and the Jacobian}
+OK, here's the difference between real and complex valued functions again. In terms of real variables, $f(z)=\overline{z}$ corresponds to $F \colon (x,y) \to (x,-y)$, which is differentiable in the real sense, its derivative at a point being the map corresponding to its Jacobian. In fact, $F$ is linear and is equal to its derivative at any point, and is therefore infinitely differentiable. So a complex valued function having a real derivative need not imply the complex valued function is holomorphic. We can associate complex valued functions $f=u+iv$ to the mapping $F(x,y)=(u(x,y),v(x,y))$, where $F \colon \R^2 \to \R^2$.
+
+Recall that $F(x,y)$ is differentiable at a $P_0=(x_0,y_0)\in \R^2$ if there exists a linear transformation $J \colon \R^2 \to \R^2$ such that \[
+    \frac{\left| F(P_0+H)-F(P_0)-J(H) \right| }{|H|}\to 0 \quad \text{as} \ |H|\to 0,\, H\in \R^2.
+\] We could also write \[
+F(P_0+H)-F(P_0)=J(H)+|H|\Psi(H),
+\] where $|\Psi(H)|\to 0$ as $|H|\to 0$. Very similar to what just happened above. Then the transformation $J$ is unique and called the \textbf{derivative} of $F$ at $P_0$. Given that $F$ is differentiable and the partial derivatives exist, we have \[
+J=J_F(x,y)=
+\begin{pmatrix}
+    \partial u/\partial x & \partial u/\partial y\\
+    \partial v/\partial x & \partial v/\partial y
+\end{pmatrix}.
+\] 
+\begin{note}
+    In the case of complex differentiation, the derivative is a complex number $f'(z_0)$, but for real derivatives, it's a matrix.
+\end{note}
+However, there is a way to link these two notions. Let's consider the limit of $h\in \R$, that is, $h=h_1+ih_2$ with $h_2=0$. Then if $z_0=x_0+iy_0$, we have 
+\begin{align*}
+    f'(z_0)&= \lim_{h_1 \to 0} \frac{f(x_0+h_1,y_0)-f(x_0,y_0)}{h_1}\\
+           &= \frac{\partial f}{\partial x}(z_0).
+\end{align*} Similarly, for $h\in \C\setminus \R$, say $h=ih_2$ ($h$ is purely imaginary), we have 
+\begin{align*}
+    f'(z_0)&= \lim_{h_2 \to 0} \frac{f(x_0,y_0+h_2)-f(x_0,y_0)}{ih_2}\\
+           &=\frac{1}{i} \frac{\partial f}{\partial y}(z_0).
+\end{align*} So if $f$ is holomorphic, then we have shown that \[
+\frac{\partial f}{\partial x}=\frac{1}{i} \frac{\partial f}{\partial y}.
+\] Now $f=u+iv$, so $\partial f / \partial x=\partial u / \partial x + i\partial v/ \partial x$, and similarly $\partial f / \partial y=\partial u /\partial y+i\partial v /\partial y$. Separate the real and imaginary parts and note that $1 / i=-i$, then we get 
+\begin{gather*}
+    \frac{\partial u}{\partial x}+i \frac{\partial v}{\partial x}= \frac{1}{i}\left( \frac{\partial u}{\partial y} \right) +\frac{1}{i}\cdot i \left( \frac{\partial v}{\partial y}\right)  \implies \\
+\frac{\partial u}{\partial x}+i \frac{\partial v}{\partial x}= -i \frac{\partial u}{\partial y} + \frac{\partial v}{\partial y}, 
+\end{gather*}
+which implies the following nontrivial relations: 
+\begin{equation}\label{cr}
+    \frac{\partial u}{\partial x}=\frac{\partial v}{\partial y}\quad \text{and}\quad \frac{\partial u}{\partial y}=-\frac{\partial v}{\partial x}.
+\end{equation}
+The relations described in \cref{cr} are known as the \textbf{Cauchy-Riemann} equations, which link real and complex analysis. Here we state the converse of the Cauchy-Riemann theorems in an important theorem.
+\begin{theorem}
+    Suppose $f=u+iv$ is a complex-valued function on an open set $\Omega$. If $u$ and $v$ are continuously differentiable and satisfy the Cauchy-Riemann equations for all $\omega\in \Omega$, then $f$ is holomorphic on $\Omega$ and $f'(z)=\partial f / \partial z$.
+\end{theorem}
+\begin{proof}
+    Recall that $u(x+h_1,y+h_2)-u(x,y)=\frac{\partial u}{\partial x}h_1+\frac{\partial u}{\partial y}h_2+ |h|\psi_1(h) $ and $v(x+h_1,y+h_2)=\frac{\partial v}{\partial x}h_1+\frac{\partial v}{\partial y}h_2+|h|\psi_2(h)$, where $\psi_j(h)\to 0$ (for $j\in \{1,2\} $) as $|h|$ tends to $0$, and $h=h_1+ih_2$. Then by the Cauchy-Riemann equations we have \[
+        f(z+h)-f(z)=\left( \frac{\partial u}{\partial x}-i \frac{\partial u}{\partial y} \right) (h_1+ih_2)+|h|\psi(h),
+    \] where $\psi(h)=\psi_1(h)+\psi_2(h)\to 0$, as $|h|\to 0$. Therefore $f$ is holomorphic and $f'(z)=2 \frac{\partial u}{\partial z}=\frac{\partial f}{\partial z}$.
+\end{proof}
+
+
+
+\subsection{Power series }
+I was wondering when we were going to cover these? The prime example of a power series is the complex \textbf{exponential} function, defined for $z\in \C$ by \[
+e^z = \sum_{n=0}^{\infty} \frac{z^n }{n!}.
+\] When $z$ is real, this is the same as the usual exponential function, and the series converges absolutely for all $z\in \C$. To see this, note that $ 
+\left| \frac{z^n }{n!} \right| = \frac{|z|^n }{n!},
+$ so compare $|e^z|$ to $\sum_{}^{} |z|^n  / n!=e^{{z}}<\infty.$ This shows that the series defining $e^z$ is uniformly convergent in every disk in $\C$. We'll prove that $e^z$ is entire, and that its derivative can be found by termwise differentiation of the power series expansion. Hence \[
+(e^z)'=\sum_{n=0}^{\infty} n \frac{z^{n-1}}{n!}=\sum_{m=0}^{\infty} \frac{z^m}{m!}=e^z
+\] for $m=n-1$, which shows that $e^z$ is its own derivative. In contrast, the geometric series $\sum_{n=0}^{\infty} z^n$ converges absolutely only in the disk $|z|<1$, and the sum is equal to $\frac{1}{1-z}$, which is holomorphic in the punctured plane $\C\setminus \{1\} $. The proof is the same as the one for real variables: observe that \[
+\sum_{n=0}^{N} z^n = \frac{1-z^{N+1}}{1-z},
+\] then note that if $|z|<1$ we have $\lim_{N\to \infty}z^{N+1}=0$.
+\begin{definition}[Power series]
+    In general, a \textbf{power series} is an expansion of the form \[
+    \sum_{n=0}^{\infty} a_n z^n , 
+    \] where $a_n \in \C$.
+\end{definition}
+Testing for absolute convergence involves looking at the sum $\sum_{n=0}^{\infty} |a_n | |z|^n $, and if $\sum_{n=0}^{\infty} a_n z^n $ converges absolutely for some $z_0$, then it converges for all $z$ in the disk $|z|\leq|z_0|$. Now we prove a theorem that there always exists an open disk (possibly empty)\footnote{Wait, this theorem is pretty lame then.} on which the power series converges absolutely.
+\begin{theorem}
+    Given a power series $\sum_{n=0}^{\infty} a_n z^n $, there exists $0\leq R\leq \infty$ such that 
+    \begin{enumerate}[label=(\roman*)]
+        \item If $|z|<R$ the series converges absolutely.
+        \item If $|z|>R$ the series diverges.
+    \end{enumerate}
+    Moreover, if we use the convention that $1 /0=\infty$ and $1 /\infty=0$, then $R$ is given by Hadamard's formula \[
+    \frac{1}{R}=\limsup |a_n |^{\frac{1}{n}}.
+    \] 
+\end{theorem}
+    We say that $R$ is the \textbf{radius of convergence} of the power series, and the region $|z|<R$ is the \textbf{disc of convergence} . In particular, $R=\infty$ for $\exp$, and $R=1$ for the geometric series.
+\begin{proof}
+    Let $L=1 /R$, and suppose that $L\neq 0,\infty$\footnote{These two cases are exercises for the reader.}. If $|z|<R$, choose a small $\varepsilon >0$ such that \[
+        (L+\varepsilon )|z|=\frac{1+\varepsilon R}{R}\cdot ``R"=r<1.
+    \] By the definition of $L$, we have that $|a_n |^{\frac{1}{n}}\leq L+\varepsilon $ for all large $n$, therefore \[
+    |a_n | |z|^n \leq \{(L+\varepsilon )|z|\} ^n =r^n .
+    \] Comparing this with the geometric series $\sum_{}^{} r^n $ shows that $\sum_{}^{} a_n z^n $ converges. If $|z|>R$, then a similar argument shows that there exists a sequence in terms of the series whose absolute value goes to infinity, so the series diverges.
+\end{proof}
+\begin{remark}
+    Things are much more delicate when we deal with the boundary of the disk of convergence, where $|z|=R$. Here, we can have either convergence or divergence.
+\end{remark}
+More examples include the \textbf{trigonometric functions}, defined by \[
+    \cos z= \sum_{n=0}^{\infty} (-1)^n \frac{z^{2n}}{(2n)!}\quad \text{and}\quad \sin z =\sum_{n=0}^{\infty} (-1)^n  \frac{z^{2n+1}}{(2n+1)!},
+\] which agree with the usual cosine and sine of a real argument when $z\in \R$. A simple calculation yields \[
+\cos z=\frac{e^{iz}+e^{-iz}}{2}\quad \text{and} \quad \sin z = \frac{e^{iz}-e^{-iz}}{2i}.
+\] These are the \textbf{Euler formulas} for cosine and sine.
+\begin{theorem}\label{analytic}
+    The power series $f(z)=\sum_{n=0}^{\infty} a_n z^n $ defines a holomorphic function in its disc of convergence. The derivative of $f$ is also a power series obtained by differentiating term by term the series for $f$, that is, \[
+        f'(z)= \sum_{n=0}^{\infty} na_n z^{n-1}.
+    \] Moreover, $f'$ has the same radius of convergence as $f$.
+\end{theorem}
+\begin{proof}
+    To show that $f'$ has the same radius of convergence as $f$, refer to Hadamard's formula. Indeed, $\lim_{n\to \infty}n^{1 /n}=1$, and therefore \[
+   \limsup |a_n |^{\frac{1}{n} } =\limsup |na_n |^{\frac{1}{n}} ,
+    \] so $\sum_{}^{} a_n z^n $ and $\sum_{}^{} na_n z^n $ have the same radius of convergence, and therefore so do $\sum_{}^{} a_n x^n$ and $\sum_{}^{} na_n z^{n-1}$. Now for the first assertion, we need to show that \[
+    g(z)=\sum_{n=0}^{\infty} na_n z^{n-1} 
+\] gives a description of $f'$. Let $R$ be the radius of convergence of $f$, and suppose that $|z_0|<r<R$. Write $
+f(z)=S_N(z)+E_N(z),
+$ where \[
+    S_N(z)=\sum_{n=0}^{N} a_n z^n\quad \text{and} \quad E_N(z)=\sum_{n=N+1}^{\infty} a_n z^n.
+\] Some crazy stuff happened, and we'll omit the rest of the proof.
+\end{proof}
+\begin{cor}
+    A power series is infinitely complex differentiable in its disc of convergence, and the higher derivatives are also power series obtained by termwise differentiation.
+\end{cor}
+\begin{definition}[Power series not centered at the origin]
+    We can define a power series centered at $z_0\in \C$ by \[
+        f(z)=\sum_{n=0}^{\infty} a_n (z-z_0)^n .
+    \]  
+\end{definition}
+The disk of convergence is now centered at $z_0$ and the radius is still given by Hadamard's formula. In fact, if $
+    g(z)=\sum_{n=0}^{\infty} a_n z^n,
+$ then $f$ is simply obtained by translating $g$, where $f(z)=g(w)$, $w=z-z_0$. So everything we know about $g$ works for $f,$ in particular, by the chain rule we have \[
+f'(z)=g'(w)=\sum_{n=0}^{\infty} na_n (z-z_0)^{n-1}.
+\] 
+A function $f$ defined on an open set $\Omega$ is \textbf{analytic} (or has a \textbf{power series expansion}) if at a point $z_0\in \Omega$ there exists a power series $\sum_{}^{} a_n (z-z_0)^n $ centered at $z_0$, with positive radius of convergence, such that \[
+    f(z)=\sum_{n=0}^{\infty} a_n (z-z_0)^n 
+\] for all $z$ in a nbd of $z_0$. If $f$ has a power series expansion for all $z_0\in \Omega$, then $f$ is \textbf{analytic on} $\mathbf{\Omega}$. By \cref{analytic}, an analytic function on $\Omega$ is also holomorphic there. Next chapter we prove a deep theorem that every holomorphic function is analytic, which is why we use the terms holomorphic and analytic interchangeably.
+
+
+\subsection{Integration along curves}
+\begin{definition}[Parametrized curve]
+    A \textbf{parametrized curve} is a function $z(t) \colon [a,b] \to \C$, where $a,b\in \R$. We say a parametrized curve is \textbf{smooth} if $z'(t)$ exists and is continuous on $[a,b]$ and $z'(t)\neq 0$ for $t\in [a,b]$.
+\end{definition}
+At the endpoints $t=a$ and $t=b$, we interpret $z'(a)$ and $z'(b)$ as the one-sided limits \[
+    z'(a)= \lim_{h\to 0, \,h>0}\frac{z(a+h)-z(a)}{h}\quad \text{and} \quad \lim_{h\to 0,\,h<0}\frac{z(b+h)-z(b)}{h}.
+\] We call these the right-hand derivative of $z(t)$ at $a$ and the left-hand derivative of $z(t)$ at $b$, respectively\footnote{Intuitively, shouldn't it be the other way around? Like left-hand derivative  corresponds to $a$, since it's on the ``left-hand side'' of the interval...}. Similarly, we say the parametrized curve is \textbf{piecewise-smooth} if $z$ is continuous on $[a,b] $, and there exist points $\{a_0,a_1,\cdots ,a_n\} $ such that \[
+a=a_0<a_1< \cdots < a_n=b,
+\] where $z(t)$ is smooth on $[a_k,a_{k+1}]$ for $1\leq k \leq n$. This differs from the standard definition of a smooth curve in that the right and left hand derivatives at $a_k$ may differ for some $1\leq k\leq n-1$. Why don't we just say parametrizations are just paths (like in the definition of path-connectedness)? That would save me a lot of typing, because the word ``path'' is much shorter than the word ``parametrization''\footnote{Thank you for the observation, very cool.}.
+
+We say two parametrizations $z \colon [a,b] \to \C$ and $\widetilde z \colon [c,d] \to \C$ are \textbf{equivalent} if there exists a continouously differentiable bijection $s\mapsto t(s)$ from $[c,d]$ to $[a,b]$ such that $t'(s)>0$ and $\widetilde z(x)=z(t(s))$. The fact that we require the derivative to be positive says that the orientation is preserved: as $s$ walks on the path from $c$ to $d$, $t(s)$ walks on the path from $a$ to $b$. The family of all parametrizations that are equivalent to $z(t)$ determine a \textbf{smooth curve} $\gamma\subseteq \C$, which is the image of $[a,b]$ under $z$ with the given orientation. We can define a curve $\gamma^-$ obtained from $\gamma$ by reversing the orientation, for example consider the parametrization $z^- \colon [a,b] \to \R^2$ defined by \[
+    z^-(t)=z(b+a-t).
+\] We can also define a \textbf{piecewise-smooth curve} in the same way: let $z(a)$ and $z(b)$ be the end-points of the curve (independent of parametrization). Then $\gamma$ begins at $z(a)$ and ends at $z(b)$. A curve is \textbf{closed} if $z(a)=z(b)$ for any parameterization (it forms a loop), and is \textbf{simple} if it isn't self-intersecting, that is, $z(t)\neq z(s)$ unless $s=t$ (of course, we make an exception if it's closed). From now on, we'll call a piecewise-smooth curve a \textbf{curve} for brevity, since we don't really care if it's not piecewise-smooth.
+\begin{example}
+    The standard example of a curve is a circle. Consider the circle \[
+        C_r(z_0)=\{z\in \C \ \big|\ |z-z_0|=r\} .
+    \] The \textbf{positive orientation} (counterclockwise) is given by $z(t)=z_0+re^{it}$ while the \textbf{negative orientation} is given by $z(t)=z_0+re^{-it}$, for $t\in [0,2\pi]$. When we talk about circles $C$, we'll usually be talking about the positively oriented circle.
+\end{example}
+\orbreak
+Now let's talk about integration along curves! A key theorem says that if a complex valued function is holomorphic in the interior of a closed circle $\gamma$, then \[
+    \int _{\gamma}f(z) \, dz=0.
+\] A version of this theorem is called \emph{Cauchy's Theorem}, which we'll talk about later. Given a smooth curve $\gamma\subseteq\C$ parametrized by $z \colon [a,b] \to \C$ and $f$ a continuous function on $\gamma$, we define the \textbf{integral of $f$ along $\gamma$} by \[
+\int _{\gamma}f(z) \, dz = \int_{a}^{b} f(z(t))z'(t) \, dt.
+\] How do we know this doesn't depend on the parametrization of $\gamma$? Say $\widetilde z$ is an equivalent parametrization of $z$, then \[
+\int_{a}^{b} f(z(t))z'(t) \, dt = \int_{c}^{d} f(z(t(s)))z'(t(s))t'(s) \, ds=\int_{c}^{d} f(\widetilde z(s))\widetilde z'(s) \, ds,
+\] proving that $\int _{\gamma}f(z) \, dz$ is well-defined. Now if $\gamma$ is piecewise-smooth, given a piecewise-smooth parametrization $z(t)$ we have \[
+\int _{\gamma}f(z) \, dz=\sum_{k=0}^{n-1} \int_{a_k}^{a_{k+1}}f(z(t))z'(t)  \, dt. 
+\] We can also define the \textbf{length} of the smooth curve $\gamma$ as $\operatorname{length}(\gamma)=\int_{a}^{b} |z'(t)| \, dt$. Apply the same arguments as before to get that $\operatorname{length}(\gamma)$ is parametrization independent and that if $\gamma$ is piecewise smooth, $\operatorname{length}(\gamma)$ is the sum of the lengths of the smoooth components.
+\begin{prop}
+    Let $\gamma$ be a curve, and $f,g$ be functions. Then
+    \begin{enumerate}
+        \item Integration is a linear operation, that is, for $\alpha ,\beta \in \C$ we have \[
+                \int_{\gamma}^{} (\alpha f(z)+\beta g(z)) \, dz=\alpha \int_{\gamma}^{} f(z) \, dz+\beta \int_{\gamma}^{} g(z) \, dz.
+        \] 
+\item For $\gamma^-$ the curve representing the reverse orientation of $\gamma$, we have\[
+        \int _{\gamma}f(z) \, dz = - \int _{\gamma^-}f(z) \, dz.
+\] 
+\item The following inequality holds: \[
+        \left| \int_{\gamma}^{} f(z) \, dz \right| \leq \underset{z\in \gamma}{\operatorname{sup}}|f(z)|\cdot \operatorname{length}(\gamma)
+\] 
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    Basically, do it yourself.
+    \begin{enumerate}
+        \item Follows from the definition and linearity of the Riemann integral.
+        \item Exercise for the reader.
+        \item Note that \[
+                \left| \int_{\gamma}^{} f(z) \, dz \right| \leq \underset{t\in [a,b]}{\operatorname{sup}}|f(z(t))| \int_{a}^{b} |z'(t)| \, dt \leq \underset{z\in \gamma}{\operatorname{sup}}|f(z)|\cdot \operatorname{length}(\gamma).
+        \] 
+    \end{enumerate}
+\end{proof}
+Suppose $f$ is define on some open set $\Omega\in \C$. A \textbf{primitive} for $f$ on $\Omega$ is a function $F$ that's holomorphic on $\Omega$ such that $F'(z)=f(z)$ for all $z\in \Omega$. Now let's look at the Fundamental Theorem of Calculus again.
+\begin{theorem}
+    If a continuous function $f$ has a primitive $F$ in $\Omega, $ and $\gamma$ is a curve in $\Omega$ starting at $\omega_1$ and ending at $\omega_2$, then \[
+        \int_{\gamma}^{} f(z) \, dz=F(\omega_2)-F(\omega_1).
+    \] 
+\end{theorem}
+\begin{proof}
+    Good thing we have the FTC from Real Analysis.  If $z(t) \colon [a,b] \to \C$ is a parametrization of $\gamma$ with $z(a)=\omega_1$ and $z(b)=\omega_2$, then 
+    \begin{align*}
+        \int_{\gamma}^{} f(z) \, dz &= \int_{a}^{b} f(z(t))z'(t) \, dt \\
+                                    &= \int_{a}^{b} F'(z(t))z'(t) \, dt\\
+                                    &=\frac{d}{dt}F(z(t))dt\\
+                                    &=F(z(b))-F(z(a)).
+    \end{align*} Clearly we're done if $\gamma$ is smooth. If $\gamma$ is only piecewise-smooth, then 
+    \begin{align*}
+        \int_{\gamma}^{} f(z) \, dz &= \sum_{k=0}^{n-1} F(z(a_{k+1}))-F(z(a_k)) \\
+        &=F(z(a_n))-F(z(a_0))\\
+        &=F(z(b))-F(z(a)).
+    \end{align*}
+\end{proof}
+\begin{cor}\label{cor}
+    If $\gamma$ is a closed curve in some open $\gamma\in \C$ and $f$ is continuous and has a primitive in $\Omega$, then \[
+        \int_{\gamma}^{} f(z) \, dz=0.
+    \] 
+\end{cor}
+\begin{proof}
+    Note that if $\gamma$ is a closed curve, then $\omega_1=\omega_2$.
+\end{proof}
+\begin{example}
+    We can use this corollary to show that functions don't have primitives. For example, $f(z)= 1 / z$ doesn't have a primitive in $\C\setminus \{0\} $, since if $C$ is the unit circle parametrized by $z(t)=e^{it}$ when $0\leq t \leq 2\pi$, we have \[
+        \int_{C}^{} f(z) \, dz = \int_{0}^{2\pi} \frac{ie^{it}}{e^{it}} \, dt=2\pi i \neq 0.
+    \] 
+\end{example}
+\begin{cor}\label{cor2}
+    If $f$ is holomorphic on a region $\Omega$ and $f'=0$, then $f$ is a constant function.
+\end{cor}
+\begin{proof}
+    Let $\omega_0\in \Omega$. We WTS that $f(\omega)=f(\omega_0)$ for all $\omega\in \Omega$: since $\Omega$ is connected we can find a curve (path) joining $\omega_0$ and $\omega$. Clearly $f$ is a primitive for $f'$. Then \[
+        \int_{\gamma}^{} f'(z) \, dz = f(\omega)-f(\omega_0)=0
+    \] by assumption, which implies that $f(\omega)=f(\omega_0)$, finishing the proof. 
+\end{proof}

@@ -1,0 +1,146 @@
+\section{Cauchy's Theorem and Its Applications}
+These will follow Stein and Shakarchi \S 2.
+\orbreak
+Last time we talked about some good stuff: open sets, holomorphic functions, integration along curves. Our first cool theorem relates the three, which is (you guessed it) Cauchy's theorem. It loosely states that if $f$ is holomorphic on an open set $\Omega$ and $\gamma\subseteq \Omega$ is a closed curve whose interior is also contained in $\Gamma$, then \[
+    \int_{\gamma}^{} f(z) \, dz=0.
+\] Cool stuff happens, including the calculus of residues. Right now we restrict ourselves to easy curves (toy contours) for simplicity, but we'll deal with the general case soon. We'll also get to Cauchy's integral formula, which says that for $f$ holomorphic in an open set containing a circle $C$ and its interior, then for all $z\in C$, \[
+f(z)=\frac{1}{2\pi i}\oint_{C}^{} \frac{f(\zeta)}{\zeta-z} \, d\zeta.
+\] From here, by differentiating we'll see that as long as the first derivative exists, all of them do! From there, we'll get
+\begin{itemize}
+    \item The property of ``analytic continuation'' (finally), namely that a holomorphic function is determined by its restriction to any open subset of its domain, which follows from the fact that holomorphic functions are analytic.
+    \item Liouville's theorem, which can prove the fundamental theorem of algebra.
+    \item Morera's theorem, which gives a simple integral characterization of holomorphic functions, preserved under uniform limits.
+\end{itemize}
+\subsection{Goursat's theorem}
+We know that if $f$ has a primitive in $\Omega$ open, then \[
+    \int_{\gamma}^{} f(z) \, dz=0
+\] for any closed curve $\gamma \subseteq \Omega$. We also can show that if the relation above holds, then a primitive will exist.
+\begin{theorem}[Goursat's theorem]
+If $\Omega$ is an open set in $\C$, and $T \subset \Omega$ is a triangle whose interior is also contained in $\Omega$, then \[
+    \int_{T}^{} f(z) \, dz=0,
+\] given $f$ is holomorphic in $\Omega$.
+\end{theorem}
+\begin{proof}
+    Given a triangle $T^{(0)}$ with a fixed positive orientation, consider its barycentric subdivision yielding the similar triangles $T_1^{(1)},T_2^{(1)},T_3^{(1)},T_4^{(1)}$, defined to be the same orientation as $T^{(0)}$. So 
+    \begin{equation}\label{4}
+        \int_{T^{(0)}}^{} f(z) \, dz=\int_{T_1^{(1)}}^{} f(z) \, dz + \int_{T_2^{(1)}}^{} f(z) \, dz + \int_{T_3^{(1)}}^{} f(z) \, dz + \int_{T_4^{(1)}}^{} f(z) \, dz.
+    \end{equation}
+     Then there exists a $j$ such that \[
+    \left| \int_{T^{(0)}}^{} f(z) \, dz \right| \leq 4 \left| \int_{T_j ^{(1)}}^{} f(z) \, dz \right| ,
+\] because if that weren't the case, it would contradict \cref{4}. Denote such $T_j ^{(1)}$ by $T^{(1)}$: note that $d^{(1)}=\frac{1}{2}d^{(0)}$ and $p^{(1)}=\frac{1}{2}p^{(0)}$, where $d^{(i)}$ and $p^{(i)}$ are the diameters and perimeters of the $T^{(i)}$'th triangle, respectively. Continuing on, we have a sequences of triangle $T^{(0)},T^{(1)},\cdots ,T^{(n)},\cdots $ such that \[
+\left| \int_{T^{(0)}}^{} f(z) \, dz \right| \leq 4^n \left| \int_{T^{(n)}}^{} f(z) \, dz \right|,\quad d^{(n)}=2^{-n}d^{0}, \ p^{(n)}=2^{-n}p^{(0)}.
+\] Denote the \emph{solid} closed triangle with boundary by $\mathcal{T} ^{(n)}$, and note that our construction yields a sequence of nested compact sets \[
+\mathcal{T} ^{(0)}\supset \mathcal{T} ^{(1)}\supset \cdots \supset \mathcal{T} ^{(n)}\supset \cdots 
+\] whose diameter approaches zero. By the NIP, there exists a unique $z_0\in \bigcup_{i=1}\mathcal{T} ^{(i)}$. Now $f$ is holomorphic at $z_0$, so we write $f(z)=f(z_0)+f'(z_0)(z-z_0)+\psi(z)(z-z_0)$, where $\psi(z)\to 0$ as $z\to z_0$. Since $f(z_0)$ and the linear function $f'(z_0)(z-z_0)$ have primitives, then we integrate and get \[
+\int_{T^{(n)}}^{} f(z) \, dz = \int_{T^{(n)}}^{} \psi(z)(z-z_0) \, dz.
+\] Now $z_0\in \overline{\mathcal{T} ^{(n)}}$ and $z\in \partial \mathcal{T} ^{(n)}\implies |z-z_0|\leq d^{(n)}$. Recall that $\left| \int_{\gamma}^{} f(z) \, dz \right| \leq \sup_{z\in \gamma}|f(z)|\cdot \operatorname{length}(\gamma)$. So we have the estimate \[
+\left| \int_{T^{(n)}}^{} f(z) \, dz \right| \leq \varepsilon _n d^{(n)}p^{(n)},
+\] where $\varepsilon _n =\sup_{z\in T^{(n)}}|\psi(z)|\to 0$ as $n\to \infty$. Therefore we have \[
+\left| \int_{T^{(n)}}^{} f(z) \, dz \right| \leq\varepsilon _n 4^{-n}d^{(0)}p^{(0)}
+\implies \left| \int_{T^{(0)}}^{} f(z) \, dz \right| \leq 4^n  \left| \int_{T^{(n)}}^{} f(z) \, dz \right| \leq \varepsilon _n d^{(0)}p^{(0)}.
+\] Letting $n\to \infty$ concludes the proof, since $\varepsilon _n \to 0$.
+\end{proof}
+Attempt to sum up the proof in easy to read words: take a triangle and subdivide it naturally into four more triangles. Choose one of them such that it follows a nice inequality, and continue subdiving until infinity. Since $\C$ is complete, we can find a point in all their closures: rewriting the formula for a derivative, we can apply the inequalities and get our result.
+\begin{cor}
+    If $f$ is holomorphic in an open set $\Omega$ that contains a rectangle $R$ and its interior, then \[
+        \int_{R}^{} f(z) \, dz.
+    \] 
+\end{cor}
+\begin{proof}
+    Immediate by constructing the $n$-gon with $n-2$ simplices.
+\end{proof}
+
+\subsection{Local existence of primitives and Cauchy's theorem in a disk}
+Ah, so I was complaining about the jank-connectedness definition by polygonal paths earlier in my notes. I see why they do it that way now.
+\begin{theorem}
+    A holomorphic function in an open disc has a primitive in that disk.
+\end{theorem}
+\begin{proof}
+    WLOG, let $D$ be a disk centered at the origin, $z\in D$ be a point. Consider a curve from $0$ to $z$ made by joining straight line segments, starting by joining $0$ to $\operatorname{Re}z$ then from $\operatorname{Re}z$ to $z$, with the orientation you'd expect. We'll denote this polygonal path by $\gamma_z$. Define the unique function $F(z)=\int_{\gamma_z}^{} f(w) \, dw$: we claim $F$ is holomorphic in $D$ and $F'(z)=f(z)$. Let $z,h\in \C$ and choose $h>0$ such that $z+h\in D$. Consider \[
+        F(z+h)-F(z)=\int_{\gamma_{z+h}}^{} f(w) \, dw-\int_{\gamma_z}^{} f(w) \, dw.
+    \] Draw some lines and make a geometric argument that $F(z+h)-F(z)=\int_{\eta}^{} f(w) \, dw,$ where $\eta$ is the straight line segment from $z$ to $z+h$. Then since $f$ is continuous at $z$ we have $f(w)=f(z)+\psi(w)$, where $\psi(w)\to 0$ as $w\to z$. Therefore \[
+    F(z+h)-F(z)=\int_{\eta}^{} f(z) \, dw + \int_{\eta}^{} \psi(w) \, dw=f(z) \int_{\eta}^{}  \, dw + \int_{\eta}^{} \psi(w) \, dw.
+\] On one hand, $1$ has $w$ as a primitive, so the first integral is just $h$. On the other hand, we have the estimate \[
+\left| \int_{\eta}^{} \psi(w) \, dw \right| \leq \underset{w\in \eta}{\operatorname{sup}}|\psi(w)| |h|.
+\] Since the supremum goes to zero as $h\to 0$, we conclude that  \[
+\lim_{h\to 0}\frac{F(z+h)-F(z)}{h}=f(z).
+\] 
+\end{proof}
+Basically, every holomorphic function has a local primitive. It's crucial that this holds not only for arbitrary disks, but other sets as well.
+\begin{theorem}[Cauchy's theorem for a disc]
+If $f$ is holomorphic in a disk, then \[
+    \int_{\gamma}^{} f(z) \, dz=0
+\] for any closed curve $\gamma$ in that disc.
+\end{theorem}
+\begin{proof}
+    Since $f$ has a primitive, apply \cref{cor}.
+\end{proof}
+\begin{cor}
+    Suppose $f$ is holomorphic in an open set containing the circle $C$ and its interior. Then \[
+        \int_{C}^{} f(z) \, dz=0.
+    \] 
+\end{cor}
+\begin{proof}
+    Let $D$ be the disk with boundary circle $C$, then there exists a slightly larger disc  $D'$ containing $D$ such that $f$ is holomorphic on $D'$: apply Cauchy's theorem on $D'$ to conclude that $\int_{C}^{} f(z) \, dz=0$.
+\end{proof}
+Basically, \textbf{toy contours} are curves for which the notion of interior is clear. For a toy countour $\gamma$ we easily have \[
+    \int_{\gamma}^{} f(z) \, dz-0,
+\] if $f$ is holomorphic in an open set containing $\gamma$ and its interior. You might ask what about general curves? Maybe we'll talk about Jordan's theorem for pieceweise-smooth curves, which states that a simple closed piecewise-smooth curve has a well defined interior that is simply connected.
+\subsection{Evaluating some integrals}
+I was just thinking about the Fourier transform today! What a coincidence— also, this is the second book in a three part series, so I'm already expected to know what this is and what it means, yay.
+\begin{example}
+    If $\xi \in \R$, then \[
+    e^{-\pi \xi^2}=\int_{-\infty}^{\infty} e^{-\pi x^2}e^{-2\pi ix \xi} \, dx.
+    \] This shows that $e-\pi x^2$ is its own Fourier transform. If $\xi=0$, then this formula just becomes the Gaussian integral, which we know to be \[
+    \int_{-\infty}^{\infty} e^{-\pi x^2} \, dx=\sqrt{\frac{\pi}{\pi}} =1.
+\] Assume $\xi >0$, and consider $f(z)=e^{-\pi z^2}$ an entire function. Oh my gosh no I'm not finishing this proof.
+\end{example}
+\begin{example}
+    Another classical example is \[
+    \int_{0}^{\infty} \frac{1-\cos x}{x^2} \, dx=\frac{\pi}{2}.
+\] Consider $f(z)=(1-e^{iz}) / z^2$, and integrate over the indented semicircle in the upper half of the annulus in the positive plane, with $\gamma_{\varepsilon }^+$ and $\gamma_R^+$ denoting the semicircles of radii $\varepsilon $ and $R$ with negative and positive orientations, respectively (where $R>\varepsilon $). Then by Cauchy's theorem, we have \[
+\int_{-R}^{-\varepsilon } \frac{1-e^{ix}}{x^2} \, dx+ \int_{\gamma_{\varepsilon }^+}^{} \frac{1-e^{iz}}{z^2} \, dz+ \int_{\varepsilon }^{R} \frac{1-e^{ix}}{x^2} \, dx+ \int_{\gamma_R^+}^{} \frac{1-e^{iz}}{z^2} \, dz=0.
+\] Let $R\to \infty$, and note that \[
+\left| \frac{1-e^{iz}}{z^2} \right| \leq \frac{2}{|z|^2},
+\] so the integral over $\gamma_R^+$ goes to zero. Therefore \[
+\int_{|x|\geq \varepsilon }^{} \frac{1-e^{ix}}{x^2} \, dx=- \int_{\gamma_{\varepsilon }^+}^{} \frac{1-e^{iz}}{z^2} \, dz.
+\] Next, note that $f(z)=\frac{-iz}{z^2}+E(z)$, where $E(z)$ is bounded at $z\to 0$, while on $\gamma_{\varepsilon }^+$ we have $z=\varepsilon  e^{i\theta}$ and $dz=i\varepsilon  e^{i\theta}d\theta$. Therefore \[
+\int_{\gamma_{\varepsilon }^+}^{} \frac{1-e^{iz}}{z^2} \, dz\to \int_{\pi}^{0} (-ii) \, d\theta=-\pi \quad \text{as} \ \varepsilon \to 0.
+\] Taking real parts yields \[
+\int_{-\infty}^{\infty} \frac{1-\cos x}{x^2} \, dx=\pi.
+\] Since the integrand is even, we are done.
+\end{example}
+
+\subsection{Cauchy's integral formula (todo skipped some stuff)}
+This is nice because we can learn about the behavior of functions on big sets by looking at small sets.
+\begin{theorem}[Cauchy's integral formula]\label{cif}
+    Suppose $f$ is holomorphic in an open set that contains the closure of a disk $D$. If $C$ denotes the boundary circle of the disk with positive orientation, then \[
+        f(z)=\frac{1}{2\pi i}\int_{C}^{} \frac{f(\zeta)}{\zeta-z} \, d\zeta \quad \text{for any point} \ z\in D.
+    \] 
+\end{theorem}
+\begin{proof}
+    keyhole
+\end{proof}
+\begin{cor}
+    If $f$ is holomorphic in an open set $\Omega$, then $f$ has infinitely many complex derivatives in $\Omega$. Moreover, if $C\subseteq \Omega$ is a circle whose interior is also contained in $\Omega$, then \[
+        f^{(n)}(z)=\frac{n!}{2\pi i}\int_{C}^{}\frac{f(\zeta)}{(\zeta-z)^{n+1}}  \, d\zeta
+    \] for all $z\in C^{\circ }$.
+\end{cor}
+\begin{proof}
+    induction, base case is CIF
+\end{proof}
+There are hereby known as the \textbf{Cauchy integral formulas}.
+\begin{theorem}[Liouville's theorem]
+    If $f$ is entire and bounded, then $f$ is constant.
+\end{theorem}
+\begin{proof}
+    If suffices to prove that $f'=0$, since $\C$ is connected, then we can apply \cref{cor2}.
+\end{proof}
+
+
+
+
+
+
+
+
