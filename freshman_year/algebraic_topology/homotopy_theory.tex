@@ -1,0 +1,16 @@
+\section{Homotopy theory} 
+Here comes a long block of Hatcher exposition, read if interested, skip if not.
+\orbreak
+We have met the first homotopy group already, the fundamental group $\pi_1(X)$. The higher dimensional analogues $\pi_n (X)$ are the \emph{homotopy groups}, which have some similarities to the homology groups: $\pi_n (X)$ is abelian for $n\geq 2$, and there are relative homotopy groups fitting into a LES similar to homology. However, neither Seifert-van Kampen's nor excision holds, making the homotopy groups much harder to compute. 
+
+However, these groups are still important: one reason is \emph{Whitehead's theorem}, which states that a map between CW complexes inducing isomorphisms on the homotopy groups is a homotopy equivalence. However the stronger statement that if two complexes have isomorphic homotopy groups then they're homotopy equivalent is false usually, aside from the case where we only have one nontrivial homotopy group— these spaces are called \emph{Eilenberg-MacLane spaces}.
+
+Another more direct connection between homology and homotopy is the \emph{Hurewicz theorem}, which says that the first nonzero homotopy group $\pi_n (X)$ of a simply-connected space $X$ is isomorphic to the first nonzero homology group $\widetilde H_n (X)$. Though excision doesn't always hold, in some important special cases it does for a range of dimensions. This leads to the idea of \emph{stable homotopy groups}, the beginning of stable homotopy theory. If you figure out how to compute the stable homotopy groups of spheres, you can pick up your Fields medal at the door.
+
+We'll also talk a little about fiber bundles which somewhat generalize the idea of covering spaces for higher homotopy groups, purely to lead toward fibrations. These allow us to describe how the homotopy type of a CW complex is inductively built up from its homotopy groups by forming `twisted products' of Eilenberg-MacLane spaces, which is the notion of a \emph{Postnikov tower}.
+\orbreak
+Let $I^n $ be the $n$-cube, and the boundary $\partial I^n $ be the subspace of points with at least one coordinate equal to $0$ or $1$. 
+\begin{definition}[Higher homotopy groups]
+    For a pointed space $X,x_0$, define the $\mathbf n$\textbf{-th homotopy group} $\pi_n (X,x_0)$ as the set of homotopy classes $f \colon (I^n ,\partial I^n ) \to (X,x_0)$ where homotopies $f_t$ are required to satisfy $f_t(\partial I^n )=x_0$ for all $t$. 
+\end{definition}
+This extends to $\pi_0$ by letting $I^0$ be a point and $\partial I^0$ be empty, so $\pi_0(X,x_0)$ is just the set of path-components of $X$.
