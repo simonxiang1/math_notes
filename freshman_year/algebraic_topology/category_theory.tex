@@ -1,0 +1,448 @@
+\section{Category Theory}
+Today we talk about abstract nonsense! These notes will follow Evan Chen's Napkin \S 60 and May's ``A Concise Course in Algebraic Topology'' \S 2. Some examples are peppered in from Hatcher \S 2.3.
+
+\subsection{Motivation}
+Why do we talk about categories? Categories rise from objects (sets, groups, topologies) and maps between them (bijections, isomorphisms, homeomorphisms). Algebraic topology speaks of maps from topologies to groups, which makes maps between categories a suitable tool for us.
+\begin{example}
+    Here are some examples of morphisms between objects:
+    \begin{itemize}
+        \item A bijective homomorphism between two groups $G$ and $H$ is an isomorphism. What also works is two group homomorphisms $\phi \colon G \to H$ and $\psi \colon H \to G$ which are mutual inverses, that is $\phi \circ \psi = \operatorname{id}_H$ and $\psi \circ \phi=\operatorname{id}_G$.
+        \item Metric (or topological) spaces $X$ and  $Y$ are isomorphic if there exists a continuous bijection $f \colon  X \to Y$ such that $f^{-1}$ is also continuous.
+        \item Vector spaces $V$ and $W$ are isomorphic if there is a bijection $T \colon V \to W$ that's a linear map (aka, $T$ and $T^{-1}$ are linear maps).
+        \item Rings $R$ and $S$ are isomorphic if there is a bijective ring homomorphism $\phi$ (or two mutually inverse ring homomorphism).
+    \end{itemize}
+\end{example}
+
+\subsection{Categories}
+\begin{definition}[Category]
+    A \textbf{category} $\mathcal{A}$ consists of 
+    \begin{itemize}
+        \item A class of \textbf{objects} , denoted $\operatorname{obj}(\mathcal{A}).$ 
+        \item For any two objects $A_1,A_2\in \operatorname{obj}(\mathcal{A})$, a class of \textbf{arrows} (also called  \textbf{morphisms} or \textbf{maps} between them). Let's denote the set of arrows by $\operatorname{Hom}_{\mathcal{A}}(A_1,A_2)$.
+        \item For any $A_1,A_2,A_3\in \operatorname{obj}(\mathcal{A})$, if $f \colon A_1 \to A_2$ is an arrow and $g \colon A_2 \to A_3$ is an arrow, we can compose the two arrows to get $h=g\circ f \colon A_1 \to A_3$ an arrow, represented in the \textbf{commutative diagram} below: 
+            \begin{figure}[H]
+                \centering
+    \begin{tikzcd}
+A_1 \arrow[rd, "h", dotted] \arrow[r, "f"] & A_2 \arrow[d, "g"] \\
+                                           & A_3               
+\end{tikzcd}
+            \end{figure}
+        The composition operation can be denoted as a function \[
+            \circ \colon \operatorname{Hom}_{\mathcal{A}}(A_2,A_3)\times \operatorname{Hom}_{\mathcal{A}}(A_1,A_2) \to \operatorname{Hom}_{\mathcal{A}}(A_1,A_3)
+        \] for any three objects $A_1,A_2,A_3$. Composition must be associative, that is, $h\circ(g\circ f)=(h\circ g)\circ f.$ In the diagram above, we say $h$ \textbf{factors} through $A_2$.
+    \item Every object $A\in \operatorname{obj}_{\mathcal{A}}$ has a special \textbf{identity arrow} $ \operatorname{id}_{\mathcal{A}}$. The identity arrow has the expected properties $\operatorname{id}_{\mathcal{A}}\circ f=f$ and $f\circ \operatorname{id}_{\mathcal{A}}=f$.
+    \end{itemize}
+\end{definition}
+\begin{note}
+    We can't use the word ``set'' to describe the class of objects because of some weird logic thing (there is no set of all sets). But you can think of a class as a set.
+\end{note}
+From now on, $A\in \mathcal{A}$ is the same as $A\in \operatorname{obj}(\mathcal{A})$. A category is \textbf{small} if it has a set of objects, and \textbf{locally small} if $\operatorname{Hom}_{\mathcal{A}}(A_1,A_2)$ is a set for any $A_1,A_2\in \mathcal{A}$.
+
+\begin{example}[Basic Categories]
+    Here are some basic examples of categories:
+    \begin{itemize}
+        \item We have the category of groups $\mathsf{Grp}.$ 
+            \begin{itemize}
+                \item The objects of $\mathsf{Grp}$ are groups.
+                \item The arrows of $\mathsf{Grp}$ are group homomorphisms.
+                \item The composition of $\mathsf{Grp}$ is function composition.
+            \end{itemize}
+        \item You can also think of the subcategory of abelian groups $\mathsf{AbGrp} $. We can generalize this to the category of modules over a fixed ring $R$ denoted $R\mathsf{Mod} $, with morphisms the module homomorphisms.
+        \item Describe the category $\mathsf{CRing}$ (of commutative rings) in a similar way.
+        \item Consider the category $\mathsf{Top}$ of topological spaces, whose arrows are continuous maps between spaces. We can also restrict the spaces to special classes like CW complexes ($\mathsf{CellCw} $), or the maps to homeomorphisms.
+        \item Also consider the category $\mathsf{Top}_{*}$ of topological spaces with a distinguished basepoint, that is, a pair $(X,x_0), \, x_0\in X$. Arrows are continuous maps $f \colon X \to Y$ with $f(x_0)=y_0$.
+        \item Similarly, the category of (possibly infinite-dimensional) vector spaces over a field $k$ $\mathsf{Vect}_{k}$ has linear maps for arrows. There is even a category $\mathsf{FDVect}_{k}$ of finite-dimensional vector spaces.
+        \item Finally, we have a category $\mathsf{Set}$ of sets, arrows denote any map between sets. You can restrict the maps to injectections, bijections, and surjections.
+    \end{itemize}
+\end{example}
+\begin{definition}[Isomorphism]
+    An arrow $A_1\overset{f}{\to }A_2$ is an \textbf{isomorphism} if there exists $A_2\overset{g}{\to }A_1$ such that $f\circ g=\operatorname{id}_{A_2}$ and $g\circ f=\operatorname{id}_{A_1}$. We say $A_1$ and $A_2$ are \textbf{isomorphic}, denoted $A_1\cong A_2$.
+\end{definition}
+\begin{remark}
+    In the category $\mathsf{Set}$, $X\cong Y \iff |X|=|Y|$.
+\end{remark}
+In other fields, we can tell a lot about the structure of an object by looking at maps between them. In category theory, we \emph{only} look arrows, and ignore what the objects themselves are.
+\begin{example}[Posets are Categories]
+   Let $\mathcal{P} $ be a poset. Then we can construct a category $P$ for it as follows:
+   \begin{itemize}
+       \item The objects of $P$ are elements of $\mathcal{P} $.
+    \item We define the arrows of $P$ as follows:
+        \begin{itemize}
+            \item For every object $p\in P$, we add an identity arrow $\operatorname{id}_p$, and 
+            \item For any pair of distinct objects $p\leq q$, we add a single arrow $p\to q$. 
+        \end{itemize}
+        There are no other arrows.
+    \item We compose arrows in the only way possible, examining the order of the first and last object.
+   \end{itemize}
+   Here's a figure depicting the category of a poset $\mathcal{P} $ on four objects $\{a,b,c,d\} $ with $a\leq b$ and $a\leq c\leq d$.
+            \begin{figure}[H]
+                \centering
+                \begin{tikzcd}
+                                                                          & {[a]} \arrow[dd, "a\leq d" description] \arrow[rd, "a\leq c" description] \arrow[ld, "a\leq b" description] \arrow["\operatorname{id}_a"', loop, distance=2em, in=125, out=55] &                                                                                                            \\
+{[b]} \arrow["\operatorname{id}_b"', loop, distance=2em, in=215, out=145] &                                                                                                                                                                                & {[c]} \arrow[ld, "c\leq d" description] \arrow["\operatorname{id}_c"', loop, distance=2em, in=35, out=325] \\
+                                                                          & {[d]} \arrow["\operatorname{id}_d"', loop, distance=2em, in=305, out=235]                                                                                                      &                                                                                                           
+\end{tikzcd}
+            \end{figure}
+            Note that no two distinct objects of a poset are isomorphic.
+\end{example}
+This shows that categories don't have to refer to just structure preserving maps between sets (these are called ``concrete categories''.
+\begin{example}[Groups as a category with one object]
+   A group $G $ can be thought of as a category $\mathcal{G} $ with one object $*$, all of whos arrows are isomorphisms. 
+
+            If the universe were structured differently and kids learned category theory before groups, symmetries transforming $X$ into itself would be a natural extension of categories that transform $X$ into other objects, a special case in which all the maps are invertible. Alas, this is not the right timeline.
+\end{example}
+
+\begin{example}
+    We have the homotopy category $\mathsf{hTop} $ whose objects are topological spaces and morphisms are homotopy classes of maps. This uses the fact that composition is well-defined on homotopy classes: $f_0g_0 \simeq f_1g_1$ if $f_0 \simeq f_1$ and $g_0 \simeq g_1$.
+\end{example}
+
+\begin{example}
+    Finally, chain complexes are objects of a category $\mathsf{Ch} _K$ for $K$ a commutative ring (usually $\Z$), with chain maps as morphisms. This category has many interesting subcategories by restricting the objects, for example we can consider chain complexes whose groups are zero in negative dimensions (or outside a finite range). Or we could talk about exact sequences or short exact sequences, in either case morphisms are chain maps which are commutative diagrams. To go even deeper, there is a category whose objects are short exact sequences of chain complexes and morphisms are the square shaped commutative diagrams. Scary stuff!
+\end{example}
+\begin{example}[Deriving Categories]
+We can make categories from other categories!
+   \begin{enumerate}
+       \item[(a)] Given a category $\mathcal{A} $, we can construct the \textbf{opposite category} $A^{\text{op}}$, which is the same as $\mathcal{A} $ but with all the arrows reversed.
+       \item[(b)] Given categories $\mathcal{A} $ and $\mathcal{B} $, we can construct the \textbf{product category}  $\mathcal{A} \times \mathcal{B} $ as follows: the objects are pairs $(A,B)$ for $A\in \mathcal{A} $, $B\in \mathcal{B} $, and the arrows from $(A_1,B_1)$ to $(A_2,B_2)$ are pairs \[
+               \left( A_1 \overset{f}{\to }A_2, B_1\overset{g}{\to }B_2 \right) .
+       \] The composition is just pairwise composition, and the identity is the pair of identity functions on $A$ and $B$.
+   \end{enumerate} 
+\end{example}
+
+\orbreak
+Some categories have things called \emph{initial objects}. For example the empty set $\O$, the trivial group, the empty space, initial element in a poset, etc. More interestingly: the initial object of $\mathsf{CRing} $ is the ring $\Z$.
+\begin{definition}[Initial object]
+    An \textbf{initial object} of $\mathcal{A} $ is an object $A_{\text{init}}\in \mathcal{A} $ such that for any $A\in \mathcal{A} $ (possibly $A=A_{\text{init}}$), there is exactly one arrow from $A_{\text{init}}$ to $A$.
+\end{definition}
+The yang to this yin is the \emph{terminal object}:
+\begin{definition}[Terminal object]
+    A \textbf{terminal object} of $\mathcal{A} $ is an object $A_{\text{final}}\in \mathcal{A} $ such that for any $A\in \mathcal{A} $ (possibly $A=A_{\text{final}}$, there is exactly one arrow from $A$ to $A_{\text{final}}$. 
+\end{definition}
+For example, the terminal object of $\mathsf{Set} $ is $\{*\} $, $\mathsf{Grp} $ is $\{1\} $, $\mathsf{CRing} $ is the zero ring, $\mathsf{Top} $ is the single point space, and a poset its maximal element (if one exists).
+
+\subsection{Products and coproducts}
+We have a way of uniquely describing objects (up to isomorphism) called the ``universal property''. For example, in the category $\mathsf{Set} $ say we have two sets $X,Y$, and we want to construct $X\times Y$. How would we do this without talking about the sets themselves, but just the maps between them? 
+\begin{namedthm}{Observation}
+    A function $A \overset{f}{\to } X\times Y$ amounts to a pair of functions $\left( A\overset{g}{\to } X,\, A\overset{h}{\to } Y \right) $. 
+\end{namedthm}
+In other words, we have natural projection maps $\pi_X \colon X\times Y \twoheadrightarrow X $ and $\pi_Y\colon X\times Y\twoheadrightarrow Y$:
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+                                                                           &  & X \\
+X\times Y \arrow[rru, "\pi_X", two heads] \arrow[rrd, "\pi_Y"', two heads] &  &   \\
+                                                                           &  & Y
+\end{tikzcd}
+\end{figure}
+By our observation, we have a bijection between functions $A \overset{f}{\to } X\times Y       $ and pairs of functions $(g,h)$, so each pair $A\overset{g}{\to } X$ and $A\overset{h}{\to } Y$ there is a \emph{unique} function $A\overset{f}{\to }X\times Y $. This demonstrates how $X\times Y$ is ``universal'', since we can build a unique function into $X\times Y$ from pairs of functions to the component spaces, as demonstrated in the following diagram. 
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+                                                                                      &  &                                                                            &  & X \\
+A \arrow[rr, "\exists !f" description, dotted] \arrow[rrrru, "f"] \arrow[rrrrd, "g"'] &  & X\times Y \arrow[rru, "\pi_X"', two heads] \arrow[rrd, "\pi_Y", two heads] &  &   \\
+                                                                                      &  &                                                                            &  & Y
+\end{tikzcd}
+\caption{Diagram for the product of objects in a category.}
+\label{prod}
+\end{figure}We can do this for general categories, defining a product.
+\begin{definition}[Product]
+    Let $X$ and $Y$ be objects in a category $\mathcal{A} $. The \textbf{product} consists of an object $X\times Y$ and arrows $\pi_X,\pi_Y$ to $X$ and $Y$ (thought of as projection), such that for any object $A$ and arrows $A\overset{g}{\to } X$, $A\overset{h}{\to } Y$, there exists a \emph{unique} arrow $A\overset{f}{\to } X\times Y$ such that \cref{prod} commutes. Note: usually the product should consist of \emph{both} the object $X\times Y$ and the projections $\pi_X,\pi_Y$, however if the projection maps are understood we often refer to $X\times Y$ as both the object and the product.
+\end{definition}
+\begin{claim}
+    Products do not always exists, consider the category with two objects and no non-identity morphisms. However, when they do, they are unique up to isomorphism. That is, given two products $P_1,P_2$ of objects $X$ and $Y$, we can find an isomorphism between them. 
+\end{claim}
+\begin{proof}
+    Consider two products $P_1$, $P_2$, and their associated projection maps. In \cref{prod}, if we replace $A$ with $P_i $ we get the following diagram:
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+                                                                                                       &  & X                                                                                                  &  &                                                                            \\
+                                                                                                       &  &                                                                                                    &  &                                                                            \\
+P_1 \arrow[rruu, "\pi_X^1", two heads] \arrow[rr, "f" description] \arrow[rrdd, "\pi_Y^1"', two heads] &  & P_2 \arrow[uu, "\pi_X^2"', two heads] \arrow[rr, "g" description] \arrow[dd, "\pi_Y^2", two heads] &  & P_1 \arrow[lluu, "\pi_X^1"', two heads] \arrow[lldd, "\pi_Y^1", two heads] \\
+                                                                                                       &  &                                                                                                    &  &                                                                            \\
+                                                                                                       &  & Y                                                                                                  &  &                                                                           
+\end{tikzcd}
+\end{figure} Since the $P_i $ are products, we have the existence of the unique morphisms $f,g$ such that the diagram commutes, by the universal property. If we just look at the outer square, $g\circ f$ is the unique map that makes this portion of the diagram commute. But $\operatorname{id}_{P_1}$ also makes this portion of the diagram commute, so $g\circ f=\operatorname{id}_{P_1}$. Similarly, we can rearrange the diagram such that $f\circ g$ factors through $g$, and thus $f\circ g=\operatorname{id}_{P_2}$ and therefore $f$ and $g$ are isomorphisms. For uniqueness, if we have maps $g \colon P_1 \to P_2$ and $h \colon P_2 \to P_1$ satisfying the properties of isomorphism, they must be the unique maps from $P_1\to P_2$ and vice versa, since the projection arrows define a unique arrow up to isomorphism into the other product. Combined with the fact that $g$ and $h$ make the following diagram commute since they satisfy the isomorphism properties,
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+                                                                                                     & X &                                                                                                      \\
+                                                                                                     &   &                                                                                                      \\
+P_1 \arrow[ruu, "\pi_X^1", two heads] \arrow[rr, "g", shift left] \arrow[rdd, "\pi_Y^1"', two heads] &   & P_2 \arrow[luu, "\pi_X^2"', two heads] \arrow[ll, "h", shift left] \arrow[ldd, "\pi_Y^2", two heads] \\
+                                                                                                     &   &                                                                                                      \\
+                                                                                                     & Y &                                                                                                     
+\end{tikzcd}
+\end{figure}
+we conclude that such arrows are precisely the arrows $f$ and $g$ induced by the other projections as stated above, and we are done.
+\end{proof}
+\begin{note}
+    Actually, we've only shown that $P_1$ and $P_2$ are isomorphic as objects, and said nothing about the projection maps. Don't worry about it too much, when we say $P_1\simeq P_2$ we're referring to the objects.
+\end{note}
+The universal property is nice because we don't have to explicity construct such an object $P$, we can just say that ``such object satisfying the given properties is unique up to isomorphism'', and refer to it henceforth without getting our hands dirty and messing with its inner workings. However, that doesn't stop us from giving examples.
+\begin{example}[Examples of products]
+    \,
+    \begin{enumerate}[label=(\alph*)]
+    \item In the category $\mathsf{Set} $, the product of sets $X,Y$ is their Cartesian product $X\times Y$.
+    \item For $\mathsf{Grp} $, the product of groups  $G,H$ is the direct product $G\times H$.
+    \item Similarly, in $\mathsf{Vect} _k$ the product of spaces $V$ and $W$ is the direct product $V\oplus W$.
+    \item In $\mathsf{CRing} $, the product of two rings $R,S$ is the product ring $R\times S$.
+    \item Thinking of a poset as a category, the product of two objects (elements) $x,y$ is the \emph{greatest lower bound}; for example,
+        \begin{itemize}
+            \item For the poset $(\R,\leq)$, the product is $\operatorname{min}\{x,y\} $.
+            \item For the poset of subsets (or subgroups, rings, fields etc) the product is $X\cap Y$.
+            \item For the poset of positive integers ordered by divisibility, the product is $\gcd(x,y)$.
+        \end{itemize}
+\end{enumerate}
+\end{example}
+We can also define products of more than one object. For objects $\{X_i  \mid i\in I\} $ in a category $\mathcal{A} $, we define a \textbf{cone} on the $X_i $ to be an object $A$ with the projection maps. Then the \textbf{product} is a cone $P$ satisfying the universal property, that is, given any other cone $A$ we have a unique map $f\colon A \to P$ making the diagram below commute. 
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+    &     & A \arrow[ddd, "\exists!f" description, dotted] \arrow[lldddddd, two heads] \arrow[ldddddd, two heads] \arrow[rdddddd, two heads] \arrow[rrdddddd, two heads] &     &     \\
+    &     &                                                                                                                                                              &     &     \\
+    &     &                                                                                                                                                              &     &     \\
+    &     & P \arrow[llddd] \arrow[lddd, two heads] \arrow[rddd, two heads] \arrow[rrddd, two heads]                                                                     &     &     \\
+    &     &                                                                                                                                                              &     &     \\
+    &     &                                                                                                                                                              &     &     \\
+X_1 & X_2 &                                                                                                                                                              & X_3 & X_4
+\end{tikzcd}
+\end{figure}
+\begin{definition}[Coproduct]
+We can do the dual construction to get the \textbf{coproduct}: given objects $X$ and $Y$, the coproduct is the object $X+Y$ with maps $X\overset{\iota_X}{\to } X+Y$ and $Y\overset{\iota_Y}{\to } X+Y$ (think inclusion) such that for any object $A$ and maps $X\overset{g}{\to } A$, $Y\overset{h}{\to } A$ there is a unique $f$ for which the following diagram commutes:
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+X \arrow[rddd, "\iota_X"'] \arrow[rrrrddd, "g", shift left]  &                                          &  &  &   \\
+                                                             &                                          &  &  &   \\
+                                                             &                                          &  &  &   \\
+                                                             & X+Y \arrow[rrr, "\exists!f" description] &  &  & A \\
+                                                             &                                          &  &  &   \\
+                                                             &                                          &  &  &   \\
+Y \arrow[ruuu, "\iota_Y"] \arrow[rrrruuu, "h"', shift right] &                                          &  &  &  
+\end{tikzcd}
+\end{figure}
+As expected, a coproduct is a universal \textbf{cocone}.
+\end{definition}
+\begin{example}[Examples of coproducts]
+    \,
+    \begin{enumerate}[label=(\alph*)]
+        \item In $\mathsf{Set} $, the coproduct of sets $X,Y$ is the disjoint union $X\amalg Y$.
+        \item For $\mathsf{Grp} $, the coproduct of groups $G,H$ is the free product $G*H$. In $\mathsf{AbGrp} $, this is the direct \emph{sum} $G\oplus H$: it has the same structure as the direct product in the finite case, but is the dual construction in the categorical sense. To make sense of this, consider the direct product as having morphisms from every component to itself, while the direct sum has morphisms from itself to every component, which is why the components must be zero for all but finitely many in this case. 
+        \item The same holds for $\mathsf{Vect} _k$, that is, the coproduct of two spaces $V,W$ is the direct sum $V\oplus W$. The notions of direct sum and product yet again coincide in the finite case: this is an example of a \textbf{biproduct}, which is both a product and a coproduct. In preadditive categories ($\mathsf{AbGrp} $ with extra structure), biproducts exists for a finite collection of objects.
+        \item In a poset, coproducts are the least upper bounds.
+    \end{enumerate}
+\end{example}
+\subsection{Monomorphisms and epimorphisms}
+
+\footnote{Here Evan uses the terminology ``\emph{monic}'' and ``\emph{epic}'', but I've noticed no one else really does that, so I'm replacing each instance with ``\emph{monomorphism}'' and ``\emph{epimorphism}''.}
+Injectivity and surjectivity don't really make sense when talking about categories, because morphisms need not be functions. Here's the correct categorical notion:
+\begin{definition}[Monomorphisms]
+    A map $X \overset{f}{\to } Y$ is a \textbf{monomorphism} (or monic) if for any commutative diagram
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+A \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & X \arrow[r, "f"] & Y
+\end{tikzcd}
+\end{figure}
+we must have $g=h$. In other words, $f\circ g=f\circ h$ implies that $g=h$. \end{definition}
+In a concrete category, injective implies monic: what the heck even is a concrete category? Anyway, consider $f\circ g=f\circ h$, so $f(g(a))=f(h(a)$ for all $a\in A$: but since $f$ is injective, this implies that $g(a)=h(a)$, and so $g=h$ and $f$ is a monomorphism. 
+Similarly, the composition of two monomorphisms is also a monomorphism: let $f,g$ be monomorphisms. Then $(f\circ g)\circ \alpha = (f\circ g)\circ \alpha' \implies f \circ (g\circ \alpha )=f\circ (g\circ \alpha ') $ by associativity of arrows. Since $f$ is a monomorphism, $g\circ \alpha =g\circ \alpha '$, but since $g$ is also a monomorphism, $\alpha =\alpha '$ and we are done.
+In most but not all situations, the converse of the definition also holds. For example, in $\mathsf{Set}, \mathsf{Grp} ,$ and $ \mathsf{CRing}  $, monic implies injective.
+
+There are many categories with a ``free'' object that you can think of as elements. For example, an element of a set is a function $1 \to S$, and an element of a ring is a function $\Z[x]\to R$, etc. In all these categories, the definition of monomorphims literally say that ``$f$ is injective on $\operatorname{Hom}_{\mathcal{A} }(A,X)$''. However, there is a standard counterexample involving the category of ``divisible'' abelian groups $\mathsf{DivAbGrp} $ and the projection $\Q\to \Q /\Z$.
+\begin{definition}[Epimorphisms]
+    A map $X \overset{f}{\to } Y$ is an \textbf{epimorphism} (or epic) if for any commutative diagram 
+    \begin{figure}[H]
+    \centering
+    \begin{tikzcd}
+X \arrow[r, "f"] & Y \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & A
+\end{tikzcd}
+    \end{figure}
+    we must have $g=h$. In other words, $g\circ f=h\circ f\implies g=h$. \end{definition}
+This is like surjectivity, but a little farther off. Furthermore, the correspondence failure rate is a little higher.
+\begin{example}[Epimorphisms that aren't onto]
+    \,
+    \begin{enumerate}[label=(\alph*)]
+        \item In $\mathsf{CRing} $, the inclusion $\Z\hookrightarrow \Q$ is an epimorphism that isn't onto. If two homomorphisms agree on an integer, they agree everywhere since we can extend linearly.
+        \item In the category of \emph{Hausdorff} topological spaces $\mathsf{Haus} $, a map is an epimorphism iff it has a dense image (for example $\Q\hookrightarrow \R$). 
+    \end{enumerate}
+    Basically, things fail when $f \colon X \to Y$ can be determined by just some of the points (some subset) of $X$.
+\end{example}
+
+
+\subsection{Functors}
+\begin{example}[Basic Functors]
+   Here are some basic examples of functors:
+   \begin{itemize}
+       \item Given an algebraic structure (group, field, vector space) we can take its underlying set $S$: this is a functor from $\mathsf{Grp}\to \mathsf{Set}$ (or whatever you want to start with).
+       \item If we have a set $S$, if we consider the vector space with basis $S$ we get a functor $\mathsf{Set} \to \mathsf{Vect}$.
+       \item Taking the power set of a set $S$ gives a functor $\mathsf{Set}\to \mathsf{Set}$.
+       \item Given a locally small category $\mathcal{A}$, we can take a pair of objects $(A_1,A_2)$ and obtain a set $\operatorname{Hom}_{\mathcal{A}}(A_1,A_2)$. This turns out to be a functor $\mathcal{A}^{\text{op}}\times \mathcal{A}\to \mathsf{Set}$.
+   \end{itemize}
+   Finally, the most important examples (WRT this course):
+   \begin{itemize}
+       \item In algebraic topology, we build groups like $H_n(X),\, \pi_1(X)$ associated to topological spaces. All these group constructions are functors $\mathsf{Top} \to \mathsf{Grp}$.
+   \end{itemize}
+\end{example}
+\begin{definition}[Functors]
+    Let $\mathcal{A}$ and $\mathcal{B}$ be categories. A \textbf{functor} $F$ takes every object of $\mathcal{A}$ to an object of $\mathcal{B}$. In addition, it must take every arrow $A_1 \overset{f}{\to }A_2$ to an arrow $F(A_1)\overset{F(f)}{\longrightarrow }F(A_2).$ Refer to the commutative diagram:
+            \begin{figure}[H]
+                \centering
+                \begin{tikzcd}
+               & A_1 \arrow[dd, "f"']       &  & B_1=F(A_1) \arrow[dd, "F(f)"] &                \\
+\mathcal{A}\ni & {} \arrow[rr, "F", dotted] &  & {}                            & \in\mathcal{B} \\
+               & A_2                        &  & B_2=F(A_2)                    &               
+\end{tikzcd}
+            \end{figure}
+        Functors also satisfy the following requirements:
+        \begin{itemize}
+            \item Identity arrows get sent to identity arrows, that is, for each identity arrow $\operatorname{id}_A$, we have $F(\operatorname{id}_A)=\operatorname{id}_{F(A)}$.
+            \item Functors respect composition: if $A_1\overset{f}{\to }A_2\overset{f}{\to }A_3$ are arrows in $\mathcal{A}$, then $F(g\circ f)=F(g)\circ F(f)$.
+        \end{itemize}
+\end{definition}
+More precisely, these are \textbf{covariant}  functors. A \textbf{contravariant}  functor $F$ reverses the direction of arrows, so that $F$ sends $f \colon A_1 \to A_2$ to $F(f) \colon F(A_2) \to F(A_1)$, and satisfies $F(g\circ f)=F(f)\circ F(g)$ instead. A category $\mathcal{A}$ has an opposite category $\mathcal{A}^{\text{op}}$ with the same objects and with $\mathcal{A}^{\text{op}}(A_1,A_2)=\mathcal{A}(A_2,A_1)$. A contravariant functor $F \colon \mathcal{A} \to \mathcal{B}$ is just a covariant functor $\mathcal{A}^{\text{op}}\to \mathcal{B}$. 
+
+\begin{example}
+    A classical example of functors is the dual vector space functor. For $K$ a field, $V$ a $K$-vector space the dual vector space functor assigns to $V$ the dual vector space $F(V)=V^*$ of linear maps $V\to K$, and to each linear transformation $f \colon V \to W$ the dual map $F(f)=f^* \colon W^* \to V^*$. Note that this functor is contravariant. 
+\end{example}
+\begin{example}
+    We have already talked about \textbf{free} and \textbf{forgetful} functors in Example 1.3: the forgetful functors are functors from spaces to sets (the underlying set of a group) and free functors are from sets to spaces (the basis set forming a vector space).
+    \begin{itemize}
+        \item Another example of a forgetful functor is a functor $\mathsf{CRing}\to \mathsf{Grp}$ by sending a ring $R$ to its abelian group $(R,+)$.
+        \item Another example of a free functor is a functor $\mathsf{Set}\to \mathsf{Grp}$ by taking the free group generated by a set $S$ (who would have known this is free?)
+    \end{itemize}
+\end{example}
+Here is a cool example: functors preserve isomorphism. If two groups are isomorphic, then they must have the same cardinality. In the language of category theory, this can be expressed as such: if $G\cong H$ in $\mathsf{Grp}$ and $U \colon \mathsf{Grp} \to \mathsf{Set}$ is the forgetful functor, then $U(G)\cong U(H)$. We can generalize this to \emph{any} functor and category!
+\begin{theorem}
+    If $A_1\cong A_2$ are isomorphic objects in $\mathcal{A}$ and $F \colon \mathcal{A} \to \mathcal{B}$ is a functor then \[
+        F(A_1)\cong F(A_2).
+    \] 
+\end{theorem}
+\begin{proof}
+Let's go diagram chasing!
+            \begin{figure}[H]
+                \centering
+                \begin{tikzcd}
+               & A_1 \arrow[dd, "f"', shift right=2]      &  & B_1=F(A_1) \arrow[dd, "F(f)"']                &                \\
+\mathcal{A}\ni & {} \arrow[rr, "F", dotted, shift left=3] &  & {}                                            & \in\mathcal{B} \\
+               & A_2 \arrow[uu, "g"']                     &  & B_2=F(A_2) \arrow[uu, "F(g)"', shift right=2] &               
+\end{tikzcd}
+            \end{figure}
+The main idea of the proof follows from the fact that functors preserve composition and the identity map. 
+\end{proof}
+This is very very useful for us (people who are doing algebraic topology) because functors will preserve isomorphism between spaces (we get that homotopic spaces have isomorphic fundamental groups).
+\begin{example}[Functors in algebraic topology]
+   As expected, functors show up all the time in algebraic topology. Here are some of the constructions we have studied so far that are functors:
+   \begin{itemize}
+       \item The act of assigning a fundamental group to a space is a functor $\pi_1 \colon \mathsf{Top_*}  \to \mathsf{Grp} $.
+       \item The singular chain complex functor $F \colon \mathsf{Top}  \to \mathsf{Ch} _{\Z}$ assigns to a space $X$ the chain complex of singular chains in $X$ and to each map $f\colon X \to Y$ the induced chain map. 
+       \item The algebraic homology functor $F \colon \mathsf{Ch}_{\Z} \to \mathsf{AbGrp}  $\footnote{Not really, it's actually the category of sequences of abelian groups, but I wasn't sure how to denote that.} assigns to a chain complex its sequence of homology groups, and chain maps the induced homomorphisms on homology.
+        \item Composing the previous functors, we have a functor $F \colon \mathsf{Top}  \to \mathsf{AbGrp} $ assigning to each space its singular homology groups.
+        \item There is a functor assigning pairs of spaces $(X,\,A)$ to the associated LES of homology groups. In the domain category, morphisms are maps between pairs, and in the target category morphisms are commutative diagrams of maps between exact sequences. 
+        \item The previous functor is a composition of the functor from pairs of spaces to $\mathsf{Ch} _{\Z}$ restricted to short exact sequences, and a functor from the aforementioned restriction on $\mathsf{Ch} _{\Z}$ to the LES of homology groups.
+        \item Finally, in the next section we will study the contravariant version of homology, called \emph{cohomology}.
+   \end{itemize}
+\end{example}
+\begin{note}
+    As a meme (or not really, but it's still funny), we can construct the category $\mathsf{Cat}$ whose objects are categories and arrows are functors.
+\end{note}
+
+\subsection{Homotopy categories and homotopy equivalence}
+Let $\mathsf{Top}_*$ be the category of pointed topological spaces. Then the fundamental group gives a functor $\mathsf{Top} _* \to \mathsf{Grp} $. When we have a suitable relation of homotopy between maps in a category $\mathcal{C} $, we define the homotopy category $\mathsf{Ho} (\mathcal{C} )$ to be the category sharing the same objects as $\mathcal{C} $, but morphisms the homotopy classes of maps. On $\mathsf{Top} _*$, we require homotopies to map basepoint to basepoint, and we get the homotopy category $\mathsf{hTop}_* $ of pointed spaces.
+
+Homotopy equivalences in $\mathcal{C} $ are isomorphisms in $\mathsf{Ho} (\mathcal{C} )$. More concretely, recall that a map $f \colon X \to Y$ is a homotopy equivalence if there is a map $g \colon Y \to X$ such that both $g\circ f \simeq \operatorname{id}_X$ and $f\circ g \simeq \operatorname{id}_Y$. In the language of category theory, we can obtain the analogous notion of a pointed homotopy equivalence. Functors carry isomorphisms to isomorphisms, so then the pointed homotopy equivalence will induce an isomorphism of fundamental groups. This also holds, but less obviously, for the category of non pointed homotopy equivalences.
+\begin{theorem}
+    If $f \colon X \to Y$ is a homotopy equivalence, then \[
+        f_* \colon \pi_1(X,x) \to \pi_1(Y,f(x))
+    \] is an isomorphism for all $x\in X$.
+\end{theorem}
+\begin{proof}
+    Let $g \colon Y \to X$ be a homotopy inverse of $f$. By our homotopy invariance diagram, we see that the composites \[
+        \pi_1(X,x)\overset{f_*}{\longrightarrow }\pi_1(Y,f(x))\overset{g_*}{\longrightarrow}\pi_1(X,(g\circ f)(x))
+    \] and \[
+    \pi_1(Y,y)\overset{g_*}{\longrightarrow}\pi_1(X,g(y))\overset{f_*}{\longrightarrow}\pi_1(Y,(f\circ g)(y))
+\] are isomorphisms determined by paths between basepoints given by chosen homotopies $g\circ f \simeq \operatorname{id}_X$ and $f\circ g \simeq \operatorname{id}_Y$. Then in each displayed composite, the first map is a monomorphism and the second is an epimorphism. Taking $y=f(x)$ in the second composite, we see that the second map in the first composite is an isomorphism. Therefore so is the first map, and we are done.
+\end{proof}
+A space $X$ is said to be contractible if it is homotopy equivalent to a point.
+\begin{cor}
+    The fundamental group of a contractible space is zero.
+\end{cor}
+
+\subsection{Natural transformations}
+We talked about maps between objects which led to categories, and then maps between categories which lead to functors. Now let's talk about maps between functors, the natural transformation: this is actually not too strange (recall the homotopy, a ``deformation'' from a map to another map).
+
+In this case, we also want to pull a map (functor) $F$ to another map $G$ by composing a bunch of arrows in the target space $\mathcal{B}$.
+\begin{definition}[Natural Transformations]
+    Let $F,G \colon \mathcal{A} \to \mathcal{B}$ be two functors. A \textbf{natural transformation} $\alpha \colon F \to G$ denoted
+            \begin{figure}[H]
+                \centering
+    \begin{tikzcd}
+        \mathcal{A} \arrow[rr, "F", bend left] \arrow[rr, "G"', bend right] & \,\,~ \Big\Downarrow\alpha & \mathcal{B}
+\end{tikzcd}
+            \end{figure}
+            consists of, for each $A\in \mathcal{A}$ an arrow $\alpha_A \in \operatorname{Hom}_{\mathcal{B}}(F(A),G(A))$, which is called the component of $\alpha$ at $A$. 
+            Pictorially, it looks like this: 
+            \begin{figure}[H]
+                \centering
+                \begin{tikzcd}
+                                                                   &  & F(A)\in\mathcal{B} \arrow[dd, "\alpha_A"] \\
+\mathcal{A}\ni A \arrow[rru, "F", dotted] \arrow[rrd, "G", dotted] &  &                                           \\
+                                                                   &  & G(A)\in\mathcal{B}                       
+\end{tikzcd}
+            \end{figure}
+            The $\alpha_A$ are subject to the ``naturality'' requirement such that for any $A_1 \overset{f}{\to }A_2$, the following diagram commutes:
+            \begin{figure}[H]
+                \centering
+                \begin{tikzcd}
+F(A_1) \arrow[r, "F(f)"] \arrow[d, "\alpha_{A_1}"'] & F(A_2) \arrow[d, "\alpha_{A_2}"] \\
+G(A_1) \arrow[r, "G(f)"']                           & G(A_2)                          
+\end{tikzcd}
+            \end{figure}
+            The arrow $\alpha_A$ represents the path that $F(A)$ takes to get to $G(A)$ (like in a homotopy from $f$ to $g$ the point $f(t)$ gets deformed to the point $g(t)$ continuously). Think of $f$ representing the homotopy and the basepoints being $F(A_1),G(A_1)$ to $F(A_2),G(A_2)$.
+\end{definition}
+Natural transformations can be composed. Take two natural transformations $\alpha \colon F \to G$ and $\beta \colon G \to H$. Consider the following commutative diagram: 
+            \begin{figure}[H]
+                \centering
+                \begin{tikzcd}
+                                                                                                     & F(A) \arrow[d, "\alpha_A"] \\
+\mathcal{A}\ni A \arrow[ru, "F", dotted] \arrow[r, "G" description, dotted] \arrow[rd, "H"', dotted] & G(A) \arrow[d, "\beta_A"]  \\
+                                                                                                     & H(A)                      
+\end{tikzcd}
+            \end{figure}
+    We can also construct inverses: suppose $\alpha$ is a natural transformation such that $\alpha_A$ is an isomorphism for each $A$. Then we construct an inverse arrow $\beta_A$ in the following way:
+            \begin{figure}[H]
+                \centering
+                \begin{tikzcd}
+                                                                   &  & F(A)\in\mathcal{B} \arrow[dd, "\alpha_A"', shift right] \\
+\mathcal{A}\ni A \arrow[rru, "F", dotted] \arrow[rrd, "G", dotted] &  &                                                         \\
+                                                                   &  & G(A)\in\mathcal{B} \arrow[uu, "\beta_A"', shift right] 
+\end{tikzcd}
+            \end{figure}
+            We say $\alpha$ is a \textbf{natural isomorphism}. Then $F(A)\cong G(A)$ \emph{naturally} in $A$ (and $\beta$ is an isomorphism too!) We write $F\cong G$ to show that the functors are naturally isomorphic.
+\begin{example}
+    If $F \colon \mathsf{Set} \to \mathsf{Grp}$ is the free functor that sends a set to the free group on such set and $U \colon \mathsf{Grp} \to \mathsf{Set}$ is the forgetful functor sending a free group to its generating set, then we have a natural inclusion of $S\hookrightarrow UF(S)$. The functors $F$ and $U$ are left and right adjoint to each other, in the sense that we have a natural isomorphism \[
+        \mathsf{Grp}(F(S),A)\cong \mathsf{Set}(S,U(A))
+    \] for a set $S$ and an abelian group $A$. This expresses the ``universal property'' of free objects: a map of sets $S\to U(A)$ extends uniquely to a homomorphism of groups $F(S)\to A$. 
+\end{example}
+\begin{definition}
+    Two categories $\mathcal{A}$ and $\mathcal{B}$ are equivalent if there are functors $F \colon \mathcal{A} \to \mathcal{B}$ and $G \colon \mathcal{B} \to \mathcal{A}$ and natural isomorphisms $FG \to \operatorname{Id}$ and $GF \to \operatorname{Id}$, where the $\operatorname{Id}$ are the respective identity functors.
+\end{definition}
+\begin{example}[Natural transformations in algebraic topology]
+    As expected, these also show up in algebraic topology.
+    \begin{itemize}
+        \item Consider the boundary maps $H_n (X,A) \overset{\partial }{\to} H_{n-1}(A)$ in singular homology, or any homology theory really.
+        \item The change-of-coefficient homomorphisms $H_n (X;G_1)\to H_n (X;G_2)$ induced by a homomorphism $G_1\to G_2$ are also natural transformations.
+    \end{itemize}
+\end{example}
+
+\subsection{The Yoneda lemma (todo)}
+\begin{definition}[The functor category]
+    The \textbf{functor category} of two categories $\mathcal{A} $ and $\mathcal{B} $, denoted $[\mathcal{A} ,\mathcal{B} ]$ is defined as follows:
+    \begin{itemize}
+        \item The objects of $[\mathcal{A} ,\mathcal{B} ]$ are (covariant) functors $F \colon \mathcal{A}  \to \mathcal{B} $, and 
+        \item The morphisms are natural transformations $\alpha \colon F \to G$.
+    \end{itemize}
+\end{definition}
+todo
+
+\subsection{(todo) equalizers, limits, colimits, pullback, pushout, kernesl and cokernesl, additive and abelian category, homological algebra }
