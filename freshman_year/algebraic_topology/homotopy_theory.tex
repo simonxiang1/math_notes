@@ -9,8 +9,36 @@ Another more direct connection between homology and homotopy is the \emph{Hurewi
 
 We'll also talk a little about fiber bundles which somewhat generalize the idea of covering spaces for higher homotopy groups, purely to lead toward fibrations. These allow us to describe how the homotopy type of a CW complex is inductively built up from its homotopy groups by forming `twisted products' of Eilenberg-MacLane spaces, which is the notion of a \emph{Postnikov tower}.
 \orbreak
+\subsection{Introduction to homotopy theory}
 Let $I^n $ be the $n$-cube, and the boundary $\partial I^n $ be the subspace of points with at least one coordinate equal to $0$ or $1$. 
 \begin{definition}[Higher homotopy groups]
-    For a pointed space $X,x_0$, define the $\mathbf n$\textbf{-th homotopy group} $\pi_n (X,x_0)$ as the set of homotopy classes $f \colon (I^n ,\partial I^n ) \to (X,x_0)$ where homotopies $f_t$ are required to satisfy $f_t(\partial I^n )=x_0$ for all $t$. 
+    For a pointed space $X,x_0$, define the $\mathbf n$\textbf{-th homotopy group} $\pi_n (X,x_0)$ as the set of homotopy classes $f \colon (I^n ,\partial I^n ) \to (X,x_0)$ where homotopies $f_t$ are required to satisfy $f_t(\partial I^n )=x_0$ for all $t$. If $f$ and $g$ are two maps from the $n$-cube into $(X,x_0)$, then we define the composition as \[
+        (f+g)(s_1,s_2,\cdots ,s_n )=
+        \begin{cases}
+            f(2s_1,s_2,\cdots ,s_n ),\quad & s_1\in [0,\sfrac{1}{2}]\\
+            g(2s_1-1,s_2,\cdots ,s_n )&s_1\in [\sfrac{1}{2}, 1].
+        \end{cases}
+    \] 
+    If we use $[f]$ to denote the homotopy classes of $f$ (rel $\partial $), then $[f]+[g]=[f+g]$. We have $(f+g)\in \pi_n (X,x_0)$ since $\partial I^n \to 0$, and thus we have given $\pi_n (X,x_0)$ a group structure. Visualizing composition in terms of spheres, we crush the equatorial $S^{n-1}$ to a point yielding a wedge of two $S^n $'s, and from here the picture is the same as with cubes. Associativity is most naturally proven by the cubical picture.
 \end{definition}
-This extends to $\pi_0$ by letting $I^0$ be a point and $\partial I^0$ be empty, so $\pi_0(X,x_0)$ is just the set of path-components of $X$.
+\begin{theorem}
+    $\pi_{n\geq 2} $ is commutative.
+\end{theorem}
+\begin{proof}
+    Consider $f+g$ as the composition of two maps of spheres, with the equator glued to the basepoint. We will show this is the same as $g+f$. The homotopy takes place in the domain $S^n $ (slogan ``work in the domain''), which is just a rotation of the sphere until the equator returns to itself, exchanging the top and bottom hemispheres. This defines a homotopy $S^n \times I\to S^n $, so following the rotation, we end up with $g+f$. The simplest way to state this for higher dimensions is by suspending the spheres, but the key point is that this \emph{doesn't} work for $n=1$, since you can't homotope a circle with a basepoint to exchange the top and bottom.
+\end{proof}
+This extends to $\pi_0$ by letting $I^0$ be a point and $\partial I^0$ be empty, so $\pi_0(X,x_0)$ is just the set of path-components of $X$. It turns out that $\pi_1$ has a lot of complications since every type of group is possible. The complications for \textbf{higher homotopy groups} (for $n\geq 2$) are totally different, in particular, $\pi_{n\geq 2}(X,x_0)$ is always abelian. Although we formalize things with cubes, most visualizations use balls and spheres, with the correspondence $(I^n ,\partial I^n )\cong (D^n ,S^{n-1})$.
+\begin{example}
+    The basic example is that $\pi_1(X,x_0)$ is the set of maps from the interval into $(X,x_0)$ up to homotopy rel $\partial I$, which is just the fundamental group. For $\pi_2(X,x_0)$, this is defined as the set of maps from the square to $(X,x_0)$, where the edges of the square $\mapsto x_0$. This can be visualizes as a small square near $x_0$ with a $2$-cell behind it, the reason why it's drawn offset is to distinguish between squares and spheres (more precisely, to indicate that the domain is $I^2$).
+\end{example}
+Often we think of $\pi_n $ as the set of homotopy classes of maps $(S^n ,\text{point} )\to (X,x_0)$ or classes of maps $(D^n ,\partial D^n )\to (X,x_0)$. These are the same sets, but the formal definition by cubes is often better.
+\begin{namedthm}{Whitehead's Theorem}
+    If $f\colon X \to Y$ for $X,Y$ connected cell complexes induces isomorphisms on each $\pi_n $, then $f$ is a homotopy equivalence.
+\end{namedthm}
+\begin{note}
+    This does \emph{not} say that if $\pi_i (X)\simeq \pi_i (Y)$ for all $i$, then $X$ and $Y$ are homotopy equivalent! This might happen in a way such that there is no specific function inducing isomorphisms on the homotopy groups. However Whitehead's theorem is still good, it says that any topological map that is an algebraic isomorphism is also a ``topological isomorphism'' (homotopy equivalence).
+\end{note}
+If $f\colon X \to Y$ sends $x_0\in Y$ to $y_0\in Y$, then $f_* \colon \pi_n (X,x_0) \to \pi_n (Y,y_0)$ is defined as follows: for all $\alpha \colon (I^n ,\partial I^n )\to (X,x_0) $, $f_*(x)$ is the composition $(I^n ,\partial I^n )\overset{\alpha }{\longrightarrow} (X,x_0)\overset{f}{\longrightarrow} (Y,y_0)$. This formulates things as the level of maps of spaces. We must check that this preserves the equivalence relation of homotopy rel $\partial I$, which isn't hard. This is exactly the same as for $\pi_1$. The omission of basepoint is also similar as for $\pi_1$, the point being that if we have a space $X$ with a path $\gamma$ from $x_0\to x_1$, then we have an induced isomorphism $\pi_n (X,x_0)\simeq \pi_n (X,x_1)$. In particular, the isomorphism type of $\pi_n $ is independent of basepoint, so whether $f\colon (X,x_0) \to (Y,y_0)$ is an isomorphism on $pi_n $ is independent of choices of $x_0,y_0$, assuming that $X,Y$ are path connected. How do we define this? You can view it as stretching out the $n$-sphere from one point to another via the map $\gamma$.
+\begin{note}
+    The isomorphism between $\pi_n (X,x_0)$ and $\pi_n (X,x_1)$ depends on the choice of $\gamma$, just like $\pi_1.$ For example, take a cube minus a vertical pillar in the middle. We can take $\gamma$ to loop around the pillar from the left or from the right to connect to points on opposite ends. These two elements of $\pi_2(X,x_0)$ are different, since moving one loop to the other requires moving the basepoint which isn't allowed.
+\end{note}
