@@ -1,0 +1,35 @@
+\section{4-Manifolds (10/13/20)}
+Today's speaker is Kai Nakamura, a 3\textsuperscript{rd}(?) year Ph.D student. 
+\begin{definition}[Manifolds]
+    A \textbf{topological manifold} is a space that locally looks like $\R^n $ (locally Euclidian), and some other stuff too (Hausdorff, charts, etc). For example, $S^n $. A \textbf{smooth structure} on a topological manifold is essentially a way to do calculus on such space. For example, we do multivariable calculus on $\R^n $ with the standard smooth structure. So a \textbf{smooth manifold} is a topological manifold with a smooth structure.
+\end{definition}
+We want to study these manifolds up to some notion of equivalence, so we study the manifolds up to \textbf{homeomorphism} (continuous map with continuous inverse) and \textbf{diffeomorphism} (differentiable map with differentiable inverse).
+\begin{example}
+    Topologists say that $S^1 $ and the ellipse are the same thing, because we can find a homeomorphisms. Similarly, $\R$ with the smooth structure and the open interval $(0,1)$.
+\end{example}
+\subsection{Classifying manifolds}
+In the $2$-dimensional case, this is the classification of surfaces. The one dimensional case is pretty trivial, for example a line, open, half open, closed interval etc. Some examples of surfaces include $S^2, \mathbb{T},$ and the genus $n$-surface. These are also all smooth.
+\begin{namedthm}{Classification of Surfaces}
+   Every closed orientable surface is homeomorphic or diffeomorphic to one of the examples we mentioned above. 
+\end{namedthm}
+Something fun to think about: torus with a hole in it. In three dimensions, the most famous result is probably Poincare's conjecture (no longer a conjecture), which asks whether a simply-connected closed $3$-manifold homeomorphic to a sphere. This is true! And Grigory Perelman ran off into the woods and was never to be seen again. Simply connected means $\pi_1$ is trivial.
+
+In dimension 7, Milnor (1956) constructed smooth manifolds $M$ that are homeomorphic to $S^7$ but not diffeomorphic. This shocked a lot of people, because in dimensions two or three we automatically get a smooth structure.
+
+Smale (1961) proved the topological Poincare conjecture for all dimensions greater than or equal to 5, that is, a smooth $n$-manifold homotopy equivalent to $S^n $ is homeomorphic to $S^n $. Although the theorem gives a homeomorphism, it actually uses smooth techniques. If you interset two spheres you can try to find a boundary circle (then rotate it?). This works for dimensions 5 and higher, and is known as \textbf{Whitney's trick}. However, this doesn't work for $4$-manifolds.
+
+Freedman (1981) showed that this worked topologically, which resulted in a classification of topologically simply connected closed $4$-manifolds, also showing the topological $4$-dimensional Poincare conjecture. This worked topologically, so maybe this works smoothly too?
+
+Donaldson (1982) analyzed the anti-self dual Yang-Mills equations on a smooth $4$-manifold to prove his famous Diagonalization theorem. The takeaway is that it showed the Whitney trick can't work smoothly in dimension four, unfortunately.
+\subsection{Exotic $\R^4$}
+   These are examples of manifolds homeomorphic to $\R^4$, but not diffeomorphic to $\R^4$. In other words, there are different ways to do calculus on $\R^4$. This is a huge shock, because it doesn't happen in other dimensions, since smooth manifolds homeomorphic to $\R^n \implies $ diffeomorphic to $\R^n $ if $n\neq 4$. In fact, there are uncountably many distinct exotic $\R^4$. When you get to universal exotic $\R^4$ it gets very strange, since you have uncountably many submanifolds that aren't homeomorphic to each other. Furthermore we have small exotic $\R^4$, which are smooth manifolds of $\R^4$-std that are exotic $\R^4$.
+
+   \subsection{The Conway knot is (k)not slice}
+Say we have the Conway knot $C$, then it has a sibling (mutation) the Kinoshita-Terasaka knot, by flipping a region around. 
+\begin{definition}[Knot]
+    A \textbf{knot} $K$ is an embedding $S^1 \hookrightarrow S^3$, where $S^3=\partial B^4$, $D^2\hookrightarrow B^4$, $\partial D^2\hookrightarrow K\subseteq B^4$. If the disk above doesn't intersect itself as an embedding, we say the knot is \textbf{slice}.
+\end{definition}
+The Kinoshita-Terasaka knot is slice. For a long time, it was an open problem whether the Conway knot was slice. Usually mutants provided a pretty good picture, but it didn't work, and neither did a bunch of invariants. For example $T(C)=0,S(C)=0$, nobody could figure it out. For a while, this was the last knot with 11 crossing that we hadn't classified it yet.
+\begin{namedthing}{Lisa Piccirillo's Proof}
+    Consider the disk embedded in $S^4$, with an equatorial $S^3$. If it's slice, it must bound a disk here. If the knot is slice, we can thicken up the disk, and take the union of $B^4$ (hemisphere) and union it with the thickened slice disk. This is called the \textbf{knot trace} $X(K)$. A knot $K$ is slice iff $X(K)\subseteq S^4$. Now asking whether $C$ is slice is the same thing as asking whether $X(C)$ embeds in $S^4$. Piccirillo's insight was to use another knot $D$ such that $X(C)\cong X(D)$ a diffeomorphism. Now is $D $ slice? $S(D)=2 \implies D$ is not slice, so  $X(D)$ doesn't embed in $S^4$ and so $X(C)$ doesn't embed in $S^4$, therefore $C$ is not slice.
+\end{namedthing}
