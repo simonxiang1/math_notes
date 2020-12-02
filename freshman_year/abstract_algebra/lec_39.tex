@@ -1,0 +1,33 @@
+\section{December 1, 2020}
+Last time, to fill in a gap $M$ being free of rank $n$ means by definition that $M$ has an $R$-basis with $n$-elements. 
+\begin{proof}
+    To finish the proof of \cref{free}, let $M$ be a free $R$-module for $R$ a PID of rank $m$, and $ N$ be a nontrivial submodule of $M$.
+
+\begin{claim}
+    $N$ is a free module of rank $n\leq m$. Consider the $R$-module homomorphisms $\varphi \colon M \to R$. Then $N$ being a submodule of $M$ implies that $\varphi (N)$ is an $R$-submodule of $R$, so $\varphi (N)=(a_{\varphi })$ with $a_{\varphi }\in R$. Consider the set of all such ideals \[
+        \sum=\left\{\left( a_{\varphi } \right)  \mid \varphi \in \operatorname{Hom}_R(M,R)\right\} ,
+    \] we have $\Sigma\neq \O$ since $\varphi \colon m \mapsto 0 $ an $R$-module homomorphisms for all $m\in M$ implies that $(0)\in \Sigma$, so $\Sigma\neq \O$. How do we know $\Sigma \neq \{\left( 0 \right) \} $? $M$ being a free module of rank $m$ iff there exsits a set $\{x_1,\cdots ,x_m\} $ an $R$-basis of $M$ by definition, so consider the set of projection maps $\pi_j \colon M \to R,\, \sum_{i=1}^{m} r_i x_i \mapsto r_j  $ which is well defined since we have an $R$-basis, so we have an $R$-module homomorphism. Then $\pi=\left( \pi_1,\cdots ,\pi_m \right) \colon M \to R^m$ is the canonical $R$-module isomorphism. Now $N\neq 0$ says that $\pi(N)\neq 0$, which subsequently implies that $\pi_j (N)\neq 0$ for some $j$. The fact that $\pi_j \in \operatorname{Hom}_R(M,R)$ implies that $\Sigma \neq 0$ (not just nonempty, but also nonzero).
+
+    Since $R$ is a PID, then $R$ is Noetherian so $\Sigma$ has a maximal element with respect to inclusion, ie there exists a homomorphism $\varphi_1 \colon M \to R$ such that $\varphi_1(N) $ is not strictly contained in any other ideal of $\Sigma$. Let $a_1$ (formerly $a_{\varphi_1 }$) $\in R$ such that $\varphi_1(N)=(a_1) $. Choose $z\in N$ such that $\varphi_1(z)=a_1 $. Subclaim:
+       \[
+           a_1 \mid \varphi (z) \ \text{for all} \ \varphi \in \operatorname{Hom}_R(M,R).
+       \]  For the proof of the subclaim, fix $\varphi \in \operatorname{Hom}_R(M\to R)$. Consider $\left( a_1,\varphi (z) \right) $ an ideal of $R$. Since $R$ is a PID, $\left( a_1,\varphi (z) \right) =(d)$, so $d=a_1r_1+\varphi (z)r_2$ with $r_1,r_2\in R$. Consider $\varphi '=r_1\varphi_1+r_2\varphi  $, since $\varphi_1,\varphi \in \operatorname{Hom}_R(M,R) $ we have $\varphi '\in \operatorname{Hom}_R(M,R)$. $\varphi '(z)=d$ and $\varphi '\in \operatorname{Hom}_R(M,R)$ says that $\varphi '(N)\in \Sigma$ and $\varphi '(N) \subseteq (d)'\supseteq (a_1)$. By the maximality of $(a_1)$, $a_1=d\cdot u$ with $u$ a unit of $R$. Then $(a_1,\varphi (z))=(a_1)\implies a_1 \mid \varphi (z)$, finishing the subclaim.
+
+       Consider the projections $\pi_1(z),\cdots ,\pi_m(z)$. We know $\pi_j \in \operatorname{Hom}_R(M,R)$, so by our subclaim $a_1 \mid \pi_j (z)$ for all $j\in \{1,\cdots ,m\} $. So we can write $\pi_j (z)=a_1b_j $ with $b_j \in R$, set $y_1=\sum_{i=1}^{m} b_i x_i ,$ we get that $z=a_1y_1$. Then $\varphi_1(z) =a_1$ implies that $\varphi_1(y_1)=1$ since $R$ is an integral domain. Subclaim two: \[
+           M\simeq Ry_1\oplus \ker \varphi_1 \ \text{by the map} \ \psi \colon x \mapsto \left( \varphi_1(x), x-\varphi_1(x)y_1  \right) . 
+       \] For the proof of this, set $\psi_1 \colon R \to Ry$, $x\mapsto \varphi_1(x)y_1 $. $\psi_1$ is an $R$-module homomorphism since $\varphi_1 $ is. Set $\psi_2 \colon M \to \ker \varphi  $, $x\mapsto x-\varphi_1(x)y_1 $. Then $\psi_2(M)\subseteq \ker \varphi \iff \varphi (x-\varphi_1(x)y_1)=0 $. $\varphi_1(x-\varphi_1(x)y_1)=\varphi (x)-\varphi_1(x)\varphi_1(y_1)=\varphi_1(x)-\varphi_1(x)=0      $, so we land in the right place. $\psi_2=\operatorname{id}-\psi_1$ both $R$-module homomorphisms implies that $\psi_2$ is an $R$-module homomorphism, so $\psi$ is an $R$-module homomorphism as well. We need to verify that $\psi$ is injective and surjective. $x\in M$ implies that $x=\psi_1(x)+\psi_2(x)$, so $\psi $ is injective. 
+
+           To see that $\psi$ is surjective, note that \[
+           \begin{rcases}
+               \left. \psi_1 \right| _{Ry_1}&=\operatorname{id}\\
+                   \left. \psi_2 \right| _{\ker \varphi_1 }&=\operatorname{id}
+           \end{rcases}\implies 
+           \begin{rcases}
+               (z_1z_{2})\in Ry_1\oplus\ker \varphi_1 \\
+               \psi(z_1+z_2)\in M=\left( \overset{=\psi_1(z_1+z_2)}{\psi_1(z_1)} ,\overset{=\psi_2(z_1+z_2)}{\psi_2(z_2)}  \right) 
+           \end{rcases}=(z_1,z_2)\implies \psi \ \text{is surjective.}  
+           \] Hence $\psi$ is an $R$-module isomorphism. Subclaim three: \[
+           N \overset{\psi}{\simeq} Ra_1y_1\oplus N\cap \ker \varphi .
+       \]Proof: $\psi \colon N \to Ry_1\oplus \ker \varphi $, $n\mapsto (\psi_1(n),\psi_2(n))$, $\psi_1(n)=\varphi_1(n)y_1\in \varphi_1(N)y_1=a_1Ry_1=Ra_1y_1  $. $\psi_2(n) \in \ker \varphi $, to show $\psi_2(n)\in N$, $\psi_2(n)=n-\psi_1(n)y_1\in n+Ra_1y_1\in N$.
+\end{claim}
+\end{proof}

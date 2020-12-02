@@ -9,7 +9,8 @@ Another more direct connection between homology and homotopy is the \emph{Hurewi
 
 We'll also talk a little about fiber bundles which somewhat generalize the idea of covering spaces for higher homotopy groups, purely to lead toward fibrations. These allow us to describe how the homotopy type of a CW complex is inductively built up from its homotopy groups by forming `twisted products' of Eilenberg-MacLane spaces, which is the notion of a \emph{Postnikov tower}.
 \orbreak
-\subsection{Introduction to homotopy theory}
+
+\subsection{Whitehead's theorem and relative homotopy groups}
 Let $I^n $ be the $n$-cube, and the boundary $\partial I^n $ be the subspace of points with at least one coordinate equal to $0$ or $1$. 
 \begin{definition}[Higher homotopy groups]
     For a pointed space $X,x_0$, define the $\mathbf n$\textbf{-th homotopy group} $\pi_n (X,x_0)$ as the set of homotopy classes $f \colon (I^n ,\partial I^n ) \to (X,x_0)$ where homotopies $f_t$ are required to satisfy $f_t(\partial I^n )=x_0$ for all $t$. If $f$ and $g$ are two maps from the $n$-cube into $(X,x_0)$, then we define the composition as \[
@@ -42,3 +43,32 @@ If $f\colon X \to Y$ sends $x_0\in Y$ to $y_0\in Y$, then $f_* \colon \pi_n (X,x
 \begin{note}
     The isomorphism between $\pi_n (X,x_0)$ and $\pi_n (X,x_1)$ depends on the choice of $\gamma$, just like $\pi_1.$ For example, take a cube minus a vertical pillar in the middle. We can take $\gamma$ to loop around the pillar from the left or from the right to connect to points on opposite ends. These two elements of $\pi_2(X,x_0)$ are different, since moving one loop to the other requires moving the basepoint which isn't allowed.
 \end{note}
+\begin{definition}[Relative homotopy groups]
+    We will define for $x_0\in A\subseteq X$, the \textbf{relative homotopy groups} $\pi_n (X,A,x_0)$ (note $\pi_1$ is not actually a group, just a set with a distinguished point) as the homotopy classes of maps $I^n \to X$ such that 
+    \begin{enumerate}[label=(\roman*)]
+        \item  $ \overset{I^{n-1}\times \{0\} \subseteq I^{n-1}\times I}{\left( I^{n-1}\subseteq I^n \right) } \to A$ ,
+        \item all other facets of $I^n $ map to $x_0$.
+    \end{enumerate}
+    If we replace (i) by the stronger condition $I^{n-1}\to x_0$, then we get $\pi_n (X,x_0)$. So it's like $\pi_n (X,x_0)$ except that one facet of $I^n $ can be moved around inside $A$.
+\end{definition}
+    These satisfy a long exact sequence as such:\[
+        \cdots \to \pi_{n+1(X,A)}\longrightarrow \pi_n (A)\overset{i_*}{\longrightarrow}  \pi_n (X) \longrightarrow \pi_{n}(X,A) \longrightarrow \pi_{n-1}(A)\overset{i_*}{\longrightarrow} \pi_{n-1}(X)\cdots \to \pi_1(X,A).
+    \] Since the $i_*$ are isomorphisms by Whitehead's thm (where $i_*$ is induced by the inclusion $A\hookrightarrow X$), then $\pi_n (X,A)=0$ for all $n$. We also have a geometric fact (the compression criterion): an element of $\pi_n (X,A)$ is 0, say as a map $(D^n ,S^{n-1}, s_0)\overset{f}{\to } (X,A,x_0)\iff f$ is homotopic rel $S^{n-1}$ to a map $D^n \to A$. The image is a cube $X=I^3$, and $A$ the bottom face. Then a ``bulge'' (element of $\pi_2(X,A)$) can be flattened to the disk in $A$, so it's zero in $\pi_2(X,A)$. Repeating this process is like building a deformation retraction of $X$ to $A$.
+
+        The relative homotopy groups are groups for $n\geq 2$, it's the same construction as for ordinary $\pi_n $ except that one coordinate on $I^n $ is reserveed for the definition of relateive $\pi_n $ (the last coordinate). What goes wrong for $\pi_1$? One facet being able to move around in $\pi_1$ means you get paths you can't combine.
+        \begin{theorem}[Long exact sequence]
+            If $x_0\in A\subseteq X$, then the following sequence is exact (suppressing basepoints): \[
+                \pi_{n+1}(X,A)\overset{\partial }{\longrightarrow}  \pi_n (A) \overset{i_*}{\longrightarrow} \pi_n (X)\overset{j}{\longrightarrow}  \pi_n (X,A) \overset{\partial }{\longrightarrow}  \pi_{n-1}(A) \overset{i_*}{\longrightarrow} \pi_{n-1}(X)\to \cdots \to \pi_1(X,A)
+            \] where the $i_*$ are induced by inclusion, and $j\colon \pi_n (X) \to \pi_n (X,A)$ is the obvious map. That is, a map $(I^n ,\partial I^n )\to (X,x_0)$ where $(I^n ,I^{n-1})\to (X,A)$, and $(I^n , \, \text{rest of} \ \partial I^n )\to x_0$. The boundary maps $\partial \colon \pi_n (X,A) \to \pi_{n-1}(A)$ are also ``obvious'': if $f\colon I^n  \to X$ represents an element of $\pi_n (X,A)$, then $\left. f \right| _{I^{n-1}}\to A$ sends $\partial I^{n-1}\to x_0$, ie it represents an element of $\pi_{n-1}(A)$, which is precisely $\partial f$.
+\end{theorem}
+\begin{proof}
+    Is it time for a diagram chase? We'll break this up into part (B), (C), (D), there is no part (A). (B) will be about $\beta \in \pi_n (A)$, (C) about $\gamma \in \pi_n (X)$, and (D) about $\delta \in \pi_n (X,A)$.
+\[
+                \pi_{n+1}(X,A)\overset{\partial }{\longrightarrow}  \underset{\beta \in }{\pi_n (A)}  \overset{i_*}{\longrightarrow} \underset{\gamma\in }{\pi_n (X)} \overset{j}{\longrightarrow}  \underset{\delta\in }{\pi_n (X,A)}  \overset{\partial }{\longrightarrow}  \pi_{n-1}(A) \overset{i_*}{\longrightarrow} \pi_{n-1}(X)\to \cdots \to \pi_1(X,A)
+            \]
+    \noindent\textbf{Part B:} Suppose $\beta \in \pi_n (A)$. We must show that
+    \begin{enumerate}[label=(\roman*)]
+        \item $ji_*\beta =0$. Applying $j$ means one facet of $I^n $ is allowed to move within $A$. We must show that if it allows our facet of $I^n $ to move within $A$, then we can shrink $\beta $ to a constant map. Shrink $I^n $ onto $\partial I^n \setminus I^{n-1}$ (Hatcher calls this space $J^{n-1}$) rel $\partial I^n \setminus I^{n-1}$. So $\beta_t $ sends the endpoints of the bottom edge of the cube to itself, $t=0\implies \beta_0=\beta _t$, $t$ small $\implies \beta _t\approx$ the pinched cube, when $t$ is large then $\beta _t\approx$ a shrunken pinched cube, and $t=1\implies \beta_1 $ is constant to $x_0$. Slogan: $\beta $ itself is a nullhomotopy of $\partial \beta $.
+        \item If $\beta \in \pi_n (A)$ and $i_*\beta =0$, then $\beta =\partial \alpha $ for $\alpha \in \pi_{n+1}(X,A)$. In this case we have to find an $\alpha $ st $\partial \alpha =\beta $, the image of $\alpha $ leaving $A$ describes a map $I^{n+1}\to  I^{n+1}/J^n =B^n \to X$ restricting to $\beta $ on $I^n $. The fact that you can draw something that bounds $\beta $ is precisely finding an element that bounds $\beta $.
+    \end{enumerate}
+\end{proof}
