@@ -71,4 +71,33 @@ If $f\colon X \to Y$ sends $x_0\in Y$ to $y_0\in Y$, then $f_* \colon \pi_n (X,x
         \item $ji_*\beta =0$. Applying $j$ means one facet of $I^n $ is allowed to move within $A$. We must show that if it allows our facet of $I^n $ to move within $A$, then we can shrink $\beta $ to a constant map. Shrink $I^n $ onto $\partial I^n \setminus I^{n-1}$ (Hatcher calls this space $J^{n-1}$) rel $\partial I^n \setminus I^{n-1}$. So $\beta_t $ sends the endpoints of the bottom edge of the cube to itself, $t=0\implies \beta_0=\beta _t$, $t$ small $\implies \beta _t\approx$ the pinched cube, when $t$ is large then $\beta _t\approx$ a shrunken pinched cube, and $t=1\implies \beta_1 $ is constant to $x_0$. Slogan: $\beta $ itself is a nullhomotopy of $\partial \beta $.
         \item If $\beta \in \pi_n (A)$ and $i_*\beta =0$, then $\beta =\partial \alpha $ for $\alpha \in \pi_{n+1}(X,A)$. In this case we have to find an $\alpha $ st $\partial \alpha =\beta $, the image of $\alpha $ leaving $A$ describes a map $I^{n+1}\to  I^{n+1}/J^n =B^n \to X$ restricting to $\beta $ on $I^n $. The fact that you can draw something that bounds $\beta $ is precisely finding an element that bounds $\beta $.
     \end{enumerate}
+    \noindent\textbf{Part C:} We want to show the following:
+    \begin{enumerate}[label=(\roman*)]
+        \item If $\gamma \in \pi_n (X)$, then $\partial j(\gamma)=0$. If $\gamma \in \pi_n (X)$, $\gamma \colon I^n  \to X$, sending $\partial I^n  \to x_0$: we want to show that $\partial  j(\gamma)=0$. $j(\gamma)$ is the same picture, ie represented by the same map, the only difference is the homotopy equivalence relation in $\pi_n (X,A)$ is more relaxed than in $\pi_n (X)$. $\partial j(\gamma)= \left. \gamma \right| _{I^{n-1}\subseteq I_n }=$ the constant map at $x_0$, or it's already been nullhomotoped.
+            \item If $j(\gamma)=0 $, then $\gamma=i_* \beta $ for some $\beta \in \pi_n (A)$, ie suppose $\gamma$ can be nullhomotoped with $I^{n-1}$ always mapping into $A$, with nested $\partial  I^n \to x_0$. In this homotopy, $I^{n-1}$ starts constant at $x_0$ and ends at the constant map $x_0$, and always maps $\partial  I^{n-1}$ to $x_0$. This homotopy (restricted to $A$) can be regarded as $I^{n-1}\times I\to A$, sending $\partial (I^{n-1}\times I)$ to $x_0$, ie this homotopy is an element of $\pi_n (A)$, which represents $\gamma \in \pi_n (X)$.
+    \end{enumerate}
+\noindent \textbf{Part D:} We want to show the following:
+    \begin{enumerate}[label=(\roman*)]
+        \item If $\delta \in \pi_n (X,A)$, then $i_* \partial (\delta)=0$. We have to show that $\partial \delta$ is nullhomotopic in $X$, that is, it bounds a ball in $X$, which it just does.
+        \item If $\partial \delta=0$ then $\delta= j(\gamma)$ for some $\gamma \in \pi_n (X)$. What does it mean for $\partial \delta=0$? It means that $\partial \delta$ bounds a disk in $A$, not just $X$. We seek a $\gamma \in \pi_n (X)$ with $\gamma$ homotopic to $\delta$ by $\operatorname{im}(X,A)$. Regard $E$ is a nullhomotopy of $\partial \gamma $ in $A$, extend this to a homotopy of $\delta $ in $X$. (Homotopy extension property: the homotopy is already defined on $\partial I^n $ extends to $I^n $). After this alteration, we have the same element $\pi_n (X,A)$ since all we changed was moving $I^{n-1}$ around in $A$. And now, all of $\partial  I^n  \to x_0$, ie is actually an element of $\pi_n (X)$. Take that to be $\gamma$.
+    \end{enumerate}
+    With that we are done.
 \end{proof}
+\subsection{The Hureiwicz theorem}
+Hatcher states a relative version, but here is an absolute version first.
+\begin{namedthm}{Hureiwicz Theorem}
+    If $X$ is $(n-1)$-connected $(\pi_i  (X)=0$ for all $i<n$), then $H_n (X) \simeq H_n (X)$. 
+\end{namedthm}
+For example, $\pi_n (S^n )\simeq\Z$ since $S^n $ is $(n-1)$-connected.
+\begin{cor}
+    Suppose a CW complex $X$ is simply connected, and $H_i (X)=0$ for all $i>0$. Then $X$ is contractible.
+\end{cor}
+\begin{proof}
+    Induction shows $\pi_n (X)\simeq H_n (X) \simeq 0$ for all $n>0$ (knowing this for $n-1)$ implies that $X$ is $(n-1)$-connected. By the Hureiwicz theorem, $\pi_n (X)\simeq H_n (X)=0$ by hypothesis. Then consider $(\text{point}  )\hookrightarrow X$, inducing isomorphisms $\pi_n (\text{point} )\to \pi_n (X) $ for all $n$. So by Whitehead's theorem, $\text{point} \hookrightarrow X$ is a homotopy equivalence, ie $X$ is contractible.
+\end{proof}
+\begin{note}
+    $\pi_n (S^n )\simeq\Z$ isn't actually an application of the Hureiwicz theorem, because you need this very fact to prove Hureiwicz. To prove  $\pi_n (S^n )\simeq\Z$, we need excision for homotopy groups.
+\end{note}
+\begin{namedthing}{The Hureiwicz Map}
+    Let $h_n  \colon \pi_n (X) \to H_n (X)$ for all spaces $X$. If $\left( f \colon S^n  \to X \right) \in  \pi_n (X)$, then $f_*$ sends $H\_n (S^n )\to H_n (X)$. So you take a generator of $H_n (S^n )\simeq \Z$ (fixed once and for all). Then $h_n (f)=f_*(\alpha )$. 
+\end{namedthing}
