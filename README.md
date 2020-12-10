@@ -3,7 +3,7 @@ These are a collection of notes I have live-TeX'd for my classes at UT Austin. C
 
   - [Algebraic Topology](https://github.com/simonxiang1/math_notes/blob/master/freshman_year/algebraic_topology/master_notes.pdf) (graduate)
   - [Complex Analysis](https://simonxiang.xyz/math/complex_analysis_notes.pdf)
-  - [Differential Equations](https://github.com/simonxiang1/math_notes/blob/master/freshman_year/differential_equations/master_notes.pdf)
+  - [Differential Equations](https://simonxiang.xyz/math/abstract_algebra_notes.pdf)
   - [Abstract Algebra](https://github.com/simonxiang1/math_notes/blob/master/freshman_year/abstract_algebra/master_notes.pdf) (auditing)
   
 I live TeX notes for complex analysis and abstract algebra, while the algebraic topology notes are taken outside of class. The differential equations repository is only updated before tests, and I miss a lot of abstract algebra lectures. You can click the links above to get to the PDF files for the notes. Also: the UT Math Club invites speakers to give talks weekly, so sometimes I type up notes for those too.
