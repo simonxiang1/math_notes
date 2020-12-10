@@ -2,6 +2,7 @@
 As you can see, I gave up taking notes for this class. It's no fun. I don't care about logistic equations or manually calculating things\footnote{This was a horrible premonition...}. If I lived in a world where all I did was proofs, life would be much better. Alas, I have a test in two days, and this is not the case. So, here we are.
 \orbreak
 We didn't cover some basic stuff that everyone should know (variation of parameters, proving uniqueness-existence, Picard iteration, series solutions), you know, basically what I signed up for this class to learn. So we'll cover those later with proper sections in my free time.
+
 \subsection{First-order linear differential equations (homogeneous)}
 First order linear ODE's are of the form 
 \begin{equation}
@@ -10,6 +11,7 @@ First order linear ODE's are of the form
 We solve the homogeneous case, $\frac{dy}{dt}+a(t)y=0$ by (intuitively) dividing by $y$ and writing $\frac{y'}{y}=\frac{dy}{dt}/y$ as $\frac{d}{dt} \ln|y(t)|$. Then it pretty much immediately follows that \[
     y(t)=\exp \left( -\int a(t) \, dt \right) .
 \] 
+
 \subsection{Initial value problem homogeneous 1st order ODE}
 Above gives solution sets of infinite order. Sometimes engineers care about initial value problems, that is, we want to solve equations of the form 
 \begin{equation}
@@ -19,6 +21,7 @@ If we just follow the same steps as earlier and integrate with bounds, we get
 \[
     y(t)=y_0\exp\left( -\int_{t_0}^{t} a(s) \, ds \right) .
 \] 
+
 \subsection{Nonhomogeneous linear 1st order ODEs}
 They are of the form
 \begin{equation}
@@ -27,6 +30,7 @@ They are of the form
 Multiply by a continuous $\mu(t)$ such that we have $\frac{dy}{dy}\mu(t)+a(t)\mu(t)y=\mu(t)b(t)$: if $\frac{d}{dt} \mu(t)y=\frac{d\mu}{dt}y+\frac{dy}{dt}\mu$, then simply replace the left half of the expression with this, and notice that they're equal if $ \frac{d\mu(t)}{dt}=a(t)\mu(t)$. So $\mu(t)=c\exp\left( \int a(t) \, dt \right) $. Therefore we have \[
     \frac{d}{dt} \mu(t)y=\mu(t)b(t) \implies y=\frac{1}{\mu(t)}\left( \int \mu(t)b(t) \, dt +c\right),
 \] which is the general solution.
+
 \subsection{Initial value nonhomogeneous linear 1st order ODE}
 We're given something that looks like 
 \begin{equation}
@@ -35,17 +39,19 @@ We're given something that looks like
 To solve this, literally just integrate on the bounds. We get that solutions are of the form \[
     y=\frac{1}{\mu(t)}\left( y_0\mu(t_0) +\int_{t_0}^{t} \mu(s)b(s) \, ds\right) .
 \] 
+
 \subsection{Separable equations}
 They are of the form 
 \begin{equation}
     \frac{dy}{dx}=g(x)f(y).
 \end{equation}
 Because you can just do this: $\frac{dy}{dx}=\frac{g(x)}{h(y)}$, where $h=f^{-1}$ given $f\neq 0$ on its domain. Nobody knows what a differential form actually is, but it's apparent how to solve it (nonrigorously).
+
 \subsection{The logistic equation}
 I hope this doesn't show up or I'm gonna lose my mind.
 \begin{equation}
     p(t)=\frac{ap_0}{bp_0+(a-bp_0)e^{-a(t-t_0)}}
-\end{equation}
+\end{equation} This comes from $\frac{dp}{dt}=ap-bp^2$. The solution to an IVP with $p(t_0)=p_0$ is $a(t-t_0)=\ln \frac{p}{p_0}\left| \frac{a_0bp_0}{a-bp} \right| $.
 \subsection{Second order linear homogenous differential equations}
 They are of the form 
 \begin{equation}\label{sode}
@@ -97,7 +103,6 @@ Is this the actual name of the method? We try to guess solutions for equations o
     a \frac{d^2y}{dt^2}+b \frac{dy}{dt}+cy=g(t),
 \end{equation}
 where $a,b,c\in \R$ and $g(t)$ is of a certain form, described below.
-
 \vspace{0.25cm}
 \noindent\textbf{Case 1:} The differential equation is of the form \[
     L[y]=a \frac{d^2y}{dt^2}+b \frac{dy}{dt}+cy=a_0+a_1t+\cdots +a_nt^n.
@@ -133,8 +138,23 @@ where $a,b,c\in \R$ and $g(t)$ is of a certain form, described below.
     To find solutions where the function on the right is of the form $e^{2t}+e^{-3t}$ or $t\sin t +e^{t}$ or something like that, simply find solutions to the two componenents and add them.
 \end{remark}
 
-
-
+\subsection{Mechanical Vibrations}
+Equilibrium, spring has been stretched a distance of $\Delta l$, where $k\Delta l=mg$. $y(t)$ is position of the mass at time $t$. To compute this, we must find the total force acting on $m$, the sum of four forces $W,R,D,F$.
+\begin{enumerate}[label=(\roman*)]
+    \item $W=mg$ is the weight.
+    \item $R$ is the restoring force, given by $R=-k(\Delta l+y)$.
+    \item $D$ is the damping or drag force exerted by the medium (oil, etc) on $m$, given by $D=-c \frac{dy}{dt}$.
+    \item $F$ denotes the external forces, usually dependent only on time.
+\end{enumerate}
+So we have \[
+    m \frac{d^2 y}{dt^2}=W+R+D+F=mg-k(\Delta l+y)-c \frac{dy}{dt}+F(t)=-ky-c \frac{dy}{dt}+F(t).
+\] So $y(t)$ satisfies the second order ODE given by \[
+m \frac{d^2y}{dt^2}+c \frac{dt}{dt}+ky=F(t).
+\] 
+\begin{enumerate}[label=(\alph*)]
+    \item \emph{Free vibrations:} In the case of free undampened motion, the differential equation reduces to $m \frac{d^2y}{dt^2}+ky=0$ or $\frac{d^2y}{dt^2}+\omega_0^2y=0$ with $\omega_0^2:= \frac{k}{m}$. The characteristic is $r^2=-\omega_0^2$, so $r=0\pm \omega_0i$, and the general solution is of the form $y(t)=a \cos (\omega_0 t)+b \sin (\omega_0 t)$. This can be rewritten as $y(t)=R \cos (\omega_0 t-\delta)$, where $R=\sqrt{a^2+b^2} $ and $\delta= \tan^{-1} \left( \frac{b}{a} \right) .$ The motion of the mass is periodic with period $T_0=2\pi /\omega_0$, this is known as simple harmonic motion. $R$ is the amplitude, $\delta$ the phase angle, and $\omega_0= \sqrt{k /m} $ the natural frequency.
+    \item whatever
+\end{enumerate}
 
 \section{Examples}
 \subsection{Homogeneous 1st order ODE}
@@ -197,6 +217,7 @@ where $a,b,c\in \R$ and $g(t)$ is of a certain form, described below.
 \begin{solution}
     Now $\mu(t)=e^{\frac{x^2}{2}}.$ So $\frac{d}{dx}ye^{\frac{x^2}{2}}=xe^{x^2}$, and $ye^{\frac{x^2}{2}}=\frac{1}{2}e^{x^2}+c\implies y=\frac{1}{2}e^{\frac{x^2}{2}}+ce^{-\frac{x^2}{2}}$. At $y(0)=1$, we have $1=\frac{1}{2}+c$, so $c=\frac{1}{2},$ and the general solution is of the form $y=\frac{1}{2}e^{\frac{x^2}{2}}+\frac{1}{2}e^{-\frac{x^2}{2}}=\frac{1}{2}e^{\frac{x^2}{2}}\left( 1+e^{-x^2} \right) $.
 \end{solution}
+
 \subsection{Separable equations}
 \begin{prob}
     Solve \[
@@ -222,6 +243,13 @@ where $a,b,c\in \R$ and $g(t)$ is of a certain form, described below.
 \begin{solution}
     $\ln|y|=\frac{x^3}{3}+c\implies y=\pm e^{\frac{x^3}{3}+c}\implies y=Ce^{\frac{x^3}{3}}$.
 \end{solution}
+
+\subsection{Logistic equations}
+\begin{example}
+    Suppose the population at time $t $ satisfies the IVP \[
+        \frac{dp}{dt}=p -\frac{1}{100}p^2, \ p(t_0)=p_0,
+    \] where $p_0$ is the population at time $t_0$. Then $t-t_0=\ln \frac{p(100-p_0)}{p_0(100-p)}$.
+\end{example}
 \subsection{Second order homogeneous ODEs}
 \begin{prob}
     Find the solutions of \[
@@ -299,3 +327,11 @@ where $a,b,c\in \R$ and $g(t)$ is of a certain form, described below.
 \begin{prob}
     Find a particular solution 
 \end{prob}
+\subsection{Mechanical Vibrations}
+\begin{prob}
+    A $1$ kg mass stretches a spring 49/320 m. Pull down the mass an additional 1/4, find amplitude, period, and frequency.
+\end{prob}
+\begin{solution}
+    We have $m=1$ kg, $g=9.8$ m/s$^2$, and $\Delta l=\frac{49}{320}$ m. Since $k \Delta l=mg$, we have $k=9.8 \cdot \frac{320}{49}\approx 64$, and $\omega_0\approx \sqrt{64} \approx 8$. So $y(t)=a \cos (8t)+b \sin (8t)$. The initial position is $\frac{1}{4}$ m, so $y(0)=\frac{1}{4}$ and $a=\frac{1}{4}$. Consider $y'(t)=-8a \sin(8t)+8b \cos (8t)$, but $y'(0)=0$ so $b=0$. Therefore $y=\frac{1}{4}\cos (8t)$, the amplitude is $\frac{1}{4}$, period is $\frac{2\pi}{8}=\frac{\pi}{4}$, and frequency is 8.
+\end{solution}
+

@@ -40,10 +40,61 @@ Consider $\dot x=f(x)$, where $x=
     \end{enumerate}
 \end{theorem}
 To see why this is true, recall that solutions are of the form $\sum_{i}^{} c_i e^{\lambda_i t}v_i $ for $\lambda_i $ eigenvalues, $v_i $ eigenvectors. Then plug in values for $\lambda_i $ and see whether or not they explode. For part (c), we're just carefully writing out the charateristic, and if any eigenvalue doesn't have the proper amount of LI eigenvectors, you add a $t$ (by judicious guessing) then it blows up.
-\begin{definition}[Asymptotic stability]
-    A solution $x=\phi(t)$ is \textbf{asymptotically stable} if it is stable, and every solution $\phi$
-\end{definition}
 
+\subsection{The Phase-Plane}
+Goal, obtain a complete description of all solutions to the equation below. To do this, note that every solution $x=x(t),\, y=y(t)$ defines a curve in $\R^3$. \[
+    \frac{dx}{dt}=f(x,y),\quad \frac{dy}{dt}=g(x,y).
+\] Key observation is that every solution $x=x(t),y=y(t),t_0\leq t\leq t_1$ defines a curve in the $xy$ plane, as $t \to t_0$ the set $(x(t),y(t))$ make a curve $\Gamma $ in the $xy$ plane. $\Gamma $ is the \textbf{orbit} or \textbf{trajectory} of the solution and the $xy$ plane is called the \textbf{phase-plane} of the solutions. We can get orbits without knowledge of the solution, let $x=x(t),y=y(t)$ be solutions, then if $x'(t)\neq 0$ at $t=t_1$, then we can solve for $t=t(x)$ in a nbd of $x_1=x(t_1)$. So for $t$ near $t_1$ the orbit is the curve $y=y(t(x))$, also note that $\frac{dy}{dx}=\frac{g(x,y)}{f(x,y)}$, so orbits of the solutions $x=x(t) $, $y=y(t)$ are just solution curves of the first order ODE $\frac{dy}{dx}=\frac{g(x,y)}{f(x,y)}$. Note that if $\frac{dx}{dt}$ and $\frac{dy}{dt}$ are both zero then the solution curve fails to be an orbit, but rather the union of distinct orbits.
+
+\subsection{Phase Portraits of Linear Systems}
+Printed
+
+\subsection{Two Point Boundary-Value Problems}
+We have a dilemma. For what values of $\lambda$ can we find nontrivial solutions $y(x) $ satisfying 
+\begin{equation}\label{bd}
+    \frac{d^2y}{dx^2}+\lambda y =0;\quad ay(0)+by'(0)=0, \quad cy(\ell)+dy'(\ell)=0?
+\end{equation}
+ These are called boundary value problems, since we talk about $y(x)$ and $y'(x)$ at two points, $x=0$ and $x=\ell$. For an IVP, recall that we talk about the value of $y$ at the singular point $x=x_0$. The meat of this section is in the example below.
+
+\subsection{Introduction to Partial Differential Equations}
+Oh look it's the Cauchy-Riemann equations! This section is not important.
+
+\subsection{The Heat Equation; Separation of Variables}
+The meat of this is that solutions to the heat equation $\frac{\partial u}{\partial t}=\alpha ^2 \frac{\partial ^2 u}{\partial t^2},\ u(x,0)=f(x), \ 0<x<\ell,\ u(0,t)=u(\ell,t)=0$ are of the form \[
+        u(x,t)=\sum_{n=1}^{N} c_n  \sin\left( \frac{n \pi x}{\ell} \right) e^{-\alpha ^2 n^2\pi^2 t /\ell ^2}= \sum_{n=1}^{N} c_n \sin \left( \frac{n\pi x}{\ell} \right) e^{-\alpha ^2 \left( \frac{n\pi}{\ell} \right) ^2t}.
+    \] For separation of variables, split $u(x,t)=X(t)T(t)$, note that they must be equal to a constant and rewrite. To make precise the constant claim, say two functions $f(x)$ and $g(t)$ of $x$ and $t$ respectively are equal. Fix $t_0$ on the domain, then $f(x)=g(t_0)$, so $f(x)=\text{point} $, therefore so does $g(t)$.
+
+\subsection{Fourier Series}
+\begin{theorem}
+    Let $f$ and $f'$ be piecewise continuous on $[-\ell,\ell]$, and compute the values \[
+        a_n =\frac{1}{\ell}\int_{-\ell}^{\ell} f(x) \cos \left( \frac{n\pi x}{\ell} \right)  \, dx, \ n\in \Z^+ \cup \{0\} , \quad b_n =\frac{1}{\ell}\int_{-\ell}^{\ell}  f(x) \sin \left( \frac{n\pi x}{\ell} \right) \, dx, \ n\in \Z^+.
+    \] Then we can form the infinite series \[
+    \frac{a_0}{2}+a_1 \cos \left( \frac{\pi x}{\ell} \right) +b_1 \sin\left( \frac{\pi x}{\ell} \right) +a_2 \cos \left( \frac{2\pi x}{\ell} \right) +b_2 \sin \left( \frac{2\pi x}{ \ell} \right) +\cdots = \frac{a_0}{2}+ \sum_{n=1}^{\infty} \left[ a_n \cos \left( \frac{n\pi x}{\ell} \right) + b_n  \sin\left( \frac{n\pi x}{\ell} \right)  \right] .
+\] This is called the \textbf{Fourier series} for $f$ on $[-\ell,\ell]$, which converges to $f(x)$ if $f$ is continuous at $x$ in the compact interval, and to $\frac{1}{2}\left[ f(x+0)+f(x-0) \right] $ if $f$ is discontinuous at $x,\ -\ell<x<\ell$. Here, $f(x+0)$ denotes the limit from the right at $x$, and similarly $f(x-0)$ the limit from the left. At $x=\pm \ell$, the Fourier series converges to $\frac{1}{2}\left[ f(\ell)+f(-\ell) \right] $ where $f(\pm \ell)$ is the limit of $f(x)$ as $x$ approaches $ \pm\ell$, denoted $\lim _{x\to \ell^-}f(x)$ and $\lim _{x\to -\ell^+}f(x)$ respectively.
+\end{theorem}
+\begin{remark}
+    Fourier expansions are unique.
+\end{remark}
+
+\subsection{Even and Odd Functions}
+\textbf{Even functions} look like $f(-x)=f(x)$, \textbf{odd functions} look like $f(-x)=-f(x)$, yada yada. Prototypical examples: $x^2$ is even, $x^3$ is odd, $\cos$ is even, $\sin$ is odd. Many function are neither even nor odd. Does this course assume we skipped precalculus or something? Even and odd functions are closed under multiplication (and composition), and odd times even is odd (odd composed with even is even). Also the obvious fact about integrals of even and odd functions (watch MIT's integration bee).
+\begin{lemma}
+    The Fourier expansion for an even function is a pure cosine series, and similarly the Fourier expansion of an odd function is all sine.
+\end{lemma}
+\begin{theorem}\label{2}
+    Let $f$ and $f'$ be piecewise continuous on the interval $[0,\ell]$, and compute  \[
+        a_n =\frac{2}{\ell}\int_{0}^{\ell} f(x) \cos \left( \frac{n\pi x}{\ell} \right)  \, dx, \ n\in \Z^+\cup \{0\}, \quad b_n =\frac{2}{\ell}\int_{0}^{\ell} f(x) \sin\left( \frac{n\pi x}{\ell} \right)  \, dx, \ n\in \Z^+.
+    \] We can then form the infinite series \[
+    \frac{a_0}{2}+\sum_{n=1}^{\infty} a_n \cos\left( \frac{n\pi x}{\ell} \right) ,\quad \sum_{n=1}^{\infty} b_n  \left( \frac{n\pi x}{\ell} \right) ,
+\] both series converge to $f(x)$ if $f$ is continuous at $x\in (0,\ell)$, and to $\frac{1}{2}\left[ f(x+0)+f(x-0) \right] $ if $f$ is discontinuous at $x\in (0,\ell)$. At $x=0$ and $x=\ell$ the first series converges to $f(x)$ and the second series to 0.
+\end{theorem}
+
+\subsection{Return to the Heat Equation}
+Back to the boundary value problem \[
+    \frac{/\partial u}{\partial t }= \alpha ^2 \frac{\partial ^2 u }{\partial x^2}; \quad u(x,0)=f(x), \ 0<x<\ell; \quad u(0,t)=u(\ell, t)=0.
+\] We've shown (not really, skipped over it but trust me) that $u(x,t)=\sum_{n=1}^{\infty} c_n \sin \left( \frac{n\pi x}{\ell} \right) e^{-\alpha ^2 \left( \frac{n\pi}{\ell} \right) ^2t}$. This leads us to ask whether we can find constants $c_1,c_2$ such that $u(x,0)=\sum_{n=1}^{\infty} c_n  \sin \left( \frac{n\pi x}{\ell} \right) =f(x), x\in [0,\ell]$. The answer is yes as we have seen, if we choose $c_n =\frac{2}{\ell}\int_{0}^{\ell} f(x) \sin \left( \frac{n\pi x}{\ell} \right)  \, dx$, then the Fourier series $\sum_{n=1}^{\infty} c_n \sin \left( \frac{n\pi x}{\ell} \right) $ converges to $f(x)$ if $f$ is continuous at $x.$ Therefore the solution we want is given by \[
+u(x,t)=\frac{2}{\ell}\sum_{n=1}^{\infty} \left[ \int_{0}^{\ell} f(x) \sin\left( \frac{n\pi x}{\ell} \right)  \, dx \right] \sin \left( \frac{n\pi x}{\ell} \right) e^{-\alpha ^2 \left( \frac{n\pi}{\ell} \right) ^2t}
+\] 
 \newpage
 \section{Examples}
 
@@ -56,7 +107,7 @@ To see why this is true, recall that solutions are of the form $\sum_{i}^{} c_i 
         x_1^0\\x_2^0
     \end{bmatrix}$ is an equilibrium point iff $1-x_2^0=0$ and $(x_1^0)^3+x_2^0=0$, so $x_2^0=1$ and $x_1^0=-1$, so $
     \begin{bmatrix}
-        -1\\1
+        -1\\
     \end{bmatrix}$ is the only equilibrium value of this system.
 \end{example}
 \begin{example}
@@ -69,4 +120,166 @@ To see why this is true, recall that solutions are of the form $\sum_{i}^{} c_i 
 \end{example}
 
 \subsection{Stability of Linear Systems}
+\begin{example}
+    To show every solution of $\dot x=Ax$ where $A=
+    \begin{bmatrix}
+        1 & 5\\ 5&1
+    \end{bmatrix}$ is unstable, note that the characteristic is $(1-\lambda)^2-25$ so the eigenvalues are $\lambda=6,-4$, so we have a positive eigenvalue and we are done.
+\end{example}
+\begin{example}
+    To show every solution where $A=
+    \begin{bmatrix}
+0 & -3 \\ 2&0
+    \end{bmatrix}$ is stable, note that the characteristic is $(\lambda -\sqrt{6} i)(\lambda +\sqrt{6} i)$, so the eigenvalues are $\lambda =\pm \sqrt{6} i$, and the eigenvectors add up, thus the solutions are stable.
+\end{example}
+\begin{example}
+    Now let $A=
+    \begin{bmatrix}
+        2 & -3 & 0 \\ 0 & -6 & -2 \\ -6 & 0 & -3
+    \end{bmatrix}$. The characteristic is $-\lambda^2(7+\lambda)$, and the eigenvector corresponding to $\lambda=0$ is $
+    \begin{bmatrix}
+        3 \\ 2 \\ -6
+    \end{bmatrix}$, so every solution is unstable since the eigenvectors don't add up.
+\end{example}
+
+\subsection{The Phase-Plane}
+\begin{example}
+    The solution $x=\cos t, y=\sin t$ of the system of differential equations $\frac{dx}{dt}=-y$, $\frac{dy}{dt}=x$ describes a helix in $(t,x,y)$ space. Also, the solutions $x=e^{-t}\cos t,\, y=e^{-t}\sin t$ for $-\infty<t<\infty$ of the system $\frac{dx}{dt}=-x-y$, $\frac{dy}{dt}=x-y$ trace out a spiral in the $xy$ plane.
+\end{example}
+\begin{example}
+    The orbits of the system $\frac{dx}{dt}=y^2,\,\frac{dy}{dt}=x^2$ are solution curves of $\frac{dy}{dx}=\frac{x^2}{y^2}$ which are clearly of the form $y(x)=(x^3+C)^{\sfrac{1}{3}}$ for $C\in \R$. Similarly, the orbits of $\frac{dx}{dt}=y(1+x^2+y^2),\, \frac{dy}{dt}=-2x(1+x^2+y^2)$ are solution curves of $\frac{dy}{dx}=-\frac{2x}{y}$ which is the family of ellipses $\frac{1}{2}y^2+x^2=C^2$.
+\end{example}
+
+\subsection{Phase Portraits of Linear Systems}
+Just follow the examples
+
+\subsection{Two Point Boundary-Value Problems}
+\begin{example}
+    For what values of $\lambda$ does \cref{bd} have nontrivial solutions for $a=1,b=0,c=1,d=0$? ($y(0)=0,y(\ell)=0$). We talk about three cases.
+    \begin{enumerate}[label=(\roman*)]
+        \item $\lambda=0$. To find the general solution of $y''=0$, note that $y'=c_1$ and so $y=c_1x+c_2$. Since $y(0)=0$, we have $c_2=0$, and $y(\ell)=0$ implies $c_1\ell=0$, thus $c_1=0$ since $\ell$ is nonzero, and we're working in an integral domain. Therefore $y(x)=0$ is the only solution for \cref{bd} given $\lambda =0$.
+        \item $\lambda<0$. The characteristic for $y''+\lambda y=0$ is $r^2+\lambda$, and $r=\pm \sqrt{-\lambda} $. If $\lambda<0$, then $\sqrt{-\lambda} $ is real, and two LI solutions are $y_1(x)=e^{\sqrt{-\lambda} x},\, y_2(x)=e^{-\sqrt{-\lambda} x}$. Now $y(x)=c_1 e^{\sqrt{-\lambda} x}+c_2e^{-\sqrt{-\lambda} x}$, $y(0)=0$ and $y(\ell)=0$ imply that \[
+        \begin{cases}
+            c_1+c_2=0\\
+            c_1e^{\sqrt{-\lambda}} +c_2e^{-\sqrt{-\lambda}} \ell=0
+        \end{cases}
+        \] This system has a nonzero solution iff $
+        \begin{vmatrix}
+            1 & 1 \\ e^{\sqrt{-\lambda} t} & e^{-\sqrt{-\lambda} t}
+        \end{vmatrix}=e^{\sqrt{-\lambda} t} - e^{-\sqrt{-\lambda} t}=0$, which implies that $e^{\sqrt{-\lambda} t}=e^{-\sqrt{-\lambda} t}\implies e^{2\sqrt{-\lambda} t}=1$, which is impossible since $e^z>1$ for $z>0$. So $c_1=c_2=0$, and thus \cref{bd} has no nontrivial solutions when $\lambda $ is negative.
+    \item $\lambda >0$. If $\lambda>0$, then $\sqrt{-\lambda} $ is complex, and since $\sqrt{-\lambda} =0+\sqrt{\lambda} i$, two LI solutions are given by $y_1(x)=e^{0x}\cos \sqrt{\lambda} x=\cos \sqrt{\lambda x} $ and $y_2(x)=\sin\sqrt{\lambda} x$, thus the general solution is of the form $y(x)=c_1 \cos\sqrt{\lambda} x+c_2\sin \sqrt{\lambda} x$. Now $y(0)=0 $ implies that $c_1=0$, and $y(\ell)=0$ implies that $\sin \sqrt{\lambda} \ell=0$ since otherwise we would have the trivial solution. This is true (for any $c_2$) when $\sqrt{\lambda} \ell=n\pi$ for some $n\in \N$, so $\lambda= \frac{n^2\pi^2}{\ell^2}$. So the boundary value problem given by \cref{bd} has nontrivial solutions \[
+            y(x)= c \sin \sqrt{\lambda} x=c \sin\left( \frac{n\pi x}{\ell} \right) 
+    \] for $\lambda = \frac{n^2\pi^2}{\ell^2},\, n\in \N   .$
+    \end{enumerate}
+\end{example}
+
+\subsection{Introduction to Partial Differential Equations}
+Not needed
+
+\subsection{The Heat Equation; Separation of Variables}
+\begin{example}
+    The random guy from cornell did a much better job with examples of separation of variables, so I'm not even gonna bother. It's in the quizzes.
+\end{example}
+
+\subsection{Fourier Series}
+\begin{example}
+    Let  \[
+        f(x)=\begin{cases}
+        0 \quad & \text{for} \ -1\leq x<0\\
+        1 & \text{for} \ 0\leq x\leq 1.
+    \end{cases}
+\] To compute the Fourier expansion of $f$ on $[-1,1]$, note that \[
+a_0=\frac{1}{1}\int_{-1}^{1} f(x)\cos \left( \frac{0\pi x}{1} \right)  \, dx=\int_{-1}^{1} f(x) \, dx =1.
+\] For $n\geq 1$, we have \[
+a_n =\frac{1}{1} \int_{-1}^{1} f(x) \cos \left( \frac{n\pi x}{1} \right)  \, dx=\int_{-1}^{0} f(x)\cos (n\pi x) \, dx+ \int_{0}^{1} f(x)\cos (n\pi x) \, dx=0+ \left. \frac{1}{n\pi}\sin(n\pi x) \right| _{0}^1=0,
+\] and similarly \[
+b_n = \int_{-1}^{0} 0\cdot \sin (n\pi x) \, dx+ \int_{0}^{1} 1\cdot f(x)\sin (n\pi x) \, dx=\left. -\frac{1}{n\pi}\cos(n\pi x) \right| _0^1=
+    \begin{cases}
+        0 \quad &\text{if} \ n \ \text{is even,} \\
+        \frac{2}{n\pi}& \text{if} \ n \ \text{is odd.}
+    \end{cases}
+\]  So the Fourier expansion is \[
+\frac{1}{2}+\frac{2}{\pi}\sin(\pi x)+\frac{2}{3\pi}\sin (3\pi x)+\cdots = \frac{1}{2}+ \frac{2}{\pi}\sum_{n=1}^{\infty} \frac{\sin (2n-1)\pi x}{2n-1}.
+\] By the big thm this converges to 0 if $-1<x<0$ and $1$ if $0<x<1$. At $x=0,\pm 1$ this series reduces to $\sfrac{1}{2}$, just plug it in, this was also foretold by the thm. To elaborate, $\frac{1}{2}\left[ f(x+0)+f(x-0) \right] =\frac{1}{2}[1+0]=\frac{1}{2}$, and $\frac{1}{2}\left[ f(1)+f(-1) \right] =\frac{1}{2}[1+0]=\frac{1}{2}$ at the endpoints.
+\end{example}
+\begin{example}
+    Let \[
+        f(x)=
+        \begin{cases}
+            1\quad & \text{for} \ -2\leq x <0\\
+            x & \text{for} \ 0\leq x\leq 2.
+        \end{cases}
+    \] We compute the Fourier expansion of $f$ on $[-2,2]$. Note that $a_0=2$, and 
+    \begin{align*}
+        a_n  &= \frac{1}{2}\int_{-2}^{0} \cos \left( \frac{n\pi x}{2} \right) \, dx+\frac{1}{2}\int_{0}^{2} x \cos \left( \frac{n\pi x}{2} \right)  \, dx =\frac{2}{n^2\pi^2}(\cos (n\pi)-1) \quad \text{for} \ n\geq 1,\\
+        b_n  &= \frac{1}{2} \int_{-2}^{0} \sin \left( \frac{n\pi x}{2} \right)  \, dx + \frac{1}{2}\int_{0}^{2} x \sin \left( \frac{n\pi x}{2} \right)  \, dx=-\frac{1}{n\pi}(1+\cos (n\pi ))\quad \text{for} \ n\geq 1.
+    \end{align*}Note that $a_n =0$ if $n$ is even, and $-\frac{4}{n^2\pi^2}$ if $n$ is odd ($\cos (n\pi)=(-1)^n $), $b_n =-\frac{2}{n\pi}$ if $n$ is even, and $0$ if $n$ is odd. So the Fourier series is given by \[
+    1+a_1 \cos \left( \frac{\pi x}{2} \right) + b_2 \sin \left( \frac{2 \pi x}{2} \right) + a_3 \cos \left( \frac{3\pi x}{2} \right) +\cdots =1- \frac{4}{\pi^2}\sum_{n=1}^{\infty} \frac{\cos \left( \frac{(2n-1)\pi x}{2} \right) }{(2n-1)^2}-\frac{1}{\pi }\sum_{n=1}^{\infty} \frac{\sin (n\pi x)}{n}.
+    \] Since this series converges to $f(x)$ if $f$ is continuous at $x$, it converges to $1$ if $x\in (-2,0)$, and $x$ if $x\in (0,2)$. At $x=0$ this becomes $\sfrac{1}{2}$, and $\sfrac{3}{2}$ at the endpoints. If we plug in $x=0$, we get the remarkable identity $\sum_{n=0}^{\infty} \frac{1}{(2n+1)^2}=\frac{\pi^2}{8}.$
+\end{example}
+\begin{example}
+    Let's find the Fourier series for $f(x)=\cos ^2x$ on $[-\pi, \pi]$. We have a unique Fourier expansion of the form $\frac{a_0}{2}+\sum_{n=1}^{\infty} [a_n \cos (n x)+ b_n \sin(nx)]$ on the interval, but we already know by reduction that \[
+        \cos ^2 x= \frac{1+ \cos (2x)}{2}=\frac{1}{2}+ 0\cdot \cos x+ 0 \cdot \sin x + \frac{1}{2}\cos (2x) + 0 \cdot  \sin(2x)+\cdots 
+    \] So this must be it. This shows the power of existence uniqueness.
+\end{example}
+
+\subsection{Even and Odd Functions}
+\begin{example}
+    This example serves to demonstrate \cref{2}. We want to expand $f(x)=1$ on the interval $[0,\pi]$. Expanding $f$ in a pure sine series on $(0,\pi)$, we have $f(x)=\sum_{n=1}^{\infty} b_n \left( nx \right) ,$ where \[
+        b_n =\frac{2}{\pi}\int_{0}^{\pi } f(x) \sin \left( nx \right)  \, dx=
+        \begin{cases}
+            0 \quad &\text{if} \ n \ \text{is even,} \\
+            \frac{4}{n\pi}& \text{if} \ n \ \text{is odd.}
+        \end{cases}
+    \] So \[
+    f(x)=\sum_{k=1}^{\infty} b_{\text{odd} }\sin(2k-1)+\sum_{k=1}^{\infty} b_{\text{even} }\sin(2k)x=\sum_{k=1}^{\infty} \frac{4}{(2k-1)\pi}\sin(2k-1)x=\frac{4}{\pi}\left( \sin  x+ \frac{\sin (3x)}{3}+\cdots  \right) 
+\] Then $\sin x + \frac{\sin(3x)}{3}+\cdots =\frac{\pi}{4}$ for any $x\in (0,\pi)$. Choose $x=\frac{\pi}{2}$, then we get the wonderful fact that \[
+1-\frac{1}{3}+\frac{1}{5}-\frac{1}{7}+\cdots =\sum_{n=0}^{\infty} (-1)^n \frac{1}{2n+1}=\frac{\pi}{4}
+\] Now expanding $f$ in a pure cosine series gets $a_0=2$, $a_n =0$ for $n\in \N$. So $\frac{2}{2}+\sum_{n=1}^{\infty} 0 \cos \left( \frac{n\pi x}{\ell} \right) =1.$ \cref{2} gives the same result, since \[
+a_0=\frac{2}{\pi}\int_{0}^{\pi}  1\, dx=2,\quad a_n =\frac{2}{\pi}\int_{0}^{\pi} 1 \cos \left( nx \right)  \, dx=\frac{2}{n\pi}(0-0)=0.
+\] 
+\end{example}
+\begin{example}
+    Let's expand $f(x)=e^x$ into a pure cosine series on $[0,1]$. We have $f(x)=\frac{a_0}{2}+\sum_{n=1}^{\infty} a_n \cos\left( n\pi x\right) =$, where \[
+        a_0=\frac{2}{1}\int_{0}^{1} e^{x} \, dx=2(e-1),\quad a_n =2 \int_{0}^{1} e^x \cos(n\pi x) \, dx=\frac{2(e \cos(n\pi)-1)}{1+n^2\pi^2}.
+    \] We can solve the second integral by parts or writing $\cos(n\pi x)=\operatorname{Re}e^{in\pi x}$ and taking real parts of the solution.
+\end{example}
+\begin{example}
+    Expand the following function into a pure cosine series on $[0,2]$. \[
+        f(x)=
+        \begin{cases}
+            0\quad &\text{for} \ 0\leq x\leq 1\\
+            1 & \text{for} \ 1<x\leq 2.
+        \end{cases}
+    \] By \cref{2} we have $f(x)=\frac{a_0}{2}+\sum_{n=1}^{\infty} a_n  \cos \left( \frac{n\pi x}{1} \right) ,$ where $a_0=\frac{2}{2}\int_{0}^{2} f(x) \, dx=1$, and \[
+    a_n =\int_{0}^{2} f(x) \cos \left( \frac{n\pi x}{2} \right)  \, dx=\int_{1}^{2} \cos \left( \frac{n\pi x}{2} \right)  \, dx=\frac{2}{n\pi}\left( 0-\sin \left( \frac{n\pi}{2} \right)  \right) =
+    \begin{cases}
+        0\quad & \text{if} \ n \ \text{is even} \\
+        -\frac{2}{n\pi}& \text{if} \ \frac{n-1}{2} \ \text{is even} \\
+        \frac{2}{n\pi}& \text{if} \ \frac{n-1}{2}\ \text{is odd.}  
+    \end{cases}
+    \] So \[
+    f(x)=\frac{1}{2}+\frac{2}{\pi}\sum_{k=1}^{\infty} \frac{(-1)^k}{2k-1}\cos \left( \frac{(2k-1)\pi x}{2} \right) ,
+\] given $x\in [0,2]\setminus \{1\} $. At $x=1$, this reduces to $\sfrac{1}{2}$, the expected value since \[
+\frac{1}{2}\left[ \lim_{x\to 1^+}f(x) + \lim_{x\to 1^-}f(x) \right] =\frac{1}{2}[1+0]=\frac{1}{2}.
+\] 
+\end{example}
+
+\subsection{Return to the Heat Equation}
+\begin{prob}
+    A thin aluminum bar ($\alpha ^2=$ 0.86 cm$^2$ /s ) 10 cm long is heated to a uniform temperature of 100$^{\circ }$C. At time $t=0$, the ends of the bar are plunged into an ice bath at $0^{\circ }$C, and thereafter they are maintained at this temperature. No heat is allowed to escape through the lateral surface of the bar. Find an expression for the temperature at any point in the bar at any later time $t$.
+\end{prob}
+\begin{solution}
+    Let $u(x,t)$ denote the temperature in the bar at the point $x$ at time $t$. This satisfies the boundary value problem \[
+        \frac{\partial u}{\partial  t}=0.86 \frac{\partial ^2u}{\partial x^2};\quad u(x,0)=100, \ 0<x<10; \quad u(0,t)=u(10,t)=0.
+    \] The solution is therefore $u(x,t)=\sum_{n=1}^{\infty} c_n  \sin \left( \frac{n\pi x}{10} \right) e^{-0.86 n^2 \pi^2 t /100 }$, where \[
+    c_n =\frac{1}{5}\int_{0}^{10} 100 \sin \left( \frac{n\pi x}{10} \right)  \, dx=\frac{200}{n\pi}(1-\cos (n\pi))=
+    \begin{cases}
+        0\quad & \text{if} \ n \ \text{is even,} \\
+        \frac{400}{n\pi}&\text{if} \ n \ \text{is odd.}
+    \end{cases}\] 
+    So \[
+        u(x,t)=\sum_{k=1}^{\infty} c_{\text{odd} }\sin \left( \frac{(2k-1)\pi x}{10} \right) e^{-0.86(2k-1)^2\pi^2 t /100}+\sum_{k=1}^{\infty} c_{\text{even}}\text{blah} =\frac{400}{\pi}\sum_{k=1}^{\infty} \frac{\sin \left( \frac{(2k-1)\pi x}{10} \right) }{2k-1}e^{-0.0086((2k-1)\pi)^2 t}.
+    \] 
+\end{solution}
 
