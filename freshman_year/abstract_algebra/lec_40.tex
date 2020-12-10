@@ -1,0 +1,37 @@
+\section{December 4, 2020}
+Wow, I haven't seen a proof span three lectures before.
+\subsection{Further continuation of the proof of \cref{free}}
+To show $N$ is free of rank $n\leq m$, we will use induction on $n:= \operatorname{rank}\, N$. $n=0$ iff $N$ is torsion, so $N\subseteq \operatorname{tors}\, M=0$ since $M$ is free, therefore $N=0$ and thus $N$ is free. So this is the base case. 
+
+Now $\operatorname{rank}\,N=n$ implies that $\operatorname{rank }\left( N \cap \ker \varphi_1  \right) \leq n-1$. By the induction hypothesis, we get that $N \cap \ker \varphi_1 $ is a free module, and $N\simeq Ra_1y_1\oplus N \cap \ker \varphi_1 $ is free as a direct sum of free modules. So $\operatorname{rank}\, N=1+k\leq 1+(m-1)=m$, so $\operatorname{rank}\, N \leq m$.
+
+\begin{claim}
+    There exists a basis $\{y_1,\cdots ,y_m\} $ of $M$ such that $\{a_1y_1,\cdots ,a_n y_n \} $ a basis of $N$ with $a_1 \mid a_2\cdots  \mid a_n $. 
+\end{claim}
+For the proof of this second claim, use induction on the rank of $M$. $M\simeq Ry_1\oplus \ker \varphi $, $\ker \varphi \subseteq M$. By Part 1, $\ker \varphi $ is free means that $\operatorname{rank}\ker \varphi \leq m-1$. The base case is where $\operatorname{rank}\, M=1$, so $M \simeq Ry_1$, $N\simeq Ra_1y_1$, and we are done. $N \cap \ker \varphi $ is contained in $\ker \varphi_1 $ of rank $m-1$, use the induction hypothesis. So there exists a basis $\{y_2,\cdots ,y_m\}$ of $\ker \varphi  $ such that $\{a_2y_2,\cdots ,a_n y_n \} $ is a basis of $N \cap \ker \varphi_1 $ and $a_2 \mid |\cdots   \mid a_n $. Hence $\{y_1,\cdots ,y_m\} $ is a basis of $M$ and $\{a_1y_2,\cdots ,a_n y_n\} $ is a basis of $N$. Subclaim: $a_1 \mid a_2$. To see this, $\pi_2 \colon M \to R$ is an $R$-module homomorphism $\sum_{}^{} r_i y_i \mapsto r_2, \pi_2(N)=\pi_2(N \cap \ker \varphi_1)=a_2R $, so $\pi_2(N) \in \sum$ and therefore $a_1 \mid a_2$. So we have $a_1 \mid a_2 \mid \cdots  \mid a_n $, and we are done.
+\end{proof}
+Whew!
+\begin{theorem}
+    Let $R$ be a PID, $M$ be a finitely generated $R$-module. Then \[
+        M\simeq R^r \oplus R /(a_1) \oplus \cdots \oplus R /(a_t),
+    \]  where $r\in \Z^+$ and $a_i \in R$ such that $a_1 \mid \cdots  \mid a_t$. (Note that $r$ denotes rank and $a_i $ denotes torsion).
+\end{theorem}
+\begin{proof}
+    Let $M=\langle x_1,\cdots ,x_n  \rangle $ with $x_i \in M$. Consider $\pi \colon R^n  \to M$, $(r_i ,\cdots ,r_n )\mapsto \sum_{i=1}^{n} r_i x_i $ a surjective $R$-module homomorphism. Note that $R^n $ is a free module of rank $R^n =n$, $\ker \pi\subseteq R^n $. By \cref{free}, $\ker \pi$ is free of rank $k\leq n$ and there exists a basis $\{y_1,\cdots ,y_n \} $ of $R^n $ such that $\{c_1y_2,\cdots ,c_ky_k\} $ is a basis of $\ker \pi$ with $c_1 \mid \cdots  \mid c_k$. So \[
+        M\simeq R^n  /\ker \pi \simeq \left(\bigoplus _{i=1}^n Ry_i  \right) / \left( \bigoplus _{i=1}^k  Rc_i y_i  \right) \simeq \bigoplus _{i=1}^k R /(c_i ) \oplus R^{n-k} \simeq R^r \oplus \bigoplus _{i=1}^t R /(a_i )
+    \] where $r=n-k$, and $c_1,\cdots, c_e$ are units in $R$, $a_i=c_{e+i}$ not a unit. Note that $a_1 \mid \cdots  \mid a_t$.
+\end{proof}
+\begin{cor}
+    Let $R$ be a PID, $M$ is a finitely generated $R$-module. Then
+    \begin{enumerate}[label=\arabic*)]
+        \item $M_{\text{tor} }\simeq \bigoplus _{i=1}^t R /(a_i )$ with $a_1  \mid \cdots  \mid a_t $.
+        \item $M$ is free iff $M_{\text{tor}} =0$.
+        \item $M\simeq R\oplus M_{\text{tors} } $ where $r=\operatorname{rank}\, M$.
+    \end{enumerate}
+\end{cor}
+\begin{theorem}
+    Let $R$ be a PID, $M$ be a finitely generated $R$-module. Then \[
+    M \simeq R^r \oplus \bigoplus _{i=1}^n  R / p_i ^{e_i }
+    \] where $r= \operatorname{rank}\, M\in \Z^+$, $e_i  \in \N$, $p_i $ not necessarily distict primes of $R$.
+\end{theorem}
+
