@@ -6,27 +6,55 @@ Let $X$ be a space, we say two paths $f,g \colon I \to X$ from $x$ to $y$ are \t
     h(s,0)=f(s),\ h(s,1)=g(s),\ h(0,t)=x,\ h(1,t)=y
 \] for all $s,t\in I$. In other words, starting at $0$ for the second interval ensures you begin at $f$, and evaluating at the end takes you to $g$. Since the starting position of $f$ and $g$ are the same, for the first interval starting at $0$ must give $x$, and similarly for $y$. Denote the homotopy equivalence class of $f$ as $[f]$: we say that $f$ is a \textbf{loop} if $f(0)=f(1)$.
 \begin{definition}[Fundamental group]
-    The \textbf{fundamental group} of a space $X$ with a basepoint $x$ denoted $\pi_1(X,x)$ is the set of loops up to homotopy starting and ending at $x$.
+    The \textbf{fundamental group} of a space $X$ with a basepoint $x$ denoted $\pi_1(X,x)$ is the set of loops up to homotopy starting and ending at $x$. For paths $f,g$ we have \[
+        (g\circ f)(t)=
+        \begin{cases}
+            f(2t)\quad & \text{if} \ 0\leq t \leq \sfrac{1}{2},\\
+            g(2t-1) &\text{if} \ \sfrac{1}{2} \leq t \leq 1.
+        \end{cases}
+    \] Similarly, we define $f^{-1}(t)=f(1-s)$, $f$ transversed the other way around, and the identity is the constant loop, $c_x(t)=x$. Multiplication of equivalence classes is given by $[g][f]=[g\circ f]$, which is well-defined, under this operation $\pi_1(X.x)$ becomes associative and unital.
 \end{definition}
+We can define a change-of-basepoint homomorphism between pointed groups $\gamma[a] \colon \pi_1(X,x)\to \pi_1(X,y)$ for $x,y\in X$ by $\gamma[a][f]=[a\cdot f\cdot a^{-1}],$ where $a$ is a path from $x$ to $y$ (note that $X$ has to be path-connected!). To see that $\gamma[a]$ is a homomorphism, consider $\gamma[a][fg]=[afga^{-1}]=[afa^{-1}aga^{-1}]=[afa^{-1}][aga^{-1}]=\gamma[a][f]\circ \gamma[a][g]$. Note that $\gamma[b\cdot a]=\gamma[b]\circ \gamma[a]$, then $\gamma[a]$ becomes an isomorphism by $\gamma[a]\circ \gamma[a^{-1}]=\gamma[a^{-1}]\circ \gamma[a]=\operatorname{id}_{\pi_1(X)} .$
 
+We can also define the induced map on the fundamental group of a map between spaces $p \colon X \to Y$ as $p_* \colon \pi_1(X,x) \to \pi_1(Y,p(x))$ by $p_*[f]=[p\circ f]$, where $f$ is a loop $I\to X$. This is a homomorphism, and $\operatorname{id}\colon X \to X$ induces the identity homomorphism. Note that for $q \colon Y \to Z$, $q_* \circ p_* = (q\circ p)_*$. We would like to say that for $p \simeq q$ homotopic by a homotopy $h$ that $p_*=q_*$, but this isn't quite true because homotopies don't respect basepoints. But $h$ determines a path $a \colon p(x) \to q(x)$ by $a(t)=h(x,t)$, which helps. Then, we can draw a diagram and show the fundamental group is preserved under homotopy type.
+\subsection{Fundamental group of the circle}
+If this is a first introduction to fundamental groups, then our first fundamental group of real interest is $\pi_1(S^{1} )=\Z$. Before we do this, let's do a quick calculation to show $\pi_1(\R)=0$. Take the origin as a convenient basepoint. Define $k \colon \R\times I \to \R$ by $k(s,t)=(1-t)s$. Then $k$ is a homotopy from the identity to the constant map at $0$. For a loop $f \colon I \to \R$ at $0$, define a homotopy from this map to a point (via $k$) by $h(s,t)=k(f(s),t).$ Then $f$ is equivalent to a constant $c_0$ by the homotopy $h$.
 
-\subsection{Fundamental group of the circle(todo)}
-If this is a first introduction to fundamental groups, then our first fundamental group of real interest is $\pi_1(S^{1} )=\Z$. Before we do this, let's do a quick calculation to show $\pi_1(\R)=0$. Take the origin as a convenient basepoint. Define $k \colon \R\times I \to \R$ by $k(s,t)=(1-t)s$. Then $k$ is a homotopy from the identity to the constant map at $0$. For a loop $f \colon I \to \R$ at $0$, define $h(s,t)=k(f(s),t).$ Then $f$ is equivalent to a constant $c_0$ by the homotopy $h$.
-\orbreak
-Now let's talk about circles: we can view $S^{1} $ as the circle group (let's denote it $U^1$), that is, \[
-U^1 = \{z\in \C\mid |z|=1\}.
-\] Multiplication is continuous, so this is a topological group. Take the identity $1$ as a convenient basepoint for  $S^{1} $.
+Now let's talk about circles: we can view $S^{1} $ as the circle group (let's denote it $U^1$), that is, $U^1 = \{z\in \C\mid |z|=1\}.$ Multiplication is continuous, so this is a topological group. Take the identity $1$ as a convenient basepoint for  $S^{1} $.
 \begin{theorem}
     We have the fundamental group of a circle isomorphic to the integers, that is, \[
         \pi_1(S^{1} ,1)\cong\Z.
     \] 
 \end{theorem}
 \begin{proof}
-    For all $n\in \Z$, define a loop $f_n$ in $S^{1} $ by $f_n(s)=e^{2\pi i ns}$. This is the same as composing the map $I\to S^{1},\, s\mapsto e^{2\pi is}$ and the $n$th power map on $S^{1} $. If we identiy the boundary points $0$ and $1$ of $I$, then the first map $(I \to S^{1} )$ induces the evident identification of $I / \partial I$ with $S^{1} $. By complex exponentiation, we have $[f_m][f_n]=[f_{m+n}]$: define a homomorphism $i \colon \Z \to \pi_1(S^{1} ,1)$ by $i(n)=[f_n]$. We claim $i$ is an isomorphism. The main idea is to use the fact that (locally) $S^{1} $ looks like $\R$, ie, $S^{1} $ is a $1$-manifold.
+    Define (the covering map) $p \colon \R \to S^1 $ by $p(s)=p(s)=e^{2\pi is}$, wrapping each interval $[n,n+1]$ around the circle. Now $f_n =p\circ \widetilde f_n $, where $\widetilde f_n(s)=sn $ is the uniquely lifted path in $\R$. This is true because exponentiation is a homomorphism between multiplication and addition, and the path lifting holds true for arbitrary paths. That is, for any path $f \colon I \to S^1 $ with $f(0)=I$, we have a uniquely lifted path $\widetilde f\colon I \to \R$ such that $\widetilde f(0)=0$ and $p\circ \widetilde f=f$. Observe that the preimage of any connected neighborhood in $S^1 $ in $\R$ is a disjoint union of a copy of such nbd in the intervals $(r,r+1),(r+1,r+2),\cdots $ for some $r\in \R$. Since $I$ is compact, we can subdivide $I$ into a finite amount of closed subintervals, so $f$ takes each subinterval into such nbd. Working backward, we thus determine the unique lifting of $f$ by using the fact that each lifting of the subintervals is determined inquely by the lifting of its initial point, then repeat.
 
-    ***FINISH LATER***
+    Consider $j \colon \pi_1(S^1 ,1) \to \Z$ by $j[f]=\widetilde f(1)$, where then endpoint lifts to. Since $p( \widetilde f(1))=1$, this number is an integer. To show such integer is independent of the choice of $f$ in the homotopy class $[f]$, say we have a homotopy $h \colon f \simeq g$ through loops at $1$, then this lifts uniquely to a homotopy $\widetilde h \colon I\times I \to \R$ such that $\widetilde h(0,0)=0$ and $p\circ \widetilde h=h$. This is the homotopy lifting property. Since paths lift uniquely, the paths $c(t)=\widetilde h(0,t)$ and $d(t)=\widetilde h(1,t)$ determine constant paths since $h(0,t)=h(1,t)=1$ for all $t$. Now $c$ is constant at $0$, so by the unique lifting property we have \[
+        \widetilde f(s)=\widetilde h(s,0) \quad \text{and} \quad \widetilde g(s)=\widetilde h(s,1).
+    \] Then our second constant path starts at $\widetilde f(1)$ and ends at $\widetilde g(1)$, thus $j(\widetilde f(1))$ is independent of the choice of path in $[f]$.
+
+    Since $j[f_n ]=n$, $j\circ i \colon \Z \to \Z$ is the identity, since $i$ takes integers to the path with such winding number, and $j$ sends a path with such winding number back down to the integers. All we have left to check is that $j$ is injective, since the composition of injections results in an injection, which the identity must be (it is a bijection)\footnote{Actually, apparently the converse of this is an example of something I missed in discrete math called the \textbf{Cantor-Bernstein-Schr\"oeder Theorem}, which states that if we have injections $A\to B$ and $B\to A$, then $A$ and $B$ must be in bijection.}. Suppose $j[f]=j[g]$, then $\widetilde f(1)=\widetilde g(1)$. Then $\widetilde g^{-1}\cdot \widetilde f$ is a loop at $0$ in $\R$. Since $\R$ is contractible, $[\widetilde g^{-1}\cdot \widetilde f]=[c_0]$, thus projecting down yields \[
+        [g^{-1}][f]=[g^{-1}\cdot f]=[c_1].
+    \] Then $[f]=[g]$, finishing the proof.
 \end{proof}
+To summarize: we defined a function from the integers into the fundamental group $\pi_1(S^1 )$ by considering the class of loops with winding number $n$, and defined a complementary function by considering the winding number of any class of loops in $S^1 $. How we showed this function was an injection is by considering the upstairs covering space $\R$, in which loops lift uniquely and preserve homotopy type. The fact that $\R$ covers $S^1 $ was also used in the definition of the complementary function assigning winding numbers, precisely as the endpoint of the lifted loop. We carefully made sure that homotopy type mattered not when assigning winding numbers to functions. Then considering that the endpoint of two lifted  loops, such paths being equal meant that they ended in the same place upstairs, and composing one with the others inverse results in a loop in $\R$ centered at zero. But since $\R$ is contractible, this loop becomes zero, and projecting downstairs also makes the composition zero, implying that the two loops are equal. After some function mumbo jumbo, we can conclude that the first map is a bijection, finishing the proof.
 
+\orbreak
+We can start with our first real-world application, that is, Brouwers fixed point theorem.
+\begin{prop}
+    There is no continuous map $r \colon D^2 \to S^1 $ such that $r \circ i=\operatorname{id}_{S^1 }$, where $i$ denotes the inclusion $S^1 \hookrightarrow D^2$.
+\end{prop}
+\begin{proof}
+    If such an $r$ existed, then \[
+        \pi_1(S^1 ,1) \overset{i_*}{\lhook\joinrel\longrightarrow} \pi_1(D^2,1) \overset{r_*}{\longrightarrow} \pi_1(S^1 ,1)
+    \] would compose to the identity, since the identity induces the identity homomorphism on the fundamental groups. Since the identity homomorphism of $\Z$ doesn't factor through the zero group, this cannot happen.
+\end{proof}
+\begin{namedthm}{Brouwer's Fixed-point Theorem}
+    Any continuous map $f\colon D^2 \to D^2$ has a fixed point.
+\end{namedthm}
+\begin{proof}
+    Suppose $f$ has no fixed point, that is, $f(x)\neq x$ for all $ x$. Define $r(x)\in S^1 $ to be the intersection of the ray starting at $f(x)$ and ending at $x$ with the boundary $S^1 $. This is well defined since $f(x)\neq x$ for all $x.$ Note that $r(x)=x$ if $x\in S^1 $. Since $r$ is continuous, this contradicts our proposition, since this is a retraction of the disk onto the boundary that, when composed with inclusion, becomes the identity on the circle, since $r(x)=x$ for $x\in S^1 $. This finishes the proof.
+\end{proof}
 
 \subsection{The van Kampen Theorem (Hatcher)}
 Let's take a space $X$ and say it's the union of path-connected open subsets $A_{\alpha}$, each of which contains the basepoint $x_0\in X$. Then the homomorphisms $j_{\alpha} \colon \pi_1(A_{\alpha}) \to \pi_1(X)$ induced by the inclusions $A_{\alpha}\hookrightarrow X$ extend to a homomorphism $\Phi \colon *_{\alpha}\pi_1(A_{\alpha}) \to \pi_1(X)$. The van Kampen theorem will say that $\Phi$ is often onto but in general, we can expect $\Phi$ to have a nontrivial kernel. 
@@ -85,7 +113,7 @@ U\cap V \arrow[ru, "i"] \arrow[rd, "j"'] &                    & X \\
             Finally, define a map $F \colon \pi_1(U\cap V,q) \to \pi_1(U,q)*\pi_1(V,q)$ by setting $F(\gamma)=(i_*\gamma)^{-1}(j_*\gamma)$\footnote{$F$ is not a homomorphism.}. Let $\overline{F(\pi_1(U\cap V,q))}$ denote the \emph{normal closure}\footnote{the \emph{normal closure} of a set means the smallest normal subgroup that contains such set.} of the image of $F$ in $\pi_1(U,q)*\pi_1(V,q)$.
 
 \begin{theorem}[Seifert-Van Kampen]
-    Let $X$ be a topological space. Suppose $U,V\subseteq X$ are open, $U\cap V=X$, and $U,V$, and $U\cap V$ are path-connected. Then for any $q\in U\cap V$, the homomorphism $\Phi$ is surjective, and its kernel is $\overline{F(\pi_1(U\cap V,q))}$. Therefore we have \[
+    Let $X$ be a topological space. Suppose $U,V\subseteq X$ are open, $U\cup V=X$, and $U,V$, and $U\cap V$ are path-connected. Then for any $q\in U\cap V$, the homomorphism $\Phi$ is surjective, and its kernel is $\overline{F(\pi_1(U\cap V,q))}$. Therefore we have \[
         \pi_1(X,q)\cong \pi_1(U,q)*\pi_1(V,q) \big/ \overline{F(\pi_1(U\cap V,q))}.
     \] 
 \end{theorem}

@@ -1,0 +1,220 @@
+\section{Final Exam}
+\subsection{Question 1: Sliding the trefoil knot}
+\begin{prob}
+    One thinks of a torus knot as lying in the surface of the torus. (See example 1.24 in chapter 1.)  Let $K$ be the trefoil knot, meaning the $(2,3)$ torus knot, pictured in that example. Now imagine sliding $K$ slightly in the torus.  For concreteness, in Hatcher's picture, take a rotation by a small amount around the axis orthogonal to the page.  The result is a copy of $K$ ``parallel'' to~$K$. Now let $L$ be the union of $n$ such disjoint copies of $K$, obtained by $n$ distinct small rotations.  Work out a presentation of $\pi_1(S^3-L)$.
+
+\end{prob}
+\begin{solution}
+    We know that $\pi_1(S^3\setminus K)=\langle \alpha ,\beta  \mid \alpha ^2=\beta ^3 \rangle     $ by Hatcher example 1.24. Our goal is to compute $\pi_1(S^3\setminus L)$, where $L$ is the union of rotations of $K$. We do this by van Kampens. Note that $\pi_1(S^3\setminus L)\cong \pi_1(\R^3\setminus L)$ by the second paragraph in example 1.24, so we decide to work in $\R^3 $ instead\footnote{I made this decision because drawing pictures with $S^3$ didn't make too much sense to me.}. To show how exactly we do the van Kampen decomposition, it makes sense to first look at the case where $n=1$, the complement $\pi_1(\R^3 \setminus K)$. Consider the trefoil lying on the surface of a torus, as in Hatcher. What we are about to detail is a less sophisticated argument that $\pi_1(\R^3\setminus K)=\langle \alpha ,\beta  \mid \alpha ^2=\beta ^3 \rangle $ compared to the one given in Hatcher, but the essence of the argument is the same. If $K$ lies on the surface of a solid torus, we can decompose $\R^3\setminus K$ into open sets $U$ and $V$ as such: Take $V$ to be the set $\mathbb{T}\setminus K$ ($\mathbb{T}$ denotes the solid torus), and $U=(\mathbb{T}\cup K)^{c}=\R^3 \setminus (\mathbb{T}\cup K)$. The cross sections of $U$ and $V$ on the surfaces of the torus are depicted in the left half of \cref{comp}.     
+    \begin{figure}[H]
+    \centering
+    \incfig[0.55]{comp}
+    \caption{A cross section of the van Kampen decomposition.}
+    \label{comp}
+    \end{figure}
+    It should be clear that $U \cup V=\R^3\setminus K$, but we can give a set theoretic argument just in case: if $a\in \R^3\setminus K$, then $a\in \mathbb{T}$ or $\mathbb{T}^{c}$ and $a\notin K$. If $a\in \mathbb{T}^{c}$, then $a\in U=\mathbb{T}^{c}\cap K^{c}$, and if $a\in \mathbb{T},$ then $a\in V=\mathbb{T}\setminus K$. Similarly, if $a\in U \cup V$, then $a\in U$ or $a\in V$: If $a\in U$, $a\notin K$ and $a\notin \mathbb{T}$, which implies $a\in \R^3 \setminus K$. If $a\in V$, then $a\in (\mathbb{T}\setminus K) \subseteq (\R^3\setminus K)$ since $\mathbb{T}\subseteq \R^3$. Therefore $U \cup V=\R^3\setminus K$. These spaces are path connected, so we can almost apply van Kampens: Note that as is, the intersection $U \cup V$ is empty, so we expand $U$ and $V$ without changing their homotopy type (taking an open neighorhood that deformation retracts onto them), as can be seen in the right half of \cref{comp}. 
+    To see what $U \cap V$ looks like, refer to \cref{torus} below\footnote{To cite my sources, I got the svg file of the torus from online, and added the arrows myself (hence the decrease in quality).}.
+    \begin{figure}[H]
+    \centering
+    \incfig[0.325]{torus}
+    \caption{The torus.}
+    \label{torus}
+    \end{figure}
+    Imagine the yellow line represents the knot $K$, which is cut out from the surface of the torus. To determine the structure of the surface $U \cap V$, imagine a horizontal segment of $U \cap V$ in between two ``lines'' of $K$. We can contract this to the black line in \cref{torus}, so following this line determines the structure of $U \cap V$. Since the black line winds around the torus and meets itself just like $K$, $U \cap V$ has the structure of an annulus, and therefore is path connected. 
+
+    Now we can apply van Kampens. We have $\pi_1(U)=\Z$, to see this, note that we can expand the solid ``center'' of the complement of the solid torus, such that $U$ has the same homotopy type of $\R^3$ minus a circle. Then by Hatcher \S 1.2 Example 1.23, $\pi_1(U) \cong \pi_1(\R^3\setminus S^1)=\Z $, in this case a longitudinal circle $\alpha $ on the solid torus is a generator for $\pi_1(U)$. $\pi_1(V)$ is much easier to see, a solid torus deformation retracts onto $S^1 $, so $\pi_1(V)=\Z$ with a meridional circle $\beta $ a generator. Finally, the annulus also deformation retracts onto a circle, so $\pi_1(U \cap V)=\Z$, let's denote a generator for this group by $\gamma $ (visually represented by the black line in \cref{torus}). The loop $\gamma $ winds around the torus twice in the longitudinal direction and three times in the meridional direction, so $\gamma $ can be expressed with the relations $\gamma =\alpha ^2,\, \gamma =\beta ^3$. Then by van Kampens, we set the two relations equal to each other and a presentation for $\pi_1(\R^3 \setminus K)$ is given by \[
+        \pi_1(\R^3\setminus K)=\langle \alpha ,\beta  \mid  \alpha ^2=\beta ^3\rangle .
+    \] The reason why we put so much effort into calculating something we already know is because explaining things carefully for the base case makes the rest of the argument go much smoother. For the case $n=2$, we want to compute the fundamental group of the complement of two disjoint trefoil knots $K_1,K_2$ (denote their disjoint union $K_1\amalg K_2$ as $L_2$). In this case, take $V$ to be the solid torus \emph{containing} the complement of $K_1$, that is, imagine a solid torus with a hollow rope representing $K_1$ lying on top. The fact that $V$ has the same homotopy type of $\R^3 \setminus K_1$ follows: Both deformation retract onto the cell complex $M_{2,3}$ by the argument given in Hatcher. For $\R^3\setminus K_1$, this is completely detailed in Hatcher, just consider $S^3$ with the second ``solid torus'' missing its compactification point. For the solid torus, we can find copies of the mapping cylinders of both $z \mapsto z^2$ and $z \mapsto z^3$ in the deformation retract of a solid torus that twists in the same shape of a hollow knot $K$. $U$ is then the complement of $(V \cup K_2)$, as shown in \cref{tk2} below.
+    \begin{figure}[H]
+    \centering
+    \incfig[0.6]{tk2}
+    \caption{The cross section of the second van Kampen decomposition.}
+    \label{tk2}
+    \end{figure}
+    From here, the process is identical to how we calculated the knot group of the standard trefoil. If we look at \cref{torus} again, this is the exact same picture as in this case, since $K_1$ is ``underneath the surface'' of the solid torus, so $U \cap V$ ``flows over it'', as can be seen in the right half of \cref{tk2}. Then the indentation traced out by $K_2$ is represented by the yellow arrow again, and following a loop on the surface of $U \cap V$ determines that $U \cap V$ has the structure of an annulus. Say a presentation for $\pi_1(V)$ is $\langle \alpha_1,\beta  \mid \alpha_1^2=\beta ^3  \rangle $, and since the fundamental groups of $U$ and $U \cap V$ are both infinite cyclic, say we have generators $\alpha_2 $ and $\gamma $, respectively. Then $\gamma $ winds around twice with respect to the longitudial generator $\alpha_2 $, and three times in the meridional direction represented by $\beta $, so by van Kampens a presentation for $\pi_1(\R^3 \setminus L_2)= \pi_1(\R^3 \setminus (K_1 \amalg K_2))$ is given by \[
+        \pi_1(\R^3\setminus L_2 )= \langle \alpha_1,\alpha_2,\beta  \mid \alpha_1^2=\beta ^3,\alpha_2^2=\beta ^3   \rangle .
+    \] This result with three generators, two of which are free with each other, is expected if you view the cross section of $\R^3 \setminus L$ as a figure eight by contracting the space between $K_1$ and $K_2$ to get the wedge $S^1 \vee S^1 $. In general, rotating $n$ copies of the trefoil yields a presentation \[
+    \pi_1(\R^3 \setminus L) =\langle \alpha_1,\cdots ,\alpha _n,  \beta \mid \alpha_1^2=\beta ^3,\cdots ,\alpha _n^2 =\beta ^3 \rangle ,
+\] where each $\alpha _i $ represents a generator for the $K_i $'th trefoil. This can be seen by taking a cross section of the complement of the disjoint union $\coprod_{i=1}^n K_i $ and contracting the space between them to the wedge of circles $\bigvee _{i=1}^n S^1_i $, as in \cref{tk4} below. (\cref{tk4} depicts the case where $n=4$).
+\begin{figure}[H]
+\centering
+\incfig[0.8]{tk4}
+\caption{The cross section of $\R^3 \setminus L_4$ contracted to $\bigvee_{i=1}^n  S^1 _i $.}
+\label{tk4}
+\end{figure}
+We can interpret the presentation $\pi_1(\R^3 \setminus L)=\langle \alpha_1,\cdots ,\alpha _n  ,\beta \mid  \alpha_1^2=\beta ^3,\cdots ,\alpha _n ^2=\beta ^3\rangle $ by considering the knot complements $K_i $ as each representing a ``fiber'' in the ``bundle'' of circles\footnote{I haven't read what a fiber bundle precisely is, but I imagine it looks something like this.}, as can be seen in the middle picture in \cref{tk4}. Each knot complement $K_i $ is generated by a loop $\alpha _i $, and winds around twice in the longitudinal direction and thrice in the meridional direction, hence the relations $\alpha _i =\beta ^3$. But each $\alpha _i $ is free of relations with each other, which makes sense if you think of each representing a generator of $\pi_1\left( \bigvee _{i=1}^n S^1 _i  \right) =*_i \Z$ for $i\in \{1,\cdots ,n\} $\footnote{This result is shown in Hatcher \S 1.2 example 1.21.}.  \end{solution}
+
+\subsection{Question 2: The action of $\operatorname{GL}_n (\Z)$ on the $n$-torus}
+
+\begin{prob}
+    Let $X=\R^n/\Z^n$ be the $n$-dimensional torus.  We consider the natural action of $G=\operatorname{GL}_n(\Z)$ on $X$, coming from the fact that this group acts on $\R^n$, preserving $\Z^n$.  Suppose $g:X\to X$ is a homeomorphism.  Prove that $g$ is homotopic to some member of $G$.
+\end{prob}
+\begin{proof}
+    A theorem from class states that if a space $X$ is simply connected, and $G$ is a group acting on $X$ such that for all $x\in X$, there is a neighborhood $U$ of $x$ that misses $\bigcup_{g\in G \setminus \{1\} } g(U)$, then $\pi_1(X /G) \cong G$. In this case, consider $\Z^n $ acting on $\R^n $ by vector addition. $\R^n $ is convex, so $\pi_1(\R^n )=0$ and $\R^n $ is simply connected. Let $x\in \R^n $, then the orbits of $x$ form an $n$-dimensional lattice, with any distinct orbit separated by an integer value with another. In this case, the minimum distance is 1, given the standard metric on $\R^n $. Consider the $\varepsilon $-neighborhood $B(x,\sfrac{1}{3})$, the open set consisting of all points a distance of $\sfrac{1}{3}$ away from $x$. The image of $B(x,\sfrac{1}{3})$ under any $z\in \Z\setminus \{1\} $ is a minumum distance of 1 away (say, by adding the element $(1,0,\cdots ,0)\in \Z^n $ to all points in the neighborhood). But for any two neighborhoods a distance of 1 away, they cannot intersect since even then, there is a ``gap'' of distance $\sfrac{1}{3}$ between both of them, by choice of radius. Thus $\R^n /\Z^n $ satisfies the condition from class, and we conclude that $\pi_1(\R^n  /\Z^n ) = \pi_1(\mathbb{T}^n )\cong \Z^n  $ (where $\mathbb{T}^n $ is the $n$-torus).
+
+    Now that we've established that $\pi_1(\mathbb{T}^n )\cong \Z^n $, consider $g \colon X \to X$ a homeomorphism. Since $\R^n $ is the universal cover of $\mathbb{T}^n $ ($\R^n $ is simply connected), we can uniquely lift $g \colon X \to X$ to a deck transformation $\widetilde g \colon \R^2\to \R^2$, by a combination of the unique lifting property and the lifting criterion. Consider the diagram below:
+    \begin{figure}[H]
+    \centering
+    \begin{tikzcd}
+\R^n \arrow[d, "p"] \arrow[r, "\widetilde g", dotted] & \R^n \arrow[d, "p"] \\
+\mathbb T^n \arrow[r, "g"]                            & \mathbb T^n        
+\end{tikzcd}
+    \end{figure}
+    Here $p \colon \R^n  \to \mathbb{T}^n $ denotes the covering map. Since $\pi_1(\R^n )$ is trivial, the image of $\pi_1(\R^n )$ under $(g\circ p)_*$ is also trivial, so it's trivially contained in $\widetilde g_* (\pi_1(\R^n ))$, which is ... trivial. Thus we have the existence of a unique deck transformation $\widetilde g \colon \R^n \to \R^n $ corresponding to the homeomorphism $g \colon X \to X$ by applying the lifting criterion to the map $g\circ p$. This is a homeomorphism $\R^n \to \R^n $ preserving $\Z^n $, since $g$ originally acted on a space in which we quotiented $\Z^n $ to zero, which is precisely how elements of $\operatorname{GL}_n (\Z)$ act on $\R^n $.
+
+    We claim that $A\in \operatorname{GL}_n (\Z)$ corresponding to the action of $\widetilde g$ on $\R^n $ is homotopic to $g$.
+    Since a homeomorphism induces an isomorphism between fundamental groups\footnote{Assigning fundamental groups is a functor $\mathsf{Top} \to \mathsf{Grp} $, and functors preserve isomorphism. Alternatively, this fact is in Hatcher \S 1.1, page 35.}, the self-homeomorphism $g$ induces an automorphism $g_* \colon \pi_1(\mathbb{T}^n )\to \pi_1(\mathbb{T}^n )$ on the fundamental group of the $n$-torus. The element $A\in \operatorname{GL}_n (\Z)$ corresponding to the action of $\widetilde g$ on $\R^n $ is also an automorphism $\pi_1(\mathbb{T}^n )\to \pi_1(\mathbb{T}^n )$, since elements of $\operatorname{GL}_n (\Z)$ are precisely the automorphisms of $\Z^n $. To show that $g$ and $A$ are homotopic, we claim that they induce the same automorphism on $\pi_1(\mathbb{T}^n )$. Take a loop that generates a copy of $\Z$, then we can lift this uniquely to the universal cover $\R^n $ by the path lifting theorem. Then both $g$ and $\widetilde g$ act on this loop in the same way, since $\widetilde g$ is just $g$ lifted to $\R^n $, thus they send the generator of one copy of $\Z$ in $\pi_1(\mathbb{T}^n )=\Z^n $ to the same place (although the domain of the loop that $\widetilde g$ acts on is in $\R^n $, $\widetilde g$ preserves $\Z^n $, and after quotienting by $\Z^n $ we get that $g$ and $\widetilde g$ do the same thing to the loop. This is what I mean by ``act on in the same way''.) Repeat this argument for the other copies of $\Z$, and we get that $g$ and $\widetilde g$ (and hence $A$) send the generators of $\pi_1(\mathbb{T}^n )$ to the same place, hence inducing the same automorphism on $\pi_1(\mathbb{T}^n )$. Since these two maps induce the same automorphism on $\pi_1(\mathbb{T}^n )$, the homotopy classes $[A \circ f]$ and $[g \circ f]$ are the same for $f$ a loop in $\mathbb{T}^n $. Since this is true for all $f$, the maps themselves must be homotopic, and we are done.
+\end{proof}
+
+%The problem is finished, but this is a side note on the particular structure of $\operatorname{GL}_n (\Z)$ (and hence homeomorphism of the $n$-torus). Consider $n=1$. In this case, we have invertible $1\times 1$ matrices with integer entries acting on $S^1 $ by matrix multiplication. This winds the loop that generates $\pi_1(S^1 )=\Z$ around itself $n$ times if the matrix is given by $[m]$, thus induces $A \colon \pi_1(S^1 ) \to \pi_1(S^1 ), \ z\mapsto mz$. (Note that this fails to be onto if $n\neq \pm 1$, since automorphisms must send generators to generators). For $n\geq 2$, we have invertible $n\times n$ matrices with integer entries, sending generators to generators. The exact structure is more difficult to determine, but these matrices wind the loops in $\mathbb{T}^n $ that generate $\pi_1(\mathbb{T}^n )=\Z^n $ a certain amount of times, preserving generators. Then the automorphism $A \colon \Z^n \to \Z^n $ acting on $\mathbb{R}^n $ will induce itself on $\pi_1(\mathbb{T}^n )$.
+
+\subsection{Question 3: The local homology of the house with two rooms}
+\begin{prob}
+    Let $X$ be the house with two rooms.  You can use either the version on p. 4 in Hatcher, or the version I used in my lectures (p. 22 in my ``02 Fundamental Group'' lectures).  We saw that it is contractible, but there isn't any obvious way to begin contracting it to a point.  It is hard to express the absence of an ``obvious way'' precisely, but the following is reasonably satisfactory.  Prove that for any $x\in X$, the local homology of $X$ at $x$ does not vanish identically.
+\end{prob}
+\begin{solution}
+    Before we do any computations with homology, recall from Hatcher \S 2.1 page 126 that the local homology groups of $X$ at a point $x\in X$ are defined as $H_n (X, X\setminus \{x\} )$, which can be excised to give $H_n (X,X\setminus \{x\} ) \cong H_n (U, U\setminus \{x\} )$ for $U$ an open neighborhood of $x$. Consider the long exact sequence for reduced local homology given by\[
+        \cdots \to \widetilde H_n (U \setminus \{x\} ) \to \widetilde H_n (U)\to \widetilde H_n (U, U\setminus \{x\} )\to \widetilde H_{n-1}(U \setminus \{x\} ) \to \cdots 
+    \] Since $X$ is contractible, $\widetilde H_n (U)=0$ for all $n$ (this is the reason we put tildes on everything), and thus we have isomorphisms $\widetilde H_n (U, U \setminus \{x\} ) \cong \widetilde H _{n-1}(U\setminus \{x\} )$ for all $n$\footnote{This was proved in a homework exercise, namely Hatcher \S 2.1 problem 15 on homework 8.}. So the local homology of a contractible space at $x$ is the $n-1$ homology of a punctured neighborhood of $X$.
+
+Consider the house with two rooms as shown in class, depicted in \cref{house} below. We denote this space $X$. 
+    \begin{figure}[H]
+    \centering
+    \incfig[0.65]{house}
+    \caption{The house with two rooms.}
+    \label{house}
+    \end{figure}
+    Careful measures have been taken to classify all points of $X$, namely, we claim that all of $X$ consists of the ten types points labelled above. Our strategy is to go along and talk about each type of point, and give its homology groups as we go. We will see that some classes of points have the same homology.
+
+    \begin{enumerate}
+        \item This class of points consist of any point in the \emph{interior} of a surface. The particular point marked in blue denotes the points in the interior of the right hand disk. Particularly, this class of points includes every interior point of the disks, and the outer cylinder of the house (sans the boundary circles). A neighborhood $U$ is just an open ball in $\R^2$, so the punctured neighborhood $U \setminus \{x\} $ deformation retracts onto the circle $S^1 $. Therefore the local homology of $X$ at an interior point is the (reduced) $n-1$ homology of the circle, that is, for $x$ in the interior we have 
+            \begin{equation*}
+                H_n (X, X\setminus \{x\} )= H_{n-1}(S^1 )=
+                \begin{cases}
+                    \Z\quad & \text{if} \ n=0,2,\\
+                    0 & \text{otherwise.}
+                \end{cases}
+            \end{equation*}
+        Hatcher calculates the reduced homology of spheres in Corollary 2.14, which is \S 2.1, page 114. For $n=0$, the local homology is $\Z$ because while the reduced homology is isomorphic to that of the circle, this doesn't make sense for the $0-1=-1$ homology of $S^1 $. In this case, the reduced homology is just zero by looking at the tail end of the LES, so you tack on a copy of $\Z$ for the unreduced homology, to get that $H_0(X, X \setminus \{x\} )=\Z$. This whole fuss about what the homology groups precisely are including zero wasn't too productive, since the goal was to show that there exists a nontrivial homology at this class of points, which $S^1 $ clearly has.
+    \item These are the ``circle boundaries'' (excluded last time), which include points on the circles bounding the leftmost and rightmost disks of the house. The particular point depicted is on the right disk. Note that this does not contain the two points where the boundary circles intersect the ``supports'' for the ``tube'', these points will be dealt with in class 8. A neighborhood of a point on a boundary circle deformation retracts to a disk as can be seen in \cref{h2}, thus a punctured neighborhood deformation retracts to a circle, so it turns out these points have the same homology as interior points. We conclude that the local homology of $X$ at $x$ in a boundary circle doesn't vanish as well.
+        \begin{figure}[H]
+        \centering
+        \incfig[0.5]{h2}
+        \caption{Neighborhoods of boundary circles deformation retracting to disks.}
+        \label{h2}
+        \end{figure}
+    \item This class of points is what I call ``tube interior'' points, where ``tube'' refers to the cavities on the external disks that allow us to access the hollow rooms. The particular point highlighted is on the interior of the right tube that allows us to access the left room. These tubes are solid, so they resemble cylinders, and thus we classify these cylinders sans their boundary circles in this category. We also consider points in the interior of the rectangular-shaped supports for the tubes. In this case, a neighborhood looks precisely like a disk, so once again the local homology doesn't vanish.
+    \item We turn our attention to the tube boundaries neglected last time, the four boundary circles of the tubes. This class of points does not contain the intersection with the supports, these four points will be dealt with in class 7. A neighborhood of a tube boundary is identical to a neighborhood of a circle boundary, thus the local homology doesn't vanish. This is the last class of points which have the same homology as interior points, which is why we marked all of them blue.
+    \item This class of points consists of points located on the interior circle which bounds the disk punctured by both tubes. Note that this excludes the two points that intersect the support, these will be dealt with in class 10. Now a neighborhood of any $x$ in this class won't just look like a ball, because of the fact that the circle portrudes inward and is surrounded on both sides by the outer cylinder. This neighborhood deformation retracts to its boundary, as can be seen below.
+        \begin{figure}[H]
+        \centering
+        \incfig[0.88]{h5}
+        \label{h5}
+        \end{figure}
+        Since two squares deformation retracts to $S^1 \vee S^1 $, the local reduced homology of $X$ at points in this class $\widetilde H_n (X, X\setminus \{x\} )$ is $\widetilde H_{n-1}(S^1 \vee S^1 )\cong \widetilde H_{n-1}(S^1 )\oplus \widetilde H_{n-1}(S^1 )$. The fact that the homology of wedge sums is the direct sum of the components is Corollary 2.25 in Hatcher (page 126). Precisely, we have \[
+            H_n (X,X \setminus \{x\} )= 
+            \begin{cases}
+                \Z \quad & \text{if} \ n=0,\\
+                \Z\oplus \Z &\text{if} \ n=2,\\
+                0 & \text{otherwise.} \ 
+            \end{cases}
+        \] Once again, this doesn't matter too much since clearly the figure eight has a nontrivial homology.
+    \item These are points on the edges of the supports, excluding intersections. These points make all four vertical lines in \cref{house}. Visualizing what a deleted neighborhood of these points look like is somewhat straightforward:
+        \begin{figure}[H]
+        \centering
+        \incfig[0.65]{h6}
+        \label{h6}
+        \end{figure}
+    Thus neighborhoods of points in this class deformation retract to $S^1 \vee S^1 $ again, and so the local homology is nontrivial.
+\item At this stage, all that remains are eight intersection points, plus class 9 (I forgot about it initially). These four points in class 7 are where the tube boundaries of class 4 intersect the supports. There are four circles for tube boundaries, hence four intersections. Although the structure of neighborhoods are slightly more complex than classes 5 and 6, deleted neighborhoods still deformation retract to $S^1 \vee S^1 $, as can be seen below.
+    \begin{figure}[H]
+    \centering
+    \incfig[0.8]{h7}
+    \label{h7}
+    \end{figure}
+\item These two points are the intersection points of exterior boundary circles with the supports. There is one tube (and one support) for each side, so there is one point in this class for the left and right boundary circles (this particular one is on the right). Deleted neighborhoods also deformation retract to $S^1 \vee S^1 $, as can be seen below.
+    \begin{figure}[H]
+    \centering
+    \incfig[0.8]{h8}
+    \label{h8}
+    \end{figure}
+\item I initially forgot about this class, which is why it doesn't fit thematically with the numbering scheme. These are the points where the tubes intersect the supports, without the endpoints (covered in class 7). Once again, deleted neighborhoods retract to $S^1 \vee S^1 $, as can be seen below.
+    \begin{figure}[H]
+    \centering
+    \incfig[0.85]{h9}
+    \label{h9}
+    \end{figure}
+\item We reach the final class of points. These are the intersection points of the interior circle with the supports. The exterior circle intersections were dealt with in class 8, but what makes this class special is the interior circle has portions of the external cylinder on boths sides, resulting in a different structure of the deleted neighborhoods as opposed to the left and right circles (hence the unique purple color). See the figure below.
+    \begin{figure}[H]
+    \centering
+    \incfig[0.85]{h10}
+    \label{h10}
+    \end{figure}
+    So punctured neighborhoods retract to $S^1 \vee S^1 \vee S^1 $. Then since the reduced local homology is the $n-1$ reduced homology of $S^1 \vee S^1 \vee S^1 $ which is just three copies of $\Z$ at $n=1$, we have the unreduced homology given by \[
+        H_n (X,X \setminus \{x\} )= 
+        \begin{cases}
+            \Z \quad & \text{if} \ n=0,\\
+            \Z\oplus \Z\oplus \Z &\text{if} \ n=2,\\
+            0 & \text{otherwise.} 
+        \end{cases}
+    \] So the local homology of $X$ at $x$ where $x$ is in class 10 is also nontrivial. This completes the classification of points of $X$.
+    \end{enumerate}
+Since we've examined every type of point in $X$ and shown their local homologies are nontrivial, we conclude the local homology at $x$ for all $x\in X$ does not vanish identically, and we are done.
+
+\end{solution}
+
+\subsection{Question 4: Homology of a space times the $n$-sphere}
+\begin{prob}
+    Let $X$ be any topological space.  For all $k$ and $n$, prove that $H_k(X\times S^n)\cong H_k(X)\oplus H_{k-n}(X)$.  Here we follow the convention that $H_k=0$ for all $k<0$.  
+
+    (This is problem 2.33 in Hatcher's ch. 2.2  He suggests an approach, which you can use if you want.  But it is not the only approach, and for me it is not even the simplest and most natural method. So don't feel locked into following his suggestion.)
+
+    Hatcher's version: Show that $H_i (X\times S^n )\approx H_i (X)\oplus H_{i-n}(X)$ for all $i$ and $n$, where $H_i =0$ for $i<0$ by definition. Namely, show $H_i (X\times S^n )\approx H_i (X)\oplus H_i (X\times S^n, X\times \{x_0\} )$ and $H_i (X\times S^n , X\times \{x_0\} )\approx H_{i-1}(X\times S^{n-1}, X\times \{x_0\} )$. [For the latter isomorphism, the relative Mayer-Vietoris sequence yields an easy proof.]
+\end{prob}
+\begin{proof}
+    We follow Hatcher's approach.\footnote{Note: I attempted to prove this directly with Mayer-Vietoris by decomposing $X \times S^n $ into $X$ times an equatorial $S^{n-1}$ and two contractible hemispheres $D^n _+,\, D^n _-$. I think this is the natural approach you spoke of. However, I got stuck somewhere down the line after applying Mayer-Vietoris, around the part where I was trying to show $H_k(X\times D_+^n )\oplus H_k(X\times D_-^n )$ quotient $\operatorname{im}\Phi$ is our desired result. It makes sense if you think of the map acting on two hemispheres with opposite orientation, ``flipping'' one to invert the second direct product to $H_{k-1}(X\times S^{n-1})$. However, I don't know how to formalize this and I didn't want to turn in an incomplete answer, so I decided to follow Hatcher's approach.} First, we want to show that $H_i (X\times S^n )\cong H_i (X)\oplus H_i (X\times S^n , X\times \{x_0\} ) .$ Consider the long exact sequence for the relative homology of the pair $(X\times S^n ,X\times \{x_0\} )$, given by \[
+        \cdots \to H_i (X \times \{x_0\} )\overset{i_*}{\longrightarrow} H_i (X\times S^n )\overset{j_*}{\longrightarrow} H_i (X\times S^n , X\times \{x_0\} )\overset{\partial }{\longrightarrow} H_{i-1}(X\times \{x_0\} )\to \cdots 
+        \] This actually breaks up into short exact sequences, since we have a retract $r \colon X\times S^n \to X\times \{x_0\} $. To visualize this retract, recall that $S^n $ can be realized as the plane $\R^n $ plus a compactification point, so $X\times S^n $ retracts onto $X$ times a point. The retract $r \colon X\times S^n  \to X\times \{x_0\} $ can be precisely given by $(x,z) \mapsto (x, x_0)$, for $x\in X$ and $z\in S^n $. So $ri=\operatorname{id}_{X\times \{x_0\} }$ where $i$ is the inclusion $X\times \{x_0\} \hookrightarrow X\times S^n $, and the induced map $i_* \colon H_i (X\times \{x_0\} ) \to H_i (X\times S^n )$ is injective. Then the boundary maps are zero, so we have the long exact sequence breaking up into the short exact sequence of the form \[
+    0 \to H_i (X\times \{x_0\} )\overset{i_*}{\longrightarrow} H_i (X\times S^n )\overset{j_*}{\longrightarrow} H_i (X\times S^n , X\times \{x_0\} )\to 0.
+\] Since $r_*i_*=\operatorname{id}_{X\times \{x_0\} },$ we actually have a splitting $H_i (X\times S^n ) \cong H_i (X \times \{x_0\} ) \oplus H_i (X\times S^n , X\times \{x_0\} )$. This can be seen by applying the splitting lemma: In condition (a), let  $p$ be the retract $r$, then the conditions are satisfied since $r_*i_*=\operatorname{id}_{X\times \{x_0\} },$ and so equivalently we have an isomorphism $H_i (X\times S^n ) \cong H_i (X \times \{x_0\} ) \oplus H_i (X\times S^n , X\times \{x_0\} )$ by condition (c), as can be seen in the diagram below.
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+            &                                                                       & H_i(X\times S^n) \arrow[rd, "j_*"] \arrow[dd, "\cong"] \arrow[ld, "r_*", dotted, shift left] &                                                &   \\
+0 \arrow[r] & H_i(X \times \{x_0\} ) \arrow[ru, "i_*", hook, shift left] \arrow[rd] &                                                                                              & {H_i(X \times S^n, X\times \{x_0\})} \arrow[r] & 0 \\
+            &                                                                       & {H_i (X \times \{x_0\} ) \oplus H_i (X\times S^n , X\times \{x_0\} )} \arrow[ru]             &                                                &  
+\end{tikzcd}
+\end{figure}
+Most of the arguments stated earlier (retraction $\implies $ boundary maps zero $\implies $ short exact sequences, the splitting lemma) are all detailed in Hatcher \S 2.2 starting from page 147. The space $X$ times a point has the same homology of $X$ itself, so $H_i (X)\cong H_i (X \times \{x_0\} )$. This concludes the first part of the problem, showing that $H_i (X\times S^n )\cong H_i (X)\oplus H_i (X\times S^n , X\times \{x_0\} )$.
+
+Onto the second part of the problem. Now we want to show that $H_i (X\times S^n , X\times \{x_0\} ) \cong H_{i-1}(X\times S^{n-1},X\times \{x_0\} )$. As Hatcher says, the relative Mayer-Vietoris sequence does indeed yield an easy proof. Recall that for pairs of spaces $(X,Y)=(A\cup B,C\cup D)$ with $C \subseteq A$ and $D\subseteq B$ such that $X=A^{\circ }\cup B^{\circ }$ and $Y=C^{\circ }\cup D^{\circ }$, the relative Mayer-Vietoris sequence is given by \[
+    \cdots \to H_n (A \cap B, C\cap D) \overset{\Phi}{\longrightarrow} H_n (A,C)\oplus H_n (B,D)\overset{\psi}{\longrightarrow} H_n (X,Y)\overset{\partial }{\longrightarrow} \cdots 
+\] In this case, let $X=X\times S^n $, $Y= X\times \{x_0\} ,\, A=X\times D^n _+,\, B=X\times D^n _-$ where $D^n _+$ and $D^n _-$ denote open neighborhoods of the positive and negative hemispheres resulting from decomposing $S^n $ into an equatorial $S^{n-1}$ and two hemispheres, and both $C,D=X\times \{x_0\} $. Clearly $C\cap D= X\times \{x_0\} $, and $A \cap B$ becomes $X \times S^{n-1}$ by the decomposition of $S^n $ and the fact that we chose neighborhoods of the hemispheres. Then since the union of the interiors of $X$ times the hemispheres is $X\times S^n $, the conditions are satisfied and we can write the relative Mayer-Vietoris sequence as seen below.
+\[
+    \cdots \overset{\Phi}{\longrightarrow} H_i (X\times D_+^n ,X\times \{x_0\} )\oplus H_i (X\times D_-^n , X\times \{x_0\} ) \overset{\psi }{\longrightarrow} H_i (X\times S^n , X\times \{x_0\} )\overset{\partial }{\longrightarrow} H_{i-1} (X\times S^{n-1}, X\times \{x_0\} )\overset{\Phi}{\longrightarrow} \cdots 
+\] However, since the hemispheres $D_{\pm}^n $ are homeomorphic to the $n$-ball and therefore contractible, $H_i (X\times D_+^n ,X\times \{x_0\} )\oplus H_i (X\times D_-^n , X\times \{x_0\} )$ becomes $H_i (X,X\times \{x_0\} )\oplus H_i (X ,X \times \{x_0\} )$, which is the same as $H_i (X,X)\oplus H_i (X,X)$ since $X$ and $X\times \{x_0\} $ have the same homology. The relative homology of a space with itself is zero, since quotienting a space by itself yields a point, for which the homology is zero. Then these groups are all zero, and we can rewrite the long exact sequence from Mayer-Vietoris as short exact sequences of the form \[
+0\to H_i (X\times S^n , X\times \{x_0\} ) \overset{\partial }{\longrightarrow} H_{i-1}(X\times S^{n-1}, X\times \{x_0\} )\to 0
+\] The left zero implies that $\partial $ is injective, and the right zero implies that $\partial $ is surjective. Therefore we have an isomorphism $H_i (X\times S^n , X\times \{x_0\} ) \cong H_{i-1}(X\times S^{n-1}, X\times \{x_0\} )$ for all $i$.
+
+Now for the final part of the problem. If we repeat the result we just got (that is, $H_i (X\times S^n , X\times \{x_0\} ) \cong H_{i-1}(X\times S^{n-1}, X\times \{x_0\} )$) with $n-1$, we get an isomorphism $H_i (X\times S^{n-1}, X\times \{x_0\} ) \cong H_{i-1}(X\times S^{n-2}, X\times \{x_0\} )$. Given that $n\leq i$, we can repeat this process $n$ times to get $H_i (X\times S^n , X\times \{x_0\} ) \cong H _{i-n}(X\times S^{n-n},X\times \{x_0\} )$. (If $n>i$ this is no problem, since we defined all the negative homology groups to be zero. So this second term simply vanishes, which is consistent with our result.) Now $H_{i-n}(X\times S^0, X\times \{x_0\} )$ is $H_{i-n}(X)$, since collapsing two copies of $X$ (one for each point of $S^0$) to a point yields $X\times \{x_0\} $, which has the same homology as $X$. Therefore $H_i (X\times S^n ,X\times \{x_0\} )\cong H_{i-n}(X)$, and we conclude that \[
+    H_i (X\times S^n ) \cong H_i (X)\oplus H_i (X\times S^n , X\times \{x_0\} )\cong H_i (X)\oplus H_{i-n}(X).\quad \qedhere
+\] \end{proof}
+\subsection{Question 5: The higher homotopy groups of the loopspace}
+\begin{prob}
+    If $(X,x)$ is a pointed space, then the loopspace of $X$ (based at~$x$) means the following space $\Omega X$.  As a set, it is the set of continuous maps $(I,\partial I)\to(X,x)$.  We equip it with the compact-open topology, which is described in Hatcher's appendix.  It has a natural basepoint $c$, namely the constant map $I\to\{x_0\}$. 
+
+    Prove that for any $n\geq0$, $\pi_n(\Omega X)\cong\pi_{n+1}(X)$.
+
+    Hatcher says a little about $\Omega X$ on p. 395, including a sophisticated perspective from which to prove this result.  But I want you to prove it directly.  Namely, if $f:(I^{n+1},\partial I^{n+1})\to (X,x_0)$, then by identifying $I^{n+1}$ by $I^n\times I$, we can regard $f$ as a family of loops parameterized by~$I^n$.  That is, $f$ can be regarded as a map $(I^n,\partial I^{n})\to(\Omega X,c)$.  This yields a function $\pi_{n+1}(X)\to \pi_n(\Omega X)$, and your task is to prove that it is an isomorphism.
+\end{prob}
+\begin{solution}
+    We first do the case where $n=0$, showing that $\pi_0(\Omega X) \cong\pi_{n+1}(X)$. $\Omega X$ is defined as the set of loops $I\to X$ sending $\partial I=\{0,1\} $ to the basepoint $x$. $\pi_0(\Omega X)$ is then defined as the path compenents of $\Omega X$, since $\pi_0$ consists of the homotopy classes of the two points $S^0$ into the the loopspace, taking one point to the base point and letting the other vary: then the elements are just components which can be connected by paths. Thus the loops in $\Omega X$ that can be connected by paths are homotopic, and the set of loops into a space up to homotopy preserving basepoints is precisely the fundamental group $\pi_1(X,x)$. Therefore $\pi_0(\Omega X) \cong \pi_1(X,x)$.
+
+    Now let's show this is true for a general $n$. Let $n\geq 1$, and consider a map $f \colon (I^{n+1}, \partial  I^{n+1}) \to (X,x_0)$. Up to homotopy, this is an element of $\pi_{n+1}(X)$. Say we have a function $\omega \colon \pi_{n+1}(X) \to \pi_n (\Omega X)$ that associates $f$ with an element of $\pi_n (\Omega X)$ by thinking of $f$ as $I^n  \times I$. Then for all $s\in I$, there is a copy of $I^n $ in $I^{n+1}$ that gets sent to it, the homotopy classes of which form $\pi_n (\Omega X)$. We claim $\omega$ is surjective, injective, and a group homomorphism.
+
+    To show that $\omega$ is a group homomorphism, consider the homotopy class of concatenated loops $f,g \colon (I^{n+1},\partial I^{n+1}) $ $\to (X, x_0) $, denoted $[f]+[g]=[f+g]$ since $\pi_{n+1}$ for $n\geq 1$ is abelian. Precisely, the concatenated loop $f+g$ is defined as $f+g \colon (s_1,s_2,\cdots ,s_n  ) \mapsto f(2s_1,s_2,\cdots ,s_n  )$ if $s_1\in [0,\sfrac{1}{2}]$ and $g(2s_1-1,s_2,\cdots ,s_n  )$ if $s_1 \in [\sfrac{1}{2}, 1]$ for $s _i \in I$. So the value of $f+g$ is determined by the position of $s_1$ in the first interval $I$. $\omega$ sends $[f+g]$ to the homotopy class of squares of $[\omega (f)]$ if $s_1\in [0,\sfrac{1}{2}]$ and $[\omega (g)]$ if $s_1\in [\sfrac{1}{2}, 0]$, denoted $[\omega(f+g)]$. However, this is precisely the definition of concatenating two loops $I^n $ in $\pi_n (\Omega X)$, since we take the values of one loop on half the interval and combine them with the values of another loop on the other half of the interval. So the image of $[f+g]$ under $\omega$ is equal to the product of the individual images, or $\omega[f+g]=\omega[f]+\omega[g]$. Up to homotopy, this determines a homomorphism $\pi_{n+1}(X)\to \pi_n (\Omega X)$.
+
+    To show $\omega $ is surjective, let $[\gamma]$ be an element of $\pi_n (\Omega X)$, that is, a homotopy class of loops $\gamma \colon (I^n , \partial  I^n ) \to (\Omega X, c)$ (where $c$ is the natural basepoint $c \colon  I \to \{x_0\} $). Let $\beta $ denote a loop in $\Omega X$. Then if you consider the domain $I^n $ of $\gamma$ times $I$ the domain of $\beta \in \Omega X$, this is an $(n+1)$-cube that gets mapped into $X$ sending $\partial I^{n+1}\to \{x_0\} $. To see this, the boundary of most of the cube $I^{n+1}$, that is, $\partial  I^n $ gets automatically mapped to $\{x_0\} ,$ since it maps to $c\in \Omega X$ which ends everything to $x_0$. The final portion of $\partial I^{n+1}$ given by $I$ (the domain of $\beta $) also gets mapped onto $x_0$ since $\beta \in \Omega X$. Then since each portion of the domain $I^{n+1}$ gets mapped to $X$, we conclude this is a map $f \colon (I^{n+1}, \partial I^{n+1}) \to (X, x_0)\in \pi_{n+1}(X)$. Then $\omega[f]=[\gamma]$ by our construction of $f$, so $\omega$ is onto.
+
+    Finally, let $f \colon (I^{n+1}, \partial I^{n+1}) \to (X,x_0)\in \pi_{n+1}(X)$ lie in $\ker \omega$, in other words $\omega ([f])$ is the trivial element in $\pi_n (\Omega X)$, the homotopy class of cubes $I^n $ that map to $c$. This homotopy class sends all points in $I^n $ to a loop $I$ (the domain of $c$), that sends everything to $x_0$. So composing $c\circ \omega[f]$ sends all of $I^{n+1}$ to $x_0$, and so $f$ must be homotopic to the identity in $\pi_{n+1}(X)$, the map that sends everything to $x_0$. Therefore the kernel of $\omega$ is trival and $\omega$ is injective. Since we've determined that $\omega$ is a bijective group homomorphism, we conclude that $\omega$ is an isomorphism of groups, and we are done.
+\end{solution}
