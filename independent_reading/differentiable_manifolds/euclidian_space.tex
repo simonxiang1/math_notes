@@ -1,0 +1,48 @@
+\newpage
+\part{Euclidian Spaces}
+\section{Smooth Functions on a Euclidian Space}
+\begin{center}
+    \sc{Introduction} 
+\end{center}
+Calculus talks about differentiation and integration on $\R$, while real analysis extends this to $\R^n $. Vector calculus talks about integrals on curves and surfaces, and now we extend these concepts to higher dimensions, the structures which with we work with are called manifolds. Things become simple: gradient, curl, and divergence are cases of the exterior derivative, and the FTC for line integrals, Green's theorem, Stokes' theorem, and the divergence theorem are manifestations of the generalized Stokes' theorem.
+
+Manifolds arise even when dealing with the space we live in, for example the set of affine motions in $\R^3$ is a $6$-manifold. This is our plan: recast calculus on $\R^n $ so we can generalize it to manifolds by differential forms. Working in $\R^n $ first isn't necessary, but much easier, since the examples are simple. Then, we define a manifold and talk about tangent spaces, working with the idea of approximating nonlinear things with linear things, with Lie groups and Lie algebras as examples. Finally, we do calculus on manifolds, generalizing the theorems of vector calculus, with the de Rham cohomology groups as $C^{\infty}$ and topological invariants.
+\orbreak
+\subsection{$C^{\infty}$ Versus Analytic Functions}
+Let's talk about $C^{\infty}$ functions on $\R^n $. Write a base for $\R^n $ as $x^1,\cdots ,x^n $ and let $p=(p^1,\cdots ,p^n )$ be a point in an open set $U$ in $\R^n $. Differential geometry uses \emph{superscripts}, not subscripts, more on this later.
+\begin{definition}[]
+    Let $k$ be a nonnegative integer. A function $f \colon U \to \R$ is $C^k$ at $p$ if its partial derivatives $\frac{\partial ^j f}{\partial x^{i_1} \cdots \partial x^{i_j }}$ of all orders $j\leq k$ exist and are continuous at $p$. The function $f \colon U \to \R$ is $C^{\infty}$ at $p$ if it is $C^k$ for all $k\geq 0$, that is, its partial derivatives of all orders \[
+        \frac{\partial ^kf}{\partial x^{i_1}\cdots \partial x^{i_k}}
+    \] exist and are continuous at $p$. We say $f$ is $C^k$ on $U$ if it is  $C^k$ for all points in $U$, and the concept of $C^{\infty}$ on a set $U$ is defined similarly. When we say ``smooth'', we mean $C^{\infty}$.
+\end{definition}
+\begin{example}
+    \,
+    \begin{enumerate}[label=(\roman*)]
+        \item We call $C^0$ functions on $U$ continuous on $U$.
+        \item Let $f \colon \R \to \R$ be $f(x)=x^{1/3}$. Then $f'(x)$ is $\frac{1}{3}x^{-2/3}$ for $x\neq 0$ and undefined at zero, so $f$ is $C^0$ but not $C^1$ at $x=0$.
+        \item Let $g\colon \R \to \R$ be defined by  \[
+                g(x)=\int_{0}^{x} f(t) \, dt= \int_{0}^{x} t ^{1/3} \, dt= \frac{3}{4}x^{4/3}.
+            \] Then $g'(x)=f(x)=\frac{1}{3}$, so $g(x)$ is $C^1$ but not $C^2$ at $x=0$. In general, we can construct functions that are $C^k$ but not $C^{k+1}$ at a point.
+        \item Polynomials, the sine and cosine functions, and the exponential functions on $\R$ are all $C^{\infty}$.
+    \end{enumerate}
+\end{example}
+A function $f$ is \textbf{real-analytic} at $p$ if in some neighborhood of $p$ it is equal to its Taylor series at $p$, that is, \[
+    f(x)=f(p)+\sum_{i}^{} \frac{\partial f}{\partial x^i }(p)(x^i -p^i )+\frac{1}{2!}\sum_{i,j}^{} \frac{\partial ^2f}{\partial x^i \partial x^j}(p) (x^i -p^i )(x^j-p^j)+\cdots 
+\] Real-analytic functions are $C^{\infty}$ because you can differentiate them termwise in their region of convergence. The converse does not hold: define \[
+f(x)=
+\begin{cases}
+    e^{-1/x} \quad & \text{for} \ x>0;\\
+    0 & \text{for} \ x\leq 0.
+\end{cases}
+\] We can show $f$ is $C^{\infty}$ on $\R$ and the derivatives $f^{(k)}(0)=0$ for all $k\geq 0$ by induction, then the Taylor series must be zero in any neighborhood of the origin, but $f$ is not. Then $f$ isn't equal to its Taylor series, and we have a smooth non-analytic function.
+\subsection{Taylor's Theorem with Remainder}
+However, we have a Taylor's theorem with remainder for $C^{\infty}$ functions that's good enough. Say a subset $S$ of $\R^n $ is \textbf{star-shaped} with respect to a point $p$ in $S$ if for every $x\in S$, the line segment from $p$ to $x$ lies in $S$.
+\begin{lemma}[Taylor's theorem with remainder]
+    Let $f$ be a $C^{\infty}$ function on an open subset $U$ of $\R^n $ star-shaped with respect to a point $p=(p^1,\cdots ,p^n )$ in $U$. Then there are $C^{\infty}$ functions $g_1(x),\cdots ,g_n (x)$ on $U$ such that \[
+        f(x)=f(p)+\sum_{i=1}^{n} (x^i -p^i )g_i (x), \quad g_i (p)=\frac{\partial f}{\partial x^i }(p).
+    \]  
+\end{lemma}
+\begin{proof}
+    Since $U$ is star-shaped with respect to $p$, for any $x\in U$
+\end{proof}
+

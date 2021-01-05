@@ -1,0 +1,347 @@
+\part{Vector Calculus}
+\section{Vector Calculus Fundamentals}
+Here we review some basics, and cover other stuff that should be taught in a standard multivariable calculus course, but wasn't at UNT (div, grad, curl).
+\subsection{Tangent planes}
+\begin{definition}[Tangent plane]
+    Let $z=f(x,y)$ represent some surface $S$ in $\R^3$, $P=(a,b,c),\,Q=(x,y,z)$ be points on $S$, and $T$ a plane containing $P$. If the angle between the vector $\overrightarrow{PQ}$ and the plane $T$ approaches zero as $Q\to P$ along $S$, then $T$ is the \textbf{tangent plane} to $S$ at $P$.
+\end{definition}
+Since two lines determine a plane, the tangent lines from the partial derivatives will be in the tangent plane, if it exists: lines may determine the plane, but not the existence of it. However, if $\frac{\partial f}{\partial x}$ and $\frac{\partial f}{\partial y}$ exist in nbd of $(a,b)$ and are continuous at $(a,b)$, then the tangent plane $z=f(x,y)$ at $(a,b,f(a,b))$ also exists. An equation for $T$ is given by \[
+    A(x-a)+B(y-b)+C(z-f(a,b))=0
+\] where $\mathbf n=(A,B,C)$ is a normal vector to $T$. Since $T$ contains the tangent lines $L_x$ and $L_y$, we just need vectors $\mathbf v_x$ and $\mathbf v_y$ parallel to $L_x$ and $L_y$ respectively, and then set $\mathbf n=\mathbf v_x \times \mathbf v_y$. Now the slope of $L_x$ is $\frac{\partial f}{\partial x}(a,b)$, so $\mathbf v_x=(1,0,\frac{\partial f}{\partial x}(a,b))$ is parallel to $L_x$. Similarly, $\mathbf v_y=(0,1,\frac{\partial f}{\partial y}(a,b))$ is parallel to $L_y$, so the normal vector to $T$ is given by \[
+\mathbf n=\mathbf v_x \times  \mathbf v_y= 
+\begin{vmatrix}
+    \mathbf i & \mathbf j &\mathbf  k \\
+    1 & 0 & \frac{\partial f}{\partial x}(a,b)\\
+    0 & 1 & \frac{\partial f}{\partial y}(a,b)
+\end{vmatrix}= -\frac{\partial f}{\partial x}(a,b)\mathbf i-\frac{\partial f}{\partial y}(a,b)\mathbf j+\mathbf k.
+\] So $T$ can be represented by the equation $
+-\frac{\partial f}{\partial x}(a,b)(x-a)=\frac{\partial f}{\partial y}(a,b)(y-b)+z-f(a,b)=0,
+$ which simplifies to \[
+\frac{\partial f}{\partial x}(a,b)(x-a)+\frac{\partial f}{\partial y}(a,b)(y-b)-z+f(a,b)=0.
+\] In general, if the surface is defined by an equation of the form $F(x,y,z)=0$, then the tangent plane at $(a,b,c)$ is \[
+    F_x(a,b,c)(x-a)+F_y(a,b,c)(y-b)+F_z(a,b,c)(z-c)=0.
+\] Our previous formula was just this applied to the case where $F(x,y,z)=f(x,y)-z$.
+\begin{example}
+    To find the tangent plane to the surface $z=x^2+y^2$ at $(1,2,5)$, note that for $f(x,y)=x^2+y^2$, we have $f_x=2x$ and $f_y=2y$, so the equation is just $2(1)(x-1)+2(2)(y-2)-z+(1^2+2^2)=0,$ or $2x+4y-z-5=0.$
+\end{example}
+\begin{example}
+    For the surface $x^2+y^2+z^2=9$, we have $F(x,y,z)=x^2+y^2+z^2-9$, so $F_x=2x$, $F_y=2y$, and $F_z=2z$. Therefore the equation for the tangent plane is $2x+2y-z-9=0.$
+\end{example}
+\subsection{Directional derivatives and the gradient}
+\begin{definition}[Directional derivative]
+    Let $f \colon D \to \R$ where $D\subseteq \R^2$, and $(a,b)\in D$. Let $\mathbf v\in \R^2$ be a unit vector ($\|v\|=1$). Then the \textbf{directional derivative} of $f$ at $(a,b)$ in the direction of $\mathbf v$, denoted $D_vf(a,b)$, is defined as \[
+        D_vf(a,b)= \lim_{h\to 0} \frac{f((a,b)+h \mathbf v)-f(a,b)}{h}.
+    \] Note that if we write $\mathbf v=(v_1,v_2)$, then this expression becomes  $\lim_{h\to 0}(f(a+hv_1,b+hv_2)-f(a,b)) /h$. 
+\end{definition} Note that the partial derivatives $f_x$ and $f_y$ are just the cases where $\mathbf v=\mathbf i=(1,0)$, etc. We can express this by saying $f_x= D_i f$ and $f_y=D_j f$.
+\begin{theorem}
+    Let $f \colon D \to \R$, $D\subseteq \R^2$ such that $f_x$ and $f_y$ exists and are continuous on $D$. Let $(a,b)\in D$, and $\mathbf v=(v_1,v_2)\in \R^2$ be a unit vector. Then \[
+        D_v f= v_1 f_x+v_2f_y.
+    \] 
+\end{theorem}
+\begin{proof}
+    The proof is annoying so it has been skipped.
+\end{proof}
+\begin{definition}[Gradient]
+   For $f\colon \R^2\to \R$, the \textbf{gradient} of $f$ denoted $\nabla f \colon \R^2 \to \R^2 $ is the vector \[
+       \nabla f=\left( \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y} \right) .
+   \] In general, if $f\colon \R^n  \to \R$, we have $\nabla f \colon \R^n  \to \R^n $ defined by \[
+   \nabla f = \left(  \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2},\cdots ,\frac{\partial f}{\partial x_n }\right) 
+   \] for $(x_1,x_2,\cdots ,x_n )\in \R^n $.
+\end{definition}
+Note that $D_vf=\mathbf v \cdot \left( \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y} \right) $, which is the same as saying $D_vf=\mathbf v\cdot \nabla f$.
+\begin{example}
+    To find $D_vf(1,2)$ where $f \colon (x,y)\mapsto xy^2+x^3y$ and $\mathbf v=\left( \frac{1}{\sqrt{2} },\frac{1}{\sqrt{2} } \right) $, note that $\nabla f=(y^2+3x^2y,2xy+x^3)$, so \[
+        D_vf(1,2)=\mathbf v \cdot \nabla f(1,2)=\left( \frac{1}{\sqrt{2} },\frac{1}{\sqrt{2} } \right) \cdot (10,5)=\frac{15}{\sqrt{2} }.
+    \] 
+\end{example}
+If $f\colon \R^2 \to \R$ has continuous partial derivatives $f_x$ and $f_y$, then $f$ is \textbf{continuously differentiable.} Say $f$ is continuously differentiable with $\nabla f\neq 0$, $c\in \operatorname{im}f$, and $\mathbf v\in \R^2$ be a unit vector tangent to the contour $f(x,y)=c$. Since $\mathbf v$ is tangent to the constant contour, the rate of change in the direction of $\mathbf v$ is zero, or $D_vf=0$. We also know $D_vf=\mathbf v\cdot \nabla f=\|\mathbf v\|\|\nabla f\|\cos\theta$, where $\theta$ is the angle between $\mathbf v$ and $\nabla f$. Since $\|\mathbf v\|=1$, $D_v=\|\nabla f\|\cos\theta=0$, and since $\nabla f$ is nonzero, $\cos \theta=0$, and therefore $\theta=90^{\circ }$. We conclude that $\nabla f \perp \mathbf v$, which says that $\nabla f$ is \emph{normal} to the contour. 
+
+In general, for a unit vector $\mathbf v\in \R^2$ we have $D_vf=\|\nabla f\|\cos\theta$. At a point $(x,y)$ the length $\|\nabla f\|$ is fixed, and $D_vf$ varies with $\theta$. The maximum value of $D_vf$ is when $\theta=0$ such that $\cos\theta=1$, and the smallest value is when $\theta=\pi$ such that $\cos\theta=-1$. So $f$ increases the fastest in the direction of $\nabla f$ (this is the case $\theta=0$) and slowest in the direction of $-\nabla f$. We can formulate our findings as a theorem.
+\begin{theorem}
+    Let $f \colon \R^2 \to \R$ be continuously differentiable, and $\nabla f \neq 0$. Then
+    \begin{enumerate}[label=(\alph*)]
+        \item The gradient $\nabla f$ is normal to any level curve $f(x,y)=c$.
+        \item The value of $f$ increases the fastest in the direction of  $\nabla f$.
+        \item The value of $f$ decreases the fastest in the direction of $-\nabla f$.
+    \end{enumerate}
+\end{theorem}
+\begin{example}
+    In which direction does $f \colon (x,y) \mapsto  xy^2+x^3y$ increase the fastest from the point $(1,2)$? What about the fastest rate of decrease?
+\end{example}
+\begin{solution}
+    We have $\nabla f=(y^2+3x^2y,2xy+x^3)$, so $\nabla f (1,2)=(10,5)\neq 0$. So a unit vector in that direction is $\mathbf v= \frac{\nabla f}{\|\nabla f\|}=\left( \frac{2}{\sqrt{5} },\frac{1}{\sqrt{5} } \right) $, similarly $\left( -\frac{2}{\sqrt{5} },-\frac{1}{\sqrt{5} } \right) $ in the direction of $-\nabla f$. You can fill in the rest.
+\end{solution}
+\subsection{Line integrals}
+Here we review the concept of a line integral.
+\begin{definition}[Line integral]\label{cfield}
+    For a function $f\colon \R^2 \to \R$ and a curve $C\subseteq \R^2$ parametrized by $x=x(t), y=y(t),a\leq t \leq b$, the \textbf{line integral} of $f(x,y)$ along $C$ is \[
+        \int_{C}^{} f(x,y) \, ds=\int_{a}^{b} f(x(t),y(t)) \sqrt{x'(t)^2+y'(t)^2}  \, dt,
+    \] where $s=s(t)=\int_{a}^{t} \sqrt{x'(u)^2+y'(u)^2}  \, du$ denotes the arc length of the curve. So $ds=s'(t)dt=\sqrt{x'(t)^2+y'(t)^2} dt$ by the FTC.
+\end{definition}
+Some basic things: traversing the curve in the opposite direction doesn't change anything. We can also define a line integral with respect to $x$ as opposed to $s$, where $\int_{C}^{} f(x,y) \, ds=\int_{a}^{b} f(x(t),y(t))x'(t) \, dt$. For the physically inclined, you can think of the line integral as work done by a force moving along a curve.
+
+Some of these constructions seem similar: we can work toward generalizing this. Define a function $f \colon \R^2 \to \R^2$ by $f \colon (x,y) \mapsto P \mathbf i+Q \mathbf j$ where $P,Q \colon \R^2 \to \R$, then $f$ is a \textbf{vector field} on $\R^2$. This function takes in points and outputs vectors. For a curve $C$ with parametrization $x=x(t),y=y(t),a\leq t \leq b$, let $\mathbf r(t)=x(t)\mathbf i+y(t)\mathbf j$ be the position vector for a point $(x(t),y(t))$ on $C$. Then $\mathbf r'(t)=x'(t)\mathbf i +y'(t)\mathbf j$ and so 
+\begin{align*}
+    \int_{C}^{} P(x,y) \, dx + \int_{C}^{} Q(x,y)\, dy&=\int_{a}^{b} P(x(t),y(t))x'(t) \, dt+\int_{a}^{b} Q(x(t),y(t))y'(t) \, dt\\
+                                                      &=\int_{a}^{b} \left( P(x(t),y(t))x'(t)+Q(x(t),y(t))y'(t) \right)  \, dt\\
+                                                      &= \int_{a}^{b} \mathbf f(x(t),y(t))\cdot \mathbf r'(t) \, dt.
+\end{align*}
+This leads us to the following definition.
+\begin{definition}[]\label{vfield}
+    For a vector field $\mathbf f=P \mathbf i +Q \mathbf j$ and a curve $C$ with parametrization $y=y(t),a\leq t \leq b$, the \textbf{line integral} of $f$ along $C$ is \[
+        \int_{C}^{} \mathbf f \cdot  d\mathbf r=\int_{C}^{} P(x,y) \, dx+\int_{C}^{} Q(x,y) \, dy=\int_{a}^{b} \mathbf f(x(t),y(t))\cdot \mathbf r'(t) \, dt,
+    \] where $\mathbf r(t)=x(t)\mathbf i+y(t)\mathbf j$ is the position vector for points on $C$.
+\end{definition}
+We distinguish \cref{cfield} and \cref{vfield} by calling one the line integral of a \emph{scalar field} and the other the line integral of a \emph{vector field}. Which one corresponds to which should be clear from context. We use the notation $d\mathbf f=\mathbf r'(t)dt=dx \mathbf i+dy\mathbf j$ to denote the \textbf{differential} of $\mathbf r$. Often we denote $\int_{C}^{} P(x,y) \, dx+\int_{C}^{} Q(x,y) \, dy$ by $\int_{C}^{} P(x,y) \, dx+ Q(x,y)\, dy$ for convenience. $P(x,y)dx+Q(x,y)dy$ is known as a \textbf{differential form}. For $F \colon \R^2 \to \R$, the \textbf{differential} of $F$ is $dF= \frac{\partial F}{\partial x}dx+ \frac{\partial F}{\partial y}dy$. A form is \textbf{exact} if it's the form of some function $F$.
+
+Recall that $\mathbf r'(t)$ is a tangent vector to points on $C$ in the direction of $C$. $C$ is smooth, therefore $\mathbf r'(t)\neq 0$ on $[a,b]$ and so the unit tangent vector to $C$ at a point is given by $\mathbf T(t)= \frac{\mathbf r'(t)}{\|\mathbf r'(t)\|}  $. This naturally leads us to the following theorem:
+\begin{theorem}
+    For a vector field $\mathbf f= P\mathbf i+Q\mathbf j$ and a smooth curve $C$ parametrized on $[a,b]$ with position vector $\mathbf r(t)=x(t)\mathbf i+y(t)\mathbf j$, we have \[
+        \int_{C}^{} \mathbf f \cdot  d\mathbf r=\int_{C}^{} \mathbf f\cdot \mathbf T ds,
+    \] where $\mathbf T(t)=\frac{\mathbf r'(t)}{\|\mathbf r'(t)\|}$.
+\end{theorem}
+This also works for piecewise smooth curves. If $C=C_1\cup C_2\cup \cdots \cup C_n $, then \[
+\int_{C}^{} \mathbf r\cdot d\mathbf r=\int_{C_1}^{} \mathbf f \cdot d\mathbf r_1+\int_{C_2}^{} \mathbf f\cdot d\mathbf r_2+\cdots +\int_{C_n }^{} \mathbf f\cdot d\mathbf r_n .
+\] 
+\begin{example}
+    Evaluate $\int_{C}^{} (x^2+y^2) \, dx+2xy\,dy$ on the curves $x=t, \ y=2t$ and $x=t,\ y=2t^2$ for $t\in [0,1]$.
+\end{example}
+\begin{solution}
+    For the first curve, note that $x'(t)=1$ and $y'(t)=2$, so \[
+        \int_{C}^{} (x^2+y^2) \, dx+2xy \, dy=\int_{0}^{1} (t^2+4t^2)x'(t) +2t(2t)y'(t)\, dt=\int_{0}^{1} 5t^2+8t^2 \, dt=\frac{13}{3}.
+    \] Similarly, for the second curve $x'(t)=1$ and $y'(t)=4t$, and so \[
+    \int_{C}^{} (x^2+y^2) \, dx+2xy\, dy=\int_{0}^{1} (t^2+4t^4)+(2t\cdot 2t^2\cdot 4t) \, dt=\int_{0}^{1} t^2+20t^4 \, dt=\frac{13}{3}.
+    \] 
+\end{solution}
+\subsection{Closed curves and conservative vector fields}
+Recall that $\int_{C}^{} f(x,y) \, ds=\int_{-C}^{} f(x,y) \, ds$ for line integrals of scalar fields, but for vector fields this does not hold, namely, $\int_{-C}^{} \mathbf f \cdot  dr=-\int_{C}^{} \mathbf f \cdot dr $. Recall that our definition of line integrals depends on the parametrization of the curve: what if we parametrize $C$ by some alternative parametrization? Then our definition would not be well defined, and this would be very bad. Thankfully, this is not the case, as long as the orientation of $C$ is invariant under parametrization.
+\begin{theorem}
+    Let $\mathbf f=P\mathbf i+Q\mathbf j$ be a vector field and $C$ be a smooth curve parametrized by $x=x(t),y=y(t)$ for $t\in [a,b]$. Say $t=\alpha (u)$ for $u\in [c,d]$ such that $a=\alpha (c),b=\alpha (d)$, and $\alpha '(u)>0$ on the interval $(c,d)$. Then $\int_{C}^{} \mathbf f \cdot d\mathbf r$ has the same value for the alternate parametrization $x=\widetilde x(u)=x(\alpha (u)),y=\widetilde y(u)=y(\alpha (u)),u\in [c,d]$.
+\end{theorem}
+\begin{proof}
+    Not too interesting, chain rule and $u$-sub.
+\end{proof}
+A \textbf{closed curve} is a loop, and a \textbf{simple closed curve} has no self-intersections, and we denote line integrals along closed curves with $\oint$. 
+\begin{theorem}
+    In a region $R$, the line integral $\int_{C}^{} \mathbf f \cdot  d\mathbf r$ is independent of path between two points of $R$ iff $\oint_{C}^{} \mathbf f \cdot  d\mathbf r=0$ for $C\subseteq R$ a closed curve.
+\end{theorem}
+\begin{proof}
+    Split $C=C_1\cup -C_2$ and go from there.
+\end{proof}
+This doesn't completely determine path independence, but it does relate some things. We work toward a more practical condition for independence of path.
+\begin{theorem}[Chain Rule]
+    If $z=f(x,y)$ is a continuously differentiable function of $x$ and $y$, and both $x=x(t)$ and $y=y(t)$ are differentiable functions of $t$, then $Z$ is a differentiable function of $t$, and \[
+    \frac{dz}{dt}=\frac{\partial z}{\partial x}\frac{dx}{dt}+ \frac{\partial z}{\partial y}\frac{dy}{dt}.
+    \]  
+\end{theorem}
+\begin{theorem}\label{ftv}
+    Let $\mathbf f=P\mathbf i+Q\mathbf j$ be a vector field on some region $R$, where $P,Q \colon \R^2 \to \R$ are continuously differentiable. Let $C\subseteq R$ be a smooth curve with parametrization $x=x(t),y=y(t),t\in [a,b]$. Suppose we have a function $F \colon \R^2 \to \R$ such that $\nabla F=\mathbf f$ on $R$. Then \[
+        \int_{C}^{} \mathbf f \cdot d\mathbf r=F(B)-F(A),
+    \] where $A=(x(a),y(a))$ and $B=(x(b),y(b))$ are the endpoints of $C$. So the line integral depends only on the endpoints.
+\end{theorem}
+\begin{proof}
+We have 
+\begin{align*}
+    \int_{C}^{} \mathbf f\cdot d\mathbf r&=\int_{a}^{b} \left( P(x(t),y(t))x'(t)+Q(x(t),y(t))y'(t) \right)  \, dt\\
+                                         &=\int_{a}^{b} \left( \frac{\partial F}{\partial x}\frac{dx}{dt}+\frac{\partial F}{\partial y}\frac{dy}{dt} \right)  \, dt \ \text{(since} \ \nabla F=\mathbf f \implies \frac{\partial F}{\partial x}=P \ \text{and} \ \frac{\partial F}{\partial y}=Q\text{)}\\
+                                         &=\int_{a}^{b} F'(x(t),y(t)) \, dt\\
+                                         &=\Big. F(x(t),y(t)) \Big|_a^b=F(B)-F(A).\qedhere
+\end{align*}
+\end{proof}
+We can think of \cref{ftv} as the line integral version of the FTC. A function $F \colon \R^2 \to \R$ such that $\nabla F= \mathbf f$ is a \textbf{potential} for $\mathbf f$. A \textbf{conservative} vector field is one that has a potential.
+\begin{cor}
+    If a vector field $\mathbf f$ has a potential in a region $R$, then $\oint_{C}^{}  \mathbf f\cdot d\mathbf r=0$ for any closed curve $C\subseteq R$, in other words, $\oint_{C}^{} \nabla F  \cdot  d\mathbf r=0$ for any $F \colon \R^2 \to \R$.
+\end{cor}
+\begin{example}
+    Show that the line integral $\int_{C}^{} (x^2+y^2) \, dx+2xy \, dy$ is path independent.
+\end{example}
+\begin{solution}
+    We want to show that $\mathbf f$ is conservative, that is, we want to find a potential $F$ such that \[
+    \frac{\partial F}{\partial x}=x^2+y^2 \quad \text{and} \quad \frac{\partial F}{\partial y}=2xy.
+    \] 
+    If $\frac{\partial F}{\partial x}=x^2+y^2$, then $F=\frac{1}{3}x^3+xy^2+g(y)$ for some function $g(y)$. This satisfies $\frac{\partial F}{\partial y}=2xy$ if $g'(y)=0,$ so $g$ is a constant (say $g=0$). Then a potential $F$ exists, where $F(x,y)=\frac{1}{3}x^3+xy^2$. So $\int_{C}^{} (x^2+y^2) \, dx+2xy \, dy$ is path independent. By \cref{ftv}, we can also see that any value of $\int_{C}^{} \mathbf f \cdot  dr=\frac{13}{3}$ for $C$ from $(0,0)$ to $(1,2)$ since \[
+        \int_{C}^{} \mathbf f \cdot d\mathbf f=F(1,2)-F(0,0)=\frac{1}{3}+4=\frac{13}{3}.
+    \] 
+\end{solution}
+
+\subsection{Green's Theorem}
+We now examine a way of evaluating line integrals on smooth vector fields (a vector field whose components $P$ and $Q$ are smooth) on simple closed curves.
+\begin{namedthm}{Green's Theorem}
+    Let $R$ be a region in $\R^2$ whose boundary is a simply closed curve $C$ which is piecewise smooth. Let $\mathbf f=P \mathbf i +Q \mathbf j$ be a smooth vector field defined on both $R$ and $C$. Then \[
+        \oint_{C}^{} \mathbf f \cdot d \mathbf r= \iint\limits_R\left( \frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y} \right)  \, dA.
+    \]  
+\end{namedthm}
+\begin{proof}
+    We prove Green's theorem for a simple region $R$, where $C=C_1\cup C$. We can write $C$ in two distinct ways, one where $C_1$ is the curve $y=y_1(x)$ from the farthest horizontal points $X_1$ and $X_2$ ($C_2$ is similarly defined) and the other where $C_1$ is the curve $x=x_1(y)$ from the farthest vertical points $Y_2$ to $Y_1$. Integrate $P$ around $C $ where $C_1$ is $y=y_1(x)$, then 
+    \begin{align*}
+        \oint_{C}^{} P(x,y) \, dx&= \int_{C_1}^{} P(x,y) \, dx+ \int_{C_2}^{} P(x,y) \, dx\\
+                                 &=\int_{a}^{b} P(x,y_1(x)) \, dx+\int_{b}^{a} P(x,y_2(x)) \, dx\\
+                                 &=\int_{a}^{b} (P(x,y_1(x))-P(x,y_2(x)))\,dx \\
+                                 &=-\int_{a}^{b} \left( \Big. P(x,y) \Big|_{y=y_1(x)}^{y=y_2(x)}  \right)  \, dx\\
+                                 &=-\int_{a}^{b} \int_{y_1(x)}^{y_2(x)} \frac{\partial  P(x,y)}{\partial y} \, dy \, dx\\
+                                 &=-\iint\limits_R \frac{\partial P}{\partial y} \, dA
+    \end{align*}A similar calculation shows that $\int_{C}^{} Q(x,y) \, dy=\iint_R\frac{\partial Q}{\partial x}\,dA$ by integrating along $C$ where $C_1=x_1(y)$. This finishes the proof. Of course, we can generalize this if we wish.
+\end{proof}
+\begin{example}
+    To evaluate $\int_{C}^{} (x^2+y^2) \, dx+2xy\, dy$ where $C$ is the boundary enclosed by $y=2x$ and $y=2x^2$, by Green's Theorem we have \[
+        \oint_{C}^{} (x^2+y^2) \, dx+2xy\,dy=\iint\limits_R \left( \frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y} \right) \,dA=\iint\limits_R (2y-2y)dA=0.
+    \] Of course we already knew this, since $\mathbf f$ has a potential function.
+\end{example}
+\begin{example}
+    To see where Green's Theorem does not hold, let $\mathbf f$ be defined by $P=-\frac{y}{x^2+y^2}$ and $Q=\frac{x}{x^2+y^2}$ on a punctured disk homeomorphic to the annulus given by $R= \{(x,y) \mid 0<x^2+y^2\leq 1\} $. An exercise shows that $\oint_C \mathbf f\cdot d\mathbf r=2\pi$, but since both $\frac{\partial Q}{\partial x}$ and $\frac{\partial P}{\partial y}$ are equal to $\frac{y^2-x^2}{(x^2+y^2)^2}$ we have $\iint\limits_R \left( \frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y} \right) \,dA=0$. The key thing is that the we integrated over a region not contained in $R$. If we outright define $R$ as an annulus with boundary, then this works.
+\end{example}
+As seen in the example, we can extend Green's Theorem for multiply connected closed regions, just subdivide while preserving orientation and use the fact that it still works for curves $C_1=C_2$. Say we have a smooth potential $F$ in $R$ of a vector field $\mathbf f$, then $\frac{\partial F}{\partial x}=P$ and $\frac{\partial F}{\partial y}=Q$, so $\frac{\partial ^2F}{\partial y\partial x}=\frac{\partial ^2F}{\partial x\partial y}$ implies that $\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x} \ \text{in} \ R.$ Conversely, if $\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}$ in $R$, then $\oint_{C}^{} \mathbf f\cdot d\mathbf r=\iint\limits_R \left( \frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y} \right) \, dA=0.$ Then for a simply connected region $R$, the following are equivalent: 
+\begin{enumerate}[label=(\alph*)]
+    \item $\mathbf f=P\mathbf i+Q\mathbf j$ has a smooth potential $F \colon \R^2 \to \R$, 
+    \item $\int_{C}^{} \mathbf f\cdot d\mathbf r$ is independent of path for curves $C\subseteq R$, 
+    \item $\oint_{C}^{} \mathbf f \cdot d\mathbf r=0$ for every simple closed curve $C\subseteq R$,
+    \item $\frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}$ in $R$ (in this case, the differential form $P \, dx + Q\, dy$ is exact).
+\end{enumerate}
+
+\subsection{Surface Integrals and the Divergence Theorem}
+Similar to how curves are parametrized with a variable $t$, we can parametrize surfaces in $\R^3$ with two variables $u,v$, in essence a continuous map $f \colon I^2 \to \R^3$. In this case, a position vector is given by $\mathbf r(u,v)=x(u,v)\mathbf +y(u,v) \mathbf j+ z(u,v) \mathbf k$ for $(u,v)\in R$ (where $R$ is a region in $\R^2$). Then define the partial derivatives as $\frac{\partial \mathbf r}{\partial u}(u,v)=\frac{\partial x}{\partial u}(u,v)\mathbf i+\frac{\partial y}{\partial u}(u,v)\mathbf j+\frac{\partial z}{\partial u}(u,v)\mathbf k$ and $\frac{\partial \mathbf r}{\partial v}(u,v)$ analogously. Tangent vectors to points on vertical gridlines are given by $\frac{\partial \mathbf r}{\partial v}$, and similarly for horizontal gridlines.
+
+Take a rectangle at a point $(u,v)$ with width $\Delta u$ and height $\Delta v$, so it has area $\Delta u\Delta v$. It gets mapped onto some surface $\Sigma$ by a parametrization, with small enough $\Delta $ (say $\Delta \sigma)$ is approximately the area of the rectangle. Recall that $\frac{\partial \mathbf r}{\partial u}\approx \frac{\mathbf r(u+\Delta u,v)-\mathbf r(u,v)}{\Delta u}$ and $\frac{\partial \mathbf r}{\partial v}\approx \frac{\mathbf r(u,v+\Delta v)-\mathbf r(u,v)}{\Delta v}$, then the surface area is approximately \[
+    \|(\mathbf r(u+\Delta u)-\mathbf r(u,v))\times (\mathbf r(u,v+\Delta v)-\mathbf r(u,v))\|\approx \left\| \left( \Delta u\frac{\partial \mathbf r}{\partial u} \right) \times \left( \Delta v \frac{\partial \mathbf r}{\partial v} \right)\right\| =\left\| \frac{\partial \mathbf r}{\partial u}\times \frac{\partial \mathbf r}{\partial v}\right\| \Delta u\Delta v.
+\] This is just taking the norm of the cross product of the two vectors that make up the rectangle, nothing special. So the surface area of a surface $\Sigma$ is the sum of the $\left\| \frac{\partial \mathbf r}{\partial u}\times \frac{\partial \mathbf r}{\partial v}\right\| \Delta u\Delta v $ over the rectangles in $R$, therefore \[
+S = \iint\limits_R \left\| \frac{\partial \mathbf r}{\partial u}\times \frac{\partial \mathbf r}{\partial v}\right\| du\,dv.
+\] We'll notate this $\iint\limits_{\Sigma}d\sigma=\iint\limits_R \left\| \frac{\partial \mathbf r}{\partial u}\times \frac{\partial \mathbf r}{\partial v}\right\| du\,dv$, which is a special case of a \emph{surface integral} over a surface $\Sigma$.
+\begin{definition}[]
+    Let $\Sigma$ be a surface in $\R^3$ parametrized by $x=x(u,v),\ y=y(u,v), \ z=z(u,v)$ for $(u,v)$ in some region $R\subseteq \R^2$. Let $\mathbf r(u,v)=x(u,v) \mathbf i+y(u,v) \mathbf j+z(u,v)\mathbf k$ be the position vector for $\Sigma$, and let $f$ be a function on some subset of $\R^3$ containing $\Sigma$. Then the \textbf{surface integral} of $f$ over $\Sigma$ is \[
+        \iint\limits_{\Sigma}f \, d\sigma =\iint\limits_R f(x(u,v),y(u,v),z(u,v)) \left\| \frac{\partial \mathbf r}{\partial u}\times \frac{\partial \mathbf r}{\partial v}\right\| du\,dv.
+    \] In particular, the surface area $S$ of $\Sigma$ is equal to $\iint\limits_{\Sigma}1 \, d\sigma$.
+\end{definition}
+Since $\frac{\partial \mathbf r}{\partial u}$ and $\frac{\partial \mathbf r}{\partial v}$ are tangent to the surface $\Sigma$, $\frac{\partial \mathbf r}{\partial u}\times \frac{\partial \mathbf r}{\partial v}$ is perpendicular to the tangent plane at each point of $\Sigma$, so the surface integral of a function $f$ can be expressed as $\iint_R f \, \|\mathbf n\|\,d\sigma$, where $\mathbf n=\frac{\partial \mathbf r}{\partial u}\times \frac{\partial \mathbf r}{\partial v}$ is a \textbf{normal vector} to $\Sigma$. An \textbf{outward unit normal vector} points away from the ``top'' part of the surface. Let's define surface integrals of three dimensional vector fields.
+\begin{definition}[]
+    Let $\Sigma$ be a surface in $\R^3$ and let $\mathbf f=f_1 \mathbf i+f_2\mathbf j +f_3\mathbf k$ be a vector field defined on some subset of $\R^3$ containing $\Sigma$. The \textbf{surface integral} of $\mathbf f$ over $\Sigma$ is \[
+    \iint\limits_{\Sigma}\mathbf f \cdot d\sigma = \iint\limits_{\Sigma}\mathbf f \cdot  \mathbf n \, d\sigma,
+    \] where $\mathbf n$ is the outward unit normal vector to $\Sigma$.
+\end{definition}
+
+
+\begin{example}
+    Let's find the surface area $T$ of a torus, created by revolving a circle of radius $a$ in the $yz$-plane around the $z$-axis, at a distance $b$ from the $z$-axis. Say points on longitudinal circles make an angle of $u$ and meridional circles an angle of $v$ with their midpoints. Then we can parametrize the torus as \[
+        x=(b+a \cos u) \cos v, \quad y=(b+a \cos u)\sin v, \quad z= a \sin u, \quad 0\leq u \leq 2\pi, \quad 0\leq v \leq 2\pi.
+    \] So $\frac{\partial \mathbf r}{\partial u}=-a \sin u \cos v \,\mathbf i - a \sin u \sin v \,\mathbf j+a \cos u \,\mathbf k$ and $\frac{\partial \mathbf r}{\partial v}=-(b+a \cos u ) \sin v \, \mathbf i+ (b+a \cos u) \cos v \,\mathbf j+0\mathbf k$, therefore the cross product $\frac{\partial \mathbf r}{\partial u}\times \frac{\partial r}{\partial v}$ is $-a(b+a \cos u) \cos v \cos u \, \mathbf i-a(b+a \cos u) \sin v \cos u \, \mathbf j-a(b+a \cos u) \sin u \, \mathbf k$, which has magnitude $a(b+a \cos u)$. So the surface area $S$ is equal to $\iint_{\Sigma}1\, d\sigma$, which is equal to \[
+    \int_{0}^{2\pi} \int_{0}^{2\pi} \left\| \frac{\partial \mathbf r}{\partial u}\times \frac{\partial \mathbf r}{\partial v}\right\| \, du \, dv=\int_{0}^{2\pi} \int_{0}^{2\pi} a(b+a \cos u) \, du \, dv=\int_{0}^{2\pi} \left( \Big. abu+a^2\sin u \Big|_{u=0}^{u=2\pi} \right)  \, dv,
+    \] which simplifies to $4\pi^2ab$.
+\end{example}
+\begin{example}
+    Let's calculate a surface integral. Hopefully this shouldn't take too much time. Let $\mathbf f=yz \mathbf i+xz\mathbf j+xy\mathbf k$ and $\Sigma$ be the plane $x+y+z=1$ bounded by $x\geq 0,\,y\geq 0,\, z\geq 0$. The outward unit normal vector is $\mathbf n= \left( \frac{1}{\sqrt{3} }, \frac{1}{\sqrt{3} }, \frac{1}{\sqrt{3} } \right) $, and $\Sigma$ is parametrized by $z=1-(u+v)$ for $u\in [0,1],\, v\in [0,1-u]$ (call this region $R$) by projecting $\Sigma$ onto the $xy$-plane. Then $\mathbf f\cdot \mathbf n=(yz,xz,xy)\cdot \left( \frac{1}{\sqrt{3} },\frac{1}{\sqrt{3} },\frac{1}{\sqrt{3} } \right) =\frac{1}{\sqrt{3} }(yz+xz+xy)=\frac{1}{\sqrt{3} }((x+y)z+xy)=\frac{1}{\sqrt{3} }((u+v)(1-(u+v))+uv)=\frac{1}{\sqrt{3}} ((u+v)-(u+v)^2+uv)$ for $(u,v)\in R$. For $\mathbf r=u\mathbf j+v\mathbf j+(1-(u+v))\mathbf k$ we have $\frac{\partial \mathbf r}{\partial u}\times \frac{\partial \mathbf r}{\partial v}=(1,0,-1)\times (0,1,-1)=(1,1,1)$, so $\left\| \frac{\partial \mathbf r}{\partial u}\times \frac{\partial \mathbf r}{\partial v}\right\|=\sqrt{3} $. Then \[
+        \iint\limits_{\Sigma}\mathbf f\cdot \mathbf n \, d\sigma= \int_{0}^{1} \int_{0}^{1-u} \frac{1}{\sqrt{3} }((u+v)-(u+v)^2+uv)\sqrt{3}  \, dv \, du=\frac{1}{8}.
+    \] 
+\end{example}
+Computing surface integrals can be tedious. If $\Sigma$ is a \textbf{closed surface} (ie bounds a solid in $\R^3$, or is a $2$-manifold), the Divergence Theorem makes this easier for us.
+\begin{namedthm}{Divergence Theorem}
+    Let $\Sigma$ be a closed surface in $\R^3$ that bounds a solid $S$, and let $\mathbf f=f_1\mathbf i+f_2\mathbf j+f_3\mathbf k$ be a vector field defined on some subset of $\R^3$ containing $\Sigma$. Then \[
+    \iint\limits_{\Sigma}\mathbf f \cdot d\sigma= \iiint\limits_S \operatorname{div}\mathbf f\, dV,
+\] where $\operatorname{div}\mathbf f=\frac{\partial f_1}{\partial x}+\frac{\partial f_2}{\partial y}+\frac{\partial f_3}{\partial z}$ is the \textbf{divergence} of $\mathbf f$.
+\end{namedthm}
+\begin{proof}
+    The proof is similar to Green's Theorem, first being proved for when $S$ is bounded above and below by one surface, and laterally by a number of surfaces. Then extend the proof to a general solid.
+\end{proof}
+\begin{example}
+   To evaluate the surface integral $\iint_{\Sigma}\mathbf f \cdot d\sigma$ where $\mathbf f=x\mathbf i+y\mathbf j+z\mathbf k,\ \Sigma=S^2$ using the Divergence Theorem, note that $\operatorname{div}\mathbf f=1+1+1=3$, so \[
+       \iint\limits_{\Sigma}\mathbf f\cdot d\sigma=\iiint\limits_S \operatorname{div}\mathbf f \, dV=3 \iiint\limits_S 1\, dV+3 \operatorname{vol}(S)=4\pi.
+   \] 
+\end{example}
+\begin{note}
+    Warning, physics will follow. The surface integral $\iint_{\Sigma}\mathbf f \cdot d\Sigma$ is often called the \textbf{flux} of $\mathbf f$ through $\Sigma$. If $\mathbf f$ represents the velocity of a field of a fluid, a positive flux means a net flow out of the fluid (in the direction of $n$), and similarly negative flux means net inward flow in the direction of $-\mathbf n$. 
+
+    Divergence can be interpreted as how much a vector field diverges from a point, which makes more sense with the following definition equivalent to the Divergence Theorem: \[
+        \operatorname{div}\mathbf f(x,y,z)= \lim_{V\to 0}\frac{1}{V}\iint\limits_{\Sigma}\mathbf f\cdot d\sigma,
+    \] where $V$ is the volume enclosed by $\Sigma$ around $(x,y,z)$. Taking the limit as $V\to 0$ means taking smaller and smaller neighborhoods around $(x,y,z)$. The limit is the ratio of flux through a surface to the volume enclosed by the surface, giving a rough measure of a flow ``leaving'' a point. Vector fields with zero divergence are called \emph{solenoidal} fields.
+\end{note}
+\begin{cor}
+    If the flux of a vector field $\mathbf f$ is zero through every closed surface containing a given point, then $\operatorname{div}\mathbf f=0$ at such point.
+\end{cor}
+\begin{proof}
+    At a point $(x,y,z)$ we have $\operatorname{div}\mathbf f(x,y,z)=\lim_{V\to 0}\frac{1}{V}\iint_{\Sigma}\mathbf f\cdot d\sigma$, but the surface integral is zero by assumption, so the limit is also zero, and we are done.
+\end{proof}
+\begin{note}
+    Sometimes \[
+        \oiint\limits_{\Sigma}f(x,y,z)\,d\sigma \quad \text{and} \quad \oiint\limits_{\Sigma}\mathbf f\cdot d\sigma
+    \] are used to denote surface integrals of scalar and vector fields, respectively, over closed surfaces. In physics, you often see $\oint\limits_{\Sigma}$ instead of $\oiint\limits_{\Sigma}$ (it's just \texttt{\textbackslash oiint} as opposed to \texttt{\textbackslash oint}??).
+\end{note}
+\subsection{Stokes' Theorem}
+This is the good stuff. Let's generalize things.
+\begin{definition}[]
+    For a function $f \colon \R^3 \to \R$ and curve $C\subseteq \R^3$ parametrized by $x=x(t),\ y=y(t), z=z(t), \ t\in [a,b]$, the \textbf{line integral} of $f$ along $C$ with respect to arc length $s$ is \[
+        \int_{C}^{} f \, ds = \int_{a}^{b} f(x(t),y(t),z(t)) \sqrt{x'(t)^2+y'(t)^2+z'(t)^2}  \, dt.
+    \] The line integral of $f$ along $C$ with respect to $x$ is $\int_{C}^{} f \, dx=\int_{a}^{b} f(x(t),y(t),z(t))x'(t) \, dt$, and the line integrals of $f$ with respect to $y$ and $z$ are similarly defined. 
+\end{definition}
+\begin{definition}[]
+    For a vector field $\mathbf f=P\mathbf i+Q\mathbf j+R \mathbf k$ for $P,Q,K \colon \R^3 \to \R$ and a curve $C\subseteq \R^3$ with smooth parametrization $x=x(t),\ y=y(t),\ z=z(t), \ t\in [a,b]$, the \textbf{line integral} of $\mathbf f$ along $C$ is \[
+        \int_{C}^{} f\cdot d\mathbf r=\int_{C}^{} P \, dx+\int_{C}^{} Q \, dy+\int_{C}^{} R \, dz=\int_{a}^{b} \mathbf f(x(t),y(t),z(t))\cdot \mathbf r'(t)dt,
+    \] where $\mathbf r(t)=x(t)\mathbf i+y(t)\mathbf j+z(t)\mathbf k$ is the position vector for $C$.
+\end{definition}
+\begin{theorem}
+    For a vector field $\mathbf f$, we have \[
+        \int_{C}^{} \mathbf f\cdot d \mathbf r=\int_{C}^{} \mathbf f\cdot \mathbf T \, ds
+    \] where $\mathbf T(t)=\frac{\mathbf r'(t)}{\|\mathbf r'(t)\|}$ is the unit tangent vector for $C$.
+\end{theorem}
+\begin{theorem}
+    For a vector field $\mathbf f$ with $P,Q,R$ continuously differentiable functions on a solid $S$, if there exists an $F \colon \R^3 \to \R$ such that $\nabla F=\mathbf f$ on $S$, then for $A,B$ endpoints of a curve $C$ we have \[
+        \int_{C}^{} \mathbf f\cdot d\mathbf r=F(B)-F(A).
+    \] 
+\end{theorem}
+\begin{cor}
+    For any $F \colon \R^3 \to \R$, we have $\oint_C \nabla F\cdot d\mathbf r=0$.
+\end{cor}
+Now that we've finished the theorem spam, let's talk about generalizing Green's Theorem to \textbf{orientable} surfaces, which require the existence of a continuous nonzero vector field $\mathbf N$ in $\R^3$ normal to the surface (i.e. perpendicular to the the tangent plane for all points of the surface). We call $\mathbf N$ a \emph{normal vector field}. For an orientable surface $\Sigma$ with boundary $C$, choose a unit normal vector $\mathbf n$ with the surface on the left, we say $\mathbf n$ is a \emph{positive unit normal vector} and that $C$ is traversed $\mathbf n$-positively. 
+\begin{namedthm}{Stoke's Theorem}
+    Let $\Sigma$ be an orientable surface in $\R^3$ whose boundary is a simple closed curve $C$, and for $P,Q,R \colon \R^3 \to \R$ let $\mathbf f = P\mathbf i+Q\mathbf j+R\mathbf k$ be a smooth vector field defined on a subset of $\R^3$ containing $\Sigma$. Then \[
+        \oint_C \mathbf f\cdot d\mathbf r=\iint\limits_{\Sigma}(\operatorname{curl}\mathbf f)\cdot \mathbf n \, d\sigma,
+    \] where \[
+    \operatorname{curl}\mathbf f=\left( \frac{\partial R}{\partial y}-\frac{\partial Q}{\partial z} \right) \mathbf i + \left( \frac{\partial P}{\partial z}-\frac{\partial R}{\partial x} \right) \mathbf j+\left( \frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y} \right) \mathbf k,
+    \] $\mathbf n$ is a positive unit normal vector over $\Sigma$, and $C$ is traversed $\mathbf n$-positively.
+\end{namedthm}
+\begin{proof}
+    Homology! Omitted because we'll come back to this during diff top.
+\end{proof}
+You can think of $\oint_C \mathbf f\cdot d\mathbf r$ as the \textbf{circulation} of $\mathbf f$ around $C$, for example, if $\mathbf E$ represents the electrostatic field due to a point charge, then $\operatorname{curl}\mathbf E=0$, so the circulation $\oint_C \mathbf E\cdot d\mathbf r=0$ by Stokes' Theorem. Such vector fields are called irrotational fields. The term ``curl'' was made to talk about electromagnetism, which measures something called \emph{circulation density}. We can see this by considering the following definition for curl: \[
+    \mathbf n\cdot (\operatorname{curl}\mathbf f)(x,y,z)=\lim_{S\to 0}\frac{1}{S}\oint_C \mathbf f\cdot d\mathbf r,
+\] where $S$ is the surface area of a surface $\Sigma$ containing a point $(x,y,z)$ with boundary curve $C$ and positive unit normal vector $\mathbf n$. Imagine $C$ shrinking to encapsulate $(x,y,z)$, causing $S$ to approach zero. The ratio of circulation to surface area is what makes the curl a rough measure of circulation density.
+\begin{theorem}
+    Let $S$ be a simply connected solid region in $\R^3$. Then the following are equivalent:
+    \begin{enumerate}[label=(\alph*)]
+        \item $\mathbf f=P\mathbf i+Q\mathbf j+R\mathbf k$ has a smooth potential $F$ in $S$,
+        \item $\int_C \mathbf f\cdot d\mathbf r$ is path independent of curves $C$ in $S$, 
+        \item $\oint_C \mathbf f\cdot d\mathbf r=0$ for every simple closed curve $C$ in $S$,
+        \item $\frac{\partial R}{\partial y}=\frac{\partial Q}{\partial z}, \ \frac{\partial P}{\partial z}= \frac{\partial R}{\partial x}, \ $ and $\frac{\partial Q}{\partial x}=\frac{\partial P}{\partial y}$ in $S$ (i.e. $\operatorname{curl}\mathbf f=0$ in $S$, or the differential form $P \,dx+Q\,dy+R\,dz$ is exact).
+    \end{enumerate}
+\end{theorem}
+\subsection{Div, grad, curl}
+A wrap up section. For $f \colon \R^n  \to \R$, $\nabla f$ is a vector-falued function $\R^n \to \R^n $, so we can ``apply'' the del operator to $f$ to get a new function. Think of $\nabla= \frac{\partial }{\partial x}\mathbf i+\frac{\partial }{\partial y}\mathbf j+\frac{\partial }{\partial z}\mathbf k$ as a ``vector'' in $\R^3$, this doesn't make sense on its own but we apply these to functions (to get $\frac{\partial f}{\partial x},\ \frac{\partial f}{\partial y},\ \frac{\partial f}{\partial z}$ for example). We denote the divergence $\operatorname{div}\mathbf f$ as $\nabla\cdot \mathbf f$, the dot product of $\mathbf f$ with $\nabla$, the reasoning can be seen below: \[
+\nabla \cdot \mathbf f=\left( \frac{\partial }{\partial x}\mathbf i+\frac{\partial }{\partial y}\mathbf j+\frac{\partial }{\partial z}\mathbf k \right) \cdot (f_1 \mathbf i+f_2\mathbf j+f_3\mathbf k)=\frac{\partial f_1}{\partial x}+\frac{\partial f_2}{\partial y}+\frac{\partial f_3}{\partial z}=\operatorname{div}\mathbf f.
+\] Similarly, we write $\operatorname{curl}\mathbf f$ as the cross product $\nabla \times \mathbf f$, this is a fairly straightforward calculation. The divergence of the gradient $\nabla\cdot \nabla f$ has a special name, the \textbf{Laplacian} of $f$, where $\nabla^2f=\frac{\partial ^2f}{\partial x^2}+\frac{\partial ^2f}{\partial y^2}+\frac{\partial ^2f}{\partial z^2}$.
+\begin{theorem}
+    The curl of the gradient is zero, or $\nabla\times (\nabla f)=0$ for any smooth $f \colon \R^3 \to \R$.
+\end{theorem}
+\begin{proof}
+   We have 
+   \[
+   \nabla \times (\nabla f)=\begin{vmatrix}
+       \mathbf i & \mathbf j & \mathbf k \\
+       \frac{\partial }{\partial x} & \frac{\partial }{\partial y}& \frac{\partial }{\partial z}\\
+       \frac{\partial f}{\partial x}& \frac{\partial f}{\partial y}& \frac{\partial f}{\partial z}
+   \end{vmatrix}=\left( \frac{\partial ^2f}{\partial y\partial z}-\frac{\partial ^2f}{\partial z\partial y} \right) \mathbf i - \left( \frac{\partial ^2f}{\partial x\partial z}-\frac{\partial ^2f}{\partial z\partial x} \right) \mathbf j+ \left( \frac{\partial ^2f}{\partial x\partial y}-\frac{\partial ^2f}{\partial y\partial x} \right) \mathbf k.
+   \] Since $f$ is smooth, the mixed partial derivatives cancel, and this expression is equal to zero.
+\end{proof}
+\begin{cor}
+    If a vector field $\mathbf f(x,y,z)$ has a potential, then $\operatorname{curl} \mathbf f=0$.
+\end{cor}
+\begin{theorem}
+    The divergence of the curl is zero, or $\nabla\cdot (\nabla\times \mathbf f)=0$ for smooth vector fields $\mathbf f(x,y,z)$.
+\end{theorem}
+\begin{proof}
+We have 
+\begin{align*}
+    \nabla \cdot (\nabla \times  \mathbf f) &=  \frac{\partial }{\partial z}\left( \frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y} \right) +\frac{\partial }{\partial y} \left( \frac{\partial P}{\partial z}-\frac{\partial R}{\partial x} \right)+\frac{\partial }{\partial x}\left( \frac{\partial R}{\partial y}-\frac{\partial Q}{\partial z} \right) \\
+                                            &=\frac{\partial ^2Q}{\partial z\partial x}+\left( \frac{\partial ^2P}{\partial y\partial z}-\frac{\partial ^2P}{\partial z\partial y} \right) +\left( \frac{\partial ^2R}{\partial x\partial y}-\frac{\partial ^2R}{\partial y\partial x} \right) -\frac{\partial ^2Q}{\partial x\partial z}\\
+                                            &=0 \quad \text{since }  \mathbf f \ \text{is smooth.}\qedhere
+\end{align*}
+\end{proof}
+\begin{cor}
+    The flux of the curl of a smooth vector field $\mathbf f(x,y,z)$ through any closed surface is zero.
+\end{cor}
