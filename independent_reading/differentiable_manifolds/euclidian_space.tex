@@ -43,6 +43,56 @@ However, we have a Taylor's theorem with remainder for $C^{\infty}$ functions th
     \]  
 \end{lemma}
 \begin{proof}
-    Since $U$ is star-shaped with respect to $p$, for any $x\in U$
+    For any $x\in U$ the line segment $p+t(x-p), \ 0\leq t \leq 1$ lies in $U$. So $f(p+t(x-p))$ is defined, and by the chain rule we have \[
+        \frac{d}{dt}f(p+t(x-p))=\sum_{}^{} (x^i -p^i ) \frac{\partial f}{\partial x^i }(p+t(x-p)).
+    \] Integrating both sides with respect to $t\in [0,1]$ we have \[
+    \Big. f(p+t(x-p)) \Big| _0^1 = \sum_{}^{} (x^i -p^i )\int_{0}^{1} \frac{\partial f}{\partial x^i }(p+t(x-p)) \, dt.
+\] Let $g_i (x)=\int_{0}^{1} \frac{\partial f}{\partial x^i }(p+t(x-p)) \, dt$. Then $g_i (x)$ is $C^{\infty}$ and the above expression simplifies to \[
+f(x)-f(p)=\sum_{}^{} (x^i -p^i )g_i (x).
+\] Furthermore, $g_i (p)=\int_{0}^{1} \frac{\partial f}{\partial x^i }(p) \, dt=\frac{\partial f}{\partial x^i }(p)$. 
 \end{proof}
+If $n=1$ and $p=0$, this lemma says that $f(x)=f(0)+xf_1(x)$ for a $C^{\infty}$ function $f_1(x)$. Applying repeatedly gives $f_i (x)=f_i (0)+xf_{i+1}(x)$, where $f_i ,f_{i+1}$ are $C^{\infty}$ functions. So 
+\begin{align*}
+    f(x)&=f(0)+x(f_1(0)+xf_2(x))\\
+        &=f(x)+xf_1(x)+x^2(f_2(0)+xf_3(x))\\
+        &\quad \vdots \\
+        &=f(0)+f_1(0)x+f_2(0)x^2+\cdots +f_i (0)x^i +f_{i+1}(x)x^{i+1}.
+\end{align*} If we differentiate this expression $k$ times, we get $f^{(k)}(0)=k!f_k(x)$, which simplifies to $f_k(0)=\frac{1}{k!}f^{(k)}(0)$ for $k=1,2,\cdots ,i$. Note that balls are star-shaped, and since $U$ is open there exists an $\varepsilon >0$ such that $p\in B(p,\varepsilon )\subseteq U$. So when a function's domain is restricted to $B(p,\varepsilon )$, $f$ is defined on a star-shaped neighborhood of $p$ and Taylor's theorem with remainder applies.
 
+\section{Tangent Vectors in $\R^n $ as Derivations}
+Vectors at a point $p$ are usually represented by columns of points or arrows stemming from $p$. A vector at $p$ is tangent to a surface if it lies in the tangent plane at $p$, the limiting position of the secant planes through $p$. This kind of definition assumes we live in $\R^n $ and would not work for a large class of manifolds. We will find a generalization that works for manifolds.
+\subsection{The Directional Derivative}
+We usually visualize the tangent space $T_p (\R^n )$ at $p\in \R^n $ as the vector space of all arrows emanating from $p$. This can be identified with the vector space $\R^n $. We write points as $p=(p^1,\cdots ,p^n )$ and vectors $v$ in $T_p(\R^n )$ as \[
+v= 
+\begin{bmatrix}
+    v^1 \\ \vdots \\ v^n 
+\end{bmatrix} \quad \text{or} \quad \langle v^1,\cdots ,v^n  \rangle .
+\] We denote the standard basis for $\R^n $ or $T_p (\R^n )$ by $\{e_1,\cdots ,e_n \} $. Then $v=\sum_{}^{} v^i e_i .$ Sometimes we denote $T_p(\R^n )$ by $T_p\R^n $. Elements of $T_p (\R^n )$ are called \textbf{tangent vectors} (or simply \textbf{vectors}) at $p$ in $\R^n $.
+
+The line through a point $p=(p^1,\cdots ,p^n )$ with direction $\langle v_1,\cdots ,v_n  \rangle $ in $\R^n $ has parametrization $c(t)=(p^1+tv^1,\cdots ,p^n +tv^n )$, with $i$th component $c^i (t)=p^i +tv^i $. If $f$ is $C^{\infty}$ in a neighborhood of $p$ in $\R^n $ and $v$ is a tangent vector at $p$, the \textbf{directional derivative} of $f$ in the direction $v$ at $p$ is defined to be \[
+    D_v f = \lim_{t \to 0} \frac{f(c(t))-f(p)}{t}= \left. \frac{d}{dt} \right| _{t=0}f(c(t)).
+\] By the chain rule, \[
+D_v f = \sum_{i=1}^{n} \frac{dc^i }{dt}(0)\frac{\partial f}{\partial x^i }(p)=\sum_{i=1}^{n} v^i \frac{\partial f}{\partial x^i }(p).
+\] Note that $D_vf$ is a number, since we evaluate partial derivatives at a point $p$. We write $D_v = \sum_{}^{} v^i  \left. \frac{\partial }{\partial x^i } \right| _p$ for the operator that sends a function $f$ to the number $D_v f$. Often times we omit the subscript $p$.
+    \subsection{Germs of Functions}
+    If two functions agree on some neighborhood of a point $p$, they will have the same directional derivatives at $p$. This suggests introducing an equivalence relation on the $C^{\infty}$ functions defined in some neighborhood of $p$. Consider the set of pairs $(f,U)$, where $U$ is a neighborhood of $p$ and $f \colon U \to \R$ is a $C^{\infty}$ function. We say $(f,U)$ is equivalent to $(g,V)$ if there is an open set  $W\subseteq U\cap V$ containing $p$ such that $f=g$ when restricted to $W$. The equivalence class of $(f,U)$ is called the \textbf{germ} of $f$ at $p$. We write $C_p ^{\infty}(\R^n )$ or simply $C_p^{\infty}$ if there is no possibility of confusion, for the set of all germs of $C^{\infty}$ functions on $\R^n $ at $p$.
+    \begin{example}
+        The functions $f(x)=\frac{1}{1-x}$ with domain $\R \setminus \{1\} $ and $g(x)=\sum_{n=0}^{\infty} x^n$ with domain $(-1,1)$ have the same germ at any point $p$ in the open inverval $(-1,1)$.
+    \end{example}
+    An \textbf{algebra} over a field $K$ is a vector space $A$ over $K$ with a multiplication map $\mu \colon A\times A \to A$, usually written $\mu(a,b)=a\times b$, such that we all $a,b,c\in A$ and $r\in K$, 
+    \begin{enumerate}[label=(\roman*)]
+        \item $(a\times b)\times c=a\times (b\times c)$ (associativity),
+        \item $(a+b)\times c=a\times c+b\times c$ and $a\times (b+c)=a\times b+a\times c$ (distributivity),
+        \item $r(a\times b)=(ra)\times b=a\times (rb)$ (homogeneity).
+    \end{enumerate}
+    Equivalently, an algebra over a field $K$ is a ring $A$ also a $K$-vector space such that ring multiplication satisfies the homogeneity condition. So an algebra has three operations: the addition and multiplication of a ring, and the scalar multiplication of a vector space. Usually we write $ab$ in place of $a\times b$.
+
+    Addition and multiplication of functions induce operations on $C_p^{\infty}$, making it into an algebra over $\R$.
+
+    \subsection{Derivations at a Point}
+    A map $L \colon V \to W$ between vector spaces over a field $K$ is called a \textbf{linear map} or a \textbf{linear operator} if for any $r\in K$ and $u,v\in V$,
+    \begin{enumerate}[label=(\roman*)]
+        \item $L(u+v)=L(u)+L(v);$
+        \item $L(rv)=rL(v).$
+    \end{enumerate}
+    Such a map can also be called $K$\emph{-linear}.
