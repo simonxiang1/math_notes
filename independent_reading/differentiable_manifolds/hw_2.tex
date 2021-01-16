@@ -1,0 +1,34 @@
+\subsection{Tangent Vectors in $\R^n $ as Derivations}
+\begin{prob}
+    Let $X$ be the vector field $x \partial /\partial x+y\partial /\partial y$ and $f(x,y,z)$ the function $x^2+y^2+z^2$ on $\R^3$. Compute $Xf$.    
+\end{prob}
+\begin{solution}
+    Since $Xf=\sum a^i  \left( \frac{\partial f}{\partial x^i } \right) $, we have $Xf=x \left( \frac{\partial f}{\partial x} \right) +y \left( \frac{\partial f}{\partial y} \right) =2x^2+2y^2$.
+\end{solution}
+\begin{prob}
+Define carefully addition, multiplication, and scalar multiplication in $C_p^{\infty}$. Prove that addition in $C_p^{\infty}$ is commutative.    
+\end{prob}
+\begin{solution}
+    For reference: $C_p^{\infty}$ is the set of all germs of $C^{\infty}$ functions on $\R^n $ at $p$. A germ is an equivalence class of a pair $(f,U)$ where for $U,V$ nbds of $p$, two pairs $(f,U),(g,V)$ are related if there exists an open set $W_p \subseteq U \cap V$ such that $f=g$ on $W$. Let $[f]_p,[g]_p$ be germs of two functions $f,g$. 
+
+    We define addition and multiplication by $[f]_p+[g_p]=[f+g]_p$, $[f]_p \times [g]_p=[f\times g]_p$ and scalar multiplication by $a[f]_p=[af]_p$ for $a\in \R$.  If $f \colon U_p \to \R, u \mapsto f(u)$ and $g \colon V_p \to \R, v \mapsto g(v)$, then we define $f+g \colon U\cap V \to \R$ by $(f+g)(w)=f(w)+_{\R}g(w)$ and $(f\times g)(w)=f(w)\times_{\R} g(w)$ for $w\in U\cap V$. Addition is commutative because addition in $\R$ is commutative.
+\end{solution}
+\begin{prob}
+Let $D$ and $D'$ be derivations at $p$ in $\R^n $, and $c\in \R$. Prove that 
+\begin{enumerate}[label=(\alph*)]
+    \item the sum $D+D'$ is a derivation at $p$,
+    \item the scalar multiple $cD$ is a derivation at $p$.
+\end{enumerate}
+\end{prob}
+\begin{solution}
+    Recall that derivations are $\R$-linear maps $D \colon C_p^{\infty} \to \R$ satisfying the Liebniz rule $D(fg)=(Df)g(p)+f(p)Dg$. Let $D$ and $D'$ be derivations. Then $(D+D')(fg)=D(fg)+D'(fg)=(Df)g(p)+f(p)Dg+(D'f)g(p)+f(p)D'g=(Df+D'f)g(p)+f(p)(Dg+D'g)=((D+D')f)g(p)+f(p)(D+D')g$. So $D+D'$ is a derivation.
+
+    On the same vein, consider $cD$ for $D$ a derivation. Then $(cD)(fg)=cD(fg)=c(Df)g(p)+cf(p)Dg=(cD)fg(p)+f(p)(cD)g$, so $cD$ is also a point-derivation at $p$.
+\end{solution}
+\begin{prob}
+    Let $A$ be an algebra over a field $K$. If $D_1$ and $D_2$ are derivations of $A$, show that $D_1\circ D_2$ is not necessarily a derivation (it is if $D_1$ or $D_2=0$), but $D_1\circ D_2-D_2\circ D_1$ is always a derivation of $A$.    
+\end{prob}
+\begin{solution}
+    Let $D_1$ and $D_2$ be the standard derivative at $p$ that sends functions to $\R$, and $[f]_1\in C_p^{\infty}, f \colon x \mapsto x^2, [g]_1\in C_p^{\infty}, g \colon x \mapsto x $. If $D_1\circ D_2$ were a derivation, then $(D_1\circ D_2)(fg)=(D_1\circ D_2)(f)g(p)+f(p)(D_1\circ D_2)(g)=f''g(1)+f(1)g''=2$. But in reality, $(fg)''=6$. So this is false.
+\end{solution}
+

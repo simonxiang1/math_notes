@@ -79,7 +79,7 @@ D_v f = \sum_{i=1}^{n} \frac{dc^i }{dt}(0)\frac{\partial f}{\partial x^i }(p)=\s
     \begin{example}
         The functions $f(x)=\frac{1}{1-x}$ with domain $\R \setminus \{1\} $ and $g(x)=\sum_{n=0}^{\infty} x^n$ with domain $(-1,1)$ have the same germ at any point $p$ in the open inverval $(-1,1)$.
     \end{example}
-    An \textbf{algebra} over a field $K$ is a vector space $A$ over $K$ with a multiplication map $\mu \colon A\times A \to A$, usually written $\mu(a,b)=a\times b$, such that we all $a,b,c\in A$ and $r\in K$, 
+    An \textbf{algebra} over a field $K$ is a vector space $A$ over $K$ with a multiplication map $\mu \colon A\times A \to A$, usually written $\mu(a,b)=a\times b$, such that for all $a,b,c\in A$ and $r\in K$, 
     \begin{enumerate}[label=(\roman*)]
         \item $(a\times b)\times c=a\times (b\times c)$ (associativity),
         \item $(a+b)\times c=a\times c+b\times c$ and $a\times (b+c)=a\times b+a\times c$ (distributivity),
@@ -96,3 +96,185 @@ D_v f = \sum_{i=1}^{n} \frac{dc^i }{dt}(0)\frac{\partial f}{\partial x^i }(p)=\s
         \item $L(rv)=rL(v).$
     \end{enumerate}
     Such a map can also be called $K$\emph{-linear}.
+
+    For every tangent vector $v$ at a point $p$ in $\R^n $, the directional derivative at $p$ gives a map of real vector spaces $D_v \colon C_p^{\infty} \to \R$. Since $D_v f= \sum_{i=1}^{n} v^i  \frac{\partial f}{\partial x^i }(p),$ we have that $D_v$ is $\R$-linear and satisfies the Leibniz rule \[
+        D_v(fg)=(D_vf)g(p)+f(p)D_vg,
+    \] since the partial derivatives $\partial  / \partial x^i \big|_p$ have these properties. In general, a linear map $D \colon C_p^{\infty} \to \R$ satisfying the Leibniz rule is called a \textbf{derivation at} $\mathbf p$ or a \textbf{point-derivation} of $C_p^{\infty}$. Denote the set of all derivations at $p$ by $\mathcal{D} _p(\R^n )$. This set is a real vector space, since the sum of two derivations at $p$ and a scalar multiple of a derivation at $p$ are again derivations at $p$. We know that directional derivatives at $p$ are all derivations at $p$, so we have a map \[
+    \phi \colon T_p(\R^n ) \to \mathcal{D} _p(\R^n ) , \quad v\mapsto D_v=\sum_{}^{} v^i  \left. \frac{\partial }{\partial x^i } \right| _p.
+    \] Since $D_v$ is linear in $v$, the map $\phi$ is a linear operator of vector spaces.
+    \begin{lemma}
+        If $D$ is a point-derivation of $C_p^{\infty}$, then $D(c)=0$ for any constant function $c$.
+    \end{lemma}
+    \begin{proof}
+        By $\R$-linearity, $D(c)=cD(1)$. To show $D(1)=0$, we have \[
+            D(1)=D(1\times 1)=D(1)\times 1+1\times D(1)=2D(1)
+        \] by the Leibniz rule. Subtracting $D(1)$ from both sides gives $D(1)=0$.
+    \end{proof}
+    \begin{theorem}
+        The linear map $\phi \colon T_p(\R^n ) \to \mathcal{D} _p(\R^n )$ is an isomorphism of vector spaces.
+    \end{theorem}
+    \begin{proof}
+        To show injectivity, assume $D_v=0$ for $v\in T_p(\R^n )$. Applying $D_v$ to the coordinate function $x^j$ (that sends $x\mapsto x^j$) gives \[
+            0=D_v(x^j)=\sum_{i}^{} v^i \left. \frac{\partial }{\partial x^i } \right| _p x^j=\sum_{i}^{} v^i  \delta_i ^j=v^j.
+            \] \footnote{I think $\delta_i ^j$ refers to the function that is one if $i=j$ and zero otherwise.} To prove surjectivity, let $D$ be a derivation at $p$ and let $(f,V)$ be a representative of a germ in $C_p^{\infty}$. Making $V$ smaller if necessary, assume that $V $ is an open (star-shaped) ball. By Taylor's theorem with remainder there are $C^{\infty}$ functions $g_i (x)$ in a neighborhood of $p$ such that \[
+            f(x)=f(p)+\sum_{}^{} (x^i -p^i )g_i (x), \quad g_i (p)=\frac{\partial f}{\partial x^i }(p).
+        \] Note that $D(f(p))$ and $D(p^i )$ equal zero since $f(p)$ and $p^i $ are constant. Applying $D$ to both sides, we get by the Leibniz rule \[
+        D f(x)=\sum_{}^{} (Dx^i )g_i (p)+\sum (p^i -p^i ) Dg_i (x)=\sum (Dx^i ) \frac{\partial f}{\partial x^i }(p).
+        \] So $D=D_v$ for $v=\langle Dx^1,\cdots ,Dx^n  \rangle $.
+    \end{proof}
+    This theorem shows that we can identify tangent vectors at $p$ with derivations at $p$. Under the identification $T_p(\R^n )\simeq \mathcal{D} _p (\R^n )$, the standard basis $\{e_1,\cdots ,e_n \} $ for $T_p(\R^n )$ corresponds to the set $\{\partial /\partial x^1|_p,\cdots ,\partial /\partial x^n |_p\}$ of partial derivatives. From now, we write a tangent vector $\langle v^1,\cdots ,v^n  \rangle =\sum_{}^{} v^i e_i $ as $v=\sum_{}^{} v^i  \left. \frac{\partial }{\partial x^i } \right| _p$. Although the vector space $\mathcal{D} _p(\R^n )$ of derivations is not as intuitive, they turn out to be more suitable for generalization to manifolds.
+
+\subsection{Vector Fields}
+A \textbf{vector field} $X$ on an open subset $U$ of $\R^n $ is a function that assigns to each point $p$ in $U$ a tangent vector $X_p$ in $T_p(\R^n )$. Since $T_p(\R^n )$ has basis $\{\partial /\partial x^i |_p\} $, the vector $X_p$ is a linear combination $
+    X_p = \sum_{}^{} a^i (p) \left. \frac{\partial }{\partial x^i } \right| _p, \ p \in U.$ We say that the vector field $X$ is $C^{\infty}$ on $U$ if the coefficient functions $a^i $ are all $C^{\infty}$ on $U$.
+        \begin{example}
+            On $\R^2\setminus \{0\} $, let $p=(x,y)$. Then $X= \frac{-y}{\sqrt{x^2+y^2} }\frac{\partial }{\partial x}+\frac{x}{\sqrt{x^2+y^2} }\frac{\partial }{\partial y}$ is the vector field of the fig
+            %todo fig
+        \end{example}
+We can identify vector fields on $U$ with column vectors of $C^{\infty}$ functions on $U$: \[
+X=\sum a^i  \frac{\partial }{\partial x^i }\quad \longleftrightarrow \quad
+\begin{bmatrix}
+    a^1\\ \vdots \\ a^n 
+\end{bmatrix}.
+\] The ring of $C^{\infty}$ functions on $U$ is commonly denoted $C^{\infty}(U)$ or $\mathcal{F} (U)$. Since one can multiply a $C^{\infty}$ vector field by a $C^{\infty}$ function and still get a $C^{\infty}$ vector field, the set of all $C^{\infty}$ vector fields on $U$, denoted $\mathfrak X (U)$, is not only a vector space over $\R$ but also a $C^{\infty}(U)$-module. 
+\subsection{Vector Fields as Derivations}
+If $X$ is a $C^{\infty}$ vector field on an open subset $U$ of $\R^n $ and $f$ is a $C^{\infty}$ function on $U$, we define a new function $Xf$ on $U$ by $(Xf)(p)=X_pf$ for any $p\in U$. Writing $X=\sum a^i  \partial /\partial x^i $, we get \[
+    (Xf)(p)=\sum a^i (p) \frac{\partial f}{\partial x^i }(p) \quad \text{or} \quad Xf=\sum a^i  \frac{\partial f}{\partial x^i },
+\] which shows $Xf$ is a $C^{\infty}$ function on $U$. So a $C^{\infty}$ vector field gives rise to an $\R$-linear map $C^{\infty}(U)\to C^{\infty}(U)$, $f\mapsto Xf$.
+\begin{prop}
+    If $X$ is a $C^{\infty}$ vector field and $f$ and $g$ are $C^{\infty}$ functions on an open subset $U$ of $\R^n $, then $X(fg)$ satisfies the product rule (Leibniz rule) $X(fg)=(Xf)g+fXg$.
+\end{prop}
+\begin{proof}
+    At each point $p \in U$, the vector $X_p$ satisfies the Leibniz rule $X_p(fg)=(X_pf)g(p)+f(p)X_pg$. As $p$ varies over $U$, this becomes an equality of functions $X(fg)=(Xf)g+fXg$.
+\end{proof}
+If $A$ is an algebra over a field $K$, a \textbf{derivation} of $A$ is a $K$-linear map $D \colon A \to A$ such that \[
+    D(ab)=(Da)b+aDb \quad \text{for all} \ a,b\in A.
+\] The set of all derivations of $A$ is closed under addition and scalar multiplication and forms a vector space, denoted $\operatorname{Der}(A)$. As noted above, a $C^{\infty}$ vector field on an open set $U$ gives rise to a derivation of the algebra $C^{\infty}(U)$. We therefore have a map $\varphi \colon \mathfrak X(U) \to \operatorname{Der}(C^{\infty}(U))$, $X\mapsto (f\mapsto Xf)$. Similar to how tangent vectors at a point $p$ can be identified with the point-derivations of $C_p^{\infty}$, so the vector fields on an open set $U$ can be identified with the derivations of the algebra $C^{\infty}(U)$, i.e., the map $\varphi $ is an isomorphism of vector spaces. Note that a derivation at $p$ is not a derivation of the algebra $C_p^{\infty}$. A derivation at $p$ is a map from $C_p^{\infty}$ to $\R$, while a derivation of the algebra $C_p^{\infty}$ is a map from $C_p^{\infty}\to C_p^{\infty}$.
+
+\section{Alternating $k$-Linear Functions}
+\subsection{Dual Space}
+If $V$ and $W$ are real vector spaces, we denote the vector space of all linear maps $f \colon V \to W$ by $\operatorname{Hom}(V,W)$. Define the \textbf{dual space} $V^*$ to be the set of all real valued linear functions on $V$, denoted  $V^*:= \operatorname{Hom}(V,\R)$. Elements of $V^*$ are called \textbf{covectors} or $1$-\textbf{covectors} on $V$. Assume $V$ is finite-dimensional, and let $\{e_1,\cdots ,e_n \} $ be a basis for $V$. Then every $v\in V$ is uniquely a linear combination $v=\sum v^i e_i $ with $v^i \in \R$. Let $\alpha ^i \colon V \to \R$ be the linear function that picks out the $i$th coordinate, given by  $\alpha ^i (v)=v^i $. Note that $\alpha ^i (e_j )=\delta_j ^i $.
+\begin{prop}
+    The functions $\alpha ^1,\cdots ,\alpha ^n $ form a basis for $V^*$.
+\end{prop}
+\begin{proof}
+    Let $f\in V^*$ and $v=\sum v^i e_i \in V$. Then $f(v)=\sum v^i f(e_i )=\sum f(e_i )\alpha ^i (v)$. So $f=\sum f(e_i )\alpha ^i $, and so the $\alpha ^i $ span $V^*$. Now suppose $\sum c_i \alpha ^i =0$ for some $c_i \in \R$. Then $0=\sum c_i \alpha ^i (e_j )=\sum c_i \delta_j ^i =c_j $ for $j=1,\cdots ,n$. So the $\alpha ^i $ are LI.
+\end{proof}
+This basis $\{\alpha ^1,\cdots ,\alpha ^n \} $ is said to be \emph{dual} to the basis $\{e_1,\cdots ,e_n \} $ for $V$.
+\begin{cor}
+    The dual space $V^*$ of a finite-dimensional vector space $V$ has the same dimension as $V$.
+\end{cor}
+\begin{example}
+    If $e_1,\cdots ,e_n $ is a basis for a vector space $V$, every $v\in V$ can be uniquely written as a linear combo $v=\sum b^i (v)e_i $, where $b_i (v)\in \R$. Let $\alpha^1,\cdots ,\alpha ^n $ be the basis of $V^*$ dual to $e_1,\cdots ,e_n $. Then \[
+        \alpha ^i (v)= \alpha ^i  \left( \sum_j b^j(v)e_j  \right) =\sum_j b^j (v)\alpha ^i (e_j )=\sum_j b^j(v)\delta_j ^i =b^i (v).
+    \] So the set of coordinate functions $b^1,\cdots ,b^n $ WRT the basis $e_1,\cdots ,e_n $ is precisely the dual basis.
+\end{example}
+\subsection{Permutations}
+Quick review since you know what permutations are. They're self-bijections, or elements of the symmetric group on such set. You use cycle notation to denote them, and a transposition is a $2$-cycle. Recall that the sign of a permutation denoted $\operatorname{sgn}(\sigma)$ is $\pm 1$ depending on whether the permutation is even or odd. Since $\operatorname{sgn}(\sigma\tau)=\operatorname{sgn}(\sigma)\operatorname{sgn}(\tau)$, one way to compute signs is to decompose and count (eg if its a product of odd and even cycles it must be odd).
+
+An \textbf{inversion} in a permutation $\sigma$ is an ordered pair $(\sigma(i),\sigma(j))$ such that $i<j$ but $\sigma(i)>\sigma(j)$. For example, the permutation $(124)(35)$ has the inversions $(21),(41),(51),(43),(53)$. Another way to compute the sign of a permutation is to count the number of inversions:
+\begin{prop}
+    A permutation is even iff it has an even number of inversions.
+\end{prop}
+\begin{proof}
+    We can multiply by transpositions corresponding to inversions and recover our original list. 
+    \begin{enumerate}[label=(\arabic*)]
+        \item Find $1$ in the list $\sigma(1),\sigma(2),\cdots ,\sigma(k)$, then every number before $1$ gives rise to an inversion. Say $\sigma(i)=1$, then $(\sigma(1),1),\cdots ,(\sigma(i-1),1)$ are all inversions. Apply the $i-1$ transpositions to move $1$ to the front, the number of inversions ending in $1$.
+        \item Now find $2$ in the list $1,\sigma(1),\cdots ,\sigma(\hat{i}),\cdots ,\sigma(k)$ (using deletion notation, note that we moved $1$ to the front). Every number (besides 1) preceding $2$ gives rise to an inversion $(\sigma(m),2)$, suppose we have $i_2$ such inversions. Applying $i_2$ transformations, we move $2$ to the front.
+    \end{enumerate}
+If you continue to the sort, you'll see the number of transpositions required to order the list is the same as the number of inversions. So the transposition decomposition is the number of inverstions, and $\operatorname{sgn}(\sigma)=(-1)^{\text{\# of inversions in} \,\sigma}$.
+\end{proof}
+\subsection{Multilinear Functions}
+Let $V^k=\overset{\text{k times}  }{\overbrace{V\times \cdots \times V}} $ for $V$ a real vector space. A function $f \colon V^k \to \R$ is $\mathbf k$\textbf{-linear} if it is linear in each of its $k$ arguments, that is, $f(\cdots ,av+bw,\cdots )=af(\cdots ,v,\cdots )+b f(\cdots ,w,\cdots )$ for $a,b\in \R$, $v,w\in V$. Usually we say ``bilinear'' and ``trilinear'' instead of $2$-linear and $3$-linear. A $k$-linear function on $V$ is also called a $\mathbf k$\textbf{-tensor} on $V$. We denote the vector space of $k$-tensors on $V$ by $L_k(V)$. If $f$ is a $k$-tensor on $V$, we call $k$ the \textbf{degree} of $f$.
+\begin{example}
+    The dot product $f(v,w)=v\cdot w$ on $\R^n $ is bilinear. 
+\end{example}
+\begin{example}
+    If we view the determinant $f(v_1,\cdots ,v_n )=\det[v_1\cdots v_n ]$ as a function on the $n$ column vectors in $\R^n $, then the determinant is $n$-linear.
+\end{example}
+\begin{definition}[]
+    A $k$-linear function $f \colon V^k \to \R$ is \textbf{symmetric} if $f(v_{\sigma(1)},\cdots ,v_{\sigma(k)})=f(v_1,\cdots ,v_k)$ for all permutations $\sigma \in S_k$; it is \textbf{alternating} if $f(v_{\sigma(1)},\cdots ,v_{\sigma(k)})=(\operatorname{sgn}\sigma)f(v_1,\cdots ,v_k)$ for all $\sigma\in S_k$. 
+\end{definition}
+\begin{example}\,
+    \begin{enumerate}[label=(\roman*)]
+        \item The dot product $f(v,w)=v\cdot w$ on $\R^n $ is symmetric.
+        \item The determinant $f(v_1,\cdots ,v_n )=\det[v_1\cdots v_n ]$ is alternating.
+    \end{enumerate}
+    Intuitively, symmetric $k$-linear functions don't care which order you input the variables in, while alternating multilinear maps preserve even orientation, but get flipped with an odd number of shuffles.
+\end{example}
+We are especially interested in the space $A_k(V)$ of all alternating $k$-linear functions on a vector space $V$ for $k>0$. These are called \textbf{alternating} $\mathbf k$\textbf{-tensors}, $\mathbf k$\textbf{-covectors}, or \textbf{multicovectors} on $V$. For $k=0$, we define a $0$-covector to be a constant so that $A_0(V)$ is the vector space $\R$. A $1$-covector is just a covector.
+\subsection{Permutation Action on $k$-Linear Functions}
+If $f$ is a $k$-linear function on a vector space $V$ and $\sigma\in S_k$, we define a new $k$-linear function by $(\sigma f)(v_1,\cdots ,v_k)=f(v_{\sigma(1)},\cdots ,v_{\sigma(k)})$. So $f$ is symmetric iff $\sigma f=f$ and alternating iff $\sigma f=(\operatorname{sgn}\sigma)f$ for all $\sigma \in S_k$. In the trivial case, $S_1 $ is the identity group, and a $1$-linear function is both symmetric and alternating, in particular, $A_1(V)=L_1(V)=V^*$.
+\begin{lemma}
+    If $\sigma,\tau \in S_k$ and $f$ is a $k$-linear function on $V$, then $\tau(\sigma f)=(\tau\sigma) f$. In other words, $S_k$ acts (from the left) on $L_k(V)$, the space of $k$-linear functions on $V$.
+\end{lemma}
+\begin{proof}
+    Exercise. 
+\end{proof}
+\subsection{The Symmetrizing and Alternating Operators}
+We can turn a $k$-linear function $f$ on a vector space $V$ into a symmetric $k$-linear function $Sf$ by defining \[
+    (Sf)(v_1,\cdots ,v_k)= \sum_{\sigma \in S_k}^{} f(v_{\sigma(1)},\cdots ,v_{\sigma(k)})
+\] or with our new notation, $Sf=\sum _{\sigma\in S_k}\sigma f$. Similarly, we the define the alternization $Af=\sum_{\sigma\in S_k}(\operatorname{sgn}\sigma)\sigma f$.
+\begin{prop}\,
+    \begin{enumerate}[label=(\roman*)]
+        \item The $k$-linear function $Sf$ is symmetric.
+        \item The $k$-linear function $Af$ is alternating.
+    \end{enumerate}
+\end{prop}
+\begin{proof}\,
+    \begin{enumerate}[label=(\roman*)]
+        \item If $\tau \in S_k$, we have $\tau(Sf)=\sum_{\sigma\in S_k}\tau(\sigma f)=\sum_{\sigma\in S_k}(\tau\sigma)f=Sf$, since by applying $\tau^{-1}$ we can obtain every permutation in $S_k$.
+        \item If $\tau \in S_k$, we have $\tau(Af)=\sum_{\sigma \in S_k}(\operatorname{sgn}\sigma)\tau (\sigma f)=\sum_{\sigma \in S_k}(\operatorname{sgn}\sigma)(\tau\sigma)f$, since $S_k$ acts on $L_k(V)$ from the left. Since $(\operatorname{sgn}\tau)(\operatorname{sgn}\tau)=1$, this expression is equal to $(\operatorname{sgn}\tau)\sum_{\sigma\in S_k}(\operatorname{sgn}\tau\sigma)(\tau\sigma)f=(\operatorname{sgn}\tau)Af$.\qedhere
+    \end{enumerate}
+\end{proof}
+\begin{lemma}
+    If $f$ is an alternating $k$-linear function on a vector space $V$, then $Af=(k!)f$.
+\end{lemma}
+\begin{proof}
+    \[
+        Af=\sum_{\sigma\in S_k}(\operatorname{sgn}\sigma)\sigma f=\sum_{\sigma\in S_k}(\operatorname{sgn}\sigma)(\operatorname{sgn}\sigma)f=\sum_{\sigma\in S_k}f=k!f.\qedhere
+    \] 
+\end{proof}
+\subsection{The Tensor Product}
+Let $f$ be a $k$-linear function and $g$ be an $\ell$-linear function on a vector space $V$. Their \textbf{tensor product} is the $(k+\ell)$-linear function $f \otimes g$ defined by \[
+    (f \otimes g)(v_1,\cdots ,v_{k+\ell})=f(v_1,\cdots ,v_k)g(v_{k+1},\cdots ,v_{k+\ell}).
+\] 
+\begin{example}
+    Let $e_1,\cdots ,e_n $ be the standard basis for $\R^n $ and let $\alpha ^1,\cdots ,\alpha ^n $ be its dual basis. The Euclidian inner product on $\R^n $ is the bilinear function $\langle , \rangle  \colon \R^n  \times \R^n \to \R$ defined by $\langle v,w \rangle =\sum v^i w^i $ for $v=\sum v^i e_j $ and $w=\sum w^i e_i $. We can express $\langle , \rangle $ in terms of the tensor product: 
+    \begin{align*}
+        \langle v,w \rangle &=\sum_{i}^{} v^i w^i =\sum_i \alpha ^i (v)\alpha ^i (w)\\
+                            &=(\alpha ^i \otimes \alpha ^i )(v,w).
+    \end{align*}
+    So $\langle , \rangle =\sum_i \alpha ^i \otimes \alpha ^i $. This notation is often used in differential geometry to describe an inner product on a vector space.
+\end{example}
+\subsection{The Wedge Product}
+We would like for the product of two alternating multilinear functions to also be alternating. This motivates the \textbf{wedge product}: for $f\in A_k(V)$ and $g\in A_{\ell}(V)$, $f\wedge g = \frac{1}{k!\ell!}A(f\otimes g);$ or explicitly, \[
+    (f\wedge g)(v_1,\cdots ,v_{k+\ell})=\frac{1}{k!\ell!}\sum_{\sigma\in S_{k+\ell}}(\operatorname{sgn}\sigma) f(v_{\sigma(1)},\cdots ,v_{\sigma(k)})g(v_{\sigma(k+1)},\cdots ,v_{\sigma(k+\ell)}).
+\] Since the definition involves the alternization, $f\wedge g$ is alternating.
+
+When $k=0$, the element $f\in A_0(V)$ is a constant $c$: then the wedge product $c\wedge g$ is scalar multiplication, since $\frac{1}{\ell!}\sum_{\sigma \in S_{\ell}}(\operatorname{sgn}\sigma)cg(v_{\sigma(1)},\cdots ,c_{\sigma(\ell)})=cg(v_1,\cdots ,v_{\ell})$. So $c\wedge g=cg$ for $c\in \R$ and $g\in A_{\ell}(V)$.
+
+The coefficient $1 /(k!\ell!)$ compensates for the repetitions in the sum: there are $k!$ permutations that permute the arguments of $f$ and similarly $\ell!$ permutations of the arguments of $g$. So we divide to get rid of repeating terms.
+\begin{example}
+    For $f\in A_2(V)$ and $g\in A_1(V)$, $A(f\otimes g)(v_1,v_2,v_3)=f(v_1,v_2)g(v_3)-f(v_1,v_3)g(v_2)+f(v_2,v_3)g(v_1)-f(v_2,v_1)g(v_3)+f(v_3,v_1)g(v_2)-f(v_3,v_2)g(v_1)$. There are three pairs of equal terms, for example $f(v_1,v_2)g(v_3)=-f(v_2,v_1)g(v_3)$ (since $f$ is alternating) and so on. So after dividing by two, $(f\wedge g)(v_1,v_2,v_3)=f(v_1,v_2)g(v_3)-f(v_1,v_3)g(v_2)+f(v_2,v_3)g(v_1)$.
+\end{example}
+A way to avoid such redundancies in the definition of $f\wedge g$ is to stipulate that $\sigma(1),\cdots ,\sigma(k)$ be in ascending order and $\sigma(k+1),\cdots ,\sigma(k+\ell)$ also be in ascending order in the sum of the wedge product. We call a permutation $\sigma \in S_{k+\ell}$ a $\mathbf {(k,\ell)}$\textbf{-shuffle} if $\sigma(1)< \cdots < \sigma(k)$ and $\sigma(k+1)< \cdots  < \sigma(k+\ell)$. Then we can rewrite the definition of the wedge product as \[
+    (f\wedge g)(v_1,\cdots ,v_{k+\ell}) = \sum_{(k,\ell)\text{-shuffles} \ \sigma}(\operatorname{sgn}\sigma )f (v_{\sigma(1)},\cdots ,v_{\sigma(k)})g(v_{\sigma(k+1)},\cdots ,v_{\sigma(k+\ell)}).
+\] Written this way, the wedge $f\wedge g$ is a sum of ${k+\ell \choose k}$ terms, rather than $(k+\ell)!$ terms.
+\begin{example}
+    If $f$ and $g$ are covectors on a vector space $V$ and $v_1,v_2\in V$, then $(f\wedge g)(v_1,v_2)=f(v_1)g(v_2)-f(v_2)g(v_1)$.
+\end{example}
+\subsection{Anticommutativity of the Wedge Product}
+It follows from the definition of the wedge product that $f\wedge g$ is bilinear in $f$ and $g$.
+\begin{prop}
+    The wedge product is anticommutative: if $f\in A_k(V)$ and $g\in A_{\ell}(V)$, then $f\wedge g=(-1)^{k\ell}g\wedge f$.
+\end{prop}
+\begin{proof}
+    Define $\tau \in S_{k+\ell}$ to be the permutation \[
+    \tau=
+    \begin{pmatrix}
+        1 & \cdots  & \ell & \ell+1 & \cdots  & \ell +k\\
+        k+1 & \cdots  & k+\ell & 1 & \cdots  & k
+    \end{pmatrix}.
+\] Then $\sigma(1)=\sigma\tau(\ell+1),\cdots ,\sigma(k)=\sigma\tau(\ell+k),\ \sigma(k+1)=\sigma\tau(1),\cdots ,\sigma(k+\ell)=\sigma\tau(\ell)$.
+\end{proof}
