@@ -1,0 +1,22 @@
+\section{January 20, 2021}
+We start by talking about curves in space. Differential geometry is about infinitesmal stuff, tangent lines, things like that. Curvature is about approximating things by the radius of a circle, it's pretty intuitive. After curves, we get into surfaces. Geodesics are like the shortest way to connect two points, a locally length-minimizing curve. We have extrinsic and intrisic curvature, which depend and don't depend on embeddings. The natural next step after curves and surfaces is Riemannian geometry (woohoo).
+
+\subsection{Curves}
+We have two kinds of curves: level curves and parametrized curves. A \textbf{parametrized curve} is a map $\gamma \colon (\alpha ,\beta ) \to \R^n $, for example, $\gamma(t)=(t^2,t^3)$. My take on open vs closed intervals: paths take one point to another, while curves describe a, well, curve in $\R^2$. They don't necessarily have to start somewhere or end somewhere, and aren't necessarily compact of course.
+
+A \textbf{level curve} is (informally) something of the form $f ^{-1}(x_0)$ where $f \colon \R^n  \to \R^{n-1}$, $x_0 \in \R^{n-1}$. We usually study the special case $n=2$.
+\begin{example}
+    Precisely, $f^{-1}(x_0)= \{y \in \R^n  \mid f(y)=x_0\} $. Take $f \colon \R^2 \to \R, f (x,y)=x^3+y^3-3xy$, this is called the \emph{Foliom of Descartes}.
+\end{example}
+Usually in this course we study parametrized curves, since they're easy to compute arc length ($\int_{t_0}^{t}  \|\dot\gamma(t)\|\, dt$ and curvature. Meanwhile, level curves are good for applications, as they arise naturally as graphs of functions. If $\gamma \colon \R \to \R^n $, we have $\gamma(t)= (\gamma_1(t), \gamma_2(t),\cdots , \gamma _n (t))  $, where $\gamma_1 \colon \R \to \R $, $\gamma_2 \colon \R \to \R $, and so on. Then the derivative is given by the $n$-tuple \[
+    \dot\gamma =\gamma '= \frac{d\gamma }{dt}=\left( \frac{d\gamma_1 }{dt},\cdots ,\frac{d\gamma _n }{dt} \right).
+\] We say $\gamma $ is \textbf{smooth} if $\frac{d^n \gamma }{dt ^n }$ exists for all $n\geq 0$. We don't really care about curves that aren't smooth.
+
+\subsection{Tangent Vectors}
+We have $\gamma '(t)$ the \textbf{tangent vector} at time $t.$ The \textbf{tangent line} at time $t$ is $\{\gamma (t)+ u \gamma '(t)  \mid  u \in \R\} $, the direction is much more important than the magnitude (speed). The \textbf{speed} of $\gamma $ at time $t$ is $\|\gamma '(t)\|$. The \textbf{arc length} of $\gamma $ from time $t_0$ is \[
+    s(t)= \int_{t_0}^{t} \| \dot \gamma(u)\| \, du.
+\] Integrating over speed gives distance traveled, which is arc length.
+\begin{example}
+    If $\gamma (t)=(t^2,t^3)$, the length from zero to one is $s(1)= \int_{0}^{1} \sqrt{4u^2+9u^4}  \, du=\int_{0}^{1} u\sqrt{4+9u^2}  \, du=\left. \frac{(4+9u^2)^{3 /2}}{27} \right| ^1_0=$ blah.
+\end{example}
+Note that we can differentiate dot products. Let $\gamma \colon \R \to \R^n $, $\lambda \colon \R \to \R^n $. Then $\phi \colon \R \to \R, \phi(t)=\langle \gamma (t),\lambda(t) \rangle $. How do you compute $\frac{d \phi}{dt}$? It's the product rule, $\frac{d \phi}{dt}=\frac{d\gamma }{dt}\cdot \lambda + \gamma \cdot \frac{d\lambda}{dt}$.

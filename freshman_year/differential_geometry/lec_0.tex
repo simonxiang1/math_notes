@@ -1,0 +1,85 @@
+\section{Curves and Surfaces}
+\subsection{Curves}
+A curve $\mathcal{C} := \{(x,y)\in \R^2  \mid f(x,y)=c\} $. Curves in $\R^3$ are defined similarly. These are called \textbf{level curves}. 
+\begin{definition}[]
+    A \textbf{parametrized curve} in $\R^n $ is a map $\gamma \colon (\alpha ,\beta ) \to \R^n $ for some $\alpha ,\beta $ with $-\infty\leq \alpha  \leq \beta  \leq \infty$. A parametrized curve whose image is contained in a level curve $\mathcal{C} $ is called a \textbf{parametrization} of $\mathcal{C} $.
+\end{definition}
+\begin{example}
+    We parametrize the parabola. If $\gamma(t)=(\gamma_1(t),\gamma_2(t))$, the components $\gamma_1$ and $\gamma_2$ of $\gamma$ must satisfy $\gamma_2(t)=\gamma_1(t)^2$ for all $t\in (\alpha ,\beta )$. The parametrization $\gamma \colon (-\infty,\infty) \to \R^2$, $\gamma(t)=(t,t^2)$ works, as well as $\gamma(t)=(t^3,t^6), \ \gamma(t)=(2t,4t^2)$, and so on. 
+
+    For the circle $x^2+y^2=1$, we could try $x=t$, but that only hits half of $S^1 $. What satisfies $\gamma_1(t)^2+\gamma_2(t)^2=1$? $\gamma_1(t)=\cos t$ and $\gamma_2(t)= \sin t$ do. The interval $(-\infty,\infty)$ is overkill since the map has infinite degree.
+\end{example}
+\begin{example}
+    Consider the \emph{astroid} $\gamma(t)=(\cos ^3 t, \sin ^3 t)$, $t\in \R$. Since $\cos ^2t + \sin ^2 t=1$ for all $t$, then $x = \cos ^3 t, \ y= \sin ^3 t$ satisfy $x ^{2 /3}+ y ^{2 /3}=1$.
+\end{example}
+A function $f \colon (\alpha ,\beta ) \to \R$ is \textbf{smooth} if $\frac{d^n f}{dt ^n  }$ exists for all $n\geq 1$ and $t \in (\alpha ,\beta )$. Smoothness is preserved under addition, multiplication, composition, etc. You differentiate vector valued functions componentwise, and we denote $d\gamma / dt$ by $\dot \gamma(t), \ d^2 \gamma / dt^2$ by $\ddot \gamma(t)$, etc. 
+\begin{definition}[]
+    If $\gamma$ is a parametrized curve, then $\dot \gamma(t)$ is the \textbf{tangent vector} of $\gamma$ at the point $\gamma(t)$.
+\end{definition}
+\begin{prop}
+    If the tangent vector of a parametrized curve is constant, then the image of the curve is a straight line.
+\end{prop}
+\begin{proof}
+    If $\dot \gamma(t)=\mathbf a$ for all $t$, where $\mathbf a$ is constant, then \[
+        \gamma(t)= \int \frac{d\gamma}{dt} \, dt=\int \mathbf a \, dt=t\mathbf a+\mathbf b,
+    \] where $\mathbf b$ is another constant vector.
+\end{proof}
+\begin{example}
+    The \textbf{lima\c con} is the parametrized curve $\gamma(t)=((1+2 \cos t) \cos t,(1+2 \cos t) \sin t)$, $t\in \R$. There's a self intersection at the origin, the tangent vector is $\dot\gamma(t)=(-\sin t - 2 \sin 2t, \cos t + 2 \cos 2t)$. This is well defined, but takes two different values at $t = 2\pi /3$ and $t= 4\pi /3$.
+\end{example}
+
+\subsection{Arc Length}
+The length of a straight line segment between two points $\mathbf u,\mathbf v \in \R^n $ is $\| \mathbf u-\mathbf v\|$, given the standard norm/inner product/metric/blah on $\R^n $. 
+\begin{definition}[]
+    The \textbf{arc-length} of a curve $\gamma$ starting at $\gamma(t_0)$ is the function $s(t)$ given by \[
+        s(t)= \int_{t_0}^{t} \| \dot\gamma(u)\| \, du.
+    \] 
+\end{definition}
+\begin{example}
+    For a \textbf{logarithmic spiral} $\gamma(t)=(e^{kt}\cos t, e^{kt} \sin t)$, we have $\dot \gamma=(e^{kt}(k \cos t- \sin t), e^{kt}(k \sin t + \cos t))$, so $\| \dot \gamma\|^2= e^{2kt}(k \cos t - \sin t) ^2+e^{2kt}(k \sin t + \cos t)^2=(k^2+1)e^{2kt}.$ Then the arc length of $\gamma$ starting at $\gamma(0)=(1,0)$ is \[
+        s= \int_{0}^{t} \sqrt{k^2+1} e^{ku} \, du= \frac{\sqrt{k^2+1} }{k}(e^{kt}-1).
+    \] 
+\end{example}
+Note that the arc-length is differentiable, that is,  \[
+    \frac{ds}{dt}=\frac{d}{dt}\int_{t_0}^{t} \| \dot\gamma(u)\| \, du = \| \dot\gamma(t)\|.
+\] 
+\begin{definition}[]
+    If $\gamma \colon (\alpha ,\beta ) \to \R^n $ is a parametrized curve, its \textbf{speed} at the point $\gamma(t)$ is $\| \dot\gamma(t)\|$, and $\gamma$ is said to be a \textbf{unit-speed} curve if $\dot \gamma(t)$ is a unit vector for all $t\in (\alpha ,\beta )$.
+\end{definition}
+\begin{prop}
+    Let $\mathbf n(t)$ be a unit vector that is a smooth function of parameter $t$. Then the dot product $\mathbf {\dot n}(t) \cdot \mathbf n(t)=0 $ for all $t$, i.e., $\mathbf {\dot n}(t)$ is zero or orthogonal to $\mathbf n(t)$ for all $t$. If $\gamma$ is a unit-speed curve, then $\ddot \gamma$ is zero or perpendicular to $\dot \gamma$.
+\end{prop}
+\begin{proof}
+    We differentiate $\mathbf n \cdot \mathbf n=1$ to get $\mathbf {\dot n} \cdot \mathbf n+ \mathbf n\cdot \mathbf {\dot n}=0$, so $\mathbf {\dot n}\cdot \mathbf n=0$.
+\end{proof}
+
+\subsection{Reparametrization}
+A parametrized curve $\widetilde {\gamma} \colon (\widetilde {\alpha }, \widetilde {\beta } )\to \R^n $ is a \textbf{reparametrization} of a parametrized curve $\gamma \colon (\alpha ,\beta ) \to \R^n $ if there is a smooth bijective map $\phi \colon (\widetilde {\alpha },\widetilde {\beta })\to (\alpha ,\beta )$ (the \emph{reparametrization map}) such that the inverse map $\phi ^{-1} \colon (\alpha ,\beta ) \to (\widetilde {\alpha },\widetilde {\beta })$ is also smooth and $\widetilde {\gamma} (\widetilde t)=\gamma(\phi (\widetilde t))$ for all $\widetilde t \in (\widetilde {\alpha },\widetilde {\beta })$.
+
+Note that since $\phi$ has a smooth inverse, $\gamma $ is a reparametrization of $\widetilde {\gamma}$, since $\widetilde {\gamma}(\phi ^{-1}(t))=\gamma(\phi (\phi ^{-1}(t)))=\gamma(t)$ for all $t \in (\alpha ,\beta )$.
+\begin{example}
+    We can reparametrize the circle as $\widetilde {\gamma}(t)=(\sin t, \cos t)$. To show this, we want to find a reparametrization map $\phi$ such that $(\cos \phi(t),\sin \phi(t))=(\sin t, \cos t)$. $\phi(t)=\pi /2 -t$ works.
+\end{example}
+\begin{definition}[]
+    A point $\gamma(t)$ of a parametrized curve $\gamma$ is called a \textbf{regular point} if $\dot\gamma(t)\neq \mathbf 0$; otherwise $\gamma(t)$ is a \textbf{singular point} of $\gamma$. A curve is \textbf{regular} if all of its points are regular.
+\end{definition}
+\begin{prop}
+    Any reparametrization of a regular curve is regular.
+\end{prop}
+\begin{proof}
+    Suppose $\widetilde {\gamma}$ is a reparametrization of $\gamma$, let $t=\phi(\widetilde t)$ and $\psi = \phi ^{-1}$ such that $\widetilde t=\psi (t)$. Differentiating both sides of $\phi(\psi(t))=t$ WRT $t$ gives $\frac{d \phi}{d \widetilde t}\frac{d\psi}{dt}=1$. So $d \phi / d \widetilde t$ is never zero. Since $\widetilde {\gamma}(\widetilde t)=\gamma(\phi(\widetilde t))$, differentiating again gives $\frac{d\widetilde {\gamma}}{d\widetilde t}=\frac{d\gamma}{dt}\frac{d\phi}{d \widetilde t}$, so $d \widetilde {\gamma} / d \widetilde t$ is never zero, if $d \gamma / dt$ is never zero.
+\end{proof}
+\begin{prop}
+    If $\gamma(t)$ is regular, then $s$ is a smooth function of $t$.
+\end{prop}
+\begin{proof}
+    Recall that $\frac{ds}{dt}=\|\dot\gamma(t)\|=\sqrt{\dot u ^2+ \dot v^2} $. Since $f(x)=\sqrt{x} $ is \emph{smooth} on $(0,\infty)$, along with $u$ and $v$, and $\dot u ^2+\dot v^2>0$ for all $t$ (since $\gamma$ is regular), $s$ itself is also smooth.
+\end{proof}
+\begin{prop}
+    A parametrized curve has a unit-speed reparametrization iff it is regular.
+\end{prop}
+\begin{proof}
+    Suppose a parametrized curve $\gamma \colon (\alpha ,\beta ) \to \R^n $ has a unit-speed reparametrization $\widetilde {\gamma}$, with a reparametrization map $\phi$. Letting $t=\phi(\widetilde t)$, we have $\widetilde {\gamma }(\widetilde t)=\gamma(t)$ and so \[
+        \frac{d\widetilde {\gamma}}{d\widetilde t}= \frac{d\gamma}{dt}\frac{dt}{d\widetilde t} \implies  \left\| \frac{d \widetilde {\gamma}}{d\widetilde t}\right\| = \left\| \frac{d\gamma}{dt}\right\| \left| \frac{dt}{d\widetilde t} \right| .
+    \] Since $\widetilde \gamma $ is unit speed, $\| d \widetilde \gamma/ d\widetilde t\|=1$, so $d\gamma / dt$ cannot be zero.
+\end{proof}
