@@ -1,0 +1,88 @@
+\part{Lee: Riemannian Manifolds}
+\section{Chapter 1: What is Curvature?}
+\begin{center}
+    \sc{Introduction} 
+\end{center}
+These are supplementary notes, following Lee's \emph{Introduction to Riemannian Manifolds}. To get an idea of what we're studying, Chapter 1 will start from the roots and give a high level overview of the material.
+\orbreak
+Geometry as a mathematical discipline stems from Euclidian plane geometry, the stuff you learned in middle school. Its elements are points, lines, distances, angles, and areas: the notion of equivalence comes from \textbf{congruence}— two plane figures are congruent if they can be transformed into each other by a \textbf{rigid motion of the plane}, a bijective transformation from the plane to itself preserving distance. Some theorems:
+\begin{namedthm}{Side-Side-Side Theorem}
+    Two Euclidian triangles are congruent iff the lengths of their corresponding sides are equal.
+\end{namedthm}
+\begin{namedthm}{Angle-Sum Theorem}
+    The sum of the interior angles of a Euclidian triangle is $\pi$.
+\end{namedthm}
+These two seemingly simple theorems illustrate two major types of results in geometry, we call them ``classification theorems'' and ``local-to-global theorems''. The SSS theorem is a \emph{classification theorem}. Such a theorem tells us how to determine whether two objects are equivalent. Ideal classification theorems list computable invariants and says objects are equivalent iff these invariants match. 
+The angle-sum theorem relates a local geometric property (angle measure) to a global property (being a triangle). Most of the theorems we study are \emph{local-to-global theorems}.
+
+After studying points and lines, we can talk about circles. Here we state two theorems, one is a classification theorem, while the other is a local-to-global theorem (it will become clear why with time).
+\begin{namedthm}{Circle Classification Theorem}
+   Two circles in the Euclidian plane are congruent iff they have the same radius. 
+\end{namedthm}
+\begin{namedthm}{Circumference Theorem}
+   The circumference of a Euclidian circle of radius $R$ is $2\pi R$. 
+\end{namedthm}
+\subsection{Curvature}
+
+If we want to study more stuff, we'll have to talk about curves in the plane. Arbitary curves don't vibe well with things like length and radius, so we have a new basic invariant called \emph{curvature}, defined using calculus and is a function of position on the curve.
+
+Formally, the \textbf{curvature} of a plane curve $\gamma$ is defined as $\kappa(t)= | \gamma ''(t)|$, the length of the acceleration vector, when $\gamma$ is given a unit-speed parametrization. This is how we think about curvature geometrically: Given a point $p=\gamma(t)$, there are several circles tangent to $\gamma$ at $p$, namely the circles whose velocity vector at $p$ is the same as that of $\gamma$ when both are given unit-speed parametrizations. The center of these circles lie on the line passing through $p$ orthogonal to $\gamma'(p)$. Among these circles, there is exactly one unit-speed parametrized circle whos acceleration vector at $p$ is the same as $\gamma$, it is called the \textbf{osculating circle}. (If acceleration is zero, replace the osculating circle by a straight line, a ``circle with infinite radius''). The curvature is then $\kappa(t)=1 /R$, where $R$ is the radius of the osculating circle. The larger the curvature , the greater the acceleration, the smaller the radius, and therefore the faster the curve is turning. A circle of radius $R$ has constant curvature $\gamma \equiv 1 /R$, while a straight line has a curvature of zero. All of this makes much more sense with a figure {\color{red}TODO}
+
+It is often convenient to extend the definition of curvature to allow positive and negative values, we do this by choosing a continuous unit normal vector field $N$ along the curve, and assigning the curvature a positive sign if the curve is facing the normal vector and a negative sign if it's facing away. The resulting function $\kappa_N$ along the curve is then called the \textbf{signed curvature}. We state two theorems about plane curves.
+\begin{namedthm}{Plane Curve Classification Theorem}
+    Suppose $\gamma$ and $\widetilde \gamma \colon [a,b] \to \R^2$ are smooth, unit-speed plane curves with unit normal vector fields $N$ and $\widetilde N$, and $\kappa_N(t), \kappa_{\widetilde N}(t)$ represent the signed curvatures at $\gamma(t)$ and $\widetilde \gamma(t)$, respectively. Then $\gamma$ and $\widetilde \gamma$ are congruent by a direction-preserving congruence iff $\kappa_N(t)=\kappa _{\widetilde N}(t)$ for all $t \in [a,b]$.
+\end{namedthm}
+\begin{namedthm}{Total Curvature Theorem}
+    If $\gamma \colon [a,b] \to \R^2$ is a unit-speed simple closed curve such that $\gamma'(a)=\gamma'(b)$, and $N$ is the inward pointing normal, then \[
+        \int_{a}^{b} \kappa_N(t) \, dt=2\pi .
+    \]  
+\end{namedthm}
+The first theorem is a classification theorem, while the second is a local-to-global theorem, relating the local property of curvature to the global (topological) property of being a simple closed curve. These generalize the circle theorems: two circles are congruent if they have the same curvature (radius), and if a circle has curvature $\kappa$ and circumference $C$, then $\kappa C=2\pi $.
+
+\subsection{Surfaces in Space}
+The natural next step is to move to three dimensions, that is, the study of general curve surfaces in space ($2$-dimensional embedded submanifolds of $\R^3$). The invariant is curvature, but it gets more complicated since a surface can curve differently in different directions. 
+
+Curvature in space is described by two numbers at each point, called the \textbf{principal curvatures}. Suppose $S$ is a surface in $\R^3$, $p$ is a point on $S$, and $N$ is a unit normal vector to $S$ at $p$. Here's a rough outline of how to compute principal curvature.
+\begin{enumerate}
+    \item Choose a plane $\Pi$ passing through $p$ and parallel to $N$. The intersection of $\Pi$ with a neighborhood of $p$ in $S$ is a place curve $\gamma \subseteq \pi$ containing $p$.
+    \item Compute the signed curvature $\kappa_N$ of $\gamma$ at $p$ with respect to the chosen unit normal $N$.
+    \item Repeat \emph{for all} normal places $\Pi$. The \textbf{principal curvatures of} $\mathbf S$ \textbf{at} $\mathbf p$, denoted by minimum and maximum signed curvatures obtained.
+\end{enumerate}
+Principle curvatures give us information about geometry, but don't answer the a paramount question in Riemannian geometry: Which properties of a surface are \emph{intrinsic}? A property of surfaces is \emph{intrinsic} if it is preserved by \emph{isometries}, maps between surfaces preserving lengths of curves. To see that principle curvature isn't intrinsic, consider the embedded surface $S_1, S_2$ in $\R^3$, where $S_1$ is the square in the $xy$-plane with $0<x<\pi, 0 < y < \pi$, and $S_2$ is the half-cylinder $\{(x,y,z) \mid  z = \sqrt{1-y^2} , 0<x<\pi, |y|<1\} $. The principal curvatures of $S_1$ are zero, while the principal curvatures of $S_2$ are $\kappa_1=0$ and $\kappa_2=1$. But the map sending $(x,y,0)$ to $(x,\cos y, \sin y)$ is a diffeomorphism from $S_1$ to $S_2$, and thus an isometry.
+
+Principle curvatures may not be intrinsic, but Guass discovered that a particular combination of them is, that is, the product $K=\kappa_1\kappa_2$ (known as the \emph{Gaussian curvature}) is intrinsic. He named it \emph{Theorema Egregium}, meaning ``remarkable theorem''. To get an idea of how Gaussian curvature works, first note that the square and half-cylinder have the same Gaussian curvature of zero (which is true by \emph{Theorema Egregium} since they are isometric). A sphere of radius $R$ has positive Gaussian curvature $1 /R^2$, since each plane intersects the sphere in a great circle of radius $R$, and so the principal curvatures are $\pm 1/R\implies K=\kappa_1\kappa_2= 1/ R^2$. Similarly, ``dome-shaped'' objects have positive Gaussian curvature, since two principal curvatures always have the same sign, while ``saddle-shaped'' objects have negative Gaussian curvatures.
+
+Model spaces of surface theory have constant Gaussian curvature. We have already seen two: Euclidian space $\R^2$ ($K=0$), and the sphere of radius $R$ ($K= 1/R^2)$. The most important model surface with constant negative Gaussian curvature is the \textbf{hyperbolic plane}, whicn we'll talk about later. We state two theorems, you know the drill.
+\begin{namedthm}{Uniformization Theorem}
+    Every connected $2$-manifold is diffeomorphic to a quotient of one of the constant-curvature model surfaces described above by a discrete group of isometries without fixed points. So every connected $2$-manifold has a complete Riemannian metric with constant Gaussian curvature.
+\end{namedthm}
+\begin{namedthm}{Gauss-Bonnet Theorem}
+   Suppose $S$ is a compact Riemannian $2$-manifold. Then \[
+       \int_{S}^{} K \, dA= 2\pi \chi (S),
+   \] where $\chi(X)$ is the Euler characteristic of $S$. 
+\end{namedthm}
+The uniformization theorem replaces the problem of classifying surfaces with classifying certain discrete groups of the models. Usually the uniformization theorem is state differently and proved with complex analysis. The Gauss-Bonnet theorem is a pure theorem of differential geometry, and arguable the most fundamental and important of them all. It relates a local geometric property (curvature) with a global topological invariant (the Euler Characteristic).
+
+Together, these theorems place strong restrictions on the types of metrics that can occur on a given surface. For example, a consequence of Gauss-Bonnet is that the only compact, connected, orientable surface that admits a metric of strictly positive Gaussian curvature is the sphere. On the other hand, if a compact, connected orientable surface has nonpositive Gaussian curvature, Gauss-Bonnet rules out the sphere, and the uniformization theorem tells us that its universal covering space is homeomorphic to the plane.
+
+\subsection{Curvature in Higher Dimensions}
+Curvature becomes a lot more complicated in higher dimensions since manifolds can curve in all sorts of crazy ways. Our first issue is that in general, Riemannian manifolds don't present themselves as embedded submanifolds of Euclidian space. So we can't cut out curves by intersecting planes. However, \textbf{geodesics}---curves that are the shortest path between two points, help with our case. Examples are straight lines in Euclidian space and great circles on a sphere.
+
+Suppose $M$ is an $n$-dimensional Riemannian manifold. The most fundamental fact about geodesics is that given any $p \in M$ and any vector $v$ tangent to $M$ at $p$, there is a unique geodesic starting at $p$ with inital velocity $v$. Here's a brief recipe for computing curvatures at some $p \in M$:
+\begin{enumerate}
+    \item Choose a $2$-dimensional subspace $\Pi$ of the tangent space to $M$ at $p$.
+    \item Look at all the geodesics through $p$ whose initial velocities lie in $\Pi$. It turns out that near $p$ these sweep out a certain $2$-dimensional submanifold $S_{\Pi}$ of $M$, which inherits a Riemannian metric from $M$.
+    \item Compute the Gaussian curvature of $S_{\Pi}$ at $p$, which \emph{Theorema Egregium} tells us can be computed from the inherited Riemannian metric. This associates a number, denoted $\sec(\Pi)$, called the \textbf{sectional curvature} of $M$ at $p$, with the plane $\Pi$.
+\end{enumerate}
+So the ``curvature of $M$ at $p$ has to be interpreted as a map $\sec \colon \{2\text{-planes in} \ T_p M\}  \to \R$. We again have three classes of constant (sectional) curvature model spaces: $\R^n $ with its Euclidian metric (for which $\sec \equiv 0)$; the $n$-sphere of radius $R$, with the Riemannian metric metric inherited from $\R^{n+1}$ ($\sec \equiv 1 /R^2$); and hyperbolic space of radius $R$ (with $\sec \equiv -1 / R^2$). Unfortunately, we have no satisfactory uniformization theorem for Riemannian manifolds in higher dimensions. In general, it is \emph{not} true that every manifold has a metric of constant sectional curvature. 
+\begin{namedthm}{Characterization of Constant-Curvature Metrics}
+   The complete, connected, $n$-dimensional Riemannian manifolds of constant sectional curvature are, up to isometry, exactly the Riemannian quotients of the form $\widetilde M / \Gamma$, where $\widetilde M$ is a Euclidian space, sphere, or hyperbolic space with constant sectional curvature, and $\Gamma$ is a discrete group of isometrics of $\widetilde M$ acting freely on $\widetilde M$.
+\end{namedthm}
+On the other hand, we have a number of power local-to-global theorems, which can be thought of generalizations of Gauss-Bonnet in various directions. They are consequences of the fact that positive curvature makes geodesics converge, while negative curvature makes them spread out. 
+\begin{namedthm}{Cartan-Hadamard Theorem}
+   Suppose $M$ is a complete, connected Riemannian $n$-manifold with all sectional curvatures less than or equal to zero. Then the universal covering space of $M$ is diffeomorphic to $\R^n $. 
+\end{namedthm}
+\begin{namedthm}{Myer's Theorem}
+    Suppose $M$ is a complete, connected Riemannian manifold with all sectional curvatures bounded below by a positive constant. Then $M$ is compact and has a finite fundamental group. 
+\end{namedthm}
+You can see that these theorems generalize the uniformization and Gauss-Bonnet, although not their full strength. Our goal with this course is to prove the three aforementioned theorems, among others; it is a primary goal of Riemannian geometry to improve upon and generalize the results of surface theory to higher dimensions.
