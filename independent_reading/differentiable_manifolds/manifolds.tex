@@ -1,0 +1,56 @@
+\part{Manifolds}
+\section{Manifolds}
+\subsection{Topological Manifolds}
+
+\begin{definition}[]
+    A topological space $M$ is \textbf{locally Euclidian of dimension} $\mathbf n$ if every point $p$ in $M$ has a neighborhood $U$ such that there is a homeomorphism  $\phi$ from $U$ onto an open subset of $\R^n $. We call the pair $(U, \phi \colon U \to \R^n )$ a \textbf{chart}, $U$ a \textbf{coordinate neighborhood} or a \textbf{coordinate open set}, and $\phi$ a \textbf{coordinate map} or a \textbf{coordinate system} on $U$. We say a chart $(U, \phi)$ is \textbf{centered} at $p \in U$ if $\phi(p)=0$. A \textbf{chart} $(U,\phi)$ \textbf{about} $\mathbf p$ simply means that $(U, \phi)$ is a chart and $p \in U$.
+\end{definition}
+\begin{definition}[]
+    A \textbf{topological manifold of dimension} $\mathbf n$ is a Hausdorff, second countable, locally Euclidian space of dimension $n$.
+\end{definition}
+For this concept to be well defined, we need to show that $\R^n $ and $\R^m$ are not homeomorphic for $n \neq m$. This is difficult in general (uses homology) but easier for \emph{smooth} manifolds, what we're interested in. Usually this refers to a connected manifold, since manifolds with multiple connected components can have different dimensions for each.
+\begin{example}
+    Euclidian space $\R^n $ is covered by a single chart $(\R^n , \operatorname{id}_{\R^n })$. Every open subset of $\R^n $ is also a topological manifold, with chart $(U, 1_U)$.
+\end{example}
+\begin{example}
+    The graph of $y = x^{2 /3}$ in $\R^2$ is a topological manifold. Since it's a subspace of $\R^2$, it's $T_2$ and second countable. It's also locally Euclidian since it's homeomorphic to $\R$ via $(x,x^{2 /3})\mapsto  x$.
+\end{example}
+\subsection{Compatible Charts}
+\begin{definition}[]
+    Two charts $(U, \phi \colon U \to \R^n ), (V, \psi \colon V \to \R^n )$ of a topological manifold are $\mathbf {C^{\infty}}$\textbf{-compatible} if the two maps \[
+        \phi \circ \psi ^{-1} \colon \psi (U \cap V) \to \phi(U \cap V), \quad \psi \circ \phi^{-1}\colon \phi(U \cap V) \to \psi (U \cap V)
+    \] are $C^{\infty}.$ These two maps are called the \textbf{transition functions} between the charts. If $U \cap V$ is empty, then two charts are automatically $C^{\infty}$-compatible. To simplify notation, we often write $U_{\alpha \beta }$ for $U_{\alpha }\cap U_{\beta }$ and $U_{\alpha \beta \gamma }$ for $U_{\alpha }\cap U_{\beta }\cap U_{\gamma }$. Non $C^{\infty}$-compatible charts are not interesting, so we omit the $C^{\infty}$ and only speak of compatible charts.
+\end{definition}
+\begin{definition}[]
+    A $C^{\infty}$ atlas or simply an \textbf{atlas} on a locally Euclidean space $M$ is a collection $\{(U_{\alpha },\phi _{\alpha })\} $ of $C^{\infty}$ compatible charts that cover $M$, i.e., such that $M= \bigcup_{\alpha } U_{\alpha }.$
+\end{definition}
+Although $C^{\infty}$ compatibility of charts is reflexive and symmetric, it's not transitive. This intuitively is the case since a triple intersection can be small, and two charts being compatible could miss an area of the third. We say a chart $(V,\psi)$ is \textbf{compatible with an atlas} $\{(U_{\alpha }, \phi _{\alpha })\} $ if it is compatible with all the charts $(U_{\alpha }, \phi _{\alpha })$ of the atlas.
+\begin{lemma}\label{compatible}
+    Let $\{(U_{\alpha },\phi_{\alpha })\} $ be an atlas on a locally Euclidian space. If two charts $(V,\psi)$ and $(W,\sigma)$ are both compatible with the atlas $\{(U_{\alpha },\phi _{\alpha })\} $ then they are compatible with each other.
+\end{lemma}
+\begin{proof}
+    Let $p \in  V \cap W$. We want to show that $\sigma \circ \psi ^{-1}$ is $C^{\infty}$ at $\psi (p)$. Since $\{(U_{\alpha },\phi_{\alpha })\} $ is an atlas for $M$, $p \in U_{\alpha }$ for some $\alpha $. Then $p$ is in the triple intersection $V \cap W \cap U_{\alpha }$. We have that $\sigma \circ \psi ^{-1} = (\sigma \circ \phi _{\alpha }^{-1})\circ (\phi _{\alpha} \circ \psi ^{-1})$ is $C^{\infty}$ on $\psi (V \cap W\cap U_{\alpha })$, hence at $\psi (p)$. So $\sigma \circ \psi ^{-1}$ is $C^{\infty}$ on $\psi(V\cap W)$, and similarly $\psi \circ \sigma ^{-1}$ is $C^{\infty}$ on $\sigma(V \cap W)$.
+\end{proof}
+\subsection{Smooth Manifolds}
+An atlas $\mathfrak A$ on a locally Euclidian spsace is said to be \textbf{maximal} if it is not contained in a larger atlas; in other words, if $\mathfrak M$ is any other atlas containing $\mathfrak A$, then $\mathfrak M=\mathfrak A$.
+\begin{definition}[]
+    A \textbf{smooth} or $C^{\infty}$ manifold is a topological manifold $M$ together with a maximal atlas. The maximal atlas is also called a \textbf{differentiable structure} on $M$. A manifold is said to have dimension $n$ if all of its connected components have dimension $n$.
+\end{definition}
+We will eventually prove that if an open set $U\subseteq \R^n $ is diffeomorphic to an open set $V \subseteq \R^m$, then $m=n$. So the dimension of a manifold is well-defined.
+
+Usually we don't have to exhibit a maximal atlas to put a smooth structure on a manifold. The existence of \emph{any} atlas will do, actually.
+\begin{prop}
+    Any atlas $\mathfrak A= \{(U_{\alpha }, \phi_{\alpha })\} $ on a locally Euclidian space is contained in a unique maximal atlas.
+\end{prop}
+\begin{proof}
+    Adjoin to $\mathfrak A$ all charts $(V_i ,\psi _i )$ compatible with $\mathfrak A$. By \cref{compatible}, the charts $(V_i ,\psi _i )$ are all compatible with each other, so the enlarged collection is an atlas. Any chart compatible with this new atlas must be compatible with $\mathfrak A$, and so by construction belongs to the new atlas. So the new atlas is maximal.
+
+    Let $\mathfrak M$ be the maximal atlas constructed above. If $\mathfrak M'$ is another maximal atlas containing $\mathfrak A$, then all charts in $\mathfrak M'$ are compatible with $\mathfrak A$ and so belong to $\mathfrak M$. So $\mathfrak M' \subset \mathfrak M$, and since both are maximal we have $\mathfrak M'=\mathfrak M$.
+\end{proof}
+As a summary, to show a topological space $M$ is a smooth manifold, we must check:
+\begin{enumerate}[label=(\roman*)]
+    \item $M$ is Hausdorff and second countable,
+    \item $M$ has a $C^{\infty}$ atlas (not necessarily maximal).
+\end{enumerate}
+\subsection{Examples of Smooth Manifolds}
+

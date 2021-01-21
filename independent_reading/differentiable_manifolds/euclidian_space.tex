@@ -127,10 +127,6 @@ D_v f = \sum_{i=1}^{n} \frac{dc^i }{dt}(0)\frac{\partial f}{\partial x^i }(p)=\s
 \subsection{Vector Fields}
 A \textbf{vector field} $X$ on an open subset $U$ of $\R^n $ is a function that assigns to each point $p$ in $U$ a tangent vector $X_p$ in $T_p(\R^n )$. Since $T_p(\R^n )$ has basis $\{\partial /\partial x^i |_p\} $, the vector $X_p$ is a linear combination $
     X_p = \sum_{}^{} a^i (p) \left. \frac{\partial }{\partial x^i } \right| _p, \ p \in U.$ We say that the vector field $X$ is $C^{\infty}$ on $U$ if the coefficient functions $a^i $ are all $C^{\infty}$ on $U$.
-        \begin{example}
-            On $\R^2\setminus \{0\} $, let $p=(x,y)$. Then $X= \frac{-y}{\sqrt{x^2+y^2} }\frac{\partial }{\partial x}+\frac{x}{\sqrt{x^2+y^2} }\frac{\partial }{\partial y}$ is the vector field of the fig
-            %todo fig
-        \end{example}
 We can identify vector fields on $U$ with column vectors of $C^{\infty}$ functions on $U$: \[
 X=\sum a^i  \frac{\partial }{\partial x^i }\quad \longleftrightarrow \quad
 \begin{bmatrix}
@@ -276,5 +272,129 @@ It follows from the definition of the wedge product that $f\wedge g$ is bilinear
         1 & \cdots  & \ell & \ell+1 & \cdots  & \ell +k\\
         k+1 & \cdots  & k+\ell & 1 & \cdots  & k
     \end{pmatrix}.
-\] Then $\sigma(1)=\sigma\tau(\ell+1),\cdots ,\sigma(k)=\sigma\tau(\ell+k),\ \sigma(k+1)=\sigma\tau(1),\cdots ,\sigma(k+\ell)=\sigma\tau(\ell)$.
+\] Then $\sigma(1)=\sigma\tau(\ell+1),\cdots ,\sigma(k)=\sigma\tau(\ell+k),\ \sigma(k+1)=\sigma\tau(1),\cdots ,\sigma(k+\ell)=\sigma\tau(\ell)$. For any $v_1,\cdots ,v_{k+\ell}\in V$,
+\begin{align*}
+    A(f\otimes g)(v_1,\cdots ,v_{k+\ell})&=\sum _{\sigma \in S_{k+\ell}}(\operatorname{sgn}\sigma)f(v_{\sigma(1)},\cdots ,v_{\sigma(k)})g(v_{\sigma(k+1)},\cdots ,v_{k\sigma(k+\ell)})\\
+                                         &= \sum _{\sigma \in S_{k+\ell}}(\operatorname{sgn}\sigma)f (v_{\sigma\tau(\ell+1)},\cdots , v _{\sigma\tau(\ell+k)})g(v_{\sigma\tau(1)},\cdots ,v_{\sigma\tau(\ell)})\\
+                                         &=(\operatorname{sgn}\tau) \sum _{\sigma\in S_{k+\ell}}(\operatorname{sgn}\sigma\tau) g (v_{\sigma\tau(1)},\cdots , v_{\sigma\tau(\ell)})f(v_{\sigma\tau(\ell+1)},\cdots ,v_{\sigma\tau(\ell+k)})\\
+                                         &=(\operatorname{sgn}\tau)A (g\otimes f)(v_1,\cdots ,v_{k+\ell}).
+\end{align*}So $A(f\otimes g)=(\operatorname{sgn}\tau )A(g\otimes f)=(-1)^{k\ell}A(g\otimes f)$. Dividing by $k!\ell!$ gives $f\wedge g=(-1)^{k\ell}g\wedge f$.
 \end{proof}
+\begin{cor}
+    If $f$ is a $k$-covector on $V$ and $k$ is odd, then $f\wedge f=0$. 
+\end{cor}
+\begin{proof}
+    We have $f\wedge f = (-1)^{k^2}f\wedge f=-f \wedge f$ by anticommutativity, so $f\wedge f=0$.
+\end{proof}
+\subsection{Associativity of the Wedge Product}
+\begin{lemma}
+    Suppose $f$ is a $k$-linear function and $g$ is an $\ell$-linear function on a vector space $V$. Then
+    \begin{enumerate}[label=(\roman*)]
+        \item $A(A(f)\otimes g)=k!A(f\otimes g)$, and 
+        \item $A(f\otimes A(g))=\ell! A(f\otimes g)$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    We have \[
+        A(A(f)\otimes g)= \sum _{\sigma \in S_{k+\ell}}(\operatorname{sgn}\sigma) \sigma \left( \sum _{\tau\in S_k}(\operatorname{sgn}\tau)(\tau f)\otimes g \right) .
+    \] We can view $\tau \in S_k$ as a permutation in $S_{k+\ell}$ such that $\tau(i)=i$ for $i=k+1,\cdots ,k+\ell$. For such a $\tau$, $(\tau f)\otimes g=\tau (f\otimes g)$. So \[
+    A(A(f)\otimes g)=\sum _{\sigma \in S_{k+\ell}}\sum _{\tau \in {S_k}}(\operatorname{sgn}\sigma)(\operatorname{sgn}\tau) (\sigma \tau)(f\otimes g).
+\] Let $\mu =\sigma\tau \in S_{k+\ell}$, there are $k!$ ways to write $\mu=\sigma\tau$ with $\sigma \in S_{k+\ell}$ and $\tau\in S_k$, because each $\tau \in S_k$ determines a unique $\sigma$ by the formula $\sigma=\mu\tau^{-1}$. So the double sum above can be rewritten as \[
+A(A(f)\otimes g)=k! \sum _{\mu \in S_{k+\ell}}(\operatorname{sgn}\mu)\mu (f\otimes g).
+\]  The proof for (ii) is similar.
+\end{proof}
+\begin{prop}
+    Let $V$ be a real vector space and $f,g,h$ alternating multilinear functions on $V$ of degrees $k,\ell,m$ respectively. Then \[
+        (f\wedge g)\wedge h = f\wedge (g\wedge h).
+    \] 
+\end{prop}
+\begin{proof}
+    By the definition of the wedge product, we have 
+    \begin{align*}
+        (f\wedge g)\wedge h &= \frac{1}{(k+\ell)!m!}A((f\wedge g)\otimes h)\\
+                            &=\frac{1}{(k_\ell)!m!}\frac{1}{m!\ell!}A(A(f\otimes g)\otimes h)\\
+                            &=\frac{(k+\ell)!}{(k+\ell)!m!k!\ell!}A((f\otimes g)\otimes h)\\
+                            &=\frac{1}{k!\ell!m!}A((f\otimes g)\otimes h).
+    \end{align*}Similarly, since the tensor product is associative, we conclude that $(f\wedge g)\wedge h=f\wedge (g\wedge h)$.
+\end{proof}
+\begin{cor}
+    Let $V$ be a real vector space and $f,g,h$ be alternating multilinear functions on $V$ of degrees $k,\ell,m$ respectively. Then \[
+        f\wedge g\wedge h = \frac{1}{k!\ell!m!}A(f\otimes g \otimes h).
+    \] More generally, if $f_i \in A_{d_i }(V)$, then \[
+    f_1\wedge \cdots \wedge f_r = \frac{1}{(d_1)!\cdots (d_r)!}A(f_1\otimes \cdots \otimes f_r).
+\] 
+\end{cor}
+\begin{prop}
+Let $[b^i _j ]$ denote the matrix whose $(i,j)$-entry is $b^i _j $. If $\alpha ^1,\cdots ,\alpha ^k$ are linear functions on a vector space $V$ and $v_1,\cdots ,v_k\in V$, then \[
+        (\alpha ^1\wedge \cdots \wedge \alpha ^k)(v_1,\cdots ,v_k)=\det [\alpha ^i (v_j )].
+    \] 
+\end{prop}
+\begin{proof}
+    \begin{align*}
+        (\alpha ^1\wedge \cdots \wedge \alpha ^k)(v_1,\cdots ,v_k)&= A(\alpha ^1 \otimes \cdots \otimes \alpha ^k)(v_1,\cdots ,v_k)\\
+                                                                  &=\sum _{\sigma \in S_k}(\operatorname{sgn}\sigma)\alpha ^1(v_{\sigma(1)})\cdots \alpha ^k(v_{\sigma(k)})\\
+                                                                  &=\det [\alpha ^i (v_j )].\qedhere
+    \end{align*}
+\end{proof}
+\subsection{A Basis for $k$-Covectors}
+Let $e_1,\cdots ,e_n $ be a basis for a real vector space $V$, and let $\alpha ^1,\cdots ,\alpha ^n $ be the dual basis for $V^*$. We introduce the multi-index notation $I=(i_i ,\cdots ,i_k)$ and write $e_I$ for $(e_{i_1},\cdots ,e_{i_k})$ and $\alpha ^I$ for $\alpha ^{i_1}\wedge \cdots \wedge \alpha ^{i_k}$. A $k$-linear function $f$ on $V$ is completely determined by its values on all $k$-tuples $e_I$. If $f$ is alternating, then it is completely determined by its values on $e_I$ with $1\leq i_1< \cdots  < i_k \leq n$; that is, we can just talk about $e_I$ with $I$ in ascending order. Suppose $I,J$ are ascending, then since the wedge of covectors forms the determinant, we have \[
+    \alpha ^I (e_J) = 
+    \begin{cases}
+        1 \quad & \text{if} \ I=J;\\
+        0& \text{if} \ I\neq J.
+
+    \end{cases}
+\] 
+\begin{prop}
+    The alternating $k$-linear functions $\alpha ^I$ where $I=(i_1<\cdots < i_k)$ form a basis for the space $A_k(V)$ of alternating $k$-linear functions on $V$.
+\end{prop}
+\begin{proof}
+    First we show linear independence. Suppose $\sum c_I \alpha ^I=0$, where $c_I\in \R$ and $I$ runs over ascending multi-indices of length $k$. Applying both sides to $e_J$, we have $0=\sum c_I\alpha ^I(e_J)=c_J$, since among all the ascending multi-indices $I$ of length $k$ there is only one equal to $J$. So the $\alpha ^I$ are LI.
+
+    To show that the $\alpha ^I$ span $A_k(V)$, let $f\in A_k(V)$. We claim that $f=\sum f(e_I)\alpha ^I$, where $I$ runs over all ascending multi-indices of length $k$. Let $g=\sum f(e_I)\alpha ^I$. By $k$-linearity and the alternating property, if two covectors agree on all $e_J$, then they are equal. But \[
+        g(e_J)=\sum f(e_I)\alpha ^I(e_J)=\sum f(e_I)\delta^I_J=f(e_J).
+    \] So $f=g=\sum f(e_I)\alpha ^I$.
+\end{proof}
+\begin{cor}
+    If a vector space $V$ is of dimension $n$, then $A_k(V)$ has dimension ${n \choose k}$.
+\end{cor}
+\begin{proof}
+    We obtain an ascending multi-index $I=(i_1<\cdots < i_k)$ by choosing a subset of $k$ numbers from $1,\cdots ,n$: This can be done in ${n \choose k}$ ways.
+\end{proof}
+\begin{cor}
+    If $k> \dim V$, then $A_k(V)=0$.
+\end{cor}
+\begin{proof}
+    In $\alpha ^{i_1}\wedge \cdots \wedge \alpha ^{i_k}$, at least two of the factors must be the same, say $\alpha $. Because $\alpha $ is a $1$-covector, $\alpha \wedge \alpha =0$, so $\alpha ^{i_1}\wedge \cdots \wedge \alpha ^{i_k}=0$.
+\end{proof}
+
+\section{Differential Forms on $\R^n $}
+\subsection{Differential $1$-Forms and the Differential of a Function}
+The \textbf{cotangent space} to $\R^n $ at $p$, denoted by $T_p^*(\R^n )$ or $T_p^* \R^n $, is defined as the dual space of $T_p(\R^n )$. So elements are covectors or linear functionals on $T_p(\R^n )$. Similarly, a \textbf{covector field} or \textbf{differential} $\mathbf 1$\textbf{-form} ($1$-form for short) $\omega$ on an open subset $U$ of $\R^n $ is a function that assigns to each point $U$ a covector $\omega_p \in T_p^*(\R^n )$.
+
+From any $C^{\infty}$ function $f\colon U \to \R$, we can construct a $1$-form $df$, called the \textbf{differential} of $f$ as follows. For $p\in U$ and $X_p \in T_p U$, define $(df)_p(X_p)=X_pf.$ Let $x^1,\cdots ,x^n $ be the standard coordinates on $\R^n $. Recall that $\{\partial /\partial x^1 |_p,\cdots ,\partial /\partial x^n |_p\} $ is a basis for the tangent space $T_p(\R^n )$.
+\begin{prop}
+If $x^1,\cdots ,x^n $ are the standard coordinates on $\R^n $, then at each point $p \in \R^n $, $\{(dx^1)_p,\cdots ,(dx^n )_p\} $ is the basis for the cotangent space $T_p^*(\R^n )$ dual to the basis $\{\partial /\partial x^1|_p,\cdots ,\partial /\partial x^n |_p\}$.
+\end{prop}
+\begin{proof}
+    \[
+        (dx^i )_p\left( \left. \frac{\partial }{\partial x^j} \right|_p  \right) = \left. \frac{\partial }{\partial x^j} \right| _p x^i =\delta_j ^i .\qedhere
+    \] 
+\end{proof}
+If $\omega$ is a $1$-form on an open $U \subseteq \R^n $, then at each point $p \in U$ we have a linear combination $\omega_p=\sum a_i (p)(dx^i )_p$ for some $a_i (p)\in \R$, since the $(dx^i )_p$ form a basis for the cotangent space $T_p^*(\R^n )$. As $p$ varies over $U$, the coefficients $a_i $ become functions on $U$, and we write $\omega = \sum a_i dx^i $. The covector field $\omega$ is said to be $C^{\infty}$ on $U$ if the coefficient functions $a_i $ are all $C^{\infty}$ on $U$. If $x,y,$ and $z$ are coordinates on $\R^3$, then $dx,dy,$ and $dz$ are $1$-forms on $\R^3$.
+\begin{prop}
+    If $f \colon U \to \R$ is a $C^{\infty}$ function on an open $U\subseteq \R^n $, then $df = \sum \frac{\partial f}{\partial x^i }dx^i $.
+\end{prop}
+\begin{proof}
+    At each point $p \in U$, we have $(df)_p=\sum a_i (p)(dx^i )_p$ for some constants $a_i (p)$ depending on $p$. So $df=\sum a_i dx^i $ for some functions $a_i $ on $U$. To evaluate $a_j $, apply both sides of the first expression to the coordinate vector field $\partial /\partial x^j$ ; that is, \[
+        df\left( \frac{\partial f}{\partial x^j} \right) =\sum_i a_i dx^i \left( \frac{\partial }{\partial x^j} \right) =\sum_i a_i \delta_j ^i =a_j .
+    \] On the other hand, $df \left( \frac{\partial }{\partial x^j} \right) =\frac{\partial f}{\partial x^i }$ by the definition of the differential.
+\end{proof}
+So if $f$ is $C^{\infty}$, $df$ is also $C^{\infty}$.
+\begin{example}
+    Every tangent vector $X_p \in T_p(\R^n )$is a linear combination of the standard basis vectors: $X_p=\sum _i b^i (X_p)\left. \frac{\partial }{\partial x^i } \right| _p$.
+\end{example}
+We have seen that at each $p \in \R^n $, we have $b^i (X_p)=(dx^i )_p (X_p)$. So the coefficient $b^i $ of a vector WRT the standard basis $\frac{\partial }{\partial x^1},\cdots ,\frac{\partial }{\partial x^n}$ is none other than the dual form $dx^i $ on $\R^n .$
+\subsection{Differential $k$-Forms}
+
+In general, a \textbf{differential form} $\omega$ \textbf{of degree} $\mathbf k$ or a $\mathbf k$\textbf{-form} on an open $U\subseteq \R^n $ is a function that assigns to each $p \in U$ an alternating $k$-linear function on $T_p(\R^n )$, i.e., $\omega_p \in A_k(T_p\R^n )$. Since $A_1(T_p\R^n )=T_p^*(\R^n )$, this generalizes the idea of a $1$-form.
