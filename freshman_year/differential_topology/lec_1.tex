@@ -1,0 +1,81 @@
+\newpage
+\part{Class Notes}
+\section{January 19, 2021}
+\begin{quote}
+    ``Differential topology is a subset of geometry, which is a subset of math. Broadly, math is about space and numbers, and this is more on the space side. This isn't a partition, however.''
+\end{quote}
+
+\subsection{Smooth Manifolds}
+Our main object of study is the smooth manifold, which is broadly a space on which you can do calculus. All these spaces look the same locally, the difference is in the global structure. We want to know how to do calculus on flat space first, which means doing calculus on open sets $U \subseteq \mathbb A^n  = \{(x^1,\cdots ,x^n )  \mid x^i  \in \R\} $, where $\mathbb A^n $ is affine $n$-space. Broadly, this means functions $f \colon U' \to U$, $n$ functions of $m$ variables, which are smooth $(C^{\infty})$. 
+
+Smooth manifolds patch together these open sets, or a collection $\{U_{\alpha }\} \alpha \in  A$. By patching together, we mean $X$ is a smooth manifold, and a surjective map from this collection onto $X$. We go from one piece (chart) to the other by transition maps. Atlases will include some border towns when you're crossing over. The information must correspond, which is the idea of a diffeomorphism.
+\begin{example}
+    Our first example will be two copies of the affine line $\mathbb A_x^1, \mathbb A_y^1$ projecting onto the circle $S^1 = \{\lambda \in  \C  \,\big|\, |\lambda |=1\}  $. If we define  \[
+    \lambda = 
+    \begin{cases}
+        e^{2i \tan ^{-1} x}\\
+        e^{2i \left( \frac{\pi}{2}- \tan ^{-1} y \right) }
+    \end{cases}
+\] we see that $0_x \mapsto 1$ and $0_y \mapsto -1$. So we patch $\mathbb A_x^1 \setminus \{0\} \overset{f}{\to } \mathbb A_y^1 \setminus \{0\} $ by the map $x \mapsto 1 /x$.
+\end{example}
+\begin{example}
+    Another example is glueing two affine planes together by stereographic projection on a sphere. Work out what the transition function is in your free time.
+\end{example}
+\begin{example}
+    Take an affine plane $\mathbb A^2$ and a line $\ell$ in it, or the manifold $X$ of affine lines through the plane.
+\end{example}
+Let's talk about the correspondence of manifolds and functions. For $f \colon X \to Y\ni c$, we can make shapes from functions like so:
+\begin{enumerate}[label=(\arabic*)]
+    \item The image $f(X)\subseteq Y$,
+    \item The fiber of $f$ at $c$, $f^{-1} (c) \subseteq X$, and the inverse image $f^{-1}(z)\subseteq X$,
+    \item The graph $\Gamma_f \subseteq X\times Y$.
+\end{enumerate}
+
+\subsection{Local-to-global and Classification theorems}
+Another idea is local vs global structure. An example of local structure is the inverse function theorem. Classification is also a big issue, it's good to know that manifolds are topologizable metric spaces. So we can talk about things like compactness and connectedness.
+\begin{enumerate}[label=(\arabic*)]
+    \item Our only example in dimension 1 is the circle $S^1 $.
+    \item In dimension 2, we have the genus $n$-surfaces, the Klein bottle, projective space, etc.
+    \item In dimension 3, if we add a simply-connected hypothesis this becomes the classic Poincar\'e (no longer!) conjecture.
+    \item In dimension 4, it's a zoo
+    \item In dimensions greater than 5, we have more wiggle room with the extra dimensions, so we can apply techniques from algebraic topology which are more effective with this wiggle room.
+\end{enumerate}
+How do we classify functions? For smooth manifolds we consider manifolds up to diffeomorphism. For functions $f \colon S^1  \to S^1 $, we can give it a nice topology (say the compact-open topology) and look at the path components, or classify the maps up to homotopy. In this case, homotopies are maps $F \colon [0,1]\times  S^1  \to S^1 $, classifying these are a kind of global property. A type of map from the circle to the circle is $f_n (\lambda)=\lambda ^n $ for $n \in \Z$, these maps have winding numbers. In a homotopy, a path in the interval can wind around and intersect itself several times, but always evens out (points being born and dying). An important concept is the orientations, knowing which way things are facing. This is the first example of what's called \emph{intersection theory}, which is what we use to make invariants.
+
+Back to smooth manifolds. They arise in many places, including:
+\begin{enumerate}[label=(\arabic*)]
+    \item Moduli spaces of geometric objects
+    \item Solutions to (nonlinear) differential equations
+\end{enumerate}
+\orbreak
+This finishes the survey of the course. Now let's begin the actual content.
+
+\subsection{Topological Manifolds}
+\begin{definition}[]
+    Let $X$ be a topological space.
+    \begin{enumerate}[label=(\roman*)]
+        \item $X$ is \textbf{locally Euclidian} if for all $x \in X$ there exists an open subset $U_x\subseteq X$ and a homeomorphism $U \to  U'$ where $U' \subseteq \A^n $ for some $n \in  \Z^{\geq 0}$.
+        \item $X$ is a \textbf{topological manifold} if $X$ is locally Euclidian, Hausdorff, and second countable.
+    \end{enumerate}
+\end{definition}
+\begin{remark}
+    At each $x \in X$, the dimension $n$ is well-defined. So we have a function $\dim \colon X \to \Z^{\geq 0}$. If the dimension is constant, then we say such a manifold is an $n$-manifold. But this doesn't always have to be the case.
+\end{remark}
+\begin{remark}
+    A topological manifold has a metrizable topology.
+\end{remark}
+
+\begin{example}
+    Here we give some examples and nonexamples of topological manifolds.
+    \begin{enumerate}[label=(\arabic*)]
+        \item Consider $\A^1$ and $S^2$, then $X=\A^1 \amalg S^2$ is a topological manifold. It has two components with dimension 1 and 2, respectively.
+        \item A nonexample is a circle with a line through it, since it's not locally Euclidian at the intersection point.
+        \item Another nonexample is $\A^1 \cup  \A^1/\sim$ under the identification that glues every point together that isn't zero. So it's a line with a double point, each of which has an interval as an open point. Therefore we can't separate these points, and so this space is not Hausdorff.
+        \item $\A^1 _{\text{discrete} }$ is an uncountable set, so this is not second countable. 
+    \end{enumerate}
+\end{example}
+\begin{remark}
+    We do not study topological manifolds in this class. But smooth manifolds are topological manifolds with extra structure. In dimensions 1,2,3, they are the same, that is, every topological manifold admits a smooth structure. 
+
+    In dimension four, TOP $\neq$ DIFF. For example, $\A^4$ has infinitely many unique smooth structures. In dimension seven, $S^7$ has 28 smooth structures. Milnor went on to classify smooth structures of spheres in all dimensions.
+\end{remark}
