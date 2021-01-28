@@ -53,4 +53,35 @@ As a summary, to show a topological space $M$ is a smooth manifold, we must chec
     \item $M$ has a $C^{\infty}$ atlas (not necessarily maximal).
 \end{enumerate}
 \subsection{Examples of Smooth Manifolds}
+\begin{example}
+    Euclidian space $\R^n $ is a smooth manifold with single chart $(\R^n , r^1,\cdots , r^n )$, where the $r^i $ are the standard coordinates on $\R^n $.
+\end{example}
+\begin{example}
+    Any open subset $V$ of a manifold $M$ is also a manifold. If $\{(U_{\alpha }, \phi _{\alpha })\} $ is an atlas for $M$, then $\{(U_{\alpha }\cap V, \phi _{\alpha }| _{U_{\alpha }\cap V})\} $ is an atlas for $V$, where $\phi _{\alpha }| _{U_{\alpha }\cap V} \colon U_{\alpha }\cap V \to \R^n $ denotes the restriction of $\phi _{\alpha }$ to the subset $U_{\alpha }\cap V$. 
+\end{example}
+\begin{example}
+    For $U\subseteq \R^n $ open and $f \colon U \to \R^m$ a $C^{\infty}$ function, the \emph{graph} of $f$ is defined as the subspace $\Gamma(f)= \{(x, f(x)) \in  U \times  \R^m\} $. The maps $\phi \colon  \Gamma(f) \to U, \ (x, f(x) ) \mapsto  x$ and $1 \times f \colon U \to \Gamma(f), \ x \mapsto  (x, f(x))$ are continuous and homeomorphisms. The graph $\Gamma(f)$ of a $C^{\infty}$ function $f \colon U \to \R^m$ has an atlas with a single chart $(\Gamma(f), \phi)$ and is therefore a $C^{\infty}$ manifold.
+\end{example}
+\begin{example}
+    For any two positive integers $m$ and $n$ let $\R ^{ m \times n}$ be the vector space of all $m \times n$ matrices. Since $\R ^{ m\times n}\cong \R^{mn}$, we give it the topology of $\R^{mn}$. The \textbf{general linear group} $\operatorname{GL}(n, \R)$ is defined as \[
+        \operatorname{GL}(n,\R) := \{A \in \R^{n \times n} \mid \det \, A \neq 0\} = {\det} ^{-1}  (\R \setminus \{0\} ).
+    \] Since $\det \colon \R^{n \times n} \to \R$ is continuous, $\operatorname{GL}(n, \R)$ is an open subset of $\R^{n \times n}\cong \R^{n^2}$ and is therefore a manifold.
+\end{example}
 
+\section{Smooth Maps on a Manifold}
+\begin{definition}[]
+    Let $M$ be a smooth $n$-manifold. A function $f \colon M \to \R$ is $C^{\infty}$ or \textbf{smooth at a point} $p \in M$ if there is a chart $(U, \phi)$ containing $p$ in the atlas of $M$ such that $f \circ \phi ^{-1}$, which is defined on the open subset $\phi (U) $ of $\R^n $, is $C^{\infty}$ at $\phi(p)$. This definition is independent of the specific chart $(U, \phi)$, for if $(V, \psi)$ is another chart in the atlas containing $p$, then on $\psi (U \cap V)$ we have \[
+        f \circ\psi ^{-1}  = (f \circ  \phi ^{-1}) \circ (\phi \circ \psi ^{-1}),
+    \] which is $C^{\infty}$ at $\psi (p)$. We say $f$ is $C^{\infty}$ on $M$ if it is smooth at every point of $M$.
+\end{definition}
+\begin{definition}[]
+    Let $F \colon N \to M$ be a map and $h$ a function on $M$. The \textbf{pullback} of $h$ by $F$, denoted $F^* h$, is the composite function $h \circ F$.
+\end{definition}
+So a function $f$ on $M$ is $C^{\infty}$ on a chart $(U, \phi)$ if its pulllback by $\phi ^{-1}$ is $C^{\infty}$ on the subset $\phi (U)$ of a Euclidian space.
+
+\begin{definition}[]
+    Let $N$ and $M$ be manifolds of dimension $n$ and $m$. A map $F \colon N \to M$ is $C^{\infty}$ at a point $p$ in $N$ if there is a chart  $(V,\psi)$ in $M$ containing $F(p)$ and a chart $(U,\phi)$ in $N$ containing $p$ such that the composition $\psi \circ F \circ \phi ^{-1}$, a map from an open subset of $\R^n $ to $\R^m$, is $C^{\infty}$ at $\phi (p)$. Since $F$ is continuous, we can always choose $U$ small enough such that $F(U) \subseteq V$.
+\end{definition}
+\begin{definition}[]
+    The map $F \colon N \to M$ is said to be smooth if it is smooth at every point of $N$. It is a \textbf{diffeomorphism} if it is bijective and both $F$ and its inverse $F^{-1}$ are smooth.
+\end{definition}
