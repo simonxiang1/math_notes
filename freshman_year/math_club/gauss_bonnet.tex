@@ -1,0 +1,38 @@
+\section{Curvature and Gauss-Bonnet (1/26/21)}
+Today's speaker is Rok Gregoric, a 4\textsuperscript{th} year PhD student. Today we'll be talking about some differential geometry!
+
+\begin{namedthing}{Question}
+   What is the sum of angles in a triangle? $\pi$! Or is it?
+\end{namedthing}
+Imagine a globe, start at the north pole and walk to the equator. Then walk to the north pole, and this makes a triangle with entirely right angles. The correct statement is that the sum of a triangle with \emph{straight edges} in \emph{the plane} is $\pi$. Our goal is to remove these two hypotheses.
+
+\begin{cor}
+    The sum of the angles of an $n$-gon with straight sides in the plane is $(n-2)\pi$.
+\end{cor}
+\begin{proof}
+    Assume our polygon is convex. Then pick a point, and connect it to each edge by straight lines, giving a triangulation of the $n$-gon. Do some stuff and it will work out.
+\end{proof}
+\begin{definition}[]
+    The \textbf{geodesic curvature} of a curve at a point $p=u(s)$ is $\kappa_g(p)= \| \frac{d\vec t}{ds}\|.$
+\end{definition}
+This makes sense by considering the radius of an osculating circle. Fun stuff! Let $\vec v \in  T_p S$ be a \emph{covariant (directional) derivative} of a function $f$ on $S$, then \[
+    \left( \nabla _{\vec v}f \right) (p) := \text{projection onto} \ T_p S  \ \text{along} \ \vec n \ \text{of} \ (D_{\vec v}f)(p).
+\] This defines an endomorphism, and so $\kappa(p)=\det \left( T_p S \to T_pS, \vec v \mapsto \nabla _{\vec v}\vec n \right) $.
+
+We have some approaches to geodesic curvature, like $\kappa_g(p)=\frac{1}{r}= | \nabla _{\vec t}\vec t|$. So we can talk about straight lines.
+\begin{definition}[]
+    A \textbf{geodesic} $g$ on a surface $S$ is any curve so that $\kappa_g\equiv 0$. An equivalent definition is that geodesics are length minimizing curves.
+\end{definition}
+\begin{example}
+    Geodesics in the plane are straight lines, while geodesics on the sphere are great circles.
+\end{example}
+
+\begin{definition}[]
+    A \textbf{polygon} in $S$ is a bounded subsurface $P \subseteq S$, whose boundary curve $\partial P$ is piecewise smooth.
+\end{definition}
+\begin{namedthm}{Gauss-Bonnet Theorem}
+   Let $P \subseteq S$ be a simply-connected $n$-gon. The sum of its angles $\varphi i _i $ is \[
+       \sum _{ 1\leq i \leq n}\varphi  _i = (n-2) \pi + \int_{\partial P}^{} \kappa_g \, ds+ \int_{P}^{} \kappa \, dS.
+   \]  
+\end{namedthm}
+We cheat for higher dimensions by taking a local section of the tangent space that's two dimensional.
