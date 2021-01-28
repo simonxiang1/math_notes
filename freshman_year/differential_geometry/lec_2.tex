@@ -1,0 +1,15 @@
+\section{January 22, 2021}
+Brief review on dot products. Let $\gamma  \colon \R \to \R^n $, $\lambda \colon \R \to \R^n $. Then define a new function $f(t)=\gamma (t)\cdot \lambda(t)$. Precisely, if $\gamma (t)=(\gamma_1(t), \gamma_2(t),\cdots ,\gamma _n (t)) $, and $\lambda(t)$ is similarly defined, then \[
+    f(t)= \gamma_1(t)\lambda_1(t)+ \gamma_2(t)\lambda_2(t)+\cdots + \gamma _n (t)\lambda _n (t),\  f'(t)= \sum _{i=1}^n  \left( \gamma _i '(t)+\lambda _i (t)+ \gamma _i (t)\lambda_i '(t) \right) =\lambda '(t) \cdot \lambda(t)+\gamma (t)\cdot \lambda '(t).
+\] So $\frac{d(\gamma \cdot \lambda)}{dt}= \frac{d\gamma }{dt}\cdot \lambda + \gamma \cdot  \frac{d\lambda}{dt}$. 
+\begin{prop}
+    Suppose $\|\gamma (t)\|$ is a constant, then $\gamma (t)\perp \gamma '(t)$.
+\end{prop}
+\begin{proof}
+    We want to show that $\gamma (t)\cdot \gamma '(t)=0$. We have {\color{red} FINISH THIS}
+\end{proof}
+\begin{example}
+    Let $\gamma (t)= (t, \sqrt{1-t^2} )$. We have $\|\gamma \|=1$ at all times, since $\gamma '(t)=\left( 1, -\frac{t}{\sqrt{1-t^2} } \right) $, which is orthogonal. Neat visualization!
+\end{example}
+\subsection{Reparametrization}
+This is in the book notes. In the proof that curves are regular iff they have a unit speed parametrization, one direction is easy.

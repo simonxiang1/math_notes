@@ -1,0 +1,29 @@
+\section{January 27, 2021}
+\subsection{Curvature}
+\begin{definition}[]
+Assume $\gamma $ is a unit-speed curve $\gamma \colon \R \to \R^n $. Define the curvature by $\kappa(s)= \| \ddot (s)\|= \left\| \left( \frac{d^2}{ds^2}\gamma  \right) (s)\right\|$.
+\end{definition}
+\begin{example}
+    The circle curve $\gamma (t)= (R \cos t, R \sin t)$ is not unit speed. So $\gamma '(t)= (-R \sin t, R \cos t)$, and $\| \gamma '(t)\|=R$. The arclength $s(t)= \int_{0}^{t} R \, du=tR$, so $s ^{-1} (t) = \frac{t}{R}$. A reparametrization is $\widetilde \gamma (t)= (R \cos \left( \frac{t}{R} \right) , R \sin \left( \frac{t}{R} \right) $. 
+
+    Say $\gamma (s)= \left(R \cos \left( \frac{t}{R} \right) , R \sin \left( \frac{t}{R} \right) \right)$ for simplicity. Then $\dot \gamma = \left(- \sin \left( \frac{t}{R} \right) , \cos \left( \frac{t}{R} \right) \right)$, and $\ddot \gamma = \left( -\frac{1}{R}\cos \left( \frac{t}{R} \right) , -\frac{1}{R}\sin \left( \frac{t}{R} \right)  \right) .$ So $\| \ddot \gamma\|=\kappa(s)=\frac{1}{R}$.
+\end{example}
+Parametrizing by arc length is painful. So we can define (if $\gamma $ is regular) $\kappa = \frac{\|\dot \kappa \times  \ddot \kappa\|}{\| \kappa\|^3}.$ This makes life easier, since in this definition, $\kappa(t)= \kappa(s(t))$. What is a cross product?? Let $\vec v, \vec w \in \R^3$, then $\vec v \times  \vec w \in \R^3$ as well. One way to find the cross product is by computing \[
+\det 
+\begin{pmatrix}
+    \mathbf i & \mathbf j & \mathbf k \\
+    v_1 & v_2 & v_3 \\
+    w_1 & w_2 & w_3
+\end{pmatrix}=(v_2w_3-v_3w_2) \mathbf i + (-v_1w_3+v_3w_1) \mathbf j+(v_1w_2-v_2w_1) \mathbf k.
+\] The cross product is \textbf{bilinear}, that is, $(\mathbf v+\mathbf u)\times \mathbf w= \mathbf v \times \mathbf w+\mathbf u\times \mathbf w$, and satisfies homogeneity, and antisymmetric like the determinant. Also, $\|\mathbf v\times \mathbf w\|= \|\mathbf v\|\|\mathbf w\|\sin \theta$, and finally we have the right hand rule.
+
+We can simplify our old formula to $\frac{\| \ddot\gamma \| \sin \theta}{\|\dot\gamma \|^2}$.
+\begin{proof}[Proof of the formula for curvature]
+    Let $s(t)=\int_{t_0}^{t} \| \gamma '(u)\| \, du$ be the arc length of a curve, and $\widetilde \gamma (t)=\gamma (s ^{-1}(t))$. So $\widetilde \gamma (s(t))=\gamma (t)$. Then \[
+        \widetilde \gamma '(s(t))s'(t)=\gamma '(t)\implies  \widetilde \gamma '(s(t))= \frac{\gamma '(t)}{s'(t)}.
+    \] Then $\widetilde \gamma ''(s(t))s'(t)^2+\widetilde \gamma '(s(t))s''(t)=\gamma ''(t)$ by the chain rule. So \[
+    \kappa(t)= \widetilde \gamma ''(s(t))= \frac{\gamma ''(t)- \widetilde \gamma '(s(t))s''(t)}{s'(t)^2}= \frac{\gamma ''(t)- \frac{\gamma '(t)}{s'(t)}\cdot s''(t)}{s'(t)^2}.
+\] Recall that $s(t)= \int_{t_0}^{t} \|\dot \gamma (u)\| \, du$, so $s'(t)= \|\dot \gamma (t)\|$. We use inner products, now $s'(t) ^2= \| \dot \gamma (t)\|^2= \langle \dot \gamma (t), \dot \gamma (t) \rangle $. So differentiating gives $2 s'(t)s''(t)= 2\langle \dot \gamma (t), \ddot \gamma (t) \rangle $. Then $s''(t)=\frac{\langle \dot \gamma (t) , \ddot \gamma (t) \rangle }{s'(t)}$. Plugging everything gives \[
+\kappa (t) = \left\| \frac{\ddot \gamma - \frac{\dot \gamma }{\| \dot \gamma \|}\frac{\dot \gamma \cdot \ddot \gamma }{\|\dot\gamma \|}}{\| \dot\gamma \|^2}\right\|= \left\| \left( \frac{\ddot \gamma }{\|\ddot \gamma \|}- \frac{\dot\gamma }{\| \dot\gamma \|}\frac{\dot \gamma \cdot \ddot \gamma }{\| \dot \gamma \|\|\ddot \gamma \|} \right) \right\|\cdot \frac{\|\ddot \gamma \|}{\|\dot \gamma \|^2}= \left\| \frac{\ddot\gamma }{\|\ddot\gamma \|}- \frac{\dot\gamma }{\|\ddot\gamma \|}\cos \theta\right\|\cdot \frac{\|\ddot\gamma \|}{\| \dot \gamma \|^2}= \sin \theta \cdot \frac{\|\ddot \gamma \|}{\|\dot\gamma \|^2}.
+\] 
+\end{proof}

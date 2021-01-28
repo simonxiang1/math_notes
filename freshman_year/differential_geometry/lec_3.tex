@@ -1,0 +1,30 @@
+\section{January 25, 2021}
+\subsection{Closed curves}
+\begin{definition}[]
+    We say $\gamma  \colon \R \to \R^n $ is $\mathbf T$\textbf{-periodic} (where $T>0$) if $\gamma (T+t)=\gamma (t)$. We say $\gamma $ is \textbf{closed} if it is $T$-period for some $T$.
+\end{definition}
+A natural question to ask is whether or not we can parametrize level curves? You know what a gradient is.
+\begin{theorem}
+    Suppose $f\colon \R^2 \to \R$ is smooth and $\nabla f(x,y)\neq \vec 0$ for all $(x,y)$ with $f(x,y)=0$. Then for all $(x_0,y_0)$ with $f(x_0,y_0)=0$, there exists a regular $\gamma  \colon (\alpha ,\beta ) \to \R^2$ such that $\alpha <0<\beta $, $\gamma (0)=(x_0,y_0)$ and $f(\gamma (t))=0$ for all $t$.
+\end{theorem}
+\begin{note}
+    The proof uses the inverse function theorem. Note that we can parametrize the entire curve under fairly broad conditions, that is, if $f ^{-1} (0)$ is \emph{connected} then we can choose $\gamma $ to parametrize all of $f^{-1} (0)$.
+\end{note}
+Assume $F \colon \R^n  \to \R^n $ is smooth. A \textbf{global inverse} is a map $G \colon \R^n  \to \R^n $ with $F \circ G(\vec x)=\vec x$. A \textbf{local inverse} at $\vec x$ is a map $G \colon U_{\vec x} \to \R^n $ with $F \circ G(\vec y)=\vec y$ for all $\vec y$, where $U_{\vec x}$ is a neighborhood of $\vec x$. An \textbf{infinitesmal inverse} at $\vec x$ is a linear map $A $ such that $(D_{\vec x}F) \circ A$ is the identity, where $D_{\vec x}F$ is the Jacobian matrix.
+
+\begin{namedthm}{The Inverse Function Theorem}
+   If $F$ is smooth and has an infinitesmal inverse at $\vec x$, then it has a smooth local inverse at $\vec x$. 
+\end{namedthm}
+\begin{theorem}
+    If $f \colon \R^2 \to \R$ is smooth and $\nabla f(x,y)$ is not horizontal for all $(x,y)$ with $f(x,y)=0$, then there exists a regular $\gamma \colon (\alpha ,\beta ) \to \R^2$ with $\gamma (t)=(t, g(t))$ and $f(\gamma (t))=0$ (and $\gamma (0)=(x_0,y_0)$ like in the previous theorem).
+\end{theorem}
+\begin{proof}
+    Let $F \colon \R^2 \to \R^2$ be $F(x,y)=(x,f(x,y)) .$ Then \[
+    DF = 
+    \begin{pmatrix}
+        1 & 0 \\ \frac{\partial f}{\partial x} & \frac{\partial f}{\partial y}
+    \end{pmatrix}, \quad \det (DF)= \frac{\partial f}{\partial y}\neq 0.
+\] By the inverse function theorem, since $DF$ is invertible, there exists a local smooth inverse $G,$ where $F \circ G(x,y)=(x,y)=(G_1(x,y), f\left( G_1,(x,y),G_2(x,y) \right) )$. This implies that $G_1(x,y)=x$, $f(x,G_2(x,y))=y$. Define $\gamma (t)= (t, G_2(t,0))$. Since $F$ and $G$ are smooth, $\gamma $ is regular, so \[
+f(\gamma (t))=f(t,G_2(t,0))=0.
+\] Something happened here.
+\end{proof}
