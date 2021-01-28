@@ -1,0 +1,14 @@
+\section{January 26, 2021}
+What is the tangent vector of a point on an arbitrary manifold, like $\C \mathrm P^2$? Arrows? No. Equivalence class of curves? This works for manifolds. Consider a curve through $p$, and another curve that looks the same locally (we have to apply the fact that manifolds look locally like $\R^n $). Derivations also work perfectly.
+
+\subsection{Basis for a Tangent Space}
+We know what a basis is for tensors, which comes from a basis for the dual space. What's the basis for the dual space of tangent vectors? Suppose we have a function $f \colon M \to \R$. Then $df (V) := v(f)$. Looking at $\R^n $, we have $(df) \left( \frac{\partial }{\partial x^1} \right) = \frac{\partial f}{\partial x^1}$, and similarly $(df)\frac{\partial }{\partial x^j }= \frac{\partial f}{\partial x^i }=\partial _j f$. So $(df) = \frac{\partial f}{\partial x^j }\phi ^j $. Note that we have $(dx^i ) \left( \frac{\partial }{\partial x^i } \right) = \frac{\partial x^i }{\partial x^j }=\delta ^i _j $. So on a manifold with coordinates $x^1,\cdots , x^n $, the basis for $T_p(M)= \{\frac{\partial }{\partial x^i }\} $. The basis for the dual space $T_p^*(M)= \{dx^i \} $.
+
+We deal with a particular $2$-covariant tensor all the time, which is the metric. If we have the notion of an inner product at every point, with a metric $g= g_{ij}dx^i  \otimes dx^j $, where $g_{ij}^{(x)}=g(\partial _i  , \partial _j )_x= \langle \partial _i , \partial _j  \rangle _x$. We will spend a ridiculous amount of time talking about this tensor at a point $x$. Let's play around with the manifold of the upper hemisphere, given by $\{(x,y,z)  \mid  x^2+y^2+z^2=1, \, z>0\} $. Some possibilities for coordinates:
+\begin{enumerate}
+    \item $x,y$, where $z= \sqrt{1-x^2-y^2} $,
+    \item $\theta, \phi$, where $\theta$ measures the angle from the north pole, and $\phi$ measures the longitude. So $x=\sin \theta \cos \phi$, $y= \sin \theta \sin \phi$, $z = \cos \theta$.
+\end{enumerate}
+How do we find a metric? We know $\frac{dx}{dt}=1$, $\frac{dy}{dt}=0$, and $\frac{dz}{dt}=\frac{-x (dy /dt)-y(dy /dt)}{\sqrt{1-x^2-y^2} }$. So we get the vectors $(1,0, -\frac{x}{z}), (0,1, -\frac{y}{z})$. So $g_{11}=1+ \frac{x^2}{z^2}=1+ \frac{x^2}{1-x^2=y^2}=\frac{1-y^2}{1-x^2-y^2}$, $g_{12}=\frac{xy}{z^2}=\frac{xy}{1-x^2-y^2}$, $g_{21}=g_{12}, g_{22}=\frac{1-x^2}{1-x^2-y^2}$.
+
+Now lets move onto spherical coordinates. This is a bunch of trig derivatives, look at the recorded lecture in your free time.
