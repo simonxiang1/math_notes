@@ -1,0 +1,45 @@
+\section{January 26, 2021}
+
+\subsection{Examples of Smooth Manifolds}
+Let $\mathcal{A} = \{(U _{\alpha }, x _{\alpha })\} _{\alpha \in A}$ be an atlas with $x _{\alpha}  \colon U_{\alpha } \to A_{\alpha }. $ Then we have a surjection \[
+    \coprod _{\alpha \in  A} x (U_{\alpha }) \xrightarrow{\underset{\alpha \in A}{\coprod} x _{\alpha }^{-1}}  M.
+\] Is this disjoint union a manifold? It's clearly locally Euclidian and Hausdorff, but whether or not it's second countable depends on the indexing set $A$.
+\begin{example}
+    Here are some examples of manifolds.
+    \begin{enumerate}[label=(\arabic*)]
+        \item We have $M= \O$ a smooth manifold. This qualifies as a smooth manifold of any dimension, even negative one. This can be useful.
+        \item An affine space on $V$ a vector space is a smooth manifold (it has an atlas with a single chart and the identity map).
+        \item If $n\geq 0$, $S^n  \subseteq \A^{n+1}$ is a smooth manifold.
+        \item We can also construct new manifolds from old.
+            \begin{enumerate}
+                \item If $\{ M_{\alpha }\} _{\alpha \in A}$, where $M_{\alpha }$ are smooth manifolds and $A$ is countable, then $\coprod _{x\in A} M _{\alpha A}$ is a smooth manifold.
+                \item Given $\{M_{\alpha }\} _{\alpha \in A}$, the Cartesian product product of manifold is also a manifold. For example, the torus $S^1  \times  S^1 $ is also a smooth manifold.
+                \item Let $M$ be a smooth manifold. Then $N \subseteq M$ open means that $N$ is also a smooth manifold, with the subspace topology. For example, $\operatorname{GL}_n (\R) \subseteq  M_n \R$ as an $n^2$-dimensional vector space, so this forms a smooth manifold. This forms an open subset, which can be realized as the inverse image of an open set $(\R \setminus \{0\} )$ under a continuous map, the determinant.
+            \end{enumerate}
+        \item Let $V$ be a real vector space with positive dimension $n$, and $k \in \{0,1,\cdots ,n\} $. Then we define the \textbf{Grassmannian} $\operatorname{Gr}_k(V)$ as the set of $W \subseteq V$ subspaces of dimension $k$. For example, if $V=\A^2$ and $k=1$, then this is $\R \mathrm P^1$. In general, $\operatorname{Gr}_1(V)=\mathbb P V$ which is projective space. 
+
+            To think about how to construct an atlas, let $w' \in  \operatorname{Gr}_k(V)$. Then $w'\oplus w''=V$ (dimension $k$ and $n-k$). Consider $\psi \colon \operatorname{Hom}(w', w'') \to \operatorname{Gr}_k(V)$, $L \mapsto  \Gamma_L$, the graph of $L.$ This is an injective map, and $U_{w''}:=\operatorname{im}\psi = \{ W \in  \operatorname{Gr}_k(V)  \mid w \cap w''=0\} $ (can't be vertical). Then $\psi ^{-1}$ is a chart with values in the vector space $\operatorname{Hom}(w',w'')$, and image $\psi=U_{w''}$ only depends on $w''$. It can be given an \emph{affine} space structure.
+    \end{enumerate}
+\end{example}
+
+Say we have spaces $A,B,C$ with $U \subseteq A, V \subseteq B$ open, and $f \colon U \to B$, $g \colon V \to C$. Since $f(U) \subseteq V, g \circ f \colon U \to C$.
+\begin{theorem}
+    If $f,g$ are $C^{\infty}$, then $g \circ f$ is $C^{\infty}$. Furthermore, we have $d( g \circ f) _p = dg _{f(p)}\circ df_p$, where $df_p \colon V \to W$, $dg _{f(p)}\colon W \to X$, $d(g \circ f)_p \colon V \to X$. 
+\end{theorem}
+What does it mean for a map $f \colon M \to N$ between topological spaces to be smooth? If $p$ is a point, pick a chart $(U_{\alpha }, x_{\alpha })$ containing $p$ and another chart $(V_{\beta }, y _{\beta })$ containing $f(p)$.
+\begin{definition}[]
+    A function $f$ is $C^{\infty}$ at $p \in M$ if for some charts $(U _{\alpha }, x_{\alpha })$ about $p$ and $(V _{\beta },y _{\beta })$ about $f(p)$, the function \[
+        y_{\beta }\circ f \circ x _{\alpha }^{-1} \colon x_{\alpha }(U_{\alpha }) \to y_{\beta }(V_{\beta })
+    \] is $C^{\infty}$.
+\end{definition}
+\begin{lemma}
+    If the condition above is true for one choice of chart, then it is true for all choices of charts. 
+\end{lemma}
+This relies on the fact that a composition of smooth maps is smooth and the chain rule. Explicitly, say $f$ is smooth. Then $(y\beta \circ f \circ x_{\alpha }^{-1})$ is $C^{\infty}$, and we compose with the transition function $(x _{\alpha }\circ x_{\alpha '}^{-1})$ to change charts. But this is a composition of $C^{\infty}$ maps, which is also $C^{\infty}$. Similarly, changing charts in the codomain gives the composition $(y _{\beta' }\circ y _{\beta }^{-1}) \circ (y _{\beta }\circ f \circ x _{\alpha }^{-1})$, which is $C^{\infty}$.
+\begin{example}
+    Let $f \colon S ^2 \to S ^2$ be the antipodal map. This is just the restriction of an affine map $f \colon \A^3 \to \A^3, (x,y,z)\mapsto (-x,-y,-z)$. If $p=(1 /\sqrt{2} , 1/\sqrt{2} ,0)$, $U_{\alpha }=\{x>0\} $, $f(p)=(-1 /\sqrt{2} , -1 /\sqrt{2} ,0)$, $V_{\beta }=\{y<0\} $. Then \[
+        y _{\beta }\circ f \circ x _{\alpha }^{-1} (u,v)= \left( -\sqrt{1-u^2-v^2} , -v \right) .
+    \] 
+\end{example}
+
+

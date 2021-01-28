@@ -1,0 +1,87 @@
+\section{January 21, 2021}
+\subsection{Charts}
+\begin{definition}[]
+    Let $X$ be a topological manifold. 
+    \begin{enumerate}[label=(\roman*)]
+        \item An $n$-dimensional \textbf{chart} on $X$ is a pair $(U, \phi)$ where $U \subseteq X$ is open and $\phi \colon U \to \A^n $ is continuous such that $\phi$ is a homeomorphism onto $\phi(U)$.
+        \item Charts $(U, \phi), (V, \psi)$ are $C^{\infty}$\textbf{-related} if $\psi \circ  \phi ^{-1} \colon  \phi (U \cap V) \to \psi (U \cap V)$ is a $C^{\infty}$ map as its inverse. This map is sometimes called the overlap between the charts or the transition function. We already know $\psi \circ \phi ^{-1}$ is a bijection/homeomorphism, and we just need smoothness.
+    \end{enumerate}
+\end{definition}
+\begin{example}
+    Not all charts are $C^{\infty}$ related. Let $X=\R$ and $U=V=\R$, $\phi(x)=x, \psi (x)=x^3$. Composing one direction sends $x \mapsto  x^3$, while $y \mapsto  y^{1 /3}$ is not $C^{\infty}$. These are perfectly valid charts, but not $C^{\infty}$-related, they are in one direction but not in the other.
+\end{example}
+\begin{example}
+    Take $S^2 \subseteq \A^3$, and consider $U= \{x>0\} $, $\phi (x,y, z)=(y,z)$, projecting onto the $yz$-plane. Given any point in this disc, we can solve for $x^+$ given by the equation $x^2+y^2+z^2=1$. Similarly, let $V=\{y>0\} $ and $\psi(x,y,z)=(x,z)$. If we use $\alpha ,\beta $ for $xz$ coordinates and $u,v$ for $yz$-coordinates, the transition map can be expressed on the domain of intersection as $\alpha =\sqrt{1-u^2-v^2} $ and $\beta =v$, where the inverse is also smooth.
+\end{example}
+\subsection{Calculus on Affine Space}
+There are two arenas where we do calculus, $\R^n = \{(\xi^1,\cdots ,\xi^n )  \mid  \xi^i  \in \R\}  $ as a vector space, and $\A^n= \{(x^1,\cdots ,x^n )  \mid x^i  \in \R\}  $ the affine space of points. As sets these are the same. We have some extra data on $\R^n $: first the zero vector $0 \in \R^n $, addition $+ \colon \R^n \times \R^n  \to \R^n $, and multiplication $\cdot  \colon \R\times \R^n  \to \R^n $. 
+
+The affine space $\A^n $ has one additional operation, $+ \colon \A^n  \times \R^n  \to \A^n $. This takes in a point and a vector, and displaces the point by the vector. So affine space has a vector space of translations, and for $V$ a vector space we have $A$ \emph{affine over} $V$. Another way to say this is that $V$ acts on $A$ by translations, where the action is \emph{simply transitive}. This means that given two points, we have the existence of a unique vector that takes one point to the other.
+
+\orbreak
+Let $V,W$ be vector spaces, $A,B$ be affine over $V,W$. For $U \subseteq A$ open, let $f \colon U \to B$. Then for $p \in U, \xi \in V$, we have the \textbf{directional derivative} as the map\[
+    \xi f(p)= \lim _{t \to  0}\frac{f(p+t \xi)-f(p)}{t}.
+\] Of course, this may or may not exist.
+\begin{theorem}
+    If $\xi f(p)$ exists for all $\xi \in \R^n $, $p \in  U$, and if each $\xi f$ is a continuous function of $p$, then for each $p \in U$, $\xi \mapsto  \xi f(p)$ is a \emph{linear} function of $\xi \in V$. This is called the \textbf{differential}, denoted $    df_p \colon V \to W.$ So $p+\xi \mapsto f(p)+d f_p(\xi)$ is the best affine approximation of $f$ at $p$.
+\end{theorem}
+A conceptual approach to the differential is that $df_p \colon V \to W$ is the unique linear map such that for all $\varepsilon >0$, there exists a $\delta >0$ such that for all $\xi \in V$, $\| \xi\|<\delta$ implies $p+\xi \in U$ and $\|f(p+\xi)-f(p)-df_p(\xi)\| \leq \varepsilon \|\xi\|$.
+\begin{example}
+    Let $V=\R^n $, $A=\A^n _{x^1,\cdots ,x^n } $, $W=\R^m, B=\A^m _{y^1,\cdots ,y^m}$. Let \[
+    f = 
+    \begin{cases}
+        y^1=y^1(x^1,\cdots ,x^n )\\
+        y^2 = y^2(x^1,\cdots ,x^n )\\
+      \qquad  \vdots \\
+        y^m=y^m(x^1,\cdots ,y^n )
+    \end{cases}
+\] , $x^i  \colon \A^n  \to \R$, $(x^1,\cdots ,x^n ) \mapsto  x^i $. Then $d x^i _p$ is independent of $p \in \A^n $, $dx ^i  \colon \R^n  \to \R$ linear, $dx^i  \in {R^n}^* \colon (\xi ^1,\cdots ,\xi ^n )\mapsto \xi ^i $. Then $dx^1,\cdots ,dx^n $ is a \emph{basis} of ${\R^n }^* $, and the dual of the dual is $\R^n $, so we also have a basis for $\R^n $ by $\frac{\partial }{\partial x^1},\cdots ,\frac{\partial }{\partial x^n }$. We usually think of these as matrices, for example \[
+\frac{\partial }{\partial x_1}=
+\begin{pmatrix}
+    1 \\ 0 \\ \vdots \\ 0
+\end{pmatrix}, \quad dx^1= 
+\begin{pmatrix}
+    1 & 0 & \cdots  & 0
+\end{pmatrix}, \quad dx^i  \left( \frac{\partial }{\partial x^j } \right) = \delta ^i _j .
+\] Since the differential $df_p \colon \R^n  \to \R^n $ is linear, $df_p\left( \frac{\partial }{\partial x^j }\right)=A_j ^i  \frac{\partial }{\partial y^i }$. Here we use up-down indices and sum over $i$. We have $A^i _j = \frac{\partial y^i }{\partial x^j }$, the partial derivative. So \[
+df_p\left( \frac{\partial }{\partial x^j } \right) = \frac{\partial y^i }{\partial x^i }\cdot \frac{\partial }{\partial y^i }, \quad df_p= \frac{\partial y^i }{\partial x^j }\frac{\partial }{\partial y^i }\otimes dx^j .
+\] 
+\end{example}
+\begin{definition}[]
+    Given our standard setup, $f \colon U \to B$ is $C^{\infty}$ if the iterated directional derivatives \[
+    \xi_1\xi_2\cdots \xi_k f \colon U \to W
+    \] exist and are continuous for all $k \in \Z^{>0}$, $\xi_1,\cdots ,\xi_k \in V$.
+\end{definition}
+\begin{example}
+    If $f$ is $C^{\infty}$, then for all $\xi_1,\xi_2 \in V$, $\xi_1\xi_2 f = \xi_2\xi_1 f$.
+\end{example}
+\begin{example}
+    For example, \[
+    \frac{\partial ^2 f}{\partial x^i \partial x^j }= \frac{\partial ^2 f}{\partial x^j  \partial x^i }.
+    \] This idea of second derivates being symmetric functions will come in handy later.
+\end{example}
+
+\subsection{Smooth Manifolds (for real this time)}
+\begin{definition}[]
+    Let $X$ be a topological manifold. 
+    \begin{enumerate}[label=(\roman*)]
+        \item An \textbf{atlas} on $X$ is a collection $\mathcal{A} = \{(U_{\alpha },\phi _{\alpha })\} _{\alpha \in A}$ such that
+            \begin{enumerate}
+                \item The charts cover $X$, that is, $\bigcup_{\alpha \in A} U\alpha =X$,
+                \item For all $\alpha_1,\alpha_2 \in A $, $(U_{\alpha_1} ,\phi_{\alpha_1 })$ and $(U_{\alpha_1 },\phi _{\alpha_2 })$ are $C^{\infty}$ related.
+            \end{enumerate}
+        \item An atlas is a \textbf{differentiable structure} on $X$ if in addition
+            \begin{enumerate}[label=(c)]
+                \item $\mathcal{A} $ is maximal: if $(U,\phi)$ is a chart which is $C^{\infty}$-related to all $(U_{\alpha },\phi_{\alpha }) \in \mathcal{A} $, then $(U, \phi) \in \mathcal{A} $.
+            \end{enumerate}
+        \item A \textbf{smooth manifold} is a pair $(X,\mathcal{A} )$ of a topological manifold and a differentiable structure.
+    \end{enumerate}
+\end{definition}
+\begin{remark}
+    Any atlas $\mathcal{A} $ is contained in a unique differentiable structure, given by \[
+        \overline{\mathcal{A} }= \{(U, \phi) \ \text{charts}  \mid (U,\phi) \text{is} \ C^{\infty}\text{-related to all} \ (U _{\alpha}, \phi _{\alpha }) \in \mathcal{A} \} .
+    \] 
+\end{remark}
+\begin{remark}
+    We have an atlas $\mathcal{A} $ on $S^2$ with $| \mathcal{A} |=6$ at the beginning of lecture, and there exists an $\mathcal{A} ^1$ on $S^2$ with $| \mathcal{A} ^1|=2.$ But there exists no $\mathcal{A} ^{n}$ in $S^2$ with $|\mathcal{A} ^n |=1$.
+\end{remark}

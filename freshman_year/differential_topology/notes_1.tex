@@ -9,4 +9,19 @@ A cover $\{V_{\beta }\} $ is a \textbf{refinement} of another cover $\{U_{\alpha
 
 If $X\subseteq \R^n $, then $V\subseteq X$ is \textbf{(relatively) open} in $X$ if it can be written as the intersection of $X$ with an open subset of $\R^n$, or $V= \widetilde V \cap X$, where $\widetilde V$ is open in $\R^n $. If $Z\subseteq X$, we can also speak of open covers of $Z$ in $X$, meaning coverings of $Z$ by relatively open subsets of $X$. Every such cover of $Z$ may be written as the intersection of $X$ with a covering of $Z$ by open subsets of $\R^n $. Since $\R^n $ is second countable, every open cover of $Z$ relative to $X$ has a countable refinement. To see this, given $\{U_{\alpha }\} $ relatively open in $X$, write $U_{\alpha }= \widetilde U_{\alpha }\cap  X$. Then let $\widetilde V _{\beta }$ be a countable refinement of $\{\widetilde U_{\alpha }\} $ in $\R^n $, and define $V_{\beta }=\widetilde V_{\beta }\cap X$.
 \orbreak
-A mapping $f \colon U \to \R^m $ of an open $U\subseteq \R^n $ is called \textbf{smooth} if $f$ has continuous partial derivatives of all orders.
+A mapping $f \colon U \to \R^m $ of an open $U\subseteq \R^n $ is called \emph{smooth} if $f$ has continuous partial derivatives of all orders. If the domain of $f$ is not open, we usually cannot speak of partial derivatives (for the concept to work, we need to be able to find a neighborhood around each point). So we generalize this definition a little. A map $f \colon X \to \R^m$ defined on an arbitrary $X$ in $\R^n $ is \textbf{smooth} if it can be locally extended to a smooth map on open sets, that is, if around each $x \in X$ there is an open set $U \subseteq \R^n $ and a smooth map $F \colon U \to \R^m$ such that $F$ equals $f$ on $U \cap X$. 
+
+A smooth map $f \colon X \to Y$ of two subsets of Euclidian spaces is a \textbf{diffeomorphism} if it is a bijection, and the inverse map $f ^{-1} \colon Y \to X$ is also smooth. In this course, diffeomorphic sets are intrinsically equivalent.
+
+\orbreak
+\subsection{Tangent Space and the Differential}
+These are actually supplementary notes handed out by Dr.\ Freed, not from G\&P.
+\begin{definition}
+    Let $\{V_{\alpha }\} _{\alpha \in A}$ be a collection of vector spaces indexed by a set $A$. Then the \textbf{direct product} $\prod _{\alpha \in A}V_{\alpha }$ is the Cartesian product of the sets $V_{\alpha }$ with componentwise addition and scalar multiplication. It is a vector space, possibly infinite dimensional. An element of the direct product is denoted $\xi = \{\xi _{\alpha }\} \in  \prod _{\alpha \in A}V_{\alpha }$; the $\alpha $-component of $\xi $ is $\xi _{\alpha }$. The sum is defined by $(\xi + \eta)_{\alpha }=\xi _{\alpha }+\eta _{\alpha }$, or $\{\xi _{\alpha }\} +\{\eta _{\alpha }\} = \{\xi_{\alpha }+\eta _{\alpha }\} $.
+\end{definition}
+Let $X$ be a smooth manifold with atlas $\mathcal{A} = \{(U_{\alpha },x_{\alpha })\} _{\alpha \in A} $. For $p \in X$, let $A_p\subseteq A$ be the set of indices $\alpha \in A$ such that $p \in U_{\alpha }$ and set $\mathcal{A} _p= \{( U_{\alpha },x _{\alpha })\} _{\alpha \in A}$. Suppose the dimension of $X$ at $p$ is $n$.
+\begin{definition}
+    The \textbf{tangent space} $T_p X$ is the subspace of the direct product $\prod _{\alpha \in  A_p}\R^n  _{\alpha }$ consisting of vectors $\xi = \{\xi _{\alpha }\} $ such that \[
+        \xi _{\beta }= d (x _{\beta }\circ x _{\alpha }^{-1}) _{x _{\alpha }(p)}(\xi _{\alpha })
+    \] for all $\alpha ,\beta \in  A_p$. Here $\R^n  _{\alpha }$ denotes the vector space $\R^n $ thought of as displacements in the codomain of the coordinate map $x _{\alpha }\colon  U_{\alpha } \to \A^n $.
+\end{definition}
