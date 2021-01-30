@@ -1,0 +1,14 @@
+\section{January 28, 2021}
+\subsection{Metrics}
+How to make a metric?? One option is to live inside a space with an existing metric, particularly a surface in $\R^3$ or something like that. (Missed a big chunk of discussion). Given two manifolds $(M_1,g_1)$ and $(M_2,g_2)$ with coordinates $(x^1,\cdots ,x^n )$, $(y^1,\cdots ,y^m )$, we have $g_1=(g_1)_{ij}dx^i \otimes dx^j , \ g_2=(g_2)_{k\ell}dy^{k}\otimes dy^{\ell}$. Then we can define the product manifold $M_1 \times  M_2, (p,q)$, with coordinates $x^1,\cdots ,x^n , y^1,\cdots ,y^m)$, $T_{(p,q)}(M_1\times M_2)=T_pM_1 \times T_q M_2$, missed some more stuff.
+\begin{example}
+    The torus is the product of two circles, $\mathbb{T}^2=S^1 _{R_1}\times S^1 _{R_2}$. The metric is given by $g_1=R_1^2d\theta^2+ R_2^2 d\theta ^2$.
+\end{example}
+
+\begin{definition}[]
+    Suppose we have a function $f \colon M_1 \to \R^+$. Then $M_1 \times _{f_2}M_2=(M_1 \times  M_2,g)$, $g_{(p,q)}=(g_1)_{ij}dx^i  \otimes dx^j +(f(p))^2 (g_2)_{k\ell}dy^k\otimes dy^{\ell}$. This is a warped product.
+\end{definition}
+Another way is by quotients by discrete actions. Consider $\R / L\Z$, or the set $\{x\in \R\} / \sim$, $x \sim (x+nL)$. If $G$ acts freely on $(X,g)$ by isometries, then $X /G$ inherits a metric from $X$. In this case, it's a circle. When would this fail?
+\begin{example}
+    Suppose $X=(\R^+, dx^2)$, and $G=\Z$, $(n,x) \to  z^n x$. Another example is $X=\R^2$, $G=\Z_2$. But we have a fixed point at the origin, so this is an orbifold (manifold with a singular point). So group actions that don't act freely cause issues at points fixed by actions.
+\end{example}
