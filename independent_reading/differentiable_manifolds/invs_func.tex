@@ -1,0 +1,35 @@
+\section{The Inverse Function Theorem}
+I feel like this needs its own section. The inverse function thoerem is a useful theorem from analysis, which talks about the local behavior of a $C^{\infty}$ map from $\R^n $ to $\R^n $. (This part assumes that you've read at least the part on Euclidian spaces).
+\subsection{The Inverse Function Theorem}
+A $C^{\infty}$ map $f \colon U \to \R^n $ is \textbf{locally invertible} or a \textbf{local diffeomorphism} at a point $p \in U$ if $f$ has a $C^{\infty}$ inverse in some neighborhood of $p$. The inverse function theorem tells us when maps are locally invertible. We say the matrix $Jf= [\partial f^i  / \partial x^j ]$ of partial derivatives of $f$ is the \textbf{Jacobian matrix} of $f$ and its determinant $\det [\partial f^i /\partial x^j ]$ is the \textbf{Jacobian determinant} of $f$ (or just the \emph{Jacobian}).
+\begin{namedthm}{Inverse Function Theorem}
+   Let $f \colon U \to \R^n $ be a $C^{\infty}$ map defined on some open $U \subseteq \R^n $. At any $p \in U$, $f$ is invertible in some neighborhood of $p$ iff the Jacobian is nonzero.
+\end{namedthm}
+\begin{proof}
+    Let's accept this without proof.
+\end{proof}
+Although this apparently reduces invertibility to a number at $p$, the Jacobian is continuous, so it's actually about the Jacobian nonvanishing in a neighborhood at $p$. The Jacobian $Jf(p)$ is the best linear approximation to $f$ at $p$, so it makes sense that $f$ is invertible iff $Jf(p)$ is also invertible.
+
+\subsection{The Implicit Function Theorem}
+The implicit function theorem gives a sufficient condition for a system of equations $f^i  (x^1,\cdots ,x^n )=0$ under which \emph{locally} a set of variables can be solved implicity as $C^{\infty}$ functions of the other variables.
+\begin{example}
+    Consider the circle, given by $f(x,y)=x^2+y^2-1=0$. You can see that $y$ is a function of $x$ in any of the points besides $(\pm 1,0)$, given by $y=\pm \sqrt{1-x^2} $. If $x\neq \pm 1$, the functions are $C^{\infty}$, which is consistent.
+\end{example}
+\begin{namedthm}{Implicit Function Theorem for $\R^2$}
+    Let $f \colon U\to \R$ be $C^{\infty}$ for $U\subseteq \R^2$ open. At a point $(a,b) \in U$ where $f(a,b)=0$ and $\frac{\partial f}{\partial y}(a,b)\neq 0$, there is a neighborhood $A\times B$ of $(a,b)$ in $U$ and a unique function $h \colon A \to B$ such that in $A\times B$, \[
+        f(x,y)=0 \ \text{if and only if} \ y=h(x).
+    \] Moreover, $h$ is $C^{\infty}$.
+\end{namedthm}
+\begin{namedthm}{Implicit Function Theorem}
+    Let $U \subseteq \R^n \times \R^m$ be open and $f \colon U \to \R^m$ a $C^{\infty}$ function. Suppose $[\partial f^i  / \partial y^j (a,b)]$ is nonsingular at a point $(a,b)\in  \ker f$. Then a neighborhood $A\times B\subseteq U$ and a unique smooth function $h\colon A \to B$ both exist such that in $A\times B$, we have \[
+        f(x,y)=0 \ \text{if and only if} \ y=h(x).
+    \] 
+\end{namedthm}
+\subsection{The Constant Rank Theorem}
+Note that the rank of a function $f \colon U \subseteq \R^n  \to \R^m$ at a point $p$ is the rank of its Jacobian $[\partial f^i  / \partial x^j (p)]$.
+\begin{namedthm}{Constant Rank Theorem}
+    If $f \colon U  \to \R^m$ has constant rank $k$ in a neighborhood of a point $p \in U$, then after a change of coordinates near $p$ in $U$ and $f(p)$ in $\R^m$, the map $f$ assumes the form $(x^1,\cdots ,x^n ) \mapsto  (x^1,\cdots ,x^k, 0,\cdots ,0)$. More precisely, there are diffeomorphisms $G$ of a neighborhood of $p$ in $U$ and $F$ of a neighborhood $f(p)$ in $\R^m$ such that  \[
+        F \circ f \circ G^{-1} (x^1,\cdots ,x^n )=(x^1,\cdots ,x^k,0,\cdots .0).
+    \] 
+\end{namedthm}
+
