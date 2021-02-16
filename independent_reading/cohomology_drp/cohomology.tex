@@ -1,0 +1,30 @@
+\section{Preliminary Material}
+\subsection{Calculus}
+\begin{namedthing}{Question}
+    Let $f \colon U \to \R^2$ be a smooth function, where $U \subseteq \R^2$ is open. Is there a smooth function $F \colon U \to \R$ such that $\partial _{x_1}F=f_1, \ \partial _{x_2}F=f_2,$ where $f=(f_1,f_2)$? Note that this implies $\partial _{x_2}f_1=\partial _{x_1}f_2$. Is this a sufficient condition to show the existence of $F$?
+\end{namedthing}
+\begin{example}
+    Consider $f \colon \R^2 \to \R^2$, where \[
+        f(x_1,x_2)= \left( \frac{-x_2}{x_1^2+x_2^2} , \frac{x_1}{x_1^2+x_2^2}\right) 
+    \] Now  
+    \begin{gather*}
+        \partial _{x_2}f_1= \frac{-(x_1^2+x_2^2)+2x_2^2}{(x_1^2+x_2^2)^2}=\frac{x_2^2-x_1^2}{(x_1^2+x_2^2)^2},\\ 
+        \partial _{x_1}f_2= \frac{(x_1^2+x_2^2)-2x_1^2}{(x_1^2+x_2^2)^2}=\frac{x_2^2-x_1^2}{(x_1^2+x_2^2)^2}.
+    \end{gather*} So $f$ satisfies $\partial _{x_2}f_1=\partial _{x_1}f_2$. However, we have no $F \colon \R^2 \setminus \{0\} \to \R$: assume there was such an $F$, then \[
+    \int_{0}^{2\pi } \frac{d}{d\theta}F(\cos \theta, \sin \theta) \, d\theta=F(1,0)-F(1,0)=0.
+    \] But \[
+    \frac{d}{d\theta}F( \cos \theta ,\sin  \theta)= \frac{dF}{dx}(-\sin \theta)+\frac{\partial F}{\partial y}\cos \theta=-f_1(\cos \theta, \sin \theta) \sin \theta+f_2 (\cos \theta, \sin \theta) \cos \theta=1
+    \] by the chain rule, a contradiction. So we have procured a counterexample.
+\end{example}
+\begin{definition}[Star-shaped]
+    A subset $X\subseteq \R^n $ is \textbf{star-shaped} with respect to $x_0\in X$ if the line segment $\{tx_0+(1-t)x\mid t \in [0,1]\} $ is contained in $X$ for all $x \in X$.
+\end{definition}
+\begin{theorem}
+    Let $U \subseteq \R^2$ be open and star-shaped. Then any smooth function $(f_1,f_2) \colon U \to R^2$ satisfying $\partial _{x_2}f_1=\partial _{x_1}f_2$, there exists a smooth function $F \colon U \to \R$ such that $\partial _{x_1}F=f_1, \ \partial _{x_2}F=f_2$.
+\end{theorem}
+\begin{proof}
+    Messy.
+\end{proof}
+Say $U \subseteq R^2$ is open, then let $C^{\infty}(U, \R^k)$ be the vector space of smooth functions $\phi \colon U \to \R^k$. Define the \textbf{gradient} and \textbf{curl} functions\footnote{The book uses \emph{rotation} instead of curl, but I think this is the standard notation.} $\operatorname{grad}\colon C^{\infty} (U,\R)\to C^{\infty}(U, \R^2), \ \operatorname{curl}\colon C^{\infty}(U,\R^2) \to C^{\infty}(U,\R)$ by \[
+    \operatorname{grad}(\phi) = \left( \frac{\partial \phi}{\partial x_1}, \frac{\partial \phi}{\partial x_2} \right) , \qquad \operatorname{curl}(\phi_1,\phi_2)= \frac{\partial \phi_1}{\partial x_2}-\frac{\partial \phi_2}{\partial x_1}.
+\] Note that the curl of the gradient is zero, or $\operatorname{curl}\circ \operatorname{grad}=0$. So the kernel of the curl contains the image of the gradient, since mapping $\operatorname{im}(\operatorname{grad})$ by $\operatorname{curl}$ gives zero. Since $\operatorname{curl}$ and $\operatorname{grad}$ are linear, both $\ker (\operatorname{curl})$ and $\operatorname{im}(\operatorname{grad})$ are (infinite-dimensional) vector spaces, furthermore, $\operatorname{im}(\operatorname{grad})$ is a subspace of $\ker (\operatorname{curl})$. So we can consider the quotient space
