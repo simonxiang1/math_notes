@@ -1,0 +1,105 @@
+\section{February 2, 2021}
+\begin{quotation}
+    ``Now I'm out of blackboard, I'm out of time, so I'm out of both space \emph{and} time.''
+\end{quotation}
+\subsection{Preliminaries for the IFT}
+\begin{definition}[]
+    Let $V$ be a real vector space. A \textbf{norm} on $V$ is a function $\|-\|\colon V \to \R^{\geq 0}$ such that 
+    \begin{enumerate}[label=(\roman*)]
+        \item $\|\xi\|=0$ iff $\xi=0$,
+        \item $\|\lambda \xi\|=|\lambda| \|\xi\|$,
+        \item $\|\xi_1+\xi_2\|\leq \|\xi_1\|+\|\xi_2\|$
+    \end{enumerate}
+    for all $\xi,\xi_1,\xi_2\in V_1$, $\lambda \in \R$. Then $(V, \|-\|)$ is a \textbf{normed linear space}.
+\end{definition}
+Given $(V,\|-\|)$, define $d \colon V\times V \to \R^{\geq 0}$, $\xi_1,\xi_2 \mapsto \|\xi_1-\xi_2\|$. You can check that $(V,d)$ is a metric space. We Say $(V, \|-\|)$ is a \textbf{Banach space} if $(V,d)$ is complete. This is always true if $\operatorname{dim}V<\infty$.
+
+\begin{example}
+    Let $V=\R^n $. Then $\|(\xi^1,\cdots ,\xi^n )\|=\sqrt{(\xi^1)^2+\cdots + (\xi^n )^2} $.
+\end{example}
+\begin{definition}[]
+    Let $V,W$ be normed linear spaces, and $T \colon V \to W$ be linear. Then $T$ is \textbf{bounded} if there exists a $C>0$ such that  \[
+    \|T\xi\|_W \leq C \| \xi\|_V \quad \text{for all} \ \xi \in V.
+    \] 
+\end{definition}
+\begin{prop}
+    $T$ is bounded if and only if $T$ is continuous if and only if $T$ is uniformly continuous.
+\end{prop}
+\begin{proof}
+    Define $\|T\|_{\operatorname{Hom}(V,W)}$ on the least constant $C>0$ such that $\|T\xi\|\leq C \|\xi\|$ for all $\xi \in V$. We can check that $\operatorname{Hom}(V,W)$ is a normed linear space and for $V \overset{T}{\longrightarrow} W \overset{S}{\longrightarrow} X$, we have $\|S \circ T\|\leq \|S\|\|T\|$.
+\end{proof}
+\begin{example}[An unbounded linear map]
+    Let $W=\ell^2= \{(a_1,a_2,a_3,\cdots \mid a_i \in \R)\}  $ with the obvious norm. Consider $T \colon W \to W$, $e_n  \mapsto ne_n $, where $e_n (0,\cdots ,\hat{n},\cdots )$. This function is unbounded. In general, you can't do this with complete spaces, but you can for incomplete ones.
+\end{example}
+\begin{lemma}
+    If $W$ is complete, then $\operatorname{Hom}(V,W)$ is complete.
+\end{lemma}
+\begin{prop}
+    $\operatorname{Iso}(V,W) \subseteq \operatorname{Hom}(V,W)$ is open, where \[
+        \operatorname{Iso}(V,W)= \{T \colon V \to W  \mid T \text{is a continuous isomorphism,} \ T^{-1} \ \text{is continuous.}  \} 
+    \] 
+\end{prop}
+\begin{proof}[Sketch of Proof]
+    Let $T \in \operatorname{Iso}(V,W)$, $a \in \operatorname{Hom}(V,W)$, $\| a\|< \frac{1}{\|T\|}$. We claim that $T+a$ is invertible.  Set \[
+        S_N = \sum_{n=0}^{N} (-1)^n  (T ^{-1}a)^n  T ^{-1} \in \operatorname{Hom}(W,V).
+    \] We claim that $\{S_N\} _N$ is a Cauchy sequence. Note that $\operatorname{id}_V -S_N(T+a)= (-1)^{n+1}(T ^{-1} a)^{N+1}$ and $\operatorname{id}_W-(T+a)S_N=(-1)^{N+1}(aT^{-1})^{N+1}$. So
+    \begin{align*}
+        \left\|\sum_{n=M+1}^{N} (-1)^n  (T^{-1}a)^n T^{-1}\right\|& \leq \sum_{n=M+1}^{N} \|T^{-1}\|^{n+1}\|a\|^n \\
+                                                                &=\|T^{-1}\|\cdot \sum_{n=M+1}^{N} \left( \frac{\|a\|}{\|T\|} \right) ^n \\
+                                                                &\leq \|T^{-1}\|\frac{\delta^{M+1}}{1-\delta} \ \text{and} \ M\to \infty.
+    \end{align*} Then use use completeness to produce $\lim _{N\to \infty}S_N=S$, and claim that $S=(T+a)^{-1}$.
+\end{proof}
+\subsection{The Contraction Mapping Fixed Point Theorem}
+\begin{theorem}
+    Let $(X,d)$ be a complete metric space, and $\phi \colon X \to X$. Suppose there exists some $0<C<1$ such that \[
+        d(\phi(x_1), \phi(x_2))\leq Cd(x_1,x_2) \quad \text{for all} \ x_1,x_2 \in X.
+    \]\footnote{This is called \textbf{Lipschitz continuity}, and is stronger than uniform continuity, which is stronger than continuity.}Then there exists a unique $x \in X$ such that $\phi(x)=x$\footnote{We say that $\phi$ is a \textbf{contraction}.}.
+\end{theorem}
+\begin{proof}[Sketch of Proof]
+    Uniqueness is immediate. Choose any $x_0 \in X$. Inductively set $x_{n+1}=\phi (x_n )$. Then $\{x_n \} $ is Cauchy, and $\lim _{n\to \infty}x_n  =x$ exists. Essentially we use the NIP and find a fixed point by nesting subsets infinitely.
+\end{proof}
+\begin{namedthing}{Notation}
+    Let $V,W$ be complete normed linear spaces, $A,B$ be affine sets with associated vector spaces $V,W$, $U \subseteq A$ be open, $f \colon U \to B$, and $df \colon U \to \operatorname{Hom}(V,W)$.
+\end{namedthing}
+\begin{definition}[]
+    Let $p \in V$. Then $f$ is \textbf{differentiable at} $p$ if there exists a $T \in \operatorname{Hom}(V,W)$ such that \[
+        \forall \varepsilon >0 \ \exists \delta >0 \ni \|\xi\|_V<\delta \implies  p+\xi \in U \quad \text{and} \quad \|f(p+\xi)-f(p)-T(\xi)\|_W\leq \varepsilon \|\xi\|_V
+    \] for all $\xi \in V$.
+\end{definition}
+
+\subsection{The Inverse Function Theorem}
+\begin{prop}
+    Let $p_0,p_1\in U$ and $(1-t)p_0+tp_1\in V$ for all $t \in [0,1]$. Suppose $f$ is differentiable, and $\|df_p\|\leq C$. Then $\|f(p_1)-f(p_0)\|_W \leq C\|\xi \|_V$, where $p_1=p_0+\xi$.
+\end{prop}
+\begin{proof}
+    Note that $f(p_1)-f(p_0)= \int_{0}^{1}  \, dt \ df_{p_t} (\xi)$, where $p_t= (1-t)p_0+tp_1$. Then 
+    \begin{align*}
+        \| f(p_1)-f(p_0)\|&\leq  \int_{0}^{1}  \, dt \ \|df_{p_t}\|\|\xi\|\\
+                          &\leq \int_{0}^{1}  \, dt C \|\xi\|\\
+                          &=C \|\xi\|.
+    \end{align*}
+\end{proof}
+\begin{theorem}
+    With our standard setup, and assume $f \in C^1$, $p \in U$, $df_p \colon V \to W$ is invertible. Then there exists an $U' \subseteq U$ open, $g \colon V' \to U' \subseteq A$, $V' \subseteq B$ open such that $g$ and $f$ are inverses. Also, $g \in C'$ and $ dg_{f(p)} = df^{-1} _p$ for all $p \in U'$. 
+\end{theorem}
+\begin{proof}
+    Define $\widetilde f(\xi) = df_p ^{-1}(f(p+\xi)-f(p)) \colon U-p \to V$. Set $\phi(\xi)=\xi - \widetilde f(\xi)$, $\phi(0)=0$, $d\phi_0=0 \colon V \to V$. Choose $r>0$ such that $\|d\phi _{\xi}\|<\sfrac{1}{2}$ if $\xi \in \overline{B_r}$. Then by our previous theorem, $\phi(\overline{B_r}) \subseteq \overline{B}_{\sfrac{r}{2}}$. Say $\eta \in \overline{B_{\sfrac{r}{2}}}$. Define \[
+        \phi ^{\eta}(\xi)=\eta+\xi - \widetilde f(\xi) = \eta+\phi (\xi) \colon \overline{B_r} \to \overline{B_r}.
+    \] Then $\phi^{\eta}(\xi)=\xi$ if and only if $\widetilde f(\xi)=\eta$. Estimate \[
+    \|\phi^{\eta}(\xi_2)-\phi^{\eta}(\xi_1)\|=\|\phi(\xi_1)-\phi(\xi_1)\|\leq \frac{1}{2}\| \xi_2-\xi_1\|.
+\] Apply the fixed point theorem to produce fixed points $\phi^{\eta}\colon \overline{B_r} \to \overline{B_r}$. We have a unique solution given by $\widetilde g \colon \overline{B}_{\sfrac{r}{2}} \to \overline{B_r}$. Set $g(q)=p + \widetilde g(df^{-1}_p(q-f(p)))$. Then 
+\begin{itemize}
+    \item $\widetilde g$ is Lipschitz continuous with constant 2,
+    \item $\widetilde g$ is differentiable,
+    \item $d\widetilde g$ is continuous. 
+\end{itemize}
+So the following diagram commutes:
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+B_{\sfrac{r}{2}} \arrow[r, "\widetilde g"] & U'' \arrow[r, "d\widetilde f"] & \operatorname{Iso}(V) \arrow[d, "\text{invert}"] \\
+                                           &                                & \operatorname{Iso}(V)                           
+\end{tikzcd}
+\end{figure}
+We conclude that $d\widetilde g_{\eta}=\left( d \widetilde f _{\widetilde g(\eta)} \right) ^{-1}$.
+\end{proof}

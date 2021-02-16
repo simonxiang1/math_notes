@@ -1,0 +1,19 @@
+\part{The Tangent Space}
+\section{Tangent Space}
+\subsection{The Tangent Space at a Point}
+We have two ways to define tangent vectors, either by column vectors, or point-derivations of $C_p^{\infty}$, the algebra of germs of $C^{\infty}$ functions at $p$. These both generalize to manifolds: for the first approach, define a tangent vector at $p$ by first choosing a chart $(U,\phi)$ around $p$, then defining a tangent vector to be an arrow at  $\phi(p)$ in $\phi(U)$. While this may be intuitive, different charts give rise to different arrows, and reconciling these differences gets messy. The clean definition is by point derivations. $C_p^{\infty}(M)$ is defined the same way as $C_p^{\infty}(\R^n )$, and a \textbf{point-derivation} of $C_p^{\infty}(M)$ is a linear map $D \colon C_p^{\infty}(M) \to \R$ that satisfies \[
+    D(fg)=(Df)g(p)+f(p)Dg.
+\] 
+
+\begin{definition}[]
+    A \textbf{tangent vector} at a point $p \in M$ is a derivation at $p$. The set of tangent vectors at $p$ form the \textbf{tangent space} of $M$ at $p$, denoted $T_p(M)$ or $T_pM$.
+\end{definition}
+Given a coordinate neighborhood $(U,\phi)=(U,x^1,\cdots ,x^n )$ about a point $p$ in a manifold $ M$, recall the new definition of a partial derivative, where \[
+    \left. \frac{\partial}{\partial x^i } \right| _p f:= \frac{\partial f}{\partial x^i }(p)= \frac{\partial (f \circ \phi ^{-1})}{\partial r^i }(\phi (p)).
+    \] This is if $x^i  = r^i  \circ \phi \colon U \to \R$. Furthermore, $\partial _{x^i }|_p f=\partial _{r^i }|_{\phi(p)}f\circ \phi^{-1} \in \R$.
+
+    \subsection{The Differential of a Map}
+    Let $F \colon N \to M$ be a smooth map between manifolds. At each $p \in N$, $F$ induces a linear map of tangent spaces $dF \colon T_p N \to T_{F(p)}M$, called its \textbf{differential} at $p$. The differential is defined as follows: If $X_p \in T_pN$, then $dF(X_p)$ is the tangent vector in $T_{F(p)}M$ defined by \[
+        (dF(X_p))f= X_p(f \circ F) \in \R
+    \] 
+

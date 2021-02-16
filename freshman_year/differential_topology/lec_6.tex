@@ -1,0 +1,106 @@
+\section{February 4, 2021}
+\subsection{The Implicit Function Theorem}
+When can we use an equation  like $f(x,y)= x^2+xy+y^3=0$ to define $y$ as a function of $x$ near a point $(x_0,y_0)$? We want the tangent line not to be vertical, or $\left. \frac{\partial f}{\partial y} \right| _{(x_0,y_0)}\neq 0$.
+    \begin{namedthm}{Implicit Function Theorem}
+        Let $A_1,A_2,B$ be affine spaces, $U_1 \subseteq A_1$, $U_2\subseteq A_2$ be open sets, $f \colon U_1\times U_2 \to B$ be a smooth function, and $(\hat{p_1}, \hat{p_2}\in  U_1 \times U_2$ be a point. Assume $(df)^2 _{(\hat{p_1}, \hat{p_2})} \colon V_2 \to W$ is invertible. Then we can locally find a function $\phi$ which solves \[
+            f(p_1, \phi(p_1))=\hat{q}, \quad p_1 \in U_1',
+        \] where $\phi \colon U_1' \to U_2$ is smooth.
+\end{namedthm}
+\subsection{Maximal rank, immersions, submersions}
+Let $V, W$ be finite dimensional real vector spaces. 
+\begin{definition}[]
+    Let $T \colon V \to W$ be linear. Then
+    \begin{enumerate}[label=(\roman*)]
+        \item $\operatorname{rank}T= \operatorname{dim}T(V) \leq \min (\dim V, \dim W)$
+        \item $T$ has \textbf{maximal rank} if injective, bijective, surjective (?)
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}\,
+    \begin{enumerate}[label=(\roman*)]
+        \item $\operatorname{Max} \operatorname{Rank}(V,W) \subseteq \operatorname{Hom}(V,W)$ is open
+        \item If $T \in \operatorname{Max} \operatorname{Rank}(V,W)$, then there exist $\{e_1,\cdots ,e_m\} $ a basis for $V$, $\{f_1,\cdots ,f_n \} $ a basis for $W$ such that 
+            \begin{align*}
+                T(e_j )&= \ \ \, f_j , \quad j=1,\cdots ,m \quad \dim V \leq \dim W\\
+                T(e_j )&=
+                \begin{cases}
+                    f_j , \quad j=1,\cdots ,m\\
+                    0, \quad j=m+1,\cdots ,n
+                \end{cases}\quad \dim V \geq \dim W
+            \end{align*}
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    missed this
+\end{proof}
+
+\begin{definition}[]
+    Let $f \colon M \to N$, $p \in M$.
+    \begin{enumerate}[label=(\roman*)]
+        \item If $df_p$ is injective, then $f$ is an \textbf{immersion} at $p$.
+        \item If $df_p$ is surjective, then $f$ is a \textbf{submersion} at $p$ (or \textbf{regular}, or $p$ is a regular point).
+        \item If $df_p$ is not surjective, then $p$ is a \textbf{critical point}.
+        \item $q \in N$ is a \textbf{regular value} if all $p \in f^{-1}(q)$ are regular points, and a \textbf{critical value} if this is not the case (there exists a $p \in f^{-1}(q)$ that is critical).
+    \end{enumerate}
+\end{definition}
+\begin{remark}
+    If $q \notin f(M)$, then $q$ is trivially a regular value.
+\end{remark}
+
+\begin{namedthm}{Sard's Theorem}
+    Let $\operatorname{Crit}(f) \subseteq N$ be the subset of critical values. Then $\operatorname{Crit}(f)$ has measure zero for $f$ smooth.
+\end{namedthm}
+\begin{cor}
+    $\operatorname{Reg}(f)$ is nonempty.
+\end{cor}
+\begin{definition}[]
+    $f \colon M \to N$ is a \textbf{diffeomorphism} if $f$ is bijective and $f ^{-1}$ is smooth.
+\end{definition}
+\begin{remark}\,
+    \begin{itemize}
+        \item Differentiate $f^{-1} \circ f=\operatorname{id}_M$. Then $(df^{-1})_{f(p)}\circ df_p= \operatorname{id}_{T_pM}$ for all $p \in M$, i.e., $(df^{-1})_{f(p)}=(df_p)^{-1}$. 
+        \item A composition of diffeomorphisms is a diffeomorphism. In categorical language, build a category of smooth manifolds, then isomorphism are diffeomorphisms (since we can find inverses).
+        \item $U \subseteq M$ open, $x \colon U \to A$ affine is a chart iff $x|_U \colon U \to x(U)$ is a diffeomorphism.
+    \end{itemize}
+\end{remark}
+
+\begin{namedthm}{Corollary of IVT}
+    Let $f \colon M \to N$, $p \in M$, $df_p \colon T_pM \to T_{f(p)}N$ is invertible. Then there exists $p \in U \subseteq M$ open, $f(p) \in V \subseteq N$ such that $f|_U \colon U \to V$ is a diffeomorphism, or $f$ is a \textbf{local diffeomorphism} at $p$.
+\end{namedthm}
+\begin{proof}[Sketch of Proof]
+    This is just a manifold version of the inverse function theorem: how do we convert? Choose charts around $p, f(p)$ given by $(\widetilde U, x)$, and $(\widetilde V, y)$ mapping into affine spaces $A,B$. Then apply the IVT to $y \circ f \circ x^{-1} \colon x(\widetilde U) \cap x(f ^{-1}(\widetilde U)) \to B$, $d(y \circ f \circ x ^{-1})=dy _{f(p)}\circ df_p \circ (dx^{-1})_{x(p)}$ bijective.
+\end{proof}
+
+\begin{prop}
+    Say $p \in M$ a smooth manifold, and $U \subseteq M$ open.
+    \begin{enumerate}[label=(\roman*)]
+        \item Suppose $x^1,\cdots ,x^n  \colon U \to \R$, and $dx^1_p ,\cdots ,dx_p ^n $ form a basis of $T_p^*M=(T_pM)^*$. Then there exists a $U' \subseteq U$ such that $(U'; x^1,\cdots ,x^n )$ is a chart.
+        \item For $x^1,\cdots ,x^k \colon U \to \R$, $k<n$, and the $dx_p^1,\cdots ,dx_p^k$ are linearly independent, then there exists a $U' \subseteq U$ andd $x^{k+1},\cdots ,x^n  \colon U' \to \R$ such that $(U' ; x^1,\cdots ,x^k)$ is a chart.
+        \item For $x^1,\cdots ,x^{\ell}\colon U \to \R$, $\ell >n$, $dx_p^1,\cdots ,dx_p ^{\ell}$ spanning $T_p^*M$, then there exists a $U' \subseteq U$, $\{i_1,\cdots ,i_n \} \subseteq \{1,\cdots ,\ell\} $ such that $(U' ; x^{i_1},\cdots ,x^{i_{\ell}}$ is a chart.
+    \end{enumerate}
+\end{prop}
+
+\begin{theorem}
+    Let $f \colon M \to N$,  $p \in M$, $\dim _p M=m, \dim _{f(p)}N=n$, $df_p$ have maximal rank. Then there exist charts $p \in (U,x), f(p) \in (V,y)$ such that 
+    \begin{align*}
+        y^i &=\ \ \, x^i , \qquad i=1,\cdots ,n \quad m\geq n;\\
+        y^i &=
+        \begin{cases}
+            x^i ,  \quad &i=1,\cdots ,m\\
+            0,& i<m+1,\cdots ,n
+        \end{cases}, \quad m \leq n.
+    \end{align*}
+\end{theorem}
+
+\begin{definition}[]
+\,
+   \begin{enumerate}[label=(\arabic*)]
+       \item $f \colon M \to N$ is an \textbf{embedding} if $f$ is a 1-1 (global) immersion (local) which is a homeomorphism onto its image.
+       \item $Q \subseteq N$ is a \textbf{submanifold} if for all $q \in Q$, there exists a $(V,y)$ chart about $q$ such that \[
+       Q \cap V= \{y ^{\ell+1}= \cdots =y^n =0\} ,
+       \] where $\dim_q Q=\ell, \dim _q N=n$.
+   \end{enumerate} 
+\end{definition}
+\begin{example}
+    Consider $f \colon \R \to \R^2 / \Z^2$, $t \mapsto  (tx_0, ty_0) \pmod{\Z^2}$. If $y_0 /x_0$ is irrational, it doesn't hit any points on the $\Z^2$ lattice besides zero, so it winds densely around the torus. So this is an injective immersion, but \emph{not} an embedding, and the image $Q \subseteq \R^2 /\Z^2$ is \emph{not} a submanifold.
+\end{example}

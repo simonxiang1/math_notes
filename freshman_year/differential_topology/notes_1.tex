@@ -25,3 +25,10 @@ Let $X$ be a smooth manifold with atlas $\mathcal{A} = \{(U_{\alpha },x_{\alpha 
         \xi _{\beta }= d (x _{\beta }\circ x _{\alpha }^{-1}) _{x _{\alpha }(p)}(\xi _{\alpha })
     \] for all $\alpha ,\beta \in  A_p$. Here $\R^n  _{\alpha }$ denotes the vector space $\R^n $ thought of as displacements in the codomain of the coordinate map $x _{\alpha }\colon  U_{\alpha } \to \A^n $.
 \end{definition}
+
+\subsection{The Inverse Function Theorem and Immersions}
+If $X$ and $Y$ are smooth manifolds, then a smooth map $f \colon X \to Y$ is a \textbf{local diffeomorphism} if it diffeomorphically maps a neighborhood of point $x$ onto its image (a nbd of $y=f(x)$). Note that for local diffeomorphisms, the mapping $df_x \colon T_x(X) \to T_y(Y)$ is an isomorphism.
+
+\begin{namedthm}{The Inverse Function Theorem}
+  Suppose that $f \colon X \to Y$ is a smooth map whose derivative $df_x$ at the point $x$ is an isomorphism of tangent spaces. Then $f$ is a local diffeomorphism at $x$.
+\end{namedthm}

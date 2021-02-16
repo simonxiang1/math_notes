@@ -11,16 +11,25 @@
 \usepackage{float}
 \usepackage{enumitem}
 
+%ok
+\usepackage{xcolor}
+\definecolor{meangreen}{RGB}{0,133,62}
+\definecolor{burntorange}{RGB}{191,87,0}
+
 %table of contents formatting
 \usepackage{tocloft}
 \renewcommand{\cftsecfont}{\color{black}}
-\renewcommand{\cftsubsecfont}{\color{magenta!70!black}}
+\renewcommand{\cftsubsecfont}{\color{burntorange}}
 \usepackage{titlesec}
 
 %microtype, font, color support, cl
 \usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
 \usepackage{adforn}
 \usepackage[charter]{mathdesign}
+%\usepackage[cmintegrals,cmbraces]{newtxmath}
+%\usepackage{ebgaramond-maths}
+%\usepackage[T1]{fontenc}
+
 
 \usepackage{fancyhdr}
 \fancyhf{}
@@ -108,9 +117,9 @@
 \hypersetup{
  linktocpage,
  colorlinks,
- linkcolor={magenta!70!black},
- citecolor={green!50!black},
- urlcolor={teal!80!black}
+ linkcolor={burntorange},
+ citecolor={meangreen},
+ urlcolor={blue!80!black}
 }
 
 %cool section divider
