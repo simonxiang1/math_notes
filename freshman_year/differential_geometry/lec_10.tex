@@ -1,0 +1,19 @@
+\section{March 1, 2021}
+not sure which lecture we're on...
+\begin{definition}[]
+    If $\sigma \colon U \to S$ is a chart, then $\mathbf N_{\sigma}= \frac{\sigma_u \times \sigma_v}{\|\sigma_u \times \sigma v\|}$ is the \textbf{standard unit normal}.
+\end{definition}
+{\color{red}todo:questions: how is this defined for higher manifolds? what's up with the condition for regularity? transition maps are smooth/atlas is maximal? what the heck is the cross product? tpn inn higher space? is it always two dimensions? does tpn depend of choice of charts?} 
+Taking the cross product gives us a vector orthogonal to $T_p S$, so dividing by the magnitude gives us a standard unit normal vector. Some stuff happened with computing the standard unit normal to a point on $S^2$.
+
+\begin{lemma}
+    If $\sigma,\widetilde \sigma$ are charts then \[
+        \widetilde \sigma _{\widetilde u}\times \widetilde \sigma _{\widetilde v}=\det(J(\Phi)) \sigma_u \times \sigma_v,
+    \] where $\Phi=\sigma ^{-1} \widetilde \sigma$ and $J(\Phi)$ is the matrix corresponding to $D\Phi$.
+\end{lemma}
+\begin{cor}
+        $\mathbf N_{\widetilde \sigma}=\operatorname{sgn}(\det(J\Phi)) \mathbf N_{\sigma}.$
+\end{cor}
+\begin{definition}[]
+    A surface $S$ is \textbf{orientable} if there is an atlas of regular surface patches for $S$ such that each $\det (J(\Phi))>0$ for the transition map $\Phi$ between any two patches in the atlas.
+\end{definition}

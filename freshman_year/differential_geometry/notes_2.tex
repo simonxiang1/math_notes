@@ -1,0 +1,208 @@
+\section{How much does a curve curve?}
+Let's talk about curvature. Curvature measures the extent to which a curve isn't contained in a straight line, while torsion measures the extent to which a curve isn't contained in a plane (so planes have zero torsion). We discover that torsion and curvature determine the shape of a curve.
+\subsection{Curvature}
+\begin{definition}[]
+    If $\gamma $ is a unit-speed curve with parameter $t$, its \textbf{curvature} $\kappa(t)$ at the point $\gamma (t)$ is defined as $\|\ddot \gamma (t)\|$. 
+\end{definition}
+Note that curvature is defined for unit speed curves in $\R^n $ for $n\geq 2$. The curvature of a circle is $1 /R$. If $\gamma $ is regular, then we can just define the curvature as $\kappa(\widetilde \gamma )$, where $\widetilde \gamma $ is the unit speed parametrization of $\kappa$. Sometimes its hard to write down explicit parametrizations so let's find a definition that doesn't depend on that.
+
+\begin{prop}
+    Let $\gamma (t)$ be regular in $\R^3$. Then \[
+    \kappa= \frac{\|\ddot \gamma \times \dot \gamma \|}{\|\dot \gamma \|^3}.
+    \] 
+\end{prop}
+\begin{proof}
+    Let $s$ be a unit speed parametrization of $\gamma $. Then $\dot \gamma = \frac{d\gamma }{dt}= \frac{d\gamma }{ds}\frac{ds}{dt},$ so \[
+        \kappa= \left\| \frac{d^2 \gamma }{ds ^2} \right\|=\left\| \frac{d}{ds}\left( \frac{\frac{d\gamma }{dt}}{\frac{ds}{dt}} \right)  \right\|= \left\|\frac{\frac{d}{dt}\left( \frac{\frac{d\gamma }{dt}}{\frac{ds}{dt}} \right) }{\frac{ds}{dt}} \right\|= \left\| \frac{\frac{ds}{dt}\frac{d^2 \gamma }{dt^2}-\frac{d^2s}{dt^2}\frac{d\gamma }{dt}}{\left(\frac{ds}{dt}\right)^3} \right\|.
+    \] Now $( ds /dt)^2= \|\dot\gamma \|^2=\dot \gamma \cdot \dot \gamma $, and differentiating WRT $t$ gives $\frac{ds}{dt}\frac{d^2 s}{dt^2}=\dot \gamma  \cdot  \ddot \gamma $. Combining this with our huge equation above we have \[
+    \kappa= \left\| \frac{\left( \frac{ds}{dt} \right) ^2 \ddot \gamma - \frac{d^2 s}{dt^2}\frac{ds}{dt}\dot \gamma }{\left( \frac{ds}{dt} \right) ^4} \right\|= \frac{\|(\dot \gamma \cdot \dot \gamma )\ddot \gamma -(\dot \gamma \cdot \ddot\gamma )\dot\gamma \|}{\|\dot \gamma \|^4}.
+\] Since $a \times (b \times c)=(a\cdot c)b-(a\cdot b)c$, we have $\dot \gamma \times (\ddot \gamma \times \dot \gamma )=(\dot \gamma \cdot \dot \gamma )\ddot\gamma -(\dot \gamma \cdot \ddot\gamma )\dot\gamma $. Furthermore, $\dot \gamma $ and $\ddot\gamma \times \dot\gamma $ are orthogonal, so $\|\dot\gamma \times (\ddot\gamma \times \dot\gamma )\|=\|\dot\gamma \|\|\ddot\gamma \times \dot\gamma \|$. Therefore \[
+\frac{\|(\dot \gamma \cdot \dot \gamma )\ddot \gamma -(\dot \gamma \cdot \ddot\gamma )\dot\gamma \|}{\|\dot \gamma \|^4}= \frac{\|\dot\gamma \times (\ddot\gamma \times \dot\gamma )\|}{\|\dot\gamma \|^4}=\frac{\|\dot\gamma \|\|\ddot\gamma \times \dot\gamma \|}{\|\dot\gamma \|^4}= \frac{\|\ddot\gamma \times \dot\gamma \|}{\|\dot\gamma \|^3}.
+\] 
+\end{proof}
+This formula for curvature makes sense if $\dot \gamma \neq 0$. So the curvature is defined for all regular points on a curve.
+
+\begin{example}
+    Consider the \textbf{circular helix} defined by \[
+        \gamma (\theta)= (a \cos \theta, a \sin\theta,b\theta), \quad \theta\in \R, \] 
+        where $a$ and $b$ are constants. The \textbf{radius} of the helix is $a$ and the \textbf{pitch} is $2\pi b$. To compute the curvature, note that $\|\dot\gamma (\theta)\|=\sqrt{a^2+b^2} $, so $\dot\gamma (\theta)$ is never zero (and hence $\gamma $ is regular) for $a\neq0$ and $b\neq 0$.  The book does this with some cross product stuff, and it turns out to be constant with curvature $\frac{|a|}{a^2+b^2}$. If $b=0$, this projects the helix onto the plane, and so the curvature is $1 /|a|$. If $a=0$, then the helix is a straight line, so the curvature is zero.
+\end{example}
+
+\subsection{Plane curves}
+Say $\gamma (s)$ is unit speed in $\R^2$, and let $\mathbf t=\dot\gamma $ be the \textbf{tangent vector} of $\gamma $. Define $\mathbf n_s$, the \textbf{signed unit normal} of $\gamma $, to be the unit vector obtained by rotating $\mathbf t$ counterclockwise by $\pi /2$. Now $\dot {\mathbf t}=\ddot\gamma $ is orthogonal to $\mathbf t$, and therefore parallel to $\mathbf n_s$. So we have a scalar $\kappa_s$ such that $\ddot\gamma =\kappa_s\mathbf n_s$. This $\kappa_s$ is the \textbf{signed curvature} of $\gamma $. Since $\| \mathbf n_s\|=1$, we have \[
+\kappa=\|\ddot\gamma \|=\|\kappa_s\mathbf n_s\|=|\kappa_s|.
+\] Positive curvature curves outward, negative curvature points inward. For $\gamma $ a regular but not unit-speed curve, define $\mathbf t$, $\mathbf n_s$, and $\kappa_s$ as the ones corresponding to its unit speed parametrization $\widetilde \gamma (s)$, where $s$ is the arc-length of $\gamma $.So $\mathbf t= \frac{d\gamma  /dt}{ds /dt}= \frac{d\gamma  /dt}{\| d\gamma  /dt\|}$, $\mathbf n_s$ is obtained by rotating $\mathbf t$ counterclockwise by $\pi /2$, and \[
+\frac{d\mathbf t}{dt}=\frac{d\mathbf t}{ds}\frac{ds}{dt}=\kappa_s \frac{ds}{dt}\mathbf n_s= \kappa_s \left\|\frac{d\gamma}{dt} \right\|\mathbf n_s.
+\] If $\gamma $ is unit-speed, the direction of the tangent vector $\dot\gamma (s)$ is measured by $\varphi (s)$ where $\dot \gamma (s)=(\cos \varphi (s), \sin \varphi (s))$. The angle $\varphi (s)$ is not always unique, but we do always have a \emph{smooth} choice:
+\begin{prop}
+    Let $\gamma \colon (\alpha ,\beta ) \to \R^2$ be a unit-speed curve, let $s_0 \in (\alpha ,\beta )$, and let $\varphi_0$ satisfy \[
+        \dot\gamma (s_0)=(\cos \varphi_0, \sin \varphi_0).  
+    \] Then we have a unique smooth function $\varphi  \colon (\alpha ,\beta ) \to \R$ such that $\varphi (s_0)=\varphi_0 $ and that $\dot \gamma (s)=(\cos \varphi (s), \sin \varphi (s))$ for all $s \in (\alpha ,\beta )$.
+\end{prop}
+\begin{proof}
+    time is finite
+\end{proof}
+\begin{definition}[]
+    The smooth function $\varphi $ is the \textbf{turning angle} of $\gamma $ determined by the condition $\varphi (s_0)= \varphi_0 $.
+\end{definition}
+\begin{prop}
+    Let $\gamma (s)$ be a unit-speed plane curve, and let $\varphi (s)$ be a turning angle for $\gamma $. Then $\kappa_s= d\varphi  /ds$. So the signed curvature is the rate at which the tangent vector of the curve rotates.
+\end{prop}
+\begin{proof}
+    Now $\mathbf t= (\cos \varphi , \sin \varphi )$, so $\dot{\mathbf t}=\dot \varphi (- \sin \varphi , \cos \varphi )$. Since $\mathbf n_s=(-\sin \varphi , \cos \varphi )$, $\dot{\mathbf t}=\kappa_s \mathbf n_s$.
+\end{proof}
+\begin{example}
+    Let us compute the signed curvature of the catenary with parametrization $\gamma (t)=(t ,\cosh t).$ Then $\dot\gamma =(1, \sinh t)$, and \[
+    s= \int_{0}^{t} \sqrt{1+\sinh ^2 t}  \, dt=\sinh t.
+    \] If $\varphi $ is the angle between $\dot\gamma $ and the $x$-axis, $\tan \varphi =\sinh t=s$, so $\sec ^2 \varphi \frac{d \varphi }{ds}=1$, and so \[
+    \kappa_s= \frac{d\varphi }{ds}=\frac{1}{\sec ^2 \varphi }=\frac{1}{1+\tan ^2\varphi }=\frac{1}{1+s ^2}.
+    \] 
+\end{example}
+\begin{cor}
+    Define the \textbf{total signed curvature} of a unit-speed \emph{closed} curve $\gamma $ of length $\ell$ as $\int_{0}^{\ell} \kappa_s(s) \, ds$. Then the total signed curvature of a closed plane curve is an integer multiple of $2\pi$.
+\end{cor}
+\begin{proof}
+    Let $\gamma $ be a unit-speed closed plane curve with length $\ell$. The total signed curvature is \[
+        \int_{0}^{\ell} \frac{d\varphi }{ds} \, ds=\varphi (\ell)-\varphi (0),
+    \] where $\varphi $ is a turning angle for $\gamma $. Since $\gamma $ is $l$-periodic, $\gamma (s+\ell)=\gamma (s)$. So $\dot\gamma (s+\ell)=\dot\gamma (s)$, in particular $\dot\gamma (\ell)=\dot\gamma (0)$. So \[
+    (\cos \varphi (\ell), \sin \varphi (\ell))=(\cos \varphi (0),\sin \varphi (0)),
+\] implying that $\varphi (\ell)-\varphi (0)$ is an integer multiple of $2 \pi.$
+\end{proof}
+An \textbf{isometry} is a map $M \colon \R^2 \to \R^2$ of the form $M=T_{\mathbf a}\circ \rho _{\theta}$, where $\rho _{\theta}$ is an anticlockwise rotation by an angle $\theta$ about the origin, and $T_{\mathbf a}$ is the translation by $\mathbf a$. That is, 
+\begin{gather*}
+    \rho_{\theta}(x,y)=(x \cos \theta-y \sin \theta, x \sin \theta+y \cos \theta),\\
+    T_{\mathbf a}(\mathbf v)=\mathbf v+\mathbf a.
+\end{gather*}
+\begin{theorem}
+    Let $k \colon (\alpha ,\beta ) \to \R$ be smooth. Then we have a unit speed curve $\gamma \colon (\alpha ,\beta ) \to \R^2$ whose signed curvature is $k$. Furthermore, if $\widetilde \gamma \colon (\alpha ,\beta ) \to \R^2$ is another unit-speed curve with signed curvature $k$, there exists an isometry $M$ of $\R^2$ such that $\widetilde \gamma (s)=M(\gamma (s))$ for all $s \in (\alpha ,\beta )$.
+\end{theorem}
+\begin{proof}
+    \textsc{hurry up please it's time}\footnote{I have an exam tomorrow and am cramming material, hence all the omitted proofs.}
+\end{proof}
+\begin{example}
+    Any regular plane curve $\gamma $ whose curvature is a positive constant is part of a circle. Since $\kappa_s\pm \kappa$, the possibility of a curve having $\kappa_s=\kappa$ at some points and $\kappa_s=-\kappa$ other places is null because $\gamma $ is continuous (precisely, by IVT). Given $\kappa_s$ we want to find a parametrized circle with such signed curvature. By our theorem, every curve with constant curvature maps onto this circle by an isometry. This shows what we wanted to show.
+
+    A unit speed parametrization of the circle is $\gamma (s)=\left( R \cos \frac{s}{R}, R \sin \frac{s}{R} \right) $, with tangent vector $\left( -\sin \frac{s}{R}, \cos \frac{s}{R} \right) $ making an angle $\pi /2 + s /R$ with the $x$-axis. So the signed curvature of $\gamma $ is $\frac{d}{ds}\left( \frac{\pi}{2}+\frac{s}{R} \right) =\frac{1}{R}$. So the curve of radius $1 /\kappa_s$ has signed curvature $\kappa_s$. If $\kappa_s<0$, the curve $\widetilde \gamma (s)=\left( R \cos \frac{s}{R}, - R \sin \frac{s}{R} \right) $ has signed curvature $- \frac{1}{R}.$
+\end{example}
+\begin{example}
+    Simple curvatures can lead to complicated curves. For example, if $\kappa_s(s)=s$, taking $s_0=0$ we have $\varphi (s)=\int_{0}^{s} u \, du= \frac{s^2}{2}$, so \[
+        \gamma (s)= \left( \int_{0}^{s} \cos\left( \frac{t^2}{2} \right)  \, d t, \int_{0}^{s} \sin \left( \frac{t^2}{2} \right)  \, dt\right) 
+    \] The curve is really pretty, and is called \emph{Cornu's Spiral}. These integrals cannot be evaluated in `elementary functions', and are called \emph{Fresnel's integrals}. They arise when studying diffraction of light.
+\end{example}
+\begin{remark}
+How do we compute $\kappa_s$ in general? 
+\begin{enumerate}[label=(\arabic*)]
+    \item Compute the standard curvature and find out the sign,
+    \item Use the formula $\kappa_s= d \varphi /ds$, then note that $\tan \varphi =y$-component of $\gamma '$ divided by $x$-component of $\gamma '$, and use $\sec ^2 \varphi \frac{d \varphi }{ds}=$ whatever,
+    \item Note that $\mathbf t=\gamma ' /\|\gamma '\|$ and $d \mathbf t /ds:=\kappa_s \mathbf n_s$, where $\mathbf n_s=
+        \left[ \begin{smallmatrix}
+                0 & -1 \\ 1 &0 
+        \end{smallmatrix} \right] \mathbf t$.
+\end{enumerate}
+\end{remark}
+
+\subsection{Space curves}
+Curves in $\R^3$ are not determined by their curvature. Let $\gamma (s)$ be unit-speed in $\R^3$, and $\mathbf t=\dot\gamma $ be its unit tangent. If $\kappa(s)$ is non-zero, define the \textbf{principal normal} of $\gamma $ at $\gamma (s)$ to be the vector $\mathbf n(s)= \frac{1}{\kappa(s)}\dot{\mathbf t}(s)$. Since $\|\dot{\mathbf t}\|=\kappa$, $\mathbf n$ is a unit vector. Since $\mathbf t \cdot \dot{\mathbf t}=0$, $\mathbf t$ and $\mathbf n$ are actually orthogonal. Then the \textbf{binormal} vector $\mathbf := \mathbf t\times \mathbf n$ is orthogonal to both $\mathbf t$ and $\mathbf n$, so we have $\{\mathbf t,\mathbf n,\mathbf b\} $ an orthonormal basis of $\R^3$. Furthermore, this basis is \emph{right-handed}, i.e., \[
+\mathbf b=\mathbf t \times \mathbf n, \quad \mathbf n=\mathbf b\times \mathbf t, \quad \mathbf t=\mathbf n\times \mathbf b.
+\] Note that $\dot{\mathbf b}=\dot {\mathbf t}\times \mathbf n+\mathbf t\times \dot{\mathbf n}=\mathbf t \times \dot{\mathbf n}$. Since $\dot{\mathbf b}$ is orthogonal to both $\mathbf t$ and $\mathbf b$, it must be a scalar multiple of $\mathbf n$, that is, $\dot{\mathbf b}=-\tau \mathbf n$ for some $\tau$. Let us call the $\tau$ the \textbf{torsion} of $\gamma $. Note that curvature and torsion are well-defined for any regular curve.
+\begin{prop}
+    Let $\gamma (t)$ be a regular curve in $\R^3$ with nowhere vanishing curvature. Then \[
+        \tau=\frac{(\dot\gamma \times \ddot\gamma )\cdot \dddot \gamma }{\|\dot\gamma \times \ddot\gamma \|^2}
+    \] 
+\end{prop}
+\begin{proof}
+    $\langle algebra \rangle $
+\end{proof}
+\begin{example}
+    Let us compute the torsion of the circular helix $\gamma (\theta)=(a \cos\theta, a \sin\theta, b\theta)$. Now 
+    \begin{gather*}
+    \dot \gamma (\theta)=(-a \sin \theta, a \cos \theta, b),    \\
+\ddot\gamma (\theta)=(-a \cos \theta, -a \sin \theta, 0),\\
+    \dddot\gamma (\theta) =(a \sin \theta, -a \cos \theta,0),\\
+    \|\dot\gamma \times \ddot\gamma \|^2=a^2(a^2+b^2),\quad (\dot \gamma \times \ddot\gamma )\cdot (\dddot \gamma )=a^2b,
+    \end{gather*}so \[
+    \tau= \frac{(\dot \gamma \times \ddot\gamma )\cdot \dddot \gamma }{\|\dot\gamma \times \ddot\gamma \|^2}= \frac{a^2 b}{a^2(a^2+b^2)}=\frac{b}{a^2+b^2}.
+    \] 
+\end{example}
+
+\begin{prop}
+    Let $\gamma $ be a regular curve  in $\R^3$ with nowhere vanishing curvature. Then the image of $\gamma $ is contained in a plane iff $\tau=0$ at all points on $\gamma $.
+\end{prop}
+\begin{proof}
+    Suppose the image of $\gamma $ is contained in a plane $\mathbf v\cdot \mathbf N=d$, where $\mathbf N$ is a constant vector, $d$ is a constant scalar, and $\mathbf v \in \R^3$. Assume $\mathbf N$ is a unit vector, then differentiating $\gamma \cdot \mathbf N=d$ wrt $s$ gives 
+    \begin{align*}
+        \mathbf t \cdot \mathbf N=0 &\implies \dot{\mathbf t}\cdot \mathbf N=0.\\
+                                    &\implies \kappa \mathbf n\cdot \mathbf N=0\\
+                                    &\implies \mathbf n\cdot \mathbf N=0.
+    \end{align*} So both $\mathbf n$ and $\mathbf t$ are orthogonal to $\mathbf N$, which implies $\mathbf b$ is parallel to $\mathbf N$. So $\mathbf b(s)=\pm\mathbf N$ for all $s$. In either case, $\mathbf b$ is constant, so $\dot{\mathbf b}=0$, and $\tau=0$.
+
+    Now assume $\tau=0$. Then $\dot {\mathbf b}=0$, and $\mathbf b$ is constant. Consider \[
+        \frac{d}{ds}(\gamma \cdot \mathbf b)=\dot\gamma \cdot \mathbf b=\mathbf t\cdot \mathbf b=0,
+    \] so $\gamma \cdot \mathbf b$ is a scalar (say $d$). So $\gamma $ is contained in the plane $\mathbf v\cdot \mathbf b=d$.
+\end{proof}
+We know that $\dot{\mathbf t}=\kappa\mathbf n$ and $\dot{\mathbf b}=-\tau \mathbf n$ by definition, but we don't know how to compute $\dot{\mathbf n}$. Since $\{\mathbf t,\mathbf n,\mathbf b\} $ form a right-handed orthonormal basis of $\R^3$, we have $\mathbf n=\mathbf b\times \mathbf t$. So \[
+    \dot{\mathbf n}=\dot{\mathbf b}\times \mathbf t+\mathbf b\times \dot{\mathbf t}=-\tau \mathbf n \times \mathbf t+\kappa\mathbf b\times \mathbf =-\kappa\mathbf t+\tau \mathbf b.
+\] 
+\begin{theorem}[Frenet-Serret equations]
+   Let $\gamma $ be unit-speed curve in $\R^3$ with nowhere vanishing curvature. Then 
+   \begin{align*}
+   \dot{\mathbf t}&=\kappa\mathbf n,\\
+   \dot{\mathbf n}&=-\kappa\mathbf t+\tau \mathbf b\\
+   \dot{\mathbf b}&=-\tau \mathbf n.
+   \end{align*}These equations are called the \textbf{Frenet-Serret equations}. Note that the matrix in the matrix equation \[
+   \begin{bmatrix}
+       0 & \kappa & 0 \\ -\kappa & 0 & \tau \\ 0 & -\tau & 0
+   \end{bmatrix} 
+   \begin{bmatrix}
+       \mathbf t \\ \mathbf n \\ \mathbf b
+   \end{bmatrix}=
+   \begin{bmatrix}
+       \dot{\mathbf t} \\ \dot {\mathbf n} \\ \dot{\mathbf b} 
+   \end{bmatrix}
+   \] is \textbf{skew-symmetric}, that is, $A=-A^T$.
+\end{theorem} 
+\begin{theorem}
+    Let $\gamma (s)$ and $\widetilde \gamma (s)$ be two unit-speed curves in $\R^3$ with the same curvature $\kappa(s)>0$ and torsion $\tau(s)$ for all $s$. Then we have an isometry $M$ of $\R^3$ such that \[
+        \widetilde \gamma (s)=M(\gamma (s)) \quad \text{for all} \ s.
+    \] Furthermore, if $k$ and $t$ are smooth function with $k>0$ everywhere, then there is unit-speed curve in $\R^3$ whose curvature is $k$ and torsion is $t$.
+\end{theorem}
+
+\section{Global properties of curves} 
+\subsection{Simple closed curves}
+\begin{definition}[]
+    A \textbf{simple closed curve} in $\R^2$ is a closed curve in $\R^2$ with no self-intersections. We say $\gamma $ is \textbf{positively-oriented} if the signed unit normal $\mathbf n_s$ of $\gamma $ points into $\gamma ^{\circ}$ at each point of $\gamma $.
+\end{definition}
+\begin{namedthm}{Hopf's Umlaufsatz} 
+   The total signed curvature of a simple closed curve in $\R^2$ is $\pm 2\pi$. 
+\end{namedthm}
+We already know that the total signed curvature of any closed curve is an integer multiple of $2\pi$, the \emph{Umlaufsatz} (German for `rotation theorem') states that this integer must be $\pm 1$.
+
+\subsection{The isoperimetric inequality}
+The \textbf{area} in a simple closed curve is given by $\mathcal A(\gamma )=\int_{\gamma ^{\circ}}^{}    \, dx\, dy$, which can be computed by Green's theorem.
+\begin{namedthm}{Green's Theorem} 
+    Let $f(x,y)$ and $g(x,y)$ be smooth and $\gamma $ be a positively oriented simple closed curve. Then \[
+        \int_{\gamma ^{\circ} }^{} \left( \frac{\partial g}{\partial x}-\frac{\partial f}{\partial y} \right)   \, dx\, dy= \int_{\gamma } f(x,y) \, dx + g(x,y)\,dy.
+    \] 
+\end{namedthm}
+\begin{prop}
+    If $\gamma (t)=(x(t),y(t))$ is a positively-oriented simple closed curve in $\R^2$ with period $T$, then \[
+        \mathcal{A} (\gamma )=\frac{1}{2}\int_{0}^{T} (x\dot y-y\dot x) \, dt.
+    \] 
+\end{prop}
+\begin{proof}
+    Let $f=-\frac{1}{2}y$, $g=\frac{1}{2}x$ in Green's theorem, then $\mathcal{A} (\gamma )=\frac{1}{2}\int_{\gamma }^{} x  \, dy-y \,dx$.
+\end{proof}
+\begin{namedthm}{Isoperimetric Inequality} 
+    Let $\gamma $ be a simple closed curve, $\ell(\gamma )$ be its length, and $\mathcal{A} (\gamma )$ be the area contained in it. Then \[
+        \mathcal{A} (\gamma )\leq \frac{1}{4\pi}\ell(\gamma )^2,
+ ,   \]  and equality holds iff $\gamma $ is a circle.
+\end{namedthm}
+Use something called \emph{Wirtinger's Inequality}.
+
+\subsection{The four vertex theorem}
+\begin{definition}[]
+    A \textbf{vertex} of a curve $\gamma(t) $ in $\R^2$ is a point where its signed curvature $\kappa_s$ has a stationary point, i.e., where $d\kappa_s /dt=0$.
+\end{definition}
+\begin{namedthm}{Four Vertex Theorem} 
+   Every simple closed curve in $\R^2$ has at least four vertices. 
+\end{namedthm}

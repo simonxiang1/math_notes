@@ -1,0 +1,222 @@
+\section{Surfaces in three dimensions}
+\subsection{What are surfaces?}
+Do you know what open sets are?
+\begin{definition}[]
+    A subset $U \subseteq \R^n $ is \textbf{open} if for $\mathbf a \in U$, there exists an $\varepsilon >0$ such that every $\mathbf u \in \R^n $ within a distance $\varepsilon $ of $\mathbf a$ also lies in $U$. Using equations: \[
+    \mathbf a \in U \ \text{and} \ \| \mathbf u-\mathbf a\| < \varepsilon  \implies \mathbf u \in U.
+    \] In simpler terms, every point has a neighborhood contained in $U$.
+\end{definition}
+$\R^n $ is open but the closed ball is not. Consider a map $f \colon X \to Y$. We say $f$ is \textbf{continuous} at $\mathbf a$ if for any $\varepsilon >0$, there exists a $\delta>0$ such that for $\mathbf u \in X$, \[
+    \|\mathbf u-\mathbf a\|< \delta \implies  \| f(\mathbf u)-f(\mathbf a)\|<\varepsilon .
+\] This is equivalent to the fact that the preimage of an open set is open. See here for more details: \url{simonxiang.xyz/blog/topological-continuity-simplicity-in-abstraction}\footnote{shameless plug}. Homeomorphism are continuous bijections with a continuous inverse.
+
+\begin{definition}[]
+    A set $\mathcal{S} \subseteq \R^3$ is a \textbf{surface} if for every $\mathbf p \in \mathcal{S} ,$ there is an open set $U \subseteq \R^2$ and an open set $W \subseteq \R^3$ containing $\mathbf p$ such that $\mathcal{S} \cap W$ is homeomorphic to $U$. Basically, locally a surface has to look like a $2$-manifold (rather, it \emph{is} a $2$-manifold). A homeomorphism $\sigma \colon U \to \mathcal{S}  \cap W$ defined above is a \textbf{surface patch} or \textbf{parametrization} of the open subset $\mathcal{S} \cap W$ of $\mathcal{S} .$ A collection of charts covering $\mathcal{S} $ formes an \textbf{atlas} of $\mathcal{S} $.
+\end{definition}
+OK, we called surface patches charts in differential topology, so I will be calling surface patches charts from now on. Aren't we missing the condition that charts have to be $C^{\infty}$ compatible as well to form an atlas?
+\begin{example}
+    A plane in $\R^3$ is a $2$-manifold with a single chart. Let $\mathbf a$ lie in the plane, and $\mathbf p,\mathbf q$ be orthogonal unit vectors parallel to the plane. If $\mathbf v$ also lies in the plane, then $ \mathbf v-\mathbf a$ is parallel to the plane, so $\mathbf v-\mathbf a=u \mathbf p+v \mathbf q$. So the surface patch is $\sigma(u,v)=\mathbf a+u \mathbf p+v \mathbf q$, with inverse $\sigma ^{-1}(\mathbf v)=((\mathbf v-\mathbf a)\cdot \mathbf p, (\mathbf v-\mathbf a)\cdot \mathbf q)$. This is clearly a continous homeomorphism.
+\end{example}
+\begin{example}
+    Why do we talk about charts? Consider a \emph{circular cylinder}, the set of points in $\R^3$ a fixed distance from an axis. For example, say the circle is of radius 1 around the $z$-axis, which we will call the \emph{unit cylinder.} This is defined by \[
+        \mathcal{S} =\{(x,y,z)\in \R^3\mid x^2+y^2=1\} .
+    \] We can parametrize this by $\sigma(u,v)=(\cos u, \sin u, v)$. The map $\sigma$ is continuous but not injective, since it's periodic. Restricting to an interval of length less than $2\pi $ gives an injective map, say $[0,2\pi]$. However, although the restriction $\sigma|_V$ where $V= \{(u,v) \in \R^2\mid u \in [0,2\pi]\} $ is injective, $V$ is not open and so $\sigma|_V$ is not a surface patch. If we restrict $\sigma$ to $U=V^{\circ}=\{(u,v) \in \R^2 \mid u \in (0,2\pi)\} $, then $\sigma|_U$ is a chart. However, $\sigma|_U$ does not hit the line $x=1,y=0$ in $\mathcal{S} $, so it does not cover $\mathcal{S} $.
+
+    We need another chart to make an atlas. So consider the chart $\sigma |_{\widetilde U}$, where $\widetilde U=\{(u,v) \in  \R^2 \mid u \in [-\pi,\pi]\} $. This covers $\mathcal{S} $ sans the line $x=-1,y=0$. Joining these two charts give an atlas, and so $\mathcal{S} $ is a surface.
+\end{example}
+\begin{example}
+    Say hello to your old friend $S^2$, defined by \[
+        S^2= \{(x,y,z)\in \R^3\mid x^2+y^2+z^2=1\} .
+    \] A popular parametrization is given by latitude $\theta$ and longitude $\varphi $: projecting a point $p$ on the sphere down to the $xy$-plane gives a point $q$, then $\theta$ is the angle between $p$ and $q$, and $\varphi $ is the angle between $q$ and the positive $x$-axis. Circles corresponding to $\theta$ are called \textbf{parallels}, and those corresponding to $\varphi $ are called \textbf{meridians}.
+
+    To find an explicit parametrization, we want to express $p$ in terms of $\theta$ and $\varphi $. The $z$-component is $\sin \theta$ by looking at the triangle. {\color{burntorange} come back to this since it's important but not essentially important, essentially parametrizing the sphere and showing it's a $2$-manifold with two charts}
+\end{example}
+\begin{example}
+    Our next (non)example is the \textbf{circular cone} with a vertex at a point $\mathbf v$ with an axis a straight line $\ell$ passing through $\mathbf v$, and an angle $\alpha $, where $\alpha  \in (0,\pi /2)$. It consists of the set of points $\mathbf p \in \R^3$ such that the straight line through $\mathbf v$ and $\mathbf p$ makes an angle $\alpha $ with the line $\ell$. For example, for $\mathbf v$ the origin, $\ell$ the $z$-axis and $\alpha =\pi /4$ we have the circular cone defined by \[
+        \mathcal{S} =\{(x,y,z)\in \R^3\mid x^2+y^2=z^2\} .
+    \] If we take the image of a chart around the origin in $\R^2$, by path-connectedness we can find a path from $c$ to $b$, where $c$ corresponds to a point $q$ in the upper cone and $b$ corresponds to a point $p$ in the lower cone. Furthermore, we can choose this path to avoid the origin, so its preimage in $\mathcal{S} $ is a path joining the hemispheres that avoids the origin. However, $\mathcal S \setminus \{0\} $ is not connected, and $p$ and $q$ lie in different connected components, so this is a contradiction.
+
+    If we delete the origin, we do get a surface $\mathcal{S} _- \cup \mathcal{S} _+$, with an atlas consisting of two charts given by the inverse of projection.
+\end{example}
+Usually a point $\mathbf a$ on a surface will lie in more than two charts. If we want two charts $\sigma,\widetilde \sigma$ to speak to each other, consider the \textbf{transition maps} $\sigma ^{-1}\circ \widetilde \sigma$, $\widetilde \sigma ^{-1} \circ \sigma$.
+
+\subsection{Smooth surfaces}
+We will use the following abbreviations: \[
+    \frac{\partial \mathbf f}{\partial u}=\partial _u \mathbf f, \ \ \frac{\partial ^2 \mathbf f}{\partial u^2}=\partial _{uu}\mathbf f, \ \ \frac{\partial ^2 \mathbf f}{\partial u\partial v}=\partial _{uv}\mathbf f, \ \ \text{etc.} \ 
+\] 
+Answer to my question above: surface is a codeword for topological manifold, while smooth surface is a codeword for smooth manifolds. You know what smooth functions are. 
+\begin{definition}[]
+    A surface patch $\sigma \colon U \to \R^3$ is \textbf{regular} if it is smooth and the vectors $\partial _u\sigma, \partial _v\sigma$ are LI at all $(u,v)$. Equivalently, the product $\partial _u\sigma \times \partial _v\sigma$ should be non-zero at each point in $U$.
+\end{definition}
+I guess my usage of chart earlier was incorrect, it's just a local homeomorphism onto its image. Now charts are \emph{allowable surface patches}, or a regular surface patch $\sigma \colon U \to \R^3$ that is a homeomorphism onto its image. An atlas is what you think it is. (We've talked about compatible charts, where is the condition that charts have to be compatible for a smooth manifold?)
+
+\begin{example}
+    A plane living in $\R^3$ is a surface, as well as the unit cylinder and $S^2$.
+\end{example}
+The book states the condition I've been waiting for as a proposition, that is, the transition maps are smooth. Interesting.
+
+\begin{prop}
+    Let $U$ and $\widetilde U$ be open subsets of $\R^2$ and $\sigma \colon U \to \R^3$ be a regular surface patch. Let $\Phi \colon \widetilde U \to U$ be a smooth bijection with smooth inverse. Then $\widetilde \sigma= \sigma \circ \Phi \colon \widetilde U \to \R^3$ is a regular surface patch.
+\end{prop}
+\begin{proof}
+    We have $\widetilde \sigma$ smooth because the composition of smooth maps is smooth. For regularity, let $(u,v)= \Phi(\widetilde u,\widetilde v)$. By the chain rule, we have  \[
+    \partial _{\widetilde u}\widetilde \sigma= \frac{\partial u}{\partial \widetilde u}\partial _u \sigma+ \frac{\partial v}{\partial \widetilde u}\partial _v\sigma, \quad \partial _{\widetilde v}\sigma= \frac{\partial u}{\partial \widetilde v}\partial _u \sigma + \frac{\partial v}{\partial \widetilde v}\partial _v\sigma,
+    \] so \[
+    \partial _{\widetilde u}\widetilde \sigma \times  \partial _{\widetilde v}\widetilde \sigma = \left( \frac{\partial u}{\partial \widetilde u}\frac{\partial v}{\partial \widetilde v}- \frac{\partial u}{\partial \widetilde v}\frac{\partial v}{\partial \widetilde u} \right) \partial _u \sigma \times \partial _v\sigma.
+\] Note that the scalar is just the Jacobian determinant of $\Phi$, which is nonzero ($J(\Phi ^{-1})=J(\Phi)^{-1}$, so $J(\Phi)$ is invertible). We conclude that $\widetilde \sigma$ is regular.
+\end{proof}
+We say the chart $\widetilde \sigma$ is a \textbf{reparametrization} of $\sigma$, and $\Phi$ is a \textbf{reparametrization map}. Note that $\sigma$ is a reparametrization of $\widetilde \sigma$ by $\Phi ^{-1}$. Also note that any two charts are reparametrizations of each other. This is important because we don't want things to depend on our choice of chart. From now on, surface means smooth surface and charat means smooth chart (whoops I've already been doing this). We also assume surfaces are connected.
+
+\subsection{Smooth maps}
+Say $\mathcal{S} _1, \mathcal{S} _2$ are surfaces covered by single charts $\sigma_1 \colon U_1 \to \R^3$ and $\sigma_2 \colon U_2 \to \R^3$. Then a map $f \colon \mathcal{S} _1 \to \mathcal{S} _2$ is \textbf{smooth} if the map $\sigma_2^{-1} \circ f\circ \sigma_1 \colon U_1 \to U_2$ is smooth.
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+\underset{\subseteq \R^2}{U_1} \arrow[d, "\sigma_1"] \arrow[r, "\sigma_2^{-1} \circ f \circ \sigma_1", dotted] & \underset{\subseteq \R^2}{U_2} \arrow[d, "\sigma_2"] \\
+\underset{\subseteq \R^3}{\mathcal{S}_1} \arrow[r, "f"]                                                        & \underset{\subseteq \R^3}{\mathcal S_2}             
+\end{tikzcd}
+\end{figure}
+Suppose $\widetilde\sigma_1 \colon \widetilde U_1 \to \R^3$ and $\widetilde \sigma_2 \colon \widetilde U_2 \to \R^3$ are reparametrizations of $\sigma_1$ and $\sigma_2$ with reparametrization maps $\Phi_1 \colon \widetilde U_1 \to U_1$ and $\Phi_2 \colon \widetilde U_2 \to U_2$. We want to show that $\widetilde \sigma_2^{-1}\circ f\circ \widetilde \sigma_1 \colon \widetilde U_1 \to \widetilde U_2$ is smooth (provided the other map is smooth).
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+\widetilde U_1 \arrow[r, "\Phi_1"] \arrow[rd, "\widetilde \sigma_1"'] \arrow[rrr, "\widetilde\sigma_2 ^{-1}\circ f \circ \widetilde\sigma_1", bend left] & \underset{\subseteq \R^2}{U_1} \arrow[d, "\sigma_1"] \arrow[r, "\sigma_2^{-1} \circ f \circ \sigma_1", dotted] & \underset{\subseteq \R^2}{U_2} \arrow[d, "\sigma_2"] & \widetilde U_2 \arrow[l, "\Phi_2"'] \arrow[ld, "\widetilde\sigma_2"] \\
+                                                                                                                                                         & \underset{\subseteq \R^3}{\mathcal{S}_1} \arrow[r, "f"]                                                        & \underset{\subseteq \R^3}{\mathcal S_2}              &                                                                     
+\end{tikzcd}
+\end{figure}
+If we write $\widetilde \sigma_2 ^{-1} =\Phi_2 ^{-1} \circ \sigma_2 ^{-1}$ and $\widetilde \sigma_1= \sigma_1 \circ \Phi_1$, then subsituting and applying the associative property gives the map as $\Phi_2 ^{-1} \circ (\sigma_2 ^{-1} \circ f \circ \sigma_1) \circ \Phi_1$, which is smooth if each component is. We have the middle component smooth by assumption, and the $\Phi_i $ are smooth by definition. The composition of smooth functions is also smooth:
+\begin{figure}[H]
+\centering
+% https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZABgBpiBdUkANwEMAbAVxiRAB12mxYAnOGDmCc4TAEYCcMAI4ACTgCUAegCYAvsACqAfQCMakGtLpMufIRS7yVWoxZtO3PpOHtREwTPntl6rdvVDYxAMbDwCIjJdG3pmVkQOLh4YfkFXd0kvRSUAZg1OAFs6HAALAGNGYABlNT0DIxMw8yIraOpY+wTHZNShEXFMuWy81yLSioZZKoD64NCzCJQVa3a7eMSnFJd+jykhn1UNHTygxoWLZGW22ziHJOc0ncHvZRHC4vLGKe0TtRsYKAAc3gRFAADNeBACkgyCAcBAkMsbp1EthAUU9CBqAw6GIYAwAAqmcIWEAMGBgnCnEAQqEw6jwpBWZHrERYdF0AJKYAAWn03jKWF4ZVkYIFQpFbI5mOxuPxRKaizJFKp2KwYHWUAgOCkUGptOhiGZjMQOVWty6bnZGJUWLJcsJxOaCXJlP1kMNSJNZpZbDBdpxeMditJrqpDRpHqQPpNAFZzSjAe66UaGQjEAAWNUathanUAu0dVlW6U5bl8tScQXC2SA8U1qU25OGrNw9Px32WtEYnLN+ltpCtvE8aOwotsAAUjc5Zd5+irEtr9clJZt5f0AEoFzWp6vOSptyKxYfvN3OboNwBeac-deV9jVkUTusnsUb5en63nu1wEpYN2IDy6gUGoQA
+\begin{tikzcd}
+\underset{\subseteq \R^2}{U_1} \arrow[d, "\sigma_1"] \arrow[r, "\sigma_2^{-1} \circ f \circ \sigma_1", dotted] \arrow[rr, "(\sigma_3^{-1}\circ g \circ \sigma_2^{-1})\circ (\sigma_2\circ f \circ \sigma_1)=\sigma_3^{-1}\circ (g \circ f ) \circ \sigma_1", bend left, shift left=3] & \underset{\subseteq \R^2}{U_2} \arrow[d, "\sigma_2"] \arrow[r, "\sigma_3^{-1}\circ g \circ \sigma_2", dotted] & \underset{\subseteq \R^2}{U_3} \arrow[d, "\sigma_3"] \\
+\underset{\subseteq \R^3}{\mathcal{S}_1} \arrow[r, "f"]                                                                                                                                                                                                                               & \underset{\subseteq \R^3}{\mathcal S_2} \arrow[r, "g"]                                                        & \underset{\subseteq \R^3}{\mathcal S_3}             
+\end{tikzcd}
+\end{figure}
+We choose the same chart $U_2$ that gets mapped onto by $U_1$ and maps to $U_3$ since choice of chart is independent of smoothness, as we have just shown. Bijective Smooth maps $f \colon \mathcal{S} _1 \to \mathcal{S} _2$ with smooth inverse are called \textbf{diffeomorphisms}. A smooth map $f \colon  \mathcal{S} _1\to \mathcal{S} _2$ is a \textbf{local diffeomorphism} if for any $p \in \mathcal{S} _1$, we have an open $\mathcal{O} \subseteq \mathcal{S} _1$ such that $f|_{\mathcal{O} }$ is a diffeomorphism onto its image.
+
+\begin{prop}
+    Let $f \colon \mathcal{S} _1 \to \mathcal{S} _2$ be a local diffeomorphism. If $f$ is injective and $\sigma_1$ a smooth chart on $\mathcal{S} _1$, then $f \circ \sigma_1$ is a smooth chart on $\mathcal{S} _2$.
+\end{prop}
+\begin{example}
+    Consider the map from the $yz$-plane to the unit cylinder $\mathcal{S} $, wrapping each line parallel to the axis around the cylinder at height $z$. This map is defined by $f(0,y,z)=(\cos y, \sin y, z)$. This is not injective, so not a diffeomorphism, but is a local diffeomorphism. Parametrizing by the chart $\pi(u,v)=(0,u,v)$ and using the atlas $\{\sigma|_U,\sigma|_{\widetilde U}\} $ of $\mathcal{S} $, let $p=(0,a,b)$ be a point in the $yz$-plane. If $a$ is not an even multiple of $2\pi$, then we have an $n \in \Z$ such that $2\pi n <a < 2(n+1)\pi$ and \[
+        f(\pi(u,v))=\sigma(u-2\pi n, v) \quad \text{if} \quad 2\pi n<u<2(n+1)\pi.
+    \] So $f$ is a diffeomorphism from the open set $\mathcal{O} =\{(0,y,z) \mid 2\pi n<y<2(n+1)\pi\} $ of the plane to the open set $f(\mathcal{O} )=\{(x,y,z)\in \mathcal{S} \mid x\neq 1\} $. We use the other chart if $a$ is not an odd multiple of $\pi$.
+\end{example}
+
+\subsection{Tangents and derivatives}
+A \textbf{tangent vector} to a surface $S$\footnote{Surfaces are now denoted $S$, I'm tired of typing \texttt{\textbackslash mathcal S}.} is the tangent vector at $p$ of some curve in $S$. The \textbf{tangent space} $T_p S$ at $p$ is the set of all tangent vectors to $S$ at $p$.
+\begin{prop}
+    Let $\sigma \colon U \to \R^3$ be a chart containing some $p \in S$, and $(u,v)$ be coordinates in $U$. The tangent space $T_p S$ is the subspaces of $\R^3$ spanned by $\partial _u\sigma, \partial _v\sigma$.
+\end{prop}
+\begin{proof}
+    Let $\gamma(t)=\sigma(u(t),v(t))$ be smooth. Then by the chain rule we have $\dot\gamma =\partial _u \sigma \dot u+\partial _v \sigma \dot v.$ So $\dot\gamma $ is a linear combination of $\partial _u \sigma$ and $\partial _v\sigma$. Conversely, any vector in a subspace spanned by $\partial _u\sigma$ and $\partial _v\sigma$ is of the form $\lambda \partial _u \sigma+\mu \partial _u \sigma$. Define $\gamma (t)=\sigma(u_0+\lambda t, v_0+\mu t)$. Then $\gamma $ is smooth in $S$, and at $t=0$ we have $\dot \gamma =\lambda \partial _u \sigma + \mu \partial _v \sigma$. So every vector in the space is the tangent vector of some curve.
+\end{proof}
+Denote the vectors $\partial _u\sigma,\partial _v\sigma$ that span $T_pS$ as the \textbf{parameter curves} on the surface. Suppose $f \colon S \to \widetilde S$ is smooth: the derivative should measure show a point $f(p) \in \widetilde S$ changes when $p$ moves to a nearby point, say $q$, of $S$. If $p$ and $q$ are close, the line near them should be tangent to $S$ at $p$. So we expect that the derivative of $f$ at $p$ associates to any tangent vector to $S$ at $p$ a tangent vector to $\widetilde S$ at $f(p)$. In other words, the derivative of $f$ should be a map $D_p f \colon T_p S \to T_{f(p)}\widetilde S.$
+
+\begin{definition}[]
+    Let $w \in T_p S$ be a tangent vector to $S$ at $p$. Then $w$ is the tangent vector at $p$ of a curve $\gamma $ in $S$ passing through $p$, say $w=\dot \gamma (t_0)$. Then $\widetilde \gamma =f \circ \gamma $ is a curve in $\widetilde S$ passing through $f(p)$ when $t=t_0$, so $\widetilde w=\dot{\widetilde \gamma } (t_0) \in T_{f(p)}\widetilde S$. We say the \textbf{derivative} $D_pf$ of $f$ at $p\in S$ is the map $D_p f \colon T_p S \to T_{f(p)}\widetilde S$ such that $D_pf(w)=\widetilde w$ for any tangent vector $w \in T_p S$.
+\end{definition}
+\begin{prop}
+    The derivative is linear.
+\end{prop}
+\begin{prop}\,
+    \begin{enumerate}[label=(\roman*)]
+        \item If $S$ is a surface and $p \in S$, then the derivative of the identity at  $p$ is $\id \colon T_pS \to T_pS$.
+        \item Chain rule, $D_p(f_2 \circ f_1)=D_{f_1(p)}f_2 \circ D_p f_1.$
+        \item If $f \colon S_1  \to S_2$ is a diffeomorphism then $D_pf \colon T_p S_1 \to T_{f(p)}S_2$ is invertible.
+    \end{enumerate}
+\end{prop}
+
+\begin{prop}
+    Let $f \colon S \to \widetilde S$ be smooth. Then $f$ is a local diffeomorphism iff for all $p \in S$, $D_pf \colon T_p S \to T_{f(p)}\widetilde S$ is invertible.
+\end{prop}
+
+{\color{red}todo:section on orientability} 
+
+\section{Examples of surfaces} 
+\subsection{Level surfaces}
+\begin{theorem}
+    Let $S \subseteq \R^3$ such that for each $p \in S$, there is a $W_p \subseteq \R^3$ open and a smooth $f \colon W \to \R$ such that
+    \begin{enumerate}[label=(\roman*)]
+        \item $S \cap W=\{(x,y,z) \in W \mid f(x,y,z)=0\} $,
+        \item $\nabla f$ is nonvanishing at $p$.
+    \end{enumerate}
+    Then $S$ is a smooth surface.
+\end{theorem}
+\begin{example}
+    We can construct $S^2$ in this manner by letting $W=\R^3$ and considering the single function $f(x,y,z)=x^2+y^2+z^2-1$, since the gradient $\nabla f=(2x,2y,2z)$ is nonvanishing.
+\end{example}
+\begin{example}
+    Consider the cone cut out by $f(x,y,z)=x^2+y^2-z^2$, which vanishes at the origin. Then the cone minus the origin is a surface.
+\end{example}
+
+\subsection{Quadric surfaces}
+\begin{definition}[]
+    A \textbf{quadric} is the a subset of $\R^3$ defined by an equation of the form \[
+    v^t Av+b^tv+c=0,
+\] where $v=(x,y,z)$, $A$ is a constant symmetric $3\times 3$, $b \in \R^3$ is constant, $c \in \R$ is a scalar. Explicitly, for $A=
+\left( \begin{smallmatrix}
+        a_1 & a_4 & a_6 \\ a_4 & a_2 & a_5 \\ a_6 & a_5 & a_3
+\end{smallmatrix} \right) $, $b=(b_1,b_2,b_3)$ we have \[
+a_1x^2+a_2y^2+a_3z^2+2a_4xy+2a_5yz+2a_6xz+b_1x+b_2y+b_3z+c=0.
+\] 
+\end{definition}
+Some quadrics which are not surfaces include $x^2+y^2+z^2=0,\ x^2+y^2=0,\ xy=0$.
+
+\begin{theorem}
+    Up to isometry, every non-empty quadric with not all zero coefficients can be transformed into one of the following:
+    \begin{enumerate}[label=(\roman*)]
+        \item Ellipsoid: $\frac{x^2}{p^2}+\frac{y^2}{q^2}+\frac{z^2}{r^2}=1$.
+        \item One sheeted hyperboloid: $\frac{x^2}{p^2}+\frac{y^2}{q^2}-\frac{z^2}{r^2}=1$.
+        \item Two sheeted hyperboloid: $\frac{z^2}{r^2}-\frac{z^2}{p^2}-\frac{y^2}{q^2}=1$.
+        \item Elliptic paraboloid: $\frac{x^2}{p^2}+\frac{y^2}{q^2}=z$.
+        \item Hyperbolic paraboloid: $\frac{x^2}{p^2}-\frac{y^2}{q^2}=z$.
+        \item Quadric cone: $\frac{x^2}{p^2}+\frac{y^2}{q^2}-\frac{z^2}{r^2}=0$.
+        \item Elliptic cylinder: $\frac{x^2}{p^2}+\frac{y^2}{q^2}=1$.
+        \item Hyperbolic cylinder: $\frac{x^2}{p^2}-\frac{y^2}{q^2}=1$.
+        \item Parabolic cylinder: $\frac{x^2}{p^2}=y$.
+        \item Plane: $x=0$.
+        \item Two parallel planes: $x^2=p^2$.
+        \item Two intersection planes: $\frac{x^2}{p^2}-\frac{y^2}{q^2}=0$.
+        \item Straight line: $\frac{x^2}{p^2}+\frac{y^2}{q^2}=0$.
+        \item Point: $\frac{x^2}{p^2}+\frac{y^2}{q^2}+\frac{z^2}{r^2}=0$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    oh save me there's a proof {\color{red}todo:this} 
+\end{proof}
+\begin{cor}
+    Every nonempty quadric of types (i)-(x) is a surface (for (vi) remove the vertex).
+\end{cor}
+
+\subsection{Ruled surfaces and surfaces of revolution}
+\begin{definition}[]
+    A \textbf{ruled surface} is a surface that is a union of straight lines, called the \textbf{rulings} (or \textbf{generators}) of the surface.
+\end{definition}
+If the rulings are all parallel, then $S$ is a \textbf{generalized cylinder}. We don't want a curve that passes through all the lines to be tangent to the rulings (intersect transversely??). Some noninteresting stuff happened.
+
+\subsection{Compact surfaces}
+\begin{example}
+    You know what a compact set is. Some examples:
+    \begin{itemize}
+        \item Spheres are compact subspaces of $\R^{n+1}$. They are clearly bounded, and closed since the complement $\R^{n+1}\setminus S^n =B^{n+1}\cup (\R^{n+1}\setminus D^{n+1}),$ a union of two open sets (where $B^{n+1}$ is the open $n$-ball and $D^{n+1}$ is the closed $n$-disk).
+        \item Planes are not compact since they're unbounded. Neither are open disks since they're open.
+        \item In our $\R^3$, the torus and the other genus $n$ surfaces are also compact. These turn out to classify compact $2$-manifolds up to diffeomorphism:
+            \begin{theorem}
+                Up to diffeomorphism, the only compact $2$-manifolds are the genus $n$ surfaces for $n\geq 0$.
+            \end{theorem}
+    \end{itemize}
+    A corollary of this:
+    \begin{cor}
+        Every compact surface is orientable.
+    \end{cor}
+    \begin{proof}
+        By the Jordan separation theorem we can separate a genus $n$ surface into a bounded interior and unbounded exterior. Define the unit normal at each point on the surface to point toward the exterior.
+    \end{proof}
+\end{example}
+\subsection{Triply orthogonal systems}
+We skipped this section.
+
+\subsection{Applications of the IFT} 
+This section too.
