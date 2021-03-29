@@ -1,0 +1,97 @@
+\section{February 23, 2021}
+\subsection{Review}
+Let's see what we did this semester.
+\begin{enumerate}[label=(\arabic*)]
+    \item We talked about tensors and metrics.
+    \item Then we talked about spaces with symmetry in relation to transitive group actions ($X=G /H$).
+    \item We talked about important examples like $S^n $ and $\mathbb H^n $.
+    \item For geodesics, we talked about length minimizing and energy minimizing stuff (no acceleration).
+\end{enumerate}
+\subsection{Spaces with symmetry}
+\hspace{\parindent}A space is \textbf{homogeneous} if every point looks the same. Let $X$ be a space, and $G$ be the set of isometries of $X$. Then $G$ acts transitively on $X$. Consider two points $p,q$ on the torus. Then there exists an isometry that translates $p$ to $q$, so the torus is homomgeneous.
+
+A space is \textbf{isotropic} if every unit tangent vector looks the same. That is, is there an isometry that takes one point and tangent vector to another? For the torus, the answer is no. An example: $\C \mathrm P^n $ for $n>1$. (This list is non exhaustive).
+
+A space is \textbf{frame isotropic} if every (oriented) orthonormal basis looks the same. Some examples include $S^n , \R^n , $ and $\mathbb H^n $. (This list may be exhaustive).
+
+\subsection{Geodesics}
+The more naive notion of geodesicsc comes from minimizing length, while a more analytic version comes from minimizing energy. Say we have a curve $\gamma $ from $p$ to $q$, where $\gamma (0)=p$, $\gamma (t)=q$. For $L=\int ds$, $\dot \gamma \equiv \frac{d\gamma (t)}{dt}$, $ds ^2= g(\dot \gamma ,\dot \gamma )\,dt ^2$, $ds=\sqrt{g(\dot \gamma , \dot \gamma )} \,dt$. Then \[
+    L= \int_{0}^{T} \sqrt{g(\dot \gamma ,\dot \gamma )}  \, dt.
+\] Say we have a curve from the origin to $(t,0)$, where the length is given by \[
+\int_{0}^{T} \sqrt{\frac{dx^2}{dt^2}+\frac{dy^2}{dt^2}}  \, dt \geq \int_{0}^{T} \sqrt{\left( \frac{dx}{dt} \right) ^2}  \, dt= \int_{0}^{T} \left| \frac{dx}{dt}  \right| \, dt \geq L ?
+\] The way for this to minimize length is to have all the inequalities be equalities. For example, say we have two points on the sphere. Since the sphere is isotropic, rotate to set one of the points as the north pole, so a geodesic is a great circle that goes through these two points.
+
+Using the upper half plane model, using the same idea wehave a symmetry that takes one point to another. So vertical lines minimize length.
+
+We can also talk about minimizing energy, given by $\int_{0}^{T} g(\dot \gamma , \dot \gamma ) \, dt$, with $\gamma (0)=p$, $\gamma (T)=q$. The minimum energy is $L^2 /T$, where $L$ is the minimum length. If you go along a geodesic you get this value, while if you go along another curve you get a higher energy. To see this, note that 
+\begin{align*}
+    E &= \int \left( \frac{ds}{dt} \right) ^2 \, dt\\
+      &= \int \left( \frac{ds}{dt}-\frac{L}{T}+\frac{L}{T} \right) ^2 \, dt\\
+      &= \int_{}^{} \left( \frac{ds}{dt}-\frac{L}{T} \right) ^2+\left( \frac{L}{T} \right) ^2 + 2 \frac{L}{T}\left( \frac{ds}{dt}-\frac{L}{T} \right)  \, dt\\
+      &= \int_{0}^{T} \left( \frac{ds}{dt}-\frac{L}{T} \right) ^2+ \frac{L^2}{T^2} \, dt\\
+      &\geq \frac{L^2}{T}.
+\end{align*}
+In Euclidian space, going along a straight line with constant speed means zero acceleration. On a sphere, we have $\ddot X \perp S^n $, using the fact that $S^n  \subseteq \R^{n+1}$. In hyperbolic space, we don't even know what acceleration is. We know how to take the second derivative of a coordinate, but we don't know how to take the derivative of a velocity vector. We need connections to make sense of this, which we will talk about on Thursday since the university has decided we cannot talk about new things.
+
+\subsection{Tensors}
+A $(k,\ell)$-tensor is a multi-linear map that takes $k$ vectors and $\ell$ covectors and gives a number. A covector is a $(1,0)$-tensor (circular definition!), or a linear map on a vector space $V$ with basis $\{e_1,\cdots ,e_n \} $. Then $V^*= \operatorname{Hom}(V,\R)$ with basis $\{\phi^1,\cdots ,\phi ^n \} $. The most important example is the metric tensor
+\begin{align*}
+    g(v,w)&=g(v^i e_i ,w^j e_j )\\
+          &=v^i w^j \, g(e_i ,e_j )\\
+          &=v^i w^j  \, g_{ij}.
+\end{align*} In general, for a tensor $T(v,w,\cdots ,\alpha ,\beta ,\cdots )$, we can always expand this to 
+\begin{align*}
+         &T(v^i e_i, w^j e_j ,\cdots ,\alpha _k \phi^k, \beta _{\ell}\phi^{\ell},\cdots )\\
+    &=v^i w^i \cdots \alpha _k\beta _{\ell}T(e_i,e_j ,\cdots ,\phi^k,\phi^{\ell},\cdots )\\
+    &= \left( T_{ij\cdots }^{k\ell\cdots }v^i w^j \cdots \alpha _k \beta _{\ell}\cdots  \right) .
+\end{align*}
+Under a change of basis, we have a new basis $\{\widetilde e_i \} $, where $\widetilde e_i =A_i ^j e_j $, and $B_i ^j A_j^k =\delta_i ^k, \ \widetilde \phi^i =B_j ^i  \phi^j $. So 
+\[
+\widetilde T_{ij\cdots }^{k\ell \cdots }= A_i ^{i'}A_j ^{j'}\cdots B_{k'}^{k}B_{\ell'}^{\ell}\cdots T_{i'j'\cdots }^{k'\ell '\cdots }.
+\] Everything we've talked about is a tensor at a point, but the important things are really tensor fields. For a manifold, how are we going to get a basis for the tangent space to a point $p$? We have two conventions:
+\begin{enumerate}[label=(\arabic*)]
+    \item Say we have coordinates $x^1,\cdots ,x^n $. Then we have a basis $\partial_1,\cdots ,\partial _n $.
+    \item We can also pick an orthonormal basis $E_1,\cdots ,E_n $.
+\end{enumerate} Most of the time we use convention (1), and everything we've done so far. Say we have coordinates $y^1,\cdots ,y^n $ with basis $\partial  /\partial y^1,\cdots , \partial  / \partial y^n $. Then \[
+\frac{\partial}{\partial y^i }= \frac{\partial x^i }{\partial y^j }\frac{\partial }{\partial x^i }
+\] by the chain rule, which gives a change of basis matrix. So $A^i _j = \frac{\partial x^i }{\partial y^j }$, and $B_j ^i =\frac{\partial y^i }{\partial x^j }$. Once we have these change of basis matrices, we know how to convert from one set of coordinates to another.
+
+\subsection{Examples}
+Say we have the plane $\R^2$. Some people like the coordinates $(x,y)$, and others like polar coordinates $(r,\theta)$. So a basis for the tangent space could be given by $\partial _x, \partial _y$ or $\partial _r, \partial _{\theta}$. To compute $A_j ^i $, we want to find $\partial (x,y) / \partial (r, \theta)$. So for $x=r \cos \theta, y=r \sin \theta$, we have 
+\[
+A^i _j =
+\begin{bmatrix}
+    A_1^1=\frac{\partial x}{\partial r}& A_2^1= \frac{\partial x}{\partial \theta}\\
+    A_1^2= \frac{\partial y}{\partial r} & A_2^2=\frac{\partial y}{\partial \theta}
+\end{bmatrix}=
+\begin{bmatrix}
+    \cos \theta=\frac{x}{r} & -r \sin \theta=-y \\
+    \sin \theta= \frac{y}{r}& r \cos \theta=x
+\end{bmatrix}.
+\] To find $B^j _i $, we have $r=\sqrt{x^2+y^2} $,  so $\partial_x r= \frac{x}{x^2+y^2}, \partial _y r=\frac{y}{x^2+y^2}$. For $\theta= \arctan^{-1}(y /x)$, we have \[
+d\theta = \frac{1}{1+\left( \frac{y}{x} \right) ^2}d\left( \frac{y}{x} \right) =
+\] 
+\subsection{Important Examples of Spaces with Symmetry}
+What are the isometries of $S^n $? We want the orientation preserving rotations starting at the origin, given by $\mathrm{SO}(n+1)$. Within these, which isometries preserve the north pole? This is given by  \[
+H= 
+\mleft(\begin{array}{ccc|c}
+    & & & \vdots \\
+    & \mathrm{SO}(n) & &0\\
+    & & & \vdots\\
+    \hline
+    \cdots &0&\cdots & 1
+\end{array}\mright)= \mathrm {SO}(n).
+\] Then $S^n = \mathrm{SO}(n+1) / \mathrm{SO}(n)$. At a point $x$, we have tangent vectors $v^1, v^2, \cdots ,v^n $, which are all isotropic (?). So $S^n $ is frame isotropic. With Lie stuff, we have \[
+T_{G /H}=\mathfrak g / \mathfrak h \simeq \mathfrak h ^{\perp}.
+\] For hyperbolic space, this really is the same thing. If we think of hyperbolic space as a sphere with the funny metric $ds ^2= dx^2 -dt^2$ (abuse of notation, $dx$ is a vector while $dt$ is a number) sitting in $\R^{n,1}$, what is the group of transformations preserving this hyperplane? This is $\mathrm{SO}(n,1)^+$, with our subgroup $H=\mathrm{SO}(n)$ (similar to $S^n $). 
+
+Note that \[
+\begin{pmatrix}
+    \cos \theta & -\sin \theta \\
+    \sin \theta & \cos \theta
+\end{pmatrix} \in  \mathrm{SO}(2), \quad 
+\begin{pmatrix}
+    \cosh \alpha  & \sinh \alpha  \\
+    \sinh \alpha & \cosh \alpha 
+\end{pmatrix} \in  \mathrm {SO} (1,1)^+,\quad \mathrm {SO}(2),\mathrm{SO}(1,1)^+ \subseteq \mathrm {SL}(1,1?).
+\] Neither of these elements are in the other group (didn't catch why?).

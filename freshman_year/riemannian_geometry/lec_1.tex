@@ -10,7 +10,7 @@ The map sending a curved string to a straight line is an isometry. So there are 
 Now to $2$-manifolds. We have the circle, half-sphere, saddle, and half-cylinder discussed earlier. We can't really tell the difference between a cylinder and the plane, they're isometric. Extrinsically they're different, but intrinsically they're the same. The sphere is different--- a circle has circumference $2\pi R$, that is, the circumference is the set of points of distance $R$ away. What is the circumference of a sphere? Use spherical coordinates: a circle of radius $R$ is a latitude line, and the length is $2\pi$ times the distance of the great circle cut out at $R$, or $2\pi \sin(R)$ if you draw out the angles. Approximately, $2\pi \sin(R) \approx 2\pi (R- \frac{R^3}{6})$. So circles are too small!
 
 This means that spheres are in some sense, sphere shaped. Another thing is the area: the area of the cap is $A= \int 2\pi \sin(R)dR=2\pi (1-\cos (R))=2\pi (\frac{R^2}{2}-\frac{R^4}{4!}+\cdots )=\pi R^2- \frac{\pi R^4}{12}+\cdots $. So circumferences and areas are a little bit too small. If we worked  in $z=x^2+y^2$, we would find that circumferences and areas would be a little bit too big. This is why you can't flatten and orange peel, or an accurate scaled map of the world preserving angles and area.
-\subsection{Dual Space}
+\subsection{Dual space}
 Suppose $V$ is an $n$-dimensional vector space, with basis $\mathcal{E} =\{e_1,\cdots ,e_n \} $. Then we can write any $v \in V$ as the sum $\sum v^i e_i $. So we have a natural correspondence between vectors $v$ and coordinates $\{v^i \} $ where $v^i  \in \R^n $. From now on, we use $v^i e_i $ to denote $\sum v^i e_i $, this is called Einstein summation notation.
 
 The dual space $V^*= \operatorname{Hom}(V, \R)$ is the space of linear functionals from $V$ into the base field, the reals. One element of $V^*$ is the function that assigns each vector to its $i$th coordinate $\phi^i (v)=v^i $. So we have a nice set of transformations $\{\phi^1,\phi ^2,\cdots , \phi ^n \} $.
@@ -18,12 +18,45 @@ The dual space $V^*= \operatorname{Hom}(V, \R)$ is the space of linear functiona
     The set $\{\phi^1,\phi^2,\cdots ,\phi^n \} $ forms an $n$-dimensional basis for $V^*$, called the \emph{dual basis} to $\mathcal{E} $.
 \end{claim}
 \begin{proof}
-    Let $\alpha =\alpha _i \phi^i $. Suppose $\alpha =0$, then for all $v, \alpha (v)=0$. So $\alpha(e_j )=0$, and $\alpha _i \phi ^i (e_j )=0$. Now $\phi^i (e_j )=\delta^i _j $, so $\alpha _i \delta^i _j =0$ and therefore $\alpha _j =0$. Now define $\alpha _j =\alpha (e_j )$. Applying this to a vector $v$ gives $(\alpha _j  \phi^j)(v)=\alpha _j (\phi ^j(v))=\alpha _j v^j$. Then $\alpha (v)=\alpha (v^je_j )=v^j \alpha (e_j )=v^j\alpha _j $, and these are equal. We conclude that $\alpha =\alpha _j v^j$.
+    Let $\alpha =\alpha _i \phi^i $. Suppose $\alpha =0$, then for all $v, \alpha (v)=0$. So $\alpha(e_j )=0$, and $\alpha _i \phi ^i (e_j )=0$. Now $\phi^i (e_j )=\delta^i _j $, so $\alpha _i \delta^i _j =0$ and therefore $\alpha _j =0$. Now define $\alpha _j =\alpha (e_j )$. Applying this to a vector $v$ gives $(\alpha _j  \phi^j)(v)=\alpha _j(v) (\phi ^j(v))=\alpha _j(v) v^j$. Then $\alpha (v)=\alpha (v^je_j )=v^j \alpha (e_j )=v^j\alpha _j(v) $, and these are equal. We conclude that $\alpha =\alpha _j(v) v^j$.
 \end{proof}
-Summary: write arbitrary elements of $V$ as $v^i e_i $, and the dual space as $\alpha =\alpha _j \phi ^j$. We have $\phi^j(v)=v^j, \alpha (e_i )=\alpha _i ,$ and $\alpha (v)=\alpha_i  v^i $. This is why we call $V^*$ the dual space: pairing elements together in either order gives a number. On this vein, $V^{* *}=V$, where the basis $\{e_1,\cdots ,e_n \} $ is dual to $\{\phi^1,\cdots ,\phi^n \} $. $V$ is the space of contravariant vectors, while $V^*$ is the space of covectors, which are covariant in a categorical sense. 
+Summary: write arbitrary elements of $V$ as $v^i e_i $, and the dual space as $\alpha =\alpha _j \phi ^j$. We have $\phi^j(v)=v^j, \alpha (e_i )=\alpha _i ,$ and $\alpha (v)=\alpha_i v^i $ (short for $\alpha _i (v)v^i $). This is why we call $V^*$ the dual space: pairing elements together in either order gives a number. On this vein, $V^{* *}=V$, where the basis $\{e_1,\cdots ,e_n \} $ is dual to $\{\phi^1,\cdots ,\phi^n \} $. $V$ is the space of contravariant vectors, while $V^*$ is the space of covectors, which are covariant in a categorical sense. 
 
-Suppose we have a new basis $\widetilde {\mathcal{E}}= \{\widetilde e_1,\cdots , \widetilde e_n \}  $. There must be some change of basis matrix, that is, $\widetilde e_i = A_i ^j e_j $, similarly we have a new dual basis with $\widetilde \phi^i =B^i _j \phi^j$. If we have a vector $v=v^i e_i =\widetilde v^i \widetilde e_i $, we have $\widetilde v^i =\widetilde \phi^i (v)=B^i _j \phi^j(v)=B^i _j v^j$. When your basis vectors get big, your coordinates get small, so they transform oppositely. This is the origin of the term contravariant. We claim that $A_i ^j B_j ^k= \delta _i ^k=B_i ^j A_j ^k$. To see this, note that $\delta_i ^k= \widetilde \phi^k(\widetilde e_i )=\widetilde \phi^k(A_i^je_j )=\phi^{\ell}B_{\ell}^k (A_i ^je_j )=B_{\ell}^kA_i ^j \delta _j ^{\ell}=B_j ^kA_i ^j=A_i ^jB_j ^k$. 
+You can visualize this by thinking of covectors as rows and vectors as columns. Then $e_i $ is a column with a 1 in the $i$th slot, while $\phi^j $ is a row with a 1 in the $j$th slot. Then $\alpha (e_i )=\alpha _i$, $\phi^j (v)=v^j $, as can be seen below.
+\begin{gather*}
+\alpha =
+\begin{pmatrix}
+    & & \alpha & &
+\end{pmatrix},\quad v=
+\begin{pmatrix}
+    \\
+    \\
+    v\\
+\\
+\\
+\end{pmatrix},\qquad \phi^j =
+\begin{pmatrix}
+    0 & 0 & 1 & 0 & 0
+\end{pmatrix},\quad e_i =
+\begin{pmatrix}
+    0 \\ 0 \\ 1 \\ 0 \\ 0
+\end{pmatrix}.\\
+\begin{pmatrix}
+    & & \alpha  & &
+\end{pmatrix}
+\begin{pmatrix}
+    0 \\ 0 \\1\\0\\0
+\end{pmatrix}=\alpha _i ,\qquad
+\begin{pmatrix}
+    0&0&1&0&0
+\end{pmatrix}
+\begin{pmatrix}
+    \\ \\ v \\ \\ \\
+\end{pmatrix}=v^j .
+\end{gather*}
+
+Suppose we have a new basis $\widetilde {\mathcal{E}}= \{\widetilde e_1,\cdots , \widetilde e_n \}  $. There must be some change of basis matrix, that is, $\widetilde e_i = A_i ^j e_j $, similarly we have a new dual basis with $\widetilde \phi^i =\phi^jB^i _j $\footnote{In this convention, $A_i ^j $ is the entry $i$th row and $j$th column of a matrix $A$ (sometimes you see $a_i ^j $) instead. Usually $i$ denotes rows and $j$ denotes columns, hence why the change of basis matrix for the dual basis is written as $B_j ^i $.}. If we have a vector $v=v^i e_i =\widetilde v^i \widetilde e_i $, we have $\widetilde v^i =\widetilde \phi^i (v)=B^i _j \phi^j(v)=B^i _j v^j$. When your basis vectors get big, your coordinates get small, so they transform oppositely. This is the origin of the term contravariant. We claim that $A_i ^j B_j ^k= \delta _i ^k=B_i ^j A_j ^k$. To see this, note that $\delta_i ^k= \widetilde \phi^k(\widetilde e_i )=\widetilde \phi^k(A_i^je_j )=\phi^{\ell}B_{\ell}^k (A_i ^je_j )=B_{\ell}^kA_i ^j \delta _j ^{\ell}=B_j ^kA_i ^j=A_i ^jB_j ^k$. 
 
 We can kinda visualize vectors as columns and covectors as rows. Then $e_i $ is a column with $1$ in the $i$th while $\phi^j$ is a row in the $j$th slot. Applying $\alpha $ to $e_i $ gives $\alpha _i $, while applying $\phi^j$ to $v$ gives $v^i $.
 \subsection{Tensors}
-A $(k,\ell)$ tensor eats $k$-vectors and $\ell$-covectors, and pops out a number. These should be multilinear in each slot. In terms of coordinates, $T(v,w)=T(v^i e_i ,w^je_j )=v^i w^i T(e_i ,e_j )$. We define $T_{ij}=T(e_i ,e_j )$, so $T(v,w)$ becomes $T_{ij}v^i w^j$. This is a $(2,0)$-tensor. What is a $(0,2)$-tensor? This is essentially a matrix, where $S(v,\alpha )=S_j ^j v^i \alpha _j $. If you don't give a tensor enough information, it turns into a tensor of lower rank, which works the same in matrix multiplication. If you have a doubly covariant tensor, it turns vectors into covectors. If you have a doubly contravariant tensor, it turns covectors into vectors. Next time, we'll talk about the most important doubly covariant tensor, the inner product.
+A $(k,\ell)$ tensor eats $k$-covectors and $\ell$-vectors, and pops out a number. These should be multilinear in each slot. In terms of coordinates, $T(v,w)=T(v^i e_i ,w^je_j )=v^i w^i T(e_i ,e_j )$. We define $T_{ij}=T(e_i ,e_j )$, so $T(v,w)$ becomes $T_{ij}v^i w^j$. This is a $(2,0)$-tensor. What is a $(1,1)$-tensor? This is essentially a matrix, where $S(v,\alpha )=S_i ^j v^i \alpha _j $. So $S$ is the matrix, $\alpha $ is a row, and $v$ is a column. If you don't give a tensor enough information, it turns into a tensor of lower rank, which works the same in matrix multiplication. If you have a doubly covariant tensor, it turns vectors into covectors. If you have a doubly contravariant tensor, it turns covectors into vectors. Next time, we'll talk about the most important doubly covariant tensor, the inner product.

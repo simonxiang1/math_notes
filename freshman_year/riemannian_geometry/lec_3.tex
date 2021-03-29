@@ -1,14 +1,85 @@
 \section{January 26, 2021}
-What is the tangent vector of a point on an arbitrary manifold, like $\C \mathrm P^2$? Arrows? No. Equivalence class of curves? This works for manifolds. Consider a curve through $p$, and another curve that looks the same locally (we have to apply the fact that manifolds look locally like $\R^n $). Derivations also work perfectly.
+\subsection{A basis for the tangent space}
+Consider some manifold, then how do we find a basis for the tangent space? If each point is covered by a chart, consider the coordinates for each chart and take the partial derivatives in that direction. For a topologically interesting manifold, usually just one set of coordinates won't work for the whole manifold. So it becomes imperative that we know how to change between coordinate charts. Suppose we have two coordinates $(x^1,x^2,\cdots ,x^n )$ and $(y^1,y^2,\cdots ,y^n )$, these give rise to the bases $\{\partial _{x^i }\} $ and $\{ \partial _{y^i }\}$. The chain rule tells us that \[
+\frac{\partial}{\partial x^i }=\frac{\partial y^j }{\partial x^i }\frac{\partial}{\partial y^j }.
+\] Then the $\frac{\partial y^j }{\partial x^i }$ form a change of basis matrix $A^j _i $, and we can take everything we know about vector spaces and tensors at a \emph{point}, and apply it to tensor \emph{fields}. A tensor on a \emph{fixed} vector space is a certain object given by some coefficients. If we want a tensor \emph{field}, we need a tensor at each point, which requires understanding what a basis is for the tangent space at each point, and what the coefficients are. Now the numbers $T_{ij}^k(x)$ are \emph{functions} of where you are, if $T_{ij}^k$ gives the coefficients for a $(1,2)$-tensor (1-contravariant 2-covariant). 
+\begin{quote}
+    ``\emph{Think globally, act locally.}''
+\end{quote}This is our slogan for working with manifolds. You always want to keep a global picture of what's going on in your head, but when doing computations and such, always work in a neighborhood with coordinate charts, where everything looks like $\R^n $.
 
-\subsection{Basis for a Tangent Space}
-We know what a basis is for tensors, which comes from a basis for the dual space. What's the basis for the dual space of tangent vectors? Suppose we have a function $f \colon M \to \R$. Then $df (V) := v(f)$. Looking at $\R^n $, we have $(df) \left( \frac{\partial }{\partial x^1} \right) = \frac{\partial f}{\partial x^1}$, and similarly $(df)\frac{\partial }{\partial x^j }= \frac{\partial f}{\partial x^i }=\partial _j f$. So $(df) = \frac{\partial f}{\partial x^j }\phi ^j $. Note that we have $(dx^i ) \left( \frac{\partial }{\partial x^i } \right) = \frac{\partial x^i }{\partial x^j }=\delta ^i _j $. So on a manifold with coordinates $x^1,\cdots , x^n $, the basis for $T_p(M)= \{\frac{\partial }{\partial x^i }\} $. The basis for the dual space $T_p^*(M)= \{dx^i \} $.
+\subsection{A basis for the dual space}
+What's the basis for the dual space of tangent vectors? Suppose we have a function $f \colon M \to \R$. Then we can take the derivative $df(V):=V(f)$, which is a covector field. In $\R^n $, we have $(df) \left( \frac{\partial }{\partial x^1} \right) = \frac{\partial f}{\partial x^1}$, and similarly $(df)\frac{\partial }{\partial x^j }= \frac{\partial f}{\partial x^j }=\partial _j f$. So $(df) = \frac{\partial f}{\partial x^j }\phi ^j $, since for a covector $\alpha $, we have $\alpha _i =\alpha (e_i )$. What happens when we take the derivative of the coordinate function $x^i $? Note that we have 
+\[
+(dx^i ) \left( \frac{\partial }{\partial x^i } \right) = \frac{\partial x^i }{\partial x^j }=\delta ^i _j .
+\] 
+ So on a manifold with coordinates $x^1,\cdots , x^n $, the basis for $T_pM$ is $\left\{\frac{\partial }{\partial x^i }\right\} $, and the dual basis for $T_p^*M$ is $\{dx^i \} $. 
 
-We deal with a particular $2$-covariant tensor all the time, which is the metric. If we have the notion of an inner product at every point, with a metric $g= g_{ij}dx^i  \otimes dx^j $, where $g_{ij}^{(x)}=g(\partial _i  , \partial _j )_x= \langle \partial _i , \partial _j  \rangle _x$. We will spend a ridiculous amount of time talking about this tensor at a point $x$. Let's play around with the manifold of the upper hemisphere, given by $\{(x,y,z)  \mid  x^2+y^2+z^2=1, \, z>0\} $. Some possibilities for coordinates:
+ \subsection{Applications of the dual basis}
+ Now that we've characterized the bases for the tangent and cotangent spaces, what does a tensor actually look like? Consider a $(2,3)$-tensor $T(x)=T_{ijk}^{\ell m}(x)\frac{\partial }{\partial x^{\ell}}\otimes \frac{\partial }{\partial x^m}\otimes dx^i \otimes dx^j \otimes dx^k$, where $T_{ijk}^{\ell m}=T(dx^{\ell},dx^m,\partial _i ,\partial _j ,\partial _k)$. Once more: covariant is how many down indices you have, contravariant is how many up indices you have\footnote{Dr.\ Sadun has been doing things the other way around (he says he can never keep it straight), but I feel like the covectors and vectors should be in this order.}. Fortunately we don't work with $5$-tensors very often, but we do deal with a particular $2$-covariant tensor all the time, which is the metric. 
+
+ We are interested in doing geometry, so we need some way to measure lengths on a vector space. If we have the notion of an inner product at every point, then we have a metric $g= g_{ij}dx^i  \otimes dx^j $, where $g_{ij}^{(x)}=g(\partial _i  , \partial _j )_x= \langle \partial _i , \partial _j  \rangle _x$. We will spend a ridiculous amount of time talking about this tensor at a point $x$. In $\R^n $ this inner product is just $\delta^i _j $, but for a manifold it isn't! Let's play around with the manifold of the upper hemisphere, given by $\{(x,y,z)  \mid  x^2+y^2+z^2=1, \, z>0\} $. Some possibilities for coordinates:
 \begin{enumerate}
     \item $x,y$, where $z= \sqrt{1-x^2-y^2} $,
     \item $\theta, \phi$, where $\theta$ measures the angle from the north pole, and $\phi$ measures the longitude. So $x=\sin \theta \cos \phi$, $y= \sin \theta \sin \phi$, $z = \cos \theta$.
 \end{enumerate}
-How do we find a metric? We know $\frac{dx}{dt}=1$, $\frac{dy}{dt}=0$, and $\frac{dz}{dt}=\frac{-x (dy /dt)-y(dy /dt)}{\sqrt{1-x^2-y^2} }$. So we get the vectors $(1,0, -\frac{x}{z}), (0,1, -\frac{y}{z})$. So $g_{11}=1+ \frac{x^2}{z^2}=1+ \frac{x^2}{1-x^2=y^2}=\frac{1-y^2}{1-x^2-y^2}$, $g_{12}=\frac{xy}{z^2}=\frac{xy}{1-x^2-y^2}$, $g_{21}=g_{12}, g_{22}=\frac{1-x^2}{1-x^2-y^2}$.
+How do we find a metric? We have $\partial _x=(1,0,-x /z)$, $\partial _y=(0,1,-y /z)$. So 
+\begin{align*}
+    g_{11}&=1+ \frac{x^2}{z^2}=1+ \frac{x^2}{1-x^2-y^2}=\frac{1-y^2}{1-x^2-y^2},\\
+    \underset{=g_{21}}{g_{12}} &=\frac{xy}{z^2}=\frac{xy}{1-x^2-y^2},\\
+    g_{22}&=1+\frac{y^2}{z^2}=\frac{1-x^2}{1-x^2-y^2}.
+\end{align*}
+These are, of course, functions of $x$ (as a point). A perfectly reasonable question to ask now would be ``what is $\partial g_{ij}/\partial x^k$''? Since we now have the metric as a function of the coordinates, we can ask at what rate does it change. Now lets move onto spherical coordinates. We have 
+\begin{align*}
+    \frac{dx}{dt}&=\cos \theta \cos \phi \frac{d\theta}{dt}-\sin \theta \sin \phi \frac{d\phi}{dt},\\
+    \frac{dy}{dt}&=\cos \theta \sin \phi \frac{d\theta}{dt}+\sin\theta \cos \phi \frac{d\phi}{dt},\\
+    \frac{dz}{dt}&=-\sin \theta \frac{d\theta}{dt}.
+\end{align*}
+\[
+    \frac{\partial }{\partial \theta}=\left( \cos \theta \cos \phi, \cos \theta \sin \phi, -\sin \theta \right) ,\quad \frac{\partial }{\partial \phi}=\left( -\sin \theta \sin \phi, \sin\theta \cos \phi,0 \right) .
+\] So
+\begin{align*}
+    g_{11}&=\cos ^2 \theta \cos ^2 \phi + \cos ^2 \theta \sin ^2 \phi + \sin ^2 \phi=\cos ^2 \theta+\sin ^2 \theta=1,\\
+    \underset{=g_{21}}{g_{12}} &=0,\\
+    g_{22}&=\sin ^2 \theta \sin ^2 \phi+ \sin ^2 \theta \cos ^2 \phi=\sin ^2 \theta.
+\end{align*}
+This makes sense because as you vary $\theta$, the rate of change down the sphere is 1, or you're moving with speed 1. This basis is nice and orthogonal, but it's not orthonormal. If we consider the basis $\{\partial _{\theta}, (1 /\sin ^2(\theta) \partial _{\phi}\} $, then we get an orthonormal basis. The problem is, there is no set of coordinates that satisfies that the expression is exactly the derivative with respect to the coordinates. It's kind of magic that our basis in $\R^n $ is both orthonormal, and consists of the derivatives of the coordinates.
 
-Now lets move onto spherical coordinates. This is a bunch of trig derivatives, look at the recorded lecture in your free time.
+\subsection{Vector fields and vector flows}
+\begin{quote}
+    \emph{When you see a new vector field, you should ask yourself ``what does the flow look like?''} 
+\end{quote}
+Every time we have a vector field, it induces a \textbf{flow}. Suppose we have a vector field on a manifold. Given a point, we can find a curve that follows the vector field: that is, we can find a curve $\{\gamma (t)\mid \gamma (0)=p, \ d\gamma /dt=V(\gamma (t))\} $. Moving along these flow lines gives us a \emph{flow}, a way to turn a point at time $t=0$ into a point at a later time. We denote this $\Phi_t^V(p)$, which is what we get when we start at a point $p$ and flow along a vector field $v$ for time $t$. Let's look at some simple vector fields and figure out what their flows are in $\R^2$. 
+\begin{enumerate}[label=(\roman*)]
+    \item If $V(x)=\partial _{x^1}$, then $\Phi_t^v(x,y)=(x+t,y)$. Similarly, for $W=\partial _{x^2}$, $\Phi_t^W(x,y)=(x,y+t)$.
+    \item For $X(x)=x^1\partial_1+x^2\partial_2  $, our flow is given by $\Phi^X_t(x,y)=e^t(x,y)$. Note that the definition of flow sets up a differential equation, and the one we are solving right now is $dx^1/ dt=x^1,\ dx^2 /dt=x^2$.
+    \item Say $Y(x)=x^1\partial_2-x^2\partial_1 $. This is rotation at a constant speed, since we're solving the differential equations $dx^1 /dt=-x^2$, $dx^2 /dt=x^1$. 
+\end{enumerate}
+Recall that a vector field is a derivation. Suppose $V$ and $W$ are vector fields. If we have a function $f \colon M \to \R$, what kind of object is $W(f)$? It's also a function $M\to \R$, since the derivative of a function is a function. So is $V(W(f))$, and so on. What is $V \circ W$? It's not a vector field, but a second order differential operator, since we're taking second derivatives. 
+
+We claim that $V(W(f))-W(V(f))$ is a \emph{first order} differential operation. Note that $W(f)=w^i \partial _i f$, so 
+\begin{align*}
+    V(W(f))&=v^j \partial _j (w^i \partial _i f)\\
+           &=v^j (\partial _j w^i )\partial _i f+v^j w^i \partial _j \partial _i f.\\
+    W(V(f))&=w^i \partial _i (v^j \partial _j f)\\
+           &=w^i (\partial _i v^j )\partial _j f+w^i v^j \partial _i \partial _j f.
+\end{align*}Taking the different of the two eliminate the second order term, since mixed partial derivatives commute. So \[
+V(W(f))-W(V(f))=v^i \partial _j w^i (\partial _i f)-w^i (\partial _i v^j )\partial _j f=(v^j \partial _j w^i -w^i \partial _j v^i )\partial _i f.
+\] This is called the \textbf{Lie bracket}, and is denoted $[V,W]$. It also goes by the \emph{commutator}, or the \emph{Lie derivative} $\mathcal{L} _V(W)$. What do these brackets mean? If we have \emph{any} coordinates, $[\partial _i ,\partial _j ]=0$. This tells us that if we have two vector fields with a nonzero Lie bracket, then they cannot be derivatives with respect to coordinates. It's not that you haven't thought up of the right coordinates, but that there \emph{are no coordinates} that they're derivatives of. If you recall the flows $\Phi^V_t,\Phi^W_t$ above, they actually commute!
+
+A basic question when you have two vector fields is what happens if you start at a point $p$ and flow for time $v$ according to $V$, then you flow for time $W$ along time $s$? Or better yet, you flow backwards along $V$ with time $-t$, and backwards along $W$ with time $-s$. 
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+{} \arrow[ddd, "\Phi^W_{-s}"'] &                                                                    &  & {} \arrow[lll, "\Phi^V_{-t}"'] \\
+                               &                                                                    &  &                                \\
+                               &                                                                    &  &                                \\
+{}                             & p \arrow[rr, "\Phi^V_t"'] \arrow[l, "{\Phi^{[V,W]}_{st}}", dotted] &  & {} \arrow[uuu, "\Phi_s^W"]    
+\end{tikzcd}
+\end{figure}
+If the bracket is zero, you come back to where you started, and if it's nonzero, you don't. This bracket measures how far off you are! Showing that this is true is the homework.
+
+\subsection{The gradient}
+Suppose we have some $f \colon M \to \R$, then $df=\partial_1 f dx^1+\partial_2fdx^2+\cdots   $. This isn't what a gradient is, it's the vector that has the property that $\nabla f \cdot v=D_vf=v(f)$, while $df(v)=v(f)$. The different is the \emph{inner product}. We have $g(\nabla f,v)=df(v)$, or $g(\nabla f, \cdot )=df$. The differential is what you get when you take the gradient and lower it an index. If you're working in $\R^n $ this doesn't do anything, the metric is just the identity. However in more interesting coordinates, it does do something. While $df_j $ is a \emph{covector}, the \textbf{gradient} $\nabla f^i $ is a \emph{vector}. So \[
+    df_j =g_{ij}(\nabla f)^i ,\quad \text{or} \quad(\nabla f)^i =g^{ij}(df)_j \ \text{\small (note the inverse metric.)} 
+\] The differential $df$ is defined without reference to any inner product. It's a perfectly good covector field (or $1$-form) on its own. The gradient is what you get when you raise the index of $df$.
+

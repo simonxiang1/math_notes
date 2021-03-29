@@ -1,0 +1,85 @@
+\section{February 11, 2021} 
+
+\subsection{More on geodesics in hyperbolic space}
+Last time we were talking about geodesics in hyperbolic space. We have seen that vertical lines are geodesics, and an element $\left( 
+\begin{smallmatrix}
+    a& b \\ c & d
+\end{smallmatrix}\right) $ acting on the line sends it to an arc starting at $a /c$ and ending at $b /d$ WLOG. Then shifting by isometries, we can assume that $a / c= -b /d$, which implies $c /d=-a /b$. So 
+\[
+\begin{pmatrix}
+    a & b \\ c & d
+\end{pmatrix}\colon iy \to \frac{b+aiy}{d+ciy}= \frac{b \left( 1+\frac{a}{b}iy \right) }{d\left( 1+ \frac{c}{d}iy \right) }.
+\] Since the expresssions in the numerator and denominator are conjugate, the image of $iy$ is a point of constant magnitude $b /d$, which implies that geodesics are indeed parts of a circle centered at the $x$-axis. Now that we know what geodesics are, this tells us a lot of things. Consider a point $(a,0)$, with our geodesics a circle of radius $R$. Parametrize by $\theta$ where $x=a+R \cos \theta$, $y=R \sin \theta$, $dx=-R \sin \theta d\theta$, $dy=R \cos \theta d \theta$, with metric \[
+ds^2= \frac{dx^2+dy^2}{y^2}= \frac{R^2 d \theta ^2}{R^2 \sin ^2 \theta}= \frac{d\theta ^2}{\sin ^2 \theta} \ \implies \ ds = \pm \frac{d\theta}{\sin \theta}.
+\] The $\pm$ sign stems from the fact that when calculating distance we can go around a circle either clockwise or counterclockwise. Integrating gives us $S=\pm \ln | \csc \theta + \cot \theta|=\pm \ln | R /y+ (x-a) /y|=\pm \ln |(R+x-a) /y|$. This diverges logarithmically as $x\to a+R$, $y \to 0$, which is expecting since this is an isometry of the vertical line. As $x \to a-R$ and $y \to 0$, both factors approach zero so it's a little trickier. However you can rewrite this as $\ln |y / (R-x-a)|$, and so the denominator approaches zero as expected and this also diverges logarithmically. So because of our metric, this arc is infinitely long on both sides.
+
+Given two points $p,q \in \H^2$, we want to find the semicircle going through $p$ and $q$. To do this, draw a line through $p$ and $q$, then the perpendicular bisector will hit the $x$ axis at a point an equal distance $R$ from both $p$ and $q$. This forms a triangle, and now you can just compare values of $\csc \theta, \cot \theta$, etc. So we have just figured out the \emph{entire} metric in hyperbolic space, since given any two points we can calculate the distance between them.
+
+\subsection{Triangles in hyperbolic space}
+Recall from last time that the sum of angles $\alpha ,\beta $ of an ideal triangle is $\pi -\theta$, and $\text{Area} \ =\theta$. How do we know this? We have \[
+    \iint_A \frac{dx\, dy}{y^2}=\int  \, dx \int_{y(x)}^{\infty} \frac{1}{\widetilde y^2} \, d\widetilde y=\int \frac{dx}{y} = \int  \frac{dx}{y} = \int \frac{R \sin \theta\, d\theta}{R \sin \theta} =\int  -\, d\theta=-\theta.
+\]The negative value stems from the fact that we integrate from left to right, while $\theta$ is measured from right to left. So $\alpha +\beta =\pi - \text{Area},$ a surprisingly nice result when compared to our weird expression for length. To find a similar expression for \emph{actual} triangles, say $\alpha ,\beta ,\gamma $ are the angles of a triangle $T$ where $\beta ,\gamma $ lie on a semicircle. Then the complement of $\alpha $ is $\pi -\alpha $, and denote the angle of the ideal triangle corresponding to $\beta $ by $\delta $.\footnote{This is for triangles with two vertices $\alpha, \gamma $ positioned directly on top of each other, but you can write any triangle this way up to isometry.} Let $B$ denote the ideal triangle formed by $\pi -\alpha $ and $\delta $. We have 
+\begin{align*}
+    \pi -\alpha +\delta &= \pi - (\text{Area of } \ B)\\
+    \delta +\beta +\gamma &=\pi -(\text{Area of} \ B)-(\text{Area of} \ T)\\
+    \alpha +\beta +\gamma -\pi &= -\text{Area} (T)\\
+    \Aboxed{ \pi-(\alpha +\beta +\gamma )&=\text{Area}(T).}
+\end{align*}Wow! We figured out the area of an arbitrary triangle just by using symmetry, no messing with Christoffel symbols or curvature or anything.
+\begin{cor}
+    The area of a triangle is always less than $ \pi.$
+\end{cor}
+To visualize this result, imagine a triangle with two base points infinitely close to the $x$-axis, and a third point all the way out in the $y$ direction (say $y=3\times 10^{45}$). Then by our metric $ds ^2=(dx ^2+dy^2)/ y^2$, as $y$ becomes very large the two ``parallel'' vertical geodesics stemming from our two basepoints get very close. Likewise, the parallel lines get infinitely close to the endpoints of the semicircle connecting the basepoints. So just imagine a triangle in the Poincare disk model with infinitely tight pinched edges.
+
+This is in contrast with the sphere, where a triangle has bloated edges. There, a triangle can even have three right angles. This completes our tour of hyperbolic space, and chapter three of the book! Now we move on to talking about geodesics.\footnote{The subtitles for the recorded lecture always say ``genetics'' instead of geodesics, and I find it hilarious that we so often abruptly switch from talking about math to talking about biology.}
+
+\subsection{Geodesics as energy minimizing curves}
+For a Riemannian manifold $(M,g)$, let $\gamma $ be a path taking a point $p \in M$ to a point $q \in M$, where $\gamma (0)=p$ and $\gamma (t)=q$. Recall that $L(\gamma )=\int \sqrt{g(\dot \gamma ,\dot \gamma )}  \, dt$. The inner product of velocity with itself is velocity squared, taking the square root gives speed and integrating WRT time gives length. Our previous notion of geodesics was thinking about them as length minimizing curves. Now consider the \textbf{energy} of a path, where \[
+    E(\gamma )=\int g(\dot \gamma ,\dot \gamma ) \, dt.
+\] We will study curves that minimize energy and see what they look like. In one dimension, consider $M=(\R,dx ^2)$. We want a path from $0$ to $L$ in time $T$, that is, $\gamma (0)=0,\, \gamma (T)=L$, and for this path to minimize $\int_{0}^{T} (d \gamma  /dt)^2 \, dt=\int_{0}^{T} (dx /dt)^2 \, dt$. We expect this to be the path with constant velocity, since any other path gets traversed faster, ergo more energy.
+
+\begin{namedthing}{The Cauchy-Schwarz inequality for $L_2$ space} 
+    Recall that Cauchy-Schwarz tells us that $\|\langle u,v \rangle \|\leq \langle u,u \rangle \cdot \langle v,v \rangle $. Applying this to the norm on the space of square-integrable functions (where $\langle f,g \rangle =\int _A \overline{f(x)}g(x) \, dx$) gives \[
+       \left| \int_{\R^n }^{}f(x) \overline{g(x)}  \, dx \right| ^2 \leq \int_{\R^n }^{} |f(x)|^2  \, dx \int_{\R^n }^{} |g(x)|^2  \, dx.
+   \] 
+\end{namedthing}
+Now that we know this very useful inequality, note that
+\begin{align*}
+    T E(\gamma )&=\int_{0}^{T} 1^2 \, dt \int_{0}^{T} \left( \frac{dx}{dt} \right) ^2 \, dt\\
+                &\geq \left( \int_{0}^{T}  \left( 1 \cdot \frac{dx}{dt} \, dt\right)  ^2 \right) =L^2.\\
+    E(\gamma )&\geq \frac{L^2}{T}.
+\end{align*}We have equality precisely when $(dx /dt)$ is a constant. A more elementary argument is that
+\begin{align*}
+    \int \left( \frac{dx}{dt} \right) ^2 \, dt &- \int \left( \frac{dx}{dt}-\frac{L}{T}+\frac{L}{T} \right) ^2 \, dt\\
+                                               &= \int \left( \frac{dx}{dt}-\frac{L}{T} \right) ^2+\underset{=0}{\underbrace{ \frac{2L}{T}\left( \frac{dx}{dt}-\frac{L}{T} \right)} } +\frac{L^2}{T^2} \, dt\\
+                                               &= \int \left( \frac{dx}{dt}-\frac{L}{T}^2 \right)  \, dt+\frac{L^2}{T}.
+\end{align*}You minimize this expression by setting the left integral to zero, or setting $(dx /dt)=L /T$ everywhere. This is essentially the same proof, since proving Cauchy-Schwartz uses a complete the square argument like this. Let us also solve this by using an overkill technique, called calculus of variations. This generalizes and is quite useful, which is why we're demonstrating how to prove this three times over.
+
+\subsection{Calculus of variations}
+Given a function $f(x)$ on $\R^n $, how do you find the minima? We compute $\nabla f$ and set it equal to zero. This may also find maxima and saddle points, but if we're at a minima, it's locally constant. Another way to say this is that $f(\vec x+\delta \vec x)=f(\vec x)+L(\delta \vec x)+O(\delta \vec x)$. We want $L(\delta \vec x)=0$, otherwise we would have a nontrivial change in $f$ to the first order. This linear function $L$ is $\nabla \cdot f,$ or $df$ applied to the change in $x$.
+
+Back to our original problem. We have $x(t),$ where $x(0)=0$ and $x(T)=L$. We change $x(t)$ to $x(t)+\delta x(t),$ and compute $E(X+\delta x)-E(x)=L (\delta x)+O(\delta x^2)$. We throw away the higher order terms, and now we want $L(\delta x)=0$. So 
+\begin{align*}
+    E(x+\delta x)&= \int \frac{d(x+\delta x)^2}{dt} \\
+                 &= \int\underset{=E(x)}{\underbrace{\left( \frac{dx}{dt} \right) ^2}} +2 \frac{dx}{dt}\frac{d(\delta x)}{dt}+\underset{\text{ignore}}{\underset{\text{second order,}}{\underbrace{ {\color{red}\left( \frac{d\, \delta x}{dt} \right) ^2}} }}   \, dt.\\
+\end{align*}
+Then
+\begin{align*}
+    \delta E&= \int 2 \frac{dx}{dt}\frac{d(\delta x)}{dt} \, dt\\
+            &=\underset{\delta (T)=0}{\underset{=0,\ \delta x(0)=0,}{\underbrace{ \left. 2 \frac{dx}{dt}\delta (x) \right| ^T_0}} } - \int 2 \frac{d^2 x}{dt^2}\delta x(t) \, dt,\\
+    \delta E &= - \int 2 \ddot x \delta x\, dt,\quad \frac{\delta E}{\delta x(t)}=-2 \ddot x(t).
+\end{align*} When will this linear function of $\delta x$ be zero? This is true only if $\ddot x=0$. So our solution must have $\ddot x(t)=0, \, \dot x(t)= \text{constant} .$ Since we're going from position 0 to position $L$ over time $T$, we must have $\dot x= L /T$. 
+
+For an arbitrary manifold, consider a path $\gamma $ from $p$ to $q$. How would you minimize $E (\gamma )?$ Geometrically we want to take the shortest path possible: once you go along a path with total length, we basically arrive at the one dimensional problem, where we travel a distance $L$ along time $T$. We do this by going at constant speed $L /T$. So for an energy minizing geodesic, we want to:
+\begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+    \item Minimize length.
+        \item Go at constant speed, given by $\sqrt{g(\dot \gamma ,\dot \gamma )} $.
+\end{enumerate}
+By minimizing energy, we're killing two birds with one stone: we get minimal length for free, while also achieving constant speed. Functionally, minimalizing energy is easier than minimizing length because there's no square root involved.
+
+\subsection{Motivating connections}
+In $\R^n $, you minimize length by requiring $\ddot x=0$ and $\dot x=$ constant. In $S ^2\subseteq \R^3$, we have already determined geodesics to be great circles, so we go around the equator (by sending any point to a pole) at constant speed. Our acceleration points towards the center of the sphere, so $\ddot x \perp T_pS^2$. If you're driving on the sphere, you never turn (acceleration points toward a different $T_pS^2$) and never slow down or speed up (acceleration in the forwards/backwards direction).
+
+In hyperbolic space, what is $\ddot x$? This is a trick question. You know what it means to take a second derivative with respect to coordinates. When we say $\ddot x=0$ in $\R^n $, we really mean $\ddot x_i =0$. Using different coordinates (such as polar), it would not be true that $\ddot r,\theta=0$. This statement that $\ddot x=0$ is coordinate dependent, and in Euclidian space we have these beautiful coordinates to play with. For $S^2$, the acceleration refers to taking the second derivative with respect to coordinates in $\R^3$. 
+
+We don't have these coordinates in hyperbolic space: we have models, but those are all different! To answer this, we'll need to develop a coordinate free way of taking coordinates, to answer the question ``what does $\frac{d}{dt}(\text{vector} )$ even mean?'' We know $\frac{d}{dt}(\text{position} )$ is just a tangent vector. But $\ddot x$ is the derivative of a \emph{tangent vector}, and we take this derivative at different points. Given a vector field on a manifold, what is its derivative? This is what \textbf{connections} are for, along with \emph{covariant derivatives} and \emph{parallel transport}. Given a nice connection, we can ask what the second derivative is, then set the acceleration to zero, and nice things happen. But we need to develop this machinery first.

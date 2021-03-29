@@ -1,0 +1,21 @@
+\section{March 23, 2021}
+\subsection{Calculus of Variations}
+Consider a function $z(t)$, with $z(0)=0, z(2)=0$. We want to minize \[
+    \alpha =\int_{0}^{2} \left( \frac{1}{2}\dot z^2-32z \right)  \, dt.
+\] If $0= \delta \mathcal{L} /\delta z=0$, then since $\delta (\dot z)=\dot{ \left( \delta z \right) }$, we have
+\begin{align*}
+    0=\delta \mathcal{L} &= \int_{0}^{2} \left( \frac{1}{2}2\dot z \delta \dot z-32 \delta z \right)  \, dt\\
+                       &= \int_{0}^{2} \left( \dot z \dot{\left( \delta z \right) } -32\delta z \right)  \, dt\\
+                       &=\dot z \delta z \big|_0^2+\int_{0}^{2}(-\ddot z-32 )\delta z \, dt\\
+                       &=-\int_{0}^{2} (\ddot z+32)\delta z \, dt.
+\end{align*} We conclude that $\ddot z=-32$. Combining this with the fact that $z(0)=0$ and $z(2)=0$, {\color{red}todo:missed something about hamiltonian mechanics, lagrangian.}. 
+
+In general, if you try to minimize the integral $\mathcal{L}=\int_{0}^{T} \frac{1}{2}m\dot x^2-V(x) $ (where $V(x)$ is some potential function), we get 
+\begin{align*}
+    \delta \mathcal{L} &= \int \left( m\langle \dot x,\dot{(\delta x)}   \rangle -\langle \nabla V,\delta x \rangle  \right)  \, dt\\
+                       &=\int \langle -m\ddot x-\nabla v,\delta x \rangle  \, dt \quad \implies \\
+    m\ddot x&=F?
+\end{align*}
+To make this more precise, consider a family of function $z_s(t)$, where $s \in (-\varepsilon ,\varepsilon ) .$ What we mean by ``family of functions'' is that this is some function $Z(s,t)$, with the rule that $z_s(0)=z_s(2)=0$. For each $s$, compute \[
+    \mathcal{L} (s)=\int_{0}^{2} \left( \frac{1}{2}\left( \dot z_s(t) \right) ^2-32 z_s(t) \right) \, dt.
+\] {\color{red}todo:missed a computation} 

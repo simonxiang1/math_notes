@@ -1,63 +1,77 @@
+\begin{note}
+    The easiest way to remember why a $(k,\ell)$-tensor eats $k$ covectors and $\ell$ tensors is by first thinking of a tensor as an element of $\bigotimes_k V\otimes \bigotimes _{\ell} V^*$, then taking the dual to realize it as a multilinear map on $(V^*)^{\times k}\times V^{\times \ell}$. Also, a covariant tensor eats vectors because a covector does.
+\end{note}
 \section{January 21, 2021}
 
-\subsection{A Basis for Tensors}
-Let's continue the algebra from yesterday. Recall a tensor takes two two vectors as input, denoted $T(v,w)=T(v^i e_i , w^j e_j )=v ^i  w ^j T (e_i , e_j )=\left( \sum _{i,j} \right) T_{ij}v^i w^{ij}$. If $V=\R^2$, what's an example of a covariant $2$-tensor? The standard inner product $\langle v \mid w \rangle =v^1w^1+v^2w^2$ works. Using the notation $g(v,w)$, we have $g_{11}=g(e_1,e_1)=1, g_{12}=0, g_{21}=0, g_{22}=1$. In general, for an inner product $g_{ij}=g_{ij}$, and if you think of as a matrix, this will be a positive definite matrix, or $g_{ij}v^i v^j \geq 0$ if $v\neq 0$ (all eigenvectors are positive). For example, the matrix \[
+\subsection{A basis for tensors}
+Let's continue the algebra from yesterday. Recall a tensor takes two two vectors as input, denoted $T(v,w)=T(v^i e_i , w^j e_j )=v ^i  w ^j T (e_i , e_j )=\left( \sum _{i,j} \right) T_{ij}v^i w^{j}$. If $V=\R^2$, what's an example of a covariant $2$-tensor? The standard inner product $\langle v \mid w \rangle =v^1w^1+v^2w^2$ works. Using the notation $g(v,w)$, we have $g_{11}=g(e_1,e_1)=1, g_{12}=0, g_{21}=0, g_{22}=1$. In general, for an inner product $g_{ij}=g_{ij}$, and if you think of it as a matrix, this will be a positive definite matrix, or $g_{ij}v^i v^j \geq 0$ if $v\neq 0$ (a symmetric matrix with all eigenvectors are positive). In general, you can build an inner product out of a symmetric positive definite matrix. For example, the matrix \[
 \begin{pmatrix}
     2 & 1 \\ 1 & 1 
 \end{pmatrix} \quad \text{with positive eigenvectors} \quad
 \begin{bmatrix}
     \frac{1\pm \sqrt{5} }{2}\\ 1
 \end{bmatrix}
-\] works. Another interesting tensor is the determinant $A(v,w)=v^1w^2-v^2w^1=-A(w,v)$. In this case, $A_{12}=-A_{21}=1$ and $A_{11}=A_{22}=0$.
+\] works. Another interesting tensor is the determinant $A(v,w)=v^1w^2-v^2w^1=-A(w,v)$\footnote{You can also call this the area form, or the symplectic form.}. In this case, $A_{12}=-A_{21}=1$ and $A_{11}=A_{22}=0$.
 
-The natural next question is: what is the space of covariant $2$-tensors on $\R^2$? This is a vector space, what would the basis be? It's denoted $\phi^i \otimes \phi ^j (e_k, e_{\ell})$. Given two tensors $S(v_1,\cdots ,v_n )$ and $T(w_1,\cdots ,w_m)$, we define $S \otimes T (v_1,\cdots ,v_n , w_1,\cdots ,w_m):= S(v_1,\cdots ,v_n )T(w_1,\cdots ,w_m)$. So $\phi ^i \otimes \phi ^j  (e_k, e_{\ell})=??$ {\color{red} missed this portion}. So $T=T_{ij}\phi ^i  \otimes \phi ^j $, and $T(e_k,e_{\ell})$.
+%It's denoted $\phi^i \otimes \phi ^j (e_k, e_{\ell})$. Given two tensors $S(v_1,\cdots ,v_n )$ and $T(w_1,\cdots ,w_m)$, we define $S \otimes T (v_1,\cdots ,v_n , w_1,\cdots ,w_m):= S(v_1,\cdots ,v_n )T(w_1,\cdots ,w_m)$. So $\phi ^i \otimes \phi ^j  (e_k, e_{\ell})=??$ {\color{red} missed this portion}. So $T=T_{ij}\phi ^i  \otimes \phi ^j $, and $T(e_k,e_{\ell})$.
+The natural next question is: what is the space of covariant $2$-tensors on $\R^2$? This is a vector space, what would the basis be? A natural basis would be the tensors $\phi^i \otimes \phi^j $. The tensor symbol in the middle is the \textbf{tensor product} : if $S(v_1,\cdots ,v_n )$ and $T(w_1,\cdots ,w_n )$ are covariant tensors (makes life simpler), then \[
+    S\otimes T (v_1,\cdots ,v_n ,w_1,\cdots ,w_n ):=S(v_1,\cdots ,v_n )T(w_1,\cdots ,w_n ).
+\]With this in mind, applying our basis tensor to $(e_k,e_{\ell})$ gives us $\phi^i \otimes \phi^j (e_k,e_{\ell})=\phi^i (e_k)\cdot \phi^j (e_{\ell})=\delta^i _k\delta^j _{\ell}$. This gives us 1 if you feed it $(e_i ,e_j )$, and 0 if you feed it anything else. Since these form a basis for the sapce of covariant $2$-tensors, our claim is that you can write any tensor $T$ in the form $T=T_{ij}\phi^i \otimes \phi^j $. Then $T(e_k,e_{\ell})=T_{k\ell}$ by definition.
 
-Consider the inner product $g$, we can think of it as taking a vector and turning it into a covector. We have $g(v,\cdot )(v)\neq 0$, so $g$ induces a map onto the dual space $g \colon V \to V^*$, which is an isomorphism. So $\alpha =g(v,\cdot ), \alpha _j =g_{ij}v^i $. You can think of this as lowering the indices. The matrix that \emph{raises} the indices is the inverse matrix, denoted $g^{ij}$, where $g^{ij}g_{jk}=\delta^i _k$.
+%Consider the inner product $g$, we can think of it as taking a vector and turning it into a covector. We have $g(v,\cdot )(v)\neq 0$, so $g$ induces a map onto the dual space $g \colon V \to V^*$, which is an isomorphism. So $\alpha =g(v,\cdot ), \alpha _j =g_{ij}v^i $. You can think of this as lowering the indices. The matrix that \emph{raises} the indices is the inverse matrix, denoted $g^{ij}$, where $g^{ij}g_{jk}=\delta^i _k$.
 
-Now that we have a basis for $2$-tensors, what about a basis for $\tau ^{k,\ell}$ (space of tensors)? It's going to be \[
-\{\phi ^{i_1}\otimes \phi ^{i_2}\otimes \cdots \otimes \phi ^{i_k}\otimes e_{j_1}\otimes \cdots \otimes _{j_{\ell}}\} .
-\] So $T=T_{i_1\cdots i_k}^{j_1\cdots j_{\ell}}\phi ^{i_1}\otimes \cdots \otimes e_{j_{\ell}}=T(e_{i_1},\cdots, e_{k}, \phi^{j_1},\cdots ,\phi ^{j_{\ell}})$ {\color{red} this may be wrong}
+Let us return to the inner product. If we only feed it one vector, then $g(v,\,)$ is waiting for a vector to spit out a number. This is just a covector, which gives an alternate use for the inner product besides taking two vectors and spitting out a number. This map is injective, since if it had a kernel (that is, $g(v,\,)=0$), then $g(v,\,)(v) \neq 0$, since it's positive. Then $g$ induces a map $g \colon V \to V^*$ an isomorphism: if $\alpha =g(v,\,)$, then $\alpha _j =g_{ij}v^i $. We call this \emph{lowering an index}: we take something with an up index, multiply it through $g_{ij}$, resulting in a down index. The inverse that \emph{raises} indices is the inverse matrix $g^{ij}$, and $g^{ij}g_{jk}=\delta^i _k$.
 
-\subsection{Trace of a Matrix}
-Now let's talk about the trace of a matrix, defined as $\operatorname{Tr}(M)=M^i _i $. If we change our basis by $\widetilde e_i =A_i^j e_j $, recall that this gives rise to a dual basis $\widetilde \phi ^i =B_j ^i  \phi^j $. In our new basis, $\widetilde M^i _j =B^i _k A_j ^{\ell}M^k_{\ell}=B^i _k M^k _{\ell}A^{\ell}_j $, this is kind of like $PMP ^{-1}$ that we did in linear algebra. But this doesn't really work with tensors, what about $2,3,4,5$-tensors? That's why we're doing it this way.
+Now that we have a basis for $2$-tensors, what about a basis for $\mathcal{T} ^{k,\ell}$ (space of tensors)? It's going to be \[
+    \{e_{i_1}\otimes e_{i_2}\otimes \cdots \otimes e_{i_k}\otimes \phi^{j_1}\otimes \phi^{j_2}\otimes \cdots \otimes \phi^{j_{\ell}}\} 
+\] So a tensor $T$ can be written as $T=T^{i_1\cdots i_k}_{j_1\cdots j_{\ell}}e_{i_1}\otimes \cdots \otimes \phi^{j_{\ell}}.$ Furthermore, to calculate the coefficients, apply your tensor to the basis vectors to get $T^{i_1\cdots i_k}_{j_1\cdots j_{\ell}}=T(\phi^{i_1},\cdots ,\phi^{i_k},e_{j_1},\cdots ,e_{j_{\ell}})$.
 
-We have the trace $\operatorname{Tr}=\widetilde M_i ^i =B^i _k M^k_{\ell}A_i ^{\ell}$. But $B^i _k A_i ^{\ell}=\delta ^{\ell}_k$, since these two are inverse matrices. So $\operatorname{Tr}=\delta _{\ell}^k M^k_{\ell}=M_k^k$, which is the old definition of trace. We can apply this to higher rank tensors: suppose we have a tensor that takes in a covector and two vectors, denoted $T(\alpha ,v,w)$. Given a tensor $S(w)=T(\phi ^i , e_i, w)$, so $S_i =T^j  _{ji}$. What happens if you change basis, that is, is $T(\phi ^i , e_i , w)=T( \widetilde \phi ^i , \widetilde e_i , w)$?
+\subsection{Trace of a matrix}
+Now let's talk about the trace of a matrix, defined as $\operatorname{Tr}(M)=M^i _i $. This is actually independent of which basis we pick. If we change our basis by $\widetilde e_i =A_i^j e_j $, recall that the dual basis transforms accordingly by $\widetilde \phi ^i =B_j ^i  \phi^j $, where $B_j ^i $ is an inverse for $A_i^j $. In our new basis, $\widetilde M^i _j =B^i _k A_j ^{\ell}M^k_{\ell}=B^i _k M^k _{\ell}A^{\ell}_j $, this is kind of like $PMP ^{-1}$ that we did in linear algebra. But this doesn't really work with tensors, what about $2,3,4,5$-tensors? That's why we're doing it this way.
+
+We have the trace $\operatorname{Tr}=\widetilde M_i ^i =B^i _k M^k_{\ell}A_i ^{\ell}$. But $B^i _k A_i ^{\ell}=\delta ^{\ell}_k$, since these two are inverse matrices. So $\operatorname{Tr}=\delta _{\ell}^k M^k_{\ell}=M_k^k$, which is the old definition of trace. We can apply this to higher rank tensors: suppose we have a tensor that takes in a covector and two vectors, denoted $T(\alpha ,v,w)$. Define a tensor $S(w)=T(\phi ^i , e_i, w)$, so $S_i =T^j  _{ji}$. What happens if you change basis, that is, is $T(\phi ^i , e_i , w)=T( \widetilde \phi ^i , \widetilde e_i , w)$?
 \[
 \langle breakout \ rooms \rangle 
-\] For fixed $w$, let's define a new tensor, $U(\alpha ,v)=T(\alpha ,v,w)$. Let's take the trace of this, we've already shown that the trace of a $(1,1)$-tensor doesn't depend on basis. So the $w$ comes along for the ride. This is a slick solution, since $\operatorname{Tr}U$ is well defined.
+\] We want to show that $T^i _{ij}w^j =\widetilde T^i _{ij}\widetilde w^j $. For fixed $w$, let's define a new tensor, $U(\alpha ,v)=T(\alpha ,v,w)$. Let's take the trace of this, we've already shown that the trace of a $(1,1)$-tensor doesn't depend on basis. So the $w$ comes along for the ride. This is a slick solution, since $\operatorname{Tr}U$ is well defined. Once you know that the trace is defined for $(1,1)$-tensors, you know it's defined for any $(n,n)$-tensor, where you pair one up index with one down index.
 
-\subsection{Tangent Vectors}
-Enough about about tensors. Now let's talk about manifolds. Usually the vector space at a point $p$ we care about is the tangent space $T_p(M)$ at that point. What's a tangent vector? In $\R^n $, consider a point $p$: what is a tangent vector there? 
+\subsection{Tangent vectors}
+Enough about about tensors. Now let's talk about manifolds. Usually the vector space at a point $p$ we care about is the tangent space $T_p(M)$ at that point. The object of importance is not a tensor at a point, but rather vector fields, covector fields, tensor fields, etc. The coefficients of such tensors are going to be functions of where you are, or the coordinates you're using. 
+
+In $\R^n $, consider a point $p$: what is a tangent vector there? There are several definitions, and they're all equivalent:
 \begin{enumerate}
     \item An arrow, add them head to tail.
     \item An element of $\R^n $, a list of $n$ numbers. This is pretty much an arrow, just take the coefficients and impose them on the standard basis.
-    \item The equivalence class of curves $\gamma (t)$ with $\gamma (0)=p$.
-    \item Velocity. Consider all possible parametrized curves through a point, and identify all curves with the same velocity at time zero. So we mean the equivalence class of curves $\gamma (t)$ with $\gamma (0)=p$. The beauty of this third definition is it makes sense on any manifold. So we can sonsider the curves going through this point, and take them up to equivalence.
-    \item Directional Derivative. For $f \colon \R^n  \to \R$, we can take $\left. \frac{d f\cdot \gamma (t)}{dt} \right| _{t=0}=\left. \frac{d\gamma ^i }{dt} \right|_{t=0}\left. \frac{\partial f}{\partial x^i } \right| _p $. The partial derivaties $\{\partial_1,\cdots ,\partial_n  \} $ gives a basis for this vector space.
+    \item Velocity. Consider all possible parametrized curves through a point, and identify all curves with the same velocity at time zero. So we mean the equivalence class of curves $\gamma (t)$ with $\gamma (0)=p$\footnote{Since you consider the curves up to equivalence, a straight line is usually the one you visualize, since it's the simplest and they're all equivalent. Of course, you can choose a wigglier curve if you want.}. The beauty of this third definition is it makes sense on any manifold. So we can consider the curves going through this point, and take them up to equivalence.
+    \item Directional Derivative. This is pretty much the same thing as velocity, since for $f \colon \R^n  \to \R$, we can take $\left. \frac{d f\cdot \gamma (t)}{dt} \right| _{t=0}=\left. \frac{d\gamma ^i }{dt} \right|_{t=0}\left. \frac{\partial f}{\partial x^i } \right| _p $. The partial derivatives $\{\partial_1,\cdots ,\partial_n  \} $ gives a basis for this vector space.
                 \item Derivations. A derivation at $p$ is a map $D \colon C^{\infty}(\R^n ) \to \R$ with the following properties:
                     \begin{enumerate}[label=(\arabic*)]
                         \item $D(af+bg)=aD(f)+b D(g)$,
-                        \item $D(fg)=f(p)D(g)+D(f)g(p)$.
+                        \item $D(fg)=f(p)D(g)+g(p)D(f)$.
                     \end{enumerate}
                     The partial derivatives $\partial _i |_p$ are derivations.
 \end{enumerate}
+This idea of thinking about tangent vectors as derivations carries over very nicely to abstract manifolds, which is why we care. Understanding the ring of smooth functions means we understand what a tangent vector is, coordinate-free (we aren't anchored to $\R^n $). 
+
+The directional derivative is a small step forward from velocity, which is a small step forward from the n\"aive arrow. Our goal is to show that the scary abstract idea of a derivation is just a small step forward from the directional derivative, and to do this, we show that they both use the same basis.
 \begin{claim}
     We have $\{\partial _i \} $ a basis for the set of derivations at $p$, denoted $\mathcal{D} _p(\R^n )$.
 \end{claim}
-This idea of thinking about tangent vectors as derivations carries over very nicely to abstract manifolds, which is why we care. We want to show a couple of things:
+We want to show a couple of things:
 \begin{enumerate}
-    \item To show $D( \text{constant} )=0$, note that $D(cf)=cD(f)=cD(f)+f(p)D(c)$, so we need $D$ of a constant to be zero.
+    \item To show $D( \text{constant} )=0$, note that $D(cf)=cD(f)=cD(f)+f(p)D(c)$, so we need $D(\text{constant} )=0$.
     \item If $f(p)=g(p)=0$, then $D(fg)=0$, this follows from the product rule.
     \item Taylor series, we have $f(x)=f(p)+ \partial _i f(p)(x^i -p^i )+$ higher order terms. Then $D(f)=0+\partial_1f(p)D(x^i )+0 =D^i  \partial_1f(p) $, where $D=D^i  \partial _i $. 
 \end{enumerate}
-This works for analytic functions. There is some cheating going on, but we don't need the entire Taylor series for the most part. So every derivation is a linear combination of partial derivatives. From now on, think of vectors as a combination of partial derivatives, or inducing curves along a vector field.
+This works for analytic functions. There is some cheating going on, but we don't need the entire Taylor series for the most part\footnote{See my notes in \texttt{independent\_reading/differentiable\_manifolds} for more info (or Tu's book).}. So every derivation is a linear combination of partial derivatives. From now on, think of vectors as a combination of partial derivatives, or inducing curves along a vector field.
 
-A vector field $V^i (x) \frac{\partial }{\partial x^i }$ is a bunch of coefficients in combination with the basis vectors of partial derivatives. How do we change coordinates here? We do this by the chain rule, that is, \[
+\subsection{Vector fields}
+
+A vector field $v^i (x) \frac{\partial }{\partial x^i }$ is a bunch of coefficients in combination with the basis vectors of partial derivatives. How do we change coordinates here? We do this by the chain rule, that is, \[
 \text{for} \ \{x\} \longleftrightarrow \{y\} \quad \text{we have} \quad \frac{\partial }{\partial y^i }= \frac{\partial x^j }{\partial y^i }\frac{\partial }{\partial x^j }.
 \] 
-Let's try this in $\R^2$ with $(r, \theta) \leftrightarrow (x,y)$. For $e_1= \frac{\partial}{\partial x}, e_2=\frac{\partial}{\partial y} $ and $\widetilde e_1= \frac{\partial }{\partial r}, \widetilde e_2 \frac{\partial }{\partial \theta}$, recall that $r = \sqrt{x^2+y^2} $, $\theta=\tan ^{-1} \left(\frac{y}{x}\right)$, and $x=r \cos \theta$, $y=r \sin \theta$. So \[
+You can think of $\partial x^j / \partial y^i $ as the change of basis matrix $A^j _i $. The inverse matrix $B^i_j $ is just $\partial  y^i /\partial x^j $. Let's try this in $\R^2$ with $(r, \theta) \leftrightarrow (x,y)$. For $e_1= \frac{\partial}{\partial x}, e_2=\frac{\partial}{\partial y} $ and $\widetilde e_1= \frac{\partial }{\partial r}, \widetilde e_2= \frac{\partial }{\partial \theta}$, recall that $r = \sqrt{x^2+y^2} $, $\theta=\tan ^{-1} \left(\frac{y}{x}\right)$, and $x=r \cos \theta$, $y=r \sin \theta$. So \[
 \frac{\partial y}{\partial r}= \cos \theta=\frac{x}{\sqrt{x^2+y^2} }, \ \frac{\partial y}{\partial r}= \sin \theta=\frac{y}{\sqrt{x^2+y^2} }, \ \frac{\partial x}{\partial \theta}= - r \sin \theta=-y, \ \frac{\partial y}{\partial \theta}=r \cos \theta=x.
-\] So now we can convert between the two bases, that is, we have the change of basis matrices 
+\] So now we can convert between the two bases, that is, we have the change of basis matrix
 \[
 \begin{pmatrix}
     \cos \theta & -r \sin \theta \\ \sin \theta & r \cos \theta
@@ -66,4 +80,4 @@ Let's try this in $\R^2$ with $(r, \theta) \leftrightarrow (x,y)$. For $e_1= \fr
     \frac{x}{\sqrt{x^2+y^2} } & -y \\
     \frac{y}{\sqrt{x^2+y^2} } & x
 \end{pmatrix}.
-\] 
+\] We can write the inverse matrix in terms of $(x,y)$ or $(r,\theta)$, taking the inverse of a two by two is pretty easy. Now we know how to convert from one basis to the other.
