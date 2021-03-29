@@ -1,0 +1,257 @@
+\newcommand\sgn{\ensuremath{\operatorname{sgn}}} %sign
+
+\section{Preliminary Material}
+\subsection{Calculus}
+\begin{namedthing}{Question}
+    Let $f \colon U \to \R^2$ be a smooth function, where $U \subseteq \R^2$ is open. Is there a smooth function $F \colon U \to \R$ such that $\partial _{x_1}F=f_1, \ \partial _{x_2}F=f_2,$ where $f=(f_1,f_2)$? Note that this implies $\partial _{x_2}f_1=\partial _{x_1}f_2$. Is this a sufficient condition to show the existence of $F$?
+\end{namedthing}
+\begin{example}\label{failure}
+    Consider $f \colon \R^2 \to \R^2$, where \[
+        f(x_1,x_2)= \left( \frac{-x_2}{x_1^2+x_2^2} , \frac{x_1}{x_1^2+x_2^2}\right) 
+    \] Now  
+    \begin{gather*}
+        \partial _{x_2}f_1= \frac{-(x_1^2+x_2^2)+2x_2^2}{(x_1^2+x_2^2)^2}=\frac{x_2^2-x_1^2}{(x_1^2+x_2^2)^2},\\ 
+        \partial _{x_1}f_2= \frac{(x_1^2+x_2^2)-2x_1^2}{(x_1^2+x_2^2)^2}=\frac{x_2^2-x_1^2}{(x_1^2+x_2^2)^2}.
+    \end{gather*} So $f$ satisfies $\partial _{x_2}f_1=\partial _{x_1}f_2$. However, we have no $F \colon \R^2 \setminus \{0\} \to \R$: assume there was such an $F$, then \[
+    \int_{0}^{2\pi } \frac{d}{d\theta}F(\cos \theta, \sin \theta) \, d\theta=F(1,0)-F(1,0)=0.
+    \] But \[
+    \frac{d}{d\theta}F( \cos \theta ,\sin  \theta)= \frac{dF}{dx}(-\sin \theta)+\frac{\partial F}{\partial y}\cos \theta=-f_1(\cos \theta, \sin \theta) \sin \theta+f_2 (\cos \theta, \sin \theta) \cos \theta=1
+    \] by the chain rule, a contradiction. So we have procured a counterexample.
+\end{example}
+\begin{definition}[Star-shaped]
+    A subset $X\subseteq \R^n $ is \textbf{star-shaped} with respect to $x_0\in X$ if the line segment $\{tx_0+(1-t)x\mid t \in [0,1]\} $ is contained in $X$ for all $x \in X$.
+\end{definition}
+\begin{theorem}\label{star}
+    Let $U \subseteq \R^2$ be open and star-shaped. Then for any smooth function $(f_1,f_2) \colon U \to \R^2$ satisfying $\partial _{x_2}f_1=\partial _{x_1}f_2$, there exists a smooth function $F \colon U \to \R$ such that $\partial _{x_1}F=f_2, \ \partial _{x_2}F=f_1$.
+\end{theorem}
+\begin{proof}
+    Messy.
+\end{proof}
+
+\subsection{Sneak peek of cohomology}
+Say $U \subseteq R^2$ is open, then let $C^{\infty}(U, \R^k)$ be the vector space of smooth functions $\phi \colon U \to \R^k$. Define the \textbf{gradient} and \textbf{curl} functions\footnote{The book uses \emph{rotation} instead of curl, but I think this is the standard notation.} $\operatorname{grad}\colon C^{\infty} (U,\R)\to C^{\infty}(U, \R^2), \ \operatorname{curl}\colon C^{\infty}(U,\R^2) \to C^{\infty}(U,\R)$ by \[
+    \operatorname{grad}(\phi) = \left( \frac{\partial \phi}{\partial x_1}, \frac{\partial \phi}{\partial x_2} \right) , \qquad \operatorname{curl}(\phi_1,\phi_2)= \frac{\partial \phi_1}{\partial x_2}-\frac{\partial \phi_2}{\partial x_1}.
+\] Note that the curl of the gradient is zero, or $\operatorname{curl}\circ \operatorname{grad}=0$. So the kernel of the curl contains the image of the gradient, since mapping $\operatorname{im}(\operatorname{grad})$ by $\operatorname{curl}$ gives zero. Since $\operatorname{curl}$ and $\operatorname{grad}$ are linear, both $\ker (\operatorname{curl})$ and $\operatorname{im}(\operatorname{grad})$ are (infinite-dimensional) vector spaces, furthermore, $\operatorname{im}(\operatorname{grad})$ is a subspace of $\ker (\operatorname{curl})$. So we can consider the quotient space (since vector spaces are abelian groups) $H_1(U)=\ker (\operatorname{curl}) / \operatorname{im}(\operatorname{grad})$. This is a sneak peek of the \emph{cohomology} groups (in this case, vector spaces) assigned to a space. Somehow the cohomology groups tend to be finite-dimensional.
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+\overset{\ker(\grad)}{H^0(U)} \arrow[r]                       & \overset{\ker(\operatorname{curl})/\operatorname{im}(\operatorname{grad})}{H^1(U)=0} \arrow[r] & H^2(U)                       \\
+{C^{\infty}(U,\R)} \arrow[r, "\operatorname{grad}"] \arrow[u] & {\underset{\text{exact}}{C^{\infty}(U,\R^2)}} \arrow[r, "\operatorname{curl}"] \arrow[u]       & {C^{\infty}(U,\R)} \arrow[u]
+\end{tikzcd}
+\caption{The commutative diagram of gradient and curl for $U$ star-shaped.}
+\end{figure}
+Now \cref{star} becomes the statement ``$H^1(U)=0$ whenever $U \subseteq \R^2$ is star-shaped''. To see this, note that $\ker (\operatorname{curl})$ consists of precisely the functions $\phi \colon U \to \R^2$ such that $\partial _{x_2}\phi_1=\partial _{x_1}\phi_2$, and if the image of $\operatorname{grad}$ are such functions $\phi$ (since $\ker(\curl)=\im (\grad)$), then there must exist an $F \in C^{\infty}(U, \R) $ mapping onto $\phi=(f_1,f_2)$, where $\partial _{x_1}F=f_2, \ \partial _{x_2}=f_1$.
+
+We know that $H^1(\R^2 \setminus \{0\} )\neq 0$, since \cref{failure} details a function in $\ker(\curl)$ that doesn't get mapped onto by $\im(\grad)$. We will see later that $H^1(\R^2 \setminus \{0\} )$ is $1$-dimensional as a vector space, and that $H^1(\R^2 \setminus \bigcup_{i=1} ^k \{x_i \} )\cong \R^k $. So the dimension of the cohomology groups gives us data about how many ``holes'' a space has. We will introduce cochain complexes and coboundaries later, but for now let us define $H^0(U)=\ker(\grad)$ analagously. This is well-defined for open sets $U\subseteq \R^k$ for $k\geq 1$, for \[
+    \grad(f)= \left( \frac{\partial f}{\partial x_1},\cdots ,\frac{\partial f}{\partial x_n } \right).
+\] 
+\begin{theorem}
+    An open set $U\subseteq \R^k$ is connected iff $H^0(U)=\R$.
+\end{theorem}
+\begin{proof}
+    If $f \in \ker(\grad)$ (so $\operatorname{grad}(f)=0$), then $f$ is locally constant, that is, every $x_0 \in U$ has a neighborhood $V(x_0)$ such that $f(x)=f(x_0)$ for $x \in V(x_0)$. This makes sense because having zero derivative geometrically means ``zero rate of change'', so the function will be constant if we ``zoom in close enough''. To see this, apply the mean value theorem to the closure of a neighborhood around $x_0$, say $[a,b]\subseteq U$. Then $f'(c)=\frac{f(b)-f(a)}{b-a}$, and since $f'(c)=0$, $f(b)-f(a)$. Since the derivative is zero everywhere, this implies the image of the neighborhood (and then $x_0$) is constant. This generalizes to multiple variables by parametrizing by one variable.
+
+Now suppose $U$ is connected. Then locally constant functions are actually constant, since for $x_0 \in U$, the set \[
+    \{x\in U \mid f(x)=f(x_0)\} =f^{-1}(f(x_0))
+\] is closed since it's the preimage of a closed set by the continuity of $f$, and open since $f$ is locally constant (every neightborhood has apoint). So since this set is nonempty, by connectedness this is all of $U$, and $H^0(U)=\R$.
+
+Conversely, if $U$ is not connected, then we have a smooth, surjective function $f \colon U \to \{0,1\} $ defined by taking all but one of the connected components to $0$, and the other to $1$. Since $f$ is locally constant, $\grad (f)=0$, so $\dim H^0 (U)>1$. We can easily extend this to show $\dim H^0(U)>1$ by replacing $\{0,1\} $ with $\{1,\cdots ,n\} $, where $n$ is the number of connected components of $U$.
+\end{proof}
+
+Now let's move on to functions of three variables. Let $U \subseteq \R^3$ be open. Define 
+\begin{align*}
+    \grad  \colon C ^{\infty}(U,\R) \to C^{\infty}(U, \R^3),\quad &f \mapsto \left( \frac{\partial f}{\partial x_1},\frac{\partial f}{\partial x_2},\frac{\partial f}{\partial x_3} \right), \\
+    \curl \colon  C^{\infty}(U,\R^3)\to C^{\infty}(U,\R^3),\quad &(f_1,f_2,f_3) \mapsto \left( \frac{\partial f_3}{\partial x_2}-\frac{\partial f_2}{\partial f_3},\frac{\partial f_1}{\partial x_3}-\frac{\partial f_3}{\partial x_1},\frac{\partial f_2}{\partial x_1}-\frac{\partial f_1}{\partial x_2}\right), \\
+\operatorname{div} \colon C^{\infty}(U,\R^3) \to C^{\infty}(U,\R),\quad &(f_1,f_2,f_3) \mapsto \frac{\partial f_1}{\partial x_1}+\frac{\partial f_2}{\partial x_2}+\frac{\partial f_3}{\partial x_3}.
+\end{align*}
+Note that $\curl \circ \grad=0$, and $\operatorname{div}\circ \curl=0$. Most textbooks leave this as an exercise but let's work this out in detail. 
+\begin{gather*}
+    \curl\left( \frac{\partial f}{\partial x_1},\frac{\partial f}{\partial x_2},\frac{\partial f}{\partial x_3} \right) =\left( \frac{\partial ^2f}{\partial x_2\partial x_3}-\frac{\partial ^2f}{\partial x_3\partial x_2},\frac{\partial ^2f}{\partial x_3\partial x_1}-\frac{\partial ^2f}{\partial x_1\partial x_3},\frac{\partial ^2f}{\partial x_1\partial x_2} -\frac{\partial ^2f}{\partial x_2\partial x_1}\right) =0,\\
+    \operatorname{div}\left( \frac{\partial f_3}{\partial x_2}-\frac{\partial f_2}{\partial x_3},\frac{\partial f_1}{\partial x_3}-\frac{\partial f_3}{\partial x_1},\frac{\partial f_2}{\partial x_1}-\frac{\partial f_1}{\partial x_2}\right)=0.
+\end{gather*}The first equality is true because mixed partial derivatives commute, and the second because the first component in the expression for curl has no part containing $x_1$. So $\frac{\partial }{\partial x_1}\left( \frac{\partial f_3}{\partial x_2}-\frac{\partial f_2}{\partial x_3} \right) =\frac{\partial ^2 f_3}{\partial x_1\partial x_2}-\frac{\partial ^2f_2}{\partial x_1\partial x_3}=0,$ and so on.
+
+Define $H^0(U),\ H^1(U)$ as earlier and set $H^2(U)=\ker (\operatorname{div}) / \im (\curl)$. 
+\begin{theorem}
+    For an open star-shaped set in $\R^3$ we have $H^0(U)=\R$, $H^1(U)=0$, and $H^2(U)=0$.
+\end{theorem}
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+\overset{\ker(\grad)}{H^0(U)} \arrow[r]                       & \overset{\ker(\operatorname{curl})/\operatorname{im}(\operatorname{grad})}{H^1(U)=0} \arrow[r] & \overset{\ker(\div)/\im(\curl)}{H^2(U)=0} \arrow[r]                       & H^3(U)                       \\
+{C^{\infty}(U,\R)} \arrow[r, "\operatorname{grad}"] \arrow[u] & {\underset{\text{exact}}{C^{\infty}(U,\R^3)}} \arrow[r, "\operatorname{curl}"] \arrow[u]       & {\underset{\text{exact}}{C^{\infty}(U,\R^3)}} \arrow[u] \arrow[r, "\div"] & {C^{\infty}(U,\R)} \arrow[u]
+\end{tikzcd}
+\caption{The updated commutative diagram for $U$ star-shaped, now with divergence.} 
+\end{figure}
+\begin{proof}
+    Since $U$ is star-shaped by assumption (and therefore connected), we immediately have $H^0(U)=\R$ and $H^1(U)=0$ by our previous theorems. We want to show that $H^2(U)=0$, or $\ker(\div)=\im(\curl)$. Since $\div(\im(\curl))=0$, we have $\im (\curl) \subseteq \ker(\div)$. So the goal has been reduce to showing that $\ker(\div) \subseteq \im(\curl)$. To accomplish this, it suffices to exhibit a smooth function $U\subseteq \R^3\to \R^3$ such that the curl of this function is equal to some chosen element of $\ker(\div) .$
+
+    Assume $U$ is star-shaped with respect to 0, and let $F \colon U \to\R^3$ such that $\div F=0$. Consider $G \colon U \to \R^3$ defined by \[
+        G(\mathbf x)= \int_{0}^{1} (F(t\mathbf x)\times t\mathbf x) \, dt.
+    \] Then if $\mathbf x=(x_1,x_2,x_3)$, $F=(f_1,f_2,f_3)$, we have
+    \begin{align*}
+        \curl(F(t\mathbf x)\times t\mathbf x)&=\curl((f_1(tx_1),f_2(tx_2),f_3(tx_3))\times (tx_1,tx_2,tx_3))\\
+                                             &=\curl (f_2(tx_2)tx_3-f_3(tx_3)tx_2,f_3(tx_3)tx_1-f_1(tx_1)tx_3,f_1(tx_1)tx_2-f_2(tx_2)tx_1)\\
+                                             &=\left( \left( tf_1(tx_1) -tx_1\frac{\partial f_2}{\partial x_2}(tx_2)\right) -\left( tx_1 \frac{\partial f_3}{\partial x_3}(tx_3)-tf_1(tx_1) \right) ,\cdots \right) \\
+                                             &=\left( 2tf_1(tx_1)-tx_1\left( \frac{\partial f_2}{\partial x_2}(tx_1)+\frac{\partial f_3}{\partial x_3}(tx_3) \right)  ,\cdots \right) \\
+                                             &=2t F(t\mathbf x)+{\color{red}??} \\
+                                             &=\frac{d}{dt}(t^2 F(t\mathbf x)).
+    \end{align*}
+Therefore \[
+    \curl G(\mathbf x)=\int_{0}^{1} \frac{d}{dt}(t^2F(t\mathbf x)) \, dt=F(\mathbf x).\qedhere
+\] 
+\end{proof}
+\begin{example}
+    If $U$ is not star-shaped then we can have nontrivial first and second cohomology groups. Consider $f \colon (\R^3\setminus S^1 ) \to \R^3$ by \[
+        f(x_1,x_2,x_3) =\left( \frac{-2x_1x_3}{x_3^2+(x_1^2+x_2^2-1)^2},\frac{-2x_2x_3}{x_3^2+(x_1^2+x_2^2-1)^2},\frac{x_1^2+x_2^2-1}{x_3^2+(x_1^2+x_2^2-1)^2} \right) .
+    \] By some calculation we have $\curl(f)=0$. So $f$ defines some element $[f] \in H^1(U)$. To show $[f]$ is nontrivial, we integrate along a curve $\gamma \subseteq U$ ``linked'' to the missing $S^1 $. Define $\gamma (t)=\left( \sqrt{1+\cos t} ,0,\sin t \right) $ for $t \in [-\pi,\pi]$. Assume $\grad(F)=f$ for some function $F$. One one hand, we have \[
+    \int_{-\pi +\varepsilon }^{\pi-\varepsilon } \frac{d}{dt}F(\gamma (t)) \, dt=F(\gamma (\pi-\varepsilon ))-F(\gamma (-\pi+\varepsilon ))\to 0 \quad \text{for} \ \varepsilon \to 0,
+    \] and on the other hand we have by the chain rule \[
+    \frac{d}{dt}F(\gamma (t))=f_1(\gamma (t))\cdot \gamma_1 '(t)+\cdots =\sin ^2 t+0+ \cos ^2t=1.
+    \] So the integral also converges to $2\pi$, a contradiction.
+\end{example}
+\begin{example}
+    Let $U \subseteq \R^k$ be open and $X \colon U \to \R^k$ be smooth ($X$ is a smooth vector field). The \textbf{energy} $A_{\gamma }(X)$ of $X$ along a smooth curve $\gamma  \colon [a,b] \to U$ is defined by \[
+        A_{\gamma} (X)=\int_{a}^{b} \langle X \circ \gamma (t),\gamma '(t) \rangle  \, dt.
+    \] If $X=\grad (\Phi)$ and $\Phi_{\gamma (a)}=\Phi_{\gamma (b)}$, then the energy of $X$ is zero, since \[
+    \langle X \circ \gamma (t),\gamma '(t) \rangle =\frac{d}{dt}\Phi(\gamma (t)).
+    \] 
+\end{example}
+
+\subsection{The alternating algebra}
+Let $V$ be a real vector space. A map $
+f \colon \overset{k \, \text{times} }{\overbrace{V\times V\times \cdots \times V} }  \to \R$ is $\mathbf k$\textbf{-linear} (or multilinear) if $f$ is linear in each factor.
+\begin{definition}[]
+    A $k$-linear map $\omega \colon V^k \to \R$ is \textbf{alternating} if $\omega(\xi_1,\cdots ,\xi_k)=0$ whenever $\xi_i =\xi_j $ for some pair $i\neq j$. Denote the vector space of alternating $k$-linear maps as $A_k(V)$.
+\end{definition}
+Note that $A_k(V)=0$ if $k>\dim V$, since two vectors in the domain have to be linearly dependent. Recall that $\operatorname{sgn} \colon S_k \to \{\pm 1\} $ is a homomorphism, since $\sgn(\sigma \circ \tau)=\sgn(\sigma) \circ \sgn(\tau)$.
+\begin{lemma}\label{alt} 
+    If $\omega \in A_k(V)$ and $\sigma \in S_k$, then \[
+        \omega(\xi _{\sigma(1)},\cdots ,\xi_{\sigma(k)})=\sgn(\sigma)\omega(\xi_1,\cdots ,\xi_k).
+    \] 
+\end{lemma}
+\begin{proof}
+    It is sufficient to show this is true for $\sigma=(i,j)$. Let $\omega_{i,j}(\xi,\xi')=\omega(\xi_1,\cdots ,\xi,\cdots ,\xi',\cdots ,\xi_k)$, where $\xi$ and $\xi'$ occur at positions $i,j$ respectively. The remaining $\xi_v \in V$ are arbitrary fixed vectors. Now $\omega _{i,j}\in A_2(V)$ since $\omega \in A_k(V)$, so $\omega _{i,j}(\xi_i +\xi_j ,\xi_i +\xi_j )=0$. By bilinearity, we have $\omega_{i,j}(\xi_i ,\xi_j )+\omega_{i,j}(\xi_j ,\xi_i )=0,$ and so $\omega _{i,j}(\xi_i ,\xi_j )=-\omega _{i,j}(\xi_j ,\xi_i )=\sgn(\sigma)\omega _{i,j}(\xi_j ,\xi_i )$.
+\end{proof}
+\begin{example}
+    If $V=\R^k$ and $\xi_i =(\xi_{i1},\cdots ,\xi_{ik})$, the determinant function $(\xi_1,\cdots ,\xi_k) \mapsto \det(\xi_{ij})$ is alternating.
+\end{example}
+\begin{definition}[]
+    A $\mathbf { (p,q)}$\textbf{-shuffle} $\sigma$ is a permutation in $S_{p+q}$ such that $\sigma(1)< \cdots < \sigma(p)$ and $\sigma(p+1)< \cdots  < \sigma(p+q)$. Denote the set of all $(p,q)$-shuffles by $S_{(p,q)}$. Since a $(p,q)$-shuffle is uniquely determined by the set $\{\sigma(1),\cdots \sigma(p)\} $, to form $S_{(p,q)}$ we choose subsets of order $p$ from  $S_{p+q}$. So $|S_{(p,q)}|={p+q\choose p} $.
+\end{definition}
+\begin{definition}[]
+    For $\omega_1\in A_p(V)$ and $\omega_2 \in A_q(V)$, define \[
+        (\omega_1\wedge\omega_2)(\xi_1,\cdots ,\xi_{p+q})=\sum_{\sigma \in S_{(p,q)}}^{} \sgn(\sigma)\omega_1 \left( \xi_{\sigma(1)}, \cdots  , \xi_{\sigma(p)} \right) \omega_2\left( \xi_{\sigma(p+1)}, \cdots ,\xi_{\sigma(p+q)} \right) .
+    \] 
+    Note that $\omega_1\wedge \omega_2$ is $(p+q)$-linear. This product is called the \textbf{exterior product} or \textbf{wedge product}.
+\end{definition}
+\begin{remark}
+    Often you also see the exterior product defined as \[
+        \omega_1\wedge \omega_2(\xi_1,\cdots ,\xi_{p+q}):=\frac{1}{p!q!}\sum _{\sigma \in S_{p+q}}\operatorname{sgn}(\sigma)\omega_1(\xi_{\sigma(1)},\cdots ,\xi_{\sigma(p)})\omega_2(\xi_{\sigma(p+1)},\cdots ,\xi_{\sigma(p+q)}).
+    \] This definition compensates for the $|S_p|=p!$ and $|S_q|=q!$ repetitions by dividing by them in the coefficient.
+\end{remark}
+\begin{lemma}
+    If $\omega_1 \in A_p(V)$ and $\omega_2 \in A_q(V)$, then $\omega_1\wedge \omega_2 \in A_{p+q}(V)$.
+\end{lemma}
+\begin{proof}
+    We show that $(\omega_1\wedge\omega_2)(\xi_1,\xi_2, \cdots ,\xi_{p+q})=0$ when $\xi_1=\xi_2$. Let $S_{12}=\{\sigma \in S_{(p,q)}\mid \sigma(1)=1,\sigma(p+1)=2\} $, $S_{21}=\{\sigma\in S_{(p,q)}\mid \sigma(1)=2,\sigma(p+1)=1\} $, and $S_0=S_{(p,q)}$ {\color{red}todo:algebra proof} 
+\end{proof}
+\begin{lemma}\label{transp} 
+    A $k$-linear map $\omega$ is alternating if $\omega(\xi_1,\cdots ,\xi_k)=0$ for all $k$-tuples with $\xi_i =\xi_{i+1}$ for some $1\leq i \leq k-1$.
+\end{lemma}
+\begin{proof}
+    Recall that $S_k$ is generated by the transpositions $(i,i+1)$, and so by \cref{alt}, we have e \[
+        \omega(\xi_1,\cdots ,\xi_i ,\xi_{i+1},\cdots ,\xi_k)=-\omega(\xi_1,\cdots ,\xi_{i+1},\xi_i ,\cdots ,\xi_k).
+    \] Then \cref{alt} holds for all $\sigma \in S_k$, so $\omega$ is alternating.\footnote{Isn't this lemma true by definition?}
+\end{proof}
+\begin{lemma}
+    The exterior product is anticommutative. That is, for $\omega_1 \in A_P(V)$ and $\omega_2 \in A_q(V)$, we have  $\omega_1\wedge \omega_2=(-1)^{pq}\omega_2\wedge \omega_1$.
+\end{lemma}
+\begin{proof}
+        Define $\tau \in S_{p+q}$ to be the permutation \[
+    \tau=
+    \begin{pmatrix}
+        1 & \cdots  & q & q+1 & \cdots  & q +p\\
+        p+1 & \cdots  & p+q & 1 & \cdots  & p
+    \end{pmatrix}.
+\] For any $\xi_1,\cdots ,\xi_{p+q}\in V$,
+\begin{align*}
+    \omega_1\wedge \omega_2(\xi_1,\cdots ,\xi_{p+q})&=\sum _{\sigma \in S_{p+q}}(\operatorname{sgn}\sigma)f(\xi_{\sigma(1)},\cdots ,\xi_{\sigma(p)})g(\xi_{\sigma(p+1)},\cdots ,\xi_{p\sigma(p+q)})\\
+                                         &= \sum _{\sigma \in S_{p+q}}(\operatorname{sgn}\sigma)f (\xi_{\sigma\tau(q+1)},\cdots , \xi _{\sigma\tau(q+p)})g(\xi_{\sigma\tau(1)},\cdots ,\xi_{\sigma\tau(q)})\\
+                                         &=(\operatorname{sgn}\tau) \sum _{\sigma\in S_{p+q}}(\operatorname{sgn}\sigma\tau) g (\xi_{\sigma\tau(1)},\cdots , \xi_{\sigma\tau(q)})f(\xi_{\sigma\tau(q+1)},\cdots ,\xi_{\sigma\tau(q+p)})\\
+                                         &=(\operatorname{sgn}\tau)A (g\otimes f)(\xi_1,\cdots ,\xi_{p+q}).
+\end{align*}{\color{red}todo:adapt this proof to the $(p,q)$-shuffle definition} 
+\end{proof}
+\begin{lemma}
+    The exterior product is associative. That is, for $\omega_1\in A_p(V),\,\omega_2\in A_q(V),$ $\omega_3 \in A_r(V)$, we have \[
+        \omega_1\wedge (\omega_2\wedge \omega_3)=(\omega_1\wedge\omega_2)\wedge\omega_3.
+    \] 
+\end{lemma}
+\begin{proof}
+    {\color{red}todo:spending less time on the algebra to get to the good stuff} 
+\end{proof}
+On top of making sure $A_k(V)$ is closed under multiplication and being associative, the exterior product is also associative and satisfies homogeneity, making it $A_k(V)$ into an algebra. What's an algebra? An $\R$\textbf{-algebra}  $A$ is a real vector space with an associative bilinear map $\mu \colon A\times A \to A$. The algebra is \textbf{unitary} if there exists a unit element (say 1) such that $\mu(1,a)=\mu(a,1)=a$ for all $a \in A$.
+\begin{definition}[]
+    \,
+    \begin{enumerate}[label=(\roman*)]
+        \item A \textbf{graded} $\R$\textbf{-algebra} $A_*$ is a sequence of vector spaces $A_k,\, k=0,1,\cdots $ and bilinear maps $\mu \colon A_k \times A_{\ell} \to A_{k+\ell}$ which are associative.
+        \item The graded algebra $A_*$ is \textbf{connected} if there exists a unit element $1 \in A_0$, and the map $\varepsilon \colon \R \to A_0,\ r\mapsto r\cdot 1$ is an isomorphism.
+        \item The graded algebra $A_*$ is \textbf{commutative} (resp \textbf{anti-commutative}) if $\mu(a,b)=(-1)^{k\ell}\mu(b,a)$ for $a \in A_k$ and $b \in A_{\ell}$.
+    \end{enumerate}
+    Elements in $A_k$ are said to have degree $k$.
+\end{definition}
+Note that $A_k(V)$ is a real vector space since 
+\begin{gather*}
+    (\omega_1+\omega_2)(\xi_1,\cdots ,\xi_k)=\omega_1(\xi_1,\cdots ,\xi_k)+\omega_2(\xi_1,\cdots ,\xi_k),\\
+    (\lambda\omega)=(\xi_1,\cdots ,\xi_k)=\lambda\omega(\xi_1,\cdots \xi_k),\quad \lambda \in \R.
+\end{gather*}
+\begin{theorem}
+    $A_*(V)$ with the exterior product is an anti-commutative and connected graded algebra.
+\end{theorem}
+\begin{proof}
+    Set $A_0(V)=\R$, since maps that take no vectors and output a scalar are just scalars themselves. Expand the product to $A_0(V)\times A_p(V)$ using the vector space structure. We have seen above that the exterior product is closed, associative, distributive, and anticommutative.
+\end{proof}
+$A_*(V)$ is the \textbf{exterior algebra} or \textbf{alternating algebra} associated with $V$. Elements of $A_1(V)$ are called $\mathbf 1$\textbf{-forms}.
+\begin{lemma}
+    For $1-$ forms $\omega_1,\cdots ,\omega_p \in A_1(V)$, we have \[
+        (\omega_1\wedge\cdots \wedge\omega_p)(\xi_1,\cdots ,\xi_p)=\det 
+        \begin{pmatrix}
+            \omega_1(\xi_1) & \omega_1(\xi_2) & \cdots  & \omega_1(\xi_p)\\
+            \omega_2(\xi_1) & \omega_2(\xi_2) & \cdots  & \omega_2(\xi_p)\\
+            \vdots & \vdots & & \vdots \\
+            \omega_p(\xi_1) & \omega_p(\xi_2) & \cdots  & \omega_p(\xi_p)\\
+        \end{pmatrix}.
+    \] 
+\end{lemma}
+\begin{proof}
+    We use induction on $p$. If $p=2$, then the two elements $(12),(21)$ of $S_2$ are $(1,1)$-shuffles. So $(\omega_1\wedge\omega_2)(\xi_1,\xi_2)=\omega_1(\xi_1)\omega_2(\xi_2)-\omega_1(\xi_2)\omega_2(\xi_1)=\det \left( 
+    \begin{smallmatrix}
+        \omega_1(\xi_1) & \omega_1(\xi_2)\\
+        \omega_2(\xi_1) & \omega_2(\xi_2)
+    \end{smallmatrix}\right) $. Now \[
+    \omega_1\wedge (\omega_2\wedge \cdots \wedge \omega_p)(\xi_1,\cdots ,\xi_p)=\sum_{j=1}^{p} (-1)\omega_1(\xi_j )(\omega_2\wedge \cdots \wedge \omega_p)\big(\xi_1,\cdots ,\hat{\xi_j },\cdots ,\xi_p\big).
+    \] Expanding the determinant along the first row gives our result.
+\end{proof}
+This lemma shows that if the $1$-forms $\omega_1,\cdots ,\omega_p $ are linearly independent, then $\omega_1\wedge\cdots \wedge\omega_p\neq 0$. This is an equivalence: we can choose elements $\xi_i \in V$ with $\omega_i (\xi_j )=0$ for $i\neq j$ and $\omega_j (\xi_j )=1$, which implies that $\det (\omega_i (\xi_j ))=1$. Conversely, if the $\omega_i $ were linearly dependent, we could write $\omega_p=\sum _{i=1}^{p-1}r_i \omega_i $. So the determinant in the previous lemma would have two equal rows and be zero. To summarize:
+\begin{lemma}
+    For $1$-forms $\omega_1,\cdots ,\omega_p$ on $V$, we have $\omega_1\wedge \cdots \wedge \omega_p \neq 0$ iff they are linearly independent.
+\end{lemma}
+\begin{theorem}\label{basis} 
+    For $\{e_i \} $ a basis of $V$ and $\{\phi_i \} $ the dual basis of $A_1(V)$ (as $i$ varies over $n$), we have \[
+        \{\phi_{\sigma_1 }\wedge \phi_{\sigma(2)}\wedge \cdots \wedge \phi_{\sigma(p)}\} _{\sigma \in S_{(p,n-p)}}
+    \] a basis of $A_p(V)$. In particular, $\dim A_p(V)={\dim V\choose p}  $. 
+\end{theorem}
+\begin{proof}
+    {\color{red}todo:less time on algebra} 
+\end{proof}
+This tells us that $A_n (V)\cong \R$ if $n=\dim V$ (since they're both one dimensional real vector spaces, ${n\choose n} =1$) and $A_p(V)=0$ for $p>n$ (since two factors will be the same). A linear map $f \colon V \to W$ induces the linear map  \[
+    A_p(f) \colon A_p(W) \to A_p(V)
+\] by setting $A_p(f)(\omega(\xi_1,\cdots ,\xi_p))=\omega(f(\xi_1),\cdots ,f(\xi_p)).$ We have $A_p(g \circ f)=A_p(f) \circ A_p(g),$ and $A_p(\id)=\id$. This is equivalent to saying that $A_p(-)$ is a \textbf{contravariant functor}. For $\dim V=n$, $f \colon V \to V$ linear, the induced map $A_n (f) \colon A_n (V) \to A_n (V)$ is a linear endormorphism of a $1$-dimensional vector space, and is therefore just scalar multiplication. It follows from the theorem below that this scalar is $\det f$.
+
+\begin{theorem}
+    The characteristic polynomial of a linear endomorphism $f \colon V \to V$ is given by \[
+        \det (f-t)=\sum_{i=0}^{n} (-1)^i \operatorname{tr}\left( A_{n-i}(f) \right) t ^i .
+    \] 
+\end{theorem}
+\begin{proof}
+    {\color{red}todo:algebra} 
+\end{proof}
