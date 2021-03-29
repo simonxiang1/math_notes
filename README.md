@@ -2,7 +2,7 @@
 These are a collection of notes I have live-TeX'd for my classes at UT Austin. Currently, I'm taking
 
   - [Differential Topology](https://github.com/simonxiang1/math_notes/blob/master/freshman_year/differential_topology/master_notes.pdf) (in progress)
-  - [Riemannian Geometry](https://github.com/simonxiang1/math_notes/blob/master/freshman_year/differential_geometry/master_notes.pdf) (in progress)
+  - [Riemannian Geometry](https://github.com/simonxiang1/math_notes/blob/master/freshman_year/riemannian_geometry/master_notes.pdf) (in progress)
   - [Differential Geometry](https://github.com/simonxiang1/math_notes/blob/master/freshman_year/differential_geometry/master_notes.pdf) (in progress)
 
 ### Previous notes
