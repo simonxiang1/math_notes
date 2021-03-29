@@ -1,0 +1,199 @@
+
+\section{Basic linear algebra} 
+Here we review things like how to multiply matrices.
+\subsection{Basics}
+A set of vectors $\{v^i \} $ \textbf{linearly independent} if $\sum_{i}^{ } c_i v^i =0$ implies $c_i =0$ for all $i$. A \textbf{basis} is a linearly independent \emph{spanning set}, that is, for a basis $\{e_i \} $, every vector $v \in V$ can be written as a linear combination $v=\sum_i v^i e_i $. A map $T \colon V \to W$ is \textbf{linear} (or a \textbf{homomorphism}) if for $v^1,v^2 \in V$ and $a_1,a_2 \in \F$, $T(a_1v^1+a_2v^2)=a_1T(v^1)+a_2T(v^2)$. For $U:=\{u^1,u^2,\cdots \} $ a finite subset of vectors in $V$, any map $T \colon U \to W$ induces a linear map $T \colon V \to W$ by the rule\[
+    T\left( \sum_i a_i u^i  \right) :=\sum _i a_i T(u^i ).
+\] The original map is said to have been \textbf{extended by linearity}\footnote{Doesn't this only work when $U$ is a spanning set for $V$?}. The set of $v \in V$ such that $Tv=0$\footnote{We use the notation $T(v):=Tv$ from now on.} is the \textbf{kernel} of $T$, and $\dim \ker T$ is called the \textbf{nullity} of $T$. The \textbf{rank} of $T$ is defined as $\dim \im T$. If $T$ is bijective then it is an \textbf{isomorphism}, where $V$ and $W$ are said to be \textbf{isomorphic}. A linear map from a space to itself is an \textbf{endomorphism}, and a self-bijection is an \textbf{automorphism}.
+
+Consider the short exact sequence \[
+0 \longrightarrow \ker T \overset{\iota}{\lhook\joinrel\longrightarrow}  V \overset{T}{\longrightarrow} W \longrightarrow 0
+\] for $T \colon V \to W$ surjective.
+\begin{theorem}
+    For the short exact sequence above, there exists a linear map $S \colon W \to V$ such that $T \circ S=1$. We say the exact sequence \textbf{splits}.
+\end{theorem}
+To see this, by surjectivity each basis element of $W$ gets mapped onto by some element in $V$. Extend the inverse map by linearity, then this new map $S$ satisfies $T \circ S=1$. This map $S$ is called a \textbf{section} of $T$.
+\begin{namedthm}{Rank-Nullity Theorem} 
+    For the short exact sequence above, let $S$ be a section of $T$. Then \[
+        V=\ker T \oplus S(W).
+    \] In particular, $\dim V=\dim \ker T+\dim S(W)$.
+\end{namedthm}
+\begin{proof}
+    By the first isomorphism theorem, we have the short exact sequence $0 \to \ker T \hookrightarrow V \to \im T \to 0$. Then since $V\to \ker T$ is a retract, apply the splitting lemma to get that the middle map is an isomorphism in the diagram below. 
+    \begin{figure}[H]
+    \centering
+    \begin{tikzcd}
+0 \arrow[r] \arrow[d] & \ker T \arrow[r, hook] \arrow[d] & V \arrow[r, "T"] \arrow[d, "\text{iso}"] & \im T \arrow[r] \arrow[d] & 0 \arrow[d] \\
+0 \arrow[r]           & \ker T \arrow[r]                 & \ker T\oplus \im T \arrow[r]                     & \im T \arrow[r]           & 0          
+\end{tikzcd}
+    \end{figure}The rank nullity theorem follows. 
+\end{proof}
+
+\subsection{Fiddling with indices (without explanation)}
+For an endomorphism $T \colon V \to V$ with a basis $\{e_i \} $ of $V$, we can construct an $n\times n$ matrix whose entries $T_{j}^i $ are given by \[
+Te_j =\sum_i e_i T_{j}^i .
+\]
+We write $(T_{j}^i )$ or $\mathbf T$ to indicate the matrix with entries $T^i _j $. The map $T \to \mathbf T$ is a \textbf{representation} of $T$ in the basis $\{e_i \} $. A different basis leads to a different matrix, but they represent the same endomorphism. Here's how I visualize the indices (with $j=3$ as an example): \[
+T\left( e_j  \right) =T
+\begin{pmatrix}
+    0\\0\\1\\0\\0
+\end{pmatrix}=T_{13}
+\begin{pmatrix}
+    1\\0\\0\\0\\0
+\end{pmatrix}+T_{23}\begin{pmatrix}
+    0\\1\\0\\0\\0
+\end{pmatrix}+T_{33}\begin{pmatrix}
+    0\\0\\1\\0\\0
+\end{pmatrix}+T_{43}\begin{pmatrix}
+    0\\0\\0\\1\\0
+\end{pmatrix}+T_{53}\begin{pmatrix}
+    0\\0\\0\\0\\1
+\end{pmatrix}=\sum_i e_i T_j ^i .
+\] The splitting happens because that's how matrix multiplication is defined. For $v=\sum_i v^i e_i \in V$, we have \[
+v':=Tv=\sum_j v^j Te_j =\sum _{ij}v^j e_i T_j ^i =\sum_i \left( \sum_j T^i _j v^j  \right) e_i =\sum_i {v^i } 'e_i ,
+\] so the components of $v'$ are related to the components of $v$ by the rule ${v^i } '=\sum _j T_j ^i v^j $. It is time to introduce Einstein summation notation, where flipping the indices means an implicit sum. So our equation above becomes \[
+v':=Tv=v^j Te_j =v^j e_i T^i _j =T_j ^i v^j e_i ={v^i } 'e_i \implies {v^i } '=T_j ^i v^j .
+\] For $S$ and $T$ two endomorphisms of $V$, if $ST:= S \circ T$, matrix multiplication is defined as $ST_{ij}=\sum_k S_{ik}T_{kj}$. In Einstein summation notation, this is notated $ST_j ^i =S^i _kT^k_j $.
+\begin{note}
+    Indices are confusing. From Wikipedia, some mnemonics: the \emph{up}per indices go \emph{up} to down, \emph{l}ower indices go \emph{l}eft to right. C\emph{o}variant tensors are r\emph{o}w vectors with l\emph{o}wer indices (but they sum over an upper index). The lower index indicates which \emph{column} you are in, hence why the indeed go left to right. Similarly, the upper index indicates which \emph{row} you are in. This is the picture to keep in mind:
+\begin{gather*}
+\alpha =
+\begin{pmatrix}
+    & & \alpha & &
+\end{pmatrix},\quad v=
+\begin{pmatrix}
+    \\
+    \\
+    v\\
+\\
+\\
+\end{pmatrix},\qquad \phi^j =
+\begin{pmatrix}
+    0 & 0 & 1 & 0 & 0
+\end{pmatrix},\quad e_i =
+\begin{pmatrix}
+    0 \\ 0 \\ 1 \\ 0 \\ 0
+\end{pmatrix}.\\
+\begin{pmatrix}
+    & & \alpha  & &
+\end{pmatrix}
+\begin{pmatrix}
+    0 \\ 0 \\1\\0\\0
+\end{pmatrix}=\alpha _i ,\qquad
+\begin{pmatrix}
+    0&0&1&0&0
+\end{pmatrix}
+\begin{pmatrix}
+    \\ \\ v \\ \\ \\
+\end{pmatrix}=v^j .
+\end{gather*}
+    Note that the only things you should be looking at are $\phi^j $ and $e_i $, since they're the actual vectors, while $\alpha _j $ and $v^i $ are coordinate functions with flipped indices so we can sum over them. If you think of a covector $\alpha =
+    \begin{pmatrix}
+        w_1 & w_2 & \cdots 
+    \end{pmatrix}$, you can see why we say they have \emph{lower} indices. However, when you write the implicit sum $\alpha =\alpha _j \phi^j $, the $\phi^j $ (which are covectors) have an upper index because that's what we're summing over: the actual entries have lower indices. For multi-index sums like $v^j e_i T^i _j $, we sum left to right.
+\end{note}
+The \textbf{row rank} (resp \textbf{column rank}) of a matrix $T$ is the maximum number of LI rows (resp columns) when considered as vectors in $\R^n $. These concepts are equal, and we call this the \textbf{rank} of $T$, denoted $\rank T$. If $\rank T=n$, then $T$ has \textbf{maximal rank}, otherwise $T$ is \textbf{rank deficient}. For $\{e_i \} $ and $\{e_i' \} $ two bases of $V$, we can write $e_j '=e_j A^i _j $ for some nonsingular $A$, called the \textbf{change of basis matrix}. If $v=v^i e_i ={v^i } 'e_i '$, then \[
+{v^j } 'e_j' ={v^j } 'e_i A^i _j =A^i_j {v^j } 'e_i =v^i e_i .
+\] So $v_j =A^i _j \{v_j \} '$, or $v_j '=(A^{-1})^i _j v^j $. We write $\langle v,f \rangle $ or $\langle f,v \rangle $ to denote $f(v)$. Then for $\{\phi^j \} $ a dual basis for $\{e_i \} $, we have $\langle e_i ,\phi^j  \rangle =\delta^j _i $. For $\{{\phi^i } '\} $ a dual basis corresponding to $\{e_i '\} $, write ${\phi^j } '=\phi^i B _i ^j $. Then \[
+\delta^j _i =\langle e_i ',{\phi^j }'  \rangle =\langle e_kA^k_i ,\phi^{\ell}B^j _{\ell} \rangle =A^k_i B^j _{\ell}\langle e_k,\phi^{\ell} \rangle =A^k_i B^j _{\ell}\delta_k^{\ell}=A^k_i B_k^j .
+\] If we write $A^T:=A^j _i $, we can write the result above as $A^TB=I$, equivalently $B=(A^T)^{-1}=(A^{-1})^T$, the \textbf{contragredient matrix} of $A$. For $f \in V^*$ a covector, under a change of basis we have \[
+f'=f_j '{\phi^j } '=f_j '{\phi^i } B_i ^j =B^j _i f_j '{\phi^i } '=f_i \phi^i =f,\quad\implies\quad f_i=B^j _i f_j ',\quad f_i '=(B^{-1})^j _i f_j .
+\] Rewriting in terms of $A$, we have \[
+{\phi^i } '=\phi^j B_j ^i =(B^T)_j ^i \phi^j =(A^{-1})^i _j \phi^j ,\quad f_j '=(B^{-1})^i _j f_i =(A^T)^i _j f_i =f_i A^i _j .
+\] 
+\subsection{Upstairs or downstairs?}
+Let's talk about what just happened. If we use standard notation, the symbol $a_j $ is ambiguous: are they components of vectors, covectors, or neither? How can we tell? We can't, we can only guess (you can tell when they're paired with the corresponding basis elements $e_i $ or $\phi^i $, but sometimes those are omitted for brevity). Introducing up down indices allows us to differentiate the two.
+
+Under a change of basis, the components of a covector transform like basis vectors, while the components of a vector transform like cobasis vectors. We say the components of a covector transform \textbf{covariantly} (with the basis vectors), while the components of a vector transform \textbf{contravariantly} (against the basis vectors). Because of this, we write $e_i $ for a basis vector as normal, but we use a raised index $\phi^i $ to denote the basis covectors. Then vector components are written with upstairs (contravariant) indices and covector components are written with downstairs (covariant indices).
+
+Writing $v=v^i e_i $ and $f=f_i \phi^i $ allows us to quickly pair the up indices and down indices to see what is being summed. When this happens, we say the indices have been \textbf{contracted}. Avoid things like $a_i=b^i $. To summarize our results, we have $\langle e_j ,\phi^j  \rangle =\delta_i ^j $, $e_j '=e_i A^i _j $, $v^{'i}=(A^{-1})i_j v^j $. This notation also leads to much pedanticism and confusion as you may have already noticed. Introducing the shorthand \[
+    \mathbf A=\left( A_j ^i  \right) ,\quad\mathbf e=
+\begin{pmatrix}
+    e_1&e_2&\cdots &e_n 
+\end{pmatrix},\quad \mathbf {\theta} =
+\begin{pmatrix}
+    \theta^1\\ \theta^2\\ \vdots \\ \theta^n 
+\end{pmatrix},\quad \mathbf v=
+\begin{pmatrix}
+    v^1\\v^2 \\ \vdots \\v^n 
+\end{pmatrix},\quad \mathbf f=
+\begin{pmatrix}
+    f_1&f_2&\cdots &f_n 
+\end{pmatrix}
+\] helps, since the above equations become $\mathbf e'=\mathbf e\mathbf A$, $\mathbf v'=\mathbf A^{-1}\mathbf v$, $\mathbf \theta'=\mathbf A^{-1}\theta$, $\mathbf f'=\mathbf f\mathbf A$. The invariance of $v$ and $f$ under a change of basis become easy to see, for example $v'=\mathbf e'\mathbf v'=\mathbf e\mathbf A\mathbf A^{-1}\mathbf v=\mathbf e\mathbf v=v$.
+
+\subsection{Inner product spaces}
+This is a more mature treatment of the material later in this paper thing. Let $\F$ be a subfield of $\C$, and $V$ and $\F$-vector space. A \textbf{sesquilinear form} on $V$ is a map $g\colon V\times V \to \F$ satisfying the following properties: for all $u,v,w \in V$ and $a,b\in \F$, the map $g$ is 
+\begin{enumerate}[label=(\roman*)]
+\setlength\itemsep{-.2em} 
+    \item \textbf{linear on the second entry}: $g\colon (u,av+bw) \to =ag(u,v)+bg(u,w)$, and 
+    \item \textbf{Hermitian}: $g(v,u)=\overline{g(u,v)}$.
+\end{enumerate}
+These two properties imply that $g$ is \textbf{antilinear} on the first entry, that is, $g(au+bv,w)=\overline{a}g(u,w)+\overline{b}g(v,w)$. If $\F$ is a real field (subfield of $\R$), then this just says that $g$ is a \textbf{symmetric bilinear form}. If a sequilinear form $g$ is \textbf{nongenerate}, where $g(u,v)=0$ for all $v$ implies $u=0$, then $g$ is an \textbf{inner product.} A space equipped with an inner product is an \textbf{inner product space}.
+
+Note that $g(u,u)$ is real by Hermiticity. If $g(u,u)\geq 0$ (resp $g(u,u)\leq 0$), then $g$ is \textbf{nonnegative definite} (resp \textbf{nonpositive definite}). If $g(u,u)=0$ implies that $u=0$, then $g $ is \textbf{positive definite} (resp \textbf{negative definite}).
+\begin{example}[The \textbf{Lorentizan inner product} on $\R^n$]
+    Let $u=(u_0,u_1,\cdots ,u_{n-1})$ and $v=(v_0,v_1,\cdots ,v_{n-1})$, and define \[
+        g(u,v):=-u_0v_0+\sum_{i=1}^{n-1} u_i v_i .
+    \] The vector space $\R^n $ equipped with this inner product is denoted $\mathbb M^n $ and is called \textbf{Minkowski space} (or \textbf{Minkowski spacetime}). Note that while the Lorentzian inner product is an indeed an inner product, it is not positive definite.
+\end{example}
+A set $\{v_i \} $ of vectors is \textbf{orthogonal} if $g(v_i ,v_j )=0$ for $i\neq j$, and is \textbf{orthonormal} if $g(v_i ,v_j )=\pm \delta_{ij}$. A vector $v$ satisfying $g(v,v)=\pm 1$ is a \textbf{unit vector}.
+\begin{theorem}\label{ob}  
+    Every inner product space has an orthonormal basis.
+\end{theorem}
+\begin{proof}[First proof of \cref{ob}]
+   We use induction on $k=\dim V$. If {\color{red}todo:some algebra}  
+\end{proof}
+\begin{proof}[Second proof of \cref{ob}]
+   {\color{red}todo:grammian, spectral theorem, diagonalization, sylvester's law of inertia}  
+\end{proof}
+{\color{red}todo:the reisz lemma} 
+
+\subsection{The tensor product}
+What are tensors? Define a new vector product called the \textbf{tensor product}, denoted by $v\otimes w$\footnote{These are actually defined by a \emph{universal property} in category theory, but let's brush over the details.}. The product is a \textbf{tensor of order} $\mathbf 2$ or a \textbf{second-order tensor} or a $\mathbf 2$\textbf{-tensor}. The tensor product is \emph{noncommutative} in general, and we form higher order tensors by repeated iteration. Order-0 tensors are scalars, while order-1 tensors are vectors. In older literature $v\otimes w$ becomes $vw$ and is called a \emph{dyadic} product. 
+
+The set $\mathcal{T} ^r$ of order $r$ tensors forms a natural vector space: for $S$ and $T$ order $r$ tensors, $aT+bS$ is another order $r$ tensor. We write $\mathcal{T} ^r := V\otimes V \otimes \cdots \otimes V=V^{\otimes r}$. The set $\mathcal{T} =\bigcup_{r} \mathcal{T} ^r$ forms an \textbf{algebra}, basically a ringed vector space satisfying homogeneity. The multiplication says that for $R $ a tensor of order $r$ and $S$ an $s$-tensor, then $R\otimes S$ is an $(r+s)$-tensor. Let us write the (graded) algebra conditions in tensor language:
+\begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+\item \textbf{left distributivity}: $R\otimes (S+T)=R\otimes S+R\otimes T$,
+\item \textbf{right distributivity}: $(S+T)\otimes R=S\otimes R+T\otimes R$,
+\item \textbf{homogeneity}: $T\otimes (aS)=(aT)\otimes S=a(T\otimes S)$.
+\end{enumerate} A tensor also has components in some basis. For $e_i $ a basis of $\R^n $, the canonical basis for $\R^n \otimes \R^m $ is given by the $nm$ elements of $\{e_i \otimes e_j \} $ as $i$ varies over $n$ and $j$ varies over $m$. A general second-order tensor on $\R^n $ is a linear combination of these basis vectors of the form $T=\sum _{ij}T^{ij}e_i \otimes e_j =T^{ij}e_i \otimes e_j $. Usually the basis is understood, so $T^{ij}$ is called a tensor, when it actually gives the components of a tensor with respect to some basis. To find the components of $v\otimes w$, observe that \[
+v\otimes w=v^i e_i \otimes w^j e_j =v^i w^i (e_i\otimes e_j ).
+\] 
+\begin{example}
+    Given a rigid body consisting of a bunch of point masses $m_{\alpha }$ at positions $\mathbf r_{\alpha }=(x_{\alpha ,1},x_{\alpha ,2},x_{\alpha ,3})$, its \textbf{inertia tensor} is given by \[
+        I_{ij}=\sum _{\alpha }m_{\alpha }(r^2_{\alpha }\delta_{ij}-x_{\alpha ,i},x_{\alpha ,j}),
+    \] where $r^2_{\alpha }=\mathbf r_{\alpha }\cdot \mathbf r_{\alpha }$. There is a lot of sloppiness going on with indices and denoting components as tensors.
+\end{example}
+\subsection{Two ways to view general tensors}
+\subsubsection*{1: As an element of the tensor product space} 
+We have been excluding covectors from the fun. A \textbf{tensor of type} $\mathbf {(r,s)} $ is an element of the tensor product space \[
+    T_s^r=\overset{r\, \text{times} }{\overbrace{V\otimes V\otimes \cdots \otimes V} } \otimes \overset{s \, \text{times} }{\overbrace{V^*\otimes V^*\otimes \cdots \otimes V^*} } =V^{\otimes r}\otimes (V^*)^{\otimes s}.
+\] An $r$-tensor previously is now a tensor of type $(r,0)$. This space of all tensors forms a \textbf{multigraded algebra}, that is, multiplying a $(r,s)$-tensor and a $(p,q)$-tensor gives a tensor of type $(r+p,s+q)$. For a basis $\{e_i \} $ of $V$ and dual basis $\{\phi^i \} $ of $V^*$, a basis for $\mathcal{T} _s^r$ is given by \[
+e_{i_1}\otimes e_{i_2}\otimes \cdots \otimes e_{i_r}\otimes \phi^{j_1}\otimes \phi^{j_2}\otimes \cdots \otimes \phi^{j_s},
+\] where the indices run from 1 to $\dim V$. A general tensor of type $(r,s)$ is a linear combination \[
+T=T^{i_1i_2\cdots i_r}_{j_1j_2\cdots j_s}e_{i_1}\otimes e_{i_2}\otimes \cdots \otimes e_{i_r}\otimes \phi^{j_1}\otimes \phi^{j_2}\otimes \cdots \otimes \phi^{j_s},
+\] with an implicit sum over $i_1\cdots i_r$, $j_1\cdots j_s$. From before, we can see that upstairs indices transform contravariantly, while downstairs indices transform covariantly. \[
+T^{i_1'\cdots i_r'}_{j_1'\cdots j_s'}=T^{i_1\cdots i_r}_{j_1\cdots j_s}(A^{-1})^{i_1'}_{i_1}\cdots (A^{-1})^{i_r'}_{i_r'}A^{j_1}_{j_1'}\cdots A^{j_s}_{j_s'}.
+\] 
+\subsubsection*{2: As a multilinear functional on the dual space} 
+Consider the space of multilinear maps $\widetilde{\mathcal{T} }  _s^r$. Recall the \textbf{natural pairing}, where $\langle f,v \rangle =\langle v,f \rangle $ denotes $f(v)$. We can view the tensor $e_{i_1}\otimes \cdots \otimes e_{i_r}\otimes \phi^{j_1}\otimes \cdots \otimes \phi^{j_s}$ as a multilinear map on the space $(V^*)^{\times r}\times V^{\times s}$ that acts according to the rule 
+\begin{align*}
+    (e_{i_1}&\otimes \cdots \otimes e_{i_r}\otimes \phi^{j_1}\otimes \cdots \otimes \phi^{j_s})(\phi^{k_1},\cdots ,\phi^{k_r},e_{\ell_1},\cdots ,e_{\ell_s} )\\
+            &=\langle e_{i_1},\phi^{k_1} \rangle \cdots \langle e_{i_r},\phi^{k_r} \rangle \langle \phi^{j_1},e_{\ell_1} \rangle \cdots \langle \phi^{j_s},e_{\ell_s} \rangle \\
+            &=\delta_{i_1}^{k_1}\cdots \delta^{k_r}_{i_r}\delta^{j_1}_{\ell_1}\cdots \delta^{j_s}_{\ell_s}.
+\end{align*}
+If we view the tensor product this way, we have
+\begin{align*}
+    T&(\phi^{k_1},\cdots, \phi^{k_r},e_{\ell_1},\cdots ,e_{\ell_s})\\
+     &=T^{i_1i_2\cdots i_r}_{j_1j_2\cdots j_s}\times (e_{i_1}\otimes e_{i_2}\otimes \cdots \otimes e_{i_r}\otimes \phi^{j_1}\otimes \phi^{j_2}\otimes \cdots \otimes \phi^{j_s})(\phi^{k_1},\cdots ,\phi^{k_r},e_{\ell_1},\cdots ,e_{\ell_s})\\
+                                                                  &=T^{i_1i_2\cdots i_r}_{j_1j_2\cdots j_s}\delta_{i_1}^{k_1}\cdots \delta^{k_r}_{i_r}\delta^{j_1}_{\ell_1}\cdots \delta_{\ell_s}^{j_s}\\
+                                                                  &=T^{k_1k_2\cdots k_r}_{\ell_1\ell_2\cdots \ell_s}.
+\end{align*}This gives an isomorphism between $\widetilde {\mathcal{T} } _s^r$ and $\mathcal{T} _s^r$. In essence, you can choose to view tensors \emph{passively} as elements of a certain vector space (the tensor product space), or \emph{actively} as multilinear functionals on the dual space. They are two sides of the same coin, so we can interchange the notations as we please.
+\section{Miscellaneous topics}
+TODO: affine spaces, inverse function, change of variables for multiple integrals (spivak 34,67) or tu appendix, rank, nullity, binomial theorem, freed's thing, maybe topology bases, subspace/product, tychonoff, convergnece, etc
+
+\subsection{The Inverse Function Theorem}
+
+
