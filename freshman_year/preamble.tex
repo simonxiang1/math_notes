@@ -10,6 +10,7 @@
 \usepackage{tikz-cd}
 \usepackage{float}
 \usepackage{enumitem}
+\usepackage{mleftright}
 
 %ok
 \usepackage{xcolor}
@@ -100,15 +101,38 @@
                {\end{genericthing*}}
 
 %self explanatory
-\newcommand\N{\ensuremath{\mathbb{N}}}
-\newcommand\R{\ensuremath{\mathbb{R}}}
-\newcommand\A{\ensuremath{\mathbb{A}}}
-\newcommand\Z{\ensuremath{\mathbb{Z}}}
-\renewcommand\O{\ensuremath{\emptyset}}
-\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\newcommand\N{\ensuremath{\mathbb{N}}} 
+\newcommand\R{\ensuremath{\mathbb{R}}} 
+\newcommand\A{\ensuremath{\mathbb{A}}} %affine space
+\newcommand\Z{\ensuremath{\mathbb{Z}}} 
+\renewcommand\O{\ensuremath{\emptyset}} 
+\newcommand\Q{\ensuremath{\mathbb{Q}}} 
 \newcommand\C{\ensuremath{\mathbb{C}}}
-\newcommand\F{\ensuremath{\mathbb{F}}}
-\newcommand\E{\ensuremath{\mathbb{E}}}
+\newcommand\F{\ensuremath{\mathbb{F}}} %field
+\newcommand\E{\ensuremath{\mathbb{E}}} %field extension
+\renewcommand\P{\ensuremath{\mathbb{P}}} %projective space
+\renewcommand\H{\ensuremath{\mathbb{H}}} %hyperbolic space
+\newcommand\im{\ensuremath{\operatorname{im}}} %image
+\newcommand\id{\ensuremath{\operatorname{id}}} %identity map
+\newcommand\grad{\ensuremath{\operatorname{grad}}} %gradient
+\newcommand\curl{\ensuremath{\operatorname{curl}}} %gurl
+\renewcommand\div{\ensuremath{\operatorname{div}}} %divergence
+\newcommand\Gr{\ensuremath{\operatorname{Gr}}} %grassmannian
+\newcommand\Hom{\ensuremath{\operatorname{Hom}}} %linear mappings
+
+\newcommand{\transv}{\mathrel{\text{\tpitchfork}}}
+\makeatletter
+\newcommand{\tpitchfork}{%
+      \vbox{
+              \baselineskip\z@skip
+                  \lineskip-.52ex
+                      \lineskiplimit\maxdimen
+                          \m@th
+                              \ialign{##\crcr\hidewidth\smash{$-$}\hidewidth\crcr$\pitchfork$\crcr}
+                                }%
+                            }
+                            \makeatother
+%transversality
 
 %essential (thanks Dr. Urbanski)
 \renewcommand\qedsymbol{$\boxtimes$}
