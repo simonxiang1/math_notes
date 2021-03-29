@@ -1,30 +1,93 @@
-\section{Preliminary Material}
-\subsection{Calculus}
-\begin{namedthing}{Question}
-    Let $f \colon U \to \R^2$ be a smooth function, where $U \subseteq \R^2$ is open. Is there a smooth function $F \colon U \to \R$ such that $\partial _{x_1}F=f_1, \ \partial _{x_2}F=f_2,$ where $f=(f_1,f_2)$? Note that this implies $\partial _{x_2}f_1=\partial _{x_1}f_2$. Is this a sufficient condition to show the existence of $F$?
-\end{namedthing}
-\begin{example}
-    Consider $f \colon \R^2 \to \R^2$, where \[
-        f(x_1,x_2)= \left( \frac{-x_2}{x_1^2+x_2^2} , \frac{x_1}{x_1^2+x_2^2}\right) 
-    \] Now  
-    \begin{gather*}
-        \partial _{x_2}f_1= \frac{-(x_1^2+x_2^2)+2x_2^2}{(x_1^2+x_2^2)^2}=\frac{x_2^2-x_1^2}{(x_1^2+x_2^2)^2},\\ 
-        \partial _{x_1}f_2= \frac{(x_1^2+x_2^2)-2x_1^2}{(x_1^2+x_2^2)^2}=\frac{x_2^2-x_1^2}{(x_1^2+x_2^2)^2}.
-    \end{gather*} So $f$ satisfies $\partial _{x_2}f_1=\partial _{x_1}f_2$. However, we have no $F \colon \R^2 \setminus \{0\} \to \R$: assume there was such an $F$, then \[
-    \int_{0}^{2\pi } \frac{d}{d\theta}F(\cos \theta, \sin \theta) \, d\theta=F(1,0)-F(1,0)=0.
-    \] But \[
-    \frac{d}{d\theta}F( \cos \theta ,\sin  \theta)= \frac{dF}{dx}(-\sin \theta)+\frac{\partial F}{\partial y}\cos \theta=-f_1(\cos \theta, \sin \theta) \sin \theta+f_2 (\cos \theta, \sin \theta) \cos \theta=1
-    \] by the chain rule, a contradiction. So we have procured a counterexample.
-\end{example}
-\begin{definition}[Star-shaped]
-    A subset $X\subseteq \R^n $ is \textbf{star-shaped} with respect to $x_0\in X$ if the line segment $\{tx_0+(1-t)x\mid t \in [0,1]\} $ is contained in $X$ for all $x \in X$.
+\section{De Rham Cohomology} 
+We finally get to the goods. 
+
+\subsection{The exterior derivative}
+
+Let $U$ denote an open set in $\R^n $, $\{e_1,\cdots ,e_n \} $ the standard basis and $\{\phi_1,\cdots ,\phi_n \} $ the dual basis of $A_1(\R^n )$ (or the basis for the dual space to $\R^n $).
+
+\begin{definition}[]
+    A \textbf{differential} $\mathbf p$\textbf{-form} on $U$ is a smooth map $\omega \colon U \to A_p(\R^n )$. The vector space of all such maps is denoted by $\Omega^p (U)$.
 \end{definition}
+If $p=0$, then $A_0(\R^n )=\R$, and $\Omega^0(U)$ is just the set of smooth functions on $U, C^{\infty}(U,\R)$. The derivative of a smooth map $\omega \colon U \to A_p(\R^n )$ is denoted $D\omega$, and is the linear map \[
+    D_x\omega \colon \R^n  \to A_p(\R^n ), \quad e_i  \mapsto \frac{d}{dt}\omega(x+te_i )_{t=0}=\frac{\partial \omega}{\partial x_i }(x).
+\] Let $I=(i_1,\cdots ,i_p)$, and write $\phi_I$\footnote{It slightly annoys me that indices aren't in the right place, but I don't want to make any mistakes deviating too far from the book, so they stay at the bottom for covectors.} for $\phi_{i_1}\wedge \cdots \wedge \phi_{i_p}$. Then we have the basis $\phi_I$ for $A_p(\R^n )$ as $I$ runs over all sequences of length $p\leq n$. So every $\omega \in \Omega^p(U)$ can be written in the form $\omega (w)=\sum \omega_I(x)\phi_I$, where the $\omega_I$ are smooth real-valued functions of  $x \in U$. The differential $D_x\omega$ is the linear map \[
+D_x\omega(e_j )=\sum_I \frac{\partial \omega_I}{\partial x_j }(x)\phi_I, \quad j=1,\cdots ,n.
+\] The function $x \mapsto D_x\omega$ is a smooth map from $U$ to $\operatorname{Hom}(\R^n ,A_p(\R^n ))$. {\color{red}todo:why? how exactly? difference between thsi and derivative?} 
+\begin{definition}[]
+    The \textbf{exterior differential} $d \colon \Omega^p(U) \to \Omega^{p+1}(U)$ is the linear operator \[
+        d_x\omega(\xi_1,\cdots ,\xi_{p+1})=\sum_{\ell=1}^{p+1} (-1)^{\ell-1}D_x\omega(\xi_{\ell})(\xi_1,\cdots ,\hat{\xi}_{\ell},\cdots ,\xi_{p+1})
+    \] where $(\xi_1,\cdots ,\hat{\xi}_{\ell},\cdots ,\xi_{p+1})=(\xi_1,\cdots ,\xi_{\ell-1},\xi_{\ell +1},\cdots ,\xi_{p+1})$. {\color{red}todo:what?} 
+\end{definition}
+The result lies in $\Omega^{p+1}(U)$ by \cref{transp}. If $\xi_i =\xi_{i+1}$, then 
+\begin{align*}
+    \sum_{\ell=1}^{p+1} &(-1)^{\ell -1}D_x\omega(\xi_{\ell})(\xi_1,\cdots ,\hat{\xi}_{\ell},\cdots ,\xi_{p+1})\\
+    =&(-1)^{i-1}D_x\omega(\xi_i )(\xi_1,\cdots ,\hat{\xi}_i ,\cdots ,\xi_{p+1})\\
+     &+(-1)^i D_x\omega(\xi_{i+1})(\xi_1,\cdots ,\hat{\xi}_{i+1},\cdots ,\xi_{p+1})\\
+    =&0.
+\end{align*}
+In the second step, the rest of the terms cancel out by properties of the exterior product, since they all contain both $\xi_i $ and $\xi_{i+1}$. The final term also cancels out since $(\xi_1,\cdots ,\hat{\xi}_i ,\cdots ,\xi_{p+1})=(\xi_1,\cdots ,\hat{\xi}_{i+1},\cdots ,\xi_{p+1})$.
+
+\begin{example}
+    Let $x_i  \colon U \to \R$ be $i$th projection. Then $dx_1 \in \Omega^1(U)$ is the constant map $dx_i \colon x \to \phi_i $, which follows from the definition of the differential. In general, for $f \in \Omega^0(U)$, we have \[
+        d_x f(\zeta)= \frac{\partial f}{\partial x_1}(x)\zeta^1+\cdots + \frac{\partial f}{\partial x_n }(x)\zeta ^n .
+    \] 
+\end{example}
+
+\begin{lemma}
+    If $\omega(x)=f(x)\phi_I$, then $d_x\omega=d_x f \wedge \phi_I$.
+\end{lemma}
+\begin{proof}
+    Note that \[
+        D_x\omega(\zeta)=(D_x f)(\zeta)\phi_I =\left( \frac{\partial f}{\partial x_1}\zeta^1+\cdots + \frac{\partial f}{\partial x_n }\zeta^n  \right) \phi_I=d_xf (\zeta) \phi_I.
+    \] So by the definition of the exterior derivative, we have 
+    \begin{align*}
+        d_x\omega(\xi_1,\cdots ,\xi_{p+1})&=\sum_{k=1}^{p+1} (-1)^{k-1}d_x f(\xi_k) \phi_I (\xi_1,\cdots ,\hat{\xi}_k,\cdots ,\xi_{p+1})\\
+        &= [d_x f \wedge \phi_I](\xi_1,\cdots ,\xi_{p+1}).\qedhere
+    \end{align*}
+\end{proof}
+{\color{red}todo:this entire proof?} For $\phi_I \in A_p(\R^n )$, we have $\phi_k \wedge \phi_I=0$ if $k \in I$, and $(-1)^r \phi_J$ if $k\notin I$, where $r$ is determined by $i_r < k < i_{r+1}$ and $J=(i_1,\cdots ,i_r,k,\cdots ,i_p)$.
+
+\begin{lemma}
+    For $p\geq 0$, the composition $\Omega^p (U) \to \Omega^{p+1}(U)\to \Omega^{p+2}(U)$ is identically zero.
+\end{lemma}
+\begin{proof}
+    Let $\omega=f \phi_I$. Then $d\omega=df\wedge \phi_I=\frac{\partial f}{\partial x_1}\phi_1\wedge \phi_I + \cdots + \frac{\partial f}{\partial x_n }\phi_n \wedge \phi_I.$ {\color{red}todo:alternating  terms?? does $I$ denote one sequence or several?} Since $\phi_i \wedge \phi_i =0 $ and $\phi_i \wedge\phi_j =-\phi_j \wedge \phi_i $, we have 
+    \begin{align*}
+        d^2\omega&= \sum_{i,j=1}^{n} \frac{\partial ^2 f}{\partial x_i \partial x_j }\phi_i  \wedge (\phi_j \wedge \phi_I)\\
+                 &= \sum_{i<j}^{} \left( \frac{\partial ^2 f}{\partial x_i \partial x_j }-\frac{\partial ^2 f}{\partial x_j \partial x_j } \right) \phi_i \wedge \phi_j  \wedge \phi_I=0.\qedhere
+    \end{align*}
+\end{proof}
+The exterior product on $A_*(\R^n )$ induces an exterior product on $\Omega^*(U)$ by defining $(\omega_1\wedge \omega_2)(x)=\omega_1(x)\wedge \omega_2(x)$. The exterior product of a $p$-form and $q$-form is a $(p+q)$-form, so it induces a bilinear map $\wedge \colon \Omega^p (U) \times \Omega^q(U) \to \Omega^{p+q}(U).$ Then for $f \in C^{\infty}(U,\R)$, we have $(f\omega_1)\wedge \omega_2=f(\omega_1\wedge \omega_2)=\omega_1\wedge f\omega_2$. Note that $f\wedge \omega=f\omega$ when $f \in \Omega^0(U)$ and $\omega \in \Omega^p(U)$.
+
+\begin{lemma}\label{product} 
+    For $\omega_1 \in \Omega^p(U)$ and $\omega_2 \in \Omega^q(U)$, \[
+        d(\omega_1\wedge \omega_2)=d\omega_1 \wedge \omega_2+(-1)^p\omega_1\wedge d\omega_2.
+    \] 
+\end{lemma}
+\begin{proof}
+    It suffices to show this holds for $\omega_1=f \phi_I$ and $\omega_2=g \phi_J$. Since $\omega_1\wedge \omega_2= fg \phi_I\wedge \phi_J$, we have 
+    \begin{align*}
+        d(\omega_1\wedge \omega_2)&=d(fg)\wedge \phi_I\wedge \phi_J=((df)g+fdg)\wedge \phi_I\wedge \phi_J\\
+                                  &= df g\wedge \phi_I\wedge \phi_J + fdg \wedge \phi_I \wedge \phi_J \\
+                                  &= df \wedge  \phi_I \wedge g\phi_J +(-1)^pf \phi_I \wedge dg\wedge \phi_J\\
+                                  &=d\omega_1\wedge\omega_2 +(-1)^p \omega_1 \wedge d\omega_2.\qedhere
+    \end{align*}
+\end{proof}
+
+\subsection{Finally, de Rham cohomology}
+In short, we have a new anti-commutative algebra $\Omega^*(U)$ with a \emph{differential} (or boundary) operator \[
+    d \colon \Omega^*(U) \to \Omega ^{*+1}(U),\quad d\circ d=0,
+\] and $d$ is a \emph{derivation} (since $d(\omega_1\wedge \omega_2)=d\omega_1\wedge \omega_2+d\omega_2\wedge \omega_1$ by \cref{product} and anticommutativity). Then $(\Omega^*(U),d)$ is an \emph{commutative differential graded algebra}\footnote{help}, called the \textbf{de Rham complex} of $U$.
+
 \begin{theorem}
-    Let $U \subseteq \R^2$ be open and star-shaped. Then any smooth function $(f_1,f_2) \colon U \to R^2$ satisfying $\partial _{x_2}f_1=\partial _{x_1}f_2$, there exists a smooth function $F \colon U \to \R$ such that $\partial _{x_1}F=f_1, \ \partial _{x_2}F=f_2$.
+    There is precisely one linear operator $d \colon \Omega^p \to \Omega^{p+1}(U)$, $p=0,1,\cdots ,$ such that 
+    \begin{enumerate}[label=(\roman*)]
+        \setlength\itemsep{-.2em}
+    \item $f \in \Omega^0(U)$, $df=\frac{\partial f}{\partial x_1}\phi_1+ \cdots + \frac{\partial f}{\partial x_n }\phi_n $,
+    \item $d \circ d=0$,
+    \item $d(\omega_1\wedge \omega_2)=d\omega_1\wedge \omega_2+(-1)^p\omega_1\wedge d\omega_2$ if $\omega_1 \in \Omega^p(U)$.
+    \end{enumerate}
 \end{theorem}
 \begin{proof}
-    Messy.
+    We know that the exterior differential $d$ satisfies these properties. To show uniqueness, say $d'$ satisfies these properties: we will show it has to be the exterior derivative. (i) tells us that $d=d'$ on $\Omega^0(U)$ (since it characterizes smooth functions on $U$), in particular $d'x_i =dx_i =\phi_i $. Since $d' \circ d'=0$, then $d'\phi_i=d'(d'(x_i ))=0 $.
 \end{proof}
-Say $U \subseteq R^2$ is open, then let $C^{\infty}(U, \R^k)$ be the vector space of smooth functions $\phi \colon U \to \R^k$. Define the \textbf{gradient} and \textbf{curl} functions\footnote{The book uses \emph{rotation} instead of curl, but I think this is the standard notation.} $\operatorname{grad}\colon C^{\infty} (U,\R)\to C^{\infty}(U, \R^2), \ \operatorname{curl}\colon C^{\infty}(U,\R^2) \to C^{\infty}(U,\R)$ by \[
-    \operatorname{grad}(\phi) = \left( \frac{\partial \phi}{\partial x_1}, \frac{\partial \phi}{\partial x_2} \right) , \qquad \operatorname{curl}(\phi_1,\phi_2)= \frac{\partial \phi_1}{\partial x_2}-\frac{\partial \phi_2}{\partial x_1}.
-\] Note that the curl of the gradient is zero, or $\operatorname{curl}\circ \operatorname{grad}=0$. So the kernel of the curl contains the image of the gradient, since mapping $\operatorname{im}(\operatorname{grad})$ by $\operatorname{curl}$ gives zero. Since $\operatorname{curl}$ and $\operatorname{grad}$ are linear, both $\ker (\operatorname{curl})$ and $\operatorname{im}(\operatorname{grad})$ are (infinite-dimensional) vector spaces, furthermore, $\operatorname{im}(\operatorname{grad})$ is a subspace of $\ker (\operatorname{curl})$. So we can consider the quotient space
