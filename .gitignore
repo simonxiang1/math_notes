@@ -14,4 +14,6 @@ other_classes
 /freshman_year/algebraic_topology/master_homework.*
 /freshman_year/differential_equations/*quiz*
 /freshman_year/differential_geometry/*quiz*
+/freshman_year/differential_geometry/*exam*
+/freshman_year/differential_topology/*exam*
 /freshman_year/complex_analysis/*test*
