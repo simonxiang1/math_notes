@@ -1,0 +1,123 @@
+\section{March 9, 2021}
+\begin{definition}[]\,
+    \begin{enumerate}[label=(\arabic*)]
+        \item A \textbf{topological manifold-with-boundary} is a topological space $X$ which is:
+    \begin{itemize}
+        \setlength\itemsep{-.2em}
+        \item Hausdorff,
+        \item second countable,
+        \item locally homeomorphic to closed affine half-space.
+    \end{itemize}
+\item An \textbf{atlas} is, as before, a covering by charts into closed affine half space with $C^{\infty}$ overlaps.
+    \end{enumerate}
+    Note that $X=\operatorname{Int}X \amalg \partial X$.
+\end{definition}
+\begin{prop}
+    \,
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\operatorname{Int}X$ is a manifold,
+        \item $\partial X$ is a manifold.
+    \end{enumerate}
+\end{prop}
+\begin{example}
+    Consider $D^n  \subseteq \A^n $ a manifold-with-boundary, where $D^n =\{(x^1,\cdots ,x^n )\mid (x^1)^2+\cdots + (x^n )^2\leq 1\} $. We have $\operatorname{Int}D^n =B^n $ an open ball, and $\partial D^n =S^{n-1}$.
+\end{example}
+\begin{proof}
+    \,
+    \begin{enumerate}[label=(\arabic*)]
+        \item Let $p \in \operatorname{Int}X$, and $(U,x)$ be a chart around $p$ where $x \colon U \to A^-$. Set $U'= U \cap \operatorname{Int}A^-$, $x' \colon U' \overset{X|_{U'}}{\longrightarrow} \operatorname{Int}A^- \hookrightarrow A$. Then $(U',x')$ is a chart on $\operatorname{Int}X$.
+        \item Let $p \in \partial X$, and $(U,x)$ a chart about $p$. Set $U ''=U \cap \partial X$ (this is an open subset of $\partial X$). 
+            \begin{figure}[H]
+            \centering
+            \begin{tikzcd}
+U'' \arrow[r, "X|_{U''}"] \arrow[rd, "X''"', dotted] & A^-               \\
+                                                     & H \arrow[u, hook]
+\end{tikzcd}
+            \end{figure}
+    Then $(U'',x'')$ is a chart on $\partial X$.\qedhere
+    \end{enumerate}
+\end{proof}
+
+\subsection{The tangent space of manifolds with boundary}
+Let $X$ be a manifold w/$\partial $\footnote{I wonder if typing this or ``manifold with boundary'' is faster?}. If $p \in X$, then $T_p X \xrightarrow{ (U,x)\,\cong}V $ a vector space. (If $x \colon U \to (\A^n )^-$, then $T_p X \cong \R^n.$ As before, the vector space $T_p X$ patches to a vector bundle \[
+TX= \coprod _{p \in X}T_p X \overset{\pi}{\longrightarrow} X.
+\] Let $p \in \partial X \subseteq X$, then we have a vector subspace
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+T_p(\partial X) \arrow[d, "{(U,x'')}"'] \arrow[r, "\subset", phantom] & T_p X \arrow[d, "{(U,x')}"] \\
+V' \arrow[r, "\subset", phantom]                                      & V                          
+\end{tikzcd}
+\end{figure}
+{\color{red}todo:diagram may be incorrect, also todo: draw some pictures} 
+Then since we have $\frac{\partial }{\partial x^2},\cdots ,\frac{\partial }{\partial x^n }$ is a basis of $T_p (\partial X)$ and $\frac{\partial }{\partial x^1},\cdots ,\frac{\partial }{\partial x^n }$ is a basis of $T_p X$, we have a short exact sequence \[
+    0 \longrightarrow T_p (\partial X) \longrightarrow T_p X \longrightarrow \underset{=\mathcal V_p(\partial X \subseteq X), \dim=1}{T_p X / T_p (\partial X)} \longrightarrow 0.
+\] 
+\begin{definition}[]
+    An \textbf{orientation} of a real line $L$ is a choice of component of $L \setminus \{0\} $. Conventions:
+    \begin{enumerate}[label=(\arabic*)]
+        \item We orient $\mathcal{V} (\partial X \subseteq X)$ by \emph{outward} normals.
+        \item ``quotient before sub''
+        \item ``ONF'', which stands for ``outward normal first''. You can remember this by noting ONF also stands for ``one never forgets''.
+    \end{enumerate}
+\end{definition}
+Over $\partial X$ we have a short exact sequence of vector bundles \[
+    0 \longrightarrow T(\partial X) \longrightarrow TX |_{\partial X}\longrightarrow \mathcal{V} _{\partial X \subseteq X}\longrightarrow 0.
+\] 
+\subsection{Submanifolds of manifolds with boundary}
+{\color{red}todo:figure: what kind of submanifolds are not allowed?} 
+Let $A$ be affine, $H \subseteq A$ be an affine hyperplane, $A^-$ be the closure of components of $A \setminus H$, $S \subseteq A$ be an affine subspace where $S\pitchfork H$ ($V' +V''=V$). Define $S^-=S \cap  A^-$.
+\begin{definition}[]
+    Let $X$ be a manifold with boundary, $W \subseteq X$ be a subset. Then $W$ is a \textbf{neat submanifold} if for all $p \in W$, we have a local chart of this form: {\color{red}todo:figure}. It ``straightens out'' the submanifold.
+\end{definition}
+
+\subsection{Construction via regular values/tranverse pullback}
+\begin{prop}
+    Let $X$ be a standard manifold, $f \colon X \to \R$ be smooth, and $c \in R$ a regular value. Then $f ^{-1}(\R^{\leq c})$ is a manifold with boundary $f^{-1}(c)$.
+\end{prop}
+{\color{red}todo:insert drawn figure about torus}. This picture is the poster child for \emph{Morse theory,} where the set of critical values is a discrete set of points. Something about bordism and pinching circles at the critical value. Notation: let $f \colon X \to Y$, $X$ is a manifold with boundary, $\partial f=f|_{\partial X}, \partial X\to Y$.
+\begin{theorem}
+    Let $X$ be a manifold with boundary, $Y$ be a manifold, $f \colon X \to Y$ smooth. Then the subset of $Y$ consisting of simultaneous regular values of $f, \partial f$ is dense.
+\end{theorem}
+This is a conseqeunce of Sard's theorem.
+\begin{proof}
+    A regular point $p \in \partial X$ of $\partial f$ is regular for $f$:
+    \begin{figure}[H]
+    \centering
+    \begin{tikzcd}
+T_p(\partial X) \arrow[dd, hook] \arrow[rrd, "d(\partial f)_p"] &  &           \\
+                                                                &  & T_{f(p)}Y \\
+T_p X \arrow[rru, "df_p"']                                      &  &          
+\end{tikzcd}
+    \end{figure}Look for simultaneous regular values of $\partial f \colon \partial X \to Y$, $f|_{\operatorname{Int}X}\colon \operatorname{Int}X \to Y$.
+\end{proof}
+\begin{theorem}
+    Let $X$ be a manifold with boundary and $Y$ a manifold, $f \colon X \to Y$. Let $q \in Y$ be a regular value under $f, \partial f$. Then $W=f ^{-1}(q) \subseteq X$ is a neat submanifold. \[
+        \mathcal{V} _p(W \subseteq X) \underset{\cong}{\xrightarrow{df_p} } T_{f(p)}Y \implies \operatorname{codim}_p(W \subseteq X)=\dim _{f(p)}Y.
+    \] 
+\end{theorem}
+\begin{remark}
+    There is a generalization to $Z \subseteq Y$ a submanifold, where $f ,\partial f \pitchfork Z\implies  W:= f^{-1}(Z)$ is a neat submanifold of $X$.
+\end{remark}
+\begin{proof}
+    Let $p \in W \cap  \operatorname{Int}X$ as before, $p \in W \cap \partial X$. Choose $(V; y^1,\cdots ,y^n $ about $q$, $y^{\alpha }(q)=0$, $U;x^1,\cdots ,x^m)$ about $p$, $f(U) \subseteq V$.
+    \begin{claim}
+        $x^1,f^{\alpha }y',\cdots <f^{\alpha }y^n $ have linearly independent differentials at $p$. $f^* y^{\alpha }=y^{\alpha }\circ f$. $W \cap U=\{f^{\alpha }y'= \cdots =f^{\alpha }y^n =0\} $. {\color{red}todo:?? see notes for this proof} Complete to a chart at $p:$ \[
+        x^1, \widetilde x^2,\cdots , \widetilde x^{m-n}, f^{\alpha }y',\cdots ,f^{\alpha }y^n \qedhere
+        \] 
+    \end{claim}
+\end{proof}
+\begin{theorem}
+    Let $X$ be a connected $1$-manifold with boundary. Then $X$ is diffeomorphic to one of the following:
+    \begin{itemize}
+        \setlength\itemsep{-.2em}
+    \item $S^1 $ (compact, no boundary)
+    \item $[0,1]$ (compact, no boundary)
+    \item $\R$ (noncompact, no boundary)
+    \item $[0,1)$ (nocompact, boundary)
+    \end{itemize}
+\end{theorem}
+\begin{cor}
+    If $X$ is a \emph{compact} $1$-manifold with boudary, then $\# \partial X \in  \partial \Z$.
+\end{cor}
+You can prove this with Morse functions or Riemannian metrics.

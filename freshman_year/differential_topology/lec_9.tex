@@ -1,0 +1,106 @@
+\section{February 25, 2021}
+\subsection{Fiber Bundles}
+\begin{definition}[]
+    Let $\pi \colon E \to M$ be a smooth map of smooth manifolds. We say $\pi $ is a \textbf{fiber bundle} if for all $p \in M$ there exists an open neighborhood $U \subseteq M$ around $p$ and a diffeomorphism $\varphi \colon U\times \pi ^{-1} (p)\to \pi ^{-1}(U)$ such that the following diagram commutes:
+    \begin{figure}[H]
+    \centering
+    \begin{tikzcd}
+U \times \pi ^{-1}(p) \arrow[rdd, "\operatorname{pr}_1"'] \arrow[rr, "\varphi"] &   & \pi^{-1}(U) \arrow[ldd, "\pi"] \\
+                                                                                &   &                                \\
+                                                                                & U &                               
+\end{tikzcd}
+    \end{figure}
+    The domain $E$ is the \textbf{total space} and the codomain $M$ is the \textbf{base} of the fiber bundle $\pi$. We denote $E_p= \pi ^{-1}(p)$ to be the fiber over the point $p$ in the base.
+\end{definition}
+The parametrized version of a smooth map of manifolds is a map of fiber bundles. Let $\pi' \colon E' \to M$ and $\pi \colon E \to M$ be fiber bundles over the same base. Then a map of fiber bundles is a smooth map $\varphi \colon E' \to E$ which fits into the commutative diagram
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+E' \arrow[rdd, "\pi'"'] \arrow[rr, "\varphi"] &   & E \arrow[ldd, "\pi"] \\
+                                              &   &                      \\
+                                              & M &                     
+\end{tikzcd}
+\end{figure}
+It is a smooth family of smooth maps $\varphi _p \colon E'_p \to E_p$ parametrized by $p \in M$. When the fiber bundles $\pi',\pi$ have extra structure---like bundles of affine spaces, vector spaces, Lie groups, etc.---then we may require that $\varphi _p$ preserve that structure.
+\begin{definition}[]
+    A \textbf{section} of a fiber bundle $\pi\colon E \to M$ is a map $\sigma \colon M \to E$ such that $\sigma$ is a right inverse for $\pi$, that is, $\pi(\sigma(x))=x$ for all $x \in M$. A \textbf{local section} is a section on an open $U \subseteq M$.
+\end{definition}
+\begin{definition}[Fiber product]
+    The fiber product is the parametrized version of the Cartesian product of manifolds. Let $M$ be a smooth manifold and $\pi_i \colon E_i  \to M$, $i=1,2$ fiber bundles over $M$. Define \[
+        E_1 \times_M E_2= \{(e_1,e_2) \in E_1 \times E_2 \mid \pi_1(e_1)=\pi_2(e_2)\} 
+    \] Then $E_1 \times _M E_2 \subseteq E_1 \times  E_2$ is a submanifold. (We prove this once we have the tool of transversality.) The maps $\pi_1,\pi_2$ agree and determine a map $\pi \colon E_1 \times _M E_2 \to M$, which is a fiber bundle. Namely, local trivializations $\varphi_1,\varphi_2  $ of $E_1,E_2$ over open neighborhoods $U_1,U_2$ of a point $p \in M$ combine to a local trivialization of $\pi$ over $U_1 \cap U_2$. This generalizes to a fiber product of a finite set of fiber bundles over a common base.
+\end{definition}
+
+\subsection{Examples of fiber bundles}
+
+\begin{example}
+    Let $V$ be a $2$ dimensional vector space and $A$ be an affine space over $V$. Let $E$ be the space of affine lines in $A$. Given a line in $A$, we get a corresponding line in $V $ by {\color{burntorange}something, todo}. We claim that $\pi$ is a fiber bundle. So $\pi ^{-1}(L)$ is the set of parallel lines with tangent direction $L$. If we choose $K$ the complement to $L$, where $K\oplus L=V$, we identify $K$ with $\pi ^{-1}(L)$ by the isomorphism $\xi \mapsto  \ell + \xi$.
+\end{example}
+\begin{example}
+    Here we give an example of a surjective submersion that is not a fiber bundle. Let \[
+        E= \{(x,y,z) \in \A^3 \mid y^2+z^2=1\} \setminus \{(0,0,1),(0,0,-1)\} ,
+    \] which looks like an infinite cylinder minus two points.
+\end{example}
+\begin{example}[Covering spaces]
+    A (smooth) covering space $\pi \colon E \to M$ is a fiber bundle. To see this, recall that every $p \in M$ has an open neighborhood $U \subseteq M$ which is evenly covered, i.e., there is a discrete set $S$ and a homeomorphism \[
+        \varphi  \colon U\times S \to \pi ^{-1}(U)
+    \] which commutes with projection to $U$. This is precisely the local trivialization condition. So a fiber bundle with discrete fibers is a covering space.
+\end{example}
+
+\begin{example}[Affine lines in a plane]\label{affine} 
+    Let $V$ be a $2$-dimensional $\R$-vector space, and let $A$ be affine over $V$. Let $E$ be the $2$-manifold of affine lines in $A$. Each affine line determines a $1$-subspace, its tangent line. Assigning the line is a smooth map $\pi \colon E \to \P V$. We claim that $\pi$ is a fiber bundle. Fix $K \in \P V$ and $p \in A$. Let us produce a local trivialization of $\pi$ on $U= \P V \setminus \{K\} $. First, observe that $p$ determines a section $s_p \colon \P V \to E$ of $\pi$, which assigns to each $L \in \P V$ the unique affine line through $p$ with tangent line $L$. Define 
+    \begin{align*}
+        \varphi  \colon U\times K &\to \pi ^{-1}(U)\\
+        L, \xi & \mapsto s_p(L)+\xi.
+    \end{align*}Then $\varphi $ is a diffeomorphism which commutes with projection, and is therefore a local trivialization, and fiber bundle.
+\end{example}
+\begin{remark}
+    The section $s_p$ is an exampe of a ``smoothly varying'' family of affine lines, and the fiber bundle makes this notion precise.
+\end{remark}
+\begin{remark}
+    The fibers of \cref{affine} have more structure, they are affine spaces. More precisely, $\pi ^{-1}(L)$ is affine over $V /L$. In fact, there is a vector bundle $Q \to \P V$ whose fiber at $L \in \P V$ is the vector space $V /L$, and $\pi$ is a bundle of affine spaces over $Q \to \P V$, a parametrized version of a single affine space over a single vector space. This is an example of a nontrivial fiber bundle.
+\end{remark}
+\begin{example}[Nonexample no.1]
+    Here we give a (non)example of a surjective submersion that isn't a fiber bundle. Define \[
+        E= \{(x,y,z) \in \A^3\mid y^2+z^2=1\}  \setminus \{(0,0,1),(0,0,-1)\} .
+    \] This is a cylinder minus two points $n,s$. Let $P$ denote the space of affine planes in $\A^3$ which contain the $z$-axis, then $P$ is diffeomorphic to $\R \mathrm P^1$ (consider the natural projection onto the the $xy$-plane). 
+
+    Define $\pi \colon E \to P$ to be the map taking $p \in E$ to the plane containing the distint non-colinear points $n,s,p$, where $n$ and $s$ are the deleted north and south poles. Then $\pi$ is surjective and a submersion: for the latter, a motion germ in $P$ is represented by a curve $\Pi _{\ell}$ of planes through the $z$-axis. Intersect with the affine line $x=1, \ z=0$ to lift to a motion $p_t$ in $E$ such that $\pi(p_t)=\Pi_t$.
+
+    However, $\pi$ is \emph{not} a fiber bundle. The typical fiber bundle of $\pi$ has total space an ellipse minus $n,s$, whereas the fiber over the $xz$-plane $\Pi_{xz}$ is the union of two affine lines minus $n,s,$, which is not diffeomorphic to the other fibers. So $\pi$ cannot be locally trivial over $\Pi _{xz}$.
+\end{example}
+
+\subsection{Vector Bundles}
+\begin{definition}[]
+    A \textbf{vector space} consists of the data $(V,0,+,\times )$ where $V$ is a set, $0 \in V$ is a distinguished element (the zero vector), $+ \colon V\times V \to V$ and $x \colon \R\times V \to V$ are addition and scalar multiplication. We have some axioms, like $(V,0,+)$ is an abelian group, scalar multiplication distributes over vector addition, etc.
+\end{definition}
+
+\begin{definition}[Vector bundle]
+    A \textbf{vector bundle} $(\pi,0,+,\times )$ consists of a fiber bundle $\pi \colon E \to M$; a section $0 \colon M \to E$ of $\pi$, called the \textbf{zero section}; a smooth map $+ \colon E \times _M E \to E$ such that 
+    \begin{figure}[H]
+    \centering
+    \begin{tikzcd}
+E \times_M E \arrow[rr, "+"] \arrow[rd] &   & E \arrow[ld, "\pi"] \\
+                                        & M &                    
+\end{tikzcd}
+    \end{figure} commutes; and a smooth map $x \colon \R\times  E\to E$ such that 
+    \begin{figure}[H]
+    \centering
+    \begin{tikzcd}
+\R \times E \arrow[rr, "\times"] \arrow[rd] &   & E \arrow[ld, "\pi"] \\
+                                            & M &                    
+\end{tikzcd}
+    \end{figure} commutes. We also require the vector space axioms and that local trivializations for $\pi$ be linear maps on fibers. We know that each fiber $E_p, \ p \in M$ of $\pi \colon E \to M$ is a vector space. The last condition, that local trivializations be linear on fibers requires this be a locally trivial family of vector spaces. Explicity, it asserts that for each $p \in M$ there exists an open neighborhood $U \subseteq M$ and a diffeomorphism $\varphi $ in the diagram
+    \begin{figure}[H]
+    \centering
+    \begin{tikzcd}
+U\times E_p \arrow[rr, "\varphi"] \arrow[rdd, "\operatorname{pr}_1"'] &   & \pi^{-1}(U) \arrow[ldd, "\pi"] \\
+                                                                      &   &                                \\
+                                                                      & U &                               
+\end{tikzcd} 
+    \end{figure}such that $\varphi |_{p' \times E_p} \colon E_p \to E_{p'}$ is a linear isomorphism for all $p' \in U$.
+\end{definition}
+
+\subsection{Constructions of vector bundles}
+{\color{red}todo:this section, also todo: tangetn/cotangent bundle} 
+

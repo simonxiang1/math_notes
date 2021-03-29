@@ -16,9 +16,11 @@ Let $\mathcal{A} = \{(U _{\alpha }, x _{\alpha })\} _{\alpha \in A}$ be an atlas
                 \item Given $\{M_{\alpha }\} _{\alpha \in A}$, the Cartesian product product of manifold is also a manifold. For example, the torus $S^1  \times  S^1 $ is also a smooth manifold.
                 \item Let $M$ be a smooth manifold. Then $N \subseteq M$ open means that $N$ is also a smooth manifold, with the subspace topology. For example, $\operatorname{GL}_n (\R) \subseteq  M_n \R$ as an $n^2$-dimensional vector space, so this forms a smooth manifold. This forms an open subset, which can be realized as the inverse image of an open set $(\R \setminus \{0\} )$ under a continuous map, the determinant.
             \end{enumerate}
-        \item Let $V$ be a real vector space with positive dimension $n$, and $k \in \{0,1,\cdots ,n\} $. Then we define the \textbf{Grassmannian} $\operatorname{Gr}_k(V)$ as the set of $W \subseteq V$ subspaces of dimension $k$. For example, if $V=\A^2$ and $k=1$, then this is $\R \mathrm P^1$. In general, $\operatorname{Gr}_1(V)=\mathbb P V$ which is projective space. 
+        \item Let $V$ be a real vector space with positive dimension $n$, and $k \in \{0,1,\cdots ,n-1\} $. Then we define the \textbf{Grassmannian} $\operatorname{Gr}_k(V)$ as the set of $W \subseteq V$ subspaces of dimension $k$. For example, if $V=\A^2$ and $k=1$, then this is $\R \mathrm P^1$. In general, $\operatorname{Gr}_1(V)=\mathbb P V$ which is projective space. 
 
             To think about how to construct an atlas, let $w' \in  \operatorname{Gr}_k(V)$. Then $w'\oplus w''=V$ (dimension $k$ and $n-k$). Consider $\psi \colon \operatorname{Hom}(w', w'') \to \operatorname{Gr}_k(V)$, $L \mapsto  \Gamma_L$, the graph of $L.$ This is an injective map, and $U_{w''}:=\operatorname{im}\psi = \{ W \in  \operatorname{Gr}_k(V)  \mid w \cap w''=0\} $ (can't be vertical). Then $\psi ^{-1}$ is a chart with values in the vector space $\operatorname{Hom}(w',w'')$, and image $\psi=U_{w''}$ only depends on $w''$. It can be given an \emph{affine} space structure.
+
+            Now we construct a topology and atlas on $\operatorname{Gr}_k(V)$. For $X \in \Gr_{n-k}(V)$, define $V_X= \Hom (V /X,X)$, $A_X= \{W \in \Gr_k(V)\mid W\cap X=0\} .$ Define on $A_X$ the structure of an affine space over $V_X$. Namely, every $W \in A_X$ is a linear complement to $X$, or $V=W \oplus X$. {\color{red} todo: finish constructing the grassmannian}
     \end{enumerate}
 \end{example}
 
@@ -34,13 +36,21 @@ What does it mean for a map $f \colon M \to N$ between topological spaces to be 
     \] is $C^{\infty}$.
 \end{definition}
 \begin{lemma}
-    If the condition above is true for one choice of chart, then it is true for all choices of charts. 
+    If the condition above is true for one choice of chart, then it is true for all choices of charts.
 \end{lemma}
-This relies on the fact that a composition of smooth maps is smooth and the chain rule. Explicitly, say $f$ is smooth. Then $(y\beta \circ f \circ x_{\alpha }^{-1})$ is $C^{\infty}$, and we compose with the transition function $(x _{\alpha }\circ x_{\alpha '}^{-1})$ to change charts. But this is a composition of $C^{\infty}$ maps, which is also $C^{\infty}$. Similarly, changing charts in the codomain gives the composition $(y _{\beta' }\circ y _{\beta }^{-1}) \circ (y _{\beta }\circ f \circ x _{\alpha }^{-1})$, which is $C^{\infty}$.
+\begin{proof}
+    This relies on the fact that a composition of smooth maps is smooth and the chain rule. Explicitly, say $f$ is smooth. Then $(y_{\beta }\circ f \circ x_{\alpha }^{-1})$ is $C^{\infty}$, and we compose with the transition function $(x _{\alpha }\circ x_{\alpha '}^{-1})$ to change charts. But this is a composition of $C^{\infty}$ maps, which is also $C^{\infty}$. Similarly, changing charts in the codomain gives the composition $(y _{\beta' }\circ y _{\beta }^{-1}) \circ (y _{\beta }\circ f \circ x _{\alpha }^{-1})$, which is $C^{\infty}$.
+\end{proof}
 \begin{example}
     Let $f \colon S ^2 \to S ^2$ be the antipodal map. This is just the restriction of an affine map $f \colon \A^3 \to \A^3, (x,y,z)\mapsto (-x,-y,-z)$. If $p=(1 /\sqrt{2} , 1/\sqrt{2} ,0)$, $U_{\alpha }=\{x>0\} $, $f(p)=(-1 /\sqrt{2} , -1 /\sqrt{2} ,0)$, $V_{\beta }=\{y<0\} $. Then \[
         y _{\beta }\circ f \circ x _{\alpha }^{-1} (u,v)= \left( -\sqrt{1-u^2-v^2} , -v \right) .
     \] 
 \end{example}
 
-
+\subsection{The Tangent Space}
+This is how Freed defines the tangent space, aaaaa. Let $\underset{\alpha \in A}{\coprod} V_{\alpha }$ be the direct product of vector spaces $V_{\alpha }.$ An element $\xi$ of the direct product looks like $\{\xi_{\alpha }\} .$ The sum is defined by $(\xi+\eta)_{\alpha }=\xi _{\alpha }+\eta _{\alpha }$. Let $X$ be a smooth manifold with atlas $\mathscr{A} =\{(U_{\alpha },x_{\alpha })\} _{\alpha \in A}$, where $x_{\alpha }\colon U_{\alpha }\to  \A_{\alpha } $. Note that $\A_{\alpha }$ is affine space with a vector space $V_{\alpha }$ of translations. For $p \in X$, let $A_p \subseteq A$ be the set of indices such $p \in U_{\alpha }$, and set $\mathscr A_p= \{(U_{\alpha },x_{\alpha })\} _{\alpha \in A_p}$.
+\begin{definition}[]
+    The tangent space $T_pX$ is the subspace of $\underset{\alpha \in A_p}{\coprod} V_{\alpha }$ consisting of the vectors $\xi =\{\xi _{\alpha }\} $ such that \[
+        \xi _{\beta }=d (x_{\beta }\circ x_{\alpha }^{-1})_{x_{\alpha }(p)}(\xi_{\alpha })
+    \] for all $\alpha ,\beta \in A_p$.
+\end{definition} {\color{red} come back and finish notes on tangetn space+watch lecture}

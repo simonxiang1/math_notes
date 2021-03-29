@@ -12,35 +12,43 @@ Let $V, W$ be finite dimensional real vector spaces.
     Let $T \colon V \to W$ be linear. Then
     \begin{enumerate}[label=(\roman*)]
         \item $\operatorname{rank}T= \operatorname{dim}T(V) \leq \min (\dim V, \dim W)$
-        \item $T$ has \textbf{maximal rank} if injective, bijective, surjective (?)
+        \item $T$ has \textbf{maximal rank} if there is equality above. 
     \end{enumerate}
+    A maximal rank map is injective if $\dim V \leq \dim W$, bijective if $\dim V=\dim W$, and surjective if $\dim V \geq \dim W$.
 \end{definition}
 
 \begin{lemma}\,
+    Let $V,W$ be finite dimensional vector spaces.
     \begin{enumerate}[label=(\roman*)]
-        \item $\operatorname{Max} \operatorname{Rank}(V,W) \subseteq \operatorname{Hom}(V,W)$ is open
+        \item The space of maximal rank linear maps $\operatorname{MaxRank}(V,W) \subseteq \operatorname{Hom}(V,W)$ is open.
         \item If $T \in \operatorname{Max} \operatorname{Rank}(V,W)$, then there exist $\{e_1,\cdots ,e_m\} $ a basis for $V$, $\{f_1,\cdots ,f_n \} $ a basis for $W$ such that 
             \begin{align*}
-                T(e_j )&= \ \ \, f_j , \quad j=1,\cdots ,m \quad \dim V \leq \dim W\\
+                T(e_j )&= \ \ \, f_j , \quad j=1,\cdots ,m \qquad \text{if} \ \dim V \leq \dim W,\\
                 T(e_j )&=
                 \begin{cases}
                     f_j , \quad j=1,\cdots ,m\\
                     0, \quad j=m+1,\cdots ,n
-                \end{cases}\quad \dim V \geq \dim W
+                \end{cases}\quad \text{if} \ \dim V \geq \dim W.
             \end{align*}
     \end{enumerate}
 \end{lemma}
 \begin{proof}
-    missed this
+    For (1), if $\dim V=\dim W$, we have already given the argument that the subset of isomorphisms $\operatorname{Iso}(V,W) \subseteq \Hom(V,W)$ is open, by showing that this is the preimage of an open set (specifically $\R\setminus \{0\} $) under the smooth function $\det \colon \operatorname{GL}(n,\R) \to \R$.
+
+    If $\dim V <\dim W$ and $T_0 \colon V \to W$ has maximal rank, choose $W_0 \subseteq W$ complementary to $T_0(V)$. In other words, $W= T_0(V) \oplus W$. If $\pi \colon W \to W /W_0$ is the projection map, define \[
+        p \colon \Hom(V,W) \to \Hom (V,W /W_0), \quad T \mapsto \pi \circ T.
+    \] {\color{red}todo: finish this} 
 \end{proof}
 
+\subsection{The maximal rank condition for smooth maps of manifolds}
 \begin{definition}[]
-    Let $f \colon M \to N$, $p \in M$.
+    Let $f \colon M \to N$ be smooth, $p \in M$, $q=f(p)$. The differential $f$ at $p$ is a linear map $df_p \colon T_pM \to T_qN$.
     \begin{enumerate}[label=(\roman*)]
         \item If $df_p$ is injective, then $f$ is an \textbf{immersion} at $p$.
         \item If $df_p$ is surjective, then $f$ is a \textbf{submersion} at $p$ (or \textbf{regular}, or $p$ is a regular point).
         \item If $df_p$ is not surjective, then $p$ is a \textbf{critical point}.
-        \item $q \in N$ is a \textbf{regular value} if all $p \in f^{-1}(q)$ are regular points, and a \textbf{critical value} if this is not the case (there exists a $p \in f^{-1}(q)$ that is critical).
+        \item If all $p \in f^{-1}(q)$ are regular points, then $q$ is a \textbf{regular value} of $f$.
+        \item If there exists a $p \in f^{-1}(q)$ a critical point, then $q$ is a \textbf{critical value} of $f$.
     \end{enumerate}
 \end{definition}
 \begin{remark}
@@ -50,9 +58,7 @@ Let $V, W$ be finite dimensional real vector spaces.
 \begin{namedthm}{Sard's Theorem}
     Let $\operatorname{Crit}(f) \subseteq N$ be the subset of critical values. Then $\operatorname{Crit}(f)$ has measure zero for $f$ smooth.
 \end{namedthm}
-\begin{cor}
-    $\operatorname{Reg}(f)$ is nonempty.
-\end{cor}
+As a corollary, we have the set of regular values dense, and in particular nonempty. The set of critical values can be empty however, an example being the identity map $\id_M \colon M \to M$ on any $M$.
 \begin{definition}[]
     $f \colon M \to N$ is a \textbf{diffeomorphism} if $f$ is bijective and $f ^{-1}$ is smooth.
 \end{definition}
@@ -72,14 +78,14 @@ Let $V, W$ be finite dimensional real vector spaces.
 \end{proof}
 
 \begin{prop}
-    Say $p \in M$ a smooth manifold, and $U \subseteq M$ open.
+    Say $p \in M$ a smooth manifold, $n=\dim_p M$, and $U \subseteq M$ open containing $p$.
     \begin{enumerate}[label=(\roman*)]
         \item Suppose $x^1,\cdots ,x^n  \colon U \to \R$, and $dx^1_p ,\cdots ,dx_p ^n $ form a basis of $T_p^*M=(T_pM)^*$. Then there exists a $U' \subseteq U$ such that $(U'; x^1,\cdots ,x^n )$ is a chart.
         \item For $x^1,\cdots ,x^k \colon U \to \R$, $k<n$, and the $dx_p^1,\cdots ,dx_p^k$ are linearly independent, then there exists a $U' \subseteq U$ andd $x^{k+1},\cdots ,x^n  \colon U' \to \R$ such that $(U' ; x^1,\cdots ,x^k)$ is a chart.
         \item For $x^1,\cdots ,x^{\ell}\colon U \to \R$, $\ell >n$, $dx_p^1,\cdots ,dx_p ^{\ell}$ spanning $T_p^*M$, then there exists a $U' \subseteq U$, $\{i_1,\cdots ,i_n \} \subseteq \{1,\cdots ,\ell\} $ such that $(U' ; x^{i_1},\cdots ,x^{i_{\ell}}$ is a chart.
     \end{enumerate}
 \end{prop}
-
+    {\color{red}todo:prove this stuff and the stuff below it} 
 \begin{theorem}
     Let $f \colon M \to N$,  $p \in M$, $\dim _p M=m, \dim _{f(p)}N=n$, $df_p$ have maximal rank. Then there exist charts $p \in (U,x), f(p) \in (V,y)$ such that 
     \begin{align*}
@@ -93,14 +99,16 @@ Let $V, W$ be finite dimensional real vector spaces.
 \end{theorem}
 
 \begin{definition}[]
-\,
-   \begin{enumerate}[label=(\arabic*)]
-       \item $f \colon M \to N$ is an \textbf{embedding} if $f$ is a 1-1 (global) immersion (local) which is a homeomorphism onto its image.
-       \item $Q \subseteq N$ is a \textbf{submanifold} if for all $q \in Q$, there exists a $(V,y)$ chart about $q$ such that \[
-       Q \cap V= \{y ^{\ell+1}= \cdots =y^n =0\} ,
-       \] where $\dim_q Q=\ell, \dim _q N=n$.
-   \end{enumerate} 
+       We say $f \colon M \to N$ is an \textbf{embedding} if $f$ is a 1-1 (global) immersion (local) which is a homeomorphism onto its image.
 \end{definition}
+\begin{definition}[]
+    Let $M$ be a smooth manifold and $Q \subseteq N$ a subset. Then $Q$ is a \textbf{submanifold} of $N$ if for all $q \in Q$ there exists $\ell \in \{0,\cdots ,n\} $ and a chart $(V,y)$ of $N$ about $q$ such that\[
+        y(Q\cap V)=\{(y^1,\cdots ,y^n )\in \A^n \mid y^{\ell+1}=\cdots=y^n =0 \} \cap y(V).
+    \] The integer $\ell$ is the \textbf{codimension} of $Q$ in $N$ at the point $q$.
+\end{definition}
+\begin{remark}
+    Note that submanifolds are manifolds, with the chart $\mathcal{A} =\{(V_{\alpha} \cap Q; y^1_{\alpha },\cdots ,y_{\alpha }^{\ell})\} $, where $\mathcal{A} =\{(U_{\alpha} ,y_{\alpha })\} $ is a covering of $Q$ by submanifold charts.
+\end{remark}
 \begin{example}
     Consider $f \colon \R \to \R^2 / \Z^2$, $t \mapsto  (tx_0, ty_0) \pmod{\Z^2}$. If $y_0 /x_0$ is irrational, it doesn't hit any points on the $\Z^2$ lattice besides zero, so it winds densely around the torus. So this is an injective immersion, but \emph{not} an embedding, and the image $Q \subseteq \R^2 /\Z^2$ is \emph{not} a submanifold.
 \end{example}

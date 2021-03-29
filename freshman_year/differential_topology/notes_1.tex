@@ -32,3 +32,15 @@ If $X$ and $Y$ are smooth manifolds, then a smooth map $f \colon X \to Y$ is a \
 \begin{namedthm}{The Inverse Function Theorem}
   Suppose that $f \colon X \to Y$ is a smooth map whose derivative $df_x$ at the point $x$ is an isomorphism of tangent spaces. Then $f$ is a local diffeomorphism at $x$.
 \end{namedthm}
+
+\subsection{Sard's Theorem and Morse Functions}
+What is measure zero? Transversality is a generalization of regularity, which is useful. We say some $A \subseteq \R^{\ell}$ has \textbf{measure zero} if it can be covered by a countable number of rectangular solids with arbitrary small total volume. A rectangular solid in $\R^{\ell}$ is a product of $I$ intervals in $\R$ with volume the product of the lengths. So $A$ has measure zero if for every $\varepsilon >0$, there exists a countable collection $\{S_1 ,S_2,\cdots \} $ of solids in $\R^{\ell}$ such that $A$ is contained in the union of the $S_i $, and \[
+    \sum_{i=1}^{\infty} \operatorname{vol}(S_i )<\varepsilon .
+\] 
+
+
+\subsection{The Tangent Bundle}
+The tangent spaces to $X$ at points are vector subspaces of $\R^n $ that generally overlap. The \textbf{tangent bundle} $T(X)$ is an artifice used to ``pull them apart''. Specifically, we have $T(X) \subseteq X\times \R^n $ defined by \[
+    T(X) = \{(x,v) \in X \times \R^n \mid v \in T_x(X)\} .
+\] $T(X)$ contains a copy $X_0$ of $X$, consisting of the points $(x,0)$. 
+

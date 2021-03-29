@@ -1,0 +1,108 @@
+\section{March 4, 2021}
+
+\subsection{Maximal rank and open conditions}
+What is a family of maps? We know what a family of smooth manifolds is, with a fiber bundle $\pi \colon X \to S$. Then we have a family of manifolds $X_s, \ s \in S$. For a smooth manifold, fix some manifolds $X,Y$. Then in our parameter space $S$, we have for $s \in S$ a map $F_s \colon X \to Y$, where $F \colon S\times X \to Y$, $F_s(x)=F(s,x)$, for $s \in S$.
+
+Now say we have varying manifolds $F_s \colon X_s \to Y_s$. Then we have two fiber bundles 
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+X \arrow[rr, "F"] \arrow[rdd, "\pi_X"'] &    & Y \arrow[ldd, "\pi_Y"] \\
+                                        &    &                        \\
+                                        & {} &                       
+\end{tikzcd}
+\end{figure}    
+where $\pi_X,\pi_Y$ are fiber bundles, and $F$ is smooth. Certain properties are \emph{stable} {\color{red}todo:(? not sure)}, or they hold in \emph{open} subsets of $S$. Consider the diagram
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+E \arrow[rdd, "\pi_E"'] \arrow[rr, "T"] &   & F \arrow[ldd, "\pi_F"] \\
+                                        &   &                        \\
+                                        & M &                       
+\end{tikzcd}
+\end{figure} where $\pi_E,\pi_F$ are vector bundles. Let $m \in M$, and $T_m$ be of maximal rank. Then there exists an open set $U\subseteq M$ containing $m$ such that $T_{m'}$ has maximal rank if $m' \in U$. We have $V \subseteq M$ an open neighborhood of $m$ with local trivializations. A technique we will use in the proof is:
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+E|_V \arrow[rr, "T"]                                &  & F|_V                            \\
+V\times E_m \arrow[u, "\cong"] \arrow[rr, "S_{m'}"] &  & V\times F_m \arrow[u, "\cong"']
+\end{tikzcd} where $S_{m'}\colon E_m \to F_m$, $m' \in V$.
+\end{figure}
+\begin{theorem}
+   Let $X,Y,S$ be smooth manifolds, $X$ be compact, $Z \subseteq Y$ be a submanifold, $F \colon S\times X \to Y$ be smooth. Then there exists an open neighborhood $W \subseteq S$ containing $s_0$ such that $F_s, s \in W$ is a
+   \begin{enumerate}[label=(\roman*)]
+       \setlength\itemsep{-.2em}
+       \item local diffeomorphism
+        \item immersion
+        \item submersion
+        \item $\pitchfork Z$
+        \item injective immersion
+        \item embedding
+        \item diffeomorphism
+   \end{enumerate} \emph{if} $F_{s_0}$ has that property.
+\end{theorem}
+\begin{remark}
+    Given $X,Y$, we can look at different topologies on $C^{\infty}(X,Y)= \{f \colon X \to Y\mid f \ \text{is} \ C^{\infty}\} $. Then the notion of \textbf{stability} is equivalent to saying maps of type () form an \emph{open} subset. \textbf{Approximations} are saying that maps of type () form a \emph{dense} subset. Even in point set topology you thought about function spaces, for example a homotopy is a path in the function space between the domain and the codomain.
+\end{remark}
+\begin{proof}
+    (i) to (iv) are maximal rank properties (we have to convert (iv) to a submersion property by the last lecture). {\color{red}todo:draw a picture? something about uniformity and compactness}. For $x \in X$ choose $U_x \subseteq X$, $W_x \subseteq W$ such that $dF$ is maximal rank on $W_x \times U_x$ (base comes before the fiber). Then for $\{U_x\} _{x \in X}$ an open cover of $X$, we have a finite $F \subseteq X$ such that $\{U_x\} _{x \in F}$ also covers $X$.
+
+    (v) If there is no neighborhood of $s_0$ where $F_s$ is injective, find sequences $s _n \to  s _n $ in $S$ and $\{x_n \} ,\{x'_n \} $ in $X$ such that $F(s _n ,x_n )=F(s_n ,x_n ')$. Since $X$ is compact, we can find subsequences $x_{n_k}\to x_0$, $x_{n_k}'\to x_0'$. Then as $k \to \infty$, \[
+        F_{s_0}(x_0)=F_{s_0}(x_0')\implies x_0=x_0' \quad \text{since} \ F_{s_0} \ \text{is injective.}
+    \] Define 
+    \begin{gather*}
+        G \colon S\times X \to S\times Y,\quad s,x \mapsto s,F(s,x)\\
+        dG_{(s_0,x_0)}=
+        \begin{pmatrix}
+            \id_{T_{s_0}S} & * \\ 0 & dF_{s_0}
+        \end{pmatrix}\\
+        dF_{s_0} \ \text{injective} \implies dG_{(s_0,x_0)} \ \text{injective} \implies G \ \text{is injective in an open nbd of} \ (s_0,x_0).
+    \end{gather*}
+    (vii) Choose a connected neighborhood $W$ of $s_0$ in $S$ such that $F_s,\ s \in W$ is an injective local diffeomorphism. We want to show that $F_s$ is surjective. Let $Y_0 \subseteq Y$ be compact, choose $X_0 \subseteq X$ compact such that $F_{s_0}(X_0)=Y_0$. We know $F_{s}(X_0) \subseteq Y$ is open since $F_{s_0}$ is a local diffeomorphism. $F_{s}(X_0)\subseteq Y$ is closed since $X_0$ is compact. Also, $F_s(X_0)$: if $x_0 \in X_0$, then $t \mapsto s_t$ is a path from $s_0$ to $s$, then $t \mapsto F_{s_t}(x_0)$ is a path from $F_{s_0}(x_0)$ to $F_s(x_0)$.
+\end{proof}
+\begin{remark}
+    For a manifold, path components and components agree.
+\end{remark}
+
+\subsection{Manifolds with boundary}
+Why do we need manifolds with boundary?
+\begin{itemize}
+    \item We have smooth homotopies $[0,1] \times X \to Y$. If we want to talk about smooth manifolds, at $\partial [0,1]$ it is not true that the manifold is $[0,1]\times X$ is locally Euclidian. So we need to add a `boundary'.
+    \item We do calculus on closed intervals, like finding minima, maxima, etc. Naturally we want to do this on curvy abstract spaces as well.
+    \item Bordism, or ``smooth homology''. We have the notion of homology, and two $1$-cycles are homologous when they differ by a boundary. We can do this with smooth manifolds, where a map between manifolds gives rise to manifolds with boundary. 
+
+        We can ``cone off'' a cycle or circle to get a disk, etc. In singular homology you can cone things off and get a smooth space. But this won't work for something like the torus. A question is ``for a given manifold, can I write it as the boundary of a compact manifold''? The answer is generally no (but you can for the torus).
+\end{itemize}
+Let us define manifolds with boundary. For the \emph{local model}, let $A$ be affine space, $H \subseteq A$ be an affine hyperplane (a subspace of one less dimension), and $A^-$ the closure of a component of $A \setminus H$. In the \emph{standard local model}, we have $A=\A^n $, $H=\{x^1=0\} $, $A^-=\{x^1\leq 0\} $. We have $A^-=\operatorname{Int}(A^-) \amalg \partial A^-$, where $\partial A^-=H$.
+
+\subsection{Calculus on manifolds with boundary} 
+If $U \subseteq A^-$, we do calculus by a map $f \colon U \to B^-$. Note that this is a generalization of our previous notion of calculus, where $U$ may have been contained in the interior of $A^-$.
+\begin{itemize}
+    \item We say $f$ is $C^{\infty}$ at $p \in U$ if there exists $p \in \widetilde U\subseteq A$ open and $\widetilde f\colon \widetilde U \to B$ $C^{\infty}$ such that $\widetilde f|_{U\cap \widetilde U}$ is the composition \[
+    U\cap \widetilde U \xrightarrow{f|_{U\cap \widetilde U}}  B^- \lhook\joinrel\longrightarrow B.
+    \] 
+\end{itemize}
+\begin{lemma}
+    $d \widetilde f_p \colon V \to W$ is independent of extension $\widetilde f$.
+\end{lemma}
+\begin{definition}[]
+    $df_p \colon V \to W$ is $d \widetilde f_p$ for any $\widetilde f$.
+\end{definition}
+Idea: $p \in \partial A^-=H$, then \[
+    d \widetilde f_p = \lim _{p'\to p}d \widetilde f_{p'} = \underset{p' \in U \cap \operatorname{Int}(A^-)}{\underset{p' \to p}{\lim} d \widetilde f_{p'}} = \underset{p' \in \widetilde U \cap \operatorname{Int}(A^-)}{\underset{p' \to p}{\lim} df_p.} 
+\] 
+If $f $ is a diffeomorphism onto its image, then $f(U \cap H \subseteq K$, and $f (U \cap \operatorname{Int}(A)) \subseteq \operatorname{Int}(B^-)$.
+\begin{definition}[]
+    \,
+    \begin{enumerate}[label=(\arabic*)]
+        \item A \textbf{topological manifold with boundary} is a topological space $X$ which is Hausdorff, paracompact, and locally homeomorphic to an open subset of a closed half affine space. 
+        \item An \textbf{atlas} is ...
+    \end{enumerate}
+    If $X$ is a manifold with boundary, then 
+    \begin{itemize}
+        \item $p \in X$, $T_pX$ is defined as before
+        \item $TX \to X$ is the tangent bundle
+    \end{itemize}
+\end{definition}
+$X=\operatorname{Int}(X)\amalg \partial X.$
+

@@ -1,0 +1,61 @@
+\section{March 25, 2021} 
+Recap:
+\begin{theorem}
+    Let $X$ be a manifold with boundary, $Y$ a smooth manifold, $Z \subseteq Y$ a submanifold, and $f \colon X \to Y$ a smooth map. Then there exists a homotopy $H \colon [0,1] \times X \to Y$ such that $H_0=f$ and $H_1, \partial H_1\transv Z$.
+\end{theorem}
+
+\begin{theorem}
+    Let $X$ be a manifold with boundary, $Y$ a smooth manifold, and $Z \subseteq Y$ a closed submanifold. Say $C \subseteq X$ is a closed subset of $X$. If we have an $f \colon X \to Y$ such $f|_C,\partial f|_{C\cap \partial X}\transv Z$, then there exists an $H \colon [0,1] \times X \to Y$ such that \[
+        H_0=f,\quad H_1,\partial H_1\transv Z,\quad H_t|_C=f|_C \ \text{for all} \ t \in [0,1].
+    \] 
+\end{theorem}
+\begin{proof}
+    {\color{red}todo:see the notes} 
+\end{proof}
+
+\subsection{Mod 2 degree}
+Let $f \colon X \to Y$ be a smooth map for $X$ a compact $n$-manifold and $Y$ a connected $n$-manifold.  If $q \in Y$ is a regular value, then $f ^{-1}(q)$ is a $0$-dimensional submanifold of $X$, hence a finite set of points since $X$ is compact. {\color{red}todo:see the notes for good stuff}  As we move between the regular values, the inverse images are created an annihilated in pairs.
+
+\begin{theorem}
+    Fix $n \in \Z^{>0}$.
+    \begin{enumerate}[label=(\arabic*)]
+        \item The mod 2 cardinality $\# f ^{-1}(q)\pmod 2$ of the inverse image of a regular value $q \in Y$ is independent of $q$.
+        \item If $F \colon [0,1]\times X \to Y$ is a smooth homotopy of maps, and $q \in Y$ is a simultaneous regular value of $F,F_0,F_1,$ then $\# F_0^{-1}(q)=\#F^{-1}_1(q)\pmod 2$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    For (2), {\color{red}todo:see the notes} 
+\end{proof}
+\begin{prop}
+    Let $X$ be a compact connected manifold of nonzero dimension. Then $\id_X\not\simeq $ the constant map, i.e., $X$ is not contractible.
+\end{prop}
+\begin{proof}
+    We have $\operatorname{deg}_2\id_X=\#\id_X ^{-1}(q)=\#\{q\} =1$ for all $q \in X$. Then $\underline{q_0}\colon X \to X$ is a constant map with value $q_0$.  So $\operatorname{def}_2\underline{q_0}=\# \underline{q_0}^{-1}(q)=0$ ($q\neq q_0$).
+\end{proof}
+
+\begin{prop}
+    Let $X$ be a compact connected manifold of nonzero dimension. Then there exists an $f \colon X \to S^n $ with $\operatorname{deg}_2f=1$.
+\end{prop}
+{\color{red}todo:see the sketch, apparently it's important} 
+
+\subsection{Mod 2 intersection \#}
+The setup is similar to the degree mod 2. Let $Y$ be a smooth manifold, $X$ a compact manifold, $Z\subseteq Y$ a closed submanifold. Let $f \colon X \to Y$ be smooth, and $\dim X+\dim Z=\dim Y$.
+
+\begin{definition}[]
+    If $f \transv Z$, define $\#_2(f,Z)=\# f^{-1}(Z)\pmod 2$. This is a compact $0$-submanifold of $X$, and is therefore a finite set of points in $X$. If $f \not\transv Z$, use a homotopy of $f$ to achieve transversality. If $f_0\sim f_1$, $f_0,f_1\transv Z $ implies $\# f_0^{-1}(Z)=\# f_1^{-1}s(Z)\pmod 2$. If $f \colon X \hookrightarrow Y$ is an inclusion of a submanifold, write $\#_2(X,Z)=\#_2(Z,X)$.
+\end{definition}
+If $W$ is compact with boundary, $F \colon W \to Y\supset Z$  closed, and $\dim \partial W+\dim Z=\dim Y$, then $\#_2(\partial F,Z)=0$.
+
+\begin{example}
+    \,
+    \begin{enumerate}[label=(\arabic*)]
+        \item Let $Y=S^1 \times S^1 , * \in S^1 $, $X=S^1 \times *$, $Z=*\times S^1 $. Then $\#_2(X,Z)=1$.
+        \item Let $Y=S^2$, $f \colon S^1  \to S^2$.  Then $f$ is nullhomotopic, so $f =\partial F$, where $F \colon D^2 \to S^2$. This implies that $\#_2(f,Z)=0$ for all ?? This gives us the following:
+\begin{theorem}
+    The torus is not diffeomorphic to $S^2$.
+\end{theorem}
+\item Let $Y=\R \mathrm P^2$, and $L =\R \mathrm P^1$ be a line in $\R \mathrm P^2$. We can think of this as compactifying $\A^2$ with $\R \mathrm P^1$ (at the boundary, identify antipodal points). Since 1+1=2, perturb $L$ to $L'$ by a homotopy, so $\#_2(L,L)=1$.
+\item The same story happens in $\C\mathrm P^2$.
+\item Let $Y=\R \mathrm P^2$, and $Z=L$ a line. Take $X=C$ a cubic curve (crazy stuff happens)
+    \end{enumerate}
+\end{example}

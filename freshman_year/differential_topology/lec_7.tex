@@ -1,11 +1,68 @@
 \section{February 9, 2021}
-\subsection{Embeddings and Submanifolds}
-Recall that $f \colon M \to N$ is an \textbf{embedding} if it's injective, an immersion, and a homeomorphism onto its image. We say $Q \subseteq N$ is a \textbf{submanifold} if about every $q \in Q$ there exists a submanifold chart. {\color{burntorange} TODO: read the notes about a submanifold chart}.
+We have three basic ways to associate a ``shape'' to a function $f \colon M \to N$: the \emph{image} $f(M)\subseteq N$, the \emph{preimage} $f^{-1}(q)\subseteq M$, and the \emph{graph} $\Gamma(f) \subseteq M\times N$ of $f$. 
+\begin{itemize}
+    \item For $M,N$ smooth manifolds and $f$ a smooth function, the graph $\Gamma (f)$ is always a submanifold of $M \times N$, and is diffeomorphic to the domain $M$.
+    \item If $f$ is an embedding, then $f(M)$ is diffeomorphic to $M$.
+    \item If $q$ is a regular value, then $f ^{-1}(q)$ is a submanifold of the domain $M$.
+    \item We will soon study \emph{transversality}, the condition for the inverse image $f ^{-1}(Q) \subseteq M$ of a submanifold $Q \subseteq N$ to be a submanifold.
+\end{itemize}
 
+\subsection{Embeddings and submanifolds}
 \begin{theorem}
-    Let $f \colon M \to N$ be an embedding. Then $Q:= f(M) \subseteq N$ is a submanifold.
+    Let $f \colon M \to N$ be an embedding. Then $f(M)\subseteq N$ is a submanifold.
 \end{theorem}
 \begin{proof}
-    Fix $q \in Q$. There exists a unique $p \in M$ such that $f(p)=q$ since $f$ is onto. By the normal form, choose charts $(U,x)$ about $p$ and $(V,q)$ about
+    Let $Q$ denote $f(M)$. Fix $q \in Q$: we must construct a submanifold chart about $q$. Let $p \in M$ be the unique point so that $f(p)=q$. Since $f$ is immersive, we have charts $(U,x)$ about $p$ and $(V,y)$ about $q$ such that $y \circ f\circ x^{-1}(x^1,\cdots ,x^m)=(x^1,\cdots ,x^m,0,\cdots ,0)$. We claim there exists an open subset $V' \subseteq V$ such that the restricted chart $(V',y)$ is a submanifold chart. 
+
+    If the condition for being a submanifold chart fails, then we have a sequence $\{p_k\} _{k=1}^{\infty} \subseteq M \setminus  U$ such that $\lim _{k \to \infty}y^j (f(q_k))=0$ for $j=m+1,\cdots ,n$. So the sequence $\{f(q_k)\} \subseteq V$ converges to a point of $f(U)$, and since $f$ is a homeomorphism onto its image we conclude that $\{p_k\} \subseteq M \setminus U$ converges to a point of $U$, which is a contraction\footnote{This is supposed to be ``contradiction'', but I find my typo funnier.} since $M \setminus U$ is closed in $M$.
 \end{proof}
-{\color{burntorange} TODO: something happened w/short exact sequences}
+
+\subsection{Regular values and submanifolds}
+Let us talk about the algebra.
+\begin{definition}[]
+    A sequence \[
+    V \overset{T}{\longrightarrow} W \overset{S}{\longrightarrow} X
+    \] of linear maps of vector spsaces is \textbf{exact} if $S \circ T=0$ and $\ker S= \im V$ as subspaces of $W$. A \textbf{long exact sequence} \[
+    \cdots \longrightarrow V^i \longrightarrow V^{i+1}\longrightarrow V^{i+2}\longrightarrow\cdots 
+    \] is a sequence of linear maps in which every two consecutive maps forms an exact sequence. A \textbf{short exact sequence} is a LES of the form \[
+    0 \longrightarrow V' \overset{T}{\longrightarrow} V \overset{S}{\longrightarrow} V''\longrightarrow 0.
+\] In the above equation, the linear map $T \colon V' \to V$ is injective with cokernel ($V / \im T)$ isomorphic to $V''$, and the linear map $S \colon V \to V''$ is surjective with kernel isomorphic to $V'$. Furthermore, if $V',V,V''$ are finite dimensional, then $\dim V=\dim V'+\dim V''$.
+\end{definition}
+\begin{definition}
+Let $P \subseteq M$ be a submanifold and $p \in P$. 
+\begin{enumerate}[label=(\arabic*)]
+    \item The \textbf{codimension} of $P$ in $M$ at $p$ is defined by $\operatorname{codim}_p(P \subseteq M)=\dim_p M-\dim_p Q=\dim (T_pM /T_pP)$.
+    \item The quotient space $T_p M /T_p P$ is the \textbf{normal (space)} to $P$ at $p$.
+\end{enumerate}
+Sometimes we use the notation $v_p=T_p M /T_p P$ to denote the normal space at $p$. Observe that there is a short exact sequence \[
+0 \longrightarrow T_p P \longrightarrow T_p M \longrightarrow v_p \longrightarrow 0.
+\] 
+\end{definition}
+\begin{theorem}
+    Let $f \colon M \to N$ be a smooth map of smooth manifolds and $q \in N$ a regular value. Then $P:= f ^{-1}(q) \subseteq M$ is a submanifold of codimension equal to $\dim_q N$. Furthermore, if $p \in P$, \[
+        T_p P=\ker (df_p \colon T_p M \to T_p N).
+    \] \end{theorem}
+We can express this with the short exact sequence \[
+    0 \longrightarrow T_p P \longrightarrow T_p M \overset{df_p}{\longrightarrow} T_q N\longrightarrow 0,
+    \] illustrated in {\color{red}todo:figure.} In general, the codimension is a locally constant function $\operatorname{codim}\colon P \to \Z^{\geq 0}$. Our theorem asserts that if $P$ is cut out by a single function, then $\operatorname{codim}$ is constant.
+
+    \begin{proof}
+        {\color{red}todo:} 
+    \end{proof}
+\begin{example}
+    The $2$-sphere $S^2 \subseteq \A^3_{x,y,z}$ is cut out by the single function $f \colon \A^3 \to \R$, $(x,y,z) \mapsto x^2+y^2+z^2$. Namely, $S^2=f^{-1}(1)$. The differential $df=2x \,dx+2y \,dy+2z\, dz$ does not vanish at any point of $f ^{-1}(-1)$. Note that $0$ is a critical point, but $f ^{-1}(0) \subseteq \A^3$ is a submanifold (not of the expected codimension of $\dim \R$, though).
+\end{example}
+\begin{example}
+    {\color{red}todo:$O^n $ orthogonal group, lie groups, a proposition,}
+\end{example}
+
+\subsection{A counting invariant; the fundamental theorem of algebra}
+\begin{theorem}
+    Let $M$ be a compact smooth manifold, $N$ a smooth manifold with $\dim M=\dim N$, and  $f \colon M \to N$ a smooth function. Set $N _{\text{reg} }\subseteq N$ the subset of regular values. Then the function \[
+        \# \colon N_{\text{reg} } \to \Z^{\geq 0}, \quad q \mapsto \# f ^{-1}(q)
+    \] 
+\end{theorem}
+The conclusion is that for any regular value $q \in N$ the subset $f^{-1}(q)\subseteq M$ is finite and its cardinality is a locally constant function of the regular value.
+\begin{proof}
+    {\color{red}todo:this. also todo: fundamental thm of algebra} 
+\end{proof}

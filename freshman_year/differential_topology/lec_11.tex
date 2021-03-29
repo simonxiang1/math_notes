@@ -1,0 +1,138 @@
+\section{March 2, 2021}
+\subsection{Embedding manifolds into affine space}
+\begin{example}
+    Any $1$-manifold is a circle, the affine line, or a union of the two. When embedding manifolds it suffices to consider connected manifolds, sincif we can embed one component we an embed all of them. The circle embeds in $\A^2$, while the line is just $\A^1$.
+
+    In dimension two, the manifolds $S^2, S^1  \times S^1 $, the two holed torus, etc. embed in $\A^3$. However, $\R \mathrm P^2$ does not embed in $\A^3$. It does embed in $\A^4$, where $xyz\neq 0$, $[x,y,z]=[\lambda x,\lambda y,\lambda z]$. This can be seen by the embedding $f \colon \R \mathrm P^2 \to \A^4$, $[x,y,z] \mapsto \frac{1}{x^2+y^2+z^2}(x^2,xy,xz,yz)$. No we want to show that: 
+    \begin{itemize}
+        \item $f$ separates points (injective)
+        \item $f$ is an immersion
+        \item $f$ is an embedding.
+    \end{itemize} {\color{red}todo:something happened about embedding $\R \mathrm P^n$ in affine space} 
+\end{example}
+\begin{theorem}\label{1}
+    Let $M$ be a smooth manifold. Then there exists an embedding $M \hookrightarrow \A^n $ for some $N$.
+\end{theorem}
+\begin{theorem}[easy Whitney]
+   There exists an embedding $M^n  \hookrightarrow \A^{2n+1}$. 
+\end{theorem}
+\begin{theorem}[hard Whitney]
+   There exists an embedding $M^n  \hookrightarrow \A^{2n}$.
+\end{theorem}
+\begin{proof}[Proof of \cref{1}]
+    Assume $M$ is compact. Cover $M$ by finitely many $\A^n $-defined charts $\{((U_{\alpha },x_{\alpha })\} _{\alpha \in A}$ such that
+    \begin{itemize}
+        \item $C(2) \subseteq x_{\alpha }(U_{\alpha })$ ($C(2)$ denotes the cube of radius $2$)
+        \item $\bigcup_{\alpha } x_{\alpha }^{-1}(C(1))=M$.
+    \end{itemize}
+    Fix a cutoff function $\chi \colon \R \to \R$ such that $0 \leq \chi(x)\leq 1$, $\chi(x)=1$ if $|x|\leq 1$, $\chi(x)=0$ if $|x|\geq 2$. Define
+    \begin{align*}
+        \widetilde x_{\alpha }^i  & \colon M \to \R, \quad \alpha \in A, i \in \{1,\cdots ,n\} \\
+        \widetilde x_{\alpha }^i  &=
+        \begin{cases}
+            \chi \circ x_{\alpha }^i ,&\text{on} \ U_{\alpha };\\
+            0,&\text{on} \ M \setminus x_{\alpha }^{-1}\left( \overline{C(2)} \right) 
+        \end{cases}\\
+                                  &\\
+        \rho _{\alpha }& \colon M \to \R, \quad \alpha \in A\\
+        \rho _{\alpha }&=
+        \begin{cases}
+            \prod _{i=1}^n  \chi \circ x^i _{\alpha } &\text{on} \ U_{\alpha }\\
+            0,\quad &\text{on} \ M \setminus x_{\alpha }^{-1}\left( \overline{C(2)} \right) .
+        \end{cases}
+    \end{align*}
+    Set $B_{\alpha }=\rho _{\alpha }^{-1}(1)$. Then $x_{\alpha }^{-1}(C(1))\subseteq B_{\alpha }$. So $\bigcup_{\alpha \in A} B_{\alpha }=M$. Set $f \colon M \to \A^{(n_+1)\cdot \# A}$, $f=\{(\rho _{\alpha },\widetilde x_{\alpha }^1,\cdots ,\widetilde x_{\alpha }^n \}_{\alpha \in A} $. 
+    \begin{claim}
+        $f$ is an injective immersion.
+    \end{claim}
+    To see that $f$ is an immersion, let $p \in M$. Choose $\alpha \in A$ such that $p \in B_{\alpha }\subseteq U_{\alpha }. $ Then $d \widetilde x_{\alpha }^1(p),\cdots ,d \widetilde x_{\alpha }^n (p)$ are linearly independent. To see that $f$ is injective, choose $p,q \in M$, $p \in B_{\alpha }$. If $q \in B_{\alpha }$, then $\widetilde x_{\alpha }^1,\cdots ,\widetilde x_{\alpha }^n $ separates. If $q \notin B_{\alpha },$ then $\rho _{\alpha }(p)=1$, $\rho _{\alpha }(q)\neq 1$.
+\end{proof}
+
+\begin{theorem}
+    If $M^n $ is embedded in a finite dimensional affine space, then 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $M$ admits an immersion into $\A^{2n}$,
+        \item $M$ admits an injective immersion into $\A^{2n+1}$.
+    \end{enumerate}
+\end{theorem}
+\begin{cor}
+   If $M$ is compact, then $M$ embeds into $\A^{2n+1}$. 
+\end{cor}
+
+\begin{proof}
+    Suppose $f \colon M\hookrightarrow A$ is the embedding, where $A$ is affine over $V$. If {\color{red}todo:help something happened come back to this proof} 
+\end{proof}
+
+\subsection{Open covers and partitions of unity}
+{\color{red}todo:watch the recorded lecture and read the section from warner} Here's a quick recap.
+\begin{definition}[]
+    Let $M$ be a topological space. Let $\{U_{\alpha }\} _{\alpha \in A}$ and $\{V_{\beta }\} _{\beta \in B}$ be sets of open subsets of $M$.
+    \begin{enumerate}[label=(\roman*)]
+        \item $\{U_{\alpha }\}_{\alpha \in A} $ is an \textbf{open cover} of $M$ if $\bigcup_{\alpha \in A} U_{\alpha }=M$.
+        \item $\{V_{\beta }\} _{\beta \in B}$ is a \textbf{subcover} of $\{U_{\alpha }\} _{\alpha \in A}$ if there exists an injection $r \colon B \to A$ such that $V_{\beta }=U_{r(\beta )}$ for all $\beta \in B$.
+        \item A \textbf{refinement} of $\{U_{\alpha }\} _{\alpha \in A}$ is an open cover $\{V_{\beta }\} _{\beta \in B}$ together with a function $r \colon B \to A$ such that $V_{\beta }\subseteq U_{r(\beta )}$ for all $\beta \in B$.
+        \item {\color{red}todo:to see the rest watch the lecture} 
+    \end{enumerate}
+\end{definition}
+\begin{definition}[]
+    Let $M$ be a topological space and $\rho \colon M \to \R$ a continuous function. The \textbf{support} of $\rho$ is the closed set \[
+        \operatorname{supp}\rho = \overline{\rho ^{-1}(\R^{\neq 0})}.
+    \] 
+\end{definition}
+\begin{definition}[]
+    Let $M$ be a smooth manifold. 
+    \begin{enumerate}[label=(\roman*)]
+        \item A \textbf{partition of unity} $\{\rho_i \} _{i\in I}$ is a set of $C^{\infty}$ functions $\rho _i \colon M \to \R$ such that 
+            \begin{enumerate}[label=(\alph*)]
+                \item $\{\operatorname{supp}\rho_i \} _{i \in I}$ is locally finite
+                \item $\rho _i \geq 0$ 
+                \item $\sum_{i\in I}^{} \rho _i (p)=1$ for all $p \in M$
+            \end{enumerate}
+        \item If $\{U_{\alpha }\} _{\alpha \in A}$ is an open cover of $M$, then $\{\rho _i \} _{i \in I}$ is \textbf{subordinate} to $\{U_{\alpha }\}_{\alpha \in A} $ if there exists a function $r \colon I \to A$ such that $\operatorname{supp}\rho _i \subseteq U_{r(i)}$ for all $i \in I$.
+        \item If $I=A$ and $r=\id_A$, then we say $\{\rho _i \} _{i \in I}$ is \textbf{subordinate with the same index set.}
+    \end{enumerate}
+\end{definition}
+\begin{theorem}
+    Let $M$ be a smooth manifold and $\{U_{\alpha }\} _{\alpha \in A}$ an open cover. {\color{red}todo:watch the lecture} 
+\end{theorem}
+Back to the lecture.
+\begin{theorem}
+    If $M^n $ is a submanifold of an affine space, then there exists an embedding $M \subseteq \A^{2n+1}$.
+\end{theorem}
+\begin{proof}
+    {\color{red}todo:read in GP, uses the fact that embeding iff injective proper immersion. so we just have to exhibit a proper map} 
+\end{proof}
+\subsection{Transversality}
+\begin{definition}[Transversality for linear maps]
+    Let $T \colon V \to W$ be a linear map between vector space and $U \subseteq W$ a subspace. Then we say $\mathbf T$ \textbf{is transverse to} $\mathbf U$, written $T \transv U$, if and only if the subspaces $T(V)$ and $U$ span $W$: \[
+        W=T(V)+W.
+    \] This is equivalent to the condition that the composition \[
+    V \overset{T}{\longrightarrow} W \longrightarrow W /U
+\] be surjective, where the second map is projection onto the quotient. (This was a homework problem.)
+\end{definition}
+\begin{definition}[]
+    Let $X,Y$ be smooth manifolds, $Z \subseteq Y$ a submanifold, $f \colon X \to Y$ a smooth map, and $p \in X$ such that $f(p) \in Z$. Then $\mathbf f$ \textbf{is transverse to} $\mathbf Z$ \textbf{at} $\mathbf p$, written $f \transv_p Z$ if \[
+        T_{f(p)}Y=df_p(T_pX)+T_{f(p)}Z.
+    \] We say $\mathbf f$ \textbf{is transverse to} $\mathbf Z$, written $f\transv Z$, if $f \transv_p Z$ for all $p \in X$ such that $f(p) \in Z$.
+\end{definition}
+\begin{remark}\,
+    \begin{enumerate}[label=(\arabic*)]
+        \setlength\itemsep{-.2em}
+        \item For $q \in Y$ we have $f \transv \{q\} $ iff $q$ is a regular value of $f$.
+        \item Any map $f$ satisfies $f \transv Y$.
+        \item If $\dim X + \dim Z < \dim Y$, then $f \transv Z$ iff $f(X) \cap Z=\O$.
+        \item If $Z_1,Z_2\subseteq Y$ are submanifolds, and $f_i \colon Z_i  \to Y$ is the inclusion map, then $Z_1 \transv Z_2$ iff $f_1 \transv Z_2$. This relation is symmetric: $f_1\transv Z_2$ iff $f_2 \transv Z_1$.
+    \end{enumerate}
+\end{remark}
+\begin{theorem}
+    Let $X,Y$ be smooth manifolds, $Z \subseteq Y$ a submanifold, and $f \colon X \to Y$ a smooth map. Assume $f \transv Z$. Then $W:= f^{-1}(Z)$ is a submanifold. Furthermore, if $p \in X$ satisfies $f(p) \in Z$, then
+    \begin{enumerate}[label=(\arabic*)]
+        \setlength\itemsep{-.2em}
+    \item $T_p W=df_p^{-1}\left( T_{f(p)}Z \right) $.
+    \item $df_p$ induces an isomorphism of normal spaces $\mathcal{V}_p(W \subseteq X) \to \mathcal{V} _{f(p)}(Z \subseteq Y) $.
+    \item $\operatorname{codim}_p(W \subseteq X)=\operatorname{codim}_{f(p)}(Z \subseteq Y)$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Choose a submanifold chart $(W,y)$ on $Y$ with $f(p) \in W$, and suppose $y \colon W \to A$, where $A$ is an affine space over a vector space $V$. Furthermore, let $A' \subseteq A$ be an affine subpsace so that $y^{-1}(A')=W \cap Z$. Suppose $V' \subseteq V$ is the subspace of translation that preserve $A'$. Let $\pi \colon A \to A /V'$ be projection onto the quotient affine space, and let $q \in A /V'$ be the image of $A'$ under $\pi$. Since $f\transv_p Z$ we have $d(\pi \circ y\circ f)_p$ surjective. Since surjectivity is an open condition, choose an open neighborhood $U \subseteq X$ of $p$ such that $\pi \circ y\circ f|_U \colon U \to A /V'$ is a submersion; in particular, $q \in A /V'$ is a regular value and $(\pi \circ y\circ f|_U)^{-1}(q)=W \cap U$. Then apply the preimage theorem.
+\end{proof}

@@ -1,0 +1,153 @@
+\section{February 23, 2021, Review}
+Cancelled due to snow day, so here are notes on stuff we should have learned plus review.
+\subsection{Sard's Theorem}
+This theorem has a long history involving Morse, Sard, Brown, Dubrovockii, and Thom. But we just call it Sard's theorem.
+\begin{namedthm}{Sard's Theorem}
+    Let $X,Y$ be $C^{\infty}$ manifolds and $f \colon X \to Y$ a $C^{\infty}$ map. Denote $C \subseteq X$ the subset of critical points of $f$. Then $f(C) \subseteq Y$ has measure zero. 
+\end{namedthm}
+We will talk about measure zero later. Also, recall that $f(C)$ is the set of critical values of $f$, and its complement in $Y$ is the set of regular values of $f$. This implies that the set of regular values is dense (since sets of measure zero have nonempty interior), or nonempty, a fact which we often use. Since a finite or countable union of measure zero sets has measure zero, we have the following result:
+\begin{cor}
+    Let $\{X_i \} _{i \in I}$ be a collection of smooth manifolds, where $I$ is finite or countable.  Let $Y$ be a smooth manifold and $f_i  \colon X_i  \to Y, i \in I$ a smooth map. Then the set of simultaneous regular values of $f_i $ is a dense subset of $Y$.
+\end{cor}
+\begin{cor}\label{sur}
+    Suppose $X,Y$ are smooth manifolds with $\dim X< \dim Y$ and $f \colon X \to Y$ a smooth map. Then $f(X) \subseteq Y$ has measure zero.
+\end{cor}
+In this case, every point of the domain is critical, since the differential cannot be surjective. We can actually prove \cref{sur} without Sard's theorem in a more elementary fashion.
+\begin{cor}
+    Any smooth map $f \colon S^n  \to S^m$ is nullhomotopic if $n<m$.
+\end{cor}
+\begin{proof}
+    By the previous corollary there exists a point $q \in S^m$ not in the image of $f$, so $f$ factors through a map $f' \colon S^n  \to S^m \setminus \{q\} $. Stereographic projection is a diffeomorphism $\varphi  \colon S^m \setminus \{q\}  \xrightarrow{\cong} \R^m$. Define the family of homotheties \[
+        h_t \colon \R^m \to \R^m,\quad \xi\mapsto (1-t)\xi.
+    \] Let $\iota \colon \R^m \hookrightarrow S^m$ denote the inclusion. Then $\iota \circ h_t \circ \varphi  \circ f' \colon S^n  \to \R^m$ is a nullhomotopy of $f'$.
+\end{proof}
+
+\subsection{Measure zero in affine space}
+We define the measure (or volume) of subsets of $\A^n $ and use them to define when some $E \subseteq \A^n $ has measure zero.
+\begin{definition}[]
+    \,
+    \begin{enumerate}[label=(\roman*)]
+        \item A \textbf{standard box} defined by real numbers $a^1,\cdots ,a^n , \ b^1,\cdots ,b^n $ with $a^i <b^i $, $i=1,\cdots ,n$ is the set \[
+                S=S(a^1,b^1;\cdots ;a^n ,b^n )=\{(x^1,\cdots ,x^n )\in \A^n  \mid a^i <x^i <b^i \ \text{for all} \ i=1,\cdots ,n\} .
+        \] If $b^i -a^i $ is the same independent of $i $, then $S$ is a \textbf{standard cube} of length $b-a$.
+    \item The \textbf{volume} of the standard box  is \[
+            \mu(S)=\prod _{i=1}^n \,(b^i -a^i )
+    \] 
+\item A set $E\subseteq \A^n $ has \textbf{($\mathbf n$-dimensional) measure zero} if for all $\varepsilon >0$ there exists a covering $\{S_i \} _{i \in I}$ of $E$ with $I$ finite or countable such that $\sum _{i\in I}\mu(S_i )<\varepsilon $.
+    \end{enumerate}
+    Note that this depends on the dimension: an open interval in $\A^1$ does not have $1$-dimensional measure zero, but it does have $n$-dimensional measure zero for $n>1$.
+\end{definition}
+\begin{prop}\label{big}
+    \,
+    \begin{enumerate}[label=(\arabic*)]
+        \setlength\itemsep{-.2em}
+        \item Let $E \subseteq \A^n $ be a set of measure zero and $E'  \subseteq E$ be a subset. Then $E'$ has measure zero.
+        \item Let $\{E_i \} _{i \in I}$ be a finite or countable collection of measure zero subsets of $\A^n $. Then $\bigcup_{i \in I} E_i $ has measure zero.
+        \item The affine subspace $\A^m \subset A^n $ has $n$-dimensional measure zero for $m<n$.
+        \item Let $U \subseteq \A^n $ be open, $E \subseteq U$ be measure zero, and $f \colon U \to \A^n $ a $C^1$ map. Then $f(E) \subseteq \A^n $ has measure zero.
+        \item A standard box does not have measure zero.
+        \item If $F \subseteq \A^n $ has nonempty interior, then $F$ does not have measure zero. 
+        \item Let $E \subseteq \A^n $ be closed. Suppose that for all $c \in \R$ the set $E \cap (\{c\} \times \A^{n-1})\subseteq \A^{n-1}$ has $(n-1)$-dimensional measure zero. Then $E$ has $n$-dimensional measure zero.
+    \end{enumerate}
+\end{prop}
+Since $C^{\infty}$ maps are $C^1$, a special case of (4) is that the image of a measure zero set under a $C^{\infty} $ diffeomorphism has measure zero.
+\begin{proof}
+    {\color{red}todo:proof} 
+    Assertion (1) is immediate since the same cover for $E$ will cover $E'$.
+\end{proof}
+
+
+\subsection{Measure zero on smooth manifolds}
+\begin{definition}\label{mzfm}
+    Let $Y$ be a smooth manifold. A subset $E \subseteq Y$ has \textbf{measure zero} if for all $\A^n $-valued charts $(V,y) \subseteq Y$, the set $y(E \cap Y) \subseteq \A^n $ has measure zero.
+\end{definition}
+The dimension $n$ may change based off which connected component you choose of $Y$. The above definition would be impractical if we had to verify every chart in a maximal atlas, but \cref{big}(4) guarantees the following.
+\begin{prop}
+    A subset $E \subseteq Y$ has measure zero if the condition of \cref{mzfm} holds for a set of charts of $Y$ which cover $E$.
+\end{prop}
+\begin{prop}
+    Let $E \subseteq Y$ have measure zero. Then $Y \setminus E$ is dense.
+\end{prop}
+\begin{proof}
+    $(\overline{Y \setminus E})^{c} \subseteq E$ is open (complement of a closed set) and has measure zero (since $E$ has measure zero), so it must be empty since it has no interior by \cref{big}(6). So $\overline{Y \setminus E}=Y$.
+\end{proof}
+\begin{proof}[Proof of \cref{sur}]
+    {\color{red}todo:} 
+\end{proof}
+
+\subsection{Introduction to fiber bundles}
+A quick recap. We have introduced conditions on smooth maps, like the rank of the differential being maximal, leading to a local normal form for $f$. An injective immersion which is a homeomorphism onto its image is an embedding, and the image of an embedding is a submanifold. The differential of a submersion is surjective everywhere, so the fibers are submanifolds.
+\begin{definition}[]
+    Let $\pi \colon E \to M$ be a smooth map of smooth manifolds. We say $\pi$ is a \textbf{fiber bundle} if for all $p \in M$ there exists an open neighborhood $U \subseteq M$ about $p$ and a diffeomorphism $\varphi \colon U\times \pi^{-1}(p) \to \pi^{-1}(U)$ such that the following diagram commutes:
+    \begin{figure}[H]
+    \centering
+    \begin{tikzcd}
+U\times \pi^{-1}(p) \arrow[rr, "\varphi"] \arrow[rd, "\operatorname{pr}_1"'] &   & \pi^{-1}(U) \arrow[ld, "\pi"] \\
+                                                                             & M &                              
+\end{tikzcd}
+    \end{figure}
+    The domain $E$ is the \textbf{total space} and the codomain $M$ is the \textbf{base} of the fiber bundle $\pi$. Here $\operatorname{pr}_1$ is projection onto the first factor, then inclusion $U \hookrightarrow M$. Note that $\pi ^{-1}(p)$ can be empty if $\pi$ is not onto.
+\end{definition}
+\begin{remark}
+    Local triviality provides a diffeomorphism $\pi ^{-1}(p') \overset{\cong}{\longrightarrow} \pi ^{-1}(p)$ of the fiber over any $p'\in U$ with the fixed fiber $\pi ^{-1}(p)$. If we rewrite $\pi$ as a map from $M$ to sets, then local triviality expresses the local constancy of this map.
+\end{remark}
+\begin{example}
+    Let $M,F$ be smooth manifolds. Then projection $\operatorname{pr}_1 \colon M\times F \to M$ is a fiber bundle. For any $p \in M$, choose $U=M$ and $\varphi =\id$. This is the trivial fiber bundle over $M$ with fiber $F$. Any fiber bundle is locally isomorphic ($\leftarrow$ will make this precise next lecture) to a trivial fiber bundle.
+\end{example}
+\begin{example}
+    The map $\pi \colon O_n  \to S^{n-1}, \ A \mapsto A \xi_0$ is a fiber bundle, where $\xi_0=(1,0,\cdots ,0)$. It is nontrivial if $n\geq 3$.
+\end{example}
+Any map (of sets) $\pi \colon E \to M$ induces a partition of the domain into its fibers. Fiber bundles induce ``regular'' partitions in that the fibers are locally diffeomorphic to each other. In this way fiber bundles provide useful decompositions of smooth manifolds. Fiber bundles can encode the geometry of the base manifold, for example the tangent bundle. Since the total space is a smooth manifold, we can apply our tools to learn about the base.
+
+\subsection{The tangent bundle}
+What is the tangent space? Suppose we have an abstract smooth manifold, which doesn't come embedded in affine space. (We don't know that everything can be embedded yet in affine space yet.) The G\&{}P approach is that $M$ comes embedded in affine space, where $M \subseteq \A^n $. Let $\xi \in T_p M \subseteq \R^n $, so $\xi$ is a column vector in $\R^n $, where $T_p M$ is a linear subspace. So when you define the tangent bundle, we have $TM \subseteq M \times \R^n $, $TM= \{(p,\xi) \mid p \in M, \xi \in \R^n , \xi \in T_p M \subseteq \R^n \} $.
+
+For example, we have the $4$-manifold $T S ^2 \subseteq $ a subspace of the $5$-manifold $S ^2 \times  \R^3$. So $S^2 \to  \R^3$, $p \mapsto  (p-0)$, with the displacement vector from the origin denoted by $\eta$. So 
+\begin{align*}
+    &F \colon S^2 \times \R^3 \to \R,\\
+    &p,\xi  \mapsto \langle \eta(p),\xi \rangle ,
+\end{align*} where $\langle a,b \rangle $ is the standard inner product in $\R^3$. So $TS ^2=F ^{-1}(0)$.
+\begin{claim}
+    The origin 0 is a regular value.
+\end{claim}
+Let $(p,\xi) \in T S ^2, \ \langle \eta(p), \xi \rangle =0$. We have $dF _{(p,\xi)}\colon T_p S^2 \times \R^3 \to \R$ is linear, surjective, and nonzero. Since $\mathrm{SO}_3$ acts on $S^2 \times  \R^3$, we can assume 
+\begin{align*}
+    &p =(1,0,0) \in \A^3\\
+    &\xi \in (0,a,0) \in \R^3.
+\end{align*}We need to check that $dF_{(p,\xi)}\left( 0;(1,0,0) \right) $ is nonzero. By the Liebniz rule, 
+\begin{align*}
+    d\langle \eta(p),\xi \rangle &= \langle d\eta(p),\xi \rangle +\langle \eta(p),d\xi \rangle \\
+                                 &=\langle (1,0,0),(1,0,0) \rangle \\
+                                 &=1\neq 0.
+\end{align*}
+Now let $M$ be an abstract manifold, $p$ be a point, and $(U,x)$ be a chart at $p$. Then we have isomorphisms 
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+T_p M \arrow[rr, "{(U_1,x_1)}"] \arrow[rdd, "\cong"] \arrow[rdd, "{(U_2,x_2)}"'] \arrow[rr, "\cong"'] &      & \R^n \\
+                                                                                                      &      &      \\
+                                                                                                      & \R^n &     
+\end{tikzcd}
+\end{figure}So the tangent bundle is constructed by a map \[
+\coprod_{p \in U_1}T_p M \underset{\cong}{\longrightarrow} U_1\times \R^n .
+\] We will elaborate on this next time. Small things: the topology on $\operatorname{Hom}(V,W)$ is the one that comes from a vector space. You can form a topology on $\mathrm{SO}_2$ by considering it as a subspace of $\R^4$.
+
+\subsection{Transversality}
+Say we have manifolds $X,Z\subseteq Y$ and a map $f \colon X \to Z,\ p \mapsto f(p)$. We consider the linearizations $T_pX$ mapping onto $T_{f(p)}Z$ a subspace of $T_{f(p)}Y$ by $T=df_p$. Something?? then $W+T(X)=Y$. In general transversality measures the failure of a map to be submersive, and surjective implies $T$ transverse. Lol we talked about tennis
+
+\subsection{Relating the Grassmannian with the Stiefel manifold}
+Let $V$ be a vector space with an inner product $a<k \leq \dim V$. Then define \[
+\operatorname{St} = \{T \colon \R^k  \to V \mid T \ \text{is an isometry}  \} 
+\]  Define $\operatorname{Hom}(\R,V)$ as the set of linear maps $T \colon \R \to V$. Then we have a map $\operatorname{Hom}(\R,V) \to V$, $T \mapsto T(1)$. Consider $f \colon \operatorname{St}_k(V) \to \operatorname{Gr}_k(V),$ where $T \mapsto  \im T=T(\R^k) \subseteq V$. Then $T$ is surjective, smooth, and a submersion, so $W \in \operatorname{Gr}_k(V)$, $f^{-1}(W)=$? For $k=1$, $\operatorname{St}_1(V)=S(V) \to \operatorname{Gr}_1(V)$ is a double cover, or covering map. Say $k=2$, for $V=\R^3$ what does $\operatorname{St}_2(V)\to  \operatorname{Gr}_2(V)$ look like? We have 
+\begin{align*}
+    f^{-1}(w)&= \{e_1,e_2\mid e_1,e_2 \ \text{form an orthonormal basis of} \ W\} \\
+    &=\{\R^2 \underset{b}{\overset{\cong}{\to }}W \mid \text{isometries} \} .\\
+    O_2&= \{\R^2 \overset{g}{\underset{\cong}{\to } } \R^2 \ \text{isometries}  \} \, \text{ a group.}\\
+       &f^{-1}(W) \times O_2 \to f^{-1}(W)\\
+       &b,g \mapsto  b \circ g.
+\end{align*}If $g=\left( 
+\begin{smallmatrix}
+    0 & 1 \\ 1 & 0
+\end{smallmatrix}\right) $, $O_2$ acts on $f^{-1}(W)$ on the right by $b \circ (g_1 \circ g_2)=(b \circ g_1)\circ g_2$. Now this action is transitive and free, so the action being simply transitive is true iff $f^{-1}(W)$ is a (right) $O_2$-torsor.
+
+
