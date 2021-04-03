@@ -205,4 +205,91 @@ We see that $L(\Delta u)^2+2M \Delta u\Delta v+N(\Delta v)^2$ is the analogue fo
 \end{example}
 
 \subsection{The Gauss and Weingarten maps}
+An approach to defining curvature of surfaces is by considering the rate at which $\mathbf N$ varies. The values of $\mathbf N$ at $S$ are recorded by its \textbf{Gauss map} $\mathcal{G} $, defined by \[
+\mathcal{G} _S \colon S \to S^2, \quad p \mapsto \mathbf N_p.
+\] The rate at which $\mathbf N$ varies is measured by $D_p \mathcal{G} \colon T_p S \to T_{\mathcal{G} (p)}S^2$. Since $T_{\mathcal{G} (p)}\perp \mathbf N_p$, this is equivalent to $T_p S$ and so the Gauss map is an endomorphism $T_p S\to T_p S$.
 
+\begin{definition}[]
+    Let $p \in S$. The \textbf{Weingarten map} $\mathcal{W} _{p,S}$ of $S$ at $p$ is defined by $\mathcal{W}=-D_p \mathcal{G} $. The \textbf{second fundamental form} of $S$ at $p \in S$ is the bilinear form $T_p S$ given by \[
+        \langle \langle v,w \rangle  \rangle _{p,S}=\langle \mathcal{W}(v),w \rangle  _{p,S}, \quad v,w  \in T_pS.
+    \] 
+\end{definition}
+\begin{lemma}
+    Let $\sigma(u,v)$ be a surface patch with standard unit normal $\mathbf N(u,v)$. Then \[
+    \mathbf N_u \cdot \partial _u\sigma=-L,\quad \mathbf N_u \cdot \partial _v\sigma=\mathbf N_v \cdot \partial _u\sigma=-M,\quad \mathbf N_v \cdot \partial _v\sigma=-N.
+    \] 
+\end{lemma}
+\begin{proof}
+    We have $\mathbf N \cdot \partial _u\sigma =\mathbf N\cdot \partial _v\sigma=0$. Differentiate wrt $u$ to get $\mathbf N_u \cdot \partial _u\sigma = -\mathbf N \cdot \partial _{uu}=-L$, and the other equalities follow in a similar manner.
+\end{proof}
+\begin{prop}
+    Let $p \in S$, $\sigma(u,v)$ be a surface patch of $S$ such that $p \in \im \sigma$, and let $L \,du^2+2M \,du\,dv+N\,dv^2$ be the sff of $\sigma$. Then for any $v,w \in T_p S$, \[
+        \langle \langle v,w \rangle  \rangle =L\, du(v)du(w)+M(du(v)dv(w)+du(w)dv(v))+Ndv(v)dv(w).
+    \] 
+\end{prop}
+\begin{proof}
+    Since both sides of the equation are bilinear forms, we just have to check that they agree when $v$ and $w$ are $\partial _u\sigma$ or $\partial _v\sigma$. This boils down to showing \[
+        \langle \langle \partial _u\sigma,\partial _u\sigma \rangle  \rangle =L,\quad \langle \langle \partial _u\sigma ,\partial _v\sigma \rangle  \rangle =\langle \langle \partial _v\sigma,\partial _u\sigma \rangle  \rangle =M,\quad \langle \langle \partial _v\sigma,\partial _v\sigma \rangle  \rangle =N.
+    \] Let $\sigma(u_0,v_0)=p$. Then \[
+    \mathcal{W} (\partial _u\sigma)= \left. -\frac{d}{du} \right| _{u=u_0} \mathcal{G} (\sigma(u,v_0))=\left. \frac{d}{du} \right| _{u=u_0}\mathbf N(u,v_0)=-\mathbf N_u,
+        \] where $\mathbf N$ is the standard unit normal of $\sigma$. Similarly, $\mathcal{W} (\partial _v\sigma)=-\mathbf N_v$. So \[
+        \langle \langle \partial _u\sigma,\partial _u\sigma \rangle  \rangle = \langle \mathcal{W} (\partial _u\sigma),\partial _u\sigma \rangle =-\mathbf N_u \cdot \partial _u\sigma=L.
+        \] The other equations follow in a similar manner.
+\end{proof}
+\begin{cor}
+    The sff is a symmetric bilinear form. Equivalently, the Weingarten endomorphism is self-adjoint.
+\end{cor}
+
+\subsection{Normal and geodesic curvatures}
+If $\gamma $ is a unit speed curve on an oriented surface $S$, then $\dot \gamma $ is a unit vector, and therefore a tangent vector to $S$. So $\dot \gamma \perp \mathbf N$, and $\dot \gamma ,\mathbf N,$ and $\mathbf N\times \dot \gamma $ are mutually orthogonal. Since $\ddot \gamma \perp \dot \gamma $, it must be a linear combination of $\mathbf N$ and $\mathbf N\times \dot \gamma $, where $\ddot \gamma =\kappa_n \mathbf N+\kappa_g(\mathbf N\times \dot\gamma) $.
+\begin{figure}[H]
+\centering
+ \includegraphics[width=0.65\linewidth]{figures/dgeo_4.1.png}
+\end{figure}
+\begin{definition}[]
+    The scalars $\kappa_n $ and $\kappa_g$ are the \textbf{normal curvature} and \textbf{geodesic curvature} of $\gamma $, respectively.
+\end{definition}
+Note that these change sign when $\mathbf N$ does, so in general only the magnitudes of $\kappa_n $ and $\kappa_s$ are well defined.
+
+\begin{prop}
+    We have 
+    \begin{align*}
+        \kappa_n &=\ddot \gamma \cdot \mathbf N,\quad \kappa_g = \ddot \gamma \cdot (\mathbf N\times \dot \gamma ),\\
+        \kappa^2&=\kappa_n ^2+\kappa_g^2,\\
+        \kappa_n &=\kappa \cos \psi, \quad \kappa_g =\pm \kappa\sin \psi,
+    \end{align*}
+    where $\kappa$ is the curvature of $\gamma $ and $\psi$ is the angle between $\mathbf N$ and the principal normal $\mathbf n$ of $\gamma $.
+\end{prop}
+\begin{proof}
+    To show $\kappa_n =\ddot \gamma \cdot \mathbf N$, note that $\ddot \gamma =\kappa_n \mathbf N+\kappa_g(\mathbf N\times \dot \gamma )$, so $\ddot \gamma \cdot \mathbf N=\kappa_n \mathbf N\cdot \mathbf N+\kappa_g (\mathbf N\times \dot \gamma )\cdot \mathbf N$, which implies that $\ddot \gamma \cdot \mathbf N=\kappa_n $ since the vectors $\mathbf N$ and $\mathbf N\times \dot\gamma $ are orthogonal. A similar process shows that $\kappa_g=\ddot \gamma \cdot (\mathbf N\times \dot \gamma )$. {\color{red}todo:not sure how to show $\kappa^2=\kappa_n ^2+\kappa_g^2$?} Since $\ddot \gamma =\kappa n$, {\color{red}todo:?} 
+\end{proof}
+As a unit speed parameter $t$ is changed to another parameter $\pm t+c$, then $\kappa_n \mapsto \kappa_n $ and $\kappa_g \mapsto  \pm \kappa_g$, so $\kappa_n $ is well defined for any regular curve while $\kappa_g$ is only well defined up to sign.
+
+\begin{prop}
+    If $\gamma $ is unit-speed on an oriented surface $S,$ its normal curvature is given by $\kappa_n =\langle \langle \dot \gamma ,\dot \gamma  \rangle  \rangle $. If $\sigma$ is a surface patch of $S$ and $\gamma (t)=\sigma(u(t),v(t))$ is a curve in $\sigma$, then we also have $\kappa_n =L\dot u^2+2M\dot u \dot v+N\dot v^2$.
+\end{prop}
+So two curves that interset at $p$ and have the parallel tangent vectors there have the same normal curvature at $p$. {\color{red}todo:how?} 
+\begin{proof}
+    Since $\dot \gamma $ is tangent to $S$, $\mathbf N \cdot \dot \gamma =0$. So $\mathbf N\cdot \ddot \gamma =-\dot{\mathbf N} \cdot \dot \gamma $. Note that $\dot{\mathbf N} = \frac{d}{dt}\mathcal{G} (\gamma (t))=-\mathcal{W} (\dot \gamma )$, therefore\[
+        \kappa_n =\mathbf N\cdot \ddot \gamma =-\dot{\mathbf N} \cdot \dot \gamma =\langle \mathcal{W} (\dot \gamma ),\dot \gamma  \rangle =\langle \langle \dot \gamma ,\dot \gamma  \rangle  \rangle .\qedhere
+    \] 
+\end{proof}
+While the normal curvature depends on the sff, the geodesic curvature only depends on the fff. 
+\begin{namedthm}{Meusnier's Theorem} 
+   Let $p \in S$ and $v \in T_p S$. Let $\Pi _{\theta}$ be the plane spanned by $v$ and making an angle $\theta$ with $T_p S$. Suppose $\Pi_{\theta}$ intersects $S$ at a curve with curvature $\kappa_{\theta}$. Then $\kappa_{\theta}\sin \theta$ is independent of $\theta$.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{figures/dgeo_4.2.png}
+\end{figure}
+\end{namedthm}
+\begin{proof}
+    Suppose $\gamma _{\theta}$ is a unit speed parametrization of the aforementioned curve. Then at $p, \dot \gamma _{\theta}=\pm v$, so $\ddot \gamma _{\theta}$ is perpendicular to $v$ and parallel to $\Pi_{\theta}$. Then $\psi = \pi /2 -\theta$, so $\kappa_n =\kappa_{\theta}\cos(\pi /2-\theta)=\kappa_{\theta}\sin \theta$, but $\kappa_n $ does not depend on $\theta$.
+\end{proof}
+An important case is where $\gamma $ is a \textbf{normal section} of the surface, i.e., $\gamma $ is the intersection of the surface with a plane $\Pi$ that is orthogonal to the tangent plane of the surface at each point of $\gamma $.
+
+\begin{cor}
+    The curvature, normal curvature $\kappa_n $, and geodesic curvature $\kappa_g$ of a normal section of a surface are related by $\kappa_n =\pm \kappa,\ \kappa_g=0$.
+\end{cor}
+\begin{proof}
+    We have $\kappa_n =\kappa\sin \theta$ where $\theta=\pm\pi /2$. For the second part, $\kappa^2=\kappa_n ^2+\kappa_g^2$, and since $\kappa=\pm \kappa_n ,$ we must have $\kappa_g=0$.
+\end{proof}
