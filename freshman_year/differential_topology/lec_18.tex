@@ -1,0 +1,50 @@
+\section{March 30, 2021} 
+{\color{red}todo:the days are completely off} 
+%{\color{red}todo:figure out the lecture numbers (mod the extra lectures)} 
+%\subsection{The mod 2 winding number}
+%Let $A$ be $(n+1)$-dimensional affine space with $V$ acting on $A$ by translations, $X$ be a compact $n$-manifold. Let $f \colon X \to A, q \in A \setminus f(x)$. Define $w_q \colon X \to S=S(v) \subseteq V, p \mapsto  \frac{f(p)-q}{\|f(p)-q\|}$. 
+%\begin{definition}
+    %The \textbf{mod 2 winding number} is given by \[
+        %W_2(f_1 q)=\deg_2 w_q \in \Z /2\Z.
+    %\] 
+%\end{definition}
+%\begin{remark}\,
+    %\begin{itemize}
+        %\setlength\itemsep{-.2em}
+        %\item $w_2(f,q)$ depends only on $[q] \in \pi_0(A \setminus f(x))$,
+        %\item $w_2(f,q)$ is unchanged under smooth homotopies of $f$ which do not contain $q$ in the image.
+    %\end{itemize}
+%\end{remark}
+%There are two methods to compute $w_2(f,q)$.
+%\begin{theorem}
+    %If $W$ is a compact $(n+1)$-manifold with $\partial W=X$, $F \colon W \to A$ such that $\partial F=f$, suppose $q \in A \setminus f(X)$ is a regular of $F$. Then $w_2(f,q)=\# F^{-1}(q) \pmod 2$.
+%\end{theorem}
+%\begin{proof}
+    %{\color{red}todo:free time} 
+%\end{proof}
+%\begin{theorem}
+    %Let $z=z_q(\xi)$. If $f\transv z$, then $w_2(f,q)=\#_2(f,z)$ in $Y=A \setminus \{q\} $.
+%\end{theorem}
+%
+%\subsection{The Jordan Brouwer theorem}
+%This is the famous topological fact that's notoriously hard to prove. Say we embed $S^1 $ in $\R^2$. Then the embedding has two components, a bounded interior and an unbounded exterior.
+%\begin{namedthm}{The Jordan curve theorem} 
+    %Suppose $X \subseteq A$ (where $A$ is affine space) is a compact connected hypersurface (submanifold of codimension 1). Then $A \setminus X$ has two path components $D_0,D_1$, exactly one of which, say $D_1$, is bounded. The closure $\overline{D_1}$ is a compact manifold with boundary with $\partial \overline{D_1}=X$. Finally, if $q \in D_j $, then $w_2(i_X,q)=j\pmod 2$, where $i_x \colon X \to A$ denotes the inclusion.
+%\end{namedthm}
+%\begin{proof}
+    %{\color{red}todo:} 
+%\end{proof}
+%Seems like Borsuk Ulam is going in the notes.
+%\begin{cor}
+    %There does not exists an embedding $\R \mathrm P^2 \hookrightarrow \A^3$.
+%\end{cor}
+\begin{namedthing}{Setup} 
+   Let $n$ denote a positive integer, $A$ a real affine space of dimension $n+1$, $V$ be a tangent space to $A$ equipped wih an inner product, $X$ be a compact $n$-manifold, and $f \colon X \to A$ a smooth map. 
+\end{namedthing}
+\subsection{Mod 2 winding number}
+Choose $q \in A \setminus f(X)$ ($f(X)\neq A$ be Sard's theorem). Let $S=S(V)\subseteq V$ be the $n$-sphere of unit norm vectors. Define $w_q \colon X \to S$, $p \mapsto  \frac{f(p)-q}{\|f(p)-q\|}.$
+\begin{definition}[]
+    The \textbf{mod 2 winding number} of $f$ about $q$ is \[
+        W_2(f,q)=\deg_2w_q.
+    \] 
+\end{definition}

@@ -1,61 +1,125 @@
 \section{March 25, 2021} 
-Recap:
-\begin{theorem}
-    Let $X$ be a manifold with boundary, $Y$ a smooth manifold, $Z \subseteq Y$ a submanifold, and $f \colon X \to Y$ a smooth map. Then there exists a homotopy $H \colon [0,1] \times X \to Y$ such that $H_0=f$ and $H_1, \partial H_1\transv Z$.
-\end{theorem}
-
-\begin{theorem}
-    Let $X$ be a manifold with boundary, $Y$ a smooth manifold, and $Z \subseteq Y$ a closed submanifold. Say $C \subseteq X$ is a closed subset of $X$. If we have an $f \colon X \to Y$ such $f|_C,\partial f|_{C\cap \partial X}\transv Z$, then there exists an $H \colon [0,1] \times X \to Y$ such that \[
-        H_0=f,\quad H_1,\partial H_1\transv Z,\quad H_t|_C=f|_C \ \text{for all} \ t \in [0,1].
-    \] 
-\end{theorem}
-\begin{proof}
-    {\color{red}todo:see the notes} 
-\end{proof}
-
-\subsection{Mod 2 degree}
-Let $f \colon X \to Y$ be a smooth map for $X$ a compact $n$-manifold and $Y$ a connected $n$-manifold.  If $q \in Y$ is a regular value, then $f ^{-1}(q)$ is a $0$-dimensional submanifold of $X$, hence a finite set of points since $X$ is compact. {\color{red}todo:see the notes for good stuff}  As we move between the regular values, the inverse images are created an annihilated in pairs.
-
-\begin{theorem}
-    Fix $n \in \Z^{>0}$.
-    \begin{enumerate}[label=(\arabic*)]
-        \item The mod 2 cardinality $\# f ^{-1}(q)\pmod 2$ of the inverse image of a regular value $q \in Y$ is independent of $q$.
-        \item If $F \colon [0,1]\times X \to Y$ is a smooth homotopy of maps, and $q \in Y$ is a simultaneous regular value of $F,F_0,F_1,$ then $\# F_0^{-1}(q)=\#F^{-1}_1(q)\pmod 2$.
-    \end{enumerate}
-\end{theorem}
-\begin{proof}
-    For (2), {\color{red}todo:see the notes} 
-\end{proof}
+%Recap:
+%\begin{theorem}
+    %Let $X$ be a manifold with boundary, $Y$ a smooth manifold, $Z \subseteq Y$ a submanifold, and $f \colon X \to Y$ a smooth map. Then there exists a homotopy $H \colon [0,1] \times X \to Y$ such that $H_0=f$ and $H_1, \partial H_1\transv Z$.
+%\end{theorem}
+%
+%\begin{theorem}
+    %Let $X$ be a manifold with boundary, $Y$ a smooth manifold, and $Z \subseteq Y$ a closed submanifold. Say $C \subseteq X$ is a closed subset of $X$. If we have an $f \colon X \to Y$ such $f|_C,\partial f|_{C\cap \partial X}\transv Z$, then there exists an $H \colon [0,1] \times X \to Y$ such that \[
+        %H_0=f,\quad H_1,\partial H_1\transv Z,\quad H_t|_C=f|_C \ \text{for all} \ t \in [0,1].
+    %\] 
+%\end{theorem}
+%\begin{proof}
+    %{\color{red}todo:see the notes} 
+%\end{proof}
+%
+%\subsection{Mod 2 degree}
+%Let $f \colon X \to Y$ be a smooth map for $X$ a compact $n$-manifold and $Y$ a connected $n$-manifold.  If $q \in Y$ is a regular value, then $f ^{-1}(q)$ is a $0$-dimensional submanifold of $X$, hence a finite set of points since $X$ is compact. {\color{red}todo:see the notes for good stuff}  As we move between the regular values, the inverse images are created an annihilated in pairs.
+%
+%\begin{theorem}
+    %Fix $n \in \Z^{>0}$.
+    %\begin{enumerate}[label=(\arabic*)]
+        %\item The mod 2 cardinality $\# f ^{-1}(q)\pmod 2$ of the inverse image of a regular value $q \in Y$ is independent of $q$.
+        %\item If $F \colon [0,1]\times X \to Y$ is a smooth homotopy of maps, and $q \in Y$ is a simultaneous regular value of $F,F_0,F_1,$ then $\# F_0^{-1}(q)=\#F^{-1}_1(q)\pmod 2$.
+    %\end{enumerate}
+%\end{theorem}
+%\begin{proof}
+    %For (2), {\color{red}todo:see the notes} 
+%\end{proof}
+%\begin{prop}
+    %Let $X$ be a compact connected manifold of nonzero dimension. Then $\id_X\not\simeq $ the constant map, i.e., $X$ is not contractible.
+%\end{prop}
+%\begin{proof}
+    %We have $\operatorname{deg}_2\id_X=\#\id_X ^{-1}(q)=\#\{q\} =1$ for all $q \in X$. Then $\underline{q_0}\colon X \to X$ is a constant map with value $q_0$.  So $\operatorname{def}_2\underline{q_0}=\# \underline{q_0}^{-1}(q)=0$ ($q\neq q_0$).
+%\end{proof}
+%
+%\begin{prop}
+    %Let $X$ be a compact connected manifold of nonzero dimension. Then there exists an $f \colon X \to S^n $ with $\operatorname{deg}_2f=1$.
+%\end{prop}
+%{\color{red}todo:see the sketch, apparently it's important} 
+%
+%\subsection{Mod 2 intersection \#}
+%The setup is similar to the degree mod 2. Let $Y$ be a smooth manifold, $X$ a compact manifold, $Z\subseteq Y$ a closed submanifold. Let $f \colon X \to Y$ be smooth, and $\dim X+\dim Z=\dim Y$.
+%
+%\begin{definition}[]
+    %If $f \transv Z$, define $\#_2(f,Z)=\# f^{-1}(Z)\pmod 2$. This is a compact $0$-submanifold of $X$, and is therefore a finite set of points in $X$. If $f \not\transv Z$, use a homotopy of $f$ to achieve transversality. If $f_0\sim f_1$, $f_0,f_1\transv Z $ implies $\# f_0^{-1}(Z)=\# f_1^{-1}s(Z)\pmod 2$. If $f \colon X \hookrightarrow Y$ is an inclusion of a submanifold, write $\#_2(X,Z)=\#_2(Z,X)$.
+%\end{definition}
+%If $W$ is compact with boundary, $F \colon W \to Y\supset Z$  closed, and $\dim \partial W+\dim Z=\dim Y$, then $\#_2(\partial F,Z)=0$.
+%
+%\begin{example}
+    %\,
+    %\begin{enumerate}[label=(\arabic*)]
+        %\item Let $Y=S^1 \times S^1 , * \in S^1 $, $X=S^1 \times *$, $Z=*\times S^1 $. Then $\#_2(X,Z)=1$.
+        %\item Let $Y=S^2$, $f \colon S^1  \to S^2$.  Then $f$ is nullhomotopic, so $f =\partial F$, where $F \colon D^2 \to S^2$. This implies that $\#_2(f,Z)=0$ for all ?? This gives us the following:
+%\begin{theorem}
+    %The torus is not diffeomorphic to $S^2$.
+%\end{theorem}
+%\item Let $Y=\R \mathrm P^2$, and $L =\R \mathrm P^1$ be a line in $\R \mathrm P^2$. We can think of this as compactifying $\A^2$ with $\R \mathrm P^1$ (at the boundary, identify antipodal points). Since 1+1=2, perturb $L$ to $L'$ by a homotopy, so $\#_2(L,L)=1$.
+%\item The same story happens in $\C\mathrm P^2$.
+%\item Let $Y=\R \mathrm P^2$, and $Z=L$ a line. Take $X=C$ a cubic curve (crazy stuff happens)
+    %\end{enumerate}
+%\end{example}
+{\color{red}todo:a lot of unclean notes commented out, also read everything about pertrubing to get transverse intersection} 
+\subsection{Mod 2 degree (again)}
+{\color{red}todo:complete last time proof} 
 \begin{prop}
-    Let $X$ be a compact connected manifold of nonzero dimension. Then $\id_X\not\simeq $ the constant map, i.e., $X$ is not contractible.
+    Let $X$ be a compact connected manifold. Then $\id_X$ is not smoothly homotopic to a constant map.
 \end{prop}
 \begin{proof}
-    We have $\operatorname{deg}_2\id_X=\#\id_X ^{-1}(q)=\#\{q\} =1$ for all $q \in X$. Then $\underline{q_0}\colon X \to X$ is a constant map with value $q_0$.  So $\operatorname{def}_2\underline{q_0}=\# \underline{q_0}^{-1}(q)=0$ ($q\neq q_0$).
+    The mod 2 degree is defined for maps $X\to X$, and $\deg_2\id_X=1$, since every point of $X$ is a regular value with a single inverse image point. On the other hand, the constant map $X\to X$ with value $p \in X$ has any $q\neq p$ as a regular value with empty inverse image, so the mod two degree of a constant map is zero.
 \end{proof}
-
 \begin{prop}
-    Let $X$ be a compact connected manifold of nonzero dimension. Then there exists an $f \colon X \to S^n $ with $\operatorname{deg}_2f=1$.
+    Let $n$ be a positive integer, $W$ a compact $(n+1)$-dimensional manifold with boundary, $Y$ a connected $n$-dimensional manifold, and $F \colon W \to Y$ a smooth map. Then the mod two degree of the restriction of $F$ to the boundary vanishes, or $\deg_2 \partial F=0$.
 \end{prop}
-{\color{red}todo:see the sketch, apparently it's important} 
-
-\subsection{Mod 2 intersection \#}
-The setup is similar to the degree mod 2. Let $Y$ be a smooth manifold, $X$ a compact manifold, $Z\subseteq Y$ a closed submanifold. Let $f \colon X \to Y$ be smooth, and $\dim X+\dim Z=\dim Y$.
-
-\begin{definition}[]
-    If $f \transv Z$, define $\#_2(f,Z)=\# f^{-1}(Z)\pmod 2$. This is a compact $0$-submanifold of $X$, and is therefore a finite set of points in $X$. If $f \not\transv Z$, use a homotopy of $f$ to achieve transversality. If $f_0\sim f_1$, $f_0,f_1\transv Z $ implies $\# f_0^{-1}(Z)=\# f_1^{-1}s(Z)\pmod 2$. If $f \colon X \hookrightarrow Y$ is an inclusion of a submanifold, write $\#_2(X,Z)=\#_2(Z,X)$.
-\end{definition}
-If $W$ is compact with boundary, $F \colon W \to Y\supset Z$  closed, and $\dim \partial W+\dim Z=\dim Y$, then $\#_2(\partial F,Z)=0$.
-
+\begin{proof}
+    Let $q \in Y$ be a simultaneous regular value of $F, \partial F$. Then $F^{-1}(q)  \subseteq W$ is a compact $1$-dimensional with $\partial F^{-1}(q)=F^{-1}(q)\cap \partial W$. Now apply {\color{red}todo:fact that boundary of 1 maniofld is even} 
+\end{proof}
+\begin{prop}
+    Let $X$ be a compact $n$-manifold. Then there exists $f \colon X \to S^n $ such that $\deg_2f=1$.
+\end{prop}
+\begin{proof}
+    {\color{red}todo:} 
+\end{proof}
+\subsection{Mod 2 intersection theory}
+Let $Y$ be a smooth manifold and $X,Z \subseteq Y$ submanifolds of complementary dimension: $\dim X+\dim Z=\dim Y$. We want to define the \emph{intersection number} of $X$ and $Z$ in $Y$ by counting the elements of $X \cap Z \subseteq Y$. An issue is that this intersection may be infinite; let $Y=\A^r$ and $X=Z=\{(x,0)\mid  x \in \R\} \subseteq \A^2$. So we need to perturb one of the submanifolds to achieve a transverse intersection. Our techniques allow us to perturb maps, so pertrub the inclusion $i_X \colon X \hookrightarrow Y$. So we can generalize the setup to an arbitrary smooth map $f \colon X \to Y$. {\color{red}todo:corollary from last lec} implies that we can homotope $f$ to a map $g \colon X \to Y$ such that $g \transv Z$, and so $g^{-1}(Z)\subseteq X$ is a $0$-dimensional submanifold. We want this set to be finite, so we add that $X$ must be \emph{compact} in the conditions. We also want the number of points mod 2 in $g^{-1}(Z)$ to be independent of perturbation, which requires $Z \subseteq Y$ be \emph{closed}.
 \begin{example}
-    \,
-    \begin{enumerate}[label=(\arabic*)]
-        \item Let $Y=S^1 \times S^1 , * \in S^1 $, $X=S^1 \times *$, $Z=*\times S^1 $. Then $\#_2(X,Z)=1$.
-        \item Let $Y=S^2$, $f \colon S^1  \to S^2$.  Then $f$ is nullhomotopic, so $f =\partial F$, where $F \colon D^2 \to S^2$. This implies that $\#_2(f,Z)=0$ for all ?? This gives us the following:
-\begin{theorem}
-    The torus is not diffeomorphic to $S^2$.
-\end{theorem}
-\item Let $Y=\R \mathrm P^2$, and $L =\R \mathrm P^1$ be a line in $\R \mathrm P^2$. We can think of this as compactifying $\A^2$ with $\R \mathrm P^1$ (at the boundary, identify antipodal points). Since 1+1=2, perturb $L$ to $L'$ by a homotopy, so $\#_2(L,L)=1$.
-\item The same story happens in $\C\mathrm P^2$.
-\item Let $Y=\R \mathrm P^2$, and $Z=L$ a line. Take $X=C$ a cubic curve (crazy stuff happens)
-    \end{enumerate}
+    Consider $Y=\A^2,Z=\{(x,0)\mid x \in \R^{\neq 0}\} \subseteq \A^2$, and $X=\{(x,y)\mid (x-1)^2+y^2=1\} $. Then $\#(X \cap Z)=1$, but any small nonzero translation of $X$ intersects $Z$ in 2 points.
 \end{example}
+\begin{namedthing}{Setup} 
+   Here, $X$ is a compact manifold, $Y$ is a manifold, $Z \subseteq Y$ is a \emph{closed} submanifold, $f \colon X \to Y$ is smooth, and $\dim X+\dim Z=\dim Y$. 
+\end{namedthing}
+\begin{lemma}\label{ind} 
+    Let $g_0,g_1 \colon X \to Y$ be smoothly homotopic maps satisfying $g_0,g_1\transv Z$. Then $\#g_0^{-1}(Z)=\#g_1^{-1}(Z)$. 
+\end{lemma}
+\begin{definition}[]
+    Define the \textbf{mod 2 intersection number} $\#_2(f,Z)=\#g^{-1}(Z)$, where $g \simeq f$ is any smoothly homotopic map such that $g \transv Z$. Such map exists by {\color{red}todo:corollary in lec 16}, and the intersection number is independent of choice of $g$ by \cref{ind}.
+\end{definition}
+\begin{remark}
+    If $X \subseteq Y$ is a compact submanifold and $f=i_X$ is the inclusion, then we write $\#_2(X,Z)=\#_2(Z,X)$. This is not symmetric for $X$ compact and $Z$ closed, but if $Z$ is compact, then $\#_2(X,Z)=\#_2(Z,X)$. We can prove this by letting $\Delta \subseteq Y\times Y$ be the diagonal submanifold, then \[
+        \#^Y_2(X,Z)=\#_2^Y(Z,X)=\#_2 ^{Y\times Y}(i_X \times i_Z,\Delta).
+    \] 
+\end{remark}
+\begin{prop}
+    Given our setup,
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+\item If $f_0 \simeq f_1$ are smoothly homotopic, then $\#_2(f_0,Z)=\#(f_1,Z)$.
+\item If $W$ is a compact $(n+1)$-dimensional manifold with boundary $\partial W=X$, and $F \colon W \to Y$ a smooth map such that $\partial F=f$, then $\#_2(f,Z)=0$.
+    \end{enumerate}
+\end{prop}
+\subsection{Examples}
+\begin{example}
+    Let $Y= S^1 \times S^1 $, and consider the submanifolds $X=S^1 \times \{0\} $ and $\Z=\{0\} \times S^1 $. Then $\#_2(X,Z)=1$. On the other hand, $\#_2(X,X)=\#_2(Z,Z)=0$. You can organize these mod 2 intersection numbers into a $2\times 2$ \emph{intersection matrix} $\left( 
+    \begin{smallmatrix}
+        0 & 1 \\ 1 & 0
+    \end{smallmatrix}\right) $.
+\end{example}
+\begin{example}
+    Let $Y=\R \mathrm P^2$ be the real projective plane, and $X=\R \mathrm P^1 \subseteq \R \mathrm P^2$ a projective line. Then $\# (X,X)=1$. To compute this, perturb the inclusion $i \colon \R \mathrm P^1 \to \R \mathrm P^2$ to achieve transversality with the given line $X$, something we can achieve by choosing a transverse line. In terms of $\R \mathrm P^2=\mathbb P(\R^3)$, a projective line is a $2$-dimensional subspace of $\R^3$, and two transverse $2$-dimensional subspaces intersect in a $1$-dimensional subspaces. That is, two projective lines intersect.
+\end{example}
+\begin{theorem}
+    The $2$-torus $S^1 \times S^1 $ is not diffeomorphic to the $2$-sphere $S^2$.
+\end{theorem}
+\begin{proof}
+    If there is a diffeomorphism, we can find two $1$-dimensional submani
+\end{proof}
