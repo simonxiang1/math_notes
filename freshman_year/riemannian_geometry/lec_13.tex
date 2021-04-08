@@ -1,0 +1,63 @@
+\section{March 9, 2021} 
+
+\subsection{Geodesics as paths with no acceleration}
+Recall our three notions of a geodesic. 
+\begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+    \item A geometric path that ``locally'' minimizes distance,
+    \item A parametrized path $\gamma (t)$ that has stationary energy (where $E(\gamma )=\int_{0}^{T} g(\dot \gamma ,\dot \gamma ) \, dt$),
+    \item A path with no acceleration; $\nabla _{\dot \gamma }\dot \gamma =0$.
+\end{enumerate}
+We have already related (1) and (2), and now we want to show (2) and (3) are equivalent, with the Levi-Civita connection. In $\R^n $, $g_{ij}=\delta^i _j $, so $\partial _i g_{jk}=0$. Consider $\gamma^{\text{new} } (t) :=\gamma (t)+\delta \gamma (t)$, then we are interested in making $E(\gamma ^{\text{new}}-E(\gamma )=\int (\ )\,\delta \gamma +O(\delta \gamma ^2) $. This is the same process as taking derivatives: for $f$ a multivariable function, we have $f(x+dx)=f(x)+L(dx)+O(dx^2)$, and $L(dx)$ is called the derivative $df$. Then taking $\lim _{dx\to 0}(f(x+dx)-f(x)-L(dx))/|dx|$ is precisely what a derivative is. If $f(x+dx)$ is stationary, then $df=\frac{\partial f}{\partial x^i }dx^i =0$, so we set $\delta E=0$. 
+\begin{align}
+    E(\gamma )&=\int_{0}^{T} g_{ij}\dot \gamma ^i \dot \gamma ^j  \, dt,\\
+    \delta E&= \int_{0}^{T} 2g_{ij}\dot \gamma ^i (\delta \dot\gamma ^j)  \, dt\\
+            &=\underset{=0}{\underbrace{ 2g_{ij}\dot \gamma ^i \delta \gamma ^j \Big|_0^T}} - \int 2g_{ij}\ddot \gamma ^i \delta \gamma ^j  \, dt
+\end{align}
+From (1) to (2), for a general manifold the $g_{ij}$ will change, since $g_{ij}$ becomes a function of time. But here it stays the same. We get to (3) by integration by parts, and the first component vanishes because $\gamma (0)=p,\ \gamma (T)=q$, so $\delta \gamma (0)=0,\ \delta \gamma (T)=0$. In general, we have \[
+    0=-2 \int g_{ij}\ddot \gamma ^i (\delta \gamma ^j ) \, dt.
+\] The only way this integral is zero for all possible values of $\delta \gamma ^j $ is if $g_{ij}\ddot \gamma ^i $ is zero. Then $g_{ij}\ddot \gamma ^i =0$, so a geodesic in $\R^n $ is something with zero acceleration. For a general manifold, since $g_{ij}$ is no longer constant we get a new metric and other terms, which look like \[
+g_{k\ell}\ddot \gamma ^{\ell}+(\text{derivatives of} \ g)\dot \gamma ^i \dot \gamma ^j =0.
+\] Working out these terms is homework, they turn out to be precisely $\Gamma _{ij}^k$. For an arbitrary Riemannian manifold, without loss of generality we can assume that we're working in a single chart, which locally is just $\R^n $ with a funny metric.
+
+\subsection{Parallel transport}
+Suppose $V$ is a vector field and $\gamma $ is a curve. What is $\nabla _{\dot \gamma }V$? (Here $\nabla$ is an arbitrary connection.) Since $V=v^i (x)e_i $, then 
+    \begin{align*}
+        \nabla _{\dot \gamma }V=\nabla _{\dot \gamma }(v^i e_i )&=\dot \gamma (v^i )e_i +v^i \nabla _{\dot \gamma }e_i \\
+                                                                &=\dot \gamma ^j (\partial _j v^i )e_i +v^i \dot \gamma ^j \nabla _{e_j }e_i \\
+                                                                &=\dot \gamma ^j (\partial _j v^i )e_i +\Gamma _{ij}^kv^i \dot \gamma ^j e_k\\
+                                                                &=\dot v^i  e_i +\Gamma _{ij}^kv^i \dot \gamma ^j e_k.
+    \end{align*}
+    \begin{definition}[]
+        We say $V$ is \textbf{parallel} along the path $\gamma $ if and only if $\nabla _{\dot \gamma }V=0$.
+    \end{definition}
+    {\color{red}todo:figure?} 
+
+    Given $V(\gamma (t))$, does there exist a parallel $V$? We want $0=\dot v^ke_k +\Gamma _{ij}^k v^i \dot \gamma ^j e_k$. In other words, we want $\dot v^k=-\Gamma _{ij}^kv^i \dot \gamma ^j $. This is just a linear first order differential equation, since we want to solve for the derivative of $v$ in terms of $v$! As long as the data is smooth ($\Gamma $ is a smooth function of position, $\gamma ^j $ a smooth function of time), then by the Existence-Uniquess theorem for differential equations we have a unique solution. Since the ODE is linear, the solution gives a linear map from $T_pM$ to $T_{\gamma (t)}M,$ which we call \textbf{parallel transport}. Without a connection the tangent spaces are just vector spaces and we wouldn't know what to do, but given a connection, we can ``drag'' one vector to another along the curve, in particular we can send frames to frames this way. 
+
+    {\color{red}todo:figure about transporting frames?} 
+
+    A natural question is ``does parallel transport depend on $\gamma $?'' In $\R^n $, it doesn't matter what path you transport by, you always get the same result, since $\dot v^k=0$ which implies $v^k$ is a constant. However on another manifold, it might depend on which path you take.
+
+    \begin{example}
+        In $S^2$, transporting a vector along two different paths to the north pole gives a different result depending on what path you take, because there's a singularity at the north pole. 
+
+        {\color{red}todo:figure} 
+
+        Curvature means that things twist when we go along loops. Whenever the answer depends on path, then going along a closed loop does not give the identity. However, we do get a linear transformation $T_p M\to T_p M$. We claim this linear transformation is an \emph{isometry.} Note that since our connection is metric,
+        \[
+            \frac{d}{dt}g(v,v)=\dot \gamma (g(v,v))=g(\nabla_gv,v)+g(v,\nabla_g v)=g(0,v)+g(v,0)=0.
+        \] Similarly, under parallel transport the derivative of two vectors doesn't change. Going around a loop gives you a rotation of your tangent space. On a two dimensional surface, all rotations commute, since the rotation group is abelian. For a closed loop, you can ``chop up'' the interior of the closed curve and see how much rotation you get from each bit, then sum. So the rotation from parallel transport by $\gamma $ a closed loop is $\int \kappa \, dA$ for some function $K$. This function $\kappa$ is called the \textbf{Gauss curvature}. On $S^n $ it's zero, in $\H$ it's negative 1, and on $\R^n $ its zero. So if you want to know the curvature at a point, just go along an infinitesmal path, and we get that $\kappa$ is a function of $g, \Gamma ,\partial \Gamma $. (Sneak peek of future content.)
+    \end{example}
+    In short, if you what a connection is, you know what parallel transport is. And if you know what parallel transport is, you know what curvature is. If the connection happens to be the Levi-Civita connection, then $\Gamma $ and $\partial \Gamma $ come from the metric, so we get formulas for curvature in terms of the metric.
+
+    \begin{example}
+        Let's think about $S ^3\subseteq \R^4$, the space of quaternions. That is, $x=x^1+x^2i+x^3j+x^4k$, where $i^2=j^2=k^2=ijk=-1$. Then $ij=k, jk=i, ki=j$, but $ji=-k, kj=-i, ik=-j$. This is a nonabelian extension of the complex numbers. Multiplication of the unit quaternions forms a group of order eight. Given the vector field $e_1(x)=ix, e_2(x)=jx, e_3(x)=kx$, we claim all these vectors are tangent to $S^3$ and form an orthonormal basis for the tangent space. This gives us a frame, but we don't have a coordinate system. We could also consider the alternate frame $\widetilde e_1(x)=xi,\widetilde e_2(x)=xj,\widetilde e_3(x)=xk$.
+
+        Let us define some interesting connections. One is by defining $\nabla^L _{e_i }e_j =0$. In the homework we show this connection is metric but has torsion. Another connection says that $\nabla^K _{\widetilde e_i }\widetilde e_j=0 $. This is also metric but not symmetric. A third connection is defined by $\nabla^M=(\nabla^L+\nabla^R)/2$, which will turn out to be metric and symmetric, so it's the Levi-Civita connection.
+    Curvature in three dimensions is a bit more subtle since rotations don't commute. Eventually we get to curvature in higher dimensions, which is a tensor with four indices, a big mess.
+    \end{example}
+    \subsection{A coordinate free approach to the fundamental theorem}
+    Sometimes we don't have coordinates, and just want to talk about things in terms of frames or vector fields. The point is that frames $e_i $ may not be coordinates $\partial /\partial x^i $. What are $\nabla _{e_i }e_j, [e_i,e_j ]$, and $g(e_i ,e_j )$? In a coordinate frame, the brackets are zero since mixed partials commute. However, this doesn't always hold for arbitrary frames. It would be nice if we had a formula for $\nabla _{e_i }e_j $ in terms of $[e_i ,e_j ]$ and $g(e_i ,e_j )$. In full generality, we could talk about $g(\nabla_XY,Z)$, $[X,Y]$ etc, $g(X,Y)$ etc, for $X,Y,Z$ vector fields. The fundamental theorem says that there exists a unique metric is, so we can figure out $g(\nabla_XY,Z)$ in terms of the other data. But there are other formulas for the Levi-civita connection, which we'll talk more about next time. This expression is called \textbf{Koszul's formula}.
+
+

@@ -1,0 +1,57 @@
+\section{March 11, 2021} 
+
+\subsection{General formulas for the Levi-Civita connection}
+Consider $g(Y,Z)$ which is just a function, so we can take its directional derivative $X(g(Y,Z)=g(\nabla_XY,Z)+g(Y,\nabla_XZ)$. (Denote $\langle X,Y \rangle =g(X,Y)$). So \[
+    X(\langle Y,Z \rangle )=\langle \nabla_XY,Z \rangle +\langle Y,\nabla_XZ \rangle 
+\] is the equation for being metric. For a symmetric connection, we have \[
+[X,Y]=\nabla_XY-\nabla_YX.
+\] In a coordinate basis $[X,Y]=0$, so $\Gamma _{ij}^k=\Gamma _{ji}^k$. Now just by changing the names of the vector fields we have  $Y\langle X,Z \rangle =\langle \nabla_YX,Z \rangle +\langle X,\nabla_YZ \rangle $ and $Z\langle X,Y \rangle =\langle \nabla_ZX,Y \rangle +\langle X,\nabla_ZY \rangle $. Then
+\begin{align*}
+    +X\langle Y,Z \rangle &=\langle \nabla_XY,Z \rangle +\langle Y,\nabla_XZ \rangle \\
+    +Y\langle X,Z \rangle &=\langle \nabla_YX,Z \rangle +\langle X,\nabla_YZ \rangle \\
+    -Z\langle X,Y \rangle &=\langle \nabla_ZX,Y \rangle +\langle X,\nabla_ZY \rangle \\ &\implies \\
+    X\langle Y,Z \rangle +Y\langle X,Z \rangle -Z\langle X,Y \rangle &=\langle \nabla_XY+\nabla_YX,Z \rangle +\langle \nabla_XZ-\nabla_ZX,Y \rangle +\langle \nabla_YZ-\nabla_ZY,X \rangle \\
+                                                                     &=2\langle \nabla_XY,Z \rangle -\langle [X,Y],Z \rangle +\langle [X,Z],Y \rangle +\langle [Y,Z],X\rangle \\ &\implies 
+\end{align*}
+\[
+ \boxed{    \langle \nabla_XY,Z \rangle =\frac{1}{2}\left( X\langle Y,Z \rangle +Y\langle X,Z \rangle -Z\langle X,Y \rangle +\langle [X,Y],Z \rangle -\langle [X,Z],Y \rangle -\langle [Y,Z],X \rangle  \right) .}
+\] This equation is called \textbf{Koszul's formula}, which is the most general formula for the Levi-Civita connection. There are some bases we care about:
+\begin{enumerate}[label=(\arabic*)]
+    \item If $X=\partial _i ,Y=\partial _j ,K=\partial _k$, then $\Gamma _{ijk}=\frac{1}{2}\left( \partial _i g_{jk}+\partial _j g_{ik}-\partial _kg_{ij} \right)$ since all the bracket terms are zero. This is the form we're familiar with of the Levi-Civita connection, and the most common one as well.
+    \item Say we have an orthonormal basis $\{E_i \} $, where $X=E_i ,Y=E_j ,Z=E_k$. Then $[E_i ,E_j ]=c_{ij}^k E_k$, where the coefficients $c_{ij}^k$ tell you to what extent are the brackets nonzero. If $c_{ijk}=\langle [E_i ,E_j ] ,E_k\rangle $, then $\Gamma _{ijk}=\Gamma _{ij}^k=\frac{1}{2}(c_{ijk}-c_{ikj}-c_{kji})$.
+    \item Given a general frame, we have $\Gamma _{ijk}=\frac{1}{2}(\partial _i g_{jk}+\partial _j g_{ik}-\partial _kg_{ij})+\frac{1}{2}(c_{ijk}-c_{ikj}-c_{jki})$.
+\end{enumerate}
+
+\subsection{Return to geodesics}
+Recall that a geodesic satisfies $\nabla_{\dot x}\dot x=0$, and $\ddot x^k +\Gamma _{jk}^k \dot x^i \dot x^j =0$. Say we have a point $p$ and a vector $v_0$, we want to talk about a geodesic starting at $p$ with velocity $v_0$. We want to convert this second order differential equation of $n$ variables into a first order ODE of two variables. Say $v(t)=\dot x(t)$, then what is $\dot v$? Recall $\nabla_v v=0 \iff \dot v^k+\Gamma _{jk}^k(x)v^i v^j=0$, so  
+    \begin{align*}
+        \dot v^k&= -\Gamma _{ij}^k(x)v^i v^j ,\\
+        \dot x^k&=v^k.
+    \end{align*}These are our two desired differential equations. Then we have unique solutions since the $\Gamma $'s are smooth functions of $x$ (the particular smooth function is given by the Levi-Civita connection). In other words, there exists a unique solution $x(0)=p,v(0)=v_0$ for a short time (locally). 
+
+    For an arbitrary amount of time, consider the line going through the origin in $\R^2\setminus \{0\} $, which fails near the origin. Another example is the open interval $M=(a,b), g=dx ^2$; after a certain amount of time you fall of the edge of the world. If somebody gives you a manifold with a starting point and velocity, we want to run a geodesic for as long as possible in the $\pm t$ direction. This motivates the following definition.
+
+    \begin{definition}[]
+        A geodesic is \textbf{maximal} if it can't be extended.
+    \end{definition}
+    Is there a maximal geodesic? Given a starting point, take the union of the geodesics on an interval. This is unique, and we can't extend this any farther because this implies a bigger interval. So given any point and any starting vector, there is always a unique maximal geodesic.
+
+    \subsection{The exponential map}
+    Say we have a manifold $M$, $p \in M$, and the tangent space $T_p M$. Then the \textbf{exponential map} is defined as $\exp_p(v)=\gamma (1)$, where $\gamma $ is a geodesic with $\gamma (0)=p,\dot \gamma (0)=v$. Is this defined on all of $T_p M$? This is defined for all sufficiently small $v$ (for large $v$ you may fall of the edge of the world). You can think of $\exp_p(sv)=\gamma _{sv}(1)=\gamma _v(s)$. For every $p$ there exists a small neighborhood that looks like $\R^n $, so $\exp$ is well defined on the tangent space in that neighborhood. So think of the exponential map as the map \[
+    \exp_p \colon \text{Nbd of} \ 0 \in T_pM \to \text{Nbd of} \ p \in M.
+\] Given a compact manifold we can extend this, so geodesics run forever and the exponential map is defined for all $t$. What is $d \exp_p|_{v=0}$? This is the identity, since $d \exp_p |_{v=0}\colon T_0(\text{Nbd of} \ 0 \in T_pM) \to T_pM$ which is the same as a map $T_p M\to T_p M$. At $v=0$, this is saying ``given an infinitesmally small vector, where do you wind up?'' This is the same thing as saying ``how fast are you moving at time zero if you have a large vector?'', since how far you wind up with an infinitesmally small vector is how far you wind up with an ordinary geodesic in a short amount of time. So this asks how geodesics at small time, which is just the derivative of a geodesic at 0, which is just $v$!
+
+The nice thing about the identity is that it's invertible. Suppose we have two manifolds $M,N$, $f \colon M \to N$, $p \in M$, $q=f(p) \in N$, $df \colon T_p M \to T_qN$. If $df_p$ is invertible, then $f$ is a local diffeomorphism, so $f|_V$ is a diffeomorphism $U \to V$ (where $U,V$ are neighborhoods of $p,q$). So $\exp_p$ is a diffeomorphism, since it takes neighborhoods to neighborhoods. Let $r=\sup \{\text{radii } \mid \exp_p \ \text{is a diffeomorphism on} \ B_p\} $. We say $r$ is the \textbf{injectivity radius} at $p.$
+
+ \begin{example}
+     Consider $M$ the torus, if we draw it as a rectangle, say it has width $L_1$ and height $L_2$, $L_2>L_1$. Then the injectivity radius at $p$ is $L_2 /2$, since any points past $L_2 /2$ wrap around. The exponential map is a local diffeomorphism, but it fails to be injective; this is why it's called the \emph{injectivity} radius. On a sphere with $p$ the north pole, our injectivity radius is $\pi$ (since the circumference is $2\pi$).
+\end{example}
+You might think the injectivity radius is about the topology, since $H_1(\mathbb{T})=\Z\oplus \Z$ is nontrivial and we have a cycle to wrap around. It turns out the injectivity radius isn't just about the topology, since $S^2$ has no interesting first homology group. A handwavy way to think about the injectivity radius is the biggest radius such that a neighborhood of size $r$ around $p$ looks like a ball.
+
+If we have orthonormal coordinates for $T_p M$, this induces coordinates on $T_q N$ by the exponential map. Then $g_{ij}(p)=\delta _{ij}$, or even stronger, we have $g_{ij}(\exp_p(v))=\delta _{ij}+O(v^2)$. Consider a ball of radius $\varepsilon <r$ in $T_p M$, for $p,q \in U_p$ (for $U_p$ a neighborhood around $p$ in $M$ 0. Is there a geodesic connecting $p$ and $q$? Sure there is, since $\exp$ is a diffeomorphism. The geodesic is also locally unique. If $q=\exp_p(v)$, then what is the distance from $p$ to $q$? It's the inf of all lengths; not all geodesics globally minimize length, but a length minizming curve is certainly a geodesic. This is equivalent to the energy concept, that the variational equations for energy give us geodesics WRT the Levi-Civita connection. Since the shortest path gives us a geodesic, and there exists exactly one geodesic, then the geodesic must be the shortest path. So the distance from $p $ to $q$ is the magnitude of $v$.
+
+In other words, the distance function from $p$ is just the magnitude function in $T_p M$. If we use polar coordinates on $T_p M$, the metric in the radial direction $g_{rr}=1$, so the metric will always be $dr^2+$something.
+
+\subsection{Tubular neighborhoods}
+Suppose we have a Riemannian manifold $M$ and a submanifold $N$. The tubular neighborhood theorem states that if $N$ is compact, the set of all points within $\varepsilon $ of $N$ is a tubular neighborhood, and is diffeomorphic to a neighborhood of the zero section of the normal bundle. If $N$ is not compact, then $\varepsilon $ is not globally chosen (it varies from point to point). What does a neighborhood of $p \in  N$ look like? A neighborhood of $p$ in the big space looks like a neighborhood of the origin in $T_pM$. But $T_pM=T_p N\oplus N_p N$, so we parametrize by $(p,v) \to \exp_p (v)$.
+    

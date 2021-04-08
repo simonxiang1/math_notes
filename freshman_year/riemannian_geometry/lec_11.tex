@@ -1,0 +1,64 @@
+\section{March 2, 2021} 
+Recap: Let $\mathfrak X(M)$ be the set of vector fields on $M$, or the sections of $TM$. Recall that $\nabla \colon \mathfrak X\times \mathfrak X \to \mathfrak X$, $(X,Y) \to \nabla_XY$. We want $\nabla _{fX}Y=f\nabla_XY$, linearity WRT $X,Y$, and $\nabla_X(fY)=f\nabla_XY+(X(f))Y$. Note that $X(f)=X\partial _i f$. If we had something that satisfied every condition besides the extra term, that would just be a tensor. This on the other hand, is a differential operator. If we have a basis $\{e_i \} $, then $\nabla _{e_i }e_j =\Gamma _{ij}^ke_k$. Usually we have $e_i = \partial  /\partial x^i$. Furthermore, $(\nabla_xy)^k=x(y^k)+\Gamma _{ij}^kx^i y^j $, or ``$\nabla_i =\partial _i +\Gamma _i $''.
+
+If $\nabla,\widetilde \nabla$ are connections, we also saw that $\widetilde \nabla-\nabla$ is a \emph{tensor}. So $(\nabla_X-\nabla_X)(fY)=f(\widetilde \nabla_X-\nabla_X)(y)$, a tensor (the extra components cancel). Furthermore the set of connections is characterized by elements of the for $\nabla_0+(1,2)$-tensors, if $\nabla_0$ exists (it does).
+
+\subsection{Connections of covectors and general tensors}
+How do we take derivatives of covector fields? Or $(1,1)$-tensors, $(5,7)$-tensors, whatever. Suppose $\alpha $ is a covector field, and $v$ is a vector field. Then $\alpha (v)$ is just a function, and we would like for \[
+    \partial _i (\alpha (v))=(\nabla _i \alpha )(v)+\alpha (\nabla_i v)
+\] to be true. We know what $\nabla_i v$ means for $v$ a vector field. We \emph{define} $(\nabla_i \alpha )(v)=\partial _i (\alpha (v))-\alpha (\nabla_i v)$, so our product rule works. Consider 
+\begin{align*}
+    (\nabla _i  \phi^k)(e_j )&= \partial _i (\phi^k(e_j ))-\phi^k(\nabla _i e_j )\\
+                             &=\partial _i \delta_j ^k- \gamma _{ij}^k\\
+                             &=-\Gamma _{ij}^k.
+\end{align*}
+So $\nabla _i e_j =\Gamma _{ij}^k e_k$, and $\nabla _i \phi^k =-\Gamma _{ij}^k \phi^j $. The roles are reversed: in the first you take the derivative of $j$ and get $k$ (with some coefficients), and in the second expression you take the derivative of $k$ and get $j$. This has to be the case because of where our indices are placed. This is the same idea of taking minus the transpose of the other, where the derivative on rows is minute the transpose of the derivative of columns. Then 
+\begin{align*}
+    (\nabla _i \alpha )&=\nabla _i (\alpha _k\phi^k)\\
+                       &=(\partial _i \alpha _k)\phi^k+\alpha _k\nabla _i \phi^k\\
+                       &= (\partial _i \alpha _k)\phi^k - \alpha _k \Gamma _{ij}^k \phi^j ,\\
+    \Aboxed{ (\nabla _i \alpha )_j &=\partial _i \alpha _j - \Gamma _{ij}^k\alpha _k.}
+\end{align*}So that's how we take the covariant derivative of a covector field. What about a $(1,1)$-tensor? For $T(v,\alpha )$ eating a vector and covector, ideally we would have \[
+\partial _i (T(v,\alpha ))=(\nabla _i T)(v,\alpha )+T(\nabla _i v,\alpha )+T(v,\nabla _i \alpha ).
+\] We know what $T(\nabla _i v,\alpha )$ and $T(v,\nabla _i \alpha )$ are, so consider this as a definition for $(\nabla _i T)(v,\alpha )$. Similarly, for a $(k,\ell)$-tensor we just have $k$ covariant terms and $\ell$ contravariant terms instead of one.
+
+\subsection{Metric connections}
+Now that we know how to take the derivative of tensors, let us compute the derivative of the \emph{metric} $\nabla _i (g)(e_j,e_k)$. Then 
+\begin{align*}
+    \nabla _i (g)(e_j ,e_k)&= \partial _i g_{jk}-g(\nabla _i  e_j ,e_k)-g(e_j ,\nabla _i e_k)\\
+                           &=\partial _i g_{jk}-g(\Gamma _{ij}^{\ell}e_{\ell},e_k)-g(e_j ,\Gamma _{ik}^{m}e_m),\\
+    (\nabla _i g)_{jk}&=\partial _i g_{jk}-\Gamma _{ij}^{\ell}g_{\ell k}-\Gamma _{ik}^m g_{jm}\\
+                      &=\partial _i g_{jk}-\Gamma _{ijk}-\Gamma _{ikj}.
+\end{align*}
+What we did was lower an index $k$ that used to be at the top, and wrote it as $\Gamma _{ijk}$, where the \emph{third} index is the lowered one. Ideally, the derivative of the metric should be zero. If $\nabla _i g=0$, we say $\nabla$ is a \textbf{metric connection}. For metric connections, we know that $\Gamma _{ijk}+\Gamma _{ikj}=\partial _i g_{jk}$. However, not every connection is metric.
+\begin{example}
+    Consider the Euclidan connection $\nabla ^E$ on $\R^n $. Given the standard basis, we have $\nabla^E _i e_j =0$, or $\Gamma _{ij}^k=0$. This depends on basis; we work in $\R^2$ with basis $(r,\theta),$ where $\widetilde e_1=\partial  /\partial r,\ \widetilde e_2=\partial /\partial \theta$. Given $\partial  /\partial r= x(\partial /\partial x)+y(\partial /\partial y),\ \partial /\partial \theta=x(\partial /\partial y)-y(\partial /\partial x)$, what are the values of $\nabla_{\frac{\partial}{\partial \theta}}\frac{\partial}{\partial \theta},\nabla _{\frac{\partial}{\partial \theta}}\frac{\partial}{\partial r},\nabla _{\frac{\partial}{\partial r}}\frac{\partial}{\partial \theta},\nabla _{\frac{\partial}{\partial r}}\frac{\partial}{\partial r}?$
+%
+    %\begin{alignat*}{2} 
+        %&\nabla _{\widetilde e_1}\widetilde e_1=0       &\nabla _{\widetilde e_1}\widetilde e_2\\
+        %&\nabla _{\widetilde e_2}\widetilde e_1 =\nabla _{\widetilde e_1}\widetilde e_2       &\nabla _{\widetilde e_2}\widetilde e_2
+    %\end{alignat*}
+
+First, recall that \[
+\widetilde e_1= \frac{x \partial _x +y \partial _y}{\sqrt{x^2+y^2} }=\frac{x}{\sqrt{x^2+y^2} }\partial _x+\frac{y}{\sqrt{x^2+y^2} }\partial _y,\quad \widetilde e_2=-y\partial _x+x\partial _y,
+\] so
+    \begin{alignat*}{2} 
+        &\nabla _{\frac{\partial}{\partial x}}\widetilde e_1=\frac{y^2 \partial _x-xy\partial _y}{(x^2+y^2)^{\sfrac{3}{2}} }=-\frac{y}{(x^2+y^2 )^{\sfrac{3}{2}}}\widetilde e_2,\quad &&\nabla _{\frac{\partial}{\partial y}}\widetilde e_1=\frac{-xy \partial _x+x^2\partial _y}{(x^2+y^2)^{\sfrac{3}{2}}}=\frac{x}{(x^2+y^2)^{\sfrac{3}{2}}}\widetilde e_2\\
+        &\nabla _{\frac{\partial}{\partial x}}\widetilde e_2=\partial _y,&&\nabla _{\frac{\partial}{\partial y}}\widetilde e_2=-\partial _x.
+    \end{alignat*}Then 
+    \begin{alignat*}{2} 
+        &\nabla _{\widetilde e_1}\widetilde e_1=\frac{x}{r}\left( -\frac{y}{r^3} \right) \widetilde e_2+\frac{y}{r}\left( \frac{x}{r^3} \right) \widetilde e_2=0,\quad
+        &&\nabla _{\widetilde e_2}\widetilde e_1=-y \left( \frac{-y}{r^3} \right) \widetilde e_2+x\left( \frac{x}{r^3} \right) \widetilde e_2=\frac{\widetilde e_2}{r},\\
+        &\nabla _{\widetilde e_1}\widetilde e_2=\frac{x}{r}\partial _y+\frac{y}{r}(-\partial _x)=\frac{\widetilde e_2}{r},
+        &&\nabla _{\widetilde e_2}\widetilde e_2=-y \partial _y-x\partial _x=-r \widetilde e_1.
+    \end{alignat*}
+\end{example}
+
+\subsection{The tangential connection}
+Suppose we have a Riemannian manifold $(M,g)$ sitting inside a bigger Riemannian manifold $N$. (The motivating example is $N=\R^n $.) Suppose $\overline{\nabla}_j \overline{g}$ is a connection (and $\overline{g}$ a metric) for $N$. Given a vector in $T_p N$, we have the orthogonal projection $\pi_p \colon T_p N \to T_p N$, taking normal vectors to zero and tangent vectors to themselves. Let us try to define a connection on $M$. Suppose $X,Y$ are vector fields on $M$, define \[
+    \nabla_X^T Y=\pi\left( \overline{\nabla}_XY \right) .
+\] Even though $X,Y$ are only defined on $M$, we can always extend it to a neighborhood of $p$ in some way. Showing that the choice of extension is not a factor is on the homework.
+\begin{example}
+    Let $M=S^1 ,\ N=\R^2$. A tangent vector is of the form $\partial _{\theta}$, so $\nabla _{\partial _{\theta}}\partial _{\theta}=\pi\left(\overline{\nabla}_{\partial _{\theta}}\partial _{\theta}\right)=\pi(-r \partial _r)=0$.
+\end{example}
+Classic differential geometry was to figure out how surfaces sit in $\R^3$. The question boiled down to ``what is this projection?'', which amounts to understanding the normal vector is, because all $\pi$ does it vanquish the normal component. So we have things like the Gauss map that gives a normal vector at ecah point. Somebody (probably Gauss/Euler) said we should work with intrinsic properties, doing things like figuring out areas and angle sums of triangles and circumferences of circles directly on the surface itself, without regards to $\mathbf N$. It turns out we get the exact same results! So the way something sits in $\R^3$ actually turns out to be intrinsic.

@@ -1,0 +1,76 @@
+\section{February 25, 2020} 
+Recall that geodesics in $\R^n $ between two points $p$ and $q$ are straight lines, explicitly given by $X(t)=p+(q-p)t /T$, moving with constant velocity $\dot X(t)=(q-p) /T$, with $\ddot X=0$. On $S^2 $, geodesics are great circles, parametrized by (assuming we're at the equator) $\vec x=(x,y,z)=(\cos t, \sin t, 0)$. So $\dot{\vec x} =(- \sin t, \cos t, 0)$ and $\ddot{\vec x} =(-\cos t, -\sin t,0)$. The acceleration has no tangential component, so it's only enough to keep us on the surface of the sphere. 
+
+But what about hyperbolic space? What does a derivative along a function mean? Given a function $f(x)$ along a curve, we have \[
+    \frac{d}{dt}f(x)=\frac{d}{dt}(f \circ x(t))= \lim _{h\to 0}\frac{f(x(t+h))-f(x(t))}{h}.
+\] It's perfectly sensible to subtract the value of a function at two points. However, \[
+\frac{d}{dt}\dot x \overset{?}{=} \lim _{h\to 0}\frac{f(\dot x(t+h))-f(\dot x(t))}{h}.
+\] The issue is $\dot x(t+h)$ and $\dot x(t)$ live in two different tangent spaces. How do we take vectors in one space and move them to vectors in another space? The thing that ``connects'' vectors in one space and moves them to another is called a \emph{connection}.\footnote{You can do this using flow, and the result is a \emph{Lie derivative}. But that isn't the current direction we're going.}
+
+\subsection{Recap of vector bundles}
+Let $M$ be a manifold. The rough definition of a vector bundle is that you assign to each point a vector space, and tie them all together somehow. 
+\begin{definition}[]
+    A \textbf{vector bundle} is a smooth manifold $E$ along with a projection map $V \to E \overset{\pi}{\to } M$ (where $V$ is a fixed vector space) such that
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\pi ^{-1}(p)$ is a vector space,
+        \item There exists a neighborhood $U$ of $p$ such that $\pi ^{-1}(U) \simeq U \times V$,
+        \item Transition maps are linear transformations.
+    \end{enumerate}
+\end{definition}
+Essentially (1) says that each fiber has a vector space structure, (2) tells us we can locally assign coordinates to preimages of neighborhoods, and (3) says that the transition maps respect such bases and the linear structure of the upstairs vector space.
+
+\begin{example}
+    An example of a vector bundle is the \textbf{tangent bundle} $TM$, since the $T_p M$ is a vector space at each point, and locally we have a basis $\{\partial x^i  \} $, and going from one tangent space to another we have a change of basis matrix. Another example is the \textbf{cotangent bundle} $T^*M$, where we consider all tangent covectors rather than vectors. On this vein we can look at the space of all $(k,\ell)$-tensors $T^{(k,\ell)}M$. So $T^{(0,1)}M=TM$ and $T^{(1,0)}M=T^*M$.
+
+    If $M \subseteq \R^n $, we can look at the \textbf{normal bundle}, the space of all vectors perpendicular to $M$. We could also look at the \textbf{trivial bundle} $M \times V$, where we have a global structure, so we can use the same basis for $V$ everywhere, leading to one chart for the bundle structure.
+\end{example}
+\begin{definition}[]
+    A (smooth) \textbf{section} of a vector bundle $E$ is a (smooth) map $s \colon M \to E$ such that $\pi \circ s=\id$. In other words, for $p \in m$, we have $s(p) \in \pi^{-1}(p)$.
+\end{definition}
+So a section smoothly assigns to every point of the manifold an element of the fiber living above it.
+
+\subsection{Connections}
+Let $v \in T_p M$, and $s$ be a section of some vector bundle $E\to M$. We want to take $\nabla_v s$, or the derivative in the $v$-direction of $s$. Suppose $b_1(x),\cdots ,b_m(x)$ is a basis for the fiber of $p$, and $e_1,\cdots ,e_n $ is a basis for $T_p X$. A section $s(x)$ can be written as $s^{\alpha }(x)b_{\alpha }(x)$ since it lives in the fiber of $p$, a vector space. Here are some things we want out of derivatives:
+\begin{enumerate}[label=(\roman*)]
+    \setlength\itemsep{-.2em}
+\item $\nabla _{e_i }s=\nabla _{e_i }(s^{\alpha }b_{\alpha })=\nabla e_i (s^{\alpha })b_{\alpha }+s^{\alpha }(\nabla e_i b_{\alpha }),$
+\item $\nabla _{e_i }b_{\alpha }=(A_i )^{\beta }b_{\beta }$,
+\item $\left( \nabla _{e_i }s \right) ^{\beta }=\partial _{e_i }s^{\beta }+(A_i )_{\alpha }^{\beta }s^{\alpha }$.
+\end{enumerate}
+Normally we see equations like ``$\nabla _i =\partial _i +A_i $''. The $\nabla _i $ is a \textbf{covariant derivative}, which is the ordinary derivative of the coefficients plus an extra matrix. We need a matrix for every direction we take a derivative in, and these matrices $A_i $ are by choice (not given). If someone tells you what the derivative of the basis vectors are, you can figure out the derivative of the section by linearity. The $\nabla _i $ is also called a \textbf{connection}. This idea works in any vector bundle. But we \emph{really} care about tangent bundles.
+
+In the case of a tangent bundle $TM$ with basis $e_1,\cdots ,e_n $ for the tangent space and $e_1,\cdots ,e_n $ for the fiber, the derivative in the $e_i $ direction of $e_j $ is some linear combination of the $e_k$'s. We denote this \[
+    \nabla _{e_i }e_j =\Gamma _{ij}^k e_k, \quad \text{or} \quad \Gamma _{ij}^k=\left( \nabla_{e_i }e_j  \right) ^k
+\] where the second expression means that you take the $k$th coefficient of the derivative $\nabla_{e_i }e_j $. If somebody tells you what the $\Gamma $'s are, you know how to take covariant derivatives. More generally you might have vector fields $v=v^i e_i $, $w=w^j e_j $, and the natural question is ``what is the covariant derivative in the $v$th direction of $w$?'' Then the $k$th component is given by \[
+\boxed{ \left( \nabla _v(w) \right) ^k=v^i (\partial _i w^k)+\Gamma _{ij}^k v^i w^j .}
+\] In the expression $\nabla_i =\partial _i +A_i $, to be more precise, the $A_i $ refers to a matrix $(A_i )^{\beta }_{\alpha }$, where the $i$ refers to the direction you're taking the derivative with respect to, and $\alpha ,\beta $ are coordinates in the fiber. Likewise, for $\Gamma _{ij}^k=(\Gamma _i)_j ^k $, $i$ refers to the direction of the derivative and $j,k$ tells us this is a linear transformation within the vector space.
+
+Our first approach was based on faith, that we somehow know that $\nabla_{e_i }e_j =\Gamma _{ij}^ke_k$, and from here we know the derivative of anything. An alternate approach is more axiomatic (this is the approach the book uses). We want to have this operation where we take the derivative of any vector field in the direction of any other vector field, say $\nabla_V(W)$. Assume $X,Y,Z$ are vector fields. Then a \textbf{connection} $\nabla \colon X \times Y\to Z$ satisfies
+\begin{enumerate}[label=(\arabic*)]
+    \item $\nabla_X(c_1Y+c_2Z)=c_1(\nabla_X Y)+c_2(\nabla_x Z)$,
+    \item $\nabla _{fX+gY}=f\nabla_XZ+g\nabla_YZ$,
+    \item $\nabla_X(fZ)=f\nabla_XZ+X(f)Z$.
+\end{enumerate}
+If we have a connection and a local basis for our tangent space $\{e_i \} $, then we can ask what $\left( \nabla_{e_i }e_j  \right) ^k=\Gamma_{ij}^k(x)$ is. 
+
+\subsection{Connection under a change of coordinates}
+The next question is ``what happens under a change of coordinates?'' Say we have coordinates $(x^1,\cdots ,x^n )$ on $M$, giving us a basis $e_i =\partial /\partial x^i $ for the tangent space. Note that section and vector field are synonymous, since a vector field is a section of the tangent bundle. Then $(\nabla _i s)^k=\partial _i s^k+\Gamma _{ij}^k s^j $. We call $(\nabla _i  s)^k$ the covariant derivative and $\partial _i s^k$ the ordinary derivative. 
+
+Now let's switch to coordinates $(y^1,\cdots ,y^n )$ with an alternate basis $\widetilde e_i $. This gives us a change of basis matrix $\widetilde e_i =\partial /\partial y^j =A_i ^j e_j $, and the dual basis $\widetilde \phi^i =B^i _j \phi^j $. We also know $A_i ^j =\partial x^j /\partial y^i ,\ B^i _j =\partial y^i /\partial x^j $. Then $\nabla _{\widetilde e_i }\widetilde e_j =\widetilde \Gamma _{ij}^k \widetilde e_k.$ The question is: how do the $\widetilde \Gamma _{ij}^k$ compare to the old $\Gamma _{ij}^k$? In our words, we want to compute $\widetilde \Gamma _{ij}^k$ in terms of $A_s',B_s',\Gamma _s'$. Note that 
+\begin{align*}
+    \nabla _{\widetilde e_i }\widetilde e_j &= \nabla _{A_i ^{\ell}e_{\ell}}A_j ^me_m=A_i ^{\ell}\nabla _{e_{\ell}}(A_j ^me_m)\\
+                                            &=A_i ^{\ell}A_j ^m\nabla _{e_{\ell} }e_m+A_i ^{\ell}(\partial _{\ell}A_j ^m)e_m\\
+                                            &=A_i ^{\ell}A_j ^m\Gamma _{\ell m}^p e_p+A_i ^{\ell}(\partial _{\ell}A_j ^m)B_m^k \widetilde e_k\\
+                                            &=(A_i ^{\ell}A_j ^mB_p^k \Gamma _{\ell m}^p+A_i ^{\ell}\partial _{\ell}A_j ^mB_m^k)\widetilde e_k.
+\end{align*}So \[
+\boxed{ \widetilde \Gamma _{ij}^k=\underset{\text{Lie tensor}}{A_i ^{\ell}A_j ^m B_p^k \Gamma _{\ell m}^p} + \underset{\text{Exterior independent of} \ \Gamma!}{A_i ^{\ell}B_m^k (\partial _{\ell}A_j ^m).}
+} \] This tells us a little bit about the $\Gamma $'s: they aren't tensors, they transform like a $(2,1)$-tensor plus an inhomogeneous bit. It is not true that connections are tensors, but if you \emph{add} a tensor to a connection, it transforms like a tensor, and the extra bit is invariant since we already know the connection. So
+\begin{enumerate}[label=(\arabic*)]
+    \item If $\nabla$ is a connection and $T$ is a $(2,1)$-tensor, then $(\nabla+T)$ is a connection.
+    \item If $\nabla$ and $\nabla'$ are connections, then $\nabla -\nabla '$ is a \emph{tensor}.
+    \item If a connection $\nabla_0$ exists, then the set of \emph{all} connections can be expressed in the form $\nabla_0+\mathcal{T} ^{2,1}M.$
+\end{enumerate}
+The space of connections isn't an vector space, but it is an affine space. Does such a $\nabla_0$ exist? Let us construct a connection on $S^2$. Say we have two coordinate charts $(u_1,v_1)$ and $(u_2,v_2)$ constructed by stereographic projection. Construct a partition of unity on both charts: say $\rho_1:=1$ on $N$, $1$ all the way down to the Tropic of Cancer, hit zero on the Tropic of Capricorn, and is zero at $S$. Define $\rho_2$ in a similar way for the second chart $(u_2,v_2)$. These are compactly supported, where $\rho_1+\rho_2=1$.
+
+Define $\nabla_0$ with $\Gamma _{ij}^{k}=0$ (not defined on the south pole), and likewise $\widetilde \nabla_0$ with $\widetilde \Gamma _{ij}^{k}=0$ (not defined on the north pole) corresponding to our charts. Then the sum $\nabla=\rho_1\nabla_0+\rho_2\widetilde \nabla_0$ is defined everywhere, since the left term extends to $0$ near the south pole (since $\rho_1=0$ there) and likewise $\rho_2\widetilde \nabla_0$ extends to the north pole. Is this a connection? Yes, because you can think of this sum as $\nabla = \nabla_0+\rho_2(\widetilde \nabla_0-\nabla_0)$, a connection plus a tensor. This argument extends to arbitrary manifolds. So every manifold admits a connection, and the set of connections looks like an affine space based on the set of $(2,1)$-tensors.
+
