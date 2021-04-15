@@ -1,0 +1,60 @@
+\section{April 15, 2021} 
+{\color{red}todo:is this lecture 24??} 
+\begin{theorem}
+    Let $X$ be a smooth manifold. Then there exists a unique $d \colon \Omega^*(X) \to \Omega^{*+1}(X)$ satisfying 
+    \begin{enumerate}[label=(\roman*)]
+    \setlength\itemsep{-.2em}
+        \item Linearity,
+        \item The Liebniz rule, 
+        \item $d^2=0$,
+        \item $d|_{\Omega^0(X)}$ is the usual differential.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Let $\{(U_i ,x_i )\}_{i\in I}$ be an open cover of $X$ by charts. Let $\{\rho _i \} _{i \in I}$ be a partition of unity, where $\operatorname{Supp} \rho _i \subseteq U_i $. If $\alpha  \in \Omega^*(X)$, then $\alpha =\sum _i \rho_i \alpha _i $, where $\operatorname{supp}(\rho _i \alpha )\subseteq U_i $. Define $d\alpha =\sum _i  d(\rho _i \alpha )$, where we compute $x_i (U_i ) \subseteq A_i $, $\operatorname{supp}d(\rho_i \alpha )$ (note that $d$ increases support). 
+
+    For this to be a good definition, we need to show that this is well-defined. say $\{(V_a,y_a\}_{a \in A} $ is another atlas, $\{\sigma _{a}\} _{a \in A}$ a partition of unity. Then 
+    \begin{align*}
+        \sum _i d(\rho _i \alpha )&=\sum _i \sum _a d(\rho _i \sigma _a\alpha )\\
+                                  &=\sum_a\sum_i  d(\sigma_a\rho_i \alpha )\\
+                                  &=\sum _{\alpha }d(\sigma_a\alpha ).
+    \end{align*}
+    Note that $\operatorname{supp}\rho _i \sigma _a \alpha \subseteq U_i \cap V_a$. Something about $d$ commuting with pullback, the first is defined on $x_i (U_i \cap V_a),$ the second on $ y_a(U_i \cap V_a)$, and the final on $y_a(V_a)$. {\color{red}todo:this, plus something about transition maps} 
+\end{proof}
+
+\subsection{Orientation}
+We have all seen Riemann integration on the line, and hopefully you have learned how to integrate in $\R^n $, and perhaps Lebesgue integration. We do not focus on the analytic aspects, but the geometric aspects, which allows us to integrate on manifolds. Unfortunately we do not have a fixed vector space, giving a fixed Lebesgue measure, so we have to start from the beginning. Let's talk about orientation.
+
+Recall that if $L$ is a real line (1-dimensional vector space), then an \textbf{orientation} of $L$ is an element of $\pi_0(L \setminus \{0\} )$.
+
+\begin{definition}[]
+    If $V$ is a finite dimensional real vector space, then an \textbf{orientation} of $V$ is an orientation of $\det V$. A \textbf{basis} of $V$ is an isomorphism $b \colon \R^n  \to V$ if $\dim V=n$.
+\end{definition}
+\begin{remark}
+    Let $\mathcal{O} (V)$ be the set of bases of $V$. The group $\operatorname{GL}_n \R=\{g \colon \R^n \overset{\simeq}{\to } \R^n \} $ acts simply transitively on $\mathcal{O} (V)$.\footnote{Apparently in physics, left vs right actions form the idea of passive vs active actions or something like that. This is a right action.} This is a right action $\operatorname{GL}_n \R$, or a torsor. Then $\det \colon \operatorname{GL}_n \R \to \R^{\neq 0}$ is an isomorphism on $\pi_0$. Introduce $\mathcal{O} (V) \to \det V \setminus \{0\} ,\ e_1,\cdots ,e_n  \mapsto e_1\wedge \cdots \wedge e_n $. An orientation partitions $\mathcal{O} (V)$ into $\mathcal{B} ^{\pm}(V)$. If $T \colon V' \to V$, then $\dim V'=\dim V$ if $T$ is an ismorphism. Then $\det T \colon \det V' \to \det V$\footnote{Confused on usage of $\det$ and $\operatorname{Det}$} is an isomorphism, and $T$ is orientation preserving (resp reversing) if $T(O')=0$ (resp $T(O')\neq O$). (Here $O$ denotes the orientation of a space.)
+\end{remark}
+\begin{definition}[]
+    Let $V$ be a finite dimensional real vector space. A nonzero element of $\operatorname{Det}V^*$ is a \textbf{volume form}. For $\xi_1,\cdots ,\xi_k \in V$, $(\xi_1,\cdots ,\xi_k)=\{t ^i \xi_i  \mid 0 \leq \to i \leq 1\} \subseteq \operatorname{span}\{\xi_i \} $, the vectors are \textbf{nondegenerate} if the $\xi_1,\cdots ,\xi_k$ are LI iff $\xi_1\wedge \cdots \wedge \xi_k\neq 0$ in $\bigwedge ^k V$. If $e_1,\cdots ,e_n $ is a basis of $V$, define \[
+        \operatorname{vol}( //(e_1,\cdots ,e_n )= \|\langle \omega, e_1\wedge \cdots \wedge e_n  \rangle \|.
+    \] 
+\end{definition}
+\begin{prop}
+    If $e_1',\cdots ,e_n '$ is another basis, and $e_j '=T_j ^i e_i $ for $T_i ^i  \in \R$, then \[
+        \operatorname{vol}// (e_1',\cdots ,e_n ')=(\det T) \operatorname{vol} // (e_1,\cdots ,e_n ).
+    \] 
+\end{prop}
+\begin{remark}
+\emph{Ratios} of volume are defined without a volume form. A $k$-form $\alpha  \in \bigwedge ^k V_6*$ induces a notion of volume on all $k$-dimensional subspaces $W \subseteq V$ such that $\alpha |_W\neq 0$. On $\R^n $ we take $\omega=e^1\wedge \cdots \wedge e^n  \in \operatorname{Det}{\R^n } ^*$.
+\end{remark}
+{\color{red}todo:?? canonical double cover, orientation bundle, homology} 
+\begin{definition}[]
+    An orientation of $X$ is a section of $\pi_0^{\text{vert} } (\operatorname{Det}TX\setminus 0)\to X$. A \textbf{volume form} on $X$ is a nonvanishing $\omega \in \Omega^n (X)$ if $\dim X=n$.
+\end{definition}
+\begin{example}
+    If $X=S^1 $, then we have two double covers up to isomorphism. If $X=\R \mathrm P^2$, then $D^2 \subseteq \A^2$ {\color{red}todo:something happen}, so the orientation double cover has total space $S^2$, and $\R \mathrm P^2$ is not orientable.
+\end{example}
+
+\begin{definition}[]
+    Suppose $X$ is an oriented manifold. A standard chart $(U,x), x \colon U \to \A^n $ is \textbf{oriented} if $\left. \frac{\partial }{\partial x^1} \right| _p,\cdots ,\left. \frac{\partial }{\partial x^n} \right| _p$ is an oriented basis of $T_p X$ for all $p \in U$. 
+\end{definition}
+If $(U,x),(V,y)$ are oriented charts, then $\det d(y \circ x^{-1})>0$. Look forward to integration.
