@@ -1,3 +1,4 @@
+\newcommand\Supp{\ensuremath{\operatorname{Supp}}} 
 \section{De Rham Cohomology} 
 
 Switching gears, the reference book has changed to Bott and Tu. 
@@ -10,7 +11,7 @@ Switching gears, the reference book has changed to Bott and Tu.
    \end{cases}
    \] 
    As a real vector space this has basis $1, dx_i ,dx_i dx_j , dx_i dx_j dx_k,\cdots ,dx_1\cdots dx_n $, where $i<j,i<j<k$ (or the $(*,n)$-shuffles). The $C^{\infty}$ \textbf{differential forms} on $\R^n $ are elements of $\Omega^* (\R^n )= \{C^{\infty}\ \text{functions on} \ \R^n \} \bigotimes_{\R}\Omega^*$. Recall that the tensor product of two $R$-algebras $A,B$ has basis $a_i\otimes b_j $, where multiplication is defined by $(a_1\otimes b_1)(a_2\otimes b_2)=a_1b_1\otimes a_2b_2$. So a form $\omega$ can be uniquely written as $\sum f_{i_1\cdots i_q}dx_{i_1}\cdots dx_{i_q}$, where the coefficients $f_{i_1\cdots i_q}$ are smooth functions. The multi-index notation simplifies this to $\omega=\sum f_I dx_I$. The algebra $\Omega^*(\R^n )=\bigoplus _{q=0}^n \Omega^q(\R^n )$ is naturally graded, where $\Omega^q$ is the space of $C^{\infty}$ $q$-forms on $\R^n $. There is a \emph{differential operator} \[
-       d \colon \Omega^q(\R^n ) \to \Omega^{q+q}(\R^n )
+       d \colon \Omega^q(\R^n ) \to \Omega^{q+1}(\R^n )
    \] defined as follows:
    \begin{enumerate}[label=(\roman*)]
    \setlength\itemsep{-.2em}
@@ -44,7 +45,7 @@ Switching gears, the reference book has changed to Bott and Tu.
 \end{prop}
 \begin{proof}
     By linearity, we check on just the monomials $\tau=f_I\,dx_I,\ \omega=g_J \,dx_J$. Then \[
-        d(\tau \wedge \omega)=d(f_1g_J)dx_I\,dx_J=(df_I)g_J\, dx_I\,dx_J+f_I\,dg_J\,dx_I\,dx_J=(d\tau)\wedge \omega+(-1)^{\deg \tau}\tau \wedge d\omega.
+        d(\tau \wedge \omega)=d(f_1g_J)dx_I\,dx_J=(df_I)g_J\, dx_I\,dx_J+f_I\,dg_J\,dx_I\,dx_J=(d\tau)\wedge \omega+(-1)^{\deg \tau}\tau \wedge d\omega.\qedhere
     \] 
 \end{proof}
 \begin{prop}
@@ -57,7 +58,7 @@ Switching gears, the reference book has changed to Bott and Tu.
     d^2\omega =d^2(f_I\,dx_I)=d(df_Idx_I)=0.\qedhere
     \] 
 \end{proof}
-The complex $\Omega^*(\R^n )$ with the differential operator $d$ is the \textbf{de Rham complex} on $\R^n $. The kernel of $d$ are \textbf{closed forms} and the image of $d$ are \textbf{exact forms}. You can view the de Rham complex as a set of differential equations with solutions the closed forms. For example, finding a closed $1$-form $f\, dx+g\,dy$ on $\R^2$ is just like solving the differential equation $\partial g/\partial x-\partial f /\partial y=0$.
+The complex $\Omega^*(\R^n )$ with the differential operator $d$ is the \textbf{de Rham complex} on $\R^n $. The kernel of $d$ are \textbf{closed forms} and the image of $d$ are \textbf{exact forms}. You can view the de Rham complex as a set of differential equations with solutions the closed forms. For example, finding a closed $1$-form $f\, dx+g\,dy$ on $\R^2$ is just like solving the differential equation $\partial g/\partial x-\partial f /\partial y=0$. {\color{red}todo:where did the $dx\, dy$ term go?} 
 
 Exact forms are automatically closed, since composing with $d$ again gives zero. These are the ``trivial'' or ``uninteresting'' solutions: the de Rham cohomology measures the size of the space of ``interesting'' solutions.
 
@@ -66,13 +67,69 @@ Exact forms are automatically closed, since composing with $d$ again gives zero.
         H_{DR}^q (\R^n )= \{\text{closed} \ q\text{-forms}\} / \{\text{exact} \ q\text{-forms}  \} .
     \] We often write $H^q(\R^n )$ in place of $H_{DR}^q(\R^n )$. Denote the cohomology class of a form by $[\omega]$.
 \end{definition}
-All the definitions work just as well with an open subset $U\subseteq \R^n $. For example, define $\Omega^*(U)$ to be the algebra $\{C^{\infty} \ \text{functions on} \ U\} \bigotimes _{\R}\Omega^*$. Then we may speak of the de Rham cohomology $H_{DR}^*(U)$ of $U$.
+All the definitions work just as well with an open subset $U\subseteq \R^n $. For example, define $\Omega^*(U)$ to be the algebra $\{C^{\infty} \ \text{functions on} \ U\} \bigotimes _{\R}\Omega^*$. {\color{red}todo:the $C^{\infty}$ functions go into where?} Then we may speak of the de Rham cohomology $H_{DR}^*(U)$ of $U$.
 \begin{example}
     If $n=0$, then \[
-        H^q=
+        H^q \left( \text{point}   \right) =
     \begin{cases}
         \R,\quad &\text{if} \ q=0,\\
         0,& \text{if} \ q>0.
     \end{cases}
-\] Since $\ker d \cap \Omega^0(\R^1)$ consists of constant functions, $H^0(\R^1)=\R$. 
+\] Since $\ker d \cap \Omega^0(\R^1)$ consists of constant functions, $H^0(\R^1)=\R$ as we've seen before {\color{red}todo:intersect?}.  On $\Omega^1(\R^1)$, $\ker d$ consists of all the $1$-forms {\color{red}todo:why?}. For $\omega=g(x)\,dx$ a $1$-form, consider $f= \int_{0}^{x} g(u) \, du$, so $df=g(x)\,dx$. Therefore every $1$-form on $\R^1$ is exact and $H^1(\R^1)=0$. If $U$ is a disjoint union of $m$ intervals on $\R$, then $H^0(U)=\R^m$, and $H^1(U)=0$. In general, 
+\[
+    H^*(\R^n )=
+    \begin{cases}
+        \R\quad& \text{in dimension } \ 0,\\
+        0 & \text{otherwise.} 
+    \end{cases}
+\] This result is called the \emph{Poincar\'e lemma}.
+\end{example}
+
+\subsection{Recap of algebraic topology stuff}
+A direct sum of vector spaces $C=\bigoplus_{q\in \Z}C^q$ is called a \textbf{differential complex} if there are homomorphisms \[
+    \cdots \to C^{q-1}\overset{d}{\to } C^q \overset{d}{\to } C^{q+1}\to \cdots 
+\] such that $d^2=0$. We say that $d$ is the \textbf{differential operator} of the complex $C$. Note that the de Rham complex is a differential complex, and the exterior derivative is a differential operator on  $\Omega^q(U)$. The \textbf{cohomology} of $C$ is the direct sum of vector spaces $H(C)=\bigoplus_{q\in \Z}H^q(C)$, where $H^q(C)=(\ker d \cap C^q) / (\im d \cap C^q)$. A map $f \colon A \to B$ between two differential complexes is a \textbf{chain map} if it commutes with the differential operators of $A$ and $B$, that is, $f d_A=d_Bf$. 
+
+A sequence of vector spaces \[
+\cdots \longrightarrow V_{i-1}\overset{f_{i-1}}{\longrightarrow} V_i \overset{f_i }{\longrightarrow} V_{i+1}\longrightarrow\cdots 
+\] is \textbf{exact} if for all $i$, $\ker f_i =\im f_{i-1}.$ An exact sequence of the form $0 \to A\to B\to C\to 0$ is a \textbf{short exact sequence}. Given a short exact sequence of differential complexes {\color{red}todo:if this ses is for dc's, doesn't quotienting make $H^n $ trivial?}  \[
+0 \longrightarrow A \overset{f}{\longrightarrow } B \overset{g}{\longrightarrow } C\longrightarrow 0
+\] where $f$ and $g$ are chain maps, there is a long exact sequence of cohomology groups \[
+\cdots \to H^q(A) \overset{f^*}{\longrightarrow} H^q(B) \overset{g^*}{\longrightarrow} H^q(C) \overset{d^*}{\longrightarrow} H^{q+1}(A)\to \cdots 
+\] where $f^*,g^*$ are the induced homomomorphisms on cohomology, and $d^*[c]$ for $c \in C^q$ is obtained as follows:
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+            & {}                                & {}                                & {}                           &   \\
+0 \arrow[r] & A^{q+1} \arrow[u] \arrow[r, "f"]  & B^{q+1} \arrow[u] \arrow[r, "g"]  & C^{q+1} \arrow[u] \arrow[r]  & 0 \\
+0 \arrow[r] & A^q \arrow[u, "d"] \arrow[r, "f"] & B^q \arrow[u, "d"] \arrow[r, "g"] & C^q \arrow[u, "d"] \arrow[r] & 0 \\
+            & {} \arrow[u]                      & {} \arrow[u]                      & {} \arrow[u]                 &  
+\end{tikzcd}
+\end{figure}
+By the fact that $g$ is onto, there exists a $b\in B^q$ such that $g(b)=c$. Since $g(db)=d(gb)=dc=0$ (implying that $db \in \ker g$), we have $db=f(a)$ for some $a \in A^{q+1}$ by exactness. It is easily checked that $a$ is closed {\color{red}todo:doesn't this mean $db=0$?}. $d^*[c]$ is defined to be the cohomology class $[a]$ in $H^{q+1}(A)$. {\color{red}todo:how to show $d^*$ is independent? didn't we already show it exists? do we know how to compute stuff?} 
+
+\subsection{Compact supports}
+Recall the \textbf{support} of a continuous function $f$ on a topological space $X$ is the closure of the set on which $f$ is nonzero, that is, $\Supp f= \overline{\{p \in X\mid f(p)\neq 0\} }$. If when defining the de Rham complex we only consider the $C^{\infty}$ functions with compact support (equivalent to having bounded support in this case), the resulting complex is called the \textbf{de Rham complex} $\Omega_c^*(\R^n )$ \textbf{with compact supports}: 
+\[
+    \Omega_c^*(\R^n ):= \{C^{\infty} \ \text{functions on} \ \R^n \ \text{with compact support}  \} \bigotimes _{\R}\Omega^*.
+\] Denote the cohomology of this complex by $H_c^*(\R^n )$.
+
+\begin{example}
+First note that 
+\[
+    H_c^*(\text{point} )=
+\begin{cases}
+    \R\quad & \text{in dimension}\ 0,\\
+    0 & \text{elsewhere.} 
+\end{cases}
+\]The closed 0-forms on $\R^1$ are once again the constant functions, and since no constant function has compact support, $H^0_c(\R^1)=0$ {\color{red}todo:more confusion about domains: doesn't $\R\to 0$ work? is $\O$ compact? also, is compact support like the analogue of reduced homology?}  To compute $H^1_c(\R^1)$ consider the integration map \[
+\int _{\R^1} \colon \Omega^1_c(\R^1) \longrightarrow\R^1.
+\] {\color{red}todo:were we ever taught how to integrate on forms?} This map is onto, and vanishes on the exact 1-forms $df$ where $f$ has compact support, for if the support of $f$ lies in the interior of $[a,b]$, then \[
+\int_{\R^1} \frac{df}{dx}dx=\int_{a}^{b} \frac{df}{dx} \, dx=f(b)-f(a)=0.
+\] {\color{red}todo:how isn't it nonzero?} If $g(x)\,dx \in \Omega_c^1(\R^1) $ is also in $\ker \int_{\R^1}$, then $f(x)=\int_{-\infty}^{x} g(u) \, du$ will have compact support {\color{red}todo:why?} and $df=g(x)\,dx$. Hence $\ker \int _{\R^1}$ consists of precisely the exact forms and \[
+H_c^1(\R^1)= \frac{\Omega_c^1(\R^1)}{\ker \int _{\R^1}}=\R^1.
+\] {\color{red}todo:??} 
+\begin{remark}
+    If $g(x)\, dx \in \Omega^1_c(\R^1)$ does not have total integral 0, then $f(x)= \int_{-\infty}^{x} g(u) \, du$ will not have compact support and $g(x)\,dx$ will not be exact.
+\end{remark}In general, 
 \end{example}
