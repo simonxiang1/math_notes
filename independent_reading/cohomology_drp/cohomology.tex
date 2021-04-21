@@ -67,7 +67,7 @@ Exact forms are automatically closed, since composing with $d$ again gives zero.
         H_{DR}^q (\R^n )= \{\text{closed} \ q\text{-forms}\} / \{\text{exact} \ q\text{-forms}  \} .
     \] We often write $H^q(\R^n )$ in place of $H_{DR}^q(\R^n )$. Denote the cohomology class of a form by $[\omega]$.
 \end{definition}
-All the definitions work just as well with an open subset $U\subseteq \R^n $. For example, define $\Omega^*(U)$ to be the algebra $\{C^{\infty} \ \text{functions on} \ U\} \bigotimes _{\R}\Omega^*$. {\color{red}todo:the $C^{\infty}$ functions go into where?} Then we may speak of the de Rham cohomology $H_{DR}^*(U)$ of $U$.
+All the definitions work just as well with an open subset $U\subseteq \R^n $. For example, define $\Omega^*(U)$ to be the algebra $\{C^{\infty} \ \text{functions on} \ U\} \bigotimes _{\R}\Omega^*$.\footnote{To avoid confusion, when the notation $C^{\infty}$ functions on $\{\text{set} \} $ is used, the codomain of the functions is just the base field, in this case $\R$.}Then we may speak of the de Rham cohomology $H_{DR}^*(U)$ of $U$.
 \begin{example}
     If $n=0$, then \[
         H^q \left( \text{point}   \right) =
@@ -75,7 +75,7 @@ All the definitions work just as well with an open subset $U\subseteq \R^n $. Fo
         \R,\quad &\text{if} \ q=0,\\
         0,& \text{if} \ q>0.
     \end{cases}
-\] Since $\ker d \cap \Omega^0(\R^1)$ consists of constant functions, $H^0(\R^1)=\R$ as we've seen before {\color{red}todo:intersect?}.  On $\Omega^1(\R^1)$, $\ker d$ consists of all the $1$-forms {\color{red}todo:why?}. For $\omega=g(x)\,dx$ a $1$-form, consider $f= \int_{0}^{x} g(u) \, du$, so $df=g(x)\,dx$. Therefore every $1$-form on $\R^1$ is exact and $H^1(\R^1)=0$. If $U$ is a disjoint union of $m$ intervals on $\R$, then $H^0(U)=\R^m$, and $H^1(U)=0$. In general, 
+\] Since $\ker d \subseteq \Omega^0(\R^1)$ consists of constant functions, $H^0(\R^1)=\R$ as we've seen before, On $\Omega^1(\R^1)$, $\ker d$ consists of all the $1$-forms, since every 1-form $f\,dx$ gets send to $\frac{\partial f}{\partial x}dx\,dx=0$. For $\omega=g(x)\,dx$ a $1$-form, consider $f= \int_{0}^{x} g(u) \, du$, so $df=g(x)\,dx$. Therefore every $1$-form on $\R^1$ is exact and $H^1(\R^1)=0$. If $U$ is a disjoint union of $m$ intervals on $\R$, then $H^0(U)=\R^m$, and $H^1(U)=0$. In general, 
 \[
     H^*(\R^n )=
     \begin{cases}
@@ -92,7 +92,7 @@ A direct sum of vector spaces $C=\bigoplus_{q\in \Z}C^q$ is called a \textbf{dif
 
 A sequence of vector spaces \[
 \cdots \longrightarrow V_{i-1}\overset{f_{i-1}}{\longrightarrow} V_i \overset{f_i }{\longrightarrow} V_{i+1}\longrightarrow\cdots 
-\] is \textbf{exact} if for all $i$, $\ker f_i =\im f_{i-1}.$ An exact sequence of the form $0 \to A\to B\to C\to 0$ is a \textbf{short exact sequence}. Given a short exact sequence of differential complexes {\color{red}todo:if this ses is for dc's, doesn't quotienting make $H^n $ trivial?}  \[
+\] is \textbf{exact} if for all $i$, $\ker f_i =\im f_{i-1}.$ An exact sequence of the form $0 \to A\to B\to C\to 0$ is a \textbf{short exact sequence}. Given a short exact sequence of differential complexes \[
 0 \longrightarrow A \overset{f}{\longrightarrow } B \overset{g}{\longrightarrow } C\longrightarrow 0
 \] where $f$ and $g$ are chain maps, there is a long exact sequence of cohomology groups \[
 \cdots \to H^q(A) \overset{f^*}{\longrightarrow} H^q(B) \overset{g^*}{\longrightarrow} H^q(C) \overset{d^*}{\longrightarrow} H^{q+1}(A)\to \cdots 
@@ -106,7 +106,7 @@ A sequence of vector spaces \[
             & {} \arrow[u]                      & {} \arrow[u]                      & {} \arrow[u]                 &  
 \end{tikzcd}
 \end{figure}
-By the fact that $g$ is onto, there exists a $b\in B^q$ such that $g(b)=c$. Since $g(db)=d(gb)=dc=0$ (implying that $db \in \ker g$), we have $db=f(a)$ for some $a \in A^{q+1}$ by exactness. It is easily checked that $a$ is closed {\color{red}todo:doesn't this mean $db=0$?}. $d^*[c]$ is defined to be the cohomology class $[a]$ in $H^{q+1}(A)$. {\color{red}todo:how to show $d^*$ is independent? didn't we already show it exists? do we know how to compute stuff?} 
+By the fact that $g$ is onto, there exists a $b\in B^q$ such that $g(b)=c$. Since $g(db)=d(gb)=dc=0$ (implying that $db \in \ker g$), we have $db=f(a)$ for some $a \in A^{q+1}$ by exactness. It is easily checked that $a$ is closed. $d^*[c]$ is defined to be the cohomology class $[a]$ in $H^{q+1}(A)$. 
 
 \subsection{Compact supports}
 Recall the \textbf{support} of a continuous function $f$ on a topological space $X$ is the closure of the set on which $f$ is nonzero, that is, $\Supp f= \overline{\{p \in X\mid f(p)\neq 0\} }$. If when defining the de Rham complex we only consider the $C^{\infty}$ functions with compact support (equivalent to having bounded support in this case), the resulting complex is called the \textbf{de Rham complex} $\Omega_c^*(\R^n )$ \textbf{with compact supports}: 
@@ -126,10 +126,49 @@ First note that
 \int _{\R^1} \colon \Omega^1_c(\R^1) \longrightarrow\R^1.
 \] {\color{red}todo:were we ever taught how to integrate on forms?} This map is onto, and vanishes on the exact 1-forms $df$ where $f$ has compact support, for if the support of $f$ lies in the interior of $[a,b]$, then \[
 \int_{\R^1} \frac{df}{dx}dx=\int_{a}^{b} \frac{df}{dx} \, dx=f(b)-f(a)=0.
-\] {\color{red}todo:how isn't it nonzero?} If $g(x)\,dx \in \Omega_c^1(\R^1) $ is also in $\ker \int_{\R^1}$, then $f(x)=\int_{-\infty}^{x} g(u) \, du$ will have compact support {\color{red}todo:why?} and $df=g(x)\,dx$. Hence $\ker \int _{\R^1}$ consists of precisely the exact forms and \[
+\] If $g(x)\,dx \in \Omega_c^1(\R^1) $ is also in $\ker \int_{\R^1}$, then $f(x)=\int_{-\infty}^{x} g(u) \, du$ will have compact support and $df=g(x)\,dx$. Hence $\ker \int _{\R^1}$ consists of precisely the exact forms and \[
 H_c^1(\R^1)= \frac{\Omega_c^1(\R^1)}{\ker \int _{\R^1}}=\R^1.
-\] {\color{red}todo:??} 
+\] To see this, {\color{red}todo:elaborate} 
 \begin{remark}
     If $g(x)\, dx \in \Omega^1_c(\R^1)$ does not have total integral 0, then $f(x)= \int_{-\infty}^{x} g(u) \, du$ will not have compact support and $g(x)\,dx$ will not be exact.
-\end{remark}In general, 
+\end{remark}In general, \[
+H_c^*(\R^n )=
+\begin{cases}
+    \R\quad & \text{in dimension} \ n,\\
+    0& \text{otherwise.} 
+\end{cases}
+\] This is called the \emph{Poincar\'e lemma for cohomology with compact support}.
 \end{example}
+
+\begin{example}
+    {\color{red}todo:comptue this with both regular (find the closed forms)+mayer vietoris, ask about summer drp} 
+    To compute $H_{DR}^*(\R^2 \setminus \{p,q\} )$ for $p,q \in \R^2$,
+\end{example}
+
+If $x_1,\cdots ,x_m$ and $y_1,\cdots ,y_n $ are the standard coordinates on $\R^m$ and $\R^n $, then a smooth map $f \colon \R^m \to \R^n $ incudes a pullback map on $C^{\infty}$ functions $f^* \colon \Omega^0(\R^n ) \to \Omega^0(\R^m)$ defined by $f^*(g)=g \circ f$. To uniquely extend this pullback to all forms $f^* \colon \Omega^* (\R^n ) \to \Omega^*(\R^m),$ consider \[
+    f^*\left(\sum g_I dy_{i_1}\cdots dy_{i_q}\right)=\sum (g_I \circ f)df_{i_1}\cdots df_{i_q}, 
+\] where $f_i =y_i  \circ f$ is the $i$th component of $f$.
+\begin{prop}
+   $f^*$ commutes with $d$. 
+\end{prop}
+\begin{proof}
+    \begin{align*}
+        df^*(g_I dy_{i_1}\cdots dy_{i_q})&=d((g_I \circ f) df_{i_1}\cdots df_{i_q})=d(g_I \circ f)df_{i_1}\cdots df_{i_q},\\
+        f^*d(g_I dy _{i_1}\cdots dy_{i_q})&=f^*\left( \sum_{i=1}^{n} \frac{\partial g_I}{\partial y_i }dy_i dy_{i_1}\cdots dy_{i_q} \right) \\
+                                          &=\sum_{i=1}^{n} \left( \left( \frac{\partial g_I}{\partial y_i }\circ f \right) df_i  \right) df_{i_1}\cdots df_{i_q}\\
+                                          &=d(g_I \circ f)df_{i_1}\cdots df_{i_q}.\qedhere
+    \end{align*}
+\end{proof}
+Note that $\Omega^*$ is a contravariant function from the category of Euclidian spaces $\{\R^n \} _{n\in \Z}$ and smooth maps $\R^m \to \R^n $ to the category of commutative differential graded algebras and their homomorphisms. We can extend the functor $\Omega^*$ to differentiable manifolds, where {\color{red}todo:stuff about pou's} 
+
+\subsection{The Mayer-Vietoris Sequence}
+The Mayer-Vietoris sequence allows one to compute the cohomology of the union of two open sets. Suppose $M=U \cup V$, where $U,V$ are open. Then we have a sequence of inclusions \[
+M \leftarrow U \amalg V \underset{\partial_1 }{\overset{\partial_0}{\leftleftarrows}}  U \cap V
+\] where $\partial_0 \colon U\cap V \hookrightarrow V,\ \partial_1 \colon U\cap V\hookrightarrow U$ {\color{red}todo:how is this union disjoin?} . Apply the contravariant functor $\Omega^*$ to get \[
+\Omega^*(M) \to \Omega^*(U)\oplus \Omega^*(V) \underset{\partial_1^* }{\overset{\partial_0^* }{\rightrightarrows}}  \Omega^*(U \cap V),
+\] this splits into the \textbf{Mayer-Vietoris sequence}, given by \[
+0 \longrightarrow\Omega^*(M) \longrightarrow\underset{(\omega,\tau)}{\Omega^*(U) \oplus \Omega^*(V)} \underset{\mapsto }{\longrightarrow}  \underset{\tau - \omega}{\Omega^*(U \cap V)} \longrightarrow 0.
+\] 
+\begin{prop}
+    The Mayer-Vietoris sequence is exact.
+\end{prop}
