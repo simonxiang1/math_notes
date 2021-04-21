@@ -1,0 +1,49 @@
+\section{March 25, 2021} 
+Picking off from yesterday, say $\exp_p \colon T_p M \to M$. Then $(x^1,\cdots ,x^n )\mapsto \exp_p(x^1 \mathbf b_1+\cdots +x^n \mathbf b_n )$, where $\{\mathbf b_1,\cdots ,\mathbf b_n \} $ are orthonormal coordinates for $T_p M$. Define $r=\sqrt{(x^1)^2+\cdots +(x^n )^2} ,\ \theta= \mathbf x / r.$ We want to figure out the values of the metric $g_{rr},g_{r\theta}, g_{\theta\theta}$.
+
+\begin{namedthm}{Gauss Lemma} 
+   We have $g_{rr}=1$ and $g_{r\theta}=0$. 
+\end{namedthm}
+{\color{red}todo:} 
+\subsection{The Riemann curvature tensor}
+We finally arrive at a big topic in Riemannian geometry. First we give a handwavy explanation. Say we have a manifold $M$, and we want to do parallel transport from $p$ to $q$ along a path. What if we go along a different path? Say $\gamma $ is a closed loop with $\gamma (0)=p$ and $\gamma (t)=p$, then parallel transport is a map $P_{\gamma }\colon T_p M \to T_p M$.If $\widetilde v,\widetilde w$ are parallel tranports of $v,w$, then \[
+\frac{d}{dt}\langle \widetilde v,\widetilde w \rangle =\langle D_t \widetilde v,\widetilde w \rangle +\langle \widetilde v,D_t \widetilde w \rangle=0.
+\] Since parallel transport preserves inner products, this map $P_{\gamma }$ around a loop is an isometry. Given two ``transverse'' vector fields $X,Y$, take a point $p$ and flow in the direction of $X$ for a little while, then $Y$, then $-X,$ then $-Y$. The distance this flow will be off is $st[X,Y]$ as we have shown.
+
+\begin{definition}[]
+    We define a $(1,3)$-tensor field that takes three inputs $R(X,Y)Z=\nabla_x\nabla_Y Z-\nabla _Y\nabla_XZ-\nabla _{[X,Y]}Z$. This tensor is called the \textbf{Riemann curvature tensor}.
+\end{definition}
+This looks like a differential operator. A tensor satisfies $R(X,Y)(fZ)=f\, R(X,Y)Z$. If this were a differential operator, it would pick up extra terms involving $f$. Let's check to see $R$ satisfies this.
+\begin{align*}
+    \nabla_Y(fZ)&=Y(f)Z+f\nabla_YZ,\\
+    \nabla_X(\nabla_Y(fZ))&=X(Y(f))Z+Y(f)\nabla_XZ+X(f)\nabla_YZ+f\nabla_X\nabla_Y Z,\\
+    \nabla_Y\nabla_X(fZ)&=Y(X(f))Z+X(f)\nabla_YZ+Y(f)\nabla_XZ+f\nabla_Y\nabla_XZ,\\
+    (\nabla_X\nabla_Y-\nabla_Y\nabla_X)(fZ)&=[X,Y]f+f(\nabla_X\nabla_Y-\nabla_y\nabla_X)Z,\\
+\nabla_{[X,Y]}(fZ)&=\left( [X,Y]f \right) Z+f\nabla_{[X,Y]}Z,\\
+R(X,Y)(fZ)&=f R(X,Y)Z.
+\end{align*}So we're left with something linear in $Z$, and this is a tensor.
+\begin{example}
+    Let's work out an example. We have
+    \begin{align*}
+        R(X,fY)Z&=\nabla_X\nabla_{fY}(Z)-\nabla_{fY}\nabla_XZ-\nabla_{[X,fY]}Z\\
+                &=\nabla_Xf(\nabla_YZ)-f\nabla_Y\nabla_XZ-\nabla_{f[X,Y]+X(f)Y}Z\\
+                &=X(f)\nabla_YZ+f\nabla_X\nabla_YZ-f\nabla_Y\nabla_XZ-f\nabla_{[X,Y]}Z-X(f)\nabla_YZ\\
+                &=f(\nabla_X\nabla_YZ-\nabla_Y\nabla_XZ-\nabla_{[X,Y]}Z)\\
+                &=fR(X,Y)Z.
+    \end{align*}This shows it works for $Y$, which implies it works for $X$ (doesn't matter which order we defined it in), so the Riemann curvature tensor is indeed a tensor.
+\end{example}
+For tensors, we usually break them down in coordinates, like saying 
+\[
+R(X,Y)Z=R_{ijk}^{\ell}x^i y^j z^k e_{\ell}, \ \text{where}\, \ R(e_i ,e_j )e_k=R_{ijk}^{\ell}e_{\ell}.
+\] 
+We might also want to consider $\langle R(X,Y)Z,W \rangle =R_{ijkl\ell}x^i y^j z^kw^{\ell},$or 
+\[
+R_{ijk\ell}=\langle R(e_i ,e_j )e_k,e_{\ell} \rangle .
+\] 
+
+We claim this has something to do with parallel transport along small loops. To see this, suppose we have a function $f(x)$, and we want to move a point $p \mapsto p+a$. We know that 
+\begin{align*}
+    f(x+a)&=\sum_{n=0}^{\infty} \frac{f^{(n)}(x)}{n!}a^n \\
+          &= e^{a \frac{d}{d x}}f.
+\end{align*}For functions, flowing around the box means we're interested in $e^{-st[X,Y]}e^{sY}e^{tX}e^{-sY}e^{-tX}$ as flows of vector fields, which turns out to be the identity since mixed partials commute. If you want to push vector fields around, we need to consider $e^{-st\nabla_{[X,Y]}}e^{s\nabla_Y}e^{t\nabla_X}e^{-s\nabla_Y}e^{-t\nabla_X}$, and the extent to which this fails to be the identity is measured by the Riemann curvature tensor. The reason why this isn't the identity outright is because the covariant derivatives $\nabla_X,\nabla_Y$ don't commute. Calculating the previous expression by performing a Taylor expansion results in $1-st R(X,Y)$ plus higher order terms.
+

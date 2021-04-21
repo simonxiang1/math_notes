@@ -1,4 +1,54 @@
 \section{March 23, 2021} 
 \subsection{Calculus of variations}
-Suppose we have $z(t)$, where $z(0)=0,z(2)=0$. We want to minimize the integral $\mathcal{L} =\int_0^2 \frac{1}{2}\dot z^2-32z \, dt$. We will do this two ways: one is the ``sloppy'' version with our usual notation for the calculus of variations, and one by a mathematically precise method. The usual notation has a precise meaning behind it, but it just seems sloppy.
+Suppose we have $z(t)$, where $z(0)=0,z(2)=0$. We want to minimize the integral $\mathcal{L} =\int_0^2 \frac{1}{2}\dot z^2-32z \, dt$. We will do this two ways: one is the ``sloppy'' version with our usual notation for the calculus of variations, and one by a mathematically precise method. The usual notation has a precise meaning behind it, but it just seems sloppy. If $0= \frac{\delta \mathcal{L} }{\delta z}$, then 
+\begin{align*}
+    \delta \mathcal{L} &= \int_{0}^{2} \left( \frac{1}{2}z \dot z \delta  \dot z-32 \delta z \right)  \, dt\\
+                       &=\int_{0}^{2} \left( \dot z \dot{\left( \delta z \right) } -32 \delta z \right)  \, dt\\
+                       &=\xcancel{  \dot z \delta z \big|_0^2}+\int_{0}^{2} (-\ddot z-32)\delta z \, dt\\
+                       &= -\int_{0}^{2} (\ddot z +32)\delta z  \, dt
+\end{align*}since $\delta (\dot z)=\dot{(\delta z)} $, and our boundary conditions. Since $\delta \mathcal{L} =0$, we conclude that $\ddot z=-32$. Given $\ddot z=-32,\ z(0)=0,\ z(2)=0$, we conclude that $z=32t-16 t^2$. The expression $\frac{1}{2}\dot z^2-32z$ is called the \textbf{Lagrangian}, $\mathcal{L} $ corresponds to the \emph{action}, and this is another way to do Hamiltonian mechanics. In general, if we want to minimze $\mathcal{L} =\int_{0}^{T} \frac{1}{2}m\dot x ^2-V(x) \, dx$ where $V(x)$ is some \emph{potential function}, we get that 
+\begin{align*}
+    \delta \mathcal{L} &=\int m\langle \dot x,\dot{(\delta x)}  \rangle -\langle \nabla V,\delta x \rangle  \, dt\\
+                       &=\int \langle -m \ddot x- \nabla v, \delta x \rangle  \, dt \implies \\
+    \Aboxed{ m\ddot x&=-\nabla V(x).}
+\end{align*}This expression is \emph{Newton's law}, where $-\nabla V(x)=F$ (since the force of the gradient is the potential energy), and $m\ddot x=ma$. People trained in math may find this unsatisfying, particularly in the notation $\delta \mathcal{L} $ and other various grievances. So let's cover this again but more precisely. Once again, our goal is to minimize $\mathcal{L} =\int_{0}^{2} \frac{1}{2}\dot z^2-32z \, dt$. Say we have a family of functions $z_s(t)$ for $s \in \left( -\varepsilon ,\varepsilon  \right) $, which in reality is a smooth function of two variables $Z(s,t)$ satisfying $z_s(0)=z_s(2)=0$. For each $s$, compute 
+\begin{align*}
+    \mathcal{L} (s)=\int_{0}^{2} (\frac{1}{2}(\dot z_s(t))^2-32z_s(t)) \, dt.
+\end{align*}We want to minimize this, so consider
+\begin{align}
+    \left. \frac{\partial \mathcal{L} }{\partial s} \right| _{=0}&=\int_{0}^{2} \frac{1}{2} \, dt\\
+                                                                 &=\int_{0}^{2} (\dot z \dot{(\partial _s z)} -32 \partial _s z) \, dt\\
+                                                                 &= \xcancel{ \dot z (\partial _s z)\Big|_0^2}+\int_{0}^{2} (-\ddot z (\partial _s z) -32 (\partial _s z))\, dt
+\end{align}This implies $\ddot z=-32$. Note that \[
+\frac{\partial }{\partial s}\dot z_s(t)= \frac{\partial }{\partial s}\frac{\partial }{\partial t}Z(s,t)=\frac{\partial ^2 Z(s,t)}{\partial t\partial s}=\dot{(\partial _sz(t))} ,
+    \] which is how we get from (1) to (2) above. This finishes the problem. These two calculations are essentially the same, but in the first one our terms weren't properly defined; we do things like taking a function $z$, changing it a little by $\delta z$, etc. Now we have a family of functions $Z(s,t)$, and $\delta z$ means $\partial _sZ(s,t)$. Conversely, given a particular $\delta z$ in mind, we can also just find a family of functions $z_s(t)=z_0(t)+s \delta z(t)$.
 
+    \subsection{Return to geodesics (once more)}
+    
+    In the last homework, we had points $p,q$ on a manifold in a single coordinate chart. Given a path $\gamma $ such that $\gamma (0)=p,\gamma (T)=q$, $\gamma (t)=(x^1(t),x^2(t),\cdots ,x^n (t))$, consider $E(\gamma )= \int \langle \dot \gamma ,\dot \gamma  \rangle  \, dt$. Then 
+    \begin{align*}
+        E&=\int_{0}^{T} (g_{ij}\dot x^i \dot x^j ) \, dt,\\
+        \delta E&=\int_{0}^{T} ((\delta g_{ij})\dot x^i \dot x^j +g_{ij}(\delta \dot x^i )\dot x^j +g_{ij}\dot x^i (\delta \dot x^j ) )\, dt\\
+                &=\int_{0}^{T} (\partial _k g_{ij}\delta x^k \dot x^i \dot x^j +2g_{ij}(\delta \dot x^i )\dot x^j )\, dt\\
+                &=\int_{0}^{T}( (\partial _k g_{ij})\dot x^i \dot x^j \delta x^k-2 \frac{d}{dt}(g_{ij}\dot x^j )\delta x^i ) \, dt\\
+                &=\int_{0}^{T} \partial _k g_{ij}\dot x^i \dot x^j \delta x^k-2\ddot x^j g_{ij}-2\dot x^j \mathbf \partial _k g_{ij}\dot x^k \delta x^i  \, dt \cdots \\
+             \\ &\downarrow\ (???) \ \\
+        \ddot x^k + \Gamma _{ij}^k\dot x^i\dot x^j &=0, \ \text{where} \ \Gamma _{ij}^k=\frac{1}{2}g^{k\ell}(\partial _i g_{jk}++\partial _j g_{ik}-\partial _kg_{ij}).
+    \end{align*}
+    It seems like magic that the way to minimize energy along a path is to follow a geodesic according to the Levi-Civita connection. Recall that
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+        \item If you minimize energy, then you have a geodesic.
+        \item If you minimize energy, you minimize length and go at constant speed, where $E_{\text{min} }=L_{\text{min} }^2/T$.
+        \item So if you minimize energy, then you have a constant-speed length-minimizing curve.
+    \end{itemize}
+    \begin{theorem}
+    Geodesics locally minimize length, that is, the shortest path to connect two points in a neighborhood of a point is by following a geodesic.    
+\end{theorem}Length minimizing curves are geodesics, but this doesn't mean geodesics minimize length (globally). However, if there's only one geodesic, it must minimize length. So the strategy is to show that given a point $p$, you can get to any other point $q$ via a unique geodesic. This is an existence-uniqueness argument.
+\begin{proof}
+    Recall that $\ddot x^k+\Gamma _{ij}^k \dot x^i \dot x^j =0$, and after converting this second order ODE into two first order ODEs $\dot x^k=v^k,\ \dot v^k+\Gamma _{ij}^k(x)v^i v^j =0$, we know unique solutions exist (for a short time) by the standard theory of differential equations. A \emph{maximal geodesic} extends this time for as long as possible. Let $\gamma _v(t)$ be the geodesic at time $t$ with initial velocity $v$, and note that $\gamma _{tv}(1)=\gamma _v(t)$. Our statement about existence-uniqueness implies that $\gamma _v(1)$ exists for all sufficiently small $v$. Define the exponential map $\exp_p(v)=\gamma _v(1)$, where $\gamma (0)=p,\dot \gamma (0)=v$. Since $\exp _p \colon T_p M \to M$,
+
+    Then $v_2(g)=\alpha g, \gamma (t)=e^{\alpha t}, v_a(g)=g\alpha ,\dot \gamma (t)=\alpha e^{\alpha t}=\alpha t,\dot \gamma (t)=e^{\alpha t}\alpha =\gamma \alpha $. So $\gamma (1)=e^{\alpha}$.
+    Suppose we have a Lie group $M=G$, then $T_p M= \mathfrak g$, a \textbf{Lie algebra}. If $G= \operatorname{SO}(n)$, then $\mathfrak g=\operatorname{so}(n)$
+    {\color{red}todo:?} 
+\end{proof}

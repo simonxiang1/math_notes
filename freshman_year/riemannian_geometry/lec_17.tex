@@ -1,0 +1,111 @@
+\section{March 30, 2021} 
+
+\subsection{More on the Riemann curvature tensor}
+Recall that $R(X,Y)Z=X^i Y^j Z^k R(e_i ,e_j )e_k$, where $R(e_i ,e_j )e_k=R_{ijk}^{\ell}e_{\ell}$. We also write $\langle R(e_i ,e_j )e_k,e_{\ell} \rangle =g(R(e_i ,e_j )e_k,e_{\ell})=R_{ijk\ell}=g_{\ell m}R_{ijk}^m$.
+Why do we care? We say 
+\begin{enumerate}[label=(\arabic*)]
+\setlength\itemsep{-.2em}
+    \item A manifold is \textbf{flat} if it is locally isometric to Euclidian $\R^n $ (that is, $g_{ij}=\delta _{ij}  $).
+    \item A manifold meets the \textbf{flatness criterion}\footnote{Nobody actually says this, we just say \emph{flat}. However, we need a separate term to distinguish this from flatness before we prove the following theorem.} if it has zero curvature, or $R=0$.
+\end{enumerate}
+\begin{theorem}\label{flatness} 
+    A manifold $M$ is flat if and only if it meets the flatness criterion.
+\end{theorem}
+\begin{example}
+    Some examples of flat manifolds include the torus $\mathbb{T}^n =\R^n /\Z^n $ and the M\"obius strip. Note that curvature in one dimension is vacuous, since the tensor is antisymmetric, and we only have one choice of basis vector so everything cancels out. This fails for a sphere since even though you can write it as a topological quotient, you can't write the metric as a quotient metric.
+\end{example}
+\begin{example}
+    Let's compute the curvature of $\R^n $ and show that $R=0$, implying that anything with nonzero curvature cannot be $\R^n $. Recall that $g_{ij}=\delta _{ij}$, and $\Gamma _{ij}^k=\frac{1}{2}(\partial _i g_{jk}+\partial _jg_{ik}-\partial _kg_{ij})=0$. Raising the index $\Gamma _{ij}^K$ also gives zero, telling us that $\nabla_{e_i }e_j =\Gamma _{ij}^ke_k=0.$ So 
+    \begin{align*}
+        R(e_i ,e_j )e_k&=\nabla_i \nabla_j (e_k)-\nabla_j \nabla_i (e_k)-\nabla_{[e_i ,e_j ]}e_k\\
+    &=\nabla_i (0)-\nabla_j (0)-0\\
+    &=0.
+    \end{align*}
+\end{example}
+\begin{example}
+    Now let's compute the curvature of a sphere. Let's use our standard parametrization $(x^1,x^2)=(\varphi ,\theta)$ with the metric $g_{11}=1,g_{12}=0,$ and $g_{22}=\sin ^2\varphi $. We know $R_{11jk}=0$ since $R(e_1,e_1)e_j =\nabla_1\nabla_1e_j -\nabla_1\nabla_1e_j -\nabla_{[e_1,e_1]}e_j =0$. Similarly $R_{22jk}=0$, and $R_{21jk}=-R_{12jk}$. So the only interesting this is $R_{12jk}$, where $j,k=1,2$; that means we only compute $R(e_1 ,e_2 )e_1$. Along the way we'll need to compute $\Gamma _{ijk}$ and $\Gamma _{ij}^k$; since $\partial_1g_{22}=2 \sin \varphi  \cos \varphi  $, we have
+    \begin{align*}
+        \Gamma _{122}&=\Gamma _{212}=\sin \varphi  \cos \varphi ,\\
+        \Gamma _{221}&=-\sin \varphi  \cos \varphi ,\\
+        \Gamma _{12}^2&=\Gamma _{21}= \cos \varphi .
+    \end{align*}So $\nabla_1e_2=\nabla_2e_1=\cos (\varphi ) e_2$, and $\nabla_2e_2=- \sin (\varphi ) \cos (\varphi)  e_1$. So 
+    \begin{align*}
+        R(e_1,e_2)e_1&=\nabla_1\nabla_2e_1-\xcancel{ \nabla_2\nabla_1e_1}=\nabla_1 \cos (\varphi )e_2\\
+                     &=- \csc ^2(\varphi )e_2+\cot (\varphi )\nabla_1e_2\\
+                     &=-\csc ^2(\varphi )e_2+\cot ^2(\varphi )e_2\\
+                     &=-e_2.
+    \end{align*}This implies $R_{121}^2=-1$, and $R_{121}^1=0$. The negative result may seem strange, but soon we'll talk about how to get \emph{scalars} out of the Riemann tensor, which results in a plus sign for $S^2$. In terms of other components, $R_{1212}=-\sin ^2 (\varphi ), R_{1221}=\sin ^2(\varphi ),R_{122}^1=\sin ^2 (\varphi )$, because $R_{21j}^k=-R_{12}j^k$. These are all the nonzero elements of the curvature tensor. So the sphere is not flat, and cannot possibly be isometric to Euclidian space.
+\end{example}
+\begin{proof}[Proof of \cref{flatness}]
+    Now that we've sufficiently motivated \cref{flatness}, let's prove it. Suppose $R=0$. Pick an orthonormal basis $e_1,\cdots ,e_n $ at $p=0$. We parallel transport along the $e_1$ direction, resulting in a frame at every point along $e_1$. Then we parallel transport along $e_2$, then $e_3$, and so on. (For now we work in three dimensions.) We need to show that
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+        \item The frame is covariantly constant, or $\nabla_i e_j =0$,
+        \item The frame is a coordinate frame, or $[e_i ,e_j ]=0$.\footnote{The Frobenius theorem says that if you have a bunch of vector fields that commute, they're really derivatives with respect to some coordinates. But we never proved this.}
+        \item $g_{ij}=\delta _{ij}$.
+    \end{enumerate}The interesting argument is (1), where we really use the lack of curvature. We do this inductively; we show on the $x^1$-axis, $\nabla_1e_1=0$. Then we show on the $x^1x^2$-plane, $\nabla_1e_1=\nabla_1e_2=\nabla_2e_1=\nabla_2e_2=0$. Finally we show that on $xyz$ spaces, $\nabla_1e_j =0$. The statement $\nabla_1e_1$ is true because we're parallel transporting. The fact that $\nabla_2e_1=\nabla_2e_2=0$ are obvious by the way we parallel transported. Compute
+    \begin{align*}
+        \nabla_2(\nabla_1e_j )&=\xcancel{ R(e_2,e_1)e_j }+\nabla_1(\nabla_2e_j )\\
+                              &=\nabla_1(\nabla_2e_j )=\nabla_1(0)\\
+                              &=0.
+    \end{align*}Since this is $0$ when time $s=0$ (along the $x^1$-axis) and the derivative is zero (no change), this must be zero everywhere. This shows $\nabla_1e_1=\nabla_1e_2=0$. To show $\nabla_i e_j =0$, start with our plane and move things in the third direction. We have already shown in the plane that $\nabla_1e_1=\nabla_1e_2=\nabla_2e_1=\nabla_2e_2=0$, and we know that $\nabla_1e_3=\nabla_2e_3=0$ since our argument works for \emph{any} $j$. Take the derivative with respect to the third coordinate, then everything is zero in $\R^3$, and so on.
+\end{proof}
+
+\subsection{Symmetries}
+We have
+\begin{enumerate}[label=(\arabic*)]
+%\setlength\itemsep{-.2em}
+    \item $R_{ijk\ell}=-R_{jik\ell}$,
+    \item $R_{ij\ell k}=-R_{ijk\ell}$,
+    \item $R_{ijk\ell}+R_{jki\ell}+R_{kij\ell}=0$,
+    \item $R_{ijk\ell}=R_{k\ell ij}$.
+\end{enumerate}
+(1) follows from the definition, (2) can be shown by taking derivations of $g(e_k,e_{\ell})$. (3) is called the \emph{algebraic Bianchi identity} or \emph{1st Bianchi identity}, and to show this we need to use facts about symmetry like $\nabla_j (e_k)=\nabla_k(e_j )$, and (4) follows from the rest.
+
+\subsection{The Ricci tensor and scalar curvature}
+What are some nice invariants of a linear transformation $M^j _i $? A simple one is the \emph{trace}, where $\operatorname{Tr}M=M^i _i;$ recall that the trace is invariant under change of basis. We define a \emph{partial} trace of the Riemann tensor $R_{ij}$,\footnote{Unfortunately they use the same notation. $R_{ij}$ refers to the Ricci tensor, while $R_{ijk\ell}$ refers to the Riemann tensor.} which we call the \textbf{Ricci tensor}. We can write the Ricci tensor as \[
+R_{ij}=R_{kij}^k=-R_{ikj}^k=-R_{kij}^k.
+\] Furthermore, $R_{ij}=R_{kijm}g^{km}$. Finally, we have \textbf{scalar curvature} given by \[
+R=g^{ij}R_{ij}.
+\] 
+\begin{example}
+    Let us return to the sphere $S^2$. What is the Ricci tensor and scalar curvature of the sphere? On the sphere, 
+    \begin{align*}
+        R_{11}&=R_{111}^1+R_{211}^2=1 =g_{11},\\
+        R_{22}&=R_{112}^1+R_{222}^2=\sin ^2 \varphi =g_{22},\\
+        R_{12}&=R_{112}^1+R_{212}^2=0=g_{12}.
+    \end{align*} Note that the Ricci tensor is identically the metric. Spaces whose Ricci tensor is proportional to the metric have a special name, called an \textbf{Einstein metric}. For the scalar curvature, 
+    \begin{align*}
+        R&= \frac{g^{11}R_{11}+g^{22}R_{21}}{n}\\
+         &=\frac{1\cdot 1+\sin ^{-2}\varphi  \sin ^2 \varphi }{n}\\
+         &=\frac{2}{2}=1.
+    \end{align*}
+\end{example}
+\begin{example}
+    Let us compute things in hyperbolic space. Recall that $g_{11}=g_{22}=\frac{1}{y^2}$, $g_{12}=0$, $\partial _2 g_{11}=\partial_2g_{22}=-\frac{2}{y^3}$. We also have 
+    \begin{align*}
+        \Gamma _{112}&=\frac{1}{y^3},\\
+        \Gamma _{121}&=\frac{1}{y^3},\\
+        \Gamma _{122}&=\frac{1}{2}(\partial_1g_{22}+\partial_2g_{12}-\partial_2g_{12})=0,\\
+        \Gamma _{211}&=\frac{1}{y^3},\\
+        \Gamma _{222}&=-\frac{1}{y^3},
+    \end{align*}
+    \begin{align*}
+        \nabla_1e_1&=\frac{1}{y}e_2,\\
+        \nabla_2e_2&=-\frac{1}{y}e_2,\\
+        \nabla_1e_2&=\frac{1}{y}e_1,\\
+        \nabla_2e_1&=-\frac{1}{y}e_1.\\
+    \end{align*}
+    Now we compute $R(e_1,e_2)e_1$, since $R_{1212}$ is the only thing we're interested in (has to be antisymmetric in both). So 
+    \begin{align*}
+        R(e_1,e_2)e_1&=\nabla_1\nabla_2e_1-\nabla_2\nabla_1e_1\\
+                     &=\nabla_1\left( -\frac{1}{y}e_1 \right) -\nabla_2\left( \frac{1}{y}e_2 \right) \\
+                     &=-\frac{1}{y}\left( \nabla_1e_1 \right) +\frac{1}{y^2}e_2-\frac{1}{y}\nabla_2e_2\\
+                     &=\frac{1}{y^2}e_2.
+    \end{align*}So $R_{121}^2=\frac{1}{y^2}$, 
+    \begin{align*}
+        R_{11}&= R_{211}^2+R_{111}^1=- \frac{1}{y^2}=-g_{11},\\
+        R_{22}&=R_{122}^1+R_{222}^2=-\frac{1}{y^2}=-g_{22},\\
+        R_{12}&=0=-g_{12}.
+    \end{align*}In hyperbolic space, the Ricci curvature is the negative of the metric. This works for $S^n $ and $\H^n $ in general.
+\end{example}
