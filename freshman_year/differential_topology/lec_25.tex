@@ -1,0 +1,95 @@
+\section{April 20, 2021} 
+\subsection{Integration on manifolds}
+To integrate on an interval $[a,b]\subseteq \R$, partition the interval into small intervals $I_i $, and for $x_i \in I_i $, $f \colon [a,b] \to \R$ consider\[
+    \int_{a}^{b} f\approx \sum_{I_i } f(x_i )\cdot \text{length} \ (I_i ).
+\] For a region $\Omega \subseteq \A^2$, we want to integrate $f \colon \Omega \to \R^2$. Then break up $\Omega$ into regions $P_{ij}$, and define \[
+\int _{\Omega}f\approx \sum _{i,j}f(p_{ij})\cdot \text{Area} \ (P_{ij}) \] To integrate on a $2$-manifold $\Sigma$, consider $\xi_{ij}\wedge \eta _{ij}\in \bigwedge ^2T_{p_{ij}}\Sigma$ for $\xi_{ij},\eta _{ij}\in T_{p_{ij}}\Sigma$. Then for $\omega \in \Omega^2(\Sigma)$, to imitate the previous integrals do something like $\sum _{i,j}\omega _{p_{ij}}(\xi_{ij}\wedge \eta_{ij})$. {\color{red}todo:?} So we don't actually integrate over 2-forms, we integrate over something called the \emph{density}.
+
+\subsection{Change of variables}
+In dimension
+\begin{enumerate}[label=\arabic*:]
+    \item Consider $\int_{1}^{2} x^2 \, dx=- \int_{-1}^{-2} y^2 \, dy=\int_{-2}^{-1} y^2 \, dy$, where $\varphi ^*x=-y,\ \varphi ^*dx=-dy$, $\varphi  \colon y \to x$ is an orientation reversing map. This is integration of a differential form, which you learn in single variable calculus.
+    \item Now consider regions $V,U$ with respect to variables $u,v$ and $x,y$. Then $\varphi  \colon V \to U$, and \[
+            \int _{U}f=\int _{U'}\overset{=\varphi ^*f}{(f \circ \varphi )} |\det \varphi | 
+    \] More intelligently, we have \[
+    |dx\,dy|= \left| \det 
+    \begin{pmatrix}
+        \frac{\partial x}{\partial u}& \frac{\partial x}{\partial v}\\ \frac{\partial y}{\partial u}& \frac{\partial y}{\partial v}
+    \end{pmatrix}\right|  |du\,dv|,\quad \int _U f|dx\wedge dy|= \int _{U'}\varphi ^*[f|dx\wedge dy|] .
+    \] 
+\end{enumerate}
+
+\subsection{Integration in $\A^n $}
+Suppose $U \subseteq \A^n $ is open, $\Omega^0_c(U)$ denotes the compactly supported smooth functions. Then \[
+    \int _U \colon \Omega^0_c(U) \to \R
+\] is linear, and satisfies the change of variables: if $\varphi  \colon U' \to U$ is a diffeomorphism, then $\int _U f=\int _{U'}\varphi ^* f|\det d \varphi | $. To identify $\Omega^0_c(U)$ with $\Omega_c^n (U)$, identify $f$ with $\omega_f=f\, dx^1\wedge \cdots \wedge dx^n $. Then $\int _U \omega=\int _{U'}\varphi ^* \omega$ if $\varphi $ is orientation-preserving. 
+
+\subsection{Globalizing integration}
+Now we want to globalize.
+\begin{theorem}
+    Let $X$ be an oriented manifold. Then there exists a unique linear map \[
+        \int _X \colon \Omega_c^n (X) \to \R
+    \] such that if $(U;x^1,\cdots ,x^n )$ is an oriented standard chart and $\omega \in \Omega^n _c(U)$, then \[
+    \int _X \omega = \int _{X(U)}(x^{-1})^*\omega 
+    \] 
+\end{theorem}
+
+\begin{proof}
+    Let $\{(U_i ,x_i )\} _{i \in I}$ is an atlas of \emph{oriented} charts, and $\{\rho _i \} _{i \in I}$ be a subordinate partition of unity. Then for $\omega \in \Omega_c^n (X)$, let $\omega=\sum _{i \in I}\rho _i \omega$, where $\operatorname{supp}(\rho _i \omega) \subseteq U_i $. Define \[
+        \int _X\omega = \sum _{i \in I}\int _{x_i (U)}( x ^{-1})^*(\rho _i \omega) .
+    \] If $\{(V_{a},y_a)\} _{a \in A}$ is an oriented atlas, $\{\sigma_a\} _{a \in A}$ a partition of unity, then this is equal to 
+    \begin{align*}
+        &=\sum _i  \sum _a \int _{x_i (U_i \cap V_a)}( x_i  ^{-1})^*(\rho _i \sigma_a\omega)\\
+        &=\sum_a\sum_i  \int _{y_a(U_i \cap V_a)}(y^{-1}_a)^*(\sigma_a \rho _i \omega)\\
+        &=\sum _a \int _{y_a(V_a)}(y^{-1}_a)^*(\sigma_a\omega).
+    \end{align*}
+\end{proof}
+
+\begin{example}
+    Let's work through an example to see how we actually calculate integrals. Let $\varphi  \colon (0,\pi) \times (0, 2\pi) \to S^2 \subseteq \A^3_{x,y,z}$, $\phi,\theta \mapsto  \sin \phi  \cos \theta, \sin \phi \sin \theta, \cos \phi$. Let $\omega = x\,dy\wedge dz +y \, dz\wedge dx+z\, dx\wedge dy$. Then 
+    \begin{align*}
+        x&= \sin \phi  \cos \theta,\quad &&dx= \cos \phi \cos \theta d \phi - \sin \phi \sin \theta d \theta,\\
+        y&=\sin \phi \sin \theta, &&dy=\cos \phi \sin \theta d \phi+ \sin \phi \cos \theta d \theta,\\
+        z&=\cos \phi,&&dz=- \sin \phi d \phi.
+    \end{align*}Then
+    \begin{align*}
+        \omega &=x \,dy\wedge dz+y\,dz\wedge dx+z\,dx\wedge dy\\
+               &=(\sin \phi \cos \theta)(\cos \phi \sin \theta d\phi+ \sin \phi\cos \theta d \theta)\wedge (-\sin \phi d \phi)\\
+               &=\sin \phi d \phi\wedge d\theta.
+    \end{align*}
+    {\color{red}todo:finish} 
+\end{example}
+
+Some properties of the integral: for an oppositely oriented manifold $-X$, \[
+\int_{-X}\omega =- \int _X\omega,
+\]and if $\varphi \colon X' \to X$ is an oriented diffeomorphism $\omega \in \Omega_c^n (X)$, \[
+\int _{X'}\varphi ^*\omega= \int_X\omega.
+\] 
+\subsection{Stoke's theorem and boundary orientations}
+Let \[
+0 \to V' \overset{i}{\to } V \overset{j}{\to } V'' \to 0
+\] be a short exact sequence of finite dimensional real vector spaces. We know 
+\begin{itemize}
+    \item $\dim V=\dim V''+\dim V'$,
+    \item $\det V \overset{\cong}{\leftarrow} \det V''\otimes \det V'$.
+\end{itemize}
+Say $e_1',\cdots ,e_k'$ is a basis of $V'$, $e_1'',\cdots ,e_{\ell}''$ is a basis of $V''$, and ${ \widetilde e_1}'',\cdots ,{\widetilde e_{\ell}}'' $ be vectors in $V$ such that $j({\widetilde e_{\alpha }} '')=e_{\alpha }''$. Then ${\widetilde e_1} '',\cdots ,{\widetilde e_{\ell}} '', \ i(e_1'),\cdots ,i(e_k')$ is a basis of $V$. Slogan: quotient before sub.
+
+\begin{namedthm}{Stokes' Theorem} 
+    Let $X^n $ be an oriented manifold with boundary, and $i \colon \partial X\hookrightarrow X$. Fix $\omega \in \Omega_c^{n-1}(X)$. Then \[
+    \int_X d\omega=\int _{\partial X}i^*\omega.
+    \]  
+\end{namedthm}
+\begin{example}[The fundamental theorem of calculus]
+    Let $X=[a,b] \subseteq \R$, $\partial X=\{a,b\} $. Then $\omega=f$, $f \colon [a,b] \to \R$, and $d\omega =df=f'(x)dx$. Then \[
+        \int _{[a,b]}f=f(a)-f(b).
+    \] {\color{red}todo:not sure} 
+\end{example}
+\begin{example}
+    Let $\partial D^3=S^2$. Then 
+    \begin{align*}
+        \int _{S^2}\omega =\int _{D^3}d\omega &=\int _{D^3}3 dx\wedge dy\wedge dz\\
+                                              &=3 \operatorname{vol}(D^3)\\
+                                              &=3 \cdot \frac{4}{3}\pi
+    \end{align*}
+\end{example}
