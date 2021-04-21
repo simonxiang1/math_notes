@@ -5,6 +5,8 @@
 *.fls
 *.fdb_latexmk
 *.out
+*.snm
+*.nav
 applications
 math_papers
 other_classes
