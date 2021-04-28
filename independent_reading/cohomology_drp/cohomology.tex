@@ -85,7 +85,7 @@ All the definitions work just as well with an open subset $U\subseteq \R^n $. Fo
 \] This result is called the \emph{Poincar\'e lemma}.
 \end{example}
 
-\subsection{Recap of algebraic topology stuff}
+\subsection{Recap of (co)homological algebra}
 A direct sum of vector spaces $C=\bigoplus_{q\in \Z}C^q$ is called a \textbf{differential complex} if there are homomorphisms \[
     \cdots \to C^{q-1}\overset{d}{\to } C^q \overset{d}{\to } C^{q+1}\to \cdots 
 \] such that $d^2=0$. We say that $d$ is the \textbf{differential operator} of the complex $C$. Note that the de Rham complex is a differential complex, and the exterior derivative is a differential operator on  $\Omega^q(U)$. The \textbf{cohomology} of $C$ is the direct sum of vector spaces $H(C)=\bigoplus_{q\in \Z}H^q(C)$, where $H^q(C)=(\ker d \cap C^q) / (\im d \cap C^q)$. A map $f \colon A \to B$ between two differential complexes is a \textbf{chain map} if it commutes with the differential operators of $A$ and $B$, that is, $f d_A=d_Bf$. 
@@ -159,16 +159,4 @@ If $x_1,\cdots ,x_m$ and $y_1,\cdots ,y_n $ are the standard coordinates on $\R^
                                           &=d(g_I \circ f)df_{i_1}\cdots df_{i_q}.\qedhere
     \end{align*}
 \end{proof}
-Note that $\Omega^*$ is a contravariant function from the category of Euclidian spaces $\{\R^n \} _{n\in \Z}$ and smooth maps $\R^m \to \R^n $ to the category of commutative differential graded algebras and their homomorphisms. We can extend the functor $\Omega^*$ to differentiable manifolds, where {\color{red}todo:stuff about pou's} 
 
-\subsection{The Mayer-Vietoris Sequence}
-The Mayer-Vietoris sequence allows one to compute the cohomology of the union of two open sets. Suppose $M=U \cup V$, where $U,V$ are open. Then we have a sequence of inclusions \[
-M \leftarrow U \amalg V \underset{\partial_1 }{\overset{\partial_0}{\leftleftarrows}}  U \cap V
-\] where $\partial_0 \colon U\cap V \hookrightarrow V,\ \partial_1 \colon U\cap V\hookrightarrow U$ {\color{red}todo:how is this union disjoin?} . Apply the contravariant functor $\Omega^*$ to get \[
-\Omega^*(M) \to \Omega^*(U)\oplus \Omega^*(V) \underset{\partial_1^* }{\overset{\partial_0^* }{\rightrightarrows}}  \Omega^*(U \cap V),
-\] this splits into the \textbf{Mayer-Vietoris sequence}, given by \[
-0 \longrightarrow\Omega^*(M) \longrightarrow\underset{(\omega,\tau)}{\Omega^*(U) \oplus \Omega^*(V)} \underset{\mapsto }{\longrightarrow}  \underset{\tau - \omega}{\Omega^*(U \cap V)} \longrightarrow 0.
-\] 
-\begin{prop}
-    The Mayer-Vietoris sequence is exact.
-\end{prop}
