@@ -27,10 +27,11 @@
 %microtype, font, color support, cl
 \usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
 \usepackage{adforn}
-\usepackage[charter]{mathdesign}
+\usepackage[charter,cal=cmcal]{mathdesign}
 %\usepackage[cmintegrals,cmbraces]{newtxmath}
 %\usepackage{ebgaramond-maths}
-%\usepackage[T1]{fontenc}
+\usepackage[T1]{fontenc}
+\usepackage{CJKutf8} %cjk languages
 
 
 \usepackage{fancyhdr}
@@ -62,7 +63,6 @@
 \theoremstyle{definition}
 \newtheorem*{note}{Note}
 \newtheorem*{claim}{Claim}
-\newtheorem*{conclusion}{Conclusion}
 \newtheorem{definition}{Definition}[section]
 \newtheorem{remark}{Remark}[section]
 \newtheorem{example}{Example}[section]
@@ -120,6 +120,8 @@
 \renewcommand\div{\ensuremath{\operatorname{div}}} %divergence
 \newcommand\Gr{\ensuremath{\operatorname{Gr}}} %grassmannian
 \newcommand\Hom{\ensuremath{\operatorname{Hom}}} %linear mappings
+\newcommand\tr{\ensuremath{\operatorname{tr}}} %trace
+\newcommand\supp{\ensuremath{\operatorname{supp}}} %support
 
 \newcommand{\transv}{\mathrel{\text{\tpitchfork}}}
 \makeatletter
