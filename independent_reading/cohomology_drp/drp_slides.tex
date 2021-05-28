@@ -66,8 +66,8 @@
     \begin{frame}
         \frametitle{Motivation} 
         \begin{exampleblock}{Question} 
-            Does there exist a function that is the gradient of some other function? More precisely, when does $F \colon U \to \R^2$ for some open $U \subseteq \R^2$ satisfy \[
-                \frac{\partial F}{\partial x}=f_1,\quad \frac{\partial F}{\partial y}=f_2 \quad \text{for some} \ f=(f_1,f_2)?
+            Does there exist a function that is the gradient of some other function? More precisely, when does there exists an $F \colon U \to \R^2$ for some open $U \subseteq \R^2$ that satisfies \[
+                \frac{\partial F}{\partial x}=f_1,\quad \frac{\partial F}{\partial y}=f_2 \quad \text{for a vector field} \ f=(f_1,f_2)?
             \] (You could also think of this question as asking when vector fields have potential.)
         \end{exampleblock}\pause
         \begin{exampleblock}{Answer} 
@@ -78,37 +78,40 @@
 
     \begin{frame}
     \frametitle{Some vector calculus} 
-    Note that $\frac{\partial F}{\partial x}=f_1,\ \frac{\partial F}{\partial y}=f_2$ implies $\frac{\partial F_1}{\partial y}=\frac{\partial F_2}{\partial x}$. Is this condition sufficient to show $F$ is the gradient of some other function?
+    Note that $\frac{\partial F}{\partial x}=f_1,\ \frac{\partial F}{\partial y}=f_2$ implies $\frac{\partial f_1}{\partial y}=\frac{\partial f_2}{\partial x}$. Is this condition sufficient to show $F$ is the gradient of some other function?
     \begin{example}
-        The vector field $F(x,y)=(y,x)$ satisfies $\frac{\partial F_1}{\partial y}= \frac{\partial F_2}{\partial x}=1$. $F$ is also the gradient of $f=xy$.
+        The vector field $f(x,y)=(y,x)$ satisfies $\frac{\partial f_1}{\partial y}= \frac{\partial f_2}{\partial x}=1$, and the gradient of $F=xy$ is $f$.
     \end{example}%\pause
     \begin{example}
-        However, consider $F(x,y)=\left( \frac{-y}{x^2+y^2},\frac{x}{x^2+y^2} \right) $. You can show this cannot be the gradient of some function by integrating around the circle, resulting in two different values.
-    \end{example}\pause
+        \begin{columns}
+            \column{0.5\textwidth} 
+            However, consider $f(x,y)=\left( \frac{-y}{x^2+y^2},\frac{x}{x^2+y^2} \right) $. This vector field cannot be conservative, which you can show by integrating around a closed loop.
+            \column{0.3\textwidth} 
+            \begin{figure}[H]
+            \centering
+             \includegraphics[width=1\linewidth]{derham1.png}
+            \end{figure}
+        \end{columns} 
+    \end{example}
+    \end{frame}
+    \begin{frame}
+    \frametitle{Div, grad, curl} 
     \begin{block}{Proposition} 
-        The condition $\frac{\partial F_1}{\partial y}=\frac{\partial F_2}{\partial x}$ is sufficient if $U$ looks like a ball (convex). 
+                \begin{columns}
+            \column{0.7\textwidth} 
+        The condition $\frac{\partial f_1}{\partial y}=\frac{\partial f_2}{\partial x}$ is sufficient for the existence of a conservative vector field $F$ if $U$ looks like a ball (convex). 
+            \column{0.2\textwidth} 
+            \begin{figure}[H]
+            \centering
+             \includegraphics[width=0.6\linewidth]{convex.png}
+            \end{figure}
+        \end{columns} 
+
         %Note that $\R^2\setminus \{0\} $ is \emph{not} convex since you can't connect the points $(-1,0),(1,0)$ by a line.
     \end{block}
-    \end{frame}
-
-    \begin{frame}
-        \frametitle{Sneak peek of de Rham cohomology} 
-        \begin{definition}
-        If $C^{\infty}(U,\R^k)$ denotes the set of smooth functions $U \to \R^k$ define the maps $C^{\infty}(U,\R) \overset{\grad}{\to } C^{\infty}(U,\R^2) \overset{\curl}{\to } C^{\infty}(U,\R),$ where $\operatorname{grad}(\phi)=\left( \frac{\partial  \phi}{\partial x}, \frac{\partial \phi}{\partial y} \right) ,\ \operatorname{curl}(\phi_1,\phi_2)=\frac{\partial \phi_1}{\partial y}-\frac{\partial \phi_2}{\partial x} $.
-        \end{definition}%\pause
-        \begin{block}{Proposition} 
-           The curl of the gradient is zero, or $\operatorname{curl}\circ \operatorname{grad}=0$. 
-        \end{block}\pause
-        This implies that $\operatorname{im}(\operatorname{grad}) \subseteq \ker (\operatorname{curl})$, so we can form the \emph{quotient space} $H^1(U):= \ker (\operatorname{curl})/ \operatorname{im}(\operatorname{grad})$. 
-       \begin{definition}
-            The space $H^1(U)$ is the \textbf{1st de Rham cohomology group} of $U$.        
-        \end{definition}
-        Now the aforementioned proposition is equivalent to saying $H^1(U)=0$ whenever $U$ is convex. {\color{red}todo:image and gradient} 
-    \end{frame}
-
-    \begin{frame}
-        \frametitle{Divergence, gradient, curl} 
-        Let's move to three dimensions!
+        %\begin{definition}
+        %If $C^{\infty}(U,\R^k)$ denotes the set of smooth functions $U \to \R^k$ define the maps $C^{\infty}(U,\R) \overset{\grad}{\to } C^{\infty}(U,\R^2) \overset{\curl}{\to } C^{\infty}(U,\R),$ where $\operatorname{grad}(\phi)=\left( \frac{\partial  \phi}{\partial x}, \frac{\partial \phi}{\partial y} \right) ,\ \operatorname{curl}(\phi_1,\phi_2)=\frac{\partial \phi_1}{\partial y}-\frac{\partial \phi_2}{\partial x} $.
+        %\end{definition}%\pause
         \begin{definition}
             Define $C^{\infty}(U,\R) \overset{\grad}{\to } C^{\infty}(U,\R^3)\overset{\curl}{\to } C^{\infty}(U,\R^3)\overset{\div}{\to } C^{\infty}(U,\R)$, 
         \begin{align*}
@@ -117,26 +120,48 @@
 \operatorname{div} \colon &(f_1,f_2,f_3) \mapsto \frac{\partial f_1}{\partial x}+\frac{\partial f_2}{\partial y}+\frac{\partial f_3}{\partial z}.
 \end{align*}
         \end{definition}%\pause
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Sneak peek of de Rham cohomology} 
+        \begin{block}{Proposition} 
+           The curl of the gradient is zero, or $\operatorname{curl}\circ \operatorname{grad}=0$. 
+        \end{block}\pause
+        This implies that $\operatorname{im}(\operatorname{grad}) \subseteq \ker (\operatorname{curl})$, so we can form the \emph{quotient space} $H^1(U):= \ker (\operatorname{curl})/ \operatorname{im}(\operatorname{grad})$. 
+       \begin{definition}
+            The space $H^1(U)$ is the \textbf{1st de Rham cohomology group} of $U$.        
+        \end{definition}
+        Now the aforementioned proposition is equivalent to saying $H^1(U)=0$ whenever $U$ is convex. Here's why:
+        \begin{itemize}
+            \item<2->All we need to show is that $\ker(\curl) \subseteq \im(\grad).$
+            \item<3->In two dimensions, $f \in \ker(\curl)$ means $ \frac{\partial f_2}{ \partial x}-\frac{\partial f_1}{\partial y}=0$.
+            \item<4->So $\frac{\partial f_1}{\partial y}= \frac{\partial f_2}{\partial x}$, and we know what to do from here!
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}
+    \frametitle{More on de Rham cohomology} 
 \begin{block}{Proposition} 
 $\div \circ \curl =0$.    
 \end{block}
-    \end{frame}
-    \begin{frame}
-    \frametitle{More on de Rham cohomology} 
     \begin{definition}
     Since the composition $\div \circ \curl$ is zero, we can also form the \textbf{2nd de Rham cohomology group} $H^2(U):=\ker (\div) / \im(\curl)$. To fit with the theme, define $H^0(U)=\ker (\grad)$. 
     \end{definition}%\pause
-    It turns out de Rham cohomology measures the amount of ``holes'' in a space. Since $\R^3$ is ``completely solid'', there should be no nontrivial de Rham cohomology. The following theorem demonstrates this:\pause
-    \begin{theorem}
-        For a convex open set $U \subseteq \R^3$, we have $H^0(U)=\R,\,H^1(U)=0,$ and $H^2(U)=0$.
-    \end{theorem}%\pause
-    Intuitively, $H^1(\R^2 \setminus \{0\} )\neq 0$ since this space has a nontrivial topology. But how do we show this?
+    It turns out de Rham cohomology measures the amount of ``holes'' in a space. Since $\R^3$ is ``completely solid'', there should be no nontrivial de Rham cohomology. The following theorem demonstrates this.
+   % Intuitively, $H^1(\R^2 \setminus \{0\} )\neq 0$ since this space has a nontrivial topology. But how do we show this?
     \end{frame}
     \begin{frame}[fragile]
-        \frametitle{A commutative diagram, because why not} 
-        The relationships between divergence, gradient, and curl, and the 0th, 1st, and 2nd de Rham cohomology groups of a convex open subset of $\R^3$ can be summarized in the following commutative diagram:
-
+        \frametitle{A quick summary} 
+    \begin{theorem}
+        For a convex open set $U \subseteq \R^3$, we have $H^0(U)=\R,\,H^1(U)=0,$ and $H^2(U)=0$.
+    \end{theorem}\pause
+    \begin{figure}[H]
+    \centering
+     \includegraphics[width=0.6\linewidth]{homotopy_circ.jpg}
+    \end{figure}\pause
+        %The relationships between divergence, gradient, and curl, and the 0th, 1st, and 2nd de Rham cohomology groups of a convex open subset of $\R^3$ can be summarized in the following commutative diagram:
         \begin{figure}[H]
+    Note: This is not an actual commutative diagram!
         \begin{tikzpicture}[baseline= (a).base]
 \node[scale=.9] (a) at (0,0){
         \begin{tikzcd}
@@ -158,10 +183,10 @@ $\div \circ \curl =0$.
                 (dx_i )^2=0,\\
                 dx_i dx_j =-dx_j dx_i ,\ i\neq j.
             \end{cases}
-        \] Then a \textbf{differential form} is an element of $\Omega^*(U)$, formally defined as $C^{\infty}(U,\R)\bigotimes _{\R}\Omega^*$, where $U \subseteq \R^n $ is open. This algebra has a natural grading $\Omega^*(U)=\bigoplus _{q=0}^n \Omega^q(U)$.
+        \] Then a \textbf{differential form} is an element of $\Omega^*(U)$, formally defined as $C^{\infty}(U,\R)\otimes _{\R}\Omega^*$, where $U \subseteq \R^n $ is open. This algebra has a natural grading $\Omega^*(U)=\bigoplus _{q=0}^n \Omega^q(U)$.
         \end{definition}%\pause
     \begin{example}
-        Concretely, a form $\omega \in  \Omega^q(U)$ can be written uniquely as $\sum f_I dx_I$, where $I$ is a strictly increasing sequence of length $q<n$.
+        Concretely, a form $\omega \in  \Omega^q(U)$ can be written uniquely as $\sum f_I dx_I$, where $I$ denotes a strictly increasing sequence of length $q<n$.
     \end{example}
     \end{frame}
 
@@ -180,19 +205,27 @@ $\div \circ \curl =0$.
             The algebra $\Omega^*\left(U \right)$ paired with the differential operator $d$ is called the \textbf{de Rham complex} on $U$.
         \end{definition}%\pause
 \begin{example}
-    A return to grounded reality. Let $\omega=x\,dy \in \Omega^1(\R)$ be a 1-form. Then $d \omega = \left( \frac{\partial x}{\partial x}dx+ \frac{\partial x}{\partial y}dy \right) dy=1\,dx\,dy+0 \,dy\,dy=dx\,dy.$ We will see more exterior derivative calculations very soon.
+    %A return to grounded reality. 
+    Let $\omega=xy\,dx \in \Omega^1(\R)$ be a 1-form. Then $d \omega = \left( \frac{\partial (xy)}{\partial x}dx+ \frac{\partial (xy)}{\partial y}dy \right) dx=y\,dx\,dx+x \,dy\,dx=-x\,dx\,dy.$ We will see more exterior derivative calculations very soon.
 \end{example}
     \end{frame}
 
     \begin{frame}
         \frametitle{How the exterior derivative generalizes calculus} 
-        In $\R^3$, $\Omega^0(\R^3)$ and $\Omega^3(\R^3)$ are one dimensional and $\Omega^1(\R^3)$ and $\Omega^2(\R^3)$ are both three dimensional. So identify
+        In $\R^3$, $\Omega^0(\R^3)$ and $\Omega^3(\R^3)$ are one dimensional and $\Omega^1(\R^3)$ and $\Omega^2(\R^3)$ are both three dimensional. Then identify
             \begin{gather*}
    \underset{f}{ \{\text{functions} \} } \quad \simeq \quad \underset{f}{\{0\text{-forms} \}}  \quad \simeq \quad \underset{f\,dx\,dy\,dz}{\{3\text{-forms} \ \} 
 }  ,   \\
 \underset{X=(f_1,f_2,f_3)}{ \{\text{vector fields} \} } \quad \simeq \quad \underset{f_1dx+f_2dy+f_3dz}{\{1\text{-forms} \}}  \quad \simeq \quad \underset{f_1dy\,dz-f_2dx\,dz+f_3dx\,dy}{\{2\text{-forms} \ \} 
 }  .
-    \end{gather*}Furthermore, taking the exterior derivative of a 0-form (function gives gradient), the derivative of a 1-form is curl, and the derivative of a 2-form is divergence. We compute one illuminating example, namely that $d(2\text{-form} )=d(f_1dy\,dz-f_2dx\,dz+f_3dx\,dy)$ is divergence.
+    \end{gather*}So,
+    \begin{itemize}
+        \item<2->Taking the exterior derivative of a 0-form (function) gives \boxed{\textbf{gradient},}
+        \item<3->The exterior derivative of a 1-form (vector field) is \boxed{\textbf{curl},}
+        \item<4->And the exterior derivative of a 2-form is \boxed{\textbf{divergence}.}
+    \end{itemize}
+%taking the exterior derivative of a 0-form (function gives gradient), the derivative of a 1-form is curl, and the derivative of a 2-form is divergence. 
+%We compute one illuminating example, namely that $d(2\text{-form} )=d(f_1dy\,dz-f_2dx\,dz+f_3dx\,dy)$ is divergence.
     \end{frame}
 
     \begingroup
@@ -205,25 +238,25 @@ $\div \circ \curl =0$.
                               &=\frac{\partial f_1}{\partial x}dx\,dy\,dz+0+0+\cdots \\
                               &=\left( \frac{\partial f_1}{\partial x}+\frac{\partial f_2}{\partial y}+\frac{\partial f_3}{\partial z}  \right) dx\,dy\,dz.
 \end{align*}
-          This is precisely divergence. Similarly, we also have 
+          \pause\emph{This is precisely \boxed{divergence!}} Similarly, we also have 
           \begin{align*}
-              df&=\frac{\partial f}{\partial x}dx+\frac{\partial f}{\partial y}dy+\frac{\partial f}{\partial z}dz=\grad ,\\
-              d(1\text{-form} )&=\left( \frac{\partial f_2}{\partial x}-\frac{\partial f_1}{\partial y} \right) dx\,dy+\cdots =\curl.
+              df&=\frac{\partial f}{\partial x}dx+\frac{\partial f}{\partial y}dy+\frac{\partial f}{\partial z}dz=\boxed{\grad ,}\\
+              d(1\text{-form} )&=\left( \frac{\partial f_2}{\partial x}-\frac{\partial f_1}{\partial y} \right) dx\,dy+\cdots =\boxed{\curl.}
           \end{align*}
-       \end{example} %\pause
-So the exterior derivative generalizes all the previous notions of derivatives from calculus!
+       \end{example} \pause
+       \textbf{So the exterior derivative generalizes all the previous notions of derivatives from calculus!} 
     \end{frame}
 \endgroup
 
 \begin{frame}
-    \frametitle{The boundary of the boundary is zero} 
+    \frametitle{The derivative of the derivative is zero} 
     \begin{block}{Proposition} 
        $d^2=0$, where $d$ denotes the exterior derivative. 
     \end{block}\pause
     \begin{proof}
         \[
             d^2 f= d\left( \sum _i \frac{\partial f}{\partial x_i }dx_i  \right) =\sum _{i,j}\frac{\partial ^2 f}{\partial x_j \partial x_i }dx_j dx_i =0
-        \] since mixed partials commute, while the $dx_j dx_i $ ``anti-commute'' (the property that $dx_j dx_i =-dx_i dx_j $).
+        \] since mixed partials commute, while the $dx_j dx_i $ anti-commute (the property that $dx_j dx_i =-dx_i dx_j $).
     \end{proof}%\pause 
     This generalizes the previous ideas $\curl \circ \grad=0,\ \div \circ \curl=0$, which allowed us to define $H^1(U)$ and $H^2(U)$. Since $d$ is defined in all dimensions, we can define a more general de Rham cohomology group!
 \end{frame}
@@ -232,17 +265,17 @@ So the exterior derivative generalizes all the previous notions of derivatives f
     \frametitle{Closed and exact forms} 
 \begin{definition}[]
     If $d\omega=0$, then $\omega$ is a \textbf{closed} form, while if $\omega=d\tau$ for some form $\tau$, we say $\omega$ is an \textbf{exact} form.  Precisely, $\ker d$ consists of all the closed forms, while $\im d$ are the exact forms.
-\end{definition}%\pause
-Since $d^2=0$, $\im d \subseteq \ker d$ trivially. Now the question at the beginning of the talk reduces to ``can we find a nontrivial closed form on $U$''? The generalized de Rham cohomology measures to what extent we can do this, by collapsing the trivial solutions to zero.
-\pause
+\end{definition}\pause
 \begin{definition}[]
    The $q$-th \textbf{de Rham cohomology} of $U$ is the space \[
        H_{DR}^q(U)=\{\text{closed} \ q\text{-forms} \} / \{\text{exact} \ q\text{-forms} \} .
    \]  
 \end{definition}
+Since $d^2=0$, $\im d \subseteq \ker d$ trivially. Now the question at the beginning of the talk reduces to ``can we find a nontrivial closed form on $U$''? The generalized de Rham cohomology measures to what extent we can do this, by collapsing the trivial solutions to zero.
 \end{frame}
 
 \begin{frame}
+    \frametitle{The cohomology of $\R^n $} 
     \begin{example}
         Let us compute the cohomology of $\R^1$. $\ker d$ in $\Omega^0(\R^1)$ consists of constant functions, so $H^0(\R^1)=\R$. Every 1-form $\omega=g(x)dx$ is exact, since $d \int_{0}^{x} g(u) \, du=\omega$; this implies $H^1(\R^1)=0$, since we mod out by the entire space. Succinctly, we have
         \[
@@ -257,8 +290,8 @@ Since $d^2=0$, $\im d \subseteq \ker d$ trivially. Now the question at the begin
             0 & \text{otherwise.}
         \end{cases}
         \] This result is called the \emph{Poincar\'e lemma.} 
-    \end{example}\pause
-    We could theoretically show that $H^*(\R^2 \setminus \{0\} ) $ is nontrivial by constructing a cohomology class and modding out, but this is a pain. Isn't there an easier way to compute these groups?
+    \end{example}%\pause
+    %We could theoretically show that $H^*(\R^2 \setminus \{0\} ) $ is nontrivial by constructing a cohomology class and modding out, but this is a pain. Isn't there an easier way to compute these groups?
 \end{frame}
 
 \begingroup
@@ -267,9 +300,9 @@ Since $d^2=0$, $\im d \subseteq \ker d$ trivially. Now the question at the begin
     \frametitle{The Mayer-Vietoris sequence} 
     A map between spaces induces a map on forms, formally stated below:
     \begin{block}{Remark}
-        Note that a smooth map $f \colon X \to Y$ induces a pullback $f^* \colon \Omega^0(Y)\to \Omega^0(X), g \mapsto g \circ f$, which naturally extends to a pullback on forms $f^* \colon \Omega^*(X) \to \Omega^*(Y)$ \[
+        Note that a smooth map $f \colon X \to Y$ induces a \textbf{pullback} $f^* \colon \Omega^0(Y)\to \Omega^0(X), g \mapsto g \circ f$, which naturally extends to a pullback on forms $f^* \colon \Omega^*(X) \to \Omega^*(Y)$ \[
             f^*\left( \sum g_I dy_{i_1}\cdots dy_{i_q} \right) =\sum \left( g_I \circ f \right) d(y_{i_1}\circ f)\cdots d(y_{i_q}\circ f)
-        \] which commutes with $d$. Furthermore, assigning the complexes $\Omega^*$ to a sequence of maps is a \textbf{contravariant functor}.
+        \] which commutes with $d$. So assigning the complexes $\Omega^*$ to a sequence of maps is a \textbf{contravariant functor}.
     \end{block}%\pause
 Suppose our space $X=U \cup V$ for $U,V$ open. Then we have a sequence of inclusions \[
 X \leftarrow U \amalg V \underset{\partial_1 }{\overset{\partial_0}{\leftleftarrows}}  U \cap V
@@ -281,7 +314,7 @@ X \leftarrow U \amalg V \underset{\partial_1 }{\overset{\partial_0}{\leftleftarr
     Applying the contravariant functor $\Omega^*$ to the sequence of inclusions gives \[
     \Omega^*(X) \to \Omega^*(U)\oplus \Omega^*(V) \underset{\partial_1^* }{\overset{\partial_0^* }{\rightrightarrows}}  \Omega^*(U \cap V),
     \] 
-        Take the difference of the projections to get the \textbf{Mayer-Vietoris sequence} \[
+        Take the difference of the maps to get the \textbf{Mayer-Vietoris sequence} \[
         0 \longrightarrow\Omega^*(X) \longrightarrow\underset{(\omega,\tau)}{\Omega^*(U) \oplus \Omega^*(V)} \underset{\mapsto }{\longrightarrow}  \underset{\tau - \omega}{\Omega^*(U \cap V)} \longrightarrow 0,
         \] which turns out to be exact. This induces a long exact sequence on cohomology \[
        \cdots \to H^q(X) \to H^q(U) \oplus H^q(V)\to H^q(U \cap V) \overset{d^*}{\to } H^{q+1}(X)\to \cdots 
@@ -289,7 +322,7 @@ X \leftarrow U \amalg V \underset{\partial_1 }{\overset{\partial_0}{\leftleftarr
 \end{frame}
 
 \begin{frame}
-    \frametitle{The de Rham cohomology of the circle} 
+    \frametitle{The de Rham cohomology of the punctured plane}  
     \begin{example}
         For $X=\R^2 \setminus \{0\} $, we can cover it with two open sets $U ,V$, whose intersection $U \cap V$ is just two solid chunks of $\R^2$. So 
         \begin{gather*}
@@ -327,6 +360,6 @@ X \leftarrow U \amalg V \underset{\partial_1 }{\overset{\partial_0}{\leftleftarr
 
 \begin{frame}
     \frametitle{Thank you!} 
-Thank you for listening to my talk! These slides and detailed notes can be found on my website: \texttt{https://simonxiang.xyz/math} 
+Thank you for listening to my talk, and a special thank you to Arun Debray for mentoring me and answering all my dumb questions! These slides and detailed notes can be found on my website: \texttt{https://simonxiang.xyz/math} 
 \end{frame}
 \end{document}
