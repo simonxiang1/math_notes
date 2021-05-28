@@ -1,0 +1,147 @@
+\section{Notes on Gauge Theory} 
+These notes are based off Sadun's lecture handouts. I may go back and take additional notes on the lectures covering Gauge theory if needed.
+\orbreak
+Here, we talk about connections and curvature on an arbitrary vector bundle, as opposed to just the tangent bundle. Greek letters denote indices for coordinates, so the components of a 1-form $A$ might be $A_{\mu}$ as opposed to $A_i $, and a 2-form might have components $F_{\mu\nu}$. Connection coefficients are denoted by $A$ instead of $\Gamma $, and the curvature is $F$ instead of $R$. $g$ no longer refers to the metric, but a gauge transformation (a change of basis in our vector bundle), so inner products are now denoted with angle brackets, like $\langle v,w \rangle $.
+
+Sometimes we deal with complex bundles, and we need to decide whether the inner product is linear in the first or second factor; if they were linear in both, then $\langle iv,iw \rangle=-\langle v,w \rangle  $, as opposed to $\langle v,w \rangle $! If $\alpha ,\beta \in \C$, we use the convention $\langle \alpha v, \beta  w \rangle =\overline{\alpha }\beta \langle v,w \rangle $, not $\alpha  \overline{\beta }\langle v,w \rangle $.
+
+\subsection{The setup}
+We work locally in a neighborhood of a point $p$ lying in a manifold $M$. If we think of that neighborhood as a single chart, then we can assume $M=\R^n $ with the usual coordinates (although the $\partial _{\mu}$ may not be orthonormal). We study a vector bundle which locally looks like $M \times V$ for $V$ a fixed vector space of dimension $m$. Note that $v$ can be real or complex.  
+
+For each $x \in M= \R^n $, pick a local basis $e_1(x),\cdots ,e_m(x)$ for the fiber at $x$. Then a section is of the form $v(x)=\sum _{i=1}^m v^i (x)e_i (x)$; note the indices are Roman since we're talking about vectors in the bundle.\footnote{Greek indices go from 1 to $n$, while Roman indices go from 1 to $m$.} We use Einstein summation once again and drop the dependence on $x$, so $v=v^i e_i $.
+Some questions:
+
+
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item How do we take covariant derivatives of sections of bundles? (Answer: connections.)
+    \item How does parallel transport work?
+    \item Is there a tensor that descrives what happens when you parallel transport around a small loop? (Answer: curvature.)
+    \item How do objects transform when we switch coordinates on $M$ or the fibers?
+    \item What is the group of all possible parallel transports around loops? (Answer: the gauge group.)
+    \item Working on a compact manifold instead of $\R^n $, are there things like Gauss-Bonnet that relate curvature to topology of the vector bundle?
+    \item Why do physicists care?
+\end{itemize}
+
+We start by working in a general structure, then specializing:
+
+\begin{enumerate}[label=(\arabic*)]
+\setlength\itemsep{-.2em}
+    \item $V$ is a real vector bundle with no additional structure; in this case, parallel transport may turn a vector into twice that vector. This is where the term ``gauge theory'' comes from, as Herman Weyl proposed that the electromagnetic field was the curvature of a vector bundle that described the lengths of things, hence the term ``gauge''.
+    \item $V$ is a complex vector bundle with no additional structure, which means a real vector bundle of dimension $2m$ with an additional complex structure on each fiber.
+    \item $V$ is a real or complex inner product space, with the connection respecting the inner product (like a metric connection). An example is where $V$ is a complex line bundle and parallel transport around a loop is multiplication by a complex phase $e^{i \theta}$. The gauge group is either $\mathrm{SO}(m)$ if $V$ is real or $\mathrm{U}(m)$ if $V$ is complex. The connection coefficients $A_{\mu}$ and curvature $F_{\mu\nu}$ end up living in the Lie algebras of $\mathrm{SO}(m)$ or $\mathrm{U}(m)$, namely the space of anti-symmetric of anti-Hermitian $m \times m$ matrices.
+    \item $V$ is a real or complex inner product space with even more structure that the connection respects, such that the gauge group $G$ is a proper subgroup of $\mathrm{SO}(m)$ or $\mathrm{U}(m)$. Connections with $G=\mathrm{SU}(m)$ (and especially $\mathrm{SU}(2)$) come up a lot in physics. Connections with gauge group $G_2$ and $E_8$ are important in string theory.
+\end{enumerate}
+
+\subsection{Real vector bundles with no extra structure}
+Ideally, a connection $\nabla$ would obey the product rule given by \[
+    \nabla_{\mu}(v^i e_i )= (\partial _{\mu}v^i )e_i +v^i \nabla_{\mu}(e_i ).
+\] This tells us that we just need to know how to take derivatives of basis vectors, and then extend linearly to the rest of the section. We need to figure out $\nabla_{\mu}$ for $\mu$ ranging from 1 to $n$. How we do this is by specifying connection coefficients $A_{\mu}$, which are $ m \times m$ matrices:
+\[
+    \nabla_{\mu}e_i = (A_{\mu})^j _i e_j .
+\] This implies \[
+(\nabla_{\mu}v)^i = \partial _{\mu}v^i  +(A_{\mu})^i _j v^j .
+\] Formally, we write \[
+\nabla_{\mu}=\partial _{\mu}+A_{\mu},\quad \text{or} \quad \nabla=\partial +A.
+\] If we think of a section as an $m$-tuple of functions $v^i $, then the covariant derivative in the $mu$-th direction is given by taking the partial derivative of this $m$-tuple and adding $A_{\mu}$ times this $m$-tuple and adding $A_{\mu}$ times this $m$-tuple, with ordinary matrix multiplication. 
+
+We can also think of the $A_{\mu}$'s as being components of a matrix valued 1-form $A$, where $A= A_{\mu}dx^{\mu}$. A usual 1-form takes in vectors at each point and gives numbers (precisely a section of the cotangent bundle). $A$ takes in vectors and gives matrices, while $\nabla$ takes in tangent vectors and gives (covariant) directional derivative operators.
+
+Let $\gamma (t)$ be a path from points $p$ to $q$. Parallel transport along $\gamma $ means solving the system of differential equations \[
+    0 = \nabla_{\dot \gamma }v= \dot v + (\dot \gamma )^{\mu}(t)A_{\mu}(\gamma (t))v(t).
+\] This gives a linear transformation from the fiber at $p$ to the fiber at $q$, which is always invertible by parallel transporting the same path but in the opposite direction. Since parallel transport is an \emph{invertible} linear operator on the fiber at $p$, our gauge group is a subset of  $\mathrm{GL}( m,\R)$. Since $\R^n $ is simply connected\footnote{Recall that we're working locally in a neighborhood.}, all loops can be deformed to the trivial loop whose parallel transport operator is the identity, and our gauge group is $\mathrm{GL}(m,\R)^+$.
+
+For a manifold that isn't simply connected, then the gauge group might be $\mathrm{GL}(n,\R)^+$ if the bundle is orientable, or all of $\mathrm{GL}(n,\R)$ if it isn't. {\color{red}todo:why all of $\mathrm{GL}$? $n$ vs $m$?} The operator of parallel transport by $t$ in the $\mu$ direction is $\exp(-t \nabla_{\mu})$, and parallel transport by $t$ in the $\mu$ direction, then $s$ in the $\nu$ direction, then $-t$ in the $\mu$ direction, then $-s$ in the $\nu$ direction is given by \[
+    1- st [\nabla_{\mu},\nabla_{\nu}]+HO.
+\] This was a homework problem for standard Riemannian geometry. So define the curvature tensor 
+\begin{equation}\label{curv} 
+F_{\mu,\nu}= [\nabla_{\mu},\nabla_{\nu}]=\partial _{\mu}A_{\nu}-\partial _{\nu}A_{\mu}+[A_{\mu},A_{\nu}].
+\end{equation}
+More generally, for $X,Y$ vector fields (sections of $TM$) on $M$, define the curvature operator by \[
+F(X,Y)=[\nabla_X,\nabla_Y]-\nabla_{[X,Y]}.
+\] The curvature in the $\mu\nu$-plane is the commutator of two covariant derivatives, and a measure of how much parallel transport depends on which path you take.
+
+\begin{problem}
+\footnote{Homework 7 was to fill in the gaps here, so I'll just write out the problems and solutions here.}Show that $F$ really is a tensor in the tangent directions. That is, if $f$ and $g$ are functions and $v$ is a section of our vector bundle, show that $F(fX,gY)(v)=fg F(X,Y)(v)$.
+\end{problem}
+\begin{solution}
+    We drop the $(v)$ from the notation. We have 
+\begin{align*}
+    F(fX,gY)&=[\nabla_{fX},\nabla_{gY}]-\nabla_{[fX,gY]}\\
+               &=\nabla_{fX}\nabla_{gY}-\nabla_{gY}\nabla_{fX}-\nabla_{g[fX,Y]+fX(g)Y}\\
+               &=f\nabla_{X}(g\nabla_Y)-g\nabla_Y(f\nabla_X)-\nabla_{-gf[Y,X]-gY(f)X+fX(g)Y}\\
+               &=fg\nabla_X\nabla_Y+fX(g)\nabla_Y-gf\nabla_Y\nabla_X-gY(f)\nabla_X-\nabla_{gf[X,Y]}+gY(f)\nabla_X-fX(g)\nabla_Y\\
+               &=fg\nabla_X\nabla_Y-gf\nabla_Y\nabla_X-fg\nabla_{[X,Y]}\\
+               &=fgF(X,Y)?
+\end{align*}Why don't the order's work out? Anyways, a simpler solution is to show $F(X,gY)=gF(X,Y)$. 
+\begin{align*}
+    F(X,gY)&=\nabla_X\nabla_{gY}-\nabla_{gY}\nabla_X-\nabla_{g[X,Y]+X(g)Y}\\
+           &=g\nabla_X\nabla_Y+X(g)\nabla_Y-g\nabla_Y\nabla_X- g\nabla_{[X,Y]}-X(g)\nabla_Y\\
+           &=g\nabla_X\nabla_Y-g\nabla_Y\nabla_X-g\nabla_{[X,Y]}\\
+           &=gF(X,Y).
+\end{align*}The proof that $F(fX,Y)=fF(X,Y)$ is analogous; flip the Lie bracket $[fX,Y]=-[Y,fX]$ so the signs work out, then flip it back.
+\end{solution}
+\begin{problem}
+    Now show that $F$ is a tensor in the fiber directions. That is, show that $F(X,Y)(fv)=fF(X,Y)(v)$.
+\end{problem}
+\begin{solution}
+    Now 
+    \begin{align*}
+        \nabla_X\nabla_Y(fv)&=\nabla_X(f\nabla_Y(v)+Y(f)v)\\
+                            &=f\nabla_X\nabla_Y(v)+X(f)\nabla_Y(v)+\nabla_X(Y(f)v)\\
+                            &=f\nabla_X\nabla_Y(v)+X(f)\nabla_Y(v)+Y(f)\nabla_X(v)+X(Y(f))v,\\
+        \nabla_Y\nabla_X(fv)&=f\nabla_Y\nabla_X(v)+Y(f)\nabla_X(v)+X(f)\nabla_Y(v)+Y(X(f))v,\\
+        \nabla_{[X,Y]}(fv)&=f\nabla_{ [X,Y]}(v)+[X,Y]f(v) .
+    \end{align*}
+    So 
+    \begin{align*}
+        F(X,Y)(fv)&=\nabla_X\nabla_Y(fv)-\nabla_Y\nabla_X(fv)-\nabla_{[X,Y]}(fv)\\
+                  &=f(\nabla_X\nabla_Y(v)-\nabla_Y\nabla_X(v))+[X,Y]f(v)-[X,Y]f(v)-f\nabla_{[X,Y]}(v)\\
+                  &=f(\nabla_X\nabla_Y(v)-\nabla_Y\nabla_X(v)-\nabla_{[X,Y]}(v))\\
+                  &=fF(X,Y)(fv).\qedhere
+    \end{align*}
+\end{solution}
+\begin{problem}
+    Suppose $m=1$, $n=2$, so $A_{\mu}, F_{\mu\nu}$ are $1\times 1$ matrices, or just numbers. Let $A_1=0$ and $A_2=x^1.$ Compute the parallel transport of a vector $1 \in \R^1$ from $(0,0)$ to $(t,0)$ to $(t,s)$ to $(0,s)$ and finally back to $(0,0)$, with each step being a straight line. Then compute $F_{12}$ from \cref{curv}.
+\end{problem}
+\begin{solution}
+    Recall we want to solve $\dot v + (\dot \gamma )^{\mu}(t)A_{\mu}(\gamma (t))v(t)=0$. From $(0,0)$ to $(t,0)$, $A_1=0$, so parallel transport of $v$ to $(t,0)$ is just 1. Now $A_2=x^1$, so $A_2(t,s)=t$. From $(t,0)$ to $(t,s)$, we want to solve $\frac{d}{ds}v(t,s)=-tv(t,s)$, or $\frac{d}{ds}v=-tv$. This gives the unique solution $v(t,s)=e^{-st}$. Now from $(t,s)$ to $(0,s)$, $A_1=0$, so $v(0,s)=e^{-st}$, and from $(0,s)$ to $(0,0)$, $A_2=0$, so we get $v(0,0)=e ^{-st}$.
+
+    \cref{curv} says that $F_{\mu\nu}=\partial _{\mu}A_{\nu}-\partial _{\nu}A_{\mu}+[A_{\mu},A_{\nu}]$. So $F_{12}=\partial_1A_2-\partial_2A_1+[A_1,A_2]  $; $\partial_1A_2=1,\partial_2A_1=0,  $ and $[A_1,A_2]=0-0=0.$ So $F_{12}=1$.
+\end{solution}
+
+Note that $F_{\nu\mu}=-F_{\mu\nu}$. Since $F$ is an anti-symmetric 2-tensor, we can think of it as a matrix valued 2-form. Taking the trace of $F$ (in the fiber directions), we get a scalar-valued 2-form, which we can integrate over closed surfaces in $M$. $\tr (F\wedge F)$ is a 4-form, $\tr (F\wedge F\wedge F)$ is a 6-form, etc. Integrating quantities like these over the 2nd, 4th, and 6th homology of $M$ give integers times universal constants like $2\pi i$.
+
+\begin{problem}\label{gt} 
+    Suppose we have two different bases $\{e_i (x)\} $ and $\{\widetilde e_i (x)\} $, where $\widetilde e_i (x)=g_i ^j (x)e_j (x)$. The matrix $g$ is called a \textbf{gauge transformation}. What are the coefficients $\widetilde v^i $ with respect to the $\widetilde e_i $ basis in terms of the coefficients $v^i $? [Hint: What are the $v^i $'s in terms of the $\widetilde v^i $'s?]
+\end{problem}
+\begin{solution}
+    If $\widetilde e_i =g_i ^j  e_j $, then for $\widetilde v=\widetilde v^i \widetilde e_i ,\ v=v^j e_j $, we have \[
+        \widetilde v=\widetilde v^i (g_i ^j e_j ) \implies  v^j = \widetilde v^i g_i ^j .
+    \] Then $\widetilde v^i =(g^{-1})^j _i \widetilde e_i $. (Here, $g^{-1}$ isn't just $\frac{1}{g}$, but the inverse matrix for $g$.)
+\end{solution}
+\begin{problem}
+    In the setting of \cref{gt}, work out a formula for the connection coefficients $\widetilde A_{\mu}$ in terms of $A_{\mu}$ and $g$.
+\end{problem}
+\begin{solution}
+    Recall that $\nabla_{\mu}e_i =(A_{\mu})_i ^j e_j $, so $(\nabla_{\mu}v)^i =\partial _{\mu}v^i +(A_{\mu})^i _j v^j $. We want to work out a formula for $\widetilde A_{\mu}$ in terms of $A_{\mu}$ and $g$. So
+    \begin{align*}
+        \nabla_{\mu}( \widetilde e_i )=\nabla_{\mu}(g_i ^j e_j )&=\partial _{\mu}g^j _i e_j \\
+                                                                &=
+    \end{align*}
+\end{solution}
+%\begin{theorem}
+   %Let $M$ be a smooth $n$-manifold and $\phi_{\alpha } \colon U_{\alpha } \to V_{\alpha }$, $\phi_{\beta }\colon U_{\beta } \to V_{\beta }$ be smooth charts on $M$, and $V_{\alpha },V_{\beta }\subseteq \mathbb R^n $. 
+   %Denote $U_{\alpha }\cap U_{\beta }$ by $U_{\alpha \beta }$.
+   %Then the transition map $\phi _{\beta }\circ \phi_{\alpha}^{-1}$ is smooth.
+%\end{theorem}
+%\begin{proof}
+    %Since $\phi_{\beta }$ is smooth, all we need to show is that $\phi_{\alpha }^{-1}$ is smooth, since the composition of smooth functions is a smooth function. We do this by the Inverse Function Theorem. For $p_0 \in U_{\alpha }$, we know $D\phi _{\alpha }(p_0)$ has full rank because $\phi_{\alpha }$ is a homeomorphism. Apply the Inverse Function Theorem to get that $\phi _{\alpha }^{-1}$ is a local diffeomorphism. Compose the image of a neighborhood around $p_0$ with the projection onto $U_{\alpha \beta }$, which is also smooth. This shows that $\phi_{\alpha }^{-1}$, and hence $\phi _{\beta }\circ \phi_{\alpha }^{-1}$, is smooth.
+%\end{proof}
+%\begin{prop}
+    %The product of two manifolds is a manifold.
+%\end{prop}
+%\begin{proof}
+%We want to exbibit a chart on the product manifold.
+%Say $\{(U_{\alpha },\phi_{\alpha  }\colon U_{\alpha } \to \R^n)\} $ and $\{(V_{\alpha },\psi _{\alpha   }\colon V_{\alpha } \to \R^m)\} $ are atlases for $X$ and $Y$, respectively. We claim that $\{(U_{\alpha }\times V_{\alpha }, \phi _{\alpha }\times \psi _{\alpha } \colon U_{\alpha }\times V_{\alpha } \to \R^n \times \R^m)\} $ is an atlas for $X \times Y$. Consider the charts $(U_{\alpha }\times V_{\alpha }, \phi_{\alpha }\times \psi _{\alpha } )$, $(U_{\beta }\times V_{\beta }, \phi _{\beta }\times \psi _{\beta })$ for $\alpha ,\beta \in A$ for $A$ an indexing set. Note that $(\phi _{\alpha } \times \psi _{\alpha }) \circ (\phi_{\beta },\psi _{\beta })^{-1}$ sends a point $(u,v)\in  \R^n  \times \R^m$ to $(\phi _{\alpha }(\phi _{\beta }^{-1}(u)), \psi _{\alpha }(\psi _{\beta }^{-1}(v)))$, so this map is the same as $(\phi _{\alpha }\circ \phi _{\beta }^{-1}) \times  (\psi _{\alpha }\circ \psi _{\beta }^{-1})$. From here, the compositions in the factors of the product map are both smooth since the original maps are, so the transition function is smooth. Therefore every chart is cross compatible, and we have an atlas on $X\times Y$.
+%\end{proof}

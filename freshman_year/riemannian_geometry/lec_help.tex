@@ -1,0 +1,48 @@
+\section{April 22, 2021} 
+
+\subsection{Physics}
+Digression to physics. Say we have an electric field $\mathbf E$ and a magnetic field $\mathbf B$. Then the force is equal to $q(\mathbf E+\mathbf v \times \mathbf B)$. Then comes along the \textbf{Maxwell equations}, which say 
+\begin{align*}
+    &\nabla\cdot \mathbf B=0,\\
+    &\nabla\times \mathbf E= -\frac{\partial B}{\partial t}.
+\end{align*}In words, the divergence of the magnetic field is zero, and (?). From now on, $c=1$ (where $c$ is the speed of light). Since $\nabla\cdot \mathbf B=0$, then we can write it as the curl of something, say $B=\vec \nabla\times \mathbf A$ (where $\mathbf A$ is a vector potential). So {\color{red}todo:physics, see lecture}  (this is classical  E\&M). Now if $A$ is vector potential and $\phi$ is scalar potential, $A \to A +\nabla f$, $\phi \to \phi - \partial _t f$, then \[
+\nabla E= \nabla \partial _t f - \partial _t \nabla f=0.
+\] Einstein comes along and says we should think of space and time as the same thing, so $A_0=-\phi$. Something, you should think of $A$ as a 1-form, where $F=dA$.
+
+\subsection{Classical mechanics}
+
+Now to classical mechanics. We have Newtonian mechanics ($F=ma$), but we also have Lagrangian and Hamiltonion mechanics, where $\mathbf p=m\mathbf v+q \mathbf A$, where $q$ is the charge an $\mathbf A=?$. This is how to incorporate electromagnetism into mechanics. Then the momentum is 
+\begin{align*}
+    H&=\frac{1}{2}mv ^2 + q \phi\\
+     &= \frac{(\mathbf p-q \mathbf A)^2}{2m}+q \phi.
+\end{align*}
+
+\subsection{Quantum Mechanics}
+Now come along Schr\"odinger, Heisenberg, Dirac, and those guys. THey say matter is described as a wave function, where $\psi(x,t)$, $p=-i \overline{h}\nabla.$ Then \[
+\mathbf p-q \mathbf A=-i \nabla-qA=-i(\nabla-iqA)=-i,
+\] which is as \emph{Covariant} derivative. $q=-e$, wave function of an electron? Taking $| \psi (x,t)|^2$ gives us a probability density. So this is a section of a complex line bundle whose covariant derivative is described by the vector potential. What about the scalar potential? Schr\"odingers equation says that \[
+i \partial _t \psi =H\psi
+\] ? So 
+\begin{align*}
+    i \partial _A \psi &= -\frac{1}{2m}\left( \nabla+ieA \right) ^2\psi -e\phi\psi,\\
+    i\partial _A\psi+e\phi \psi &= -\frac{1}{2m}\left( \nabla+ieA \right) ^2\psi\\
+    i(\partial _t-ie \phi)\psi&=-\frac{1}{2m}\left( \nabla+ieA \right) ^2\psi,\\
+    i(\partial _t+ieA_0)\psi&=-\frac{1}{2m}(\nabla+ieA)^2\psi,
+\end{align*}where $A_0=-\phi$.
+We've talked about Hamiltonian mechanics, but we can also talk about Lagrangian mechanics, where \[
+L=\frac{1}{2}mv^2-q\phi+q\mathbf A \cdot \mathbf v.
+\] Why are we adding $\mathbf A\cdot \mathbf v$? We are usually interested in the \emph{action}, a line integral 
+\[
+S= \int_{0}^{t} L \, dt.
+\] We want to minimize the length. So 
+\begin{align*}
+    &q \int_{0}^{t} (A_0+\mathbf A\cdot \mathbf v) \, dt\\
+    =&q \int_{0}^{t} A_0\,dt + \mathbf A\cdot d \mathbf x \\
+    =&q \int A .
+\end{align*}Something, $e^{iS}$? So each path gets a factor of $e^{iq \int A }$. This is exactly parallel transport! Finally, what is this business about adding $\nabla f$ to a vector potential? This is just a change of basis. So this funny gauge transformation is just the fact that we can change the basis of a vector bundle. Gauge theory on groups like $\operatorname{SU}_2$ arose from theoretical physics (?)
+
+What in blazers did we just witness? This is a math course, not a physics course.
+
+\subsection{Curvature of a codimension 1 bundle}
+shape operator?
+
