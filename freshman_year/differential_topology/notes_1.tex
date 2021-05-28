@@ -44,3 +44,85 @@ The tangent spaces to $X$ at points are vector subspaces of $\R^n $ that general
     T(X) = \{(x,v) \in X \times \R^n \mid v \in T_x(X)\} .
 \] $T(X)$ contains a copy $X_0$ of $X$, consisting of the points $(x,0)$. 
 
+\subsection{Integration on Manifolds}
+Why do we integrate over forms? 
+\begin{namedthm}{Change of variables in $\R^k$} 
+   Suppose $f \colon V \to U$ is a diffeomorphism of open sets in $\R^k$ and $a$ is an integrable function on $U$. Then \[
+       \int_{U} a\, dx_1 \cdots  dx_k = \int _V (a \circ f) \,|\det (df)|\, dy_1 \cdots dy_k.
+   \] 
+\end{namedthm}
+Changing variables by $f$ sends $a$ to the obvious pullback $a \circ f$, while scaling by the volume form $|\det (df)|$. The forms counteract this volume change. Consider the integrand to be a $k$-form $\omega= a\,dx_1\wedge \cdots \wedge dx_k$. Then define \[
+\int_U \omega= \int_U a\,dx_1 \cdots dx_k.
+\] So $\omega$ pulls back to the form $f^*(\omega)= (a \circ f) \det (df) dy_1 \wedge  \cdots \wedge  dy_k$. If $f$ preserves orientation, then $\det(df)>0$, so $f^* \omega$ is the integrand on the right in the Change of Variables theorem. We say $\omega$ is integrable if $a$ is.
+\begin{namedthm}{Change of Variables in $\R^k$} 
+   Assume $f \colon V \to U$ is an orientation-preserving diffeomorphism of open sets in $\R^k$ or $\H^k$, and let $\omega$ be an integrable $k$-form on $U$. Then \[
+   \int _U \omega= \int_V f^* \omega.  
+   \] If $f$ is orientation-reversing, then $\int_U \omega=-\int _V f^* \omega$.
+\end{namedthm}
+Recall the \textbf{support} of $\omega$ is the closure of the set of points where $\omega(x)\neq 0$; assume that this closure is compact, or $\omega$ is \textbf{compactly supported}. Say $\supp \omega \subseteq W \subseteq X$ where $W$ is open and parametrizable. If $h \colon U \to W$ is an orientation-preserving diffeomorphism of $W$ with $U \subseteq H^k$ open, $h^* \omega$ is a compactly supported smooth $k$-form on $U$. So $h^* \omega$ is integrable, and $\int_X\omega= \int_U h^* \omega$. If $g \colon V \to W$ is another parametrization of $W$, then $f = h ^{-1} \circ g$ is an orientation preserving diffeomorphism $V \to U$, and \[
+\int _U  h^* \omega  = \int _V f^* h^* \omega=\int _V g^* \omega.
+\] So $\int_X \omega$ is independent of parametrization. {\color{red}todo:something partitions of unity}. You can check that \[
+\int_X (\omega_1+\omega_2)= \int _X \omega_1+ \int_X \omega_2 \qquad \text{and} \qquad \int_X c\omega=c \int_X \omega
+\] for $c \in \R$.
+\begin{theorem}
+    If $f \colon Y \to X$ is an orientation-preserving diffeomorphism, then \[
+    \int_X \omega=\int_Y f^* \omega
+\] for every compactly supported, smooth $k$-form on $X$ (where $k=\dim X=\dim Y$).
+\end{theorem}
+We can only integrate $k$-forms over $X$ a $k$-manifold, but we can integrate lower dimensional forms over submanifolds. If $Z$ is an oriented submanifold of $X$ and $\omega$ is a form on $X$, our abstract operations give us a natural way of ``restricting'' $\omega$ to $Z$. Let $i\colon Z \hookrightarrow X$ denote the inclusion, and define the \textbf{restriction} of $\omega$ to $Z$ as the form $i^* \omega$. If $\omega$ is a 0-form, then  $i^*\omega$ is the usual restriction of $\omega$ to $Z$. If $\dim Z= \ell$ and $\omega$ is an $\ell$-form whose support intersects $Z$ in a compact set, define \[
+\int_Z \omega=\int_Z i^* \omega.
+\] 
+\begin{example}
+    Suppose $\omega=f_1dx_1+f_2dx_2+f_3dx_3$ is a smooth 1-form on $\R^3$, and $\gamma \colon I \to \R^3$ is a simple curve (diffeomorphism of $I$ onto $C=\gamma (I)$ a compact 1-manifold with boundary). Then \[
+    \int_C \omega=\int_I \gamma ^* \omega.
+\] For $\gamma (t)=(\gamma_1(t),\gamma_2(t),\gamma_3(t))  $ we have $\gamma ^* dx_i =d\gamma _i = \frac{d\gamma _i }{dt}dt$, and \[
+\int _C \omega= \sum_{i=1}^{3} \int_{0}^{1} f_i [\gamma (t)] \frac{d\gamma _i }{dt}(t) \, dt.
+\] If $\mathbf F$ is the vector field $(f_1,f_2,f_3)$ in $\R^3$, then this is the \textbf{line integral} of $\mathbf F$ over $C$ denoted $\oint \mathbf F\,d \gamma $.
+\end{example}
+\begin{example}
+    Consider the compact supported 2-form on $\R^3$ given by $\omega=f_1 dx_2\wedge dx_3+f_2 dx_3\wedge dx_1+ f_3 dx_1\wedge dx_2$. {\color{red}todo:area form} 
+\end{example}
+
+\subsection{Summary of facts about the exterior derivative}
+\begin{enumerate}[label=(\arabic*)]
+\setlength\itemsep{-.2em}
+    \item Linearity: $d(\omega_1+\omega_2)=d\omega_1+d\omega_2$ 
+    \item Multiplication law: $d(\omega \wedge \theta)=(d\wedge ) \wedge  \theta+(1)^p \omega \wedge d\theta$
+    \item $d(d\omega)=0$.
+    \item $d$ is unique
+    \item For $g \colon Y \to X$ a smooth map of manifolds with boundary, for every form $\omega$ on $X$, $d(g^* \omega)=g^* (d \omega)$.
+    \item $d \circ g^* = g^* \circ d$ (5) but concise
+    \item $df= \frac{\partial f}{\partial x_i } dx^i $
+\end{enumerate}
+
+\subsection{Cohomology}
+All gradient vector fields have curl zero, but the converse depends on the domain of definition. Two closed $p$-forms are \textbf{cohomologous}, denoted $\omega \sim \omega'$, if $\omega-\omega'=d \theta$ (their difference is exact). Then $H^p(X)$ is the set of equivalent classes, and forms a real vector sapce. The 0 cohomology class is the collection of exact forms, since $\omega=\omega'=d \theta=0$.
+
+If $f \colon X \to Y$ is a smooth map that pulls $p$-forms on $Y$ back to $p$-forms on $X$, since $f^*$ commutes with the derivative, $f^*$ pulls back closed forms to closed forms and exact forms to exact forms. In fact, if $\omega\sim \omega'$, then $f^* \omega\sim f^* \omega'$. So $f^*$ induces a pullback on cohomology classes, or a mapping $f^{\#} \colon H^p(Y) \to H^p(X)$. Note that $f^{\#}$ \emph{pulls back}, that is, if $f \colon X \to Y$, then $f^{\#}\colon H^p (Y) \to H^p(X)$.
+
+You can show that
+\begin{enumerate}
+    \item If $X \overset{f}{\longrightarrow} Y \overset{g}{\longrightarrow} Z$, then $(g \circ f)^{\#}=f ^{\#}\circ g^{\#}$.
+    \item $H^p(X)=0$ for all $p>\dim X$.
+    \item $\dim H^0(X)$ is precisely the number of connected components in $X$.
+\end{enumerate}
+
+\subsection{Stokes Theorem}
+We have a remarkable relationship between the operators $\int$ and $d$ on forms and the operation $\partial $ which to each manifold with boundary associates its boundary.
+
+\begin{namedthm}{The Generalized Stokes Theorem} 
+    Suppose $X$ is any compact-oriented $k$-dimensional manifold with boundary (which implies $\partial X$ is a $(k-1)$-manifold with the boundary orientation). Then if $\omega$ is any smooth $(k-1)$-form on $X$, \[
+    \int _{\partial X}\omega= \int_X d\omega.
+    \] 
+\end{namedthm}
+\begin{proof}
+    Suppose $\omega$ has compact support contained in the image of a local parametrization $h \colon U \to X$, where $U \subseteq \R^k$ or $\mathbb H^k$\footnote{We omit the part of the proof where $U \subseteq \mathbb H^k$ for time constraints.} is open. If $U \subseteq \R^k$ is open, then $h(U)$ does not intersect the boundary. So \[
+        \int _{\partial  X}\omega=0\quad \text{and} \quad \int_X d\omega= \int_U h^*(d \omega) = \int _U dv,
+    \] where $v= h^*\omega$. Since $v$ is a $(k-1)$-form, write $v= \sum_{i=1}^{k} (-1)^{i-1}f_i  dx_1 \wedge  \cdots \wedge  \widehat{dx_i } \wedge \cdots \wedge dx_k$. Then $dv= \left( \sum _i  \frac{\partial f_i }{\partial x_i }dx_1 \wedge \cdots \wedge dx_k \right) $, so \[
+    \int _{\R^k}=\sum _i  \int _{\R^k}\frac{\partial f_i }{\partial x_i }dx_1\cdots dx_k.
+\] This is our usual notion of a multivariable integral, so you can change the order of the terms (Fubini's theorem). Integrating the $i$th term with respect to $x_i $, we get \[
+\int _{\R^{k-1}}\left( \int_{-\infty}^{\infty} \frac{\partial f_i }{\partial x_i }dx_i  \right) dx_1 \cdots \widehat{dx_i } \cdots  dx_k.
+\] Since $\int_{-\infty}^{\infty} \frac{\partial f_i }{\partial x_i }dx_i $ is the function of $x_1,\cdots , \hat{x}_i ,\cdots ,x_k$ that assigns to any $(k-1)$-tuble $(b_1,\cdots ,\hat{b}_i ,\cdots ,b_k)$ the number $ \int_{-\infty}^{\infty} g'(t) \, dt$, where $g(t)=f_i (b_1,\cdots ,t,\cdots ,b_k)$. Since $v$ has compact support, $g$ vanishes outside a sufficiently large interval $(-a,a)$ in $\R^1$. So by the FTC, \[
+\int_{-\infty}^{\infty} g'(t) \, dt= \int_{-a}^{a} g'(t) \, dt=g(a)-g(-a)=0-0=0.
+\] Thus $\int_X d\omega=0$.
+\end{proof}
