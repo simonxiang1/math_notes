@@ -1,0 +1,26 @@
+\documentclass[fontsize=9pt]{article}
+\input{../preamble.tex}
+
+%references
+\usepackage[backend=biber,style=alphabetic]{biblatex}
+\DeclareLabelalphaTemplate{
+        \labelelement{\field[final]{shorthand}
+        \field{label}
+        \field[strwidth=2,strside=left]{labelname}}
+    \labelelement{\field[strwidth=2,strside=right]{year}}}
+        \DeclareFieldFormat{labelalpha}{\textbf{\scriptsize #1}}
+\addbibresource{references.bib}
+
+\title{2021 Summer Minicourses, UT Austin}
+\begin{document}
+\maketitle
+Notes for some of the Summer 2021 minicourses, taught by various graduate students here at UT Austin. If you taught one of these courses and don't want the notes to be viewed publicly (or if you have any comments or suggestions in general), please contact me at \url{simonxiang@utexas.edu}! Homepage: \url{https://web.ma.utexas.edu/SMC/Minicourses.html}
+\tableofcontents
+\newpage
+    %include lecture files
+    \input{spectra} 
+    %add and swap as necessary
+
+\clearpage
+\printbibliography
+\end{document}

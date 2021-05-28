@@ -1,0 +1,175 @@
+%small margins
+\usepackage[margin=1in]{geometry}
+\linespread{1.2} 
+
+%basic math stuff
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs, mathtools}
+\usepackage{hyperref}
+\usepackage[capitalize, noabbrev]{cleveref}
+\usepackage{xfrac}
+\usepackage{tikz-cd}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{mleftright}
+\usepackage{cancel} 
+
+%ok
+\usepackage{xcolor}
+\definecolor{meangreen}{RGB}{0,133,62}
+\definecolor{burntorange}{RGB}{191,87,0}
+
+%table of contents formatting
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\color{black}}
+\renewcommand{\cftsubsecfont}{\color{burntorange}}
+\usepackage{titlesec}
+\setcounter{tocdepth}{2} 
+
+%microtype, font, color support, cl
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\usepackage{adforn}
+\usepackage[charter,cal=cmcal]{mathdesign}
+%\usepackage[cmintegrals,cmbraces]{newtxmath}
+%\usepackage{ebgaramond-maths}
+\usepackage[T1]{fontenc}
+\usepackage{CJKutf8} %cjk languages
+
+
+\usepackage{fancyhdr}
+\fancyhf{}
+ \fancyhead[RO,LE]{\small\thepage}
+ \fancyhead[LO]{\small\itshape\nouppercase{\leftmark}}
+ \fancyhead[RE]{\small\itshape Lecture Notes}
+ \setlength{\headheight}{11.0pt}
+\pagestyle{fancy}
+
+%figures
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[2][1]{%
+    \def\svgwidth{#1\columnwidth}
+    \import{./figures/}{#2.pdf_tex}
+}
+\pdfsuppresswarningpagegroup=1
+
+%good stuff
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{cor}{Corollary}[section]
+\newtheorem{problem}{Problem}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{prob}{Problem}
+\newtheorem*{claim}{Claim}
+\theoremstyle{definition}
+\newtheorem*{note}{Note}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{example}{Example}[section]
+\newenvironment{solution}
+  {\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[Solution]}
+  {\end{proof}}
+
+%named theorems!
+\swapnumbers
+\theoremstyle{plain}
+\newcommand{\thistheoremname}{}
+%numbered
+\newtheorem{genericthm}[theorem]{\thistheoremname}
+\newenvironment{namedthmnum}[1]
+  {\renewcommand{\thistheoremname}{#1}%
+         \begin{genericthm}}
+        {\end{genericthm}}
+%unnumbered
+\newtheorem*{genericthm*}{\thistheoremname}
+\newenvironment{namedthm}[1]
+  {\renewcommand{\thistheoremname}{#1}%
+         \begin{genericthm*}}
+               {\end{genericthm*}}
+%general thing (definition, example, etc)
+\theoremstyle{definition}
+\newcommand{\thisthingname}{}
+\newtheorem{genericthing}[definition]{\thisthingname}
+\newenvironment{namedthingnum}[1]
+  {\renewcommand{\thisthingname}{#1}%
+         \begin{genericthing}}
+        {\end{genericthing}}
+%unnumbered thing
+\newtheorem*{genericthing*}{\thisthingname}
+\newenvironment{namedthing}[1]
+  {\renewcommand{\thisthingname}{#1}%
+         \begin{genericthing*}}
+               {\end{genericthing*}}
+
+%self explanatory
+\newcommand\N{\ensuremath{\mathbb{N}}} 
+\newcommand\R{\ensuremath{\mathbb{R}}} 
+\newcommand\A{\ensuremath{\mathbb{A}}} %affine space
+\newcommand\Z{\ensuremath{\mathbb{Z}}} 
+\renewcommand\O{\ensuremath{\emptyset}} 
+\newcommand\Q{\ensuremath{\mathbb{Q}}} 
+\newcommand\C{\ensuremath{\mathbb{C}}}
+\newcommand\F{\ensuremath{\mathbb{F}}} %field
+\newcommand\E{\ensuremath{\mathbb{E}}} %field extension
+\renewcommand\P{\ensuremath{\mathbb{P}}} %projective space
+\renewcommand\H{\ensuremath{\mathbb{H}}} %hyperbolic space
+\newcommand\im{\ensuremath{\operatorname{im}}} %image
+\newcommand\id{\ensuremath{\operatorname{id}}} %identity map
+\newcommand\grad{\ensuremath{\operatorname{grad}}} %gradient
+\newcommand\curl{\ensuremath{\operatorname{curl}}} %gurl
+\renewcommand\div{\ensuremath{\operatorname{div}}} %divergence
+\newcommand\Gr{\ensuremath{\operatorname{Gr}}} %grassmannian
+\newcommand\Hom{\ensuremath{\operatorname{Hom}}} %linear mappings
+\newcommand\tr{\ensuremath{\operatorname{tr}}} %trace
+\newcommand\supp{\ensuremath{\operatorname{supp}}} %support
+\newcommand\coker{\ensuremath{\operatorname{coker}}} %cokernel
+
+\newcommand{\transv}{\mathrel{\text{\tpitchfork}}}
+\makeatletter
+\newcommand{\tpitchfork}{%
+      \vbox{
+              \baselineskip\z@skip
+                  \lineskip-.52ex
+                      \lineskiplimit\maxdimen
+                          \m@th
+                              \ialign{##\crcr\hidewidth\smash{$-$}\hidewidth\crcr$\pitchfork$\crcr}
+                                }%
+                            }
+                            \makeatother
+%transversality
+
+%essential (thanks Dr. Urbanski)
+\renewcommand\qedsymbol{$\boxtimes$}
+
+%link colors
+\hypersetup{
+ linktocpage,
+ colorlinks,
+ linkcolor={burntorange},
+ citecolor={meangreen},
+ urlcolor={blue!80!black}
+}
+
+%cool section divider
+\newcommand{\orbreak}{
+\begin{center}
+    \adforn{25}\adforn{14}\adforn{53}
+ \vspace{0.2cm}
+\end{center}
+}
+
+%\titleformat{\section}[frame]
+%{\normalfont}
+%{\filright
+%\footnotesize
+%\enspace Lecture \thesection\enspace}
+%{8pt}
+%{\Large\bfseries\filcenter}
+
+  %\titlespacing*{\section}
+%{0pt}{5.5ex plus 1ex minus .2ex}{4.3ex plus .2ex}
+
+%tis me
+\author{Simon Xiang}

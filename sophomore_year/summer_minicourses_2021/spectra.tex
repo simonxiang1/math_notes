@@ -1,0 +1,269 @@
+\section{Spectra are your Friends (Rok Gregoric)} 
+This is a minicourse on stable homotopy theory, specifically spectra, taught by Rok Gregoric. The word ``spectra'' (or spectrum) shows up so much in math, for example the spectrum of an operator in functional analysis, the spectrum of a commutative ring in algebraic geometry, and spectra as a basic object of study in stable homotopy theory. The first two ideas are closely related while the third idea less so. 
+
+This minicourse will use $\infty$-categories as a warning to the faint of heart readers. As for prerequisites, not much background in algebraic topology or category theory will be presumed, but will be useful. Similarly, no background in stable homotopy theory will be assumed. The course will not prove much, the standard reference is \cite{ref:lurie}.
+
+\subsection{$\infty$-categories and stability (May 24)}
+As an introduction, a story says that mathematics began with shepherds counting sheep by enumerating elements of $\Z_{\geq 0}=\N$. Adding two flocks of sheep induced a monoid (group without inverses) structure $\Z_{\geq 0}\times \Z_{\geq 0}\to  \Z_{\geq 0}$, and negative numbers came about by the group completion of the monoid $(\Z_{\geq 0})^{\mathrm{gp}}=\Z$. 
+After the integers, we figured out how to multiply and got a ring structure. From here we obtain the abelian groups as the category of modules over the integers $(\mathsf{Ab} \simeq \mathsf{Mod} _{\Z})$, and everything in algebra follows. This is how algebra came about, and this is where we supposedly went wrong: we should have been working with the sphere spectrum all along.
+\begin{figure}[H]
+\centering
+ \includegraphics[width=0.5\linewidth]{figures/jarvis.png}
+ \label{jarvis} 
+ \caption{A relevant meme.} 
+\end{figure}
+What if instead of considering equivalent classes of sheep, the shepherds remembered they could ``change'' the sheep, for example saying ``this is sheep 1 and sheep 2, but I can rename sheep 1 to sheep 2 and vice versa''? Instead of using equivalence classes of finite sets up to bijection, what if the shepherds remembered bijections as well? So if we worked with finite sets up to bijection (the category $\mathsf{Fin} ^{\simeq}$), we can pass to $\N$ by the cardinality function $|\cdot |$, which is not a drastic change. The claim is we arrive at the sphere spectrum by imitating the historical development of the integers.
+
+We have somewhat of a monoid structure by taking the disjoint union of finite sets $\mathsf{Fin} ^{\simeq} \times \mathsf{Fin} ^{\simeq}\to \mathsf{Fin} ^{\simeq},$ where $(I,J) \mapsto I \amalg J$. With the sufficient theory, we can consider the group completion $S :=(\mathsf{Fin} ^{\simeq})^{\mathrm{gp}}$, which is an incarnation of the \textbf{sphere spectrum}. There is a natural multiplication $(I,J) \mapsto I \times J$ which, passing by cardinalities to the integers, is just the natural product. So $S$ is a ring, and we can form $\mathsf{Sp} := \mathsf{Mod} _S$, the category of modules over $S$. Voil\`a, this is what a spectra is. This is an intuitive perspective and we glossed over many things, we will come back and clarify much of this later on.
+
+
+Another story: an Indian emporer asked many blind men to touch and elephant and report back on what it is. Each blind man touched a different part of the elephant like the snout or leg, and thus reported back thinking they had found a tree or a sword or whatever. None of them had the complete picture, but each of them has said the truth. An elephant is quite complicated--- you could describe it as a collection containing the ears, the trunk, the tusks, etc. Each of these is an \textit{aspect} of the elephant, and in the same way spectra have many different incarnations:
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item (co)homology theories,
+    \item spaces stable under suspension,
+    \item infinite loop spaces,
+    \item homotopy-coherent analogue of abelian groups,
+    \item modules over the sphere spectrum $S$,
+\end{itemize}
+and so on.
+
+%\orbreak
+%\subsubsection*{$\infty$-categories in a nutshell} 
+\begin{definition}[]
+    An $\mathbf \infty$\textbf{-category} $\mathcal{C} $ consists of:
+    \begin{enumerate}[label=(\roman*)]
+    \setlength\itemsep{-.2em}
+        \item A set of objects $C \in \mathcal{C} $,
+        \item Spaces of maps $\mathrm{Map}_{\mathcal{C} }(C,C') \in \mathcal{S} $ for all $C,C' \in \mathcal{C} $,
+        \item A composition map \[
+                \mathrm{Map}_{\mathcal{C} }(C',C'')\times \mathrm{Map}_{\mathcal{C} }(C,C') \to \mathrm{Map}_{\mathcal{C} }(C,C''),\quad (f,g) \mapsto f \circ g.
+        \] which is associative and unital \emph{up to coherent homotopy}.
+    \end{enumerate}
+\end{definition}
+
+\begin{figure}
+\centering
+\begin{tabular}{|| c | c ||} 
+    \hline
+    Classical math & Homotopical math \\
+    \hline\hline
+    equality ($=$) & equivalence ($\simeq$)\\ \hline
+    sets $(\mathsf{Set} $) & $\underset{\text{(homotopy types, anima...)}}{\text{spaces (}\mathcal{S} \text{)}} $\\ \hline
+    categories & $\infty$-categories \\ \hline
+\end{tabular}
+\label{comparison}
+\caption{A comparison of ideas in classical math versus homotopical math.} 
+\end{figure}
+
+What do we mean by ``homotopy coherence''? Say we have two maps $f \circ (g \circ h)$ and $(f \circ g) \circ h$, these maps aren't actually equal, but equivalent. This equivalence $f \circ (g \circ h) \simeq (f \circ g) \circ h$ is a path in the space of maps $\mathrm{Map }_{\mathcal{C} }(C,C'')$. Given a triple composition $((f \circ g) \circ h) \circ k$, there are several different ways to express this, and chaining the homotopies that encode their equivalence gives a ``loop'' in a mapping space of sorts. This mapping space may give different (non-unique) choices of expression, which is bad, so homotopy coherence specifies that we can express composition up to contractible mapping spaces (so a unique choice). In essence, we can write expressions like $f \circ g \circ h$ without brackets, since it's unique up to contractible ambiguity.
+For example, when we say the following diagram commutes, \[
+\begin{tikzcd}
+    \bullet \arrow[d,"f"']\arrow[dr,"h"]& \\
+    \bullet \arrow[r,"g"']& \bullet
+\end{tikzcd}
+\] this implies that $h\simeq g \circ f$. This homotopy is implictly constructing a 1-simplex with the vertices of the triangle, and ``filling'' in the simplex to make the space contractible. This means that we have many choices of composite morphisms (the paths going through the middle), and they're all related by contractible ambiguity.
+
+\begin{example}
+    What are some key examples of $\infty$-categories?
+    \begin{itemize}
+\setlength\itemsep{-.2em}
+        \item An ordinary (locally small) category is an $\infty$-category where the mapping spaces are just discrete topologies (sets).
+        \item The spaces $\mathcal{S} $ form an $\infty$-category.
+        \item $\mathsf{Cat} _{\infty}$ is an $\infty$-category of $\infty$-categories.
+    \end{itemize}
+\end{example}
+The cool thing is that we can pass much of category theory through the language of $\infty$-categories. This is where we gloss over things a little bit--- proving all of category theory for $\infty$-categories is hard, and some other people (Jacob Lurie and Emily Riehl, see \cite{ref:lurie} ) have already done all of it.
+\begin{example}
+    Here are some familiar notions from category theory.
+    \begin{itemize}
+\setlength\itemsep{-.2em}
+        \item The \textbf{initial object} $C \in \mathcal{C} $ is an object such that $\mathrm{Map}_{\mathcal{C} } (C,C')$ is contractible for all $C' \in \mathcal{C} $. Terminal objects are similarly defined. For example, in $\mathcal{S} $ (the $\infty$-category of spaces), the inital object is the empty space and terminal objects are contractible spaces.
+        \item For $C \in \mathcal{C} $, we define the \textbf{overcategory} $\mathcal{C} /C$ with objects as morphisms $C' \to C$. A map in $\mathrm{Map}_{\mathcal{C} /C}(C' \to C, C''\to C)$ makes the following diagram commute: \[
+        \begin{tikzcd}
+            C' \arrow[rr]\arrow[rd]& & C''\arrow[ld] \\
+               & C &
+        \end{tikzcd}
+        \] Undercategories $C / \mathcal{C} $ are defined analogously.
+    \item An example of these constructions are \textbf{pointed spaces} $\mathcal{S} _*$, defined as the undercategory $* / \mathcal{S} $ of a contractible space. So morphisms between objects of pointed spaces $(x \colon * \to X) \in \mathcal{S} _*$ have to preserve the basepoint $*$.
+    \item \textbf{Functors} also make sense, where the maps between morphisms are compatible with all the higher homotopies between them. This also gives rise to the $\infty$-category of functors.
+    \item \textbf{Limits} and \textbf{colimits} give rise to \textbf{homotopy limits} (and \textbf{homotopy colimits}), and they have universal properties! For intuition on limits and colimits, consider a functor from the integers by comparison to a category $\mathcal{C} $. \[
+            \underset{\text{functor} \ F \colon (\Z,\geq ) \to \mathcal{C} }{\underbrace{  \overset{\varprojlim F(n)}{\bullet} \longrightarrow \cdots \overset{F(-3)}{\bullet } \longrightarrow \overset{F(-2)}{\bullet} \longrightarrow \overset{F(-1)}{\bullet} \longrightarrow \overset{F(0)}{\bullet} \longrightarrow \overset{F(1)}{\bullet } \longrightarrow \overset{F(2)}{\bullet} \longrightarrow \overset{F(3)}{\bullet} \longrightarrow \cdots \longrightarrow \overset{\varinjlim F(n)}{\bullet} }} 
+        \] A \emph{diagram} is just this functor $F$. Then a colimit (denoted $\varinjlim$) is the farthest thing you can put on the right, and a limit (denoted $\varprojlim$) is the farthest thing you can put on the left. Unlike analysis, we don't need a linear diagram, we just need to find the farthest things on the left/right of some diagram.
+    \end{itemize}
+    Here are two examples of limits and colimits. Suppose we have a terminal object $* \in \mathcal{C} $. Then the \textbf{suspension} of $C \in \mathcal{C} $ (denoted $\Sigma C)$ is the pushout $* \amalg_C *$ of $C \to *$ with itself, or the colimit that completes the diagram on the left.
+    \[
+    \begin{tikzcd}
+        C\arrow[r]\arrow[d] & *\arrow[d] \\
+        *\arrow[r] & \Sigma C\arrow[ul,phantom,"\ulcorner", very near start]
+    \end{tikzcd}\qquad\qquad
+    \begin{tikzcd}
+        \Omega C\arrow[d]\arrow[r] \arrow[dr,phantom,"\lrcorner",very near start]& *\arrow[d] \\
+        *\arrow[r] &C
+    \end{tikzcd}
+\] 
+Similarly, given an initial object $* \in \mathcal{C} $, the \textbf{(based) loops} on $C \in \mathcal{C} $ are defined as the pullback $\Omega C:= * \times_C  *$, the limit that completes the diagram on the right.
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item \textbf{Adjunctions} between categories $\mathcal{C} ,\mathcal{D} $ consist of two functors $F \colon \mathcal{C}  \to \mathcal{D} ,\ G \colon \mathcal{D}  \to \mathcal{C} $ such that \[
+            \mathrm{Map}_{\mathcal{D} }(F(C),D)\simeq \mathrm{Map}_{\mathcal{C} (C, G(D))}
+    \] for all $C \in \mathcal{C} ,\ D \in \mathcal{D} $. This relation is denoted $F\dashv G$. We say $F$ is a \textbf{right adjoint functor} while $G$ is a \textbf{left adjoint functor}. A basic yet profound fact in category theory is that left adjoints preserve colimits while right adjoints preserve limits.
+\end{itemize}
+\end{example}
+
+\begin{claim}
+    Let $\mathcal{C} $ be an $\infty$-category with a zero object\footnote{A zero object is just an object that is both initial and terminal.} $*$. Then $\Sigma \dashv \Omega$.
+\end{claim}
+\begin{proof}
+    The claim is that $\mathrm{Map}_{\mathcal{C} }(\Sigma C, C')\simeq \mathrm{Map}_{\mathcal{C} }(C,\Omega C')$. How do we show this? Since colimits factor out of $\Hom$ to become limits, or more precisely $\Hom(\varinjlim F, N)=\varprojlim \Hom(F-,N) $, we have
+    \begin{align*}
+        \mathrm{Map}_{\mathcal{C} }(\Sigma C,C')&\simeq \mathrm{Map}_{\mathcal{C} }(*\amalg_C *, C')\\
+                                                &\simeq \mathrm{Map}_{\mathcal{C} }(* , C') \times _{\mathrm{Map}_{\mathcal{C} }(C,C')} \mathrm{Map}_{\mathcal{C} }(*, C') \quad \text{\small by factoring out colimits} \\
+                                                &\simeq \mathrm{Map}_{\mathcal{C} }(C,*) \times_{\mathrm{Map}_{\mathcal{C} }(C,C')}\mathrm{Map}_{\mathcal{C} }(C,*) \quad \text{\small by contractibility} \\
+                                                &\simeq \mathrm{Map}_{\mathcal{C} }(C , * \times _C *) \\
+                                                &\simeq \mathrm{Map}_{\mathcal{C} }(C,\Omega C').\qedhere
+    \end{align*}
+\end{proof}
+
+\begin{definition}[]
+    A \textbf{homotopy category} of an $\infty$-category $\mathcal{C} $ is an ordinary 1-category $\mathrm{h} \mathcal{C} =\mathsf{Ho}(\mathcal{C})  $, where 
+    \begin{align*}
+        \mathrm{ob}(\mathsf{Ho} \mathcal{C} )&:= \mathrm{ob}(\mathcal{C} ),\\
+        \Hom _{ \mathsf{Ho} \mathcal{C} }(C,C')&:= \pi_0 (\mathrm{Map}_{\mathcal{C} }(C,C')).
+    \end{align*}In other words, the objects are just the objects of $\mathcal{C} $, and the path components of the mapping space $\mathrm{Map}_{\mathcal{C} }(C,C')$ forms the set of morphisms of $\mathsf{Ho} \mathcal{C} $. For topological spaces, this is your familiar category of spaces up to homotopy $\mathsf{hTop} $ from algebraic topology.
+\end{definition}
+
+\orbreak
+This ends the ``$\infty$-category theory in a nutshell'' section of this minicourse. Now let's talk about stability.
+\begin{definition}[]
+    A (1-)category $\mathcal{C} $ is \textbf{abelian} if
+    \begin{enumerate}[label=(\roman*)]
+    \setlength\itemsep{-.2em}
+        \item it has a zero object $0 \in \mathcal{C} $,
+        \item it has a biproduct\footnote{A biproduct is both a product and a coproduct.} $\oplus$,
+        \item every morphism $f \colon C \to C'$ has a kernel $\ker (f) \to C$ and a cokernel $C' \to \mathrm{coker}(f)$,
+        \item for every $f \colon C \to C'$ in $\mathcal{C} $, $\coker (\ker (f) \to C)\simeq \ker(C' \to \coker (f))$. This is a generalization of the first isomorphism theorem, where if you think of $\coker(f)$ as $C' /\im f$, the RHS equals $\ker(C' / \im f)=\im f,$ while the LHS becomes $\coker(\ker f)= C /\ker f$. So $C /\ker f\simeq \im f$. Diagramatically, \[
+        \begin{tikzcd}
+\ker(f) \arrow[d] \arrow[r]      & 0 \arrow[d] \\
+C \arrow[r, two heads] \arrow[u] & \coker(f)  
+\end{tikzcd}
+        \] is both a pullback and a pushout. You can also think of this as saying that limits and colimits coincide in certain cases.
+    \end{enumerate}
+\end{definition}
+So how do we transport this notion to $\infty$-land?
+\begin{definition}[]
+    An $\infty$-category $\mathcal{C} $ is \textbf{stable} if
+    \begin{enumerate}[label=(\roman*)]
+    \setlength\itemsep{-.2em}
+        \item it has a zero object $0 \in \mathcal{C} $,
+        \item it has a biproduct $\oplus$,
+        \item every morphism $f \colon C \to C'$ admits a \textbf{fiber}\footnote{A way of motiviating this terminology is by realizing the kernel is the fiber of 0.} (or \emph{homotopy kernel}) and \textbf{cofiber} (or \emph{homotopy cokernel}), where the fiber is the pullback of $f$ along the zero map, and the cofiber is the pushout of $f$ along the zero map. \[
+        \begin{tikzcd}
+            \mathrm{fib}(f)\arrow[r]\arrow[d] \arrow[dr,phantom,"\lrcorner",very near start]& 0 \arrow[d]\\
+            C \arrow[r,"f"] & C'
+        \end{tikzcd}\qquad\qquad     
+        \begin{tikzcd}
+            C\arrow[r,"f"]\arrow[d] & C' \arrow[d]\\
+            0 \arrow[r] & \mathrm{cofib}(f)\arrow[ul,phantom,"\ulcorner", very near start]
+        \end{tikzcd}
+        \] 
+    \item any $C'\to C \to C''$ in $\mathcal C$ is a \textbf{fiber sequence} (fits into the left diagram) iff it is a \textbf{cofiber sequence} (fits into the right diagram). In other words, the square \[
+    \begin{tikzcd}
+        C'\arrow[r]\arrow[d]\arrow[dr,phantom,"\lrcorner",very near start]& C\arrow[d]\\
+        0\arrow[r]& C''\arrow[ul,phantom,"\ulcorner",very near start]
+    \end{tikzcd}
+    \]is a pullback iff it is a pushout.
+    \end{enumerate}
+\end{definition}
+
+\begin{example}
+    Any sequence $C \to 0 \to C'$ is a fiber if $C \simeq 0 \times_{C'}0\simeq \Omega C' $, and a cofiber if $C'\simeq 0 \amalg_C 0\simeq \Sigma C$. This tells us that in stable $\infty$-categories, we can ``undo'' the suspension to get loops, and vice versa. This gives an equivalent characterization of stability--- $\mathcal{C} $ with a zero object is stable iff 
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item it has all finite limits,
+    \item $\Omega \colon \mathcal{C} \overset{\sim}{\to} \mathcal{C}  $,
+\end{itemize}or iff
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item it has all finite colimits,
+    \item $\Sigma\colon \mathcal{C} \overset{\sim}{\to} \mathcal{C}  $,
+\end{itemize}or iff
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item it has all finite limits and colimits,
+    \item any square \[
+    \begin{tikzcd}
+        C'\arrow[r]\arrow[d]& C\arrow[d]\\
+        0\arrow[r]& C''
+    \end{tikzcd}
+    \] in $\mathcal{C} $ is a pullback iff it is a pushout.
+\end{itemize}
+Since these two functors are adjoint, if either one exists the other characterization holds, or $\Omega\simeq \Sigma ^{-1}$. So stability tells us that loops and suspension are not just in adjunction, but in \emph{equivalence}. This means we study things \emph{stable} under loops or suspension, hence the nomenclature.
+\end{example}
+
+\begin{example}
+    The $\infty$-category $\mathcal{S}_* $ is not stable. There is no biproduct, and the initial object $(\O)$ and the terminal object $(\{*\} )$ are not the same. To fix this, consider pointed spaces to get a zero object, and you can think about biproducts in your free time. We have (finite) limits and colimits in $\mathcal{S} _*$, however, $\Omega,\Sigma \colon S_* \to S_*$ are not equivalences. To see this, consider $X$ any non-based space and $X_+ =X\amalg \{*\} \in \mathcal S_* $. Then loops $\Omega X_+ \simeq *$ because loops are pointed at $\{*\} $, and ``undoing'' loops means we can get back information about $X$, which should not be the case.
+    
+    For example, we only have one map $S ^2 \to S^1 $, where $\pi_2(S^1 )=0$. However, suspending this results in a map $S^3\to S^2$, including the Hopf fibration ($\pi_3(S^2)\simeq \Z )$. Then de-suspending kills the Hopf fibration.
+\end{example}
+\orbreak
+The big idea is this: spaces are generally not stable, and to fix this lack of stability, we introduce spectra. How do we fix this? With spectra. The idea is to ``make $\Omega$ invertible by force''. Define the $\mathbf \infty$\textbf{-category of spectra} as the inverse limit \[
+    \mathsf{Sp}:= \varprojlim \big( \cdots  \overset{\Omega}{\longrightarrow} \mathcal S_*\overset{\Omega}{\longrightarrow} \mathcal S_*\overset{\Omega}{\longrightarrow} \mathcal S_*\overset{\Omega}{\longrightarrow} \mathcal S_*\big),
+\] then the $\infty$-category of spectra has finite limits, and  will respect $\Omega \colon \mathcal{S} _* \overset{\sim}{\to}  \mathcal{S_*} $.
+
+\subsection{(Co)homology theories, and the smash product (May 25)}
+Some observations on the definition of spectra:
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item The category of spectra is a \emph{limit}\footnote{Maybe I have a poor understanding of category theory but don't limits give you objects? How do you get a category from a limit?} formed in the $\infty$-category of $\infty$-categories ($\mathsf{Cat} _{\infty}$). Each $\Omega$ is a functor between categories, where objects in $\mathsf{Cat} _{\infty}$ are the $\infty$-categories $\mathcal{S} _*$.
+    \item $\mathsf{Sp} $ is a stable $\infty$-category by design, or $\Omega \simeq \Sigma ^{-1}$.
+    \item A \textbf{spectrum}, i.e. an object $X \in \mathsf{Sp} $, consists of spaces $X_i $ associated to each $\mathcal{S} _*$ with equivalences $X_i \simeq \Omega X_{i+1}$ for all $i \in \Z$. If you've read \emph{War and Peace} (the literature) on spectra, the equivalence $X_i\simeq \Omega X_{i+1} $ holds for $\mathbf \Omega$\textbf{-spectra}. There is an analogous notion of a $\mathbf \Sigma$\textbf{-spectra} (or ``pre-spectra''), defined as a collection of pointed spaces $X_i \in \mathcal{S} _* $ with pointed maps $\Sigma X_i  \to X_{i+1}$. The difference between these two notions is we do not require the structure maps $\Sigma X_i  \to X_{i+1}$ to be homotopy equivalences.
+\end{itemize}
+
+\begin{example}
+    Let $X \in \mathcal{S} _*$. Then we can form the \textbf{suspension spectrum} $\Sigma ^{\infty}X \in \mathsf{Sp} $ as a $\Sigma$-spectrum, where $\left( \Sigma ^{\infty}X \right) _i :=\Sigma^i  X$ for all $i\geq 0$, where $\Sigma^i X$ is the $i$th suspension of $X$. The structure maps are then given by \[
+        \Sigma\left(\Sigma ^{\infty}X\right)_i \simeq \Sigma \left( \Sigma^i X \right) \simeq \Sigma ^{i+1}X\simeq \left( \Sigma ^{\infty}X \right) _{i+1}.
+    \] This is organically a $\Sigma$-spectrum and \emph{not} an $\Omega$-spectrum. Two example of suspension spectrum include the \textbf{zero spectrum} $0\simeq \Sigma ^{\infty}*$, and the \textbf{sphere spectrum} $S:=\Sigma ^{\infty}S^0,$ so that $\left( \Sigma ^{\infty}S\right) _i   \simeq S^i.$
+\end{example}
+\begin{figure}[h]
+    \centering
+\begin{tabular}{|| c || c | c || } 
+   \hline& $\Omega$-spectra & $\Sigma $-spectra \\ \hline\hline
+    PROS & $\infty$-categorically meaningful & easier to find component spaces\\ \hline
+    CONS & more esoteric (complicated) & morphisms hard to define correctly \\ \hline
+\end{tabular}
+\label{procon} 
+\caption{The pros and cons of $\Omega$-spectra and $\Sigma$-spectra.} 
+\end{figure}
+$\Omega$-spectra arose naturally as a way to make $\infty$-categories stable, so in a sense they're ``meaningful'' in an $\infty$-categorical sense. However, this means explicit examples may be more esoteric, or not as nice as the examples we have for $\Sigma$-spectra. 
+
+On the other hand, morphisms are hard to define for $\Sigma$-spectra: consider a $\Sigma$-spectrum with component spaces $X_i $ and structure maps. Na\"ively, we could say a map between $\Sigma$-spectra sends spaces $X_i \to Y_i $ such that the corresponding squares commute. This holds for $\Omega$-spectra, but the structure maps may not exist until we reach a certain $i$. For example, we have already seen the Hopf fibration that only exists after one iteration of suspension.
+\[
+\begin{tikzcd}
+    \cdots \arrow[r] &  X_{i-1}\arrow[d]\arrow[r,red,"\exists ?"] & X_i \arrow[d]\arrow[r,red,"\exists ?"] & X_{i+1} \arrow[d]\arrow[r]&\cdots \\
+    \cdots \arrow[r]&Y_{i-1} \arrow[r] & Y_i \arrow[r] & Y_{i+1}\arrow[r]&\cdots 
+\end{tikzcd}
+\] So given these problems with $\Sigma$-spectra, how do we create $\Omega$-spectra that contain the same information as $\Sigma$-spectra? To do this, start with a $\Sigma$-spectrum $\left( X_i ,\Sigma X_i  \to X_{i+1} \right) _{i\geq 0}$, then use the adjunction $\Sigma \dashv \Omega$ to get structure maps $X_i \to \Omega_{i+1}$. To make these maps equivalences, we can iterate loops by applying the structure maps on the result of $X_i \to \Omega _{i+1}$, then taking the colimit, like so: \[
+Y _i :=\varinjlim \big( X_i  \longrightarrow \Omega X_{i+1} \longrightarrow\Omega^2 X_{i+2}\longrightarrow \Omega ^3 X_{i+3}\longrightarrow\cdots  \big) .
+\] This gives rise to an $\Omega$-spectrum $\left( Y_i , Y_i \simeq \Omega Y_{i+1} \right) _{i\geq 0}$ by construction. The spaces $Y_i $ and $X_i $ will be different, \textit{but they model the same spectrum!} In general the $Y_i $ will be quite complicated, even if the $X_i $ are simple--- for example in the suspension spectrum, when $X_i =\Sigma ^i X,$ we have $Y_i =\varinjlim_j \Omega^j \Sigma ^{j+i}X$.
+
+\begin{namedthing}{Notation} 
+    For a spectrum $X\in\mathsf{Sp} $ and an $\Omega$-spectrum model $(X_i ,X_i \simeq \Omega X_{i+1})$ for $X$, we say $\Omega^{\infty}X:=X_0$ is the \textbf{underlying (infinite loop) space of} $\mathbf X$, and denote $\Omega ^{\infty-n}X:= X_n $. This is sensible notation because $\Omega^n (\Omega ^{\infty-n}X)\simeq \Omega ^n X_n \simeq X_0,$ or $\Omega ^{\infty}X$.
+\end{namedthing}
+
+Note that $\Omega ^{\infty}\colon \mathsf{Sp}  \to \mathcal{S} _*$ is a functor, and is in adjunction with $\Sigma ^{\infty} \colon \mathcal{S} _* \to \mathsf{Sp} $, where $\Sigma ^{\infty}$ preserves colimits and $\Omega ^{\infty}$ preserves limits. Since $\Sigma ^{\infty}$ preserves colimits, we have an easy $\infty$-categorical way to describe $\Sigma^{\infty}$. That is, $\Sigma ^{\infty} \colon \mathcal{S} _* \to \mathsf{Sp} $ is purely determined by the fact that 
+\begin{enumerate}[label=(\roman*)]
+\setlength\itemsep{-.2em}
+    \item $\Sigma ^{\infty}(S^0)\simeq S$, where $S$ denotes the sphere spectrum,
+    \item $\Sigma ^{\infty}$ preserves colimits.
+\end{enumerate}These conditions give rise to a unique functor $\Sigma ^{\infty}$ up to contractible space. Why does this equivalence work? There is also an adjuction between pointed spaces and spaces, where $\mathrm{oblv }\colon \mathcal{S} _* \to \mathcal{S} $ forgets the basepoint ($X \mapsto X$), and $+ \colon \mathcal{S} _* \to \mathcal{S} $ adds a disjoint basepoint ($X \mapsto X\amalg \{*\} $). Then compose this adjuction with the adjunction $\Sigma ^{\infty}\dashv \Omega ^{\infty}$ to get an adjunction $\Sigma ^{\infty}_+ \dashv \Omega ^{ \infty}_{\mathrm{oblv}}$ between spaces and spectra, like in the diagram below. \[
+\begin{tikzcd}
+\mathsf{Sp} \arrow[rr, "\Omega^{\infty}"', bend right] \arrow[rrrr, "\Omega^{\infty}_{\mathrm{oblv}}"', bend right, shift right=2] & \perp & \mathcal S_* \arrow[ll, "\Sigma ^{\infty}"', bend right] \arrow[rr, "\mathrm{oblv}"', bend right] & \perp & \mathcal S \arrow[ll, "+"', bend right] \arrow[llll, "\Sigma^{\infty}_+"', bend right, shift right=2]
+\end{tikzcd}\] 
+Then $\Sigma ^{\infty}_+ \colon \mathcal{S}  \to \mathsf{Sp} $ is characterized by preserving colimits and the fact that $\Sigma ^{\infty}_+ (*)\simeq S$.\footnote{An alternative notation is to denote $S[X]\simeq \Sigma ^{\infty}_+(X)$, viewed as a sort of ``spherical group ring''. This notation is mostly used when $X$ has additional structure.} Why do colimit preservation claims characterize functors uniquely? The reason is that $\mathcal{S} $ (resp $\mathcal{S} _*$) is freely generated by $*$ (resp $S^0$) under colimits, which is a universal property. One reason for why this is so simple is that we can present spaces as CW complexes--- when you build a complex by attaching cells, you are actually giving a colimit formula for the space, where every object that your diagram is mapping to is contractible. How does this work? We start off with $S^0 \simeq * {\color{meangreen}\amalg } *$, a {\color{meangreen}colimit} (coproduct) of contractible things. Then $S^n \simeq {\color{meangreen}\Sigma ^n} S^0$, where suspensions are also {\color{meangreen}colimits}. Finally, we create CW complexes by gluing cells together. Consider the following diagram: \[
+\begin{tikzcd}
+    S^n \arrow[r]\arrow[d,hook] & X \arrow[d] \\
+    *\simeq D^n \arrow[r] & X'
+\end{tikzcd}
+\] When we build CW complexes, we have a boundary map $S^n \to X$, where we have already built some complex $X$. Then we include the boundary $S^n  \hookrightarrow D^n $, which is contractible, and form a \emph{homotopy pushout} to glue in the cell. Alas, homotopy pushouts are also {\color{meangreen}colimits}, and we get that any CW complex is a colimit of contractible spaces.
+
