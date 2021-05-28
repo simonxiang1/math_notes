@@ -83,11 +83,11 @@ In other fields, we can tell a lot about the structure of an object by looking a
                                                                           & {[d]} \arrow["\operatorname{id}_d"', loop, distance=2em, in=305, out=235]                                                                                                      &                                                                                                           
 \end{tikzcd}
             \end{figure}
-            Note that no two distinct objects of a poset are isomorphic.
+            Note that no two distinct objects of a poset are isomorphic, since if $a \leq b$ and $b \leq a$, then $a=b$.
 \end{example}
 This shows that categories don't have to refer to just structure preserving maps between sets (these are called ``concrete categories''.
 \begin{example}[Groups as a category with one object]
-   A group $G $ can be thought of as a category $\mathcal{G} $ with one object $*$, all of whos arrows are isomorphisms. 
+    A group $G $ can be thought of as a category $\mathcal{G} $ with one object $*$, all of whos arrows are isomorphisms. (Note that elements of groups are invertible. You can think of the single object $*$ as the set a group is acting on.)
 
             If the universe were structured differently and kids learned category theory before groups, symmetries transforming $X$ into itself would be a natural extension of categories that transform $X$ into other objects, a special case in which all the maps are invertible. Alas, this is not the right timeline.
 \end{example}
@@ -114,11 +114,29 @@ Some categories have things called \emph{initial objects}. For example the empty
 \begin{definition}[Initial object]
     An \textbf{initial object} of $\mathcal{A} $ is an object $A_{\text{init}}\in \mathcal{A} $ such that for any $A\in \mathcal{A} $ (possibly $A=A_{\text{init}}$), there is exactly one arrow from $A_{\text{init}}$ to $A$.
 \end{definition}
-The yang to this yin is the \emph{terminal object}:
+For example, in $\mathsf{Set} $ the initial object is $\O$, since the only possible map $\O \to \{ \text{nonempty set} \} $ is inclusion. $\mathsf{Grp} _{\text{init}  }$ is the trivial group by mapping $1 \to \id_G$ for a group $G$. Similarly, $\mathsf{CRing} _{\text{init}  }=\Z$, since $\id_{\Z}=1$ generates the ring $\Z$, and the unique map is $\id_{\Z}\to  \id_R$. For $\mathsf{Top} $, the initial object is the empty space $\O$ with its unique topology, with the unique map $\O \to  \O_{\tau} $ for $\tau$ a topology on a space $X$. If a poset has a smallest element, since arrows are unique anyways, and you can't draw arrows from larger elements to smaller elements.
+
+\begin{remark}
+An important thing about initial objects; if they exist, they must be unique! To see this, let $A_1,A_2$ be initial objects of some category $\mathcal{A} .$ Then there exists unique maps $A_1 \overset{f}{\to}  A_2$, $A_2 \overset{g}{\to}  A_1$ by the initial property. Since $\id_{A_1} \colon A_1 \to A_1$, $\id_{A_2}\colon A_2 \to A_2$ exist by the definition of a category, composing $A_1 \overset{f}{\to } A_2 \overset{g}{\to } A_1$ gives $g \circ f=\id_{A_1}$, $f \circ g=\id _{A_2}$ by uniqueness. This is precisely the definition of an isomorphism $A_1 \cong A_2$, and furthermore, this isomorphism is unique because $f$ and $g$ are unique.
+\end{remark}
+The dual notion to the initial product is the terminal product.
 \begin{definition}[Terminal object]
-    A \textbf{terminal object} of $\mathcal{A} $ is an object $A_{\text{final}}\in \mathcal{A} $ such that for any $A\in \mathcal{A} $ (possibly $A=A_{\text{final}}$, there is exactly one arrow from $A$ to $A_{\text{final}}$. 
+    A \textbf{terminal object} of $\mathcal{A} $ is an object $A_{\text{final}}\in \mathcal{A} $ such that for any $A\in \mathcal{A} $ (possibly $A=A_{\text{final}}$), there is exactly one arrow from $A$ to $A_{\text{final}}$. An object that is both initial and terminal is called a \textbf{zero} object.
 \end{definition}
-For example, the terminal object of $\mathsf{Set} $ is $\{*\} $, $\mathsf{Grp} $ is $\{1\} $, $\mathsf{CRing} $ is the zero ring, $\mathsf{Top} $ is the single point space, and a poset its maximal element (if one exists).
+For example, the terminal object of $\mathsf{Set} $ is $\{*\} $ with the map being projection, $\mathsf{Grp} _{\text{final }  }$ is the trivial group by projection as well, $\mathsf{CRing}_{\text{final}  } $ is the zero ring by projection (since ring homomorphisms map $1_R \to 1_S$), $\mathsf{Top}_{\text{final}  } $ is the single point space (you know how), and a poset its maximal element (if one exists), by the natural ordering.
+    Terminal objects are also unique up to isomorphism. Let $A_1,A_2$ be terminal objects, then there exist unique maps $ A_2 \overset{f}{\to } A_1,$ $A_1 \overset{g}{\to } A_2$ by the terminal property of $A_1,A_2$, resp. Since $\id_{A_1} \colon A_1 \to A_1$, $\id_{A_2} \colon A_2 \to A_2$ exist and are unique by the terminal property, we must have $g \circ f \colon A_2 \to A_2=\id _{A_2},$ $f \circ g \colon A_1 \to A_1=\id _{A_1}$, which is precisely a unique isomorphism $A_2 \cong A_1$.
+\begin{remark}
+That was neat, but recall how we mentioned that terminal products are ``dual'' to initial products. To make this precise, the terminal product $A_*$ of a category $A$ is the initial product of $\mathcal{A} ^{\mathrm{op}},$ since if there exists a unique arrow $A_{*} \to A$ for any $A \in \mathcal{A} ^{\mathrm{op}} \ (\text{and} \ \mathcal{A} )$, flipping the arrows says we have a unique arrow $A \to A_*$ for any $A \in \mathcal{A} $, precisely the idea of a terminal product. Then uniqueness follows by the fact that the initial product is unique in $\mathcal{A} ^{\mathrm{op}}$.
+
+In general, we can consider the dual of any categorical notion by thinking about them in $\mathcal{A} ^{\mathrm{op}}$--- we usually tack on the prefix ``co'' when we do this. Furthermore, $\mathcal{A} ^{\mathrm{op}^{\mathrm{op}}}=\mathcal{A} $, or the dual notion to a dual notion is itself. So if a mathematician is a device for turning coffee into theorems, a comathematician is a device for turning ffee into cotheorems. hahahahahaha
+\end{remark}
+Suppose we have a concrete category. We can think of elements of these ``sets'' as morphisms, for example:
+\begin{itemize}
+    \item In $\mathsf{Set} $, arrows $\{*\} \to S$ correspond to elements of $S$.
+    \item In $\mathsf{Top} $, arrows $\{*\} \to X$ correspond to points of $X$. 
+    \item In $\mathsf{Grp} $, arrows $\Z \to G$ correspond to elements of $G$.
+    \item In $\mathsf{CRing} $, arrows $\Z[x]$ correspond to elements of $R$.
+\end{itemize}
 
 \subsection{Products and coproducts}
 We have a way of uniquely describing objects (up to isomorphism) called the ``universal property''. For example, in the category $\mathsf{Set} $ say we have two sets $X,Y$, and we want to construct $X\times Y$. How would we do this without talking about the sets themselves, but just the maps between them? 
@@ -139,7 +157,7 @@ By our observation, we have a bijection between functions $A \overset{f}{\to } X
 \centering
 \begin{tikzcd}
                                                                                       &  &                                                                            &  & X \\
-A \arrow[rr, "\exists !f" description, dotted] \arrow[rrrru, "f"] \arrow[rrrrd, "g"'] &  & X\times Y \arrow[rru, "\pi_X"', two heads] \arrow[rrd, "\pi_Y", two heads] &  &   \\
+A \arrow[rr, "\exists !f" description, dotted] \arrow[rrrru, "g"] \arrow[rrrrd, "h"'] &  & X\times Y \arrow[rru, "\pi_X"', two heads] \arrow[rrd, "\pi_Y", two heads] &  &   \\
                                                                                       &  &                                                                            &  & Y
 \end{tikzcd}
 \caption{Diagram for the product of objects in a category.}
@@ -162,7 +180,7 @@ P_1 \arrow[rruu, "\pi_X^1", two heads] \arrow[rr, "f" description] \arrow[rrdd, 
                                                                                                        &  &                                                                                                    &  &                                                                            \\
                                                                                                        &  & Y                                                                                                  &  &                                                                           
 \end{tikzcd}
-\end{figure} Since the $P_i $ are products, we have the existence of the unique morphisms $f,g$ such that the diagram commutes, by the universal property. If we just look at the outer square, $g\circ f$ is the unique map that makes this portion of the diagram commute. But $\operatorname{id}_{P_1}$ also makes this portion of the diagram commute, so $g\circ f=\operatorname{id}_{P_1}$. Similarly, we can rearrange the diagram such that $f\circ g$ factors through $g$, and thus $f\circ g=\operatorname{id}_{P_2}$ and therefore $f$ and $g$ are isomorphisms. For uniqueness, if we have maps $g \colon P_1 \to P_2$ and $h \colon P_2 \to P_1$ satisfying the properties of isomorphism, they must be the unique maps from $P_1\to P_2$ and vice versa, since the projection arrows define a unique arrow up to isomorphism into the other product. Combined with the fact that $g$ and $h$ make the following diagram commute since they satisfy the isomorphism properties,
+\end{figure} Since the $P_i $ are products, we have the existence of the unique morphisms $f,g$ such that the diagram commutes, by the universal property of products. If we just look at the outer square, $g\circ f$ is the unique map that makes this portion of the diagram commute. But $\operatorname{id}_{P_1}$ also makes this portion of the diagram commute, so $g\circ f=\operatorname{id}_{P_1}$. Similarly, we can rearrange the diagram such that $f\circ g$ factors through $g$, and thus $f\circ g=\operatorname{id}_{P_2}$ and therefore $f$ and $g$ are isomorphisms. For uniqueness, if we have maps $g \colon P_1 \to P_2$ and $h \colon P_2 \to P_1$ satisfying the properties of isomorphism, they must be the unique maps from $P_1\to P_2$ and vice versa, since the projection arrows define a unique arrow up to isomorphism into the other product. Combined with the fact that $g$ and $h$ make the following diagram commute since they satisfy the isomorphism properties,
 \begin{figure}[H]
 \centering
 \begin{tikzcd}
@@ -190,7 +208,7 @@ The universal property is nice because we don't have to explicity construct such
         \begin{itemize}
             \item For the poset $(\R,\leq)$, the product is $\operatorname{min}\{x,y\} $.
             \item For the poset of subsets (or subgroups, rings, fields etc) the product is $X\cap Y$.
-            \item For the poset of positive integers ordered by divisibility, the product is $\gcd(x,y)$.
+            \item For the poset of positive integers \emph{ordered by divisibility}, the product is $\gcd(x,y)$.
         \end{itemize}
 \end{enumerate}
 \end{example}
@@ -245,11 +263,25 @@ A \arrow[r, "g", shift left] \arrow[r, "h"', shift right] & X \arrow[r, "f"] & Y
 \end{tikzcd}
 \end{figure}
 we must have $g=h$. In other words, $f\circ g=f\circ h$ implies that $g=h$. \end{definition}
-In a concrete category, injective implies monic: what the heck even is a concrete category? Anyway, consider $f\circ g=f\circ h$, so $f(g(a))=f(h(a)$ for all $a\in A$: but since $f$ is injective, this implies that $g(a)=h(a)$, and so $g=h$ and $f$ is a monomorphism. 
+In a concrete category, injective implies monic: what the heck even is a concrete category? Anyway, consider $f\circ g=f\circ h$, so $f(g(a))=f(h(a))$ for all $a\in A$: but since $f$ is injective, this implies that $g(a)=h(a)$, and so $g=h$ and $f$ is a monomorphism. 
 Similarly, the composition of two monomorphisms is also a monomorphism: let $f,g$ be monomorphisms. Then $(f\circ g)\circ \alpha = (f\circ g)\circ \alpha' \implies f \circ (g\circ \alpha )=f\circ (g\circ \alpha ') $ by associativity of arrows. Since $f$ is a monomorphism, $g\circ \alpha =g\circ \alpha '$, but since $g$ is also a monomorphism, $\alpha =\alpha '$ and we are done.
 In most but not all situations, the converse of the definition also holds. For example, in $\mathsf{Set}, \mathsf{Grp} ,$ and $ \mathsf{CRing}  $, monic implies injective.
 
-There are many categories with a ``free'' object that you can think of as elements. For example, an element of a set is a function $1 \to S$, and an element of a ring is a function $\Z[x]\to R$, etc. In all these categories, the definition of monomorphims literally say that ``$f$ is injective on $\operatorname{Hom}_{\mathcal{A} }(A,X)$''. However, there is a standard counterexample involving the category of ``divisible'' abelian groups $\mathsf{DivAbGrp} $ and the projection $\Q\to \Q /\Z$.
+There are many categories with a ``free'' object that you can think of as elements. For example, an element of a set is a function $1 \to S$, and an element of a ring is a function $\Z[x]\to R$, etc. In all these categories, the definition of monomorphims literally say that ``$f$ is injective on $\operatorname{Hom}_{\mathcal{A} }(A,X)$''. 
+
+\begin{example}
+However, there is a standard counterexample to the idea that monic implies injective. In the category of ``divisible'' abelian groups $\mathsf{DivAbGrp} $, consider the projection $\Q\to \Q /\Z$. The quotient projection is clearly not injective (as any two elements in a coset get mapped to the same equivalence class in $\Q /\Z$), but it is monic, since if 
+
+\begin{figure}[H]
+\centering
+\begin{tikzcd}
+G \arrow[r, "f", shift left] \arrow[r, "g"', shift right] & \Q \arrow[r, "\pi"] & \Q /\Z
+\end{tikzcd}
+\end{figure}commutes, for $x \in G$, we have $f(x)$ and $g(x)$ in the same coset representative, or $f(x)-g(x)=n$ for $n \in \Z$. If $n \neq 0$, then let  $2ny =x$ for $y \in G$. Then $f(x)=f(2ny)=2n f(y)$, so $f(y)=\frac{1}{2n}f(x)$, $g(y)=\frac{1}{2n}g(x)$. Now $f(y)-g(y)$ must be an integer, but \[
+f(y)-g(y)=\frac{1}{2n}(f(x)-g(x))=\frac{1}{2},
+\] a contradiction. So $n=0$, and $f(x)=g(x)$. This implies $f=g$, and so $\pi$ is a monomorphism.
+\end{example}
+
 \begin{definition}[Epimorphisms]
     A map $X \overset{f}{\to } Y$ is an \textbf{epimorphism} (or epic) if for any commutative diagram 
     \begin{figure}[H]
@@ -271,7 +303,7 @@ This is like surjectivity, but a little farther off. Furthermore, the correspond
 
 
 \subsection{Functors}
-\begin{example}[Basic Functors]
+\begin{example}[Basic Functors]\label{funk} 
    Here are some basic examples of functors:
    \begin{itemize}
        \item Given an algebraic structure (group, field, vector space) we can take its underlying set $S$: this is a functor from $\mathsf{Grp}\to \mathsf{Set}$ (or whatever you want to start with).
@@ -306,11 +338,27 @@ More precisely, these are \textbf{covariant}  functors. A \textbf{contravariant}
     A classical example of functors is the dual vector space functor. For $K$ a field, $V$ a $K$-vector space the dual vector space functor assigns to $V$ the dual vector space $F(V)=V^*$ of linear maps $V\to K$, and to each linear transformation $f \colon V \to W$ the dual map $F(f)=f^* \colon W^* \to V^*$. Note that this functor is contravariant. 
 \end{example}
 \begin{example}
-    We have already talked about \textbf{free} and \textbf{forgetful} functors in Example 1.3: the forgetful functors are functors from spaces to sets (the underlying set of a group) and free functors are from sets to spaces (the basis set forming a vector space).
+    We have already talked about \textbf{free} and \textbf{forgetful} functors in \cref{funk}: the forgetful functors are functors from spaces to sets (the underlying set of a group) and free functors are from sets to spaces (the basis set forming a vector space).
     \begin{itemize}
         \item Another example of a forgetful functor is a functor $\mathsf{CRing}\to \mathsf{Grp}$ by sending a ring $R$ to its abelian group $(R,+)$.
         \item Another example of a free functor is a functor $\mathsf{Set}\to \mathsf{Grp}$ by taking the free group generated by a set $S$ (who would have known this is free?)
     \end{itemize}
+\end{example}
+\begin{definition}[]
+    A functor $F \colon \mathcal{A}  \to \mathcal{B} $ is \textbf{faithful} (resp \textbf{full}) if for any $A_1,A_2 \in  \mathcal{A} $, $F \colon \Hom_{\mathcal{A} }(A_1,A_2)\to \Hom _{\mathcal{B} }(F A_1,FA_2)$ is injective\footnote{The reason why concepts like injectivity are well-defined is because categories are assumed to be locally small, and so $\Hom _{\mathcal{A}  }(A_1,A_2)$, etc, is a set.} (resp. surjective). Then a concrete category is a category with a faithful (forgetful) functor $U \colon \mathcal{A}  \to \mathsf{Set} $.
+\end{definition}
+\begin{example}
+    Define the \textbf{covariant Yoneda functor} $H^A\colon \mathcal{A}  \to \mathsf{Set} $ by \[
+        H^A( A_1):= \Hom _{\mathcal{A} }(A,A_1) \in \mathsf{Set} ,
+    \] or if you like diagrams,
+    \begin{figure}[H]
+    \centering
+    \begin{tikzcd}
+A_1 \arrow[dd, "f"']         &  & {\Hom(A,A_1)} \arrow[dd, "H^A(f)"] \\
+{} \arrow[rr, "H^A", dotted] &  & {}                                 \\
+A_2                          &  & {\Hom(A,A_2)}                     
+\end{tikzcd}
+    \end{figure}To define the induced map $H^A(f)$, let $f_1 \in \Hom(A,A_1)$, or $f_1 \colon A \to A_1$. Then set $H^A(f)\colon f_1 \mapsto  f \circ f_1$, where $A \overset{f_1}{\to } A_1 \overset{f}{\to } A_2$. So $H^A(f)$ sends a morphism $f_1 \colon A \to A_1$ to a morphism $H^A(f)(f_1) \colon A \to A_2$, which is precisely a map $\Hom(A,A_1) \to  \Hom(A,A_2)$.
 \end{example}
 Here is a cool example: functors preserve isomorphism. If two groups are isomorphic, then they must have the same cardinality. In the language of category theory, this can be expressed as such: if $G\cong H$ in $\mathsf{Grp}$ and $U \colon \mathsf{Grp} \to \mathsf{Set}$ is the forgetful functor, then $U(G)\cong U(H)$. We can generalize this to \emph{any} functor and category!
 \begin{theorem}
@@ -346,6 +394,21 @@ This is very very useful for us (people who are doing algebraic topology) becaus
 \begin{note}
     As a meme (or not really, but it's still funny), we can construct the category $\mathsf{Cat}$ whose objects are categories and arrows are functors.
 \end{note}
+\begin{example}[Dual Space]
+    Assigning the dual space $V^*$ to a vector space $V$ in the category of vector spaces over a field $K$ ($\mathsf{Vect} _K$) is a good example of a contravariant functor.
+    \[
+        \begin{tikzcd}
+    V_1 \arrow[dd, "T"']       &  & {V_1^*=\Hom(V_1,K)} \arrow[dd, red, dotted, shift right] \\
+    {} \arrow[rr, "(-)^*"] &  & {}                                                  \\
+    V_2                        &  & {V_2^*=\Hom(V_2,K)} \arrow[uu, "T^*"', shift right]
+    \end{tikzcd}
+\] If we tried to construct the red arrow to make $(-)^*$ a covariant functor, we would need to define a natural map $V_1^* \to V_2^*$, or something that sends a covector $\beta \colon V_1 \to K$ to a covector $\alpha \colon V_2 \to K$. There is no natural map $V_2 \to V_1$, but we do have $f \colon V_1 \to V_2$, so define $T^*(\alpha )=\alpha  \circ f$, which is a map $V_1 \to K$, precisely an element of $V_1^*=\Hom(V_1,K)$.
+\end{example}
+\begin{example}\label{yf} 
+    Recall our discussion of the covariant Yoneda functor. The \textbf{contravariant Yoneda functor} $H_A \colon \mathcal{A} ^{\mathrm{op}} \to \mathsf{Set} $ is defined by $H_A \colon X \mapsto \Hom _{\mathcal{A} }(X,A) \in \mathsf{Set} $ for $X \in \mathcal{A} $. To define the induced map $H^A(f) \colon \Hom(Y,A) \to \Hom(X,A)$, for $y_A \in \Hom(Y,A),$ let \[
+        H^A(f)(y_A)=y_A \circ f ,\quad X \overset{f}{\longrightarrow} Y \overset{y_A}{\longrightarrow} A.
+    \] Then $H^A(f)(y_A) \colon X \to A$, so $H^A(f)(y_A) \in \Hom(X,A)$. This shows $H^A(f)$ is a proper map $\Hom(Y,A) \to \Hom(X,A)$, and so the contravariant Yoneda functor is indeed a contravariant functor.
+\end{example}
 
 \subsection{Homotopy categories and homotopy equivalence}
 Let $\mathsf{Top}_*$ be the category of pointed topological spaces. Then the fundamental group gives a functor $\mathsf{Top} _* \to \mathsf{Grp} $. When we have a suitable relation of homotopy between maps in a category $\mathcal{C} $, we define the homotopy category $\mathsf{Ho} (\mathcal{C} )$ to be the category sharing the same objects as $\mathcal{C} $, but morphisms the homotopy classes of maps. On $\mathsf{Top} _*$, we require homotopies to map basepoint to basepoint, and we get the homotopy category $\mathsf{hTop}_* $ of pointed spaces.
@@ -370,7 +433,6 @@ A space $X$ is said to be contractible if it is homotopy equivalent to a point.
 
 \subsection{Natural transformations}
 We talked about maps between objects which led to categories, and then maps between categories which lead to functors. Now let's talk about maps between functors, the natural transformation: this is actually not too strange (recall the homotopy, a ``deformation'' from a map to another map).
-
 In this case, we also want to pull a map (functor) $F$ to another map $G$ by composing a bunch of arrows in the target space $\mathcal{B}$.
 \begin{definition}[Natural Transformations]
     Let $F,G \colon \mathcal{A} \to \mathcal{B}$ be two functors. A \textbf{natural transformation} $\alpha \colon F \to G$ denoted
@@ -434,15 +496,63 @@ Natural transformations can be composed. Take two natural transformations $\alph
         \item The change-of-coefficient homomorphisms $H_n (X;G_1)\to H_n (X;G_2)$ induced by a homomorphism $G_1\to G_2$ are also natural transformations.
     \end{itemize}
 \end{example}
+\begin{example}
+    When we say there is a natural/canonical isomorphism $(V^*)^* \cong V$, it means formally that we have a natural transformation \[
+    \begin{tikzcd}
+        \mathsf{FDVect} _K\arrow[rr, "\id", bend left] \arrow[rr, "(-^*)^*"', bend right] & \,\,~ \Big\Downarrow\varepsilon & \mathsf{FDVect} _K
+\end{tikzcd}
+    \] where $\varepsilon _V \colon v \mapsto ev_v$. The fact that this is an isomorphism follows by the fact that $\dim V=\dim(V^*)^*$ and $\varepsilon _V$ is injective.
+\end{example}
 
-\subsection{The Yoneda lemma (todo)}
+\subsection{The Yoneda lemma}
 \begin{definition}[The functor category]
     The \textbf{functor category} of two categories $\mathcal{A} $ and $\mathcal{B} $, denoted $[\mathcal{A} ,\mathcal{B} ]$ is defined as follows:
     \begin{itemize}
+    \setlength\itemsep{-.2em}
         \item The objects of $[\mathcal{A} ,\mathcal{B} ]$ are (covariant) functors $F \colon \mathcal{A}  \to \mathcal{B} $, and 
         \item The morphisms are natural transformations $\alpha \colon F \to G$.
     \end{itemize}
 \end{definition}
-todo
+Let us construct functors $H_{\bullet} \colon \mathcal{A}  \to [\mathcal{A} ^{\mathrm{op}},\mathsf{Set} ]$, $H^{\bullet}\colon \mathcal{A} ^{\mathrm{op}} \to [\mathcal{A} , \mathsf{Set} ]$. For $A \in \mathcal{A} $, let $H_{\bullet}(A)=H_A$, where we recall from \cref{yf} that $H_A$ is a contravariant functor  $\mathcal{A} ^{\mathrm{op}} \to \mathsf{Set} $, sending $X \mapsto \Hom _{\mathcal{A} }(X,A)$. Similarly, we have the contravariant functor $H^{\bullet}$ that sends $A \in \mathcal{A} ^{\mathrm{op}}$ to $H^A$, where $H^A$ is a covariant functor that sends $X \in A$ to $\Hom_{ \mathcal{A} }(A,X)$. The notions are dual, so let us just use $H_{\bullet}$.
+If we have a category $\mathcal{A} $, $H_{\bullet}$ provides some special functors $\mathcal{A} ^{\mathrm{op}}\to \mathsf{Set} $.
 
-\subsection{(todo) equalizers, limits, colimits, pullback, pushout, kernesl and cokernesl, additive and abelian category, homological algebra }
+
+\begin{definition}[]
+    A \textbf{presheaf} $X$ is a contravariant functor $\mathcal{A} ^{\mathrm{op}}\to  \mathsf{Set} $. A presheaf is said to be \textbf{representable} if $X \cong H_A$ for some $A$.
+\end{definition}
+So the idea of a representable presheaf is asking what kind of presheaves are already ``built into" the category $\mathcal{A} $? One way to think about this is: given a presheaf $X$ and a particular $H_A$, we can consider the set of natural transformations $\alpha  \colon X \Rightarrow H_A$, and see what we can gleam from there. 
+
+\begin{namedthm}{Yoneda Lemma} 
+    Let $\mathcal{A} $ be a category, choose $A \in \mathcal{A} $, and let $H_A$ be the contravariant Yoneda functor. Let $X \colon \mathcal{A} ^{\mathrm{op}} \to \mathsf{Set} $ be a contravariant functor. Then the map \[
+        \left\{ \mathrm{Natural \ transformations} \ 
+    \begin{tikzcd}
+        \mathcal{A}^{\mathrm{op}} \arrow[rr, "H_A", bend left] \arrow[rr, "X"', bend right] & \,\,~ \Big\Downarrow\alpha & \mathsf{Set} 
+\end{tikzcd}
+        \right\} \to  X(A)
+    \] defined by $\alpha  \mapsto \alpha _A(\id_A) \in X(A)$ is an isomorphim of $\mathsf{Set} $. Morever, if we view both sides of the equality as functors \[
+    \mathcal{A} ^{\mathrm{op}}\times [ \mathcal{A} ^{\mathrm{op}}, \mathsf{Set} ]\to \mathsf{Set} ,
+    \] then this isomorphism is natural.
+\end{namedthm}
+{\color{red}todo:more on this} 
+
+\subsection{Equalizers}
+Given sets $X,Y$, and maps $X \xrightarrow{f,g} Y$, define their \textbf{equalizer} to be the set $\{x \in X \mid f(x)=g(x)\} $. This makes sense with sets, but as usual we want to generalize to categories. If we have two objects $X,Y$ with maps $f,g$ between them, we call this a \textbf{fork}: \[
+\begin{tikzcd}
+X \arrow[r, "f", shift left] \arrow[r, "g"', shift right] & Y
+\end{tikzcd}
+\] A cone over this fork is an object $A$ and arrows over $X,Y$ making the diagram commute, like so. \[
+\begin{tikzcd}
+A \arrow[d, "q"'] \arrow[rd, "f\circ q=g \circ q", dotted] &   \\
+X \arrow[r, "f", shift left] \arrow[r, "g"', shift right]  & Y
+\end{tikzcd}
+\] The arrow over $Y$ essentially requires $f \circ q = g \circ q$. The \textbf{equalizer} of $f$ and $g$ is a ``universal cone'' over this fork: it is an object $E$ and a map $e \colon E \to X$ such that for each $q \colon A \to X$ the diagram \[
+\begin{tikzcd}
+                                                            & A \arrow[dd, "!\exists h" description] \arrow[lddd, "q"'] \arrow[rddd, dotted] &   \\
+                                                            &                                                                                &   \\
+                                                            & E \arrow[ld, "e"'] \arrow[rd, dotted]                                          &   \\
+X \arrow[rr, "g"', shift right] \arrow[rr, "f", shift left] &                                                                                & Y
+\end{tikzcd}
+\] commutes for a unique $h \colon A \to E$.
+
+\subsection{Abelian categories}
+Recall that a \textbf{zero object} is an object that is both inital and terminal. $\mathsf{Set} $ doesn't have a zero object because $\O \neq \{*\} $, and similarly with $\mathsf{Top} $. From now, we assume all categories to have zero objects.
