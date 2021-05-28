@@ -1,0 +1,236 @@
+\section{Gauss' Theorema Egregium} 
+\subsection{The Gauss and Codazzi-Maidarni equations}
+\begin{namedthm}{Codazzi-Maidarni Equations} 
+   \begin{gather}
+       L_v-M_u= L \Gamma _{12}^1 +M (\Gamma _{12}^2-\Gamma _{11}^1)-N \Gamma _{11}^2,\\
+       M_v-N_u =L \Gamma _{22}^1 + M(\Gamma _{22}^2-\Gamma _{12}^1)-N \Gamma _{12}^2.
+   \end{gather} 
+\end{namedthm}
+
+\begin{namedthm}{Gauss Equations} 
+   \begin{align}
+       EK&=(\Gamma _{11}^2)_v - (\Gamma _{12}^2)_u +\Gamma _{11}^1\Gamma _{12}^2+\Gamma _{11}^2\Gamma _{22}^2-\Gamma _{12}^1\Gamma _{11}^2-(\Gamma _{12}^2)^2\\
+       FK&=(\Gamma _{12}^1)_u-(\Gamma _{11}^1)_v+\Gamma _{12}^2\Gamma _{12}^1- \Gamma _{11}^2\Gamma _{22}^1\\
+       FK&=(\Gamma _{12}^2)_v-(\Gamma _{22}^2)_u+\Gamma _{12}^1\Gamma _{12}^2-\Gamma _{22}^1 \Gamma _{11}^2\\
+       GK&=(\Gamma _{22}^1)_u - (\Gamma _{12}^1)_v +\Gamma _{22}^1\Gamma _{11}^1+\Gamma _{22}^1\Gamma _{11}^1-(\Gamma _{12}^1)^2-\Gamma _{12}^2\Gamma _{22}^1
+   \end{align} 
+\end{namedthm}
+\begin{theorem}
+    Let $\sigma \colon U \to \R^3$ and $\widetilde \sigma \colon U \to \R^3$ be surface paths with the same fff and sff, then there is a direct isometry $M$ of $\R^3$ such that $\widetilde \sigma=M(\sigma)$.
+\end{theorem}
+
+\subsection{Gauss' remarkable theorem}
+\begin{namedthm}{Gauss' Theorema Egregium} 
+    The Gaussian curvature of a surface is preserved by local isometries. Explicitly, if $S_1 ,S_2$ are surfaces and $f \colon S_1 \to S_2$ is a local isometry, then for any $p \in S_1,$ the Gaussian curvature of $S_1$ at $p$ is equal to the Gaussian curvature of $S_2$ at $f(p)$.
+\end{namedthm}
+\begin{cor}
+    Any map of any region of the surface of the earth must distort distances.
+\end{cor}
+    We have a nasty expression for $K$ in terms of determinants, look in the book. This can be simplified:
+\begin{cor}
+    \begin{enumerate}[label=(\roman*)]
+    \setlength\itemsep{-.2em}
+        \item If $F=0$, \[
+                K= -\frac{1}{2 \sqrt{EG} }\left\{ \frac{\partial }{\partial u}\left( \frac{G_U}{\sqrt{EG} } \right) + \frac{\partial }{\partial v}\left( \frac{E_v}{\sqrt{EG} } \right)  \right\} 
+        \] 
+    \item If $E=1$ and $F=0$, \[
+    K= \frac{1}{\sqrt{G} }\frac{\partial ^2 \sqrt{G} }{\partial u ^2}.
+    \] 
+    \end{enumerate}
+\end{cor}
+
+
+\section{Hyperbolic geometry} 
+\subsection{Upper half-plane model}
+A parametrization of the pseudosphere is \[
+    \widetilde \sigma(v,w)= \left( \frac{1}{w}\cos v, \frac{1}{w} \sin v, \sqrt{1- \frac{1}{w^2}} - \cosh ^{-1} w \right) ,
+\] where $w>1$. Geodesics are arcs of circles and straight lines in the $vw$-plane that orthogonally intersect the $v$-axis. The fff is \[
+\frac{dv^2+dw^2}{w^2 }.
+\] A natural question is ``is there a surface corresponding to the whole half-plane $w>0$ with this fff?'' A theorem of Hilbert says that there is no surface with constant negative Gaussian curvature that is ``geodesically complete'', ie where geodesics can be extended ifninitely in both directions. Identify $\R^2$ with $\C$ in the natural way such that \[
+\mathcal{H} = \{z \in \C \mid \operatorname{Im}(z)>0\} .
+\] 
+\begin{prop}
+    Hyperbolic angles are the same as Euclidian angles.
+\end{prop}This is true because the metric is conformal. Similarly, hyperbolic lines are just the geodesics in $\mathcal{H} $.
+\begin{prop}
+    The geodesics in $\mathcal{H} $ are the half-lines parallel to the imaginary axis and the semicircles with centers on the real axis.
+\end{prop}
+\begin{prop}
+    There is a unique hyperbolic line passing through any two distinct points of $\mathcal{H} $. Furthermore, the parallel axiom does not hold in $\mathcal{H} $.
+\end{prop}
+\begin{prop}
+    The hyperbolic distance between two points $a,b \in \mathcal{H} $ is given by \[
+        d _{\mathcal{H} }(a,b) = 2 \tanh ^{-1} \frac{|b-a|}{|b-\overline{a}|}.
+    \] 
+\end{prop}
+\begin{theorem}
+    Let $P$ be an $n$-polygon with internal angles $\alpha _i $. Then the hyperbolic area of the polygon is \[
+        \mathcal{A} (P)= (n-2)\pi- \left(\sum_{i=1}^n   \alpha _i \right).
+    \] 
+\end{theorem}
+In particular, the triangle has area $\pi-\alpha -\beta -\gamma $, contrasting with the the Euclidian formula $\alpha +\beta +\gamma =\pi$, and the spherical formula $\alpha +\beta +\gamma -\pi=$ area.
+
+\subsection{Isometries of $\mathcal{H} $}
+\begin{prop}
+    Let $l_1,l_2$ be hyperbolic lines in $H$, and let $z_1,z_2$ be points on $l_1,l_2$ resp. Then we have an isometry of $H$ taking $l_1$ to $l_2$ and $z_1$ to $z_2$.
+\end{prop}
+
+\subsection{Poincar\'e disk model}
+\begin{definition}[]
+    The Poincar\'e disk model $D_P$ of hyperbolic geometry is the disk $D$ equipped with the metric \[
+        \frac{4(dv ^2+ dw^2)}{(1-v^2-w^2)^2}.
+    \] 
+\end{definition}
+\begin{prop}
+    Let $\Gamma$ be a circle that intersects $C$ orthogonally, then inversion in $\Gamma$ is an isometry of $D_P$. Reflections along lines passing through the origin (and therefore orthogonal to $C$) are also isometries.
+\end{prop}
+We know that the distance between two points is $d_{D_P}(a,b)=d_H(P^{-1}(a),P^{-1}(b))$, $a,b \in D_P$. 
+\begin{prop}
+    For $a,b\in D_P$, we have \[
+    d_{D_P}=2 \tanh ^{-1} \frac{|b-a|}{|1-\overline{a}b|}.
+    \] 
+\end{prop}
+\begin{prop}
+    Hyperbolic lines in $D_P$ are the lines and circles that intersect $C$ orthogonally.
+\end{prop}
+
+\section{Minimal surfaces} 
+The goal is to find a surface of minimal area with a fixed curve as its boundary. 
+
+\subsection{Plateau's problem}
+We study a family of surface patches $\sigma^{\tau}\colon U \to \R^3$, where $U \subseteq \R^2$ is open and independent of $\tau$, and $\tau$ lies in some open interval $(-\delta , \delta )$ for some $\delta >0$. Let $\sigma=\sigma^0$. The \textbf{surface variation} of the family is the function $\varphi  \colon U \to \R^3$ given by \[
+\varphi =\left. \dot \sigma^{\tau}
+\right|_{t=0}. \] Here, a dot denotes $\frac{d}{d\tau}$. Define the area function $A(\tau)$ to be \[
+A(\tau)= \int _{\text{int} \ }
+\] {\color{red}todo:stuff} 
+\begin{definition}[]
+    A \textbf{minimal surface} is a surface whose mean curvature is zero everywhere.
+\end{definition}
+\begin{cor}
+    If a surface $S$ has least area among all surfaces with the same boundary curve, then $S$ is a minimal surface.
+\end{cor}
+
+\subsection{Examples of minimal surfaces}
+\begin{prop}
+    Any minimal surface of revolution is either an open subset of a plane or a catenoid.
+\end{prop}
+\begin{prop}
+    Any ruled minimal surface is an open subset of a plane or a helicoid.
+\end{prop}
+\begin{example}
+    \textbf{Ennerper's surface} given by \[
+        \sigma(u,v)= \left( u- \frac{u^3}{3}+uv^2, v-\frac{v^3}{3}+u^2v, u^2-v^2 \right) 
+    \] it looks cool
+\end{example}
+\begin{example}
+    \textbf{Scherk's surface} is given by $z=\ln \left( \frac{\cos y}{ \cos x} \right) $. This surface only exists when $\cos x$ and $\cos y$ are both greater or less than zero.
+\end{example}
+
+\section{The Gauss-Bonnet theorem}
+GB relates a topological invariant, the Euler characteristic $\chi$, to Gaussian curvature, which changes wildly under diffeomorphisms. This interplay between geometry and topology shows up a lot in life.
+\begin{namedthm}{Gauss-Bonnet Theorem} 
+    \[
+        \int_M K \,dA+\int_{\partial M}\kappa_g \,ds=2\pi \chi(M).
+    \] 
+\end{namedthm}
+Please keep this in mind as you see the special cases.
+\subsection{Gauss-Bonnet for simple closed curves}
+  This is the simplest version of GB.
+  \begin{theorem}
+      Let $\gamma (s)$ be a unit-speed simple closed curve on a patch $\sigma$ of length $\ell(\gamma )$, and assume that $\gamma $ is positively-oriented. Then \[
+          \int_{0}^{\ell (\gamma )} \kappa_g ds=2\pi- \int _{\text{int} \, (\gamma )}K\, d A_{\sigma}.
+      \] 
+  \end{theorem}
+
+  \subsection{Gauss-Bonnet for curvilinear polygons}
+  %興味ない
+  \begin{definition}[]
+      A \textbf{curvilinear polygon} in $\R^2$ is a continuous map $\pi \colon \R \to \R^2$ such that for some real number $T$ and some points $0=t_0<t_1< \cdots < t_n  =T$,
+      \begin{enumerate}[label=(\roman*)]
+      \setlength\itemsep{-.2em}
+  \item $\pi(t)=\pi(t')$ iff $t'-t$ is an integer multiple of $T$,
+  \item $\pi$ is smooth on each subinterval $(t_0,t_1),(t_1,t_2,)\cdots ,(t_{n-1},t_n )$,
+    \item The one-sided derivatives \[
+            \dot \pi ^- (t_i )= \lim _{t \uparrow t_i }\frac{\pi(t)-\pi(t_i )}{t-t_i },\quad \dot \pi^+(t_i )=\lim _{t\downarrow t_i }\frac{\pi(t)-\pi(t_i )}{t-t_i }
+    \] exist for $1\leq i \leq n$ and are non-zero and not parallel.
+      \end{enumerate}
+      The points $\gamma (t_i )$ are called \textbf{vertices} of the curvilinear polygon $\pi$, and the segments corresponding to $(t_{i_1},t_i )$ are called its \textbf{edges}.
+  \end{definition}
+  \begin{theorem}
+      Let $\gamma $ be a positively-oriented unit-speed curvilinear polygon with $n$ edges on a surface $\sigma$, and let $\alpha _i $ be the interior angles at its vertices. Then \[
+          \int_{0}^{\ell(\gamma )} \kappa_G \, ds = \sum_{i=1}^{n}\alpha _i  - (n-2)\pi -\int _{\text{int} \, (\gamma )}K\,d A.
+      \] 
+  \end{theorem}
+  \begin{cor}
+      If $\gamma $ is a curvilinear polygon with $n$ edges each of which is the arc of a geodesic, then the internal angles $\alpha _i $ of the polygon satsify \[
+          \sum_{i=1}^{n} \alpha _i =(n-2)\pi + \int _{\text{int} \,(\gamma )}K\,dA.
+      \] 
+  \end{cor}
+
+  \subsection{Gauss-Bonnet for compact surfaces}
+  \begin{definition}[]
+      Let $S$ be a surface with atlas $\{(\sigma_i \mid U_i  \to \R^3)\} _{i\in I}$. A \textbf{triangulation} of $S$ is a collection of curvilinear polygons, each of which is contained (along with its interior) in one of the $\gamma _i (U_i )$ such that
+      \begin{enumerate}[label=(\roman*)]
+      \setlength\itemsep{-.2em}
+          \item Every point of $S$ is in at least one of the curvilinear polygons,
+            \item Two curvilinear polygons are either disjoint, or either intersection is a common edge or common vertex,
+            \item Each edge is an edge of exactly two polygons.
+      \end{enumerate}
+  \end{definition}
+  \begin{example}
+      You can triangulate $S^2$ into eight polygons by dividing it by three orthonormal coordinate planes.
+  \end{example}
+  \begin{theorem}
+      Every compact surface has a finite triangulation.
+  \end{theorem}
+  \begin{definition}[]
+      The \textbf{Euler number} (or Euler characteristic) of a compact surface $S$ with finitely many polygons is \[
+      \chi= V-E+F.
+      \]
+  \end{definition}
+  For example, the triangulation of $S^2$ above has Euler characteristic $\chi= 6-12+8=2$. $\chi$ is actually a topological invariant and doesn't depend on the triangulation (see homology), for example ``inflating'' a tetrahedron to triangulate $S^2$ gives $\chi=4-6+4=2$.
+      
+  \begin{theorem}
+      Let $S$ be a compact surface. Then for any triangulation of $S$, \[
+      \int_S K \,dA=2\pi \chi.
+      \] So the Euler number $\chi$ of a triangulation of a compact surface $S$ depends only on $S$ and not on the choice of triangulation.
+  \end{theorem}
+  \begin{example}
+     For $S^2$, $\int_S K\,dA=4\pi$.  Since $K=1$, the LHS is just the area of the sphere. However, deform $S^2$; $K$ goes crazy but deforming doesn't change the triangulation, so $\int_S K\,dA$ is still $4\pi$. This shows any two diffeomorphic compact surfaces have the same Euler number.
+  \end{example}
+  \begin{theorem}
+      The Euler characteristic of the compact surface $T_g$ of genus $g$ is $2-2g$.
+  \end{theorem}
+  \begin{proof}
+      We know it holds for $S^2$. For $\mathbb{T}^1$, triangulate the square appropiately and identify. Then proceed by induction, stitching subsequent tori on by surgery. This identification is done by removing a curvilinear $n$-gon from $T_g$ and gluing edges.
+  \end{proof}
+  \begin{cor}
+      \[
+          \int _{T_g}K\,dA=4\pi (1-g).
+      \] 
+  \end{cor}
+
+  \subsection{Holonomy and Gaussian curvature}
+  \begin{prop}
+  Let $\gamma $ be unit-speed along a patch $\sigma$ and $v$ be nonzero parallel vector field along $\gamma $. Let $\varphi $ be the oriented angle $\widehat{{ \dot { \gamma }}v} $\footnote{What is this formatting?? It's suppose to be a hat over $\dot \gamma  v$.} from $\dot \gamma $ to $v$. Then the geodesic curvature of $\gamma $ is \[
+      \kappa_g= - \frac{d\varphi }{ds}.
+      \] 
+  \end{prop}
+  \begin{prop}
+      Let $\gamma $ be a positively-oriented unit-speed simple closed curve on a surface $\sigma$, let $\kappa_g$ be the geodesic curvature of $\gamma $, and let $v$ be a non-zero parallel vector field along $\gamma $. Then, going once around $\gamma $, $v$ rotates through an angle \[
+          2\pi - \int_{0}^{\ell (\gamma )} \kappa_g  \, ds,
+      \] 
+  \end{prop}
+  where $\ell(\gamma )$ is the length of $\gamma $. This angle is called the \textbf{holonomy} around $\gamma $, and is denoted by $h_{\gamma }$.
+  \begin{theorem}
+      Let $\gamma $ be a positively oriented simple closed curve on a surface path $\sigma$, let $h_{\gamma }$ be the holonomy around $\gamma $, and let $K$ be the Gaussian curvature of $\sigma$. Then \[
+          h_{\gamma }=\int _{\text{int} \, (\gamma )}K\,dA.
+      \] 
+  \end{theorem}
+  We can use this to help find the Gaussian curvature at a point $p$ of a surface $S$: if $\gamma $ is a small positively oriented simple closed curve on the surface containing $p$ in its interior, the Gaussian curvature of $S$ at $p$ will be approximately \[
+      \frac{h_{\gamma }}{\text{Area} \,(\text{int} \,(\gamma ))}.
+  \] 
+  \begin{prop}
+      Suppose a surface $S$ has the property that for any two points $p,q \in S$, the parallel transport $\Pi ^{pq}_{\gamma }$ is independent of the curve $\gamma $ joining $p$ and $q$. Then $S$ is flat.
+  \end{prop}
+  The converse is generally not true, but if we assume $S$ is simply-connected, then it is.

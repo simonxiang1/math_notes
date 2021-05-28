@@ -1,0 +1,211 @@
+\section{Gaussian, mean, and principal curvatures} 
+
+\subsection{Gaussian and mean curvatures}
+\begin{definition}[]
+    If $\mathcal{W} $ is the Weingarten map of an oriented surface at a point $p \in S$, then the Gaussian curvature $K$ and the mean curvature $H$ of $S$ at $p$ are defined by \[
+        K= \det \mathcal{W} ,\qquad H= \frac{1}{2}\tr (\mathcal{W} ).
+    \] Note that $K$ is defined for any surface, while $H$ is only defined up to sign on a non-orientable surface. Define \[
+    \mathcal{F} _I = 
+    \begin{pmatrix}
+        E & F \\ F & G
+    \end{pmatrix},\quad \mathcal F_{II}=
+    \begin{pmatrix}
+        L & M \\ M & N
+    \end{pmatrix}.
+    \] 
+\end{definition}
+\begin{prop}
+    For $\sigma$ a surface patch of an oriented surface $S$, the matrix $\mathcal{W} _{p,S}$ wrt the basis $\{\sigma_u,\sigma_v\} $ of $T_p S$ is $\mathcal{F}_I^{-1}\mathcal{F} _{II}$. 
+\end{prop}
+\begin{cor}
+    We have \[
+        H= \frac{LG-2MF+NE}{2(EG-F^2)},\quad K= \frac{LN-M^2}{EG-F^2}.
+    \] 
+\end{cor}
+\begin{example}
+    Recall for the surface of revolution $\sigma(u,v)=(f(u),\cos v, f(u) \sin v, g(u))$, assuming $f>0$ and $\dot f^2+\dot g^2=1$ everyhwere, \[
+    E=1,\ F=0,\ G=f^2, L=\dot f \ddot g-\ddot f \dot g,\ M=0, N=f\dot g. 
+    \] Then \[
+    K= \frac{LN-M^2}{EG-F^2}= \frac{(\dot f\ddot g-\ddot f\dot g)f\dot g}{f^2}=\frac{-\ddot f f}{f^2}=- \frac{\ddot f}{f}.
+    \] 
+\end{example}
+\begin{theorem}
+    Let $\sigma\colon U \to \R^3$ be a surface patch, $(u_0,v_0) \in U$, and $\delta >0$ such that $R_{ \delta }$ the closed disk of length $\delta $ about $(u_0,v_0)$ os contained in $U$. Then \[
+        \lim _{\delta  \to 0} \frac{\mathcal{A} _N(R_{\delta })}{A_{\sigma}(R_{\delta })}=|K|,
+    \] where $K$ is the Gaussian curvature of $\sigma$ at $\sigma(u_0,v_0).$
+\end{theorem}
+\begin{example}
+    A plane has constant unit normal, so $\mathcal{G} (R)$ is a point and has no area, and the plane has zero Gaussian curvature everywhere. This shows every point on the sphere is an umbilic.
+\end{example}
+
+\subsection{Principal curvatures of a surface}
+\begin{prop}
+    Let $p \in S$. Then we have scalars $\kappa_1,\kappa_2$ and a basis $\{t_1,t_2\} $ of $T_p S$ such that \[
+        \mathcal{W} (t_1)=\kappa_1t_1,\quad \mathcal{W} (t_2)=\kappa_2t_2.
+    \] If $\kappa_1\neq \kappa_2$, then $\langle t_1,t_2 \rangle =0$. 
+\end{prop}
+We say $\kappa_1,\kappa_2$ are the \textbf{principal curvatures} of $S$, and $t_1,t_2$ are the \textbf{principal vectors} corresponding to the $\kappa_i $. Points where $\kappa_1=\kappa_2$ are called \textbf{umbilics}, and $p$ is an umbilic iff $W_{p,S}$ is a scalar multiple of the identity, or every tangent vector is principal. If $p$ is not an umbilic, then the principal vectors are orthogonal.
+\begin{cor}
+   If $p \in S$, then there is an orthonormal basis of $T_pS$ consisting of principal vectors. 
+\end{cor}
+\begin{prop}
+    If $\kappa_1,\kappa_2$ are the principal curvatures of a surface, the mean and Gaussian curvatures are given by \[
+        H= \frac{1}{2}(\kappa_1+\kappa_2),\quad K=\kappa_1\kappa_2.
+    \] 
+\end{prop}
+\begin{proof}
+    Using the basis of principal vectors, $\mathcal{W} =\left( 
+    \begin{smallmatrix}
+        \kappa_1 & 0 \\ 0 & \kappa_2
+    \end{smallmatrix}\right) $. Our result immediately follows.
+\end{proof}
+\begin{namedthm}{Euler's Theorem} 
+   Let $\gamma $ be a curve on an oriented surface $S$, and $\kappa_1,\kappa_2$ be the principal curvatures of $\sigma$, with non-zero principal vectors $t_1$ and $t_2$. Then, the normal curvature of $\gamma $ is \[
+   \kappa_n =Kk_1\cos ^2 \theta+Kk_2\sin ^2 \theta,
+   \] where $\theta$ is the oriented angle $\widehat{t_1\dot \gamma } $.
+\end{namedthm}
+\begin{cor}
+    The principal curvatures at a point are the maximum and minimum values of the normal curvature of all curves on the surface that pass through the point. Furthermore, the principal vectors are the tangent vectors of the curves giving these maximum and minimum values.
+\end{cor}
+\begin{proof}
+    If $\kappa_1,\kappa_2$ are disticnct, WLOG suppose $\kappa_1>\kappa_2$. Then \[
+        \kappa_n =\kappa_1\cos ^2 \theta+\kappa_2\sin ^2 \theta=\kappa_1-(\kappa_1-\kappa_2)\sin ^2 \theta,
+    \] then $\kappa_n  \leq \kappa_1$ with equality iff $\theta=0$ or $\pi$, i.e., iff $\dot \gamma $ is parallel to $t_1$. If $\kappa_1=\kappa_2$, then the normal curvature of every curve is equal to  $\kappa_1$ by Euler's theorem and every tangent vector to the surface is a principal vector.
+\end{proof}
+How do we compute principal curvature? Since $\mathcal{W} =\mathcal{F} _{I}^{-1}F_{II}$, we want to solve $\det (\mathcal{F} ^{-1}_I F_{II}-\kappa I)=0$, and a tangent vector $t= \xi\sigma_u=\eta \sigma_v$ is a principal vector if \[
+    (\mathcal{F} _I ^{-1}\mathcal{F} _{II}-\kappa I)
+    \begin{pmatrix}
+        \xi \\ \eta
+    \end{pmatrix}= 
+    \begin{pmatrix}
+        0 \\0
+    \end{pmatrix}
+\] Write $\mathcal{F} _I ^{-1}\mathcal{F} _{II}-\kappa I$ as $\mathcal{F} _I ^{-1}(\mathcal{F} _{II}-\kappa \mathcal{F} _I)$.
+\begin{prop}
+    The principal curvatures of the root of the equation \[
+    \begin{vmatrix}
+        L- \kappa E & M - \kappa F \\ M - \kappa F & N - \kappa G
+    \end{vmatrix}=0,
+    \] and the principal vectors corresponding to principal curvature $\kappa$ are the tangent vectors $t= \xi \sigma_u+\eta \sigma_v$ such that \[
+    \begin{pmatrix}
+        L- \kappa E & M - \kappa F \\ M - \kappa F & N - \kappa G
+    \end{pmatrix}
+    \begin{pmatrix}
+        \xi \\ \eta
+    \end{pmatrix}=
+    \begin{pmatrix}
+        0 \\ 0
+    \end{pmatrix}.
+    \] 
+\end{prop}
+\begin{example}
+    For $S^2$, we know $E=1,F=1,G=\cos ^2 \theta$, and $L=1,M=0, N= \cos ^2 \theta$. Then solving $(1-\kappa)(\cos ^2 \theta- \kappa \cos ^2 \theta)=0$ gives $\kappa=1$.
+\end{example}
+\begin{example}
+    Consider the unit cylinder $\sigma(u,v)=(\cos v, \sin v, u)$. Then $E=1,F=0,G=1$ and  $L=0,M=0,N=1$. Then solving \[
+    \begin{vmatrix}
+        0-\kappa & 0 \\ 0 & 1-\kappa
+    \end{vmatrix}=0
+\] gives $\kappa=0,1$. Any principal vector $t_1$ corresponding to $\kappa_1=1$ satisfies $\left( 
+\begin{smallmatrix}
+    -1 & 0 \\ 0 & 0
+\end{smallmatrix}\right) \left( 
+\begin{smallmatrix}
+    \xi_1 \\ \eta_1
+\end{smallmatrix}\right) =0$, so $\xi_1=0$ and $t_1$ is a multiple of $(-\sin v, \cos v, 0)$. Similarly, any principal vector corresponding to $\kappa_2=0$ is a multiple of $\sigma_u=(0,0,1)$. 
+\end{example}
+\begin{prop}
+    Let $S$ be a connected surface of which every point is an umbilic. Then $\mathcal{S} $ is an open subset of a plane or a sphere.
+\end{prop}
+What do the values of the principal curvatures tell us about a surface? Assume $p$ is the origin and $T_p S$ is the $xy$-plane, $t_1=(1,0,0)$ and $t_2=(0,1,0)$ are principal corresponding to principal curvatures $\kappa_1$ and $\kappa_2$, and $\mathbf N=(0,0,1)$. Something, then near $p$, $S$ is approximated by the quadric surface $z= \frac{1}{2}(\kappa_1 x^2+\kappa_2 y^2)$.
+\begin{enumerate}[label=(\roman*)]
+\setlength\itemsep{-.2em}
+    \item Both the $\kappa_i >0$ or $\kappa_i <0$. Then the equation $(z=\frac{1}{2}(\kappa_1x^2+\kappa_2y^2)$ is of an elliptic paraboloid and $p$ is an \textbf{elliptic point} of the surface.
+    \item The $\kappa_i $ have opposite sign. Then the equation is of a hyperbolic paraboloid and $p$ is a \textbf{hyperbolic point} of the surface.
+    \item One of the $\kappa_i $ is zero and the other nonzero. Then the equation is of a parabolic cylinder and $p$ is a \textbf{parabolic point} of the surface.
+    \item Both the $\kappa_i =0$. Then the equation is of a plane and $p$ is a \textbf{planar point} of the surface. In this case, we need to analyze higher order terms.
+\end{enumerate}
+\begin{example}
+    For the torus \[
+        \sigma(\theta,\varphi )=((a+b \cos \theta) \cos \varphi , (a+b \cos \theta) \sin \varphi , b \sin \theta),
+    \] then the fff is $b^2 d \theta ^2+(a+b \cos \theta)^2 d \varphi  ^2$ and the sff is $b\, d \theta ^2+(a+b \cos \theta) \cos \theta d \varphi ^2$. So $\kappa_1= \frac{1}{b}$, $\kappa_2= \frac{\cos \theta}{a +b \cos\theta}$. Since $\kappa_1>0$ everywhere, the point $\sigma(\theta, \varphi )$ is elliptic, parabolic, or hyperbolic according to whether $\kappa_2>0,=0,$ or $<0$ resp.
+\end{example}
+
+\subsection{Surfaces of constant Gaussian curvature}
+
+\section{Geodesics} 
+\subsection{Basics}
+\begin{definition}[]
+    A curve $\gamma $ on $S$ is a \textbf{geodesic} if $\ddot \gamma (t)$ is zero or perpendicular to the $T_{\gamma (t)}S$, i.e., parallel to its unit normal for all $t$. Equivalently, $\nabla _{\dot\gamma }\dot \gamma =0$.
+\end{definition}
+\begin{prop}
+    Geodesics have constant speed.
+\end{prop}
+\begin{prop}
+    A unit-speed curve on a surface is a geodesic iff its geodesic curvature is zero everywhere.
+\end{prop}
+\begin{prop}
+    Straight lines are geodesics, as well as normal sections of surfaces. Recall normal sections $C$ of $S$ are the intersection of a plane $\Pi$ with $S$, such that $\Pi\perp S$ for all $c \in C$.
+\end{prop}
+\begin{example}
+    Great circles are geodesics.
+\end{example}
+
+\subsection{The geodesic equations}
+\begin{theorem}
+    A curve $\gamma $ on $S$ is a geodesic iff for any part $\gamma (t)= \sigma(u(t),v(t))$ of $\gamma $ contained in a chart $\sigma$ of $S$, we have 
+    \begin{gather}
+        \frac{d}{dt}(E\dot u +F\dot v) =\frac{1}{2}(E_u \dot u^2+2F_u \dot u \dot v+ G_U \dot v^2),\\
+        \frac{d}{dt}(F\dot u+G\dot v) =\frac{1}{2}(E_v \dot u ^2+2F_v \dot u \dot v +G_v \dot v^2).
+    \end{gather}These differential equations are called the \textbf{geodesic equations}.
+\end{theorem}
+\begin{prop}
+    Given the setup above, $\gamma $ is a geodesic iff 
+    \begin{gather}
+        \ddot u + \Gamma _{11}^1 \dot u ^2 +2 \Gamma _{12}^1 \dot u \dot v + \Gamma _{22}^1 \dot v ^2=0,\\
+        \ddot v + \Gamma _{11}^2 \dot u ^2 +2 \Gamma _{12}^2 \dot u \dot v + \Gamma _{22}^2 \dot v ^2=0.
+    \end{gather}
+\end{prop}
+\begin{prop}
+    Let $p \in S$, $t$ be tangent to $S$ at $p$. Then there exists a unqiue unit-speed geodesic $\gamma $ on $S$ passing through $p$ with tangent vector $t$. In other words, geodesics are locally unique.
+\end{prop}
+\begin{example}
+    Straight lines are the only geodesics in the plane, and great circles are the only geodesics on the sphere.
+\end{example}
+\begin{cor}
+    Any local isometry sends geodesics to geodesics.
+\end{cor}
+
+\subsection{Geodesics on surfaces of revolution}
+\begin{prop}
+    On a surface of revolution $\sigma(u,v)=(f(u) \cos v, f(u) \sin v, g(u))$, 
+    \begin{enumerate}[label=(\roman*)]
+    \setlength\itemsep{-.2em}
+        \item Every meridian is a geodesic.
+        \item A parallel $u=u_0$ is a geodesic iff $\frac{df}{du}=0$ when $u=u_0$, ie $u_0$ is a stationary point of $f.$
+    \end{enumerate}
+\end{prop}
+\begin{namedthm}{Clairaut's Theorem} 
+    Let $\gamma $ be a unit-speed curve on a surface of revolution $S$, let $\rho \colon S \to \R$ be the distance of a point of $S$ from the axis of rotation, and let $\psi$ be the angle between $\dot \gamma $ and the meridians of $S$. If $\gamma $ is a geodesic, then $\rho \sin \psi $ is constant along $\gamma $. Conversely, if $\rho \sin \psi $ is constant along $\gamma $, and if not part of $\gamma $ is part of some parallel of $S$, then $\gamma $ is a geodesic.
+\end{namedthm}
+\begin{example}
+    Look in book for geodesics on the pseudosphere and one-sheeted hyperboloid.
+\end{example}
+
+\subsection{Geodesics as shortest paths}
+Embed $\gamma $ in a smooth family of curves on $\sigma$ passing through $p$ and $q.$ By ``family'', we mean a curve $\gamma ^{\tau}$ on $\sigma$, such that for each $\tau \in (-\delta ,\delta )$, 
+\begin{enumerate}[label=(\roman*)]
+\setlength\itemsep{-.2em}
+    \item there is an $\varepsilon >0$ such that $\gamma ^{\tau}(t)$is defined for all $t \in (-\varepsilon ,\varepsilon )$ and all $\tau \in (-\delta ,\delta )$;
+    \item for some $a,b$ with $-\varepsilon  < a<  b < \varepsilon $, we have \[
+            \gamma ^{\tau}(a)=p \quad \text{and} \quad \gamma ^{\tau}(b)=q\quad \text{for all} \quad \tau \in (-\delta ,\delta );
+    \] 
+\item the map from the rectangle $(-\delta ,\delta ) \times (-\varepsilon ,\varepsilon )$ into $\R^3$ given by $(\tau ,t) \mapsto  \gamma ^{\tau}(t)$ is smooth;
+\item $\gamma ^{0}=\gamma $.
+\end{enumerate}
+The length of the part of $\gamma ^{\tau}$ between $p$ and $q$ is defined by \[
+    \mathcal{L} (\tau)= \int_{a}^{b} \|\dot \gamma ^{\tau} \| \, dt,
+\] where the dot denotes  $\frac{d}{dt}$.
+\begin{theorem}
+    The unit-speed curve $\gamma $ is a geodesic iff $\frac{d}{dt}\mathcal{L} (\tau)=0$ when $\tau=0$ for all families of curves $\gamma ^{\tau}$ with $\gamma ^0=\gamma $.
+\end{theorem}
