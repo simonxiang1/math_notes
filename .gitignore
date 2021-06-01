@@ -8,6 +8,9 @@
 *.snm
 *.nav
 *.vrb
+*.bbl
+*.bcf
+*.blg
 applications
 math_papers
 other_classes
