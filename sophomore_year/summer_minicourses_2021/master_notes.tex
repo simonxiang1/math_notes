@@ -1,14 +1,6 @@
 \documentclass[fontsize=9pt]{article}
 \input{../preamble.tex}
 
-%references
-\usepackage[backend=biber,style=alphabetic]{biblatex}
-\DeclareLabelalphaTemplate{
-        \labelelement{\field[final]{shorthand}
-        \field{label}
-        \field[strwidth=2,strside=left]{labelname}}
-    \labelelement{\field[strwidth=2,strside=right]{year}}}
-        \DeclareFieldFormat{labelalpha}{\textbf{\scriptsize #1}}
 \addbibresource{references.bib}
 
 \title{2021 Summer Minicourses, UT Austin}
@@ -19,8 +11,9 @@ Notes for some of the Summer 2021 minicourses, taught by various graduate studen
 \newpage
     %include lecture files
     \input{spectra} 
+    \input{tft} 
+    \input{alg_geom} 
     %add and swap as necessary
-
 \clearpage
 \printbibliography
 \end{document}
