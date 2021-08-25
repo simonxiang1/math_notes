@@ -1,0 +1,47 @@
+\section{August 25, 2021}
+Welcome to the first day of class! This is how Dr.\ Raskin thinks about algebra-- in some way abstract algebra is a set of organizational tools that teaches you how to break up a question or pose a question, or reduce it to a simpler case. There was a tradition to classify all sorts of finite algebraic structures, eg finite dim Lie algebras or Lie rings or some binary operation, etc. Studying geometry or showing there are no solutions are more interesting aspects of algebra.
+
+We'll start with finite group theory, then move on to ring theory. We'll follow \emph{Dummit and Foote}, as well as lecture notes from Gaitsgory's Math 122 taught at Harvard. The formalism of group theory is somewhat abstract, because it's an organizational tool. What is group theory? In life, there are various ways of symmetry, eg reflections ($\Z /2$ symmetry, where actions of $\Z /2$ preserve the structure). Another $\Z /2$ symmetry is rotations, and so these two different types of symmetry are the ``same''. Group theory abstracts this idea of $G$ symmetries by realizing $\Z /2$ as a group.
+
+\subsection{Group theory}
+\begin{definition}[]
+    A \textbf{group} $G$ consists of a set $G$ and a map $m \colon G \times G \to G$, $(g,h) \mapsto g\cdot h$ (multiplication) such that
+    \begin{enumerate}[label=(\alph*)]
+    \setlength\itemsep{-.2em}
+        \item the multiplication is associative, eg for all $g_1,g_2,g_3$, $(g_1 \cdot g_2) \cdot g_3= g_1 \cdot (g_2 \cdot g_3),$ 
+    \item there exists some $1 \in G$ such that $1 \cdot g =g \cdot 1=g$ for all $g \in G$, 
+    \item for all $g \in G$ there exists some $g ^{-1} \in G$ such that 
+    \end{enumerate}
+    We say that $1$ is the identity and $g^{-1}$ is the inverse for $g$.
+\end{definition}
+\begin{lemma}
+    Identity elements are unique.
+\end{lemma}
+\begin{proof}
+    Suppose $1, \widetilde 1\in G$ are both identity elements. Then \[
+    \widetilde 1= 1 \cdot \widetilde 1=1.\qedhere
+    \] 
+\end{proof}
+\begin{lemma}
+    Inverses are unique.
+\end{lemma}
+\begin{proof}
+    Suppose $g \in G$ with inverses $g ^{-1}$ and $\widetilde{g ^{-1}} $. Then \[
+        g^{-1} = g^{-1} \cdot 1=g^{-1}\cdot (g \cdot \widetilde {g^{-1}} )=(g^{-1} \cdot g) \cdot \widetilde {g^{-1}} =1 \cdot \widetilde {g^{-1}} =\widetilde {g^{-1}} .\qedhere
+    \] 
+\end{proof}
+
+\begin{example}
+  Here are some examples of groups.
+  \begin{itemize}
+  \setlength\itemsep{-.2em}
+      \item Suppose $\R^{\times }\subseteq \R$ is the set of non-zero real numbers. Then $(\R ^{\times }, \cdot )$ is a group. Some variants include $(\R^{>0}, \cdot )$, $(\{-1,1\} ,\cdot )$, and $(\Q^{\times },\cdot )$ which are all groups.
+      \item $(\R,\cdot )$ is not a group because 0 has no inverse. However, $(\R,+)$ is a group with unit 0, and the inverse of some $x \in \R$ is $-x$.
+  Sometimes we write groups additively where it makes more sense.
+\item The \textbf{symmetric group on} $\mathbf n$ \textbf{letters}, denoted $S_n $, is the set of maps \[
+S _n = \{\sigma \colon \{1, \cdots ,n\}  \xrightarrow{\simeq } \{1,\cdots ,n\}   \} 
+\] where multiplication is just composition and the identity element is the identity morphism. Since each $\sigma$ is a bijection, we have a unique inverse map $\sigma^{-1}$ which is the multiplicative inverse for $\sigma$.  
+
+You can think of groups as subgroups of $S_n $ (leading to Cayley's theorem), for example a reflection is a shuffling of infinitely many points in $\R^2$ around some axis.
+  \end{itemize}
+\end{example}
