@@ -1,0 +1,71 @@
+%% Creator: Inkscape 1.1 (c4e8f9ed74, 2021-05-24), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'equiv.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{968.31333431bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.3480122)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{equiv.pdf}}%
+    \put(0.01081286,0.23168381){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$M$\end{tabular}}}}%
+    \put(0.12878704,0.23223689){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$M$\\\end{tabular}}}}%
+    \put(0.24584763,0.22125989){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$M$\end{tabular}}}}%
+    \put(0.37096616,0.27420041){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$N$\end{tabular}}}}%
+    \put(0.49350177,0.27458951){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$N$\end{tabular}}}}%
+    \put(0.60848395,0.22461769){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$M$\end{tabular}}}}%
+    \put(0.03612322,0.02961294){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Reflexivity\end{tabular}}}}%
+    \put(0.39124591,0.02495987){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Symmetricity\end{tabular}}}}%
+    \put(0.78282967,0.02371969){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Transitivity\\\end{tabular}}}}%
+    \put(0.72775258,0.22347856){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$M$\\\end{tabular}}}}%
+    \put(0.84050048,0.28107221){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$N$\end{tabular}}}}%
+    \put(0.96395689,0.33545816){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$P$\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{equiv.pdf}}%
+  \end{picture}%
+\endgroup%

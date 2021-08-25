@@ -1,0 +1,233 @@
+\section{Topological Field Theory (Arun Debray)} 
+
+This is a minicourse on topological field theory, taught by Arun Debray. We will cover the generalities of TFTs, then a series of examples, namely invertible field theories, the finite path integral, state sums, and computing Hurewizc numbers. Existing introductions to TFTs tend to focus on dimension two and Frobenius algebras, or jump into higher category theory and the cobordism hypothesis, or cover lots of generalities and don't give many examples. This minicourse aims to construct many examples and give applications, since they're interesting and can be quite difficult to construct.
+
+Regrettably time is finite, so we won't cover extended TFTs (involving higher category theory) and the cobordism hypothesis, Chern-Simons theory (look out for a minicourse on that later), and connections with physics. Many things that happen will be motivated by physics, but this minicourse is intended for mathematicians. For prerequisites, it would be good to have a solid handle on the language of smooth manifolds.
+
+\subsection{The general theory of TFTs (May 31)}
+Let us start off by clarifying some terminology. You may have heard ``bordism'' or ``cobordism'', and for a while cobordism was the more common word-- we will use the word bordism. The etymology of cobordism comes from the Latin roots meaning ``together (co) they bound (bord)''. At some point Atiyah realized there is a generalized homology theory, and this is what we deal with today. So it makes sense to talk about bordisms and homology as opposed to cobordisms and cohomology. However if you read the literature and come across ``cobordism groups'', they probably mean the same thing as the bordism groups we discuss.
+
+On the same vein, some people say ``topological field theory'' (TFT) and others say ``topological quantum field theory'' (TQFT). In mathematics, people tend to use these words interchangeably. Dan Freed pointed out that the Atiyah-Segal formalism we will discuss works for classical field theories as well, and mathematically saying something is quantum is kind of funky. So we will stick to the terminology of TFTs, but these two words are pretty much interchangeable.
+
+\subsection*{Bordism}
+Bordism tells us when two manifolds together bound some manifold of one dimension higher.
+\begin{definition}[]
+    Let $M_0$ and $M_1$ be closed $n$-manifolds. A \textbf{bordism} from $M_0$ to $M_1$ is a compact $(n+1)$-manifold $X$, a partition $\partial X=Y_0\amalg Y_1$, and diffeomorphisms $\theta _i  \colon Y_i  \xrightarrow{\cong} M_i $. If there is a bordism from $M_0$ to $M_1$, we say $M_0$ and $M_1$ are \textbf{bordant}.
+\end{definition}
+
+\begin{figure}
+\centering
+\incfig[0.3]{pair_of_pants}
+\caption{A bordism between $M_0$ and $M_1$.}
+\label{pair_of_pants}
+\end{figure}
+
+Bordism is an equivalence relation. It is reflexive since $M \times [0,1]$ is a bordism from $M$ to $M$. If $M$ and $N$ are bordant, then flipping the manifold around is a bordism from $N$ to $M$, and if we have bordisms $M$ to $N$ and $N$ to $P$, just glue at $N$ to get a bordism $M$ to $P$. These ideas are illustrated in \cref{equiv}, with $M=S^1 $, $N=S^1 \amalg S^1 $, and $P=S^1 \amalg S^1 \amalg S^1 $.
+
+\begin{figure}[H]
+\centering
+\incfig[0.8]{equiv}
+\caption{Illustration of the fact that bordism is an equivalence relation. }
+\label{equiv}
+\end{figure}
+
+Denote the set of bordism classes of closed $n$-manifolds by $\Omega_n ^O $. The disjoint union gives $\Omega_n ^O$ a commutative monoid structure, with $\O$ the unit. It turns out this is actually an abelian group! Furthermore, the direct product turns $\Omega_*^O:=\bigoplus _n  \Omega_n ^O$ into a $\Z$-graded ring. Additive inverses are easy to compute since the macaroni $M \times [0,1]$ gives a bordism from $2M$ to the point, so every element is its own inverse, and the bordism ring is actually an $\F_2$ algebra. These rings have been computed by Ren\'e Thom in his thesis \cite{thom}, which are polynomial algebras on an infinite set of generators. It is known what manifolds correspond to these generators. 
+
+Now we introduce tangential structures, the goal of which is to generalize bordisms while taking into account topological information. For example, we have our diffeomorphisms $\theta_i $ that identify the boundary of a manifold. What if we want these to preserve orientation? Then we get a different notion of bordism, and non-isomorphic bordism groups. Tangential structures capture topological structure like spin structures and maps into spaces. They do \emph{not} capture geometric information like a Riemannian metric or connections on principle bundles. Information must also be ``local''-- a single point inside a manifold is not a local notion, along with CW structures. This is deliberately vague, and we will see a precise definition soon.
+
+\begin{definition}[]
+    Consider the \textbf{stable orthogonal group} $O:= \mathrm{colim}_n \mathrm{O}_n $. The classifying space $BO$ is the classifying space for stable virtual vector bundles, where ``virtual'' means we allow formal differences $E-F$ for bundles $E,F \to X$, and ``stable'' means we ignore the different between $E$ and $E\oplus \R$. 
+\end{definition}
+Homotopy classes of maps to $BO$ denoted $[M,BO]$ is identified with stable isomorphism classes of virtual vector bundles. The point is that a manifold has a canonical map (or homotopy class) $M \to BO$, which classifies its tangent bundle. Suppose we had an orientation on $M$, then we could repeat this whole process with \emph{oriented} vector bundles, giving us the stable special orthogonal group $SO:= \mathrm{colim}_n \mathrm{SO}_n $ with classifying space $BSO$.
+
+It is true that a manifold admits an orientation iff the map $M \to BO$ factors through $BSO$. Different orientations of $M$ are parametrized by choices of lift. Now we generalize this, and consider \emph{any} space $B$ and any map $B \to BO$ (it has to be a fibration, but up to homotopy we can make any map a fibration).
+\begin{definition}[]
+    Let $\xi \colon B \to BO$ be a fibration. A $\mathbf \xi$\textbf{-structure} on a manifold is a lift \[
+    \begin{tikzcd}
+   & B\arrow[d,"\xi"]\\
+        M \arrow[r,"TM"']\arrow[ru,dotted] & BO
+    \end{tikzcd}\] 
+    Two $\xi$-structures are equivalent if they are homotopic through lifts of the tangent bundle map.
+\end{definition}
+\begin{example}
+Given a family of maps $G_n  \to O_n ^t$, we can stabilize and take the colimit to obtain $\xi \colon BG \to BO$. For $BSO \to BO$ this is an orientation, and for $B \mathrm{Spin}\to BO$ this is a spin structure.
+\end{example}
+\begin{example}
+    We can also take $BO \times BG \to BO$ where $G$ is some other group, so in this case a $\xi$-structure is equivalent to a map to $BG$, which is a principle $G$-bundle. More generally, $BO \times X\to BO$ encodes a map to $X$.
+\end{example}
+The main thing we want to do with this is induce a structure on the boundary. If $M$ is a manifold with boundary, $T(\partial M)\oplus \nu \cong\left. TM \right| _{\partial M}$, since the normal bundle is trivializable as a line bundle. There are two ways to do trivialize $\nu$-- by walking a distance $\varepsilon $ into the manifold and walking $\varepsilon $ outward (outward vs inward unit normal). As virtual stable vector bundles, $T(\partial M) \cong \left. TM \right| _{\partial M}-\nu$, and a $\xi$-structure on $TM$ induces a $\xi$-structure on $T(\partial M)$. Let $\partial M$ refer to $\partial M$ with its $\xi$-structure the \emph{inner} unit normal, and $-\partial M$ refer to the $\xi$-structure via the \emph{outer} unit normal.
+
+        \begin{figure}[H]
+        \centering
+        \incfig[0.4]{ind}
+        \caption{An induced structure on the boundary of $M \times [0,1]$.}
+        \label{ind}
+        \end{figure}
+Now we can define bordisms of $\xi$-manifolds, which are compact $\xi$-manifolds of one dimension higher, where everything has a $\xi$-structure and diffeomorphisms identify $\xi$-structures from $\partial X$ to $M \amalg -N$. This also yields an equivalence relation compatible with the disjoint union, and so we get bordism groups $\Omega^{\xi}_n $. However, it is not true that we always get a graded ring.
+
+We want to upgrade or categorify this structure. 
+
+\begin{definition}[]
+Define a \textbf{bordism category} $\mathrm{Bord}_n ^{\xi}$ whose objects are closed $(n-1)$-dimensional $\xi$-manifolds, and whose morphisms are $\xi$-structured bordisms between them. Here, composition is just the gluing of bordisms. For composition to be associative, we need to take diffeomorphism classes rel boundary-- so if two bordisms are diffeomorphic, they are the same bordism. The identity is a cylinder, a morphism from $M$ to $-M$. So in order to have an identity morphism, we need to define bordisms with the minus sign.
+\end{definition}
+It turns out that $(\amalg, \O)$ turns the bordism category into a ``categorical commutative monoid'' structure, or in other words, $(\mathrm{Bord}_n ^{\xi},\amalg, \O)$ is a \textbf{symmetric monoidal category}. Essentially, we have a unit and a ``tensor prodouct'' $\amalg$ which is associative and commutative up to natural isomorphism. For example, $(\mathsf{Vect}_{\C} ,\otimes,\C)$ is a symmetric monoidal category. The precise definition is in \cite{mac}, there you can also read about the corresponding notion of symmetric monoidal functors and symmetric monoidal natural transformations.
+
+\subsection*{Topological field theories}
+Here comes the moment we have all been waiting for.
+\begin{definition}[]
+    A \textbf{topological field theory} is a symmetric monoidal functor $Z \colon \mathrm{Bord}_n ^{\xi}\to \mathsf{Vect} _{\C}$. We say $n$ is the \textbf{spacetime dimension} of the theory, and $(n-1)$ is the \textbf{space dimension}. 
+\end{definition}
+In physics, the bordism category is interpreted as objects being space, and the morphism between them is like time evolution, hence spacetime.
+Let's unravel this definition.
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item The objects in $\mathrm{Bord}_n ^{\xi}$ are closed $(n-1)$-manifolds, and the bordisms/morphisms are $n$-manifolds. 
+    \item Every closed $(n-1)$-manifold $M$ is associated to a vector space $Z(M)$ called the \textbf{state space}.\footnote{If you know about quantum mechanics, there is a Hilbert space of states. In QFT, we do this on arbitrary manifolds, and here we get a Hilbert space from a manifold of codimension 1. We will see soon why we only need to think about finite dimensional vector spaces.}
+    \item A bordism $X \colon M \to N$ defines a linear map $Z(X) \colon Z(M) \to Z(N)$, where functoriality says that gluing goes to composition. You can think of this as time evolution from states on $M$ to states on $N$.
+    \item $Z(\O)=\C$. Therefore a closed $n$-manifold $X$ as a bordism $\O \to \O $ defines a linear map $\C \to \C$: the image of 1 is called the \textbf{partition function} of $X$.
+\end{itemize}
+
+\begin{example}[The Euler TFT]
+    Assign to every closed $(n-1)$-manifold the state space $\C$, and to every bordism $X \colon M \to N$ the quantity $\lambda^{\chi (X,N)}$. Here, $\lambda\in \C^{\times }$ is fixed, and $\chi(X,N)$ is the relative Euler characteristic (an alternating sum of the relative homology groups). Then gluing (counting cells of a CW structure) and symmetric monoidality hold because of formulas for $\chi$.
+
+    For $\lambda\neq 1$ it is not trivial, but it is almost trivial.
+\end{example}
+
+\begin{theorem}\label{finitestate} 
+    Let $Z \colon \mathrm{Bord}_n^{\xi} \to \mathsf{Vect} _{\C}$ be a TFT and $M$ be a closed $(n-1)$-dimensional $\xi$-manifold. Then the vector space $Z(M)$ is finite-dimensional.
+\end{theorem}
+This differs from QFT where state spaces tend to look like $\ell_2$ of something. We prove this by defining a generalization of ``finite-dimensional'' in arbitrary symmetric monoidal categories, showing that this is preserved by symmetric monoidal functors, then showing that every object in $\mathrm{Bord}_n ^{\xi}$ is ``finite-dimensional''.
+
+\begin{definition}[]
+    Let $\mathcal{C} $ be a symmetric monoidal category and $x \in \mathcal{C} $. \textbf{Duality data} for $x$ is an object $x ^{\vee} \in \mathcal{C} $ and morphisms $e \colon x \otimes x^{\vee} \to 1$, $c \colon 1 \to x \otimes x^{\vee}$ such that the following maps compose to the identity:
+    \begin{gather}
+       x \xrightarrow{c \otimes \id_x} x \otimes x^{\vee}\otimes x \xrightarrow{\id_x \otimes e} x,\label{ecoev1} \\ 
+       x^{\vee}\xrightarrow{\id_x\vee \otimes c} x^{\vee}\otimes x \otimes x^{\vee}\xrightarrow{e\otimes \id_x \vee} x^{\vee}.\label{ecoev2} 
+    \end{gather}
+    If duality data exists for $x$, we say $X$ is \textbf{dualizable}, $x^{\vee}$ is the \textbf{dual} of $x$, $e$ the \textbf{evaluation}, and $c$ the \textbf{coevaluation}.
+\end{definition}
+\begin{figure}[h]
+\centering
+\incfig[0.3]{ecoev}
+\caption{Evaluation (on the left) and coevaluation (on the right).}
+\label{ecoev}
+\end{figure}
+To visualize evaluation and coevaluation, people typically draw string diagrams, as in \cref{ecoev}. Evaluation can be thought of colliding things with time, and coevaluation can be thought of as making something new. Equations \eqref{ecoev1} and \eqref{ecoev2} tell us that the $S$-diagram (on the left) and $Z$-diagram (on the right) in \cref{szdiagram} both are just the identity, where the identity is a straight line.
+
+\begin{figure}[H]
+\centering
+\incfig[0.6]{szdiagram}
+\caption{The $S$-diagram (left) encoding \cref{ecoev1} and the $Z$-diagram (right) encoding \cref{ecoev2}. }
+\label{szdiagram}
+\end{figure}
+
+    Say $V$ is dualizable with duality data $(V^{\vee}, c,e)$, then $c(1)=v^i \otimes v_i $, a \emph{finite} sum.\footnote{We use Einstein summation notation, so there is an implicit sum over $i$.} Apply the $Z$-diagram to figure out that for any $x \in V$, we have $x=e(x, ^i )v_i $, or the finite set $\{v_i \} $ spans $V$. Conversely, given a finite-dimensional vector space, let $V^{\vee}:= \Hom (V,\C)$, $e$ be evaluation, and $c \colon 1 \mapsto e^i \otimes e_i $ ($\{e_i \} $ is a basis, $\{e^i \} $ is the dual basis). So $V$ is finite-dimensional iff it is dualizable.
+
+    In $\mathrm{Bord}_n ^{\xi}$, \emph{any} object is dualizable. Referring to \cref{zorro}, evaluation is the outgoing macaroni and coevaluation is the incoming macaroni. We take diffeomorphism classes of bordisms as our morphisms, so clearly the diagrams are diffeomorphism to the identity cylinder. So they are the same. David Ben-Zvi likes to call this result ``Zorro's lemma'', modeled after the swordsman drawing a ``$Z$'' to complete his proof. 
+    \begin{figure}[H]
+    \centering
+    \incfig[0.3]{zorro}
+    \caption{``Zorro's lemma'', which shows all objects of $\mathrm{Bord}_n ^{\xi}$ are dualizable.}
+    \label{zorro}
+    \end{figure}
+\begin{proof}[Proof of \cref{finitestate}]
+    Symmetric monoidal functors preserve duality by definition, since they factor over the tensor product and must send the identity to the identity. Then if $f \colon \mathcal{C}  \to \mathcal{D} $ is a symmetric monoidal functor and $x \in \mathcal{C} $ is dualizable, then $f(x)$ is dualizable.
+    So if $Z \colon \mathrm{Bord}_n ^{\xi} \to \mathsf{Vect}_{\C} $ is a TFT and $M$ is a closed $(n-1)$-manifold, we know $M$ is dualizable in $\mathrm{Bord}_n ^{\xi}$ by Zorro's lemma. Therefore $Z(M)$ is dualizable in $\mathsf{Vect} _{\C}$, i.e., finite-dimensional.
+\end{proof}
+We can also consider mapping class group actions of $\mathrm{O}$ and $\mathrm{SO}$: general tangential structures are fine too, but require some extra care. The key idea is that $\mathrm{Diff}(M)$ acts on the state space $Z(M)$ by mapping cylinders: for $\varphi  \in \mathrm{Diff}(M)$, this defines a bordism $M \to M$ by $[0,1] \times M$, where we attach 0 by $\id$ and 1 by $\varphi $. Because we defined diffeomorphisms rel boundary to make associativity work, this is not always the same morphism. This defines a group homomorphism from diffeomorphisms to automorphisms in the bordism category of $M$. By functoriality, we get an action of the diffeomorphisms on the state space, which is just the image of this mapping cylinder under $Z$.
+
+If $\varphi $ and $\varphi '$ are isotopic, their mapping cylinders are diffeomorphic rel boundary, and they define the same morphism in $\mathrm{Bord}_n ^{\xi}$. So the $\mathrm{Diff}(M)$-action factors through the action of the \textbf{mapping class group} $\mathrm{MCG}(M):=\mathrm{Diff}(M) / \mathrm{Diff}_0(M)$, where $\mathrm{Diff}_0(M)$ is the connected component of the identity. For example the diffeomorphism group of the torus is this infinite dimensional terrible thing, but the mapping class group is $\mathrm{SL}(2,\Z)$.
+
+The \textbf{mapping torus} of $\varphi  \in \mathrm{Diff}(M)$ is the mapping cylinder plus one extra identification, defined by $M_{\varphi }:= [0,1] \times M / (0,x) \sim (1, \varphi (x))$. It shouldn't be difficult to show that for $Z$ a TFT, the partition function of the mapping torus is the \emph{trace} of the action of $\varphi $ on the state space $Z(M)$. A special case is the mapping torus of the identity which is just $M \times S^1 $, where $Z(M \times S^1 )=\dim Z(M)$, since the trace in this case is just the dimension.
+
+\subsection{Invertible field theories (June 1)}
+These are the simplest possible non-trivial examples of TFTs, which is why we start here. People classify these by the tools of homotopy theory, which you may or may not like. So we try to extract the big idea of the proof to present, then go over the details at the end.
+\orbreak
+Throughout this talk, we will have the notion that symmetric monoidal categories are categorified versions of commutative rings. Given a commutative ring $A$, a unit $x$ is an element invertible under multiplication (there exists an $x^{-1}$ such that $x \cdot  x^{-1}=1$). When we categorify, the bad news is that $x ^{-1}$ and the isomorphism $x \otimes x ^{-1} \xrightarrow{\cong} 1$ are now data. The good news is that this is contractible choice, like duality data, so we think of it as a condition. This is like choosing a Riemannian metric-- there is a contractible space, so as far as homotopy theorists are concerned, a manifold and a manifold with some Riemannian metric are equivalent.
+\begin{example}
+    In $(\mathsf{Vect} _{\C}, \otimes)$, a vector space is invertible iff it is one-dimensional. The dual is a good choice for the inverse, and evaluation is an isomorphism. Invertible vector spaces are trivializable, that is, they are all isomorphic to the trivial vector space $\C$. Maybe you have to make a choice-- if we consider vector bundles or representations, we get non-trivial invertible objects (one dimensional representations, line bundles).
+\end{example}
+
+\subsection*{Picard groupoids}
+Let $\mathcal{C} ^{\times }\subseteq \mathcal{C} $ denote the subcategory of $\otimes$-invertible objects and composition-invertible morphisms. This is a \textbf{Picard groupoid}, the key notion of today's talk. It has a symmetric monoidal structure, such that all objects are invertible.
+
+\begin{example}
+    $\mathsf{Vect} _{\C}^{\times }$ consists of lines (or one-dimensional vector spaces) with nonzero linear maps between them.
+\end{example}
+Recall a TFT is a symmetric monoidal functor $\mathrm{Bord}_n ^{\xi}\to \mathsf{Vect} _{\C}$, and they form a functor category where morphisms are symmetric monoidal natural transformations. This category of TFTs has a symmetric monoidal structure given by ``pointwise tensor product'': \[
+    (Z_1 \otimes Z_2)(M) := Z_1(M) \otimes Z_2(M).
+\] The unit is the trivial theory, or the constant functor valued in $\C$ and $\id_{\C}$. An \textbf{invertible TFT} is an invertible object in this symmetric monoidal category. This is a concise definition that might make geometric topologists upset.
+
+In a commutative ring of $\C$-valued functions, an element $f$ is invertible iff $f(x) \in \C^{\times }$ for all $x$. The same idea for TFTs is analogous: a TFT $Z$ is invertible iff for all closed $(n-1)$-manifolds $M$, $Z(M)$ is one-dimensional, and for all bordisms $X$, $Z(X)\neq 0$. You can think of these as ``nearly trivial'' TFTs.
+
+\subsubsection*{A physics digression} 
+
+How did these appear in physics? If you're a condensed matter theorist studying topological phases of matter, it is believed that there should be a way to classify these by taking a low energy approximation and obtaining a TFT. So the system behaves sort of like a quantum mechanical system, and you want to cut off all the eigenvalues of the Hamiltonian except for the bottom. Classifying these things is complicated, so you may want to start with a special case, known as ``invertible phases'' or ``symmetry protected topological phases'' or maybe even ``short range entangled phases'', which should be classified at low energy by invertible TFTs. A lot of open problems in physics and making the physics into math are related to this. We can make progress on this by comparing what the physicists have done to mathematical classifications of invertible TFTs. This is what Freed-Hopkins do in \cite{fh}.
+
+Another application is that sometimes quantum field theories or topological field theories are not quite precisely defined. There is a little extra data you have to give to define them, and the famous example is Chern-Simons theory. One way to define this in physics language is to say the theory has an anomaly. There are many ways to define this ``anomaly'', and Freed-Teleman do this in \cite{ft} by saying your theory is actually the boundary to some bulk theory which is invertible. The idea is you can understand anomalies by understand invertible field theories, and there are plenty of cases where people care about anomalies. Classifying invertible field theories is a helpful way to get your hands on what anomalies are. Plenty of papers do this, for example, Freed and Hopkins do this for M-theory in \cite{fh2}.
+
+\subsection*{The Freed-Hopkins-Teleman theorem} 
+The thing about invertible field theories is that we know what all of them are. This idea originates from \cite{fht}, but is really first explicitly stated in \cite{fh}. However they add additional assumptions, and Freed-Hopkins-Teleman is where this first really happened.
+
+\begin{theorem}[Freed-Hopkins-Teleman]\label{fhtt} 
+    The abelian group of (isomorphism classes of) invertible $n$-dimensional TFTs of $\xi$-manifolds valued in $\mathsf{sVect} _{\C}$ is naturally isomorphic to the group of SKK $\xi$-bordism invariants $\Hom(\mathrm{SKK}_n ^{\xi},\C^{\times })$.
+\end{theorem}
+Here, $n$ is the dimension of the manifold in the bordism, and $\mathsf{sVect} _{\C}$ is the category of \textbf{super vector spaces}. Super vector spaces are complex vector spaces with a $\Z_2$-grading (you can say when two elements are even are odd) which has the sign rule from cohomology. So if $a$ and $b$ are odd, then $a\otimes b = - b \otimes a$. We won't say what SKK is just yet, but it's a modified version of bordism invariants that are a bit harder to compute. The idea is that $\Hom (\mathrm{SKK}_n^{\xi} ,\C^{\times })$ is the partition function to an invertible TFT.
+
+This is the proof sketch. We argue that classfying invertible TFTs is purely a question about Picard groupoids. It turns out we can express Picard groupoids and maps between them with algebraic data, which is known as the one-dimensional stable homotopy hypothesis combined with a little bit of Postnikov theory. Finally, we know this data for $\mathrm{Bord}_n ^{\xi}$ (hard work) and $\mathsf{sVect} _{\C}^{\times }$ (fairly straightforward).
+
+\orbreak
+Here we review group completion. This may be new only because we don't talk about monoids that much. Say $f \colon M \to N$ is a homomorphisms of commutative monoids and $\im (f) \subseteq N ^{\times }$. We can \textbf{group complete} $M$ to an abelian group $\overline{M}$ by declaring new elements that satisfy $x \cdot x^{-1}=1$, much like how $\Z$ is built from $\N$. $\overline{M}$ also goes by the Grothendieck group, $K_0$, or $K$. Then $f$ extends to a map $\overline{f}\colon \overline{M} \to N^{\times }$ of abelian groups by setting $f( x ^{-1}):=f(x) ^{-1}$. Moreover, you can restrict $\overline{f}$ to $M$ and obtain $f$, so $f$ and $\overline{f}$ determine each other, or the abelian group of invertible maps $M \to N$ is naturally isomorphic to the abelian group of all maps $\overline{M}\to  N^{\times }$.
+
+This is the example we categorify. If a map has image in the invertible set, it factors through group completion and we lose no data this way. Given a symmetric monoidal category $\mathcal{C} $ and a symmetric monoidal functor $f$ to a Picard groupoid $\mathcal{D} ^{\times }$, the factors through the \textbf{Picard groupoid completion} $\overline{f}\colon \overline{\mathcal{C} } \to \mathcal{D} ^{\times }$. $\overline{\mathcal{C} }$ is constructed by adding inverses to objects under tensor product and morphisms under composition, and similarly $\overline{f}$ is constructed by the formula $\overline{f}(x ^{-1}):= f(x)^{-1}$. Again $f$ and $\overline{f}$ determine each other. 
+
+That means that if $\mathcal{C} =\mathrm{Bord}_n ^{\xi}$, classifying invertible TFTs (maps that factor through $\overline{f}$) is equivalent to computing the abelian group of isomorphism classes of Picard groupoid maps $\overline{\mathrm{Bord}_n ^{\xi}}\to  \mathsf{Vect} _{\C}^{\times }$.
+The key thing about Picard groupoids is that we can express them solely in terms of algebraic data.
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item $\pi_0(\mathcal{C} )$ is the abelian group of isomorphism classes of objects under tensor product.
+    \item $\pi_1(\mathcal{C} ):=\mathrm{Aut}_{\mathcal{C} }(1)$ is the automorphisms of the unit, and Eckmann-Hilton implies this group is abelian. This corresponds to the fact that $\pi_{\geq 2}$ or $\pi_1$ of a topological group is always abelian.
+    \item Using $(-) \otimes \id_x$, we bring $\mathrm{Aut}_{\mathcal{C} }(1) \to \mathrm{Aut}_{\mathcal{C} }(1 \otimes x)=\mathrm{Aut}_{\mathcal{C} }(x)$. So $\pi_1(\mathcal{C} )$ is canonically identified wth $\mathrm{Aut}_{\mathcal{C} }(x)$ for all $x \in \mathcal{C} $.
+    \item The $\mathbf k$\textbf{-invariant} $k \colon \pi_0(\mathcal{C} ) \otimes \Z /2 \to \pi_1(\mathcal{C} )$ is defined as follows: given $x \in \pi_0(\mathcal{C} )$, take the class of the symmetry map $\sigma \in  \mathrm{Aut}_{\mathcal{C} }(x\otimes x)=\pi_1(\mathcal{C} )$. We can think of $x\otimes x$ as the ``swap'' map, in $\mathsf{Vect} _{\C}$ this is the identity and in $\mathsf{sVect} _{\C}$ it is the identity on even elements and $-1$ on odd elements.
+\end{itemize}
+A theorem of Ho\`ang says that $(\pi_0,\pi_1,k)$ determine a Picard groupoid up to equivalence. Moreover, homotopy classes of morphisms between Picard groupoid $f \colon \mathcal{C}  \to \mathcal{D}  $ are naturally identified with the abelian group of pairs of maps $f_0\colon \pi_0(\mathcal{C} ) \to \pi_0(\mathcal{D} )$ which commute with the $k$-invariant. So to prove the classification of invertible TFTs, we need to determine $(\pi_0,\pi_1,k)$ for $\overline{\mathrm{Bord}_n ^{\xi}}$ and $\mathsf{sVect} _{\C}^{\times }$.
+
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item For $\mathsf{Vect} _{\C}$, we do this directly: $\pi_0=0$, since invertible vector spaces up to isomorphism are all isomorphic to $\C$. What are the linear maps $\C\to \C$ that are invertible? This is $\C^{\times }$, so $\pi_1=\C^{\times }$. For the $k$-invariant, there's only one map from $\Z /2 \otimes 0 \to \C^{\times }$, so $k=0$.
+    \item For $\mathsf{sVect} $, $\pi_0=\Z /2$ (the even and odd lines), $\pi_1=\C^{\times }$, and the $k$-invariant is the unique injective nontrivial map $\Z /2 \otimes \Z /2 \to \C^{\times }$.
+    \item For $\mathrm{Bord}_n ^{\xi}$, this is a major theorem! In the celebrated paper \cite{gmtw}\footnote{If anybody knows why this is cited as \texttt{[Gal+09]} instead of \texttt{[GMTW09]}, please let me know.} by Galatius-Madsen-Tillmann-Weiss, they determine the homotopy type of the cobordism category by obtaining a space from the topological category of bordisms, and they compute its homotopy. Nguyen goes further in \cite{nguyen} and extracts from that the Picard groupoid structure.
+
+        $\pi_0$ is the ordinary bordism group $\Omega_{n-1}^{\xi}$, and $\pi_1=\mathrm{SK K}_n ^{\xi}$, the \textbf{SKK bordism group}. \cite{gmtw} says it differently, but it is equivalent. $S^1 $ has two framings up to equivalence: one is induced as the boundary of the trivial framing on the disk, and the other is the Lie group framing. This sends manifolds one dimension higher, and is well defined from bordism class to SKK bordism classes, which gives a $k$-invariant. A framing is a trivialization of the tangent bundle (a nullhomotopic map to $BO$), so it induces a $\xi$-structure.
+\end{itemize}
+
+\begin{proof}[Proof of \cref{fhtt}]
+We have seen that invertible TFTs valued in $\mathsf{sVect} _{\C}$ are identified with pairs of maps $f_0 \colon \Omega_{n-1}^{\xi} \to \Z /2$ and $f_1 \colon \mathrm{SKK}_n ^{\xi} \to \C^{\times }$. Crucially, the $k$-invariant for $\mathsf{sVect} _{\C}^{\times }$ is injective, so $f_1$ uniquely determines $f_0$ (if $f_0$ can exist). But the $k$-invariant tensors with $\Z /2$, so the image of $f_1 \circ k_{\mathrm{Bord}_n ^{\xi}}$ is contained in $\Z /2= \{\pm 1\} \subseteq \C^{\times }$, and therefore $f_0$ must exist. This means we can lose the data $f_0$, and so invertible TFTs are identified with maps $\mathrm{SK K}_n ^{\xi}\to \C^{\times }$.
+\end{proof}
+
+What is the SKK group exactly? Consider the notion of bordism where ``bounding'' means $M$ bounds $W$, \emph{and} the outward normal vector field on $M$ extends to a nonvanishing vector field on $W$. This defines a commutative monoid under disjoint union, and group completion results in the \textbf{SKK group} $\mathrm{SK K}_n ^{\xi}$. Karras-Krek-Neumann-Ossa first studied this in \cite{kkno}, where they called it ``Schneiden, Kleben, Kontrolle'' (German for ``cutting and pasting, controlled''), hence ``SKK''. This goes by many other names, including vector field bordism, Reinhardt bordism, Madsen-Tillmann bordism, and Lorentz bordism.
+
+In particular, the Euler characteristic is an SKK invariant, since $\chi(S^2)\neq 0$. Since we have a nonvanishing vector field on the whole thing, $\chi(W)$ vanishes by Poincar\'e-Hopf. Now pick a CW structure and use the gluing formula. Ordinary bordism invariants are also SKK invariants, since SKK bordism is stricter than bordism. Another interesting invariant is the \textbf{Kervaire semicharacteristic} in dimension $4k+1$ (where $\xi=\mathrm{SO}$), defined by \[
+    \kappa(M):= \sum_{i=o}^{2k} b_i (M) \pmod 2,
+\] where $b_i (M)$ refers to the Betti numbers of $M$. SKK bordism invariants tend to be one of these three.
+
+Here are many concrete examples of ordinary bordism invariants. The general idea is that integrating canonical cohomology classes by $\xi$-structures (for example, characteristic classes of the tangent bundle, or pulling back cohomology classes) gives bordism invariants of $\xi$-manifolds. This is super general, we can use generalized cohomology, twisted cohomology, etc. For example, say we want to study oriented 6-manifolds with principal  $U_1$-bundles. If $p_1 \in H_1^4(M;\Z)$ denotes the first Pontrjagin class, $c_1 \in H^2(M;\Z)$ is the first Chern class, multiply them together to get something in $H^6$ and integrate. That is, there is an invariant $\Omega_6^{\mathrm{SO}}(B \mathrm{U}_1) \to \Z$ given by \[
+    M,P \mapsto \int p_1(M)c_1(P).
+\] Why is this true? Both $p_1$ and $c_1$ admit de Rham models as closed forms, then this is true by Stokes' theorem. In general, Milnor-Stasheff show this for Whitney classes in \cite{cc} but their argument generalizes.
+
+\subsubsection*{The homotopy theory in the background} 
+The proof of \cref{fhtt} about the classification of invertible TFTs actually uses stable homotopy theory. Given a Picard groupoid $\mathcal{C} $, take the geometric realization of the \emph{nerve} (a simplicial abelian group), resulting in a pointed CW complex with $\pi_i =0$ for $i \geq 2$. This is a grouplike $\E_{\infty}$-space, so it defines a spectrum with $\pi_i =0$ for $i\neq 0,1$, called the ``classifying spectrum'' of $\mathcal{C} $.
+
+The \textbf{1-dimensional stable homotopy hypothesis} conjectures that taking the classifying spectrum defines an equivalence of homotopy theories from the category of Picard groupoids to the category of 1-truncated connective spectra (only $\pi_0$ and $\pi_1$ nontrivial). This was a folk theorem proven by many (see \cite{jo}). Postnikov theory tells us how to determine homotopy classes of maps between such spectra using the $k$-invariant (see \cite{jo} again). Then \cite{gmtw} identified the classifying space of the groupoid of $\mathrm{Bord}_n ^{\xi}$, and \cite{nguyen} determined the grouplike $\E_{\infty}$-structure, hence the classifying spectra.
+
+Why is there so much homotopy theory? We are often interested in classfiying \textbf{extended TFTs}, formulated in terms of higher bordism categories. Here, the homotopical approach generalizes \emph{much} better. Invertible extended TFTs are classified by maps between Picard $n$-groupoids. Taking the nerve of a Picard $n$-groupoid then geometrically realizing results in a space, which has a grouplike $\E_{\infty}$-structure, so we get a spectra. The ``categorified'' $n$-dimensional stable homotopy hypothesis says that we get an equivalence between the homotopy theory of Picard $n$-groupoids and that of spectra with homotopy groups concentrated in degrees $[0,n]$. It was a conjecture up to last year, proven in \cite{mopsv}. Schommer-Pries computes the homotopy type of the bordism $n$-category in \cite{sp}\footnote{Not sure if I got the right paper of Schommer-Pries...} and gets out a classifying spectrum. Depending on the target $\mathcal{C} $, invertible extended TFTs are classified in terms of homotopy or cohomology groups of \textbf{Madsen-Tillman spectra}, again giving SKK groups.
+
+If we only care about non-extended TFTs we can break it down into simpler components, but this is a sneak peek of what's going on behind the curtain in the proof of \cref{fhtt}.
+
+\subsection{The finite path integral (June 2)} 
+You may have heard about the path integral spoken about in hush tones, as something the physicists do that is mathematically illegal. We're going to talk about a setting where you can actually do it, and product a topological theory. This puts strong constraints on what can happen, for example for gauge theory the gauge group is finite. The point is, this gives examples of TFTs that are not just invertible TFTs we talk about last time, and we can say some interesting properties about them (what are their state spaces, what are the values of their partition functions on various manifolds). Some of these go by names like Dijkgraaf-Witten theory, Yetters model, Quinn's finite homotopy TFT, etc.
+
+The goal of today/the rest of the week is to construct interesting and nontrivial examples whose partition functions and state spaces are not too hard to calculate, and which (unlike yesterday) don't require too much homotopy theory to digest.
+\orbreak
+
+A quick review of yesterday's lecture. A \textbf{bordism invariant} is an abelian group homomorphism $\varphi  \colon \Omega_n ^{\xi}  \to \C^{\times }$. Bordism invariants lift to an invertible TFT $Z_{\varphi }\colon  \mathrm{Bord}_n ^{\xi} \to \mathsf{sVect} _{\C}$ with partition function $\varphi $. Good examples of bordism invariants are integrating characteristic classes or natural cohomology classes for manifolds with a $\xi$-structure.
