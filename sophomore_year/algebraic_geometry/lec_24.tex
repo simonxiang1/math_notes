@@ -1,0 +1,24 @@
+\section{November 4, 2021} 
+{\color{red}todo:missed the first 20 minutes of this class.} Recall the base change $\mathrm{Sch} / R \xrightarrow{\times _{\Spec R}\Spec T}\mathrm{Sch} / T $, which is just the ordinary tensor product for rings. 
+\[
+\begin{tikzcd}
+             & X \times_{\Spec R} \Spec T \arrow[ld] \arrow[rd] &                    &              & S\otimes T              &              \\
+X \arrow[rd] &                                                  & \Spec T \arrow[ld] & S \arrow[ru] &                         & T \arrow[lu] \\
+             & \Spec R                                          &                    &              & R \arrow[lu] \arrow[ru] &             
+\end{tikzcd}
+\] 
+In particular, we can turn any scheme into one of characteristic $p$, $\mathrm{Sch} \to \mathrm{Sch} / \Z / p $. Here the fiber product is just the fiber.
+Intersections in algebraic geometry are just tensor products. Now consider $U \subseteq Z$, and a fiber product $Z \leftarrow X \leftarrow X \times _ZU \rightarrow U=\Spec \Z$. Then the fiber product with opens inside $X$.
+
+Why are we doing this? Schemes are always schemes over $\Spec \Z$, or $\mathrm{Sch}=\mathrm{Sch} / \Spec \Z$. Somehow the geometry algebraic geometry is assembling all the $X_p$'s (the fibers) into something. Even if we don't are about arithmetic things ($\Spec \Z$), doing geometry in this settting naturally leads to others. For example, consider $R= \C[x]$. Then for $\mathrm{Sch} /R$ a scheme over  $R$, we think about a parameter of schemes (?). For example, consider $y^2 = x^3+ \lambda x  \mu$, thought of as a family in $\A^2$ with two parameters. So we think of $\C [\lambda,\mu]$-algebras or $\mathrm{Sch }/ \A^2 _{\C}$. \[
+\begin{tikzcd}
+{\Spec \C[x,y,\lambda,\mu ]=\A^2_S} \arrow[d] & {\Spec \C[x,y,\lambda\mu] / y^2=x^3+\lambda x +\mu} \arrow[l, "\supset", phantom] \arrow[ld] \\
+{\Spec \underset{}{\C[\lambda,\mu]}}          &                                                                                             
+\end{tikzcd}
+\] Back to the idea of group schemes/ A group scheme over  $R$ is a group object in $\mathrm{Sch} /R$, or some $G \in \mathrm{Sch} / R$ with a map $G \times G \to G$, which is a product  in $\mathrm{Sch} /R$.
+\begin{claim}
+    This product in $\mathrm{Sch} / R$ is the exactly the fiber product, where $X,Y \mapsto  X \times _{\Spec R}Y$.
+\end{claim}
+The reason is that base changes preserve limits (fiber products). Now let's talk about the identity. We want to say that it's a point of $G$, what does that mean? We claim that the identity $e$ is a map $e \colon \{ \text{final object} \} =\Spec R  \to G$. Why is this a thing? One way to think about it is on the level of functors of points. $\mathrm{Map}_{\mathrm{Sch} / R}(X,G)$ should be a group, and $M\mathrm{Map} (X, \text{final object} )= x$. Multiplication is defined on each fiber, and the identity is not a point, but a whole section.
+
+In algebraic geometry land we could say the base is $\A^1 \ 0$, or in topology land $S^1 $. Consider $\Z / 3$ a point, which is the smallest group with an interesting automorphism. This corresponds to (something?) on the circle, corresponding with a three-fold cover.

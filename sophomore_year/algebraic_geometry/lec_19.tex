@@ -1,0 +1,66 @@
+\section{October 19, 2021}
+Today we hopefully walk about schemes. What is a ringed space? It is a category with objects being pairs $(X, \mathcal{O} _X)$ where $X$ is a topological space and $\mathcal{O} _X$ is a sheaf of commutative rings on $X$. For example, we can think about the pairs  $(M, \mathcal{O} _M)$ where $M$ is a smooth (resp topological) manifold and $\mathcal{O} _M= C^{\infty}$ (resp continuous) functions. We are missing the data of what morphisms are. It is obvious to consider continuous maps $f \colon X \to Y$ between topological spaces, but we need to do something about the functions, and we need a notion of pullback of functions.
+
+If we have $U \subseteq Y$ open for $X \xrightarrow{f} Y$, $f^{-1}(U) \subseteq X$ open, we should have a collection  \[
+\begin{tikzcd}
+\mathcal O_Y(U) \arrow[d, "\mathrm{res}"] \arrow[r] & \mathcal O_X(f^{-1}(U)) \arrow[d, "\mathrm{res}"] \\
+\mathcal O_V(U) \arrow[r]                           & \mathcal O_X(f^{-1}(V))                          
+\end{tikzcd}
+\] We could name this as an $f$-map from $\mathcal{O} _Y$ to $\mathcal{O} _X$. We can take $\mathcal{O} _X$ and \textbf{pushforward} to $Y$ ($\mathcal{O} _Y \to f_x\mathcal{O} _X$) \emph{or} take $\mathcal{O} _Y$ and \textbf{pullback} to $X$ ($f ^{-1}\mathcal{O} _Y \to \mathcal{O} _X$). These notions haven't been defined, but they'll be defined to be compatible with our earlier notion. These two functors are going to be adjoint functors on sheaves of the two spaces. The pushforward is easier to define, but once you know one the other is completely determined by the adjoint.
+
+The definition of pushforward is built to make this work. Given $f \colon X \to Y$, $f_\cdot  \colon \mathcal{C} _X \to \mathcal{C} _Y$, $F \mapsto  f_x F$, define $f_* F(U) := F( f^{-1}(U))$. So a map of ringed spaces $(X, \mathcal{O }_X) \to  (Y, \mathcal{O} _Y) $ is the data $f \colon X \to Y$ and $f ^{\#} \colon \mathcal{O} _Y \to f_*\mathcal{O} _X$ a map of sheaves of rings on $Y$.
+\begin{example}
+    Some examples of pushforwards:
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+\item Suppose we have a map $f \colon X \to \mathrm{pt}$. We need $f_* F( \mathrm{pt})= F( f ^{-1}( \mathrm{pt}))=F(X)= \Gamma(F)$, the global sections of the sheaf. So global sections are just special cases of the pushforward.
+\item Suppose we have an inclusion $i \colon  \mathrm{pt} \to X$, so we should get a functor $i_* \colon  \mathcal{C} \to \mathcal{C} _X$. We have 
+    \[
+    i_* F(U)= F( i ^{-1} U)=
+    \begin{cases}
+        F( \mathrm{pt}) & \text{if} \ x \in U,\\
+        F(\emptyset) & \text{if} \ x\notin U.
+    \end{cases}
+    \] We have alread defined this as $i_* F= \delta _{x,F}$ the skyscraper sheaf of $x$ with value $F$.
+    \end{itemize}
+\end{example}
+    Now let's think about pulling back the same examples.
+Given $\Gamma = f_*, f \colon X \to \mathrm{pt}$, we need to find the adjoint.
+    \begin{lemma}
+        $\Hom _{\mathcal{C} _X}(\underline{A},F)=\Hom _{\mathcal{C} }(A, \Gamma(F))$ where $\underline{A}$ is the constant sheaf with value $A$. In other words, the operation that takes $A$ to the constant sheaf is the left adjoint to global sections.
+    \end{lemma}Then the pullback operation is $f ^{-1}(A)= \underline{A}$, so the construction of constant sheaves is our first example of pullbacks. For \[
+    \begin{tikzcd}
+        \underline{A} ^{\mathrm{pre}}\arrow[rd] \arrow[d]  & \\
+        \underline{A} \arrow[r] & F
+    \end{tikzcd}
+\] we have $\Hom (\underline{A}^{\mathrm{pre}},F)=\Hom \underline A , F)$. So \[
+\begin{tikzcd}
+A=\underline A^{\mathrm{pre}}(X) \arrow[d, "\id", shift left] \arrow[d, hook', shift right=7] \arrow[r] & F(X)=\Gamma(X) \arrow[d, "\mathrm{res}"] \\
+A=\underline A^{\mathrm{pre}}(X) \arrow[r]                                                            & F(U)                                    
+\end{tikzcd}
+\] Then for $f \colon X \to \mathrm{pt}$, $f ^{-1} \colon \mathcal{C}  \to \mathcal{C} _X$ is $A \mapsto \underline A$, $A ^{\mathrm{pre}}(U)= A (f(U))$.
+\begin{lemma}
+    We have \[
+        \Hom _{\mathcal{C} _X}(F , i_* A)=\Hom _{\mathcal{C} }(F_X,A).
+    \] On $x \in U$, $F(U) \to A$ compatible under restriction is equivalent to $\Hom (\varinjlim _{x \in U}F(U),A)$.
+\end{lemma}So $ i ^{-1} $ takes $F \mapsto  F_X$ a stalk, and $i ^{-1}F(U) \overset{?}{=} F(i(U))$ (open?). Pull backs do a thing with shrinking opens and sheafifying, but they're nice as adjoints. BUT on stalks, $f^{-1}$ is the ``pullback'' of a function: $(f^* g)(x)= g(f(x))$. That is, sheaves are equivalent  to functors $X \to \mathcal{C} $, $(f ^{-1} F)+x \simeq F _{f(x)}$. Now we go back to rings and stuff.
+
+We are moving toward the ``fundamental theorem of algebraic geometry'', a correspondence between rings and spaces. Given $R$ a ring, we attached to it a ringed space $( \Spec R, \mathcal{O} _{\Spec R})$. For functoriality, we need to talk about maps. Given $\varphi  \colon R \to S$, we have $f = \Spec \varphi  \colon X=\Spec S \to Y=\Spec R$ and $R \to S$ a pullback of functions. We need $f ^{\#} \colon \mathcal{O} _Y \to f_* \mathcal{O} _X$, i.e., given $r \in R$ we need $D_r \subseteq Y=\Spec R$, where $\mathcal{O} _Y(D_r) \xrightarrow{?} \mathcal{O} _X(f ^{-1} D_r)$, comparing these two rings gives our pullback. Then $\mathcal{O} _Y(D_r)=  r ^{-1} R, f ^{-1} D_r= D _{\varphi (r)}$, and $\mathcal{O} _X( f^{-1} D_r)= (\varphi  (r))^{-1}S$.
+
+We have completed the definition of a functor $\mathsf{Rings} ^{\mathrm{op}}\to \mathsf{Ringed Spaces}, R \mapsto  (\Spec R, \mathcal{O} _{\Spec R})$. However, we're still missing one last thing. Let $X,\mathcal{O} $ be a ``normal'' sheaf of functions, $x \in X$, $f \in \mathcal{O} _X$ a stalk of $\mathcal{O} _X$ at $x$. Suppose $f(x)\neq 0$, then $f$ is \emph{invertible} on $U$ small enough. So $f \in \mathcal{O} _X$ is invertible, and $f$ is not contained in any ideal, i.e., $\mathcal{O} _x$ is a \textbf{local ring}. This means there exists a unique maximal ideal ($\mathfrak m \subseteq \mathcal{O} _x$ being functions vanishing at $x$) iff there exists an ideal $\mathfrak m$ such that $f\notin \mathfrak m \implies f$ is invertible.
+
+\begin{definition}[]
+    A \textbf{ringed space} ($X,\mathcal{O} _X$) is a \emph{locally ringed space} (LRS) such that the stalks $\mathcal{O} _X,x \in X$ are local rings. 
+\end{definition}
+This implies that for every $x \in X, \mathfrak m _x \subseteq \mathcal{O} _x$ is maximal, which implies that $f \in \mathcal{O} (U)$ for $x \in U$. ``Evaluate'' $f(x)= f \pmod{\mathfrak m}$ in $k_x =\mathcal{O} _x /\mathfrak m_x$. We say a map of ringed spaces $f \colon (X, \mathcal{O} _X) \to (Y, \mathcal{O} _Y)$ is \textbf{local} (i.e., a map of LRS) if $f^{\#}_{y_1} \colon \mathcal{O} _{Y,y} \to \mathcal{O} _{X,x}$ is \emph{local}, i.e., maps $\mathfrak m_y \to \mathfrak m_x$. In other words, we have a map $\mathsf{Rings} ^{\mathrm{op}}\to \mathsf{LRS} $.
+
+Observe that $X=\Spec R, \mathcal{O} _{\Spec R}$ is a LRS with stalks $\mathcal{O} = R_p := (R \setminus p \ni f) ^{-1}R, x \in X =\Spec R \iff p \subseteq  R$, where $\mathfrak m$ is the image of $p$. Then $\varphi  \colon R \to S$ implies the map $\Spec S \to \Spec R$ is local.
+
+\begin{definition}[]
+    A \textbf{scheme} is a LRS, locally isomorphic to one of the form $\Spec R$.
+\end{definition}
+So $(X, \mathcal{O} _X)$ has open cover $X= \bigcup U_i $, where each $U _i  \simeq  \Spec R_i $, $\left. \mathcal{O} _X \right| _{U_i }\simeq  \mathcal{O} _{\Spec R _i }$.
+    \begin{theorem}
+        We have $\mathsf{Rings} ^{\mathrm{op}}\subseteq  \mathsf{LRS} $ a full subcategory of affine schemes. Furthermore, the functor $\Spec \colon \mathsf{Rings} ^{\mathrm{op}} \to \mathsf{LRS} $ is the right adjoint to $\mathsf{LRS}  \to \mathsf{Rings} ^{\mathrm{op}}$, $(X,\mathcal{O} _X) \mapsto  \Gamma(\mathcal{O} _X)$, i.e., $(X,\mathcal{O} _X) \to (\Spec R, \mathcal{O}_{\Spec R}) \iff R \to \Gamma(\mathcal{O} _X)$.
+    \end{theorem}
+    This means rings are completely determined by geometric objects, achieving our goal of a faithful dictionary between rings and geometry. Now we can actually start doing algebraic geometry. We'l prove this next time.

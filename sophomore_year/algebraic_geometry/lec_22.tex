@@ -1,0 +1,48 @@
+\section{October 28, 2021} 
+Following an explanation:
+\begin{quotation}
+``I'm more confused.'' --Student\\
+``You're more confused. Great.'' --Ben-Zvi
+\end{quotation}
+Today we'll motivate one of the most important constructions in algebraic geometry, fiber products. Recall that a scheme $X=\Spec R$ and a map $f \in \mathcal{O} (X)=R$ is equivalent to a map $f \colon X \to \A^1 = \Spec \Z[x]$, where $\Z[x] \xrightarrow{ x \mapsto  f} \mathcal{O} (X)$. There is the vanishing locus $V(f)= f ^{-1}(0)$, which is isomorphic to $\Spec R /f$. Here $f ^{-1} (0) = \{p \subseteq  R \mid  f \in p\} $. Something happened.
+\begin{theorem}
+    $\mathsf{Sch} $ has fiber products. \[
+        \begin{tikzcd}
+                                           & X\times_ZY \arrow[r] \arrow[d] & X \arrow[d] \\
+U \arrow[ru, dotted] \arrow[rru, crossing over] \arrow[r] & Y \arrow[r]                    & Z          
+\end{tikzcd}\quad
+\begin{tikzcd}
+{\Hom(U,X\times_ZY)} \arrow[r] \arrow[d] & {\Hom(U,X)} \arrow[d] \\
+{\Hom(U,Y)} \arrow[r]                    & {\Hom(U,Z)}          
+\end{tikzcd}
+    \] 
+\end{theorem}
+Why is this relevant? Fibers are a special case of fiber products. The fundamental theorem says $\mathsf{Aff} =\mathsf{Rings} ^{\mathrm{op}}$ is the right adjoint of $X \mapsto  \mathcal{O} (X)$, which preserves all limits. This is the same as a limit in $\mathsf{Rings} ^{\mathrm{op}}$ which is a colimit in $\mathsf{Rings} $. A digression on tensor products.
+
+We defined how to take the tensor product for modules of a ring, given $M,N$ $A$-modules for $A$ a ring, we defined $M \otimes_A N$ as a colimit, that is, whenever $M,N$ mapped somewhere both $A$-linearly, then it factors through $M \otimes_A N$. \[
+\begin{tikzcd}
+N \arrow[rd] \arrow[rrrd] &                                &  &   \\
+                          & M\otimes_AN \arrow[rr, dotted] &  & U \\
+M \arrow[ru] \arrow[rrru] &                                &  &  
+\end{tikzcd}
+\] Now for $A \to B$ a homomorphism of rings ($B $ is an $A$-algebra), then $B \otimes_AN $ is a $B$-module. We have $B \otimes_A (-) \colon A\text{-modules}  \to B\text{-modules} $ (symmetric monoidal functor that takes rings to rings), then $B\otimes_AC$ is a ring with $(b_1 \otimes c_1) \cdot (b_2 \otimes c_2)=(b_1b_2)\otimes (c_1c_2)$, i.e., the tensor product gives pushouts (fibered coproducts) in $\mathsf{Ring} $. This is also known as the tensor product over $A$-algebras.
+\[
+\begin{tikzcd}
+                        & B \arrow[rd] \arrow[rrrd] &                                               &  &                           \\
+A \arrow[ru] \arrow[rd] &                           & B\otimes_AC \arrow[rr, "\text{ring}", dotted] &  & \underset{\text{ring}}{U} \\
+                        & C \arrow[ru] \arrow[rrru] &                                               &  &                          
+\end{tikzcd}
+\] This is to say rings have a natural operation of a tensor product, and the fundamental theorem immediately implies that schemes have fibered products and we know what they are. That is, \[
+\begin{tikzcd}
+                   & \Spec B \times _{\Spec A}\Spec C= \Spec B\otimes _A C. \arrow[ld] \arrow[rd] &                    \\
+\Spec B \arrow[rd] &                                                                              & \Spec C \arrow[ld] \\
+                   & \Spec A                                                                      &                   
+\end{tikzcd}
+\] i.e., $\mathrm{Map} (X, \Spec B \otimes_AC) = \{ \text{maps} \ X \to \Spec B,\Spec C \ \text{agreeing on}\ X\to \Spec A \}$. Then $\Spec R \to \A_k = \Spec k[x] \xleftarrow{0}\Spec k ,$ $k[x] \to k, x \mapsto  0$. So $\Spec R \otimes _{k[x]}k =R /f\to \Spec R$.
+
+\begin{quotation}
+    ``The non-existence of a zero object means we're happy, because  it means we're doing geometry, not linear things. Linear things are a shadow of non-linear things.'' 
+\end{quotation}
+Now $R\otimes _{k[x]}k = \{r \otimes \lambda\} =R=R\otimes k/ x \cdot r=fr \otimes \lambda =r\otimes x \cdot \lambda$. Here $x \otimes \lambda=0$, so $fr\otimes \lambda=0$, and $R \otimes _{k[x]} k \simeq  R /f$. Something happened? $\A^1 \times _{\Spec \Z}\A^1 = \A^1 \times \A^1 = \Spec \Z[x] \otimes _{\Z}\Spec \Z[y]=\Spec \Z[x,y]=\A^2$. We defined a scheme as an abstract object, but secretly we should think of it as a scheme over something. Topological spaces can be thought of as maps to a point, but that gives no information. However, the final object for $\mathsf{Sch} $ is $\Spec \Z$, which is an interesting object.
+
+Let's do one more example. Last time we talked about whether or not a scheme has a certain characteristic. Consider $\A^1 _{\Z}\to  \Spec \Z.$ Inside of $\Spec \Z$ we have $\Z /5$

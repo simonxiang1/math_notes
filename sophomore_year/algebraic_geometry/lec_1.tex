@@ -1,1 +1,99 @@
 \section{August 26, 2021}
+Algebraic geometry is about trying to think about algebraic objects in terms of geometry, for example visualizing $x^2+y^2=1$ as the circle. For example, we can discuss things like symmetries, groups, parametrizations, calculus, length ($2\pi$), the topology, etc. Grothendieck says that we should be able to do this to \emph{all} algebraic objects.
+
+There is a natural map from Geometry  $\to $ Algebra by looking at functions. Let $k$ be a field, like $\R$ or $\C$. Let $X$ be a set or space that we do geometry. Then consider the map\[
+    X\mapsto \mathrm{Fun}_k(X):= \{f \colon X \to k\} ,
+\] where $\mathrm{Fun}_k(X)$ forms a commutative ring. Addition is given by $f(x)+g(x)=(f +g)(x)$ and multiplication is $f(x) \cdot g(x)=(fg)(x)$. For example, if $X =S^1  \subseteq \R^2$, consider polynomial functions on $X$, the restriction $\{ \text{polynomials on} \ \R^2\} =k[x,y]$. This ring of polynomial functions $\mathrm{Poly}(S^1 )\simeq k[x,y] / (x^2+y^2-1) $ naturally recovers our polynomials valued on the circle.
+
+The first topic we define is the notion of a \textbf{scheme}, a class of geometric spaces or setting to do geometry. Inside of schemes we have $\operatorname{Spec}R$, where $R$ is a commutative ring.
+
+\subsection{Preamble to algebraic geometry}
+Let $R= \Z[a,b,c] / (a^n +b^n -c^n )$, which results in a geometric object called $\Spec R$ (analogously with $\Spec \Z$). ``Spectrum'' refers to a rainbow, like the spectrum of an operator, a subset of $\R$ given by eigenvalues on a matrix. If $A \in \mathrm{Mat}_{n \times n}(\R)$, we look at $\R[x] / ( \text{characterisitic polynomials of} \ A)$. Algebraic topologists also like the work spectrum, but these ideas are unrelated.
+
+Let $X$ be a space, and $x \in X$. How do points relate to functions? Given a function, we can evaluate it at that point. Let $R= \mathrm{Fun}_k(X)$, then we get a ring homomorphism $\mathrm{eval}_x \colon R \to k$, where $f \mapsto f(x)$. Then $\ker( \mathrm{eval}_x)=m_x=\{f / f(x)=0\} \subseteq R$, which is a \emph{maximal ideal}. Modding out by maximal ideals gives a field, and the kernel is maximal since if $m_x \subseteq I \subseteq R$, $0 \subseteq I /m \subseteq R /m=k$. This results in an ideal between 0 and a field, therefore $m_x$ is maximal.
+
+The basic algorithm is that points $=R \leadsto$ maximal ideals of $R$ ($R /m\simeq k)$, which we want to realize as  $R=\mathrm{Fun}_k(X)$. Gelfand duality says that if $X$ is a compact Hausdorff topological space, then $X \mapsto C(X)$ where $C(X)$ is a commutative $C^*$-algebra. So this idea is not unique to algebraic geometry. We want to take this idea and modify it to work for arbitrary commutative rings. In particular, we allow
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item Rings with nilpotent elements, eg $\varepsilon  ^2=0$. This was outlawed in classical AG. In the world of schemes, this corresponds to analysis, in particular derivatives.
+    \item We are not going to assumed that our fields are algebraically closed, ($k= \overline{k}$), or even a field at all. This corresponds to arithemtic, since one of the things we want to do is study the integers by AG.
+    \item The third generalization of classical AG is gluing. Just one $\Spec R$ is not all the spaces we want, we glue them together like manifolds which corresponds to topology.
+\end{itemize}
+These are the main differences between pre-Grothendieck AG and modern AG.
+\subsection{Introduction to category theory}
+Category theory is an indispensible tool in many areas of math. There isn't an obvious home for it in the curriculum, so this is the home.
+
+\begin{definition}[]
+    A category $\mathcal{C} $ consists of two collections[sets]\footnote{We can't say sets because of some logic issue with Russell's paradox, but think of them as sets.}:
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+        \item $\operatorname{Ob}\mathcal{C} $, the set of objects,
+        \item $\operatorname{Mor}\mathcal{C} \to \operatorname{Ob}\mathcal{C} \times \operatorname{Ob}\mathcal{C} $, the set of morphisms.
+    \end{itemize}
+    For $X,Y \in \operatorname{Ob}\mathcal{C} $, this maps to $\Hom_{ \mathcal{C} }$ {\color{red}todo:go back and finish}. Finally, we have a composition: for all $X,Y,Z \in \mathcal{C} $, \[
+        \overset{f}{\overbrace{\Hom _{\mathcal{C} }(X,Y)} } \times  \overset{g}{\overbrace{\Hom _{\mathcal{C} }(X,Y)} } \to \overset{g \circ f}{\overbrace{\Hom _{\mathcal{C} }(X,Y)} }
+    \] {\color{red}todo:finish def} 
+\end{definition}
+\begin{example}
+    A category $\mathcal{C} $ with one object $X$ has the data $\Hom _{\mathcal{C} }(X,X):=A$. Then $A$ is a monoid, since $1_X \in A$ is the unit and multiplication is composition. If we require the morphism to be invertible, then $A$ is a group.
+\end{example}
+
+\begin{definition}[]
+    We say $f \in \Hom _{\mathcal{C} }(X,Y)$ is an \textbf{isomorphism} if there exists a  $g \in \Hom _{\mathcal{C} }(Y,X)$ such that $f \circ g=1_Y$, $g \circ f=1_X$. A category $\mathcal{C} $ is a \textbf{groupoid} if all morphisms are isomorphisms.
+\end{definition}
+\begin{example}
+    A groupoid with only one object is a group. The most famous groupoid is the fundamental groupoid (or Poincar\'e groupoid) $\pi_{\leq 1}(X)$, where $\operatorname{Ob}:= \{x \in X\} $ points, and morphisms are $\Hom(x,y)=$ paths from $x$ to $y$ up to homotopy. In other words, this is $\pi_1(X)$ without reliance on the basepoint.
+\end{example}
+\begin{example}[Posets as categories]
+   Let $S$ be a set with a partial order $\leq$, that is for all $x,y,z \in X$,
+   \begin{itemize}
+   \setlength\itemsep{-.2em}
+       \item $x \leq x$,
+       \item $x\leq y \leq z \implies x \leq z$,
+        \item $x\leq y$ and $y \leq x \implies x=y$.
+   \end{itemize}
+   This gives rise to a category $\mathcal{C} , $ where $\operatorname{Ob}\mathcal{C} =S$, and morphisms are $\Hom _{\mathcal{C} }(X,Y)= \{x \leq y\} $ (there is an arrow from $x$ to $y$ if $x\leq y$). This is a \textbf{small} category.
+\end{example}
+\begin{example}
+    Here are examples of ``big'' categories. Before, we could list the objects. 
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+        \item $\mathsf{Set} $ is the category where objects are sets and morphisms are maps between sets.
+        \item $\mathsf{Group} $ is the category where objects are groups and morphisms are groups homomorphisms.
+        \item $\mathsf{Top} $ is the category of topological spaces with continuous maps as morphisms.
+        \item $\mathsf{Ring} $ is the category of rings with ring homomorphisms. 
+        \item $R$-$\mathsf{Mod} $ is the category of modules over a ring $R$, where $k$-modules are just vector spaces in $\mathsf{Vect} _k$ and $\Z$-modules are just abelian groups in $\mathsf{Ab} $.
+    \end{itemize}
+    Objects are irrelevant. The whole point of category theory is we should never think about categories without thinking about the morphisms. This leads into the next idea: we have categories as objects, but how do two categories talk to each other?
+\end{example}
+
+\begin{definition}[]
+    Let $\mathcal{C} ,\mathcal{D} $ be categories. Then a \textbf{functor} $F \colon \mathcal{C}  \to \mathcal{D}  $ is 
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+        \item 
+    a function $\operatorname{Ob}\mathcal{C} \xrightarrow{F}  \operatorname{Ob}\mathcal{D} $, where $X \in \mathcal{C} \mapsto  F(X) \in \mathcal{D} $,
+\item given $X,Y \in \mathcal{C} $, \[
+        \Hom _{\mathcal{C} }(X,Y) \xrightarrow{F} \Hom _{\mathcal{D} }(F(X),F(Y))
+\] which preserves identities and composition: \[
+\begin{tikzcd}
+{\Hom_{\mathcal C}(X , Y)\times \Hom_{\mathcal C}(Y,Z)} \arrow[r] \arrow[d, "F\times F"] & {\Hom_{\mathcal C}(X,Z)} \arrow[d, "F"] \\
+{\Hom_{\mathcal D}(F(X) , F(Y))\times \Hom_{\mathcal D}(F(Y),F(Z))} \arrow[r]            & {\Hom_{\mathcal D}(F(X),F(Z))}         
+\end{tikzcd}
+\] This diagram \emph{commutes}, eg it doesn't matter which way you compose the arrows.
+    \end{itemize}
+    This defines what we call a \textbf{covariant functor}. A \textbf{contravariant functor} reverses the direction of arrows, eg $\Hom _{\mathcal{C} }(X,Y) \xrightarrow{F} \Hom _{\mathcal{C} }(F(Y),F(X))$. 
+\end{definition} 
+In terms of monoids, we can define the opposite monoid as $a \cdot b=b\cdot a$, and we can do the same thing in terms of categories: morphisms go the other way. Therefore we can think of contravariant functors as standard covariant functors in $\mathcal{C} ^{\mathrm{op}}$.
+\begin{example}[Functions]
+    This is the example our class is built on. Let $\mathrm{Fun}_k \colon \mathsf{Set}  \to \mathsf{Ring} $\footnote{From now on in this class, all rings are commutative.} be given by $X \mapsto \mathrm{Fun}_k(X)$. What make this a functor is that it's compatible with morphisms: given a map $X \to Y$, how do we relate functions on $Y$ to functions on $X$? Functions pull back: 
+\[
+\begin{tikzcd}
+X \arrow[rr, "\pi"] \arrow[rd, "\pi^*f"'] &   & Y \arrow[ld, "f"] \\
+                                          & k &                  
+\end{tikzcd}
+\] 
+This tells us that $(\pi^*f)(x)=f(\pi(x))$. So $\mathrm{Fun}_k(Y) \xrightarrow{\pi^*} \mathrm{Fun} _k(X)$ is a contravariant functor, which we call $\Spec$. This gives rise to the slogan for this class: Algebra=(Geometry)$^{\mathrm{op}}$.
+\end{example}
+
+

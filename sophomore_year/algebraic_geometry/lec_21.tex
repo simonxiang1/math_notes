@@ -1,0 +1,28 @@
+\section{October 26, 2021} 
+We have $\P^n $ ``defined'' as lines through the origin in $\A ^{n+1}$. In $\P^1$, say we have $(v,w) \in \A^2$. If $v\neq 0$, then $(v,w)$ is on the same line as  $(1, \frac{w}{v})$. Then $\A^1 = \P^1 \setminus  \{y \, \text{axis} \} $. So $\P^1=\A^1 _{x=1} \cup \A^1_{y=1}=\Spec k[x,y] / (x-1) \cup \Spec k[x,y] / (y-1)= \Spec k[y] \cup \Spec k[x]$. Then we have $\P^1 \setminus  \{ y \, \text{axis} \} \simeq  \P^1 \setminus \{x \, \text{axis} \} \subseteq \A^1 \setminus 0$, leading to the gluing $\Spec k[x][x ^{-1}] \leftrightarrow \Spec k[y][y ^{-1}],$ where $x \mapsto  y ^{-1} $ and $x ^{-1} \mapsto y$. 
+
+Consider $A^1 \cup \A^1$, where we glue $\A^1 \setminus 0 \simeq \A^1 \setminus 0$ (gluing everywhere besides the origin), leading to a ``UFO'' or ``ravioli'' of sorts. This is a scheme, since it's covered by affine schemes. We have $\mathcal{O} ( \text{ravioli} )= k[x]=f \in k[x], g \in k[y]$ which agree under $k[x] [x ^{-1}]$. This is another example of a scheme, which is not terribly useful besides counterexamples.
+
+Now let's talk about $\P^2$. These are lines in $\A^3,$ isomorphic to $\A^2 \cup  \P^1$. {\color{red}todo:missed this section} 
+
+Back to schemes. We have some consequences of this fundamental theorem which says $\mathrm{Map}(X,\Spec R) \simeq  \Hom (R, \mathcal{O} (X))$, where $X$ is a scheme. Recall that $\Spec \Z$ is a \textbf{final object}, that is, there exists a unique $\mathrm{Map}(X,\Spec \Z) =\Hom(\Z,\mathcal{O} (X)), 1\mapsto 1$. In the case of $\Spec \Z$,for a map $\Z \to  \mathcal{O} (X)$, we can ask whether the map factors through  $\Z /p$ or not. \[
+\begin{tikzcd}
+    \Z \arrow[rr]\arrow[rd] & & \mathcal{O} (X) \\
+                            & \Z /p \arrow[ru, dotted] & 
+\end{tikzcd}
+\] If it does, we say $X$ has \textbf{characteristic} $p$. Now consider $\mathrm{Map}(X,\A^1 _{\Z}) =\Hom (\Z[x], \mathcal{O} (X))$. A map from $\Z$ has no data (determined by $\Z$), but for $\Z[x]$ homomorphisms are completely determined by the image of $x$, so this is precisely $\mathcal{O} (X) \simeq  \A_2^1 \times  (A_y^1 \setminus 0)$. The point is that maps to $\A^1$ \emph{are} functions. Why are the $\mathcal{O} (X)$ a ring? Rather, why are maps $\mathrm{Map}(X, \A^1)$ a ring? The cool answer is that $\A^1$ itself has extra structure, we can add and multiply in $\A^1$ (we say $\A^1$ is a ``ringed scheme''). For example, we have an interesting map $\R \times  \R \xrightarrow{(x,y) \mapsto  x+y}  \R$, $(+)^* f(x,y)=f(+(x,y))=f(x+y)$. Then $\A^2 \simeq  \A^1 \times \A^1 \to \A^1$, iff $\mathcal{O} (\A^1) \to  \mathcal{O} (\A^1 \times  \A^1)$, where $k[x] \mapsto  k[u,v],$ and $x \mapsto  u+v$. There is an analogous idea with multiplication $x \mapsto u\cdot v$ and the inverse map ($- \colon \A^1 \xrightarrow{x \mapsto -x} \A^1 $). Paired with $\mathcal{O} \colon \Spec \Z \to \A^1$, these satisfy the axioms of a grouop in the category $\mathsf{Sch} $, and form a \textbf{group object}.
+
+What is a group object? These make sense in any category-- for $G \in \mathcal{C} $, we need maps $G \times G \xrightarrow{+} G, G \xrightarrow{-} G, x \overset{0}{\hookrightarrow} G $. For example, in $\mathsf{Set} $ we have ordinary groups, in $\mathsf{Top} $ we have topological groups, and in the category of smooth manifolds we have Lie groups. For $X \in \mathcal{C} $, $\Hom(X,G) \in \mathsf{Set} $ means $\Hom (X, G\times G) \to \Hom(X,G) = \Hom(X,G) \times \Hom(X,G)$.
+
+\begin{prop}
+    Let $G \in \mathcal{C} $ be an object in a category $\mathcal{C} $. Then TFAE:
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+        \item $G$ is a group object,
+        \item\[
+                \begin{tikzcd}
+{h_G=\underset{x \mapsto  \Hom(X,G)}{\Hom (-,G)} \colon \mathcal{C}} \arrow[rd, dotted] \arrow[r] & \mathsf{Set}                    \\
+                                                                                                  & G_p \arrow[u, "\mathrm{forget}"']
+\end{tikzcd}\] In other words, this makes $\mathrm{Map}(X,G)$ into a group functorially.
+    \end{enumerate}\end{prop}
+    Here for $X \to Y$, $h_G (Y) \to h_G(X)$, and $h_G(x)$ is a group. Then $\A^1,+$ is a group scheme iff $\mathrm{Map}(X,\A^1,+) = \mathcal{O} (X),+$.\footnote{Ring schemes are never used but group schemes come up a lot.} We claim that $\A^1 \setminus 0$ is a group scheme (recall $\A^1$ is a monoid with multiplication $k[x] \to k[u,v], x \mapsto  u\cdot v$). We have $\A^1 \setminus 0 = \Spec k[x][x ^{-1}] \xrightarrow{( - ) ^{-1}} \A^1 \setminus 0$ with inverse $x \mapsto  x ^{-1}$. This group scheme is so useful we denote it by $\G_m = \A^1 \setminus 0$, $\G_a = \A^1 ,+$. Then $\mathrm{Map}(X,\G_m) , x \mapsto  f = \Hom(k[x,x ^{-1}], \mathcal{O} (X)) =  \{ f \in \mathcal{O} (X) \mid  f ^{-1} \ \text{exists} \} = \mathcal{O} ^{\times }$ units. So a formula for $\P^n $ living  in $\A ^{n+1} \setminus 0 $ is $\{\A ^{n+1} \setminus 0\} / \G_m$. Note that $\mathrm{Map}(\Spec \Z, \G_m) = \Z ^{\times }=\{ \pm 1\} $.

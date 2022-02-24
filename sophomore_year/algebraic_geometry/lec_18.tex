@@ -1,0 +1,38 @@
+\section{October 14, 2021} 
+Our plan for the next two lectures is to finally discuss schemes. For a ring $R$, we defined $\Spec R$ as the set of prime ideals inside $R$. Then define a topology by the closed subsets $V_S$ for $S\subseteq R$, where $V_S$ is the vanishing locus of all primes containing $S$. A special example is $V_f$ for $f \in R$, where $V_S = \bigcap_{f \in S} V_f$. This is equivalent to $D_f = \Spec R \setminus V_f$, where $D_f$ is the nonvanishing locus of $f$. Then open $U= \bigcup_{f \ \text{nonvanishing} } D_f$. Another key example is $\mathcal{O} _{\Spec R}$, which is a sheaf of rings on $\Spec R$. Our goal today is to construct this structure sheaf.
+
+Inside of $\Spec R$, we want $\mathcal{O} (\Spec R)=R$. To find $\mathcal{O} (D_f)$, observe that as a topological space $D_f \cong \Spec f ^{-1} R= R_f$ where $R_f$ is the localization of $R$ by $f$. Functions in scheme theory are not uniquely determined by their vanishing locus. Recall $f^{-1} R \simeq  S ^{-1} _f R$, where $S_f$ is equal to all elements $g \in R$ such that the vanishing locus $V(g) \subseteq V(f)$, or $D_g \supset D_f$. This is equal to all functions vanishing nowhere on $U=D_F$. Define $\mathcal{O} '_{\Spec R}(U)= S^{-1}_UR$. This is equal to $\mathcal{O} (D_f)= f^{-1} R$. We claim that $\mathcal{O} '$ is a presheaf of rings.
+All we need to do is give some restriction maps. For $V \subseteq U$, we need to define restriction $\mathcal{O} '(U) \to \mathcal{O} '(V)$. Define $\mathcal{O} '(U) = S^{-1}_U R, \mathcal{O} '(V)= S^{-1}_VR$.
+\begin{example}
+    Let $X=\Spec k[x,y,z,w]$, and $U= X \setminus \{0\} $. Then $\mathcal{O} (\A ^2 \setminus \{0\} )= \mathcal{O} (\A^2)=k[x,y]$. (something about codimension one and two), this an example of a scheme that is not affine. We'll return to this later.
+\end{example}
+
+Now that we have a presheaf, all that remains is to sheafify. Define $\mathcal{O} _{\Spec R}= ( \mathcal{O} '_{\Spec R})^{\mathrm{sh}}$-- this is a very nice definition that doesn't show up in textbooks. The reason being this doesn't give the whole picture, since we don't know what its values on the whole space are (global sections change under sheafification). 
+
+\begin{definition}[]
+    $\mathcal{O} _{\Spec R}$ is a sheaf.
+\end{definition}
+This is a triviality if we use our previous definition. 
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item $\mathcal{O} (D_f)$ (?)
+    \item these form a basis
+    \item $U \subseteq \Spec R $ open and $U= \bigcup_{i \in  I} D_{f_i }$. 
+\end{itemize}
+This implies we must have \[
+    \mathcal{O} (U) \to \prod \mathcal{O} (D_{f_i }) \rightrightarrows \prod \mathcal{O} (D_{f_i f_j }).
+\] 
+\begin{claim}
+    This reduces to checming for $U$ distinguished opens and $D=U$.
+\end{claim}
+We prove this for $U=\Spec R$ itself. We need to show that \[
+R \to \prod R_{f_i }\rightrightarrows \prod R_{f_i f_j }
+\] where the $D_{f_i }$ cover $\Spec R$, $1=\sum a_i  f_i $. For the identity, to show injectivity suppose $r \in R$ which maps to $\mathcal{O}  \in \prod R_{f_i }$. This is equivalent to $r \mapsto 0$ in $R_{f_i }$ for every $i \in I$. Then $R \xrightarrow{f_i } R \xrightarrow{f_i }R \xrightarrow{f_i }\cdots $, and $\frac{r}{1}\in  R_{f_i }$ iff $f_i  ^{N_i }r=0$ for $N \gg 0$. So $D_{f_i }^{N_i }=D_{f_i }$, and $\bigcup D_{f_i }^{N_i }=\Spec R$ still covers. This implies $1=\sum b_i  f_i  ^{N_i }$, and $r= r\cdot 1= \sum b_i  f_i ^{N_i }r=0$.
+
+Now we need to show gluing. Given $s _i  \in R_{f_i }$ agreeing in $R_{f_i  f_j }$, we need to construct $s \in R$ localizing to each $s _i $. Making a simplifying assumption, suppose $I =\{ 1, \cdots ,n\} $ a finite collection.  We have $s_i = \frac{a_i  \in R}{f_i ^{\ell _i } }, D_{f_i  ^{\ell _i }}=D_{f_i }$. WLOG, assume $s_i  = \frac{a_i }{f_i }$. The $s_i , s_j $ agree in $R_{f_i f_j }, $ and since $\frac{a}{b}=\frac{c}{d}$ in $R_y$, $\frac{a_i }{f_i }\equiv \frac{a_j }{f_j }$ in $R_{f_i f_j }$. Now $g^N (ad-bc)=0$, so $(f_if_j )^{m_{ij}}(a_i f_j -a_j f_i )=0$, $(f_i f_j )^N(a_i f_j -a_j f_i )=0$. Then $s _i = \frac{a_i }{f_i }= \frac{a_i  f_i  ^N}{f_i ^{N+1}}=\frac{b_i }{g_i }$, and $s _i  = \frac{b_i }{g_i }$, $D_{g_i }=D_{f_i }$. But now $\frac{b_i }{g_i }=\frac{b_j }{g_j }$ in $R_{g_i  g_j }$, $b_i  g_j -b_j g_j =0$, and $\bigcup_{}D_{g_i }=\Spec R $ implies $1=\sum c_i  g_i $. Now we use  a trick familiar from topology (partitions of unity); let $s= \sum c_i  b_i $. Why is $\left. s \right| _{D_{g_i }}=s_i $ true? We get 
+    \begin{align*}
+        s \cdot g _j  &= \sum c_i  b_i  g_j \\
+                      &= \sum c_i  g_i  b_j \\
+                      &=1 \cdot b_j =b_j ,
+    \end{align*}i.e., $s=\frac{b_j }{g_i }$.
+    If $I$ is infinite, wrote $1=\sum a_i  f_i = \sum _{i \in J \subseteq I \ \text{finite} }a_i  f_i $. Now we have a finite situation, with $\Spec R= \bigcup_{j\in J} D_{f_j }$. The $(s _i  ) _{ i \in I}$ agree on overlaps, so $(s _i ) _{i \in J}$ glues to $s' \in R$. We need $s $ in $R_{f_i }$ to be $s _i  $ for all $i \in I$. Fix $\alpha  \in  I$, and let $J'=J \cup \{\alpha \} $, use $J'$ to construct the gluing. {\color{red}todo:missed this part} 

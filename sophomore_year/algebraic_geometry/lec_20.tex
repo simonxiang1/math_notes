@@ -1,0 +1,46 @@
+\section{October 21, 2021} 
+Last time: we had a map $R$ (ring) $\mapsto  \Spec R$ (topological space and sheaf $\mathcal{O} _{\Spec R}$), a LRS. This gives rise to a functor $\Spec \colon \mathsf{Rings}^{\mathrm{op}}  \to \mathsf{LRS} $.
+
+\begin{definition}[]
+    An \textbf{affine scheme} is a LRS isomorphic to $\Spec R$ for some $R$. A \textbf{scheme} is a LRS locally of this form, i.e. has an open cover by affines.
+\end{definition}
+\begin{definition}[]
+    A \textbf{quasi-affine scheme} is a scheme which is isomorphic to an oepn in an affine.
+\end{definition}
+Open subsets of affine are always covered by distinguished opens (spec of localization), so any open subset of an affine is always a scheme, but may not be affine.
+\begin{example}
+    Some examples of schemes that are not affine:
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+\item  $\A ^2_k \setminus \{0\} $ (make it concrete, maybe something like $\C$). Here we consider $\Spec k[x,y] \ni 0 \iff \mathfrak m_0 = (x,y)$. The key point is that this ideal is not principal, you need two generators. The claim is that this is a scheme, but not an affine scheme-- we can cover $\A^2_k$ by two opens $\A^2 \setminus \{y\text{-axis} \} , \A^2 \setminus \{x\text{-axis} \} $. More concretely, $U_1= \Spec k[x,y][y^{-1}],U_2=\Spec k[x,y][x ^{-1}]$. Contained in both of these is $U_{12}=\Spec k[x,y][x ^{-1} , y ^{-1}]$. Then 
+        \[
+            \mathcal{O} (\A^2) \simeq  \mathcal{O} (\A^2 \setminus 0) =\{  f \in \mathcal{O} (U_1), g \in \mathcal{O} (U_2) \ \text{agree on overlaps} \}= k[x,y].
+        \] (Points of $\A^1$ are complex conjugates?)
+    \item Consider the projective line $\P^1_k$. How do we define this? Consider  $\A^1_x=\Spec k[x],\A^1_y = \Spec k[y]$. There are inclusions $\Spec k[x][x^{-1}],\Spec k[y][y^{-1}]$ (remove the origin), then send identify these two by $x \mapsto  y ^{-1}$. Glue these two together to get $\A^1_x \amalg \A_y^1$, then  $S ^2= \C \cup \infty$ (?). Something about stereographic projection. This is one of the fundamenetal non-affine examples-- affine things are great, but projective things are better. We will build more schemes as we go on.
+    \end{enumerate}
+\end{example}
+
+\begin{theorem}
+    For $X$ a LRS (eg a scheme), we have 
+    \[
+        \mathrm{Map}(X,\Spec R) \underset{\mathcal{O} ( )}{\xrightarrow{\simeq }}  \Hom (R, \mathcal{O} (X))
+    \] an isomorphism, i.e., $\Spec \colon \mathsf{Rings} ^{\mathrm{op}} \to \mathsf{LRS} $ is the right adjoint to $\mathcal{O} ( ) \colon \mathsf{LRS}  \to \mathsf{Rings} ^{\mathrm{op}}$.\footnote{I missed the entire proof of this, I'll look at Vakil later...}
+\end{theorem}
+\begin{cor}
+    $\mathsf{Rings} ^{\mathrm{op}}\hookrightarrow \mathsf{LRS} $ is fully faithful, i.e., maps $\Spec S \to \Spec R \iff R \to S$, i.e., $\mathsf{AffScheme} \leftrightarrow \mathsf{Rings} ^{\mathrm{op}}$.
+\end{cor}
+Given $\varphi  \colon R \to \Gamma (\mathcal{O} _X) = \mathcal{O} (X)$, we need to build $X \to \Spec R, x\in X \mapsto  ?? $ (prime in $R$), $\varphi  ^{-1} (\mathfrak m_x) \subseteq R$ (functors from $R$ vanish at $x$). Let $f \in R, \varphi (f) \in \Gamma (\mathcal{O} _X)$. Define $D _{\varphi (f)}= \{x \in X \mid  \varphi (f) \ \text{doesn't vanish} \} $, then $( \varphi (f))_x \notin \mathfrak m_x$. We need to check that $D_{\varphi (f)}= \pi ^{-1} D_f$.
+
+\begin{lemma}
+    Let $X$ be a LRS, and $s \in \Gamma( \mathcal{O} _X)$. Then $D_S= \{ x \in X \mid s(x)\neq 0\} $ is open.
+\end{lemma}
+\begin{proof}
+    Consider $x \in D_s$. Then the germ of $s$, $(s)_x \in \mathcal{O} _{X,x}$ is invertible (the magic of local rings, either things vanish or are invertible). This means there exists some germ $t \in \mathcal{O}_{X,x}$ where $t \cdot (s)_x=1$. So there exists some open $x \in U,$ where $g \cdot s=1$, i.e. $s$ is invertible on $U$. This implies that $x \in U \subseteq D_s$, and we are done.
+\end{proof}
+\begin{cor}
+    $s$ is invertible on all of $D_s$.
+\end{cor}
+\begin{proof}
+    Glue inverses.
+\end{proof}
+
