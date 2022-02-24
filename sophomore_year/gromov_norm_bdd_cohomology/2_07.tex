@@ -1,0 +1,38 @@
+\section{Measure homology} 
+Recap:
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item We used the straightening argument to show that the volume of a hyperbolic manifold $\| M\|_1 \geq \mathrm{vol} (M) / v_n $ for $n \geq 2$, $v_2 =\pi$.
+    \item We also know an upper bound when studying triangulations on surfaces, eg for $n=2,$ $\|S\|_1= \mathrm{vol}(S) / \pi=-2 \chi(S)$ if the genus $\geq 1$.
+\end{itemize}
+An application is to compute the set of possible degrees $\{ \deg f \mid  f \colon S \to S'\} $, and the claim is that this is equal to the set $\{d \mid |\chi(S)| \geq |d \chi(S')|\} $. To make this work exactly, we need $S,S'$ closed oriented, not $S^2$.
+\begin{proof}
+    First we prove the inclusion $\{ \deg f \mid  f \colon S \to S'\} \subseteq  \{d \mid |\chi(S)| \geq |d \chi(S')|\} $. Let $f \colon S \to S'$. By the degree inequality, $|d| \cdot  \|S'\|_1 \leq \|S\|_1$, which is just saying that $|d| \cdot  |\chi(S')| \leq |\chi(S)|$ with $d=\deg f$.
+
+    The other direction is done by constructing maps between surfaces. First, exclude some silly cases; we may assume $d>0$ and satisfies the inequality. There are two kinds of maps. To construct a map $S \to S'$ with degree one, we construct an intermediary covering surface $\Sigma$ for $S'$, where $S\to \Sigma$ is surjective and the covering $\Sigma \to S'$ has degree $d$. Let $\Sigma$ be a degree  $d$ cover of $S'$. The nice thing is that $|\chi(\Sigma)|=|d\chi(S')| \leq |\chi(S)|$, so the genus $g(\Sigma) \leq g(S)$. We have $|\chi(\Sigma)| = 2g-2$, and the map  $S \to \Sigma$ ``pinches'' any extra genus out. To make sure this is true, look at the preimage of a regular value.
+\end{proof}
+Here is a theorem that possibly could be due to Thurston.
+\begin{namedthm}{Gromov's proportionality} 
+    Let $M$ be a oriented closed connected hyperbolic manifold, then $\|M\|_1= \mathrm{vol}(M) / v_n$, where $v_n = \sup \mathrm{vol}(\Delta ^n )$ for $\Delta ^n $ a hyperbolic simplex.
+\end{namedthm}
+\begin{proof}
+    It suffices to show $\|M\|_1 \leq \mathrm{vol}(M) / v_n $ by our earlier inequality. The easiest way to prove an upper bound is the following; by definition it is an infimum of simplices. What we need to do is find a nice class representing this fundamental class, where the number of simplices represents the number $\mathrm{vol}(M) / v_n $. To do this, construct cycles representing $[M]$ with the number of simplices approximately optimal, or $\mathrm{vol}(M) / v_n $.
+
+    Our strategy is to construct $c= \sum \lambda_i  c_i $ with 
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+        \item $\lambda_i >0$,
+        \item $c_i $ a straight hyperbolic (with consistent orientation) simplex with $\mathrm{vol}(c_i ) > v_n -\varepsilon $
+        \item $c$ is a cycle.
+    \end{enumerate}
+    Why do these three conditions show our theorem? By (3), $[c]=\lambda[M]$. Pairing, we get 
+    \[
+        \lambda \mathrm{vol}(M) = \langle \lambda[M], \mathrm{vol} \rangle \implies \langle c, \mathrm{vol} \rangle = \left\langle \sum \lambda_i  c_i , \mathrm{vol} \right\rangle = \sum \lambda_i \mathrm{vol}(c_i ) \geq \left( \sum \lambda_i  \right) (v_n -\varepsilon ).
+    \] Since $\lambda>0,\sum \lambda_i  = |c|_1$, which means $[c /\lambda]=[M], |c / \lambda|_1 = \sum \lambda_i  / \lambda \leq \lambda \mathrm{vol} / \lambda (v_n -\varepsilon )= \mathrm{vol}(M) /(v_n -\varepsilon )$. By letting $\varepsilon  \to 0$, we get our desired upper bound. This is cool but how do we construct a cycle with these properties? Recall the surface case where we triangulated very large covers and projected down, but it's not always clear if we can do this for manifolds. We have $\left( \ell_1 \right) ^*=  \ell _{\infty}$, but $(\ell _{\infty})^* \supseteq \ell_1$. 
+
+    We measure homology; earlier we said $C_n (M;\R)= \mathrm{span}_{\R}S_n (M)$, where $S_n (M)= \mathrm{Maps}(\Delta ^n ,M)$. We equip this with the compact open topology to make this into a space. Let $\mathcal{C} _n (M;\R)$ be signed measures on $S_n (M)$ with compact support and bounded total variation. Let $v=v_+-v_-,|v_+(S_n (M))+v_-(S_n (M))$, $C_n (M;\R) \hookrightarrow \mathcal{C} _n (M;\R)$, $\sum\lambda_i  c_i  \mapsto \sum \lambda_i  \Delta _{c_i }$ which is norm-preserving. We also have $\partial  \colon \mathcal{C} _{n+1}(M;\R) \to C_n (M;\R)$. This leads to another homology theory, called the \textbf{measure homology}.
+\end{proof}
+\begin{theorem}[Zastrow, Hansen]
+    For CW complexes, measure homology is isomorphic to singular homology. Furthermore, this is isometrically isomorphic (L\"oh, 2006).
+\end{theorem}
+The ``isometrically'' says that we can alternatively define the Gromov norm this way. This construction is called ``smearing'', because we put this these simplices everywhere (smearing) to construct a cycle. Next time we approximate this smearing cycle with an honest cycle. The idea is that we fix $\Delta \colon \Delta ^n  \to \H^n $ such that $\mathrm{vol}(\Delta )> v_n -\varepsilon $. We have $\mathrm{Isom}^+(\H^n ) $ acting on $\H^n $, $\mathrm{Isom}^+(\H^n ) \cdot \Delta $. By Haar, this is locally finite and $\mathrm{Isom}^+(\H^n )- \mathrm{invariant}$. Identify two copies if they differ by some $g \in \pi_1(M)$.

@@ -1,0 +1,29 @@
+\section{More on hyperbolic geometry} 
+Finally, onto the last model.
+\item \textbf{Upper-half space model}: Here, let $H= \{x \in \R^n  \mid x_n >0\} $ with metric $ds ^2 / x^2_n $. Geodesics are straight lines pointing upward, or circular arcs with endpoints perpendicular to the boundary plane. The first case is a special case of the second one, where we only have one point at the boundary plane $\R^{n-1}$. Here, $\partial \H^n  = \{x_n =0 \} \cup \{\infty\} $, thought of as the one-point compactification of $\R^{n-1}$, in other words, the sphere $S^{n-1}$.
+    Isometries are M\"obius transformations preserving $H$. These include scaling, rotation, translation, and inversions. 
+
+    Let us talk about the classification of isometries. Let $n=2$, then $\R^2 \simeq  \C$. So $\mathrm{Isom}^+(\H^2)= \mathrm{PSL}_2(\R)$. For $n=3$, $\mathrm{Isom}^+(\H^3) \simeq \mathrm{PSL}_2(\C)$.
+
+    \begin{example}
+        Let us talk about the area of an ideal triangle (in $\H^2$). One way to compute the area is using Gauss-Bonnet. Ideal triangles are determined by the location of the vertices $(x,y,z)$-- we want to show that another ideal triangle $(x',y',z')$ has the same area as $(x,y,z)$ up to isometry. 
+        \begin{enumerate}[label=(\arabic*)]
+        \setlength\itemsep{-.2em}
+    \item $\mathrm{Isom}(\H^2)$ acts transitively on $\partial \H^2$, so we may assume that $x=x'$.
+        {\color{red}todo:missed some things} 
+        \end{enumerate}
+    \end{example}
+\end{enumerate} 
+\subsection{Classification of isometries}
+Okay, now we can move onto the classification of isometries. We have $\mathrm{Isom}(\H^n )$ acting on $\H^n  \simeq  B^n $, by the Brouwer fixed point theorem a fixed point exists.
+\begin{theorem}
+    A non-identity element $g \in \mathrm{Isom}^+(\H^n )$ falls into three classes:
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+\item $g$ is \textbf{elliptic}: $g$ fixes some point inside $\H^n $. Up to conjugation, $g \in \mathrm{SO}(n)$ (in the ball model).
+\item $g$ is \textbf{parabolic}: $g$ has no fixed point in $\H^n $ and has a unique fixed point in $\partial \H^n $. Up to conjugation, $g$ acts on the upper half space by translation.
+\item $g$ is \textbf{hyperbolic}: $g$ has not fixed point in $\H^n $ and has more than one fixed point (actually two points) in $\partial \H^n $. Up to conjugation, $g(x)=\lambda\cdot A(x),\lambda>0$. This preserves a unique geodesic, called $\mathrm{axis}(g)$.
+    \end{enumerate}
+\end{theorem}
+Okay, so why did we spend so much time talking about hyperbolic geometry? We want to show that $\|S\|_1= -2\chi (S)$. We proved that $\|S\|_1\leq -2 \chi(S)$, but we need to show that $\|S\|_1 \geq -2\chi(S)$. We will actually do something more-- instead of two dimensions, next time we will try to prove this for an arbitrary closed orientable hyperbolic manifold $M^n $ of dimension greater $n $ than than two. In other words, we want to show $\| M\|_1 \geq \frac{\mathrm{vol}(M)}{\nu_n }$, where $\nu_n =\sup \mathrm{vol}(\Delta ^n ) < \infty$, $\Delta ^n $ hyperbolic.
+

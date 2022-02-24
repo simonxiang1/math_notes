@@ -1,0 +1,31 @@
+\section{Hyperbolic geometry} 
+Last time we did some computations to compute the volume of an arbitrary surface. We need hyperbolic volume to get the lower bound.
+\subsection{Review of hyperbolic geometry}
+The space that is relevant is $\H^n $, which is $n$-dimensional hyperbolic space. We can define $\H^n $ as the unique simply connected complete\footnote{Synonymous for bounded and closed are compact, or all geodesics extend to infinite geodesics.} Riemannian manifold with constant sectional curvature $-1$. Such a space is unique by the classification of spaces. We go through three models of this space.
+\begin{enumerate}[label=(\arabic*)]
+\setlength\itemsep{-.2em}
+    \item \textbf{Hyperboloid model}: In this model, $\H^{n}$ is a subspace of $\R^{n+1}$. Fix a bilinear form $\langle x,y \rangle =x_1y_1+ \cdots +x_n y_n -x_{n+1}y_{n+1}$, which looks like a standard inner product for the first $n$ coordinates, but the last has a negative sign. Representing this as a matrix with $x,y$ vectors, $\langle x,y \rangle =x^T By$, where \[
+    B=
+    \begin{bmatrix}
+        1 & & & \\
+         & \ddots & & \\
+         & & 1 & \\
+         & & & 1
+    \end{bmatrix}
+    \] If we let $x$ and $y$ be equal, we can think of this as a projective form. Let $S = \{x \mid \langle x,x \rangle =-1\} $, or $x_1^2+x_2^2+\cdots x_n ^2-x_{n+1}^2=-1$. This results in a hyperboloid. Let $S_+$ be the component with $x_{n+1}>0$. $\langle \cdot ,\cdot  \rangle $ restricts to an inner product on $T_pS=p^{\perp}$ for any $p \in S$. So this is precisely the Riemannian structure on the manifold. With this metric, $S_+$ is complete with curvature $-1$. So we can think of $S_+ \simeq \H^n $ as a model for $\H^n $.
+
+    The isometry group $\mathrm{Isom}(\H^n )$ tells us the symmetry of this geometry, and gives us a way to understand the behavior under this geometry. Let $\mathrm O(n,1)$ denote the group of linear transformations preserving $\langle \cdot ,\cdot  \rangle $. In particular this preserves $S$, but we are only taking the upper sheet, so we ignore elements that swap the two components, denoted $\mathrm O^+(n,1)$ (an index two subgroup). This turns out to be exactly $\mathrm{Isom}(\H^n )$. If we want to preserve orientation, this becomes $\mathrm{SO}^+(n,1)$.
+
+    Let us talk about (totally) geodesic subspaces of dimension $k$. These are subspaces intersected with the half we care about, or $V \cap S^+$, where $V$ is a linear subspace of $\dim k+1$. These subspaces are ``linear'' by taking intersections with linear subspaces. {\color{red}todo:lots of stuff} 
+
+\item \textbf{Poincar\'e disk model}: This model helps us visualize the ``boundary at infinity''. This is a conformal model, which means locally the metric looks like a scaling of the Euclidian metric. Here $\mathbb{D}^n \subseteq \R^n $ denotes the unit open disk, and our metric is given by $\frac{4 \cdot ds ^2}{(1- \| x\|^2)^2}$. It looks like the Euclidian metric near the origin, but as we get farther (closer to the boundary) the metric scales a lot. The choice of scaling ensures the curvature is $-1$, and this is a way to visualize the boundary at $\infty$, denoted $\partial \H^n $. Topologically, this is identified as $\partial \mathbb D^n $. We can topologize $\H^n  \cup \partial \H^n $ as $\overline{\mathbb D^n } $ (the \emph{closed} unit ball). Furthermore,
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+        \item Any isometry on $\H^n $ extends to a homeomorphism on the closure $\overline{\H^n }$. 
+        \item Any \emph{geodesic} in this model has two distinct points on $\partial \H^n $, where geodesics are circular arcs perpendicular to $\partial \mathbb D^n $.
+    \end{itemize}
+    Isometries are M\"obius transformations preserving the unit disk $\mathbb D^n $. What are M\"obius transformations? In the two dimensional case, these are like fractional linear maps on the complex plane/sphere. We can think of these as maps that preserve angles, like Euclidian singularities, translations, and inversions. In particular, we can generate all these M\"obius transformation by inversions, which map round spheres/hyperplanes to round spheres/hyperplanes.
+
+    For example, consider a round sphere with radius $r$ centered at a point $p$ in  $\R^2 \cup \{\infty\} $. Then $p \leftrightarrow \infty$, where $d \cdot d'=r^2$ {\color{red}todo:figure} 
+
+    Refractions can be thought of as inversions $S(p,r)$ with respect to hyperplanes with infinite radius. The general form is $f(x)=\lambda\cdot A i(x)+b$ where $A \in \mathrm{O}(n), \lambda>0,b \in \R^n ,i$ is inversion or the identity.

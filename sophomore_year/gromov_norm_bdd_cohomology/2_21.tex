@@ -1,0 +1,55 @@
+\section{More on quasimorphisms} 
+Last time we had the comparison map $c \colon H_b^n (G;\R) \to H^n (G;\R)$, and we were trying to understand what is $\ker c$. We had quasimorphisms $\varphi  \colon G \to \R$ with the property that $|\varphi (gh)-\varphi (g)-\varphi (h)| \leq D(\varphi )$ for all $g,h$. This leads to a vector space $\hat{Q}(G)$ of all quasimorphisms, with a homogeneous subspace $Q(G)$ and another subspace $H^1(G;\R)$. Another containment is the bounded functions $C^1 _b(G;\R) \supseteq \hat{Q}(G)$. We were trying to show that $\hat{Q}(G)= C^1_b(G;\R) \oplus Q(G)$, and we have already shown how to get the homogeneous component (from homogenization).
+
+Let $\varphi _+=\varphi +D(\varphi )$. Then $\varphi (gh)-D(\varphi ) \leq \varphi (g)+\varphi (h) \leq \varphi (gh)+D(\varphi )$. So 
+\begin{align*}
+    \varphi _+(g)+\varphi _+(h)&= \varphi (g)+\varphi (h) + 2 D(\varphi )\\
+                               & \geq \left( \varphi (gh)-D(\varphi ) \right) +2D(\varphi )\\
+                               &= \varphi (gh)+D(\varphi )\\
+                               &= \varphi_+(gh),
+\end{align*}which implies $\varphi_+(g^n )$ is subadditive. Similarly, define $\varphi _-=\varphi -D(\varphi )$, doing an analogous calculation shows that $\varphi _-(g^n )$ is sup-additive, so $\varphi _-(g^{m+n}) \geq \varphi _-(g^m)+\varphi _-(g^n )$. Now we have bounds on both sides in a sense. Explicitly, we have $\varphi _-(g) \leq \varphi (g) \leq \varphi _+(g)$. Therefore \[
+\varphi _-(g) \leq \frac{\varphi -(g^n )}{n}\leq \frac{\varphi _+(g^n )}{n}\leq \varphi _+(g).
+\] The sup-additive sequence has an upper bound and the sub-additive sequence has a lower bound. Taking the limit, by our analysis lemma, we have \[
+\sup \frac{\varphi _-(g^n )}{n}= \lim \frac{\varphi _-(g^n )}{n}=\lim _{n \to +\infty}\frac{\varphi _+(g^n )}{n}= \inf \frac{\varphi +(g^n )}{n}.
+\] So $\varphi _+(g^n )= \varphi _-(g^n )+2D(\varphi )$. By the squeeze lemma, $\sup \frac{\varphi _-(g^n )}{n}=\lim \frac{\varphi ^n (g)}{n}= \overline{\varphi }(g)$. So the limit exists, and we actually have two new descriptions of our limit. On one hand, $\overline{\varphi }(g)=\inf _{n\geq 1}\frac{\varphi _+(g^n )}{n}\leq \varphi _+(g)=\varphi (g)+D(\varphi )$ (for $n=1$). On the other hand, $\overline{\varphi }(g)=\sup _{n\geq 1}\frac{\varphi -(g^n )}{n}\geq \varphi _-(g)=\varphi (g)-D(\varphi )$. Together, $|\overline{\varphi }(g)-\varphi (g)| \leq D(\varphi )$ for every $g$. So $\overline{\varphi }(g)$ is only a bounded distance away from $\varphi (g)$, which implies $\overline{\varphi }$ itself is a quasimorphism (sum of two quasimorphisms).
+The last thing to show is that $\overline{\varphi }$ is a homogeneous quasimorphism. This follows by the limit definition. We have \[
+    \overline{\varphi }(g^k) =\lim _{n\to \infty}\frac{\varphi (g^{kn})}{n}=k \lim _{n \to \infty}\frac{\varphi (g ^{kn})}{kn}=k \overline{\varphi }(g).
+\] However, this only works for $k \in \Z_+$. If $k=0$, $\overline{\varphi }(\id)=\lim \frac{\varphi (\id ^n )}{n}=0$. If $k $ is negative, then $\overline{\varphi }(g^{-k})=k \overline{\varphi }(g ^{-1})$, so if $\overline{\varphi }(g ^{-1})=- \overline{\varphi }(g)$ then we are good. To see why adding them up gives $|\varphi (g^n )+\varphi (g^{-n}) - \varphi (\id)| \leq D(\varphi )$, which implies $\varphi (g^n )+\varphi (g^{-n})$ is bounded. 
+
+\begin{lemma}
+    $\overline{\varphi }$ is a well-defined homogeneous quasimorphism, moreover, we have an explicit bound $| \overline{\varphi }-\varphi |_{\infty}=\sup_g | \overline{\varphi }(g)-\varphi (g)|\leq D(\varphi )$.
+\end{lemma}
+This summarizes our previous discussion.
+\begin{remark}
+    Recall that $D(\varphi +\psi) \leq D(\varphi )+D(\psi)$, and for $f$ bounded we have $D(f) \leq 3|f|_{\infty}$ by the triangle inequality. In our case, $D(\overline{\varphi }) \leq D(\overline{\varphi }-\varphi )+D(\varphi ) \leq 3D(\varphi )+D(\varphi ) = 4D(\varphi )$. Actually, we have a better bound $D(\overline{\varphi }) \leq 2D(\varphi )$. But we may not need this fact.
+\end{remark} 
+\begin{prop}
+    $\hat{Q}(G)=Q(G)\oplus C^1_b(G)$.
+\end{prop}
+\begin{proof}
+    We have 
+    \[
+        \varphi = \underset{\in Q(G)}{\overline{\varphi }} + \underset{\in C^1_b(G)}{(\varphi -\overline{\varphi })} ,
+    \] 
+    which means $\hat{Q}(G)=Q(G)+C^1_b(G)$. To show $Q(G) \cap C^1_b(G)=0$, let $\varphi  \in Q(G) \cap C^1_b(G)$. Then $|\varphi (g)|= |\varphi (g^n ) / n| \leq |\varphi |_{\infty}/n \xrightarrow{n \to \infty} 0$, and we are done.
+\end{proof}
+\begin{prop}
+    We have an exact sequence \[
+        0 \to H^1(G) \to Q(G) \xrightarrow{\delta} H^2_b(G;\R) \xrightarrow cH^2(G;\R).
+    \] 
+\end{prop}
+\begin{proof}
+    Exactness at the first entry means that $H^1(G) \to Q(G)$ is injective, which is true since it is defined as in inclusion. So we have to show two things:
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+\item $\ker \delta = H^1(G)$ 
+\item $\im \delta = \ker c$.
+    \end{enumerate}For (1), let  $\varphi  \in Q(G)$. Then $(\delta \varphi ) (g,h)= \varphi (g)+\varphi (h)-\varphi (gh)$. So $\delta\varphi =0 \iff \varphi $ is a homomorphism, i.e. $\varphi  \in H^1(G)$. For (2), the easier direction is to show $\im \delta \subseteq \ker c$. This is by definition, since $\delta ^2=0$. 
+        So $\delta \varphi $ is a coboundary in the ordinary sense, i.e. $[\delta \varphi =0 $ in $H^2(G;\R)$. 
+
+        The harder part is to show $\im \delta \supseteq \ker c$. Let $\alpha  \in H^2_b(G;\R)$ such that $c(\alpha )=0 \in H^2(G;\R)$, or $\alpha =\delta \varphi $, $\varphi  \colon G \to \R, \varphi  \in C^1(G;\R)$. Since $\alpha $ is a bounded class, $\delta \varphi $ is bounded which implies $\varphi $ is a quasimorphism. To show that this is homogeneous, $\varphi -\overline{\varphi }$ is bounded, so $[\delta \varphi ]=[\delta \overline{\varphi }]=\alpha  \in H^2_b(G;\R)$. Then $\overline{\varphi }\in Q(G)$, which implies $\alpha  \in \im \delta$.
+\end{proof}
+\begin{cor}
+    $\ker c = Q(G) / H^1(G;\R)=\im \delta$.
+\end{cor}
+Next time we will talk about many different kinds of quasimorphisms.

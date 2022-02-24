@@ -1,0 +1,58 @@
+\section{Bounded cohomology} 
+{\color{red}todo:was late, missed definition of $\delta_n  \colon C^n (G;R)  \to C^{n+1}(G;R) $}. bounded functions, $R$ is the size.   sup norm over simplices. bounded funtion is still bounded over coboundary. hence we get bounded cohomology $H^n _b(G;R)=Z^n _b/ B^n _b.$ equipped with nan inudced norm $\sigma \in H^n _b(G;R)$. $\|\alpha A\|_{\infty}=\inf _{[f]=\sigma,f \in Z^n _b{G;R} }|f|_{\infty}$. 
+
+\begin{definition}[]
+    There is a comparison map $c \colon H^n _b(G;R) \to H^n (G;R)$ induced by $C^n _b(G;R) \to C^n (G;R)$.
+\end{definition}
+Some questions:
+\begin{enumerate}[label=(\arabic*)]
+\setlength\itemsep{-.2em}
+    \item Given $\sigma \in H^n (G;R)$, is there a $\sigma \in \im \sigma$. Related question: is $c$ surjective? Furthermore, if $\sigma_b \mapsto  \sigma$ by $c$, is there a natural $\sigma_b$? Does it carry any extra info?
+    \item What is $\ker(c)$? What do they correspond to?
+\end{enumerate}
+
+\begin{example}
+    Some examples in lower degrees.
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+\item For degree $n=0$, the only 0-cochain is a constant function, which are always bounded. The 0-cochain is also a 0-cycle, there is nothing interesting; so $H^0_b(G;R)=H^0(G;R)=R$.
+\item For degree $n=1$, let $f \in C^1 (G;R)$, i.e. $f \colon G \to R$. The coboundary $(\delta f)(g,h)=f(g)+f(h)-f(gh)$. We have $f \in Z^1(G;R)$ iff $f \colon G \to R$ is a homomorphism (coboundary zero). If $f$ is bounded, consider $|f(g^n )|=|n f(g)| \leq C$, so $|f(g)|=0$. Therefore if $f$ is a homomorphism then $f=0$, so $Z^1_b(G;R)=0$, which implies $H^1_b(G;R)=0$. In general, the comparison map is not an isomorphism.
+    \end{itemize}
+    A general idea to obtain $\sigma \in \ker c$. Consider $C^{n-1}\xrightarrow{\delta} C^n  \xrightarrow{\delta^2} C^{n+1}$. For $f \in C^{n-1}$, we know $\delta ^2=0$, so $\delta f \in Z^n $. As a cohomology class it is trivial, but it might be a nontrivial bounded cohomology class. If $\delta f$ is bounded, then $[\delta f] \in Z^n _b$. This gives us a class in $H^n _b$. Furthermore, $[\delta f] \in \ker c$.
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+\item When $n=2$, $f \in C^1(G;\R)$ is a function $G \to \R$. We hope that $(\delta f)=f(g)+f(h)-f(gh)$ is bounded. This leads to the following definition.
+    \end{itemize}
+\end{example}
+    \begin{definition}[]
+        A function $\varphi \colon G \to \R$ is a \textbf{quasimorphism} if $D(\varphi ):=\sup _{g,h \in G}|\varphi (g)+\varphi (h)-\varphi (gh)|<\infty$. The number $D(\varphi )$ is called the \textbf{defect} of $\varphi $. We say $\varphi $ is \textbf{homogeneous} if $\varphi (g^n )=n \varphi (g)$ for all $n \in \Z$, $g \in G$.
+    \end{definition}
+    \begin{example}
+       Some examples:
+       \begin{enumerate}[label=(\arabic*)]
+       \setlength\itemsep{-.2em}
+           \item Homomorphisms are homogeneous quasimorphisms.
+            \item Bounded functions are quasimorphisms, but never homogeneous.
+            \item Quasimorphisms form a real linear space: you can multiply by a scalar and add them. 
+       \end{enumerate}Denote the space of all quasimorphisms by $\hat{Q}(G)$, and there is a containment $H^1(G;\R) \subseteq Q(G) \subseteq \hat{Q}(G) \subseteq C^1_b(G;\R)$ where $Q(G)$ denotes the linear subspace of homogeneous quasimorphisms, and  $C^1_b(G;\R)$ are bounded functions.
+    \end{example}
+    \begin{prop}
+        The space of all quasimorphisms decomposes as $\hat{Q}(G)=Q(G)\oplus C^1_b(G;\R)$. 
+    \end{prop}
+    We will prove this later!
+    \begin{definition}[Homogenization]
+        Take an arbitrary $\varphi  \in \hat{Q}(G)$, then define the homogenization $\overline{\varphi }$ by $\overline{\varphi }(g)=\lim _{n \to +\infty}\frac{\varphi (g^n )}{n}$.
+    \end{definition}
+    Often times we need check whether this limit exists. It turns out $\overline{\varphi }$ is well-defined, homogeneous, and a quasimorphism. To see well-definedness, we quote the following definition from analysis.
+
+    \begin{lemma}
+        Consider $\{a_n \} $ a sub-additive sequence, which means $a_{m+n} \leq a_m+a_n $ for all $m,n \geq 1$. Then $\lim _{n \to +\infty}a^n  /n= \inf _{n\geq 1}a^n  / n$. In particular, the limit exists if  $a_n /n$ is bounded below.
+    \end{lemma}
+    \begin{proof}
+       We have \[
+       \overline{\lim} \frac{a_n}{n} \geq \underline{\lim} \frac{a_n }{n} \geq \inf _{n \geq 1} \frac{a_n }{n}
+       \] by definition. We want tos how that $\inf _{n  \geq 1} \frac{a_n }{n}\geq \overline{\lim} \frac{a_n }{n}$. Fix $m \leq 1$, $n=qm+r$, $0 < r \leq m$ by the division algorithm. If $n>m$, then $a_n  \leq a_m+a_{n-m} \leq \cdots \leq q a_m+a_r$. To bound $a_r$, introduce $B=\max _{0 < r \leq m}a_r$. Then this is less than or equal to $qa_m+B$. By the inequality above, \[
+       \frac{a_n }{n}\leq \frac{aq_m+B}{qm+r}= \frac{a_m + \frac{B}{q}}{m+ \frac{r}{q}} \xrightarrow{n \to \infty} \frac{a_m}{m}.
+       \] So $\overline{\lim} a_n  / n \leq a_m / m$. Taking $m$ arbitrary, this implies $\overline{\lim} a_n  / n \leq \inf _{m \geq 1}a_m / m$.
+    \end{proof}
+    We will see the rest next lecture.

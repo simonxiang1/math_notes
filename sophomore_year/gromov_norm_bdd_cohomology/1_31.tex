@@ -1,0 +1,70 @@
+\section{Straightening} 
+\begin{theorem}\label{volhyper} 
+    Let $M^n $ be a hyperbolic closed orientable manifold. Then $\|M\|_1 \geq \mathrm{vol}(M) / v^n $, where $v_n  =\sup \mathrm{vol}(\Delta ^n )< \infty$, $v_2=\pi$, $\Delta ^n $ hyperbolic.
+\end{theorem}
+\begin{lemma}
+    $v_2=\pi$.
+\end{lemma}
+\begin{proof}
+    There are two proofs.
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+\item A hyperbolic triangle with angles $A,B,C$ has the formula $\mathrm{area}=\pi-(A+B+C)$. This implies that $\sup =\pi$.
+\item For any hyperbolic triangle, $\mathrm{area}(\Delta )< \mathrm{area}(\Delta ')$ where $\Delta '$ is an ideal hyperbolic triangle. We have shown that $\mathrm{area}(\Delta ')$ is $\pi$, so $\sup=\pi$. Why can we always bound a triangle by an ideal triangle? Take an arbitrary hyperbolic triangle and a point in its interior, then take geodesics toward the boundary. This results in an ideal triangle strictly containing the original. This argument works in higher dimensions as well.\qedhere
+    \end{enumerate}
+\end{proof}
+
+About \emph{straightening}; consider the linear map $\mathrm{str} \colon C_k(M; \R) \to C_k(M; \R)$ on the basis $C \colon \Delta ^k \to M$. This lifts to a map $\widetilde C \colon \Delta ^k \to \H^n $.
+\[
+\begin{tikzcd}
+                                              & \H^n \arrow[d, "P"] \\
+\Delta^k \arrow[ru, "\widetilde C"] \arrow[r] & M                  
+\end{tikzcd}
+\] 
+Recall $\widetilde {\mathrm{str}} \colon C_k(\H^n ;\R) \to C_k(\H^n ;\R)$.
+\begin{enumerate}[label=(\arabic*)]
+\setlength\itemsep{-.2em}
+    \item For every $g \in \mathrm{Isom}(\H^n )$, $g\cdot  \widetilde{\mathrm{str}}(\widetilde C)= \widetilde {\mathrm{str}} (g \cdot \widetilde C$). Then define $\mathrm{str}(C)=p \cdot \widetilde {\mathrm{str}} (\widetilde c)$.
+    \item Straightening commutes with the boundary, or $\partial \cdot \widetilde{\mathrm{str}}=\widetilde{\mathrm{str}} \cdot \partial $.
+\end{enumerate}
+One might object that there are different choices for the lift, but thesea ll differ by a transformation, and property (1) says we can move the $g$ outside the list. Translating and projecting is the same as projecting onto the translation, so this is well-defined. A nice property is that the boundary also commutes with the straightening downstairs, or $\partial \cdot \mathrm{str}=\mathrm{str}\cdot \partial $, where $\partial \colon C_{k+1}(M; \R) \to C_k(M;\R)$.
+Any linear map commuting with the boundary induces a map on the homology, so $\mathrm{str}$ induces a map $\mathrm{str}_* \colon H_k(M;\R) \to H_k(M;\R)$.
+\begin{lemma}
+    $\mathrm{str}_* =\id_{H_k(M;\R)}$.
+In other words, straightening does not change homology classes.
+\end{lemma}
+\begin{proof}
+    When we do straightening, the new things are homotopic to the stuff we had earlier. Take a linear homotopy on $\R^{n+1}$, then project to $\H^n $. This implies that $\mathrm{str}_*=\id$.
+\end{proof}
+\begin{lemma}
+    $| \mathrm{str}_* c|_1 \leq |c|_1$.
+\end{lemma}
+\begin{cor}\label{str} 
+    For every $\sigma\in H_k(M; \R) $, we have $\|\sigma\|_1=\inf _{[c]=\sigma}|c|_1$ where $c$ is straight.
+\end{cor}
+This is the key takeaway from the straightening operation; to calculate the norm on homology classes, all we have to do is take it over straightened classes.
+\begin{proof}[Proof of \cref{volhyper}]
+    Suppose $[M]$ is represented by some cycle $c=\sum  \lambda_i c_i $. By \cref{str}, we may assume that each $c_i $ is a straight hyperbolic $n$-simplex. This implies $\mathrm{vol}(c_i )\leq v_n $. Let $\mathrm{vol}$ be the volume form on $M$, representing a cohomology class dual to the fundamental class. Then
+    \[
+        \mathrm{vol}(M)=\int_M \mathrm{vol}=\left\langle [M],\mathrm{vol} \right\rangle =\left\langle \sum \lambda_i  c_i , \mathrm{vol} \right\rangle =\sum \lambda_i \left\langle c_i , \mathrm{vol} \right\rangle =\sum \lambda_i \mathrm{vol}(c_i ) \leq \sum |\lambda_i | \cdot \mathrm{vol}(c_i ) \leq v_n  \cdot \sum |\lambda_i |=v_n \cdot |c|_1. 
+    \] This implies $|c|_1 \geq \frac{\mathrm{vol}(M)}{v_n }.$ Since $c$ is arbitrary, $\|M\|_1 \geq \frac{\mathrm{vol}(M)}{v_n }$. In the case $n=2$, $\mathrm{vol}(M)=-2\pi \chi(M)$, $v_2=\pi$, which implies $\|M\|_1 \geq -2\chi(M)$.
+\end{proof}
+\begin{remark}
+    The volume form is not a bounded function on all singular simplices. However, it is bounded on straight simplices. We have $\mathrm{vol}\circ \mathrm{str}$ bounded, representing the volume class. This leads to bounded cohomology, asking which cocycles can be bounded.
+\end{remark}
+\begin{remark}
+    It is not crucial to do this for something exactly hyperbolic. We can do a similar thing for $M$ negatively curved and closed, the argument helps us show that $\|M\|_1>0$.
+\end{remark}
+\begin{namedthm}{Conjecture (Gromov)} 
+    Let $M$ be closed, non-positively curved with negative Ricci curvature. Then $\|M\|_1>0$.
+\end{namedthm}
+\begin{prop}
+    If $M$ is closed hyperbolic, then $\|\cdot \|_1$ is an honest norm (not just a semi-norm) on $H_k(M;\R)$ for every $k \geq 2$, i.e. $\sigma\neq 0 \in H_k(M;\R)$ implies $\|\sigma\|_1>0$.
+\end{prop}
+\begin{proof}
+    There is a pairing $H_k(M;\R) \times H^k(M;\R) \to \R$ which is non-singular. In other words, $\sigma \in H_k(M;\R)$ corresponds to $\sigma^* \in H^k(M;\R)$ such that $\langle \sigma,\sigma^* \rangle \neq 0$. More concretely, we can think of $H^k(M;\R)$ as de Rham cohomology where the classes are differential forms, and integrate the $k$-forms on something $k$-dimensional. Represent $\sigma^*$ by some differential form $\omega$. Let $\|\mathrm{vol}\|_{\infty}:=\sup|\omega_p(v_1, \cdots ,v_k)|$ where we take the supremum over $p \in M$, the $v_1, \cdots ,v_k \in T_p(M)$ are orthogonal, and $\|v_i \|=1$. By compactness $\sup |\omega_p(v_1,\cdots ,v_k)| < \infty$; then we can do the same pairing argument where $|\langle \sigma,\sigma^* \rangle |=\left|\left\langle  \sum \lambda_i c_i ,\omega\right\rangle\right| \leq \sum |\lambda_i | \cdot \left( \|\mathrm{vol}\|_{\infty }\cdot \mathrm{vol}(c_i ) \right) $. 
+    Then $\left. \frac{\omega}{\|\mathrm{vol}\|_{\infty}} \right| _{c_i }\leq \left. \mathrm{vol} \right| _{c_i }$, {\color{red}todo:unfinished} 
+\end{proof}
+The point is we can do a similar argument for other cohomology classes as well. This argument is a powerful tool; we can do pairing with differential forms to get a lower bound. We saw that everything vanishes on $H_1$, why doesn't this argument work? This is because $v_1= \infty$ (not-bounded).
+
+Next time we will continue and give a proof that $v_n $ is a finite number.

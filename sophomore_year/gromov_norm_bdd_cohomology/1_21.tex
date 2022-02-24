@@ -1,0 +1,60 @@
+\section{Simplicial volume} 
+Recall that last time we introduced the simplicial norm. We took a topological space $X$ and considered the singular homology group $H_n (X ;\R) := Z_n (X) / B_n (X)$. Given every homology class $\sigma \in H_n (X;\R)$, we can represent it by cycles, aand every cycle is represented by simplices. So we minimize the number of simplices, and so $\| \sigma\|_1= \inf _{[C]=\sigma,C \in Z_n (X)}|C|_1$.
+What do we mean by semi-norm? The conditions are non-negativity ($\|\sigma\|_1 \geq 0$), linearity ($\| \lambda \sigma\|_1 = |\lambda | \cdot \|\sigma\|_1$, and the triangle inequality ($\|\sigma_1+\sigma_2\|_1 \leq \|\sigma_1\|_1 + \| \sigma_2\|_1$). The only difference is that you can have non-trivial elements with zero norm. 
+
+\subsection{Rational coefficients}
+What happens if we use rational coefficients instead of real coefficients? If we are able to represent some homology class $\sigma$ by a rational cycle, all we need to preserve is that the subspace $B_n $ is a rational subspace. This is because the boundary map $\partial _{n+1}\colon C_{n+1} \to C_n $ is rational ({\color{red}todo:see figure}). 
+
+\begin{lemma}
+    If $\sigma \in H_n (X; \Q)$, then $\| \sigma\|_1= \inf _{[C]=\sigma, C \in Z_n (X;\Q)}|C|_1$. In general, for $\sigma \in H_n (X;\R)$, for every $\varepsilon >0$ there exists a $\sigma' \in H_n (X;\Q)$ such that $\| \sigma- \sigma'\|_1 <\varepsilon $. In other words, rational homology classes are dense in real homology classes.
+\end{lemma}
+A detailed proof is in the notes {\color{red}todo:references}. Sometimes we would like to work with rational cycles, so up to scaling we are working with integral cycles. This leads to literally counting simplices, which can be useful. We could also consider the \emph{relative homology classes}; if $A \subseteq X$, then $H_n (X, A ;\R)$ leads to another simplicial norm $\| \cdot \|_1$. Many times rational homology classes can be represented by manifolds (in degrees two or three), which leads to integral classes being more geometric in nature.
+
+\subsection{Simplicial volume}
+Let $M$ be an orientable, connected, and compact manifold with boundary $\partial M$. What we know from algebraic topology is that since $M$ is compact and connected, $H_n (M ,\partial M ;\Z) \simeq  \Z$. The orientation gives us a choice of generator $[M]$, which is the fundamental class. A more geometric description is this: suppose we can triangulate our manifold. Then using our given orientation we can take the formal sum of all the simplices involved in the triangulation, and so the fundamental class is the sum of the top simplices. The simplicial volume is then $\| [M]\|_1$;  we denote this by $\|M\|_1= \| [M]\|_1$.
+
+\begin{remark}
+    Some remarks;
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+\item The choice of orientation doesn't matter because the two choices differ by a negative sign, and the norm ignores negative signs. So we don't have to choose an orientation. If $M$ is non-orientable, consider the orientable double cover $N$ and divide by two ($\| M\|_1= \| N\|_1 /2 $).
+\item If $M= \amalg _{i=1}^k M_i $, then $\|M\|_1= \sum_{i=1}^{k} \|M_i \|_1= \left\| \sum_{i=1}^{k} [M_i ]\right\|_1$.
+\item If we have a map $f \colon M^n  \to N^n $ where $M^n $ and $N^n $ are both degree $n$ occ\footnote{Orientable, connected, closed. We will use these assumptions often.} manifolds, then $f_*[M] \in H_n (N; \Z)=\langle [N] \rangle $, which implies $f_*[M]=\deg (f) \cdot [N]$, which subsequently implies that $\deg (f) \in \Z$. Here orientation matters.
+    \end{itemize}
+\end{remark}
+\begin{lemma}
+    If $f \colon M^n  \to N^n $ with $M,N$ occ, then $\deg (f) \cdot \|N\|1 \leq \|M\|_1$. Moreover, if $f$ is a finite covering map, then equality holds.
+\end{lemma}
+\begin{proof}
+    Functoriality tells us that $\|f_* [M]\|_1 \leq \|M\|_1$. By definition, $\| \deg (f) \cdot [N]\|_1$ which is equal to $|\deg (f)| \cdot \|N\|_1$. So the inequality follows easily from functoriality. To prove equality, we want to lift our triangulation upstairs to find the fundamental class of $M$. Our covering provides a way to do this; if $f$ is a covering map, suppose $[N]=[c]$, where $c= \sum \lambda_i c_i $. Each $c_i $ lifts to some $\widetilde {c_i }^j  $, where $j=1,2,\cdots ,d.$ Then $\widetilde c= \sum _i  \sum _{j=1}^d \lambda_i  \widetilde{c_i } ^j $, and $f_*[\widetilde c]=\left[\sum d \lambda_i c_i\right]=d[c]=d[N]=\pm f_*[M] $. We conclude that $[\widetilde c]=\pm [M]$. Explicitly, $| \widetilde c|_1=d \cdot \sum _i |\lambda_i |=d \cdot |c|_1$. Since $c$ is arbitrary, $\| M\|_1 \leq d \cdot \| N\|_1=|\deg (f) |\cdot \|N\|_1$, and functorality tells us that equality holds.
+\end{proof}
+
+From here, we can deduce many examples.
+\begin{cor}
+    If an occ manifold $M$ admits a map $f \colon M \to M$ with $|\deg(f)|>1$, then $\|M\|_1=0$.
+\end{cor}
+\begin{proof}
+    We have $\|M\|_1<\deg (f) \cdot \|M\|_1 \leq \|M\|_1$ if $\|M\|$ is positive, which is a contradiction. So $\|M\|_1=0$. The intuition is that if a manifold covers itself several times, we cannot make sense of volume.
+\end{proof}
+
+\begin{example}
+    Some examples;
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+        \item The circle $S^1 $ has a self map of degree $n$ for every integer $n$. and so $\|S^1 \|_1=0$.
+        \item We can generalize this by taking products, and so $T^n =(S^1 )^n $ satisfies $\|T^n \|_1=0$.
+        \item Another way to generalize this is to take higher dimensional spheres, constructing the degree map in a similar way. So $\|S^n \|_1=0$ when $n\geq 0$.
+        \item If $M=S^1  \times N$ (product of some manifold with a circle), we can keep the second factor by the identity and take the degree map for the circle, which results in a self map of non-trivial degree. So $\|M\|_1=0$.
+    \end{enumerate}
+    What is a non-trivial example? We'll probably cover this next time.
+\end{example}
+Now we can go back to the simplicial norm using our understanding of simplicial volume.
+\begin{lemma}
+    If $\sigma \in H_n  (X;\R)$ such that there exists a map $f \colon S^n  \to X$ where $f_*[S^n ]=\sigma$, then $\|\sigma\|_1=0$.
+\end{lemma}
+\begin{proof}
+    This again follows by functoriality; $\|\sigma\|_1= \|f_* [S^n ]\|_1 \leq \|[S^n ]\|_1=0$.
+\end{proof}
+\begin{cor}\label{h1vanish} 
+    The norm $\|\cdot \|_1$ vanishes on $H_1$.
+\end{cor}

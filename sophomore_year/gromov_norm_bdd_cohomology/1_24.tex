@@ -1,0 +1,27 @@
+\section{ok} 
+We prove the corollary from last time.
+\begin{proof}[Proof of \cref{h1vanish}]
+    We approximate by rational homology classes. It suffices to show that $\|\sigma\|_1=0$ for any \emph{rational} $\sigma$, which implies there is a $c=\sum \lambda_i c_i ,\ \lambda_i  \in \Q$ such that $[c]=\sigma$. This subsequently implies there is a $N \in \Z_+$ such that $N\cdot c=\sum \mu_i  c_i ,\ \mu _i  \in \Z$ is an integral cycle. This reduces the problem to integral cycles.
+    \begin{claim}
+        For any integral 1-cycle $\sum \mu _i  c _i ,\ \mu _i  \in \Z$ in $X$, there is a map $f \colon \amalg _{j=1}^k S^1 _i  \to X$ such that $f_*\left( \sum_{j=1}^{k} [S^1 _i ] \right) =\left[ \sum _i  \mu_i c_i  \right] $.
+    \end{claim}
+    Given this claim, $\| \sum \mu _i  c_i \|_1=\left\| \sum_{j=1}^{k} f_*[S^1 _i ]\right\|_1 \leq \sum_{j=1}^{k} \|f_* [S^1 _i ]\|_1=0,$ which implies that $\left\|\left[ \sum \mu _i  c _i  \right] \right\|_1=0$ for any integral cycle.
+    
+    We are missing a proof of the claim.
+    \begin{proof}[Proof of claim]
+        Gluing $\mu_i $s into a circle? Not sure what happened here. The fact that $\partial \left( \sum \mu _i  c_i  \right) =0$ implies there is a pairing on the set of end points of this collection of segments. So this is a closed 1-manifold, equal to $\amalg _j  S^1 _j $.
+    \end{proof}
+    This completes the overall proof.
+\end{proof}
+\begin{remark}
+    In dimension 2, an integral homology class is represented by $f \colon \amalg _{j=1}^kS _j  \to X$ such that $\sigma= f_* \sum _{j=1}^k [S_j ]$, where the $S_j $ are closed connected oriented surfaces. The situation is more complicated in higher dimensions.
+\end{remark}
+Now we compute the volume of surfaces. We already know that $\| S^2\|_1= \| T^2\|_1=0$.
+\begin{theorem}
+    Let $S$ be an occ surface. Then the simplicial volume of $S$ is $\|S\|_1= -2 \chi(S)$ if $S$ has genus two or above.
+\end{theorem}
+\begin{proof}
+    Today we prove that $\|S\|_1 \leq -2\chi(S)$. With a hyperbolic metric, $\mathrm{area}(S)=-2\pi \cdot \chi(S)= \pi \| S\|_1$, where $\pi$ is the area of the ideal hyperbolic triangle. By definition, $\|S\|_1= \inf_{[c]=[S]} |c|_1\leq |c|_1$. Recall that if $S$ has a triangulation with $f$ triangles, then we set a cycle with $f$ triangles representing $[S]$, which implies $\|[S]\|_1=f$. Also recall taht $\chi(S)=v-e+f$, and $3f=2e$. Together these implies that $\chi(S)=v-\frac{3f}{2}+f=v-\frac{f}{2}$. So $2\chi(S)=2v-f$, which implies that $2v-2\chi(S)$. We may choose $v=1$, then $\|S\|_1\leq 2-2\chi(S)$. How do we get ride of the two? Let $f \colon S' \to S$, then $\chi(S')=d\chi(S)$, so $\|S'\|`_1=d\| S\|_1$. So $d \|S\|_1 \leq 2-2d \chi(S)$, and $\|S\|_1 \leq \frac{2}{d}-2\chi(S)$. Since $d$ can be arbitrarily large, take $d \to \infty$ and $\| S\|_1 \leq -2\chi(S)$.
+
+    The reversed inequality uses ``straightening'', which replaces an arbitarary singular cycle by one only involving hyperbolic simplices. Then use hyperbolic volume to get the bound.
+\end{proof}

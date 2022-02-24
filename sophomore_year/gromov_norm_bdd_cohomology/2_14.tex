@@ -1,0 +1,69 @@
+\section{Co-Hopfian groups and group homology} 
+\subsection{Co-Hopfian groups}
+\begin{definition}[]
+    A group $G$ is \textbf{co-Hopfian} if every \emph{injective} $G \hookrightarrow G$ is an isomorphism.
+\end{definition}
+\begin{example}
+    Some examples:
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+        \item Finite groups are co-Hopfian.
+        \item $\Z$ is not co-Hopfian by the map $\Z \xrightarrow{\times 2} \Z$.
+        \item $\Z^n $ is not co-Hopfian.
+        \item $F_n $ is not co-Hopfian. For example, consider $F_2=\langle a,b \rangle $ with the self-map $a \mapsto a, b \mapsto b^2$. If we think of $F_2$ as $\Z * \Z$, then the first $\Z$ maps to itself by the identity and the second maps to itself by squaring.
+        \item Let $G=H *K$ (free product), if $K$ is not co-Hopfian, then $G$ is not co-Hopfian by the same logic as above.
+    \end{enumerate}
+\end{example}
+\begin{lemma}
+    Let $M$ be a complete Riemannian manifold such that sectional curvature is non-positive. Then $M$ is aspherical.
+\end{lemma}
+\begin{proof}
+    The proof is by Cartan-Hamadard, which tells us that the exponential map $T_p M \to M$ is a covering. {\color{red}todo:missed this proof} 
+\end{proof}
+\begin{lemma}
+    Let $M,N$ be connected aspherical $n$-manifolds. Suppose that $\pi_1 M \simeq  \pi_1 N$. Then $M$ and $N$ have the same compactness.
+\end{lemma}
+\begin{proof}
+    Note that $M$ is closed iff $H_n (M ; \Z /2)=\Z /2$.  We have $G=\pi_1 M= \pi_1 N$, and $N$ is closed iff $H_n (N; \Z /2) =\Z/2$, which is true, so we are done.
+\end{proof}
+\begin{lemma}
+    If $M$ is a closed connected aspherical manifold, then any subgroup $H$ of $\pi_1 M$ with $H \simeq  \pi_1 M$ must have finite index.
+\end{lemma}
+\begin{proof}
+    Let $G=\pi_1 M \geq H$ a subgroup. We have an isomorphism $f \colon G \to H$. Let $\widetilde M$ be the covering space corresponding to $H$. Since $M$ is aspherical,  $M$ is $K(G,1)$, which implies that $\widetilde M$ is aspherical and $K(H,1)$. So $f$ can be realized as a homotopy equivalence $\varphi  \colon M \to \widetilde M$. $M$ is compact implies that $\widetilde M$ is compact, so $\pi$ is a \emph{finite} cover. Finite covers correspond to finite index subgroups, therefore $H$ has finite index.
+\end{proof}
+\begin{lemma}
+    Let $M$ be a closed, connected, aspherical, orientable manifold. If $\pi_1M$ is \emph{not} co-Hopfian, then there is a self-map $f \colon M \to M$ with $|\deg f | >1$. So $\|M\|_1=0$.
+\end{lemma}
+\begin{proof}
+    Let $G=\pi_1 M$, $h \colon G \hookrightarrow  G$, $H=\im h$. By the lemma above, we get $\pi$ a finite cover, $\varphi $ a homotopy equivalence..
+\[
+\begin{tikzcd}
+                                                   & H \arrow[d, hook] \\
+G \arrow[r, "h"'] \arrow[ru, "\overset{h}{\cong}"] & G                
+\end{tikzcd}\qquad
+\begin{tikzcd}
+                                        & \widetilde M \arrow[d, "\pi"] \\
+M \arrow[ru, "\varphi"] \arrow[r, "f"'] & M                            
+\end{tikzcd}
+\] 
+    We have $n=\dim M$. The map $\varphi \colon H_n (M;\Z) \xrightarrow{\cong} H_n (M;\Z) $ an isomorphism, $[M] \mapsto  \pm [M]$, so $\deg (\varphi)=\pm 1$. Then we have \[
+        |\deg f| = |\deg \varphi | \cdot |\deg \pi| = |\deg \pi| > 1
+    \] if $H$ is proper, where $\deg \pi$ is the index of $H$ in $G$. By the degree inequality, we get $\|M\|\leq |\deg f| \cdot \|M\| $ which implies $\|M\|_1=0$.
+\end{proof}
+\begin{cor}
+    If $M$ is closed with negative sectional curvature, then $\pi_1 M$ is co-Hopfian.
+\end{cor}
+\begin{proof}
+    Negative curvature implies $M$ is aspherical, which also implies $\|M\|_1=0$. By the lemma above, $\pi_1 M$ is co-Hopfian.
+\end{proof}
+\begin{example}
+    For $S$ occ, $g>1$, then $\pi_1 (S)$ is co-Hopfian.
+\end{example}
+This ends the detour, and we will go back to the algebraic definition of group homology and group cohomology.
+
+\subsection{The bar complex}
+Let $C_n (G;R)$ be the free $R$-module with basis consisting of $n$-tuples $(g_1, \cdots ,g_n)  \in G ^n $. In the same way, define co-chains as the dual $C^n (G;R)=\Hom(C_n (G;R),R)$. The differential $\partial  \colon C_n (G;R) \to C_{n-1}(G;R)$ looks a little strange: \[
+    \partial (g_1,\cdots ,g_n )= (g_2,\cdots ,g_n )+\sum_{i=1}^{n-1} (-1)^i (g_1, \cdots ,g_{i-1},g_i g_{i+1},g_{i+2},\cdots ,g_n )+(-1)^n (g_1,\cdots ,g_n ).
+\] For example, when $n=2$, $\partial (g_1,g_2)=g_2-g_1g_2+g_1$. We can think of this as a map to $\Z$, which is zero when this is a homomorphism. For $n=3$, we have $\partial (g_1,g_2,g_3)=(g_2,g_3)+(g_1g_2,g_3)+(g_1,g_2g_3)-(g_1,g_2)$. This corresponds to the four faces of a tetrahedron. The key thing is that $\partial ^2=0$, and the corresponding homology $H_n (G;R) = \ker \partial  / \im \partial $ is the group homology. Similarly, $H^n (G;R)$ is the group cohomology; we will use this model to explain bounded cohomology. What we will do next time is build a particular $K(G,1)$ space which corresponds to our formala, and from there we will define bounded cohomology.
+

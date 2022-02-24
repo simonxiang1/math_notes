@@ -1,0 +1,37 @@
+\section{ok} 
+\begin{lemma}
+    We have $v_n =\sup _{\Delta ^n }\mathrm{vol}(\Delta ^n ) \leq \pi / (n-1)!$ for all $n\geq 2$, where $\Delta ^n $ is a hyperbolic simplex.
+\end{lemma}
+\begin{proof}
+    We already have $v_2=\pi$. It suffices to look at ideal simplices. We show $v_n  \leq \frac{v_{n-1}}{n-1}$ for all $n\geq 3$, which paired with induction implies the bound. Let $\Delta ^n $ be an arbitrary ideal simplex. Let $s$ map a circle into a half-sphere that sits in $S^{n-1}\subseteq  \R^n $. Then for $x \in \mathbb D^{n-1}, x \mapsto (x,h(x)), \|x\|^2+|h(x)|^2=1.$ So $h(x)^2=1- \|x\|^2$, which implies $h(x) = \sqrt{1- \|x\|^2} $. 
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+\item $\Delta ^n =\{(x,y) \mid x \in \tau_0, y \geq h(x)\} $,
+\item $\tau= S(\tau_0)$.
+    \end{enumerate}
+    We know the metric $ds ^2 /y$ is a Euclidian metric scaled by the last coordinate. So \[
+        \mathrm{vol}(\Delta ^n )= \int _{\Delta ^n } \frac{dx \, dy}{y^n }=\int _{\tau_0}\int_{h(x)}^{\infty} \frac{dy}{y^n } \, dx.
+    \] We can directly compute the inner integral since we are working in the upper half space model; $\int y^{-n}=\frac{y^{-n+1}}{-n+1}$, so this integral becomes $\frac{1}{n-1}\int_{\tau_0}\frac{1}{h(x)^{n-1}}\,dx \overset{\text{key} }{\leq}  \frac{1}{n-1}\cdot \mathrm{vol}(\tau) \leq \frac{v_{n-1}}{n-1}$. Now it remains to show the key inequality.
+    By definition, $\mathrm{vol}(\tau)= \int _{\tau_0}\left. s^* \mathrm{vol} \right| _{\tau}$. We now compare the integrals point by point to see that one dominates the other. The pullback $s^* \mathrm{vol}$ is a 2-form on the unit disk, so we evaluate it on $(e_1,e_2)$. This is equal to the volume of the pushforward, or $\mathrm{vol}(s_* e_1, s_* e_2)> \left. \mathrm{vol} \right| _{\tau}(\text{std basis} )$. What is the standard basis? Whatever it is, the restriction to $\tau$ adds one more vector in the orthonormal direction to make it an orthonormal basis, then evaluate. So this becomes $\frac{1}{h(x)^{n-1}}$. 
+\end{proof}
+\begin{remark}
+    A theorem of Haagerup-Munkholm shows that $v_n $ is uniquely achieved by the \emph{regular} ideal $n$-simplex. So $\mathrm{sym}(\Delta ^n )=S_{n+1}$.
+\end{remark}
+This finishes our estimate. In the two-dimensional case, we have the computation of the volume of surfaces. Let us go back to our theorem.
+\begin{theorem}
+    If $S$ is an orientable closed connected surface with genus $g \geq 1$, then $\| S\|_1=-2 \chi (S)$.
+\end{theorem}
+Note that this also holds in the genus 1 case since both the volume and the Euler characteristic are zero (admits a self map). If $S$ is orientable, closed, and connected, then denote \[\chi^-(S)= \begin{cases}
+        \chi\left( S\right) & g \geq 1\\
+        0 & g \leq 1.
+    \end{cases}\] 
+    With this notation, then $\| S\|_1=-2\chi^- (S)$. If $S$ is orientable closed (without assuming connectedness), then $\chi^-(S)=\sum_{\Sigma \subseteq S} \chi^-(\Sigma)$, where the $\Sigma$ are components of $S$. Equivalently this is $\sum \chi$ over aspherical components. Then $\|S\|_1=-2\chi^-(S)$.
+    \begin{namedthing}{Recall} 
+        Our problem: $\deg(S,S')= \{\deg (f) \mid f \colon S \to S'\} $, $S,S'$ occ. 
+    \end{namedthing}
+    \begin{prop}
+        If $S,S'$ occ with $g \geq 1$, then $\deg(S,S')=\{ d \in \Z \mid |d \chi(S')| \leq |\chi(S)|\}$.
+    \end{prop}
+    \begin{proof}
+        By the degree inequality, we have $f \colon S \to S'$, $|\deg(f)| \cdot \|S'\|_1 \leq \|S\|_1$. It suffices to show that every $d$ satisfies $|d \cdot \chi(S')| \leq |\chi(S)|$. We can find $f \colon S \to S'$ with $\deg(f)=d$. We can compose with a self-homeomorphism to flip the degree, and degree 0 is just a constant map, so focus on $d$ positive. We have $d \cdot |\chi(S')| \leq |\chi(S)|$ by symmetry. We take two kinds of maps.
+    \end{proof}
