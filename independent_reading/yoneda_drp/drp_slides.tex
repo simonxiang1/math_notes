@@ -1,0 +1,205 @@
+\newcommand\N{\ensuremath{\mathbb{N}}} 
+\newcommand\R{\ensuremath{\mathbb{R}}} 
+\newcommand\A{\ensuremath{\mathbb{A}}} %affine space
+\newcommand\Z{\ensuremath{\mathbb{Z}}} 
+\renewcommand\O{\ensuremath{\emptyset}} 
+\newcommand\Q{\ensuremath{\mathbb{Q}}} 
+\newcommand\C{\ensuremath{\mathbb{C}}}
+\newcommand\F{\ensuremath{\mathbb{F}}} %field
+\newcommand\E{\ensuremath{\mathbb{E}}} %field extension
+\renewcommand\P{\ensuremath{\mathbb{P}}} %projective space
+\renewcommand\H{\ensuremath{\mathbb{H}}} %hyperbolic space
+\newcommand\im{\ensuremath{\operatorname{im}}} %image
+\newcommand\rank{\ensuremath{\operatorname{rank}}} %rank
+\newcommand\id{\ensuremath{\operatorname{id}}} %identity map
+\newcommand\grad{\ensuremath{\operatorname{grad}}} %gradient
+\newcommand\curl{\ensuremath{\operatorname{curl}}} %gurl
+\renewcommand\div{\ensuremath{\operatorname{div}}} %divergence
+\newcommand\Gr{\ensuremath{\operatorname{Gr}}} %grassmannian
+\newcommand\Hom{\ensuremath{\operatorname{Hom}}} %linear mappings
+
+\documentclass[xcolor=dvipsnames]{beamer} 
+\usetheme{Copenhagen} 
+\beamertemplatenavigationsymbolsempty
+\definecolor{burntorange}{RGB}{191,87,0}
+\definecolor{utgrey}{RGB}{51,63,72} 
+
+\setbeamercolor{palette primary}{bg=burntorange,fg=white}
+\setbeamercolor{palette secondary}{bg=burntorange,fg=white}
+\setbeamercolor{palette tertiary}{bg=burntorange,fg=white}
+\setbeamercolor{palette quaternary}{bg=burntorange,fg=white}
+\setbeamercolor{structure}{fg=burntorange} % itemize, enumerate, etc
+\setbeamercolor{section in toc}{fg=burntorange} % TOC sections
+\setbeamercolor{subsection in head/foot}{bg=burntorange,fg=white}
+\setbeamercolor{block title example}{fg=white,bg=burntorange}
+%\setbeamercolor{block body example}{fg=white,bg=burntorange}
+
+\usepackage[utf8]{inputenc} 
+\usepackage{float}
+\usepackage{tikz} 
+\usepackage{tikz-cd} 
+\renewcommand\qedsymbol{$\boxtimes$}
+\title{The Yoneda Lemma} 
+\subtitle{A brief introduction to category theory} 
+\author{Simon Xiang} 
+\institute{University of Texas at Austin} 
+\begin{document} 
+    \begin{frame}
+        \titlepage
+    \end{frame}
+
+    \begin{frame}
+\frametitle{Categories} 
+\begin{definition}[]
+    A \textbf{category} $\mathcal{C} $ consists of the following data:
+    \begin{itemize}
+\item A set
+    %\footnote{Technically class, but let's not worry about the set-theoretic details}
+    of objects $\operatorname{Ob}(\mathcal{C} )$,
+\item A set
+    %\footnote{For locally small categories}
+    of morphisms $\Hom (A,B)$ for any two objects $A,B \in \operatorname{Ob}(\mathcal{C} )$,
+    %\footnote{Abuse of notation should be $\operatorname{Ob}(\mathcal{C} )$}
+    \end{itemize}
+    such that for any two morphisms $f \colon A \to B, g \colon B \to C$ there exists a morphism $g \circ f \colon A \to C$. This data is subject to the following rules:
+    \begin{itemize}
+        \item Composition satisfies associativity, 
+        \item There exists an identity morphism $\id_A \colon A \to A$ for any object $A \in \mathcal{C} $ satisfying $f\circ \id_A =\id_B\circ f$ for any $A\xrightarrow fB$.
+    \end{itemize}
+\end{definition}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Examples} 
+        \begin{example}
+        Some typical examples of categories:
+        \begin{itemize}
+            \item Sets
+            \item Groups
+            \item Finite dimensional vector spaces
+            \item Topological spaces
+        \end{itemize}
+        \end{example}
+        \begin{example}
+            Categories with one object can be viewed as monoids, and if every morphism is invertible then they become groups.
+        \end{example}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Functors} 
+        \begin{definition}[]
+            A (covariant) \textbf{functor} $K \colon \mathcal{C}  \to \mathcal{D} $ between two categories $\mathcal{C,D} $ associates to each object of $\mathcal{C} $ an object of $\mathcal{D} $, and to each morphism $[A \xrightarrow{f} B] \in \mathcal{C}$ a morphism $[K(A) \xrightarrow{Kf}K(B)]\in \mathcal{D} $. Furthermore, $K(\id_A)=\id_{K(A)}$ and $K(A \xrightarrow f B \xrightarrow g C)=[K(A) \xrightarrow{Kf} K(B) \xrightarrow{Kg} K(C)]  $ for $A,B,C \in \mathcal{C} $.
+        \end{definition}
+        \begin{example}
+            Some examples of covariant functors:
+            \begin{itemize}
+                \item The functor $\mathsf{Grp} \to \mathsf{Set} $ assigning groups to their base set
+                \item $\mathsf{Set} \to \mathsf{Grp} $ where $A \in \mathsf{Set}  $ gets sent to the free group on $A$ is a functor
+                    %Sets with extra structure (like groups, topological spaces) can be assigned to their ``base'' set, with morphisms corresponding to functions of sets. This gives a covariant functor into $\mathsf{Set} $.
+                \item $\pi_1 \colon \mathsf{Top}_*  \to \mathsf{Grp}  $ is a functor because the induced homomorphism preserves composition and identities
+            \end{itemize}
+        \end{example}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Covariant or contravariant?} 
+        \begin{definition}[]
+            The \textbf{opposite category} $\mathcal{C} ^{\mathrm{op}}$ of a category $\mathcal{C} $ is the same as $\mathcal{C} $ except the direction of the arrows is reversed (every $[A \xrightarrow f B] \in \mathcal{C} $ corresponds to a $[B \xrightarrow{f ^{\mathrm{op}}} A] \in \mathcal{C} ^{\mathrm{op}}$).
+        \end{definition}
+        \begin{definition}[]
+ A \textbf{contravariant functor} is a covariant functor $K \colon \mathcal{C} ^{\mathrm{op}} \to \mathcal{D} $.
+ We could also say a contravariant functor is a covariant functor which switches the direction of the arrows on composition, or $K(A \xrightarrow f B \xrightarrow g C) =[K(C)\xrightarrow{Kg} K(B) \xrightarrow{Kf} K(A)]$. 
+        \end{definition}
+        \begin{example}
+            The dual space functor $\mathsf{Vect} _k^{\mathrm{op}} \to \mathsf{Vect} _k$ sending $V \mapsto  V^*=\Hom(V,k)$, $[ V_1 \xrightarrow T V_2 ]\mapsto ([V_2 \to k] \mapsto [V_1 \xrightarrow TV_2 \to k])$ is contravariant.
+        \end{example}
+    \end{frame}
+    \begin{frame}[fragile]
+        \frametitle{Natural transformations} 
+        \begin{definition}[]
+        Let $F,G \colon \mathcal{C}  \to \mathcal{D} $ be functors. A \textbf{natural transformation}  $\alpha  \colon F \to G$ associates to any object $A \in \mathcal{C} $ a morphism $F(A) \xrightarrow{\alpha _A}  G(A) $ in $\mathcal{D} $, satisfying the naturality diagram below for any $f \colon A \to B$.
+                \begin{figure}[H]
+                        \begin{tikzcd}
+F(A) \arrow[r, "Ff"] \arrow[d, "\alpha_A"] & F(B) \arrow[d, "\alpha_B"] \\
+G(A) \arrow[r, "Gf"]                       & G(B)                      
+\end{tikzcd}
+        \end{figure}
+        \end{definition}
+    \end{frame}
+    \begin{frame}[fragile]
+        \frametitle{Some examples} 
+        \begin{example}[The Yoneda functor]
+        For a category $\mathcal{C}$ with  $A,X,Y \in \mathcal{C} $, $\Hom(-,A) \colon \mathcal{C} \to \mathsf{Set} $ defined by $ X\mapsto \Hom(X,A), [X\xrightarrow fY] \mapsto ([Y\to A] \mapsto  [X\xrightarrow f Y \to A])$ is a contravariant functor. 
+        %\hspace{1cm} If $\mathcal{C} =\mathsf{Vect} _k,A=k,$ then this generalizes the dual space functor from earlier.
+    \end{example}
+    \begin{example}[Natural transformations]
+        \begin{itemize}
+            \item  Consider the double dual functor $(-)^{* *}\colon \mathsf{Vect} _k \to \mathsf{Vect} _k$, $V \to V^{**}=\Hom(\Hom(V,k),k) $. Let $[V \xrightarrow fk] \in V^*, v \in V$, then $\mathrm{eval} \colon (-)^{**}\to \id_{\mathsf{Vect}_k}$ is a natural transformation to the identity functor where $\mathrm{eval}_V \colon v\mapsto [f \mapsto f(v)]$.\[
+            \begin{tikzcd}
+                V \arrow[r,"T"] \arrow[d,"\mathrm{eval}_V"]& W\arrow[d,"\mathrm{eval}_W"]\\
+                V^{* *}\arrow[r,"T^{**}"]  & W^{* *}
+            \end{tikzcd}
+            \] 
+        \end{itemize}
+    \end{example}
+    \end{frame}
+
+    \begin{frame}[fragile]
+        \frametitle{The Yoneda lemma} 
+        \begin{lemma}[Yoneda lemma]
+            If $K \colon \mathcal{C}^{\mathrm{op}}  \to \mathsf{Set} $ is a contravariant functor and $R \in \mathcal{C} $, then there is a bijection of sets $\operatorname{Nat}(\Hom(-,R),K) \simeq K(R)$.
+        \end{lemma}
+        \begin{proof}[Proof of the Yoneda lemma]\renewcommand{\qedsymbol}{}
+            Let $\alpha \colon \Hom(-,R) \to K$ be a natural transformation. Then $\alpha _R \colon \Hom(R,R) \to K(R)$, particularly $\alpha _R(\id_R) \in K(R)$. Naturality tells us that for $D\xrightarrow fR$ the following diagram commutes \[
+           \begin{tikzcd}
+{\Hom(R,R)} \arrow[r, "\alpha_R"] \arrow[d, "f^*"] & K(R) \arrow[d, "Kf"] \\
+{\Hom(D,R)} \arrow[r, "\alpha_D"]                  & K(D)                  
+\end{tikzcd} 
+            \] or in other words, $Kf(\alpha _R(\id_R))=\alpha _D(f).$
+        \end{proof}
+    \end{frame}
+
+    \begin{frame}[fragile]
+        \begin{proof}[Proof of the Yoneda lemma (continued)]\renewcommand{\qedsymbol}{}
+            %This gives us a roadmap for constructing a natural transformation $\beta \colon \Hom(-,r) \to K$ from an object $b \in K(r)$.
+            For $A \in \mathcal{C} $, let $\beta _A \colon \Hom(A,R) \to K(A)$ send $[A \xrightarrow g R] \mapsto Kg(b)$. 
+            %This defines a natural transformation; it remains to check the ``natural'' part of such transformation. 
+            Checking naturality, let $A,B \in \mathcal{C}, A \xrightarrow fB $.\[
+            \begin{tikzcd}
+{\Hom(A,r)} \arrow[r, "\beta_A",red]                   & K(A)                  \\
+{\Hom(B,r)} \arrow[r, "\beta_B",blue] \arrow[u, "f^*"',red] & K(B) \arrow[u, "Kf"',blue]
+\end{tikzcd}
+            \] 
+            %We first follow the red direction. 
+            Let $B \xrightarrow hr \in \Hom(B,r)$, then 
+            \[
+                f^* h= [A \xrightarrow f B \xrightarrow hR]= [A \xrightarrow{ h \circ f}R] \in \Hom(A,R).
+            \] 
+            So $\beta _A (h \circ f)=K(h \circ f)(b)=(Kf \circ Kg)(b)$ by contravariance.
+            %Now onto the blue direction.
+            Now $\beta _B(h)=Kh(b)$, so $Kf(\beta _B(h))=Kf(Kh(b))=(Kf \circ Kh)(b)$. Therefore $\beta _A(f^*(h))=Kf(\beta _B(h))$.
+            %, and $\beta $ is indeed a natural transformation.
+       \end{proof} 
+\end{frame} 
+    \begin{frame}[fragile]
+        \begin{proof}[Proof of the Yoneda lemma (continued)]
+            %\begin{align*}
+                %&K(r) \to \operatorname{Nat}(\Hom(-,r),K)\to K(r),\\
+                %&\operatorname{Nat}(\Hom(-,r),K) \to K(r) \to \operatorname{Nat}(\Hom(-,r),K)
+            %\end{align*}
+
+            %\hspace{1cm}It remains to show that this correspondence is indeed a bijection. %In other words, 
+            %which we defined earlier should both end up being the identity.
+            %Starting with the top equation, 
+            Let $b \in K(r)$, and $\beta  \colon \Hom(-,r) \to K$, $\beta _A \colon A \xrightarrow gr \mapsto  Kg(b)$. Then $\beta _r(\id_r)=K(\id_r)(b)=\id _{\mathsf{Set} }(b)=b$. %since functors send identities to identities. 
+            %Finally, the bottom equation. 
+            Let $\alpha \colon \Hom(-,r) \to K$ be a natural transformation, and consider $\alpha _r(\id_r) \in K(r)$. Then associate to this the natural transformation $\beta _A \colon A \xrightarrow gr \mapsto  Kg(\alpha _r(\id_r))$. \[
+           \begin{tikzcd}
+{\Hom(r,r)} \arrow[d, "g^*",blue] \arrow[r, "\alpha_r",red] & K(r) \arrow[d, "Kg",red] \\
+{\Hom(A,r)} \arrow[r, "\alpha_A",blue]                  & K(A)                
+\end{tikzcd} 
+            \] In the naturality diagram for $\alpha $, note that $\beta _A(g)=(Kg \circ \alpha _r)(\id_r)$ is the result of following the red path. Also note that following the blue path gives $\alpha _A(g^*(\id_r))=\alpha _A(g)$, so $\beta _A(g)=\alpha _A(g)$. Then $\beta =\alpha $, and we are done.
+       \end{proof} 
+    \end{frame}
+
+\end{document}
