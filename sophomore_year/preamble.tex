@@ -3,6 +3,7 @@
 \linespread{1.2} 
 
 %basic math stuff
+\usepackage{pythonhighlight} 
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{mathrsfs, mathtools}
 \usepackage{hyperref}
@@ -14,6 +15,7 @@
 \usepackage{mleftright}
 \usepackage{cancel} 
 \usepackage{epigraph} 
+%\usepackage{minted} %code
 
 %ok
 \usepackage{xcolor}
@@ -74,9 +76,9 @@
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem{cor}{Corollary}[section]
-\newtheorem{problem}{Problem}
+\newtheorem{prob}{Problem}
 \newtheorem{prop}{Proposition}[section]
-\newtheorem*{prob}{Problem}
+\newtheorem*{problem}{Problem}
 \newtheorem*{claim}{Claim}
 \theoremstyle{definition}
 \newtheorem*{note}{Note}
@@ -131,6 +133,7 @@
 \newcommand\E{\ensuremath{\mathbb{E}}} %field extension
 \renewcommand\P{\ensuremath{\mathbb{P}}} %projective space
 \renewcommand\H{\ensuremath{\mathbb{H}}} %hyperbolic space
+\newcommand\G{\ensuremath{\mathbb{G}}} %ag stuff
 \newcommand\im{\ensuremath{\operatorname{im}}} %image
 \newcommand\id{\ensuremath{\operatorname{id}}} %identity map
 \newcommand\grad{\ensuremath{\operatorname{grad}}} %gradient
@@ -138,9 +141,13 @@
 \renewcommand\div{\ensuremath{\operatorname{div}}} %divergence
 \newcommand\Gr{\ensuremath{\operatorname{Gr}}} %grassmannian
 \newcommand\Hom{\ensuremath{\operatorname{Hom}}} %linear mappings
+\newcommand\Aut{\ensuremath{\mathrm{Aut}}} %automorphism group
+\newcommand\Spec{\ensuremath{\operatorname{Spec}}} %spectrum
 \newcommand\tr{\ensuremath{\operatorname{tr}}} %trace
 \newcommand\supp{\ensuremath{\operatorname{supp}}} %support
 \newcommand\coker{\ensuremath{\operatorname{coker}}} %cokernel
+\newcommand\Ext{\ensuremath{\operatorname{Ext}}} %extensions
+
 
 \newcommand{\transv}{\mathrel{\text{\tpitchfork}}} %transversality
 \makeatletter
