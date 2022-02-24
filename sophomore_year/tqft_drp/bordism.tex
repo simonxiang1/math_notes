@@ -1,0 +1,147 @@
+\section{Introduction to Bordism} 
+
+Review of homology: A \textbf{singular} $q$\textbf{-chain} in a space $S$ is a formal sum of continuous maps $\Delta ^q \to S$ from the standard $q$-simplex. There is a boundary operation $\partial $ on chains; a chain $c$ is a \textbf{cycle} if $\partial c=0$, and a \textbf{boundary}  if there exists a $(q+1)$-chain $b$ with $\partial b=c$. If $S$ is a point then every cycle is a boundary. Bordism replaces cycles by \emph{closed smooth manifolds} mapping continuously into $S$. (Here \emph{closed} means \emph{compact without boundary}). Chains become \emph{compact smooth manifolds}  $X$ with a continuous map $X \to S$, and the boundary of this chain is the restriction $\partial  X \to S$ to the boundary.
+
+\begin{example}
+    Not every closed smooth manifold is the boundary of a compact smooth manifold. We have $Y= \R \mathrm P^2$ \emph{not} the boundary of a compact 3-manifold. However, it is the boundary of a noncompact 1-manifold with with boundary. To see this, first consider $\R \mathrm P^0\simeq \{\text{pt} \} $. This is the boundary of a non-compact 1-manifold, namely the half line $[0,1)$. Here the cover $\left\{[0,\frac{1}{2}),(\frac{1}{3},\frac{2}{3}),(\frac{1}{2},\frac{3}{4}),(\frac{2}{3},\frac{4}{5}),\cdots ,(\frac{n}{n+1},\frac{n+2}{n+3})\right\}) $ as $n\to \infty$ has no finite subcover. This generalizes to $\R \mathrm P^1\simeq S^1 $, which is the boundary of $S^1  \times [0,1)$ and so $\R \mathrm P^2$ is the boundary of $\R \mathrm P^2 \times [0,1)$. From here, we can see that every closed smooth manifold $Y$ is the boundary of a noncompact manifold with boundary, namely $Y \times [0,1)$. {\color{red}todo:check}  What fails if $Y$ isn't closed? If $Y$ has boundary, then $\partial ^2=0$, and if $Y$ is non-compact this doesn't work. {\color{red}todo:check (why we need closed). also 1-manifold??} 
+
+    How do we prove our earlier assertion that $\R \mathrm P^2$ is not the boundary of a compact 3-manifold? We will see this later.
+\end{example}
+
+\subsection{Review of smooth manifolds}
+\begin{definition}[]
+    A \textbf{topological manifold} is a paracompact, Hausdorff topological space $X$ such that every point of $X$ has an open neighborhood homeomorphic to an open subset of affine space. We define $n$\emph{-dimensional affine space} as $\A^n = \{(x^1, x^2, \cdots ,x^n ) \mid  x^i  \in \R\} $. The vector space $\R^n $ acts transitively on $\A^n $ by translations.
+\end{definition}
+\begin{definition}[]
+    The empty set $\O$ is trivially a manifold of any dimension $n \in \Z^{\geq 0}$. We write $\O^n $ to denote the empty manifold of dimension $n$.
+\end{definition}
+\begin{definition}[]
+    Define $\A_-^n = \{(x^1, x^2 ,\cdots ,x^n ) \in \A^n  \mid x^1 \leq 0\} $. We require that coordinate charts take values in open sets of $\A_-^n $. Then we partition $X$ into two disjoint subsets (both manifolds): the \textbf{interior} (points with $x^1 < 0$ in every coordinate system) and the \textbf{boundary} $\partial X$ (points with $x^1=0$).
+\end{definition}
+\begin{remark}
+    Recall the mnemonic ``ONF'', standing for ``Outward Normal First''. An outward normal in a coordinate system is represented by the first coordinate vector field $\partial  /\partial  x^1$, which points outward at the boundary.
+\end{remark}
+\begin{definition}[]
+    At any point $p \in \partial X$ there is a canonical subspace $T_p(\partial  X) \subseteq T_pX$; the quotient space $T_pX / T_p(\partial X)$ is a real line $\nu_p$. So over the boundary there is a short exact sequence \[
+        0 \to T(\partial X) \to TX \xrightarrow p \nu \to 0
+    \] of vector bundles. 
+\end{definition}The vector $\partial  / \partial x^1(p)$ projects to a nonzero element of $\nu_p$, but there is no canonical basis independent of coordinate system. However, any two such vectors are in the same component of $v_p \setminus \{0\} $, so $\nu$ carries a canonical \emph{orientation}. Furthermore, there is a splitting $s \colon \nu \to TX$ that assigns to a point on $\nu$ a tangent vector which lies in $T(\partial X)$, which by the quotient projection maps to 0. Therefore since $s \circ p=\id_{TX}$, we have $TX \simeq T(\partial X)\oplus \nu$. For example, say we have an $n$-manifold with boundary, then $T_pM \simeq \R^{n+1}$ and $T_mM\simeq \R^n $ for $m \in \partial X$. Since $T_mM$ has codimension 1 we have $\nu\simeq  \R$, which comes from $\R^{n+1}/ \R^n $. We also see that $T_pM \simeq \R^{n+1}\simeq (T_mM\simeq \R^n ) \oplus (\nu \simeq \R)$.
+
+\begin{definition}[]
+    Let $X$ be a manifold with boundary. A \textbf{collar} of the boundary is an open set $U \subset X$ which contains $\partial X$ and a diffeomorphism $(-\varepsilon ,0] \times \partial X\to U$ for some $\varepsilon >0$.
+\end{definition}
+\begin{theorem}
+    The boundary $\partial X$ of a manifold $X$ with boundary has a collar.
+\end{theorem}
+\begin{proof}
+    {\color{red}todo:this?} 
+\end{proof}
+
+Let $\{X_1,X_2,\cdots \} $ be a countable collection of manifolds. We form a new manifold $X_1 \amalg X_2 \amalg \cdots $, the \textbf{disjoint union} of $X_1,X_2,\cdots $. As a set it is the disjoint union of the underlying sets for the manifolds. A question is how to precisely define this; what is $X\amalg X$, for example? A solution is to fix some $\A^{\infty}$ and regard all manifolds embedded in it. Replace $X_i $ by $\{i\} \times X_i $, then define the disjoint union to be the ordinary union of subsets of $\A^{\infty}$. We could also use a universal property; a disjoint union of $X_1,X_2,\cdots $ is a manifold $Z$ and collection of smooth maps $\iota_i  \colon X_i  \to Z$ such that for any manifold $Y$ and collection $f_i  \colon X_i  \to Y$ of smooth maps, there exists a unique map $f \colon Z \to Y$ such that for each $i$ the diagram \[
+\begin{tikzcd}
+    X_i  \arrow[r, "\iota _i" ] \arrow[rd, "f_i "']& Z\arrow[d, dotted, "f"]\\
+     & Y
+\end{tikzcd}
+\] commutes. 
+\subsection{Bordism}
+\begin{definition}[]
+    
+Let $Y_0,Y_1$ be closed $n$-manifolds. A \textbf{bordism} $(X,(\partial X)_0 \amalg (\partial X)_1, \theta_0,\theta_1)$ from $Y_0$ to $Y_1$ is a compact $(n+1)$-manifold $X$ with boundary, a decomposition $\partial X=(\partial X)_0\amalg (\partial X)_1$ of its boundary, and embeddings $\theta_0 \colon [0,+1) \times Y_0 \to X, \theta_1 \colon (-1,0] \times Y_1 \to X$ such that $\theta_i ((0,Y_i) )=(\partial X)_i ,i=0,1$. 
+\end{definition}
+
+The map $\theta_i $ is a diffeomorphism onto its image, which is a collar neighborhood of $(\partial X)_i $. The reason why we add the collar neighborhoods is to make it easier to glue bordisms; without them we could say a bordism $X$ from $Y_0$ to $Y_1$ is a compact $(n+1)$-manifold with boundary $Y_0 \amalg Y_1$. 
+\begin{definition}[]
+    Let $(X,(\partial X)_0 \amalg (\partial X)_1, \theta_0, \theta_1)$ be a bordism from $Y_0$ to $Y_1$. The \textbf{dual bordism} from $Y_1$ to $Y_0$ is $(X^{\vee},(\partial X^{\vee})_0 \amalg (\partial X^{\vee})_1, \theta_0^{\vee},\theta_1^{\vee})$ where $X^{\vee}=X$, the decomposition of the boundary is swapped so  $(\partial X^{\vee})_0=(\partial X)_1$ and $(\partial X^{\vee})_1=(\partial X)_0$, and 
+    \begin{align*}
+        &\theta_0^{\vee}(t,y)=\theta_1(-t,y), &t \in [0,+1), \ y \in Y_1,\\
+        &\theta_1^{\vee}(t,y)=\theta_0(-t,y),& t \in (-1,0], \ y \in Y_0.
+    \end{align*}
+\end{definition}
+Think of the dual bordism $X^{\vee}$ as the original bordism $X$ ``turned around'', and view it as a bordism from $Y_1^{\vee}$ to $Y_0 ^{\vee}$, where for naked manifolds we set $Y_i ^{ \vee}=Y_i $. When manifolds have tangential structure, this will not necessarily be the case.
+
+\begin{lemma}
+    Bordism defines an equivalence relation.
+\end{lemma}
+\begin{proof}
+    For any closed manifold $Y$, the manifold $X=[0,1] \times Y$ is a bordism from $Y$ to $Y$. Formally, set $(\partial X)+0= \{0\} \times Y, (\partial X)_1= \{1\} \times Y$, and simple diffeomorphisms $[0,1) \to [0, \frac{1}{3}), (-1,0] \to (\frac{2}{3},1]$ to construct our $\theta_i $. Symmetry is given by the dual bordism; if $X$ is a bordism from $Y_0$ to $Y_1$, then $X^{\vee}$ is a bordism from $Y_1$ to $Y_0$. 
+
+    For transitivity let $X$ be a bordism $Y_0 \to Y_1$, and $X'$ a bordism from $Y_1$ to $Y_2$. Define a new manifold $X''= X \amalg X /\sim$, where for $(a,b),(c,d) \in X \amalg X'$, if either $a,d \in Y_1$, then $(a,b)\sim(c,d)$. {\color{red}todo:how exactly is this a manifold? bourbaki: \url{https://math.stackexchange.com/questions/496571/under-what-conditions-the-quotient-space-of-a-manifold-is-a-manifold}. basically $E$ is a closed submanifold of $M \times M$ (true since $E=(\partial M)_1=(\partial M')_0$ which are manifolds by def. the projection is also a submersion. diffeomorphic. okay how do we show the smooth structure?} 
+
+\end{proof}
+\begin{example}
+    If $f \colon M \to N$ is a diffeomorphism between manifolds, then consider the mapping cylinder $Mf=([0,1]\times M)\amalg_f N$, a smooth manifold with boundary $M \times \{0\} \cup N\times \{1\} $. So diffeomorphic manifolds are bordant.
+\end{example}
+Let $\Omega_n $ denote the set of equivalence classes of $n$-manifolds under the equivalence relation of bordism. We use the term \textbf{bordism class} for an element of $\Omega_n $. Note that $\O^0$ (empty manifold) is a distinct element of $\Omega_n $, so $\Omega_n $ is a \textbf{pointed set}.
+
+\subsection{Disjoint union and the abelian group structure}
+The disjoint union and cartesian product give $\Omega_n $ more structure.
+
+\begin{definition}[]
+    A \textbf{commutative monoid} is a set with a commutative, associative composition law and identity element. An \textbf{abelian group} is a commutative monoid in which every element has an inverse.
+\end{definition}
+Disjoint unions of manifolds pass to bordism classes: if $Y_0$ is bordant to $Y_0'$ and $Y_1$ is bordant to $Y_1'$, then $Y_0\amalg Y_1$ is bordant to $Y_0'\amalg Y_1'$ (take the disjoint union of the bordisms as manifolds). So $(\Omega_n ,\amalg)$ is a commutative monoid.
+\begin{lemma}\label{bordab} 
+    $(\Omega_n,\amalg )$ is an abelian group with identity $\O^n $. Furthermore, for $Y \in \Omega_n $, $Y\amalg Y$ is null-bordant.
+\end{lemma}
+\begin{proof}
+    Let $Y \in  \Omega_n $. Consider the manifold $X=[0,1] \times Y$; this gives a bordism between $Y\amalg Y$ and $\O^n $, with $(\partial X)_0=Y\amalg Y $ and $(\partial X)_1=\O^n $. Inverses are unique because if we took another manifold $M$ not bordant to $Y$, we can't have a manifold with boundary $M\amalg Y$ by definition, so we cannot do the empty manifold decomposition. {\color{red}todo:check} 
+    So $Y=Y^{-1}$ and we are done.
+\end{proof}
+\begin{prop}
+    $\Omega_0 \cong \Z /2\Z$ with generator $\mathrm{pt} $.
+\end{prop}
+\begin{proof}
+    Compact 0-manifolds are finite disjoint unions of points. \cref{bordab} implies that the disjoint union of two points is a boundary, so this is zero in $\Omega_0$. To show that $\mathrm{pt}$ is not the boundary of a compact 1-manifold without boundary, this follows from the classification of 1-manifolds with boundary; they are a finite disjoint union of circles and closed intervals, so its boundary has an even number of points.
+\end{proof}
+
+\begin{prop}
+    $\Omega_1=0$ and $\Omega_2=\Z /2\Z$ with generator $\R \mathrm P^2$.
+\end{prop}
+\begin{proof}
+    By the classification of compact 1-manifolds, closed 1-manifolds are finite disjoint unions of circles,  which bound disks (and so they are null-bordant). Therefore $\Omega_1=0$. Now recall the classification theorem for 2-manifolds, which states that there are two connected families; oriented and unoriented surfaces. For oriented surfaces, they are either 2-spheres or connected sum of tori (genus $g$ surfaces). Spheres bound the 3-ball, and genus $g$ surfaces go to genus $g$ handlebodies. {\color{red}todo:check} 
+
+    Any unoriented surface is a \textbf{connected sum} of $\R \mathrm P^2$'s. It suffices to prove that $\R \mathrm P^2$ does not bound and $\R \mathrm P^2\# \R \mathrm P^2$ does not bound. For the former, suppose that $X$ is a compact manifold with $\partial X=\R \mathrm P^2$. Then consider the \textbf{double} $D= X \cup _{\R \mathrm P^2}X$, constructed by gluing two copies of $X$ along $\R \mathrm P^2$. We have $\chi(D)=2\chi(X)-\chi(\R \mathrm P^2)=2\chi(X)-1$ by Hatcher 2.2.21, which is odd. However, closed odd-dimensional manifolds have zero euler characteristic. It remains to show that $\chi(X)=\chi(A)+\chi(B)-\chi(A\cap B)$; this is true by inclusion-exclusion (on counting cells). {\color{red}todo:check} 
+
+    Similarly $\chi(M_1 \# M_2)=\chi(M_1)+\chi(M_2)-\chi(S^2 )=1$. The same argument applies; suppose there exists some compact $X$ with $\partial X=\R \mathrm P^2\# \R \mathrm P^2$, examine $\chi$ of the double, and we are done. {\color{red}todo:hatcher 3.3.6(b). where does this argument fail? right, existence of $X$. but it does bound... ??} 
+
+    Correct argument; $\R \mathrm P^2\# \R \mathrm P^2$ is diffeomorphic to the Klein bottle $K$, which has a map  $K \to S^1 $, a fiber bundle with fiber $S^1 $. Then there is an associated fiber bundle with fiber $D^2$, a compact 3-manifold with boundary $K$.
+\end{proof}
+
+\subsection{Cartesian product and the ring structure}
+\begin{definition}[]
+    \ \vspace{-0.2em} 
+    \begin{enumerate}[label=(\roman*)]
+    \setlength\itemsep{-.2em}
+\item A \textbf{commutative ring} $R$ is an abelian group $(+,0)$ with a second commutative, associative composition law $(\cdot )$ with identity (1) which distributes over the first: $r_1\cdot (r_2+r_3)=r_1\cdot r_2+r_1\cdot r_3$ for all $r_1,r_2,r_3 \in R$.
+\item A $\Z$\textbf{-graded commutative ring} is a commutative ring $S$ which as an abelian group is a direct sum $S=\bigoplus_{n \in \Z}S_n $ of abelian group such that $S_{n_1 }\cdot S_{n_2} \subseteq S_{n_1+n_2}$. In other words, you can multiply two elements in $S_{n_1},S_{n_2}$ to get an element in $S_{n_1+n_2}$.
+    \end{enumerate}
+    Elements in $S_n \subset S $ are called \textbf{homogeneous of degree} $n$; an element of $S$ is a finite sum of homogeneous elements.
+\end{definition}
+
+\begin{example}
+    The integers $\Z$ form a commutative ring, and for any commutative ring $R$ there is a polynomial ring $S=R[x]$ in a single variable which is $\Z$-graded. To define this grading, we need to assign a degree to the indeterminate $x$, usually 1; in this case $S_n $ is the abelian group of homogeneous polynomials of degree $n$ in $x$. More generally, there is a $\Z$-graded polynomial ring $R[x_1,\cdots ,x_k]$ in any number of indeterminates with any assigned integer degrees $\deg x_k \in \Z$.
+\end{example}
+    Define \[
+    \Omega=\bigoplus _{n \in \Z^{\geq 0}}\Omega_n .
+    \] Formally, define $\Omega_{-m}=0$ for $m>0$. The Cartesian product of manifolds is compatible with bordism; if $Y_0$ is bordant to $Y_0'$ and $Y_1$ is bordant to $Y_1'$, then $Y_0 \times Y_1$ is bordant to $Y_0' \times Y_1'$. To see this, let $M_0,M_1$ be the bordisms with $\partial M_0=Y_0\amalg Y_0'$, $\partial M_1=Y_1\amalg Y_1'$. Then the bordism between $Y_0 \times Y_1$ and $Y_0' \times Y_1'$ is given by $M_0 ?? M_1$ {\color{red}todo:not $M_0 \times M_1$, dimension. not $\amalg$, counterex. help}. So this passes to a commutative, associative binary composition on $\Omega$.
+    \begin{prop}
+        $(\Omega,\amalg, \times )$ is a $\Z$-graded ring. A homogeneous element of degree $n \in \Z$ is represented by a closed manifold of dimension $n$.
+    \end{prop}
+    \begin{proof}
+        {\color{red}todo:?? dk what the bordism of product is. show it's compatible??} 
+    \end{proof}
+    In his Ph.D. thesis Thom {\color{red}todo:references} proved the following theorem.
+    \begin{theorem}[Thom]
+        There is an isomorphism $\Omega \cong \Z /2 \Z [x_2,x_4, x_5,x_6, x_8,\cdots $ where there is a polynomial generator of degree $k$ for each positive integer $k$ not of the form $2^i -1$. Furthermore, if $k$ is even, then $x_k$ is represented by $\R \mathrm P^k$. {\color{red}todo:does this vibe with $\Omega_2=\Z /2\Z$? shouldn't it be $\Z /2\Z[x_2]$? or is that just $\Z /2\Z$} 
+    \end{theorem}
+    Dold later constructed manifolds representing the odd degree generators, which are fiber bundles over $\R \mathrm P^m$ will fiber $\C \mathrm{P}^{\ell} $. Working out $\Omega_{10}$, or 10-manifolds up to bordism, we have generator $\R\mathrm{P}^{10}$. {\color{red}todo:?? don't know much about 10-manifolds} 
+
+Thom proved that the \textbf{Stiefel-Whitney numbers} determine the bordism clsas of a closed manifold. The \textbf{Steifel-Whitney classes} $w_i (Y) \in H^i  (Y; \Z /2\Z)$ are examples of \textbf{characteristic classes} of the tangent bundle; we will discuss this stuff later. Any closed $n$-manifold $Y$ has a \textbf{fundamental class} $[Y] \in H_n (Y;\Z /2\Z)$. If $x \in H^{\bullet}(Y; \Z /2\Z)$, the pairing $\langle x,[Y] \rangle $ produces a number in $\Z /2\Z$.
+\begin{theorem}
+    The Stiefel-Whitney numbers \[
+        \langle w_{i_1} (Y)\smile w_{i_2}(Y)\smile \cdots \smile w_{i_k}(Y),[Y]\rangle \in \Z /2 \Z
+    \] determine the bordism class of a closed $n$-manifold $Y$.
+\end{theorem}
+That is to say, if two closed $n$-manifolds $Y_0,Y_1$ have the same Stiefel-Whitney numbers, then they are bordant. Notice that not all naively possible nonzero Stiefel-Whitney numbers can be nonzero. For example, $\langle w_1(Y),[Y] \rangle $ vanishes for any closed 1-manifold $Y$. Also, the theorem implies that a closed $n$-manifold is the boundary of a compact $(n+1)$-manifold iff all the Stiefel-Whitney numbers of $Y$ vanish. If it is a boundary, it is immediate that the Stiefel-Whitney numbers vanish; the converse is not obvious. {\color{red}todo:I'm not supposed to get this right yet?} \[
+\frac{-b\pm \sqrt{b^2-4ac} }{2a}
+\] 
