@@ -1,0 +1,66 @@
+\section{Filtrations and homology} 
+Discussion section on Monday, 3-4 PM in room 12.166. The topology seminar has booked the room until half past three but it is unlikely they'll stay in there that long.
+
+We previously asserted that the following chain maps are quasi-isomorphisms:
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item For $A_{\bullet}$ a simplicial abelian group, we have the quotient map $A_* \to NA_*=A_* / DA_*$ of the simplicial chains mod the degenerate chains a quasi-isomorphism.
+    \item For $X_{\bullet }$ a simplicial set, the map from simplicial chains $C_*(X_{\bullet})=\Z X_* \to S_*(|X_{\bullet}|)$. 
+\end{itemize}We lay out a homological framework for proving such assertions.
+\subsection{Mapping cones}
+There is a homological and topological version of this concept, and it is really the homological version we want to use. But we start with the topological version for context. Let $f \colon X \to Y$ be a map up spaces, then define the \textbf{mapping cone} by \[
+    Cf:= (I \times X) \amalg Y / \sim, \quad (0,x)\sim f(x), (1,x)\sim(1,x')
+\] for all $x,x' \in X$. In other words, this is the mapping cylinder with the top collapsed to a point, hence the cone. Then there is a pushout diagram \[
+\begin{tikzcd}
+X \arrow[r, "{x\mapsto (0,x)}", hook] \arrow[d, "f"'] & I\times X / \{1\} \times X \arrow[d] \arrow[rdd, bend left] &   \\
+Y \arrow[r] \arrow[rrd, bend right]                   & Cf \arrow[rd, "\exists!", dotted]                           &   \\
+                                                      &                                                             & Z
+\end{tikzcd}
+\]  A map $Cf\to Z$ corresponds to $g \colon Y \to Z, h \colon I \times X \to Z$, where $h$ is a nullhomotopy of $g \circ f$. Now we get to the homological version, where there is a close analogy to the topological situation. We have $f \colon C_* \to D_*$ a map of chain complexes. This leads to a new chain complex $\mathrm{cone}(f)$ over some ring $R$, where \[
+(\mathrm{cone}f)_n = C_{n-1}\oplus D_n ,\quad \delta \colon (\mathrm{cone}f)_n  \to (\mathrm{cone}f)_{n-1}, \quad \delta(x,y)=(-\partial _C x, fx+\partial _D y).
+\] From here we can see $\delta^2=0$. There is a notion of a shift of a chain complex; for $m \in \Z$,  $C_*[x]=C_{n+m}$. The boundary operator is $(-1)^m=(-1)^m \partial _C$. By construction, there is a short exact sequence of complexes \[
+\begin{tikzcd}
+0 \arrow[r] & D_* \arrow[r] & \mathrm{cone}f \arrow[r] & {C_*[-1]} \arrow[r] & 0
+\end{tikzcd}
+\] which leads to a long exact sequence in homology, given by \[
+\begin{tikzcd}
+\cdots \arrow[r] & H_qD \arrow[r] & H_q(\mathrm{cone}f) \arrow[r] & H_{q-1}C \arrow[r, "\text{connecting}"] \arrow[r, "\text{map}\ \beta "'] & H_{q-1}D \arrow[r] & \cdots
+\end{tikzcd}
+\] The connecting map $\beta $ actually turns out to be the induced map on homology $Hf$. What is $\beta [x]$? We have $\partial _Cx=9$, then we left $x$ to $(x,0) \in \mathrm{cone}f$. Apply $\delta$, then we get $(-\partial _Cx,fx)$. Project to $D_x$ to get $[fx]$. This is all obtained by following the general formula to find the connecting map of a long exact sequence.
+
+\begin{lemma}
+    $f$ is a quasi-isomorphism iff $H_*(\mathrm{cone}f)=0$.
+\end{lemma}
+\begin{proof}
+    Use the LES. Recall that it's given by \[
+    H_*D \to H_* \mathrm{cone f}\to H_{*-1}C \xrightarrow{Hf} H_{*-1}D \to \cdots 
+    \] Subsitute zero in the appropiate places and apply exactness.
+\end{proof}
+So mapping cones convert quasi-isomorphisms into acyclic complexes. We haven't actually made the connection to the topological version; a chain map has the form $\mathrm{cone}f \xrightarrow{h+g}  E_*$, where $g \colon D_* \to E_*$, $ h \colon C_{*-1} \to E_*$. This is a chain map iff $g$ is a chain map and $h$ is a chain homotopy from 0 to $g \circ f$.
+\begin{remark}
+    Suppose we take a map of spaces $f \colon X \to Y$. Then there is an induced map $f_* \colon S_*X \to S_*Y$, so we can take $\mathrm{cone}(f_*)$. On the other hand, we could also take the singular chains of the topological cone $S_*(Cf)$. We claim there is a chain map from $\mathrm{cone}(f_* \colon S_*X \to S_*Y) \to S_*(Cf)$. We have $Y\lhook\joinrel\xrightarrow{i}Cf $, which implies there ia a map $i_* \colon S_*Y \to S_*(Cf)$. So there is a chain nullhomotopy of $i_* f_*$, which leads to $h \colon S_*X \to S_{*+1}(Cf)$, a nullhomotopy of $i_*f_*$. Moreover, this map is actually a quasi-isomorphism (we will need excision to prove this part).
+\end{remark}
+
+\subsection{Filtered complexes}
+Let $C_*$ be a chain complex, and take an increasing filtration on it. This means we have a sequence of subcomplexes \[
+\cdots \subset F_p \subset C_* \subset F_{p+1}C_* \subset \cdots \subset C_*
+\] Why are filtrations worth talking about? They come up all over the place.
+\begin{example}
+    Say $X$ is a space with nested subspaces $X_p \subset X_{p+1}\subset \cdots \subset X$. Then the singular chains $S_*X$ are filtered by $F_p(S_*X)=\im (S_*X_p \to S_*X)$. For example, CW complexes are filtered by their skeleta, and preimages of the skeleta of the base of fiber bundles give an interesting filtration (leading to the Serre spectral sequence).
+\end{example}
+
+From $\{F_pC_*\} $ a filtered chain complex, we get an associated graded chain complex \[
+    \mathrm{gr}(C_*)=\bigoplus_{p \in \Z}\mathrm{gr}_p(C_*)=F_p C_* / F_{p-1}C_*.
+\] Even though $\mathrm{gr}C$ forgets a lot of information, it still knows a lot. Say we have a finite filtration $\cdots \subset 0 \subset\cdots \subset 0 \subset F_p C_* \subset\cdots  \subset F_{p'} C_*=C_* \subset C_* \subset\cdots $
+\begin{lemma}
+    If $\{F_p C_*\} $ is a finite filtration and $H_*(\mathrm{gr}C)=0$, then $H_*(C)=0$.
+\end{lemma}
+\begin{proof}
+    The number of steps $p'-p$ is finite. The idea is to induct on the number of steps. Use the LES to get our result.
+\end{proof}
+\begin{theorem}
+    If $f \colon C_* \to D_*$ is a chain map that preserving filtrations $\{F_pC_*\} $ and $\{F_pD_*\} $, and if the induced map $\mathrm{gr}C_* \to \mathrm{gr}D_*$ is a quasi-isomorphism, then $f$ is a quasi-isomorphism.
+\end{theorem}
+\begin{proof}
+    $\mathrm{cone}f_*$ inherits a filtration from whose associated graded is acyclic by assumption. By the lemma,  $\mathrm{cone}f$ is acyclic, which exactly means that $f$ is a quasi-isomorphism. If you wanted you could also prove this directly with the five-lemma.
+\end{proof}

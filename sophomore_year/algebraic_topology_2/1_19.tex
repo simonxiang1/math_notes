@@ -1,0 +1,79 @@
+\section{Chapter 1: Simplices and homology theory}
+Some preliminaries; our plan is to set problems in class and have them done by the next class. Some problems will be posted with a corresponding discussion session (schedule is in the works). There will be no formal grading, but participation and engagement is expected.
+
+\subsection{Topic overview}
+On one hand we have cut and paste constructions like manifolds, and on the other we have algebra. The appeal of algebra to a geometer may seem like a Faustian bargain, but we'll see what's going on. A crucial invariant is the set of homotopy groups of spheres, where as a set we have $[S^k,S^n ]= \{ \text{homotopy classes of continuous maps} \ S^k \to S^n \} $. One can understand these through geometry (Pontryagin-Thom construction), e.g. we see that $[S ^{k+n},S^n ]$ is independent of $n\gg 0$. In the case $[S^{3+n},S^n ]$ for $n\gg 0$, this is understandable via \textit{framed} $3$\textit{-manifolds} (compacted $3$-manifolds with trivialized tangent bundles, framed cobordism?), then $\#[S^{3+n},S^n ]=24$ (related to things like the signature of a $K 3$ surface). 
+
+On the other hand we can use algebraic techniques (spectral sequences, localization, etc). For example, a theorem of Serre says that $[S^k, S^n ]$ is finite, except when $k=n$ or $k=2n-1$, $n$ even. The proof uses a whole spectrum of spectral sequence and localization arguments, which led Gromov to say ``what the blazers is going on??''. This is the Faustian deal. However, sometimes they work together beautifully. The prelim course tends to emphasize the geometric side, so we'll paddle toward the algebraic side.
+
+We are ready to begin the first chapter.
+
+\subsection{Category theory}
+We talk about the formalism of simplicial sets, which gives us a clean language to express things, which supercedes triangulation. This structure is simple and effective for expressing various ideas in algebraic topology. We also want to appeal to the language of category theory, i.e. we want to say things like ``equivalence of categories'' and ``natural transformation'' without apology.
+
+\begin{definition}[Categories]
+    A \textbf{category} $\mathcal{C} $ consists of
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+\item a collection of objects $ \operatorname{ob}\mathcal{C} $,
+\item for every $X, Y \in \operatorname{ob}\mathcal{C} $, a set $\mathcal{C} (X,Y)$ of ``morphisms from $X$ to $Y$'',
+\item for every $X,Y,Z \in \operatorname{ob}\mathcal{C} $ a composition map $ \circ \colon \mathcal{C} (Y,Z) \times \mathcal{C} (X,Y) \to \mathcal{C} (X,Z)$. Composition must be associative and unital, which means that for every $X$ there exists a $c_X \in \mathcal{C} (X,X)$ such that $f \circ c_X=f, c_X \circ g=g$.
+    \end{itemize}
+\end{definition}
+\begin{example}
+    Some examples:
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+        \item $\mathsf{Set} $, where objects are sets and morphisms are mappings,
+        \item $\mathsf{Top} $, where objects are topogical spaces and morphisms are continuous maps,
+        \item  $\mathsf{hTop} $, where objects are topological spaces and morphisms are homotopy classes of continuous maps $ \mathsf{hTop}(X,Y)=[X,Y] $. This is the ``\emph{na\"ive homotopy category}'', which has some shortcomings as suggested by the name.
+        \item If  $(S,<)$ is a totally ordered set, we get a category $\mathcal{C} _S $, where $\operatorname{ob}\mathcal{C} _S=S$, and \[
+                \mathcal{C} _S (x,y)=
+                \begin{cases}
+                    \text{singleton} & \text{if} \ x \leq y,\\
+                    \O & \text{if} \ x >y.
+                \end{cases}
+        \] 
+    \end{itemize}
+\end{example}
+
+\begin{definition}[Isomorphisms]
+    A morphism $f \in \mathcal{C} (X,Y)$ is an \textbf{isomorphism} if there exists a two sided inverse $f ^{-1} \in \mathcal{C} (Y,X)$ (with respect to the identity morphisms).
+\end{definition}
+For example, in $\mathsf{Top} $ an isomorphism is a homeomorphism, while in $\mathsf{hTop} $ an isomorphism is a homotopy equivalence. The language of topological spaces is set up to talk about continuity, and in some sense categories are set up so we can talk about functors.
+
+\begin{definition}[Functors]
+    For $\mathcal{C,D} $ categories, a (covariant) \textbf{functor} $F \colon \mathcal{C}  \to \mathcal{D} $ consists of maps $F \colon \operatorname{ob}\mathcal{C}  \to \operatorname{ob}\mathcal{D} $, $F \colon \mathcal{C} (X,Y) \to \mathcal{D} (FX,FY)$ such that theses maps are compatible with composition and preserve units, or $F(g \circ _{\mathcal{C} }f)=Fg \circ _{\mathcal{D} }Ff,\ F(e_X)=e_{FX}$.
+\end{definition}
+\begin{example}
+    There are ``forgetful'' funtors, like the functor $U \colon \mathsf{Top}  \to \mathsf{Set} $, where $X \mapsto  X, f \mapsto f$ (spaces and maps map to their underlying sets and functions). There are also ``free'' functors, like $F \colon \mathsf{Set}  \to \mathsf{Mod} _{\Z}$ (the category of $\Z$-modules, or abelian groups), where $FS=\Z^S= \{\text{maps}\ S \to \Z \} $. A key example for algebraic topology is the \emph{singular homology functor} $H_n  \colon \mathsf{hTop}  \to \mathsf{Mod}_{\Z} $, where singular homology assigns to each space an abelian group with induced maps. A basic fact is that the induced map only depends on the homotopy class, and so this functor makes sense in the na\"ive homotopy category.
+\end{example}
+\begin{definition}[]
+    The \textbf{opposite category} $\mathcal{C} ^{\mathrm{op}}$ of a category $\mathcal{C} $ has the same objects ($\operatorname{ob}\mathcal{C} ^{\mathrm{op}}=\operatorname{ob}\mathcal{C} $), and $\mathcal{C} ^{\mathrm{op}}(X,Y)=\mathcal{C} (Y,X)$, $f \circ _{\mathcal{C} ^{\mathrm{op}}}g=g \circ _{\mathcal{C} }f$. A \textbf{contravariant functor} $\mathcal{C} \to \mathcal{D} $ is a functor $F \colon \mathcal{C} ^{\mathrm{op}} \to \mathcal{D} $, which amounts to $F \colon \operatorname{ob}\mathcal{C}  \to \operatorname{ob}\mathcal{D} $, $F \colon \mathcal{C} (X,Y) \to D(Y,X), f \mapsto f^*$. The important relation is that $(g \circ _{\mathcal{C} }f)^*=f^* \circ _{\mathcal{D} }g^*$.
+\end{definition}
+We will construct the \emph{singular cohomology functor} $H^n  \colon (\mathsf{hTop}  )^{\mathrm{op}}\to \mathsf{GradedRings} $. A basic example from differential topology is de Rham cohomology, which maps $H_{dR}\colon \mathsf{Manifolds} \to \R-\mathsf{GradedAlgebras} $. A class of functors that show up quite often are the representable and corepresentable functors.
+
+\begin{definition}[Representable functors]
+    For $X \in \operatorname{ob}\mathcal{C} $, we get
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+\item a covariant functor $\mathcal{C} (X,\cdot ) \colon \mathcal{C}  \to \mathsf{Set} $, called a \textbf{co-representable functor},
+\item a contravariant functor $\mathcal{C} (\cdot, X ) \colon \mathcal{C}^{\mathrm{op}}  \to \mathsf{Set} $, called a \textbf{representable}.
+    \end{itemize}
+\end{definition}
+These functors are composed of maps to and from our object $X$, and morphisms are made by composing or precomposing respectively. For example, we have the representable functor $\mathsf{Top} (\cdot ,\R) \colon \mathsf{Top} ^{\mathrm{op}} \to \mathsf{Set}$ sending a space $Z$ to its set of continuous functions $\mathsf{Top} (Z,\R)$.
+
+\begin{definition}[Natural transformations]
+   Consider two functors $F,G \colon \mathcal{C}  \to \mathcal{D}  $. Then a \textbf{natural transformation} $\theta \colon F\implies G $ consists of; for every $X \in \operatorname{ob}\mathcal{C} $, a morphism $\theta_X \in \mathcal{D} (FX,GX)$ such that $\theta_Y\circ Ff=Gf \circ _{\mathcal{D} }\theta_X$ (where $f \in \mathcal{C} (X,Y)$).
+\end{definition}
+   For example, for $f \in \mathcal{C} (X,Y)$, we get natural transformations $\theta=\mathcal{C} (\cdot ,f) \colon \mathcal{C} (\cdot ,X) \implies \mathcal{C} (\cdot ,Y),$ where $\theta_Z(g)=f \circ _{\mathcal{C} }g $. This leads into the \emph{Yoneda lemma}.
+
+   \begin{lemma}[Yoneda's lemma for representables]
+      The map \[
+          C(X,Y) \to \{\text{\emph{natural transformations}}\ C(\cdot ,X) \to C(\cdot ,Y)\} ,\ f \mapsto C(\cdot ,f)
+      \] is a bijection. 
+   \end{lemma}
+   \begin{proof}
+       ok
+   \end{proof}
+

@@ -1,0 +1,33 @@
+\section{Products of CW complexes and simplicial sets} 
+Let $X,Y$ be CW complexes. We can form a product CW complex $X \times _{CW}Y$, where \[
+    \mathrm{sk}_n (X \times _{CW}Y) = \bigcup_{p+g=n} \mathrm{sk}_pX \times \mathrm{sk}_gY.
+\] The product $e_{\alpha }^p \times e_{\beta }^q$ of a $p$-cell $e_{\alpha }^p \cong D^p$ for $X$ and a $q$-cell $e_{\beta }^q \cong D^q$ for $Y$ is a $(p+q)$-cell for $X \times _{CW}Y$ ($D^p \times D^q \cong D^{p+q}$). The $n$-sphere is a CW complex in a very simple way; $S^n =e^0 \cup e^n $ by collapsing the boundary to one point. So $S^n  \times Y$ has one $p$-cell and one $(p+n)$-cell for each $p$-cell of $Y$. The attaching maps are just products. There is a subtlety; as a space $X \times _{CW}Y = \bigcup \mathrm{sk}_k(X\times Y)$. Is it true that $X\times _{CW}Y \simeq X\times Y$? As a set, yes. As a space, yes if $X$ is a \textbf{locally finite} CW complex (each cell-closure intersects only finitely many cell-closures). In general, no. We can read more in Hatcher about this.
+
+There is a clean fix, which is to work in the categoryo of compactly generated spaces. In this category, one can take the product of two spaces, and CW complexes are objects, which is compatible with products. We can read more about this in Hatcher or May. This is interesting only if you like weird point-set topology.
+
+ \subsection{Products of simplicial sets}
+ Take two simplicial sets $X_{\bullet},Y_{\bullet} \colon (\mathsf{Ord} _{\leq})^{\mathrm{op}} \to \mathsf{Set} $. This means we have sets $X_n $ ($n\geq 0$) and maps $\theta ^{\star} \colon X_q  \to X_p$ attached to $\theta \colon [p] \to [q]$, and face maps $\partial ^i  \colon X_n  \to X_{n-1}$ attached to co-face maps $\varepsilon ^i \colon [n-1] \to [n]$ (strictly increasing, omits $i$).
+ Define a product of simplicial sets $(X\times Y)_{\bullet}$ as having $(X \times Y)_n =X_n  \times Y_n $ and maps $\theta ^{\star}$ are products of those in  $X_{\bullet}$ and $Y_{\bullet}$. This is suspiciously easy, but we will see why soon.
+
+ We have projection maps $(X \times Y)_{\bullet}\to X_{\bullet},(X\times Y)_{\bullet}\to Y_{\bullet}$ which induce maps $\rho_1 \colon |(X\times Y)_{\bullet}) \to |X_{\bullet}|, \rho_2 \colon |(X\times Y)_{\bullet}| \to |Y_{\bullet}|$, so we get a product map $\rho=\rho_1 \times \rho_2 \colon |(X\times Y)_{\bullet}| \to |X_{\bullet}| \times |Y_{\bullet}|$.
+ \begin{theorem}
+     If $|X_{\bullet}|$ is locally finite when viewed as a CW complex whose cells are the non-degenerate simplices of $X_{\bullet}$, then  $\rho \colon |(X \times Y)_{\bullet}| \to |X_{\bullet}|\times |Y_{\bullet}|$ is a homeomorphism.
+ \end{theorem}
+
+ This is \emph{not} true for the geometric realization of \emph{semi}-simplicial sets. For example, consider $\Delta ^1$ as a semi-simplicial set. Then $\Delta ^1 \times \Delta ^1$ ought to be a square, but it has four 0-simplices, one 1-simplex, and \emph{no} higher simplices.
+ So degeneracies matter here.
+
+ \begin{proof}
+     Last time, we defined the simplicial set $\Delta ^p_{S S}:= \mathsf{Ord} _{\leq}(\cdot ,[p])$. Then $|\Delta ^p _{S S}|=|\Delta ^p|$.
+     \begin{lemma}
+         The map $\rho \colon |\Delta _{S S}^p \times \Delta _{S S}^q |\to |\Delta ^p|\times |\Delta ^q| $ is a homeomorphism. For example, $|\Delta ^1_{S S}\times \Delta ^1_{S S}|$ is a square. 
+     \end{lemma}
+     Granting the lemma; we have $|X_{\bullet}|= \bigcup e_{\alpha }^p$ the interior of a $p$-cell, indexed by $\alpha  \in X_p$ a non-degenerate $p$-simplex. Similarly $|Y_{\bullet}|= \bigcup e_{\beta }^q$, and $|X_{\bullet}| \times |Y_{\bullet}|= \bigcup e_{\alpha }^p \times e_{\beta }^q $. On the other hand, $|(X \times Y)_{\bullet}|= \bigcup e^{p+q}_{(\alpha ,\beta )}$, and $\rho(e^{p+q}_{\alpha ,\beta })\subseteq e_{\alpha }^q \times e_{\beta }^q$ via $\rho \colon \overline{e^{p+q}} \to \overline{e_{\alpha }^q}\times \overline{e_{\beta }^q}$. This map here is exactly the one considered in the lemma, identifying a $p-$ cell with $|\Delta ^p|$. We find that $\rho$ is a continuous bijection. We need a little bit more to show that $\rho$ is a homeomorphism, which is detailed in the class notes.
+
+     Now we turn our attention to the lemma, which says that $|(\Delta _{S S}^p \times \Delta _{S S}^q)| \xrightarrow{\cong}|\Delta ^p|\times  |\Delta ^q|$. Looking at $(\Delta _{S S}^p \times \Delta _{S S}^q)_n $, these are increasing maps $[n] \to [p] \times [q]$, i.e., sequences $(i_0,j_0),(i_1,j_1),\cdots ,(i_n ,j_n )$ where $0\leq i_0 \leq i_1 \leq \cdots \leq i_n  \leq p$, $0 \leq j_0 \leq j_1 \leq \cdots \leq j_n  \leq q$. The non-degenerate $n$-simplices are those such that we never have $(i_k,j_k)=(i_{k+1}, j_{k+1})$.
+     {\color{red}todo:insert figure} 
+     Let us do this for the simplest case $\Delta _{S S}^1\times \Delta _{S S}^1$. This has four non-degenerate 0-simplices, five non-degenerate 1-simplices, and two non-degenerate 2-simplices, which ends up being $|\Delta ^1| \times |\Delta ^1|$ {\color{red}todo:figure}. In general, the non-degenerate top-dimensional $(p+q)$-dimensional simplices of $\Delta ^p_{S S}\times \Delta ^q _{S S}$ are indexed by staircase diagrams. These are in bijection with $(p,q)$-shuffles, i.e. permutations $\omega \in S_{p+q}$ which are strictly increasing on $\{1,\cdots ,p\} $ and on $\{p+1, \cdots ,p+q\} $.\footnote{Shuffles are like riffle shuffles; we split a sorted deck and interleave them in some complicated way, while preserving the order of the halves.} The remainder of the proof shows how $|\Delta ^p|\times |\Delta ^q|$ is ``tiled'' by $(p+q)$-dimensional simplices indexes by shuffles.
+
+     For example, if we take a 2-simplex times a 1-simplex (a prism), we won't have time to write down the explanation. Reading through this portion of the proof and playing with it by hand until it makes sense. In particular, what is the triangulation of this prism?
+ \end{proof}
+

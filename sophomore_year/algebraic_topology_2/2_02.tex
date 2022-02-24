@@ -1,0 +1,66 @@
+\section{The universal cover of $BG$ is contractible} 
+Some reminders.
+\begin{definition}[]
+    An \textbf{aspherical space} is a path-connected $CW$ complex $X$ whose universal cover $\widetilde X$ is contractible.
+\end{definition}The reason for the name is that the higher homotopy groups are the same as the universal cover, so there are no non-trivial maps between spheres.
+\begin{example}
+    Some examples:
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+        \item point
+        \item $S^1 $ with universal cover $\R \to  S^1 $, $\pi_1(S^1 ) \cong \Z$ 
+        \item $\underset{n}{\underbrace{S^1  \times  \cdots  \times S^1 } } $ with universal cover $\R^n  ,  \pi_1((S^1 )^n )=\Z^n $ 
+        \item The genus $g$ surface $\Sigma_g$ with universal cover $\mathbb D \cong \R^2$, $\pi_1 \cong \langle A_1, \cdots ,A_g,B_1 ,\cdots ,B_g \mid [A_1,B_1]\cdots [A_g,B_g]=1 \rangle $.
+        \item $\bigvee ^n  S^1 $, whose universal cover is an $\infty$ tree, $\pi_1=F_n $.
+        \item $\R \mathrm P^{\infty} $, whose universal cover is $S^{\infty}=\bigcup S^n $. It is a fact that $S^{\infty}$ is contractible! We have $\pi_1(\R \mathrm P^{\infty})=\Z /2 $. There is a generalization with infinite lens spaces, with fundamental group $\Z /n$.
+    \end{itemize}
+\end{example}
+Last time we saw that a small category $\mathcal{C} $ has
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item a nerve $N \mathcal{C} $ (simplicial set)
+    \item a classifying space $B \mathcal{C} =|N \mathcal{C} |$.
+\end{itemize}
+\begin{example}
+    A group $G$ defines a category $G$ with one object and morphisms parametrized by group elements, hence $NG$ and $BG$. Here, $(NG)_n =G^n $. We didn't actually need inverses to do this, it works for monoids as well.
+\end{example}
+\begin{remark}[From Riccardo, who isn't here]
+  I didn't catch it rip.  
+\end{remark}
+\begin{namedthing}{Variant} 
+    Let $G$ be a monoid. It has a \textbf{translation category} $tG$, whose objects are elements of $G$ ($\mathrm{ob}(tG)=G$)  and has morphisms $\mathrm{mor}_{tG}(g_1,g_2)=\{h \in G \mid hg_1=g_2\} $. If $G$ is a group, all morphisms in $tG$ are isomorphisms.
+\end{namedthing}
+\begin{prop}
+    The classifying space $B(tG)$ is contractible when $G$ is a group.
+\end{prop}
+\begin{proof}
+    We saw last time that if a functor $F \colon \mathcal{C}  \to \mathcal{D} $ is an equivalence of categories, then $BF \colon B\mathcal{C}  \to B\mathcal{D} $ is a homotopy equivalence. This was the punchline from last time. Take the trivial category $[1]$ with one object and one morphism, this category has a trivial classifying space (a point). There is a functor $F \colon tG \to [1]$ which sends $F(g)=*,F(g_1\xrightarrow h g_2)=\id_*$. This category is the terminal object among categories. More interestingly, there is a functor in the opposite direction $G \colon [1] \to tG$, sending $g(*)=e,g(\id_*)=(e \xrightarrow ee)$. 
+
+    We claim that $G$ is an equivalence (with $F$ as an inverse equivalence). To show a functor is an equivalence, we show it is fully faithful and essentially surjective. Essential surjectivity means that every object in the target category $tG$ is isomorphic to one in the image of the functor. $g \underset{t_G}{\cong} e$ since $e \xrightarrow gg$, and it is an isomorphism since we go in the other direction by $g^{-1}$. Fully faithful means that $G$ is bijective on morphism sets; $[1](*,*)=\{\id_*\} $, and again $tG(e,e)=\{e \xrightarrow ee\} $, and $G$ bijectively maps between these two sets. Finally we get that $G \colon tG \to [1]$ induces a homotopy equivalence $B(tG) \to  \{\text{pt} \} $. Therefore $B(tG)$ is contractible.
+\end{proof}
+Set $EG=B(tG)$. The next thing is that there is a functor $P \colon tG \to G$. On objects, $P(g)=*$, $P(g_1 \xrightarrow hg_2)=h$. This induces a map $p=BP\colon EG \to BG$ (the $p$ stands for projection).
+\begin{note}
+    Note that $N(tG)_0=\mathrm{ob}(tG)=G$, and 
+    \[
+    N(tG)_n = \left\{ \left| g_0 \xrightarrow{g_1} g_1g_0 \xrightarrow{g_2} g_2g_1g_0 \to  \cdots  \to  \xrightarrow{g_n } g_n  \cdots g_0 \right|  \right\} \cong G^{n+1}
+\] in a sequence $(g_1,g_1,\cdots ,g_n )$. Compare this with $(NG)_n =G^n $. Face and degree maps are like those in $NG$. We have $NP \colon N(tG) \to NG$, $G^{n+1}\to  G^n $, where $(g_0 ,\cdots ,g_n ) \mapsto (g_1, \cdots ,g_n )$. 
+\end{note}
+\begin{theorem}\label{egfree} 
+   $EG$ comes with a free and proper right $G$-action, covering $\id_{BG} $ such that $P \colon EG /G \to BG$ is a homeomorphism.
+\[
+\begin{tikzcd}
+EG \arrow[rr, "\gamma"] \arrow[rdd, "p"'] &                                               & EG \arrow[ldd, "p"] \\
+                                          & {} \arrow[loop, distance=2em, in=55, out=125] &                     \\
+                                          & BG                                            &                    
+\end{tikzcd}
+\] 
+   Furthermore, $p \colon EG \to BG$ is a (universal) covering map.
+\end{theorem}
+\begin{cor}
+    $BG$ is aspherical.
+\end{cor}
+\begin{proof}[Proof of \cref{egfree}] 
+    $G$ acts (strictly) on the right on the category $tG$; to $g \in G$, attach $F_{\gamma }\colon tG \to tG$ such that $F_{\gamma '\gamma }=F_{\gamma }\circ F_{\gamma '}$, $F_e=\id_{tG}$. Then $F_{\gamma }(g)=g\gamma , F_{\gamma }(g_1 \xrightarrow hg_2)=(g_1 \gamma  \xrightarrow h g_2\gamma )$. $F_{\gamma }$ then induces a $G$-action on $N(tG)$, hence on $EG$. Here $G^{n+1}=N(tG)_n  \xrightarrow{\gamma } N(tG)_n =G^{n+1}$, $(g_0,\cdots ,g_n ) \mapsto (g_0 \gamma , g_1, \cdots ,g_n $, hence amounts to a map of simplicial sets. This action on $N(tG)_n $ is free, and also is free on the non-degenerate simplices in $N(tG)_n $, so the $G$-action on $EG$ is free. The categorical $G$-action on $tG$ commutes with $P$, and it follows that $p \colon EG /G \to BG$ is bijective. 
+
+    The final thing is that the $G$-action on $EG$ is proper. This means that the map $EG \times G \to EG \times EG, (x,\gamma ) \mapsto (x, x\cdot \gamma )$ is proper (pre-image of compact is compact). It follows that $EG /G$ is Hausdorff, and the projection $EG \to EG /G$ is a covering map. It further follows that $EG /G \xrightarrow P BG$ is also a covering map (and bijective), hence a homeomorphism. {\color{red}todo:notes} 
+\end{proof}

@@ -1,0 +1,59 @@
+\section{Homology groups} 
+Some review. A semi-simplicial set is a functor $X _{\bullet}\colon (\mathsf{Ord} _<)^{\mathrm{op}} \to \mathsf{Set} $, so that the co-face map $\varepsilon ^i  \colon [n-1] \to [n]$ induces a \textbf{face map} $\partial ^i \colon X_n  \to X_{n-1}$. These satisfy the \textbf{face relations}: $\partial ^i  \circ \partial ^j  = \partial ^{j-1}\circ \partial ^i $ when $i<j$.
+
+\begin{definition}[]
+    In any category $\mathcal{C} $, a \textbf{semi-simplicial object} of $\mathcal{C} $ is a functor $X_{\bullet} \colon (\mathsf{Ord} _<)^{\mathrm{op}} \to \mathcal{C} $. Similarly, a \textbf{simplicial object} is a functor $X_{\bullet}\colon  (\mathsf{Ord} _{\leq}) ^{\mathrm{op}} \to \mathcal{C} $. 
+\end{definition}For example, we have (semi-)simplicial spaces or (semi-)simplicial groups, etc. We'll focus on the csae where $\mathcal{C} = \mathsf{Mod}_R$, the category of modules over a commutative ring $R$, especially the case $R=\Z$, or $\mathsf{Mod} _{\Z}=\mathsf{Ab} $. A semi-simplicial $R$-module consists of:
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item Some $R$-modules $A_n $ ($n\geq 0$),
+    \item Face homomorphisms $\partial ^i  \colon A_n  \to A_{n-1}$ among face relations.
+\end{itemize}
+How do these relate to simplicial sets? We can turn any (semi-)simplicial set $X_{\bullet}$ into a (semi-)simplicial $R$-module $[n] \mapsto R^{X_n }$, applying the free functor $\mathsf{Set} \to  \mathsf{Mod} _R$. \[
+    (\mathsf{Ord} _<)^{\mathrm{op}}\to  \mathsf{Set} \xrightarrow{\text{free} } \mathsf{Mod} _R
+\] We make a momentous definition.
+\begin{definition}[Boundary operator]
+    For $n\geq 1$, define the \textbf{boundary operator} $\partial =\sum _{i=0}^n    (-1)^i  \partial ^i $,\ $A_n  \to A_{n-1}$.
+\end{definition}
+\begin{lemma}\label{bddsr} 
+    $\partial \circ \partial =0$, as maps $A_n \to A_{n-2}$.
+\end{lemma}
+One of the problems on the problem set was to use the face relations to prove \cref{bddsr}. Hence we get a \textbf{chain complex} of $R$-modules $\cdots  \to A_2 \xrightarrow{\partial } A_1 \xrightarrow{\partial } A_0 \to 0.$ Reminder: a chain complex of $R$-modules is a family of $R$-modules $\{C_n \} _{n \in \Z}$ with $R$-linear maps $\partial  \colon C_n  \to C_{n-1}$ such that $\partial \circ \partial =0$. In our case, take $A_n =0$ when $n<0$. This is also called a ``non-negative chain complex''. Set $C_*= \bigoplus _{n \in \Z}C_n $, which leads to an operator $\partial  \colon C_* \to C_*$, which by definition is a \textbf{graded} $R$-module. $\partial $ has \textbf{degree} $-1$, i.e. carries $C_n $ into $C_{n-1}$. 
+
+There is a category of chain complexes $\mathsf{Ch} _R$. Morphisms $(C_*, \partial )g\to (D_X, \partial ')$ are maps $f \colon C_* \to D_*$ of degree zero ($f(C_n )<D_n $) such that $\partial ' \circ f = f \circ \partial $. This leads to a functor $\mathsf{ssMod} _r \to \mathsf{Ch} _R$, where $\mathsf{ssMod} _R$ is the category of semi-simplicial $R$-modules. We usually query chain complexes vias their \textbf{homology}. Namely, set 
+\[
+    H_n (C_*, \partial ):= \frac{\ker (\partial \colon C_n  \to C_{n-1})}{\im (\partial  \colon C_{n+1} \to C_n) }.
+\] So $H_n $ is a subquotient of $C_n $, where $\ker \partial $ presents ``$n$-cycles'' and $\im \partial $ represents ``$n$-boundaries''.
+\begin{remark}
+    If $A_{\bullet}$ is a \textbf{simplicial} $R$-module, its chain complex $(A_*,\partial )$ has a \textbf{chain subcomplex} $DA_*$, the \emph{degenerate}  chains. Namely, $DA_n =\sum $ images of the degeneracy maps $A_{n-1}\to A_n $. Some facts:
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+\item $\partial (DA_n ) \subseteq DA_{n-1}$.
+\item $(DA_*,\partial )$ is \textbf{acyclic}, i.e. $H_*(DA_*,\partial )=0$.
+    \end{itemize}
+    It follows that $A_* \to A_* /DA_*$ (called the \textbf{normalized} chain complex) induces an isomorphism on homology. To see this, we use the long exact sequence on homology induced by the short exact sequence $0 \to DA_* \to A_* \to A_* / DA_* \to 0$. So one has the choice to work with normalized chains if one wishes, without affecting homology. This idea comes up all over the place; we'll apply it next to singular homology, but also includes simplicial homology, \u Cech cohomology of spaces equipped with open coveres, group homology (bar complex), the homology of Lie algebras, the Hochschild homology of associative algebras, it's all over the place.
+
+    A question that comes up regularly is ``why do chain complexes show up everywhere in mathematics (or algebra)''? A number of principles apply, but this construction of a chain complex from a simplicial module encompasses a whole lot of them. In many cases we have the option of working with standard or normalized chains.
+\end{remark}
+   \subsection{Singular homology}
+   A space $X$ leads to a simplicial set $C(|\Delta ^{\bullet}|,X), [n] \mapsto  \{\text{continuous maps} \ |\Delta ^n | \to X\} $. Here $\partial ^i  \colon C(|\Delta ^n|,X)  \to C(|\Delta ^{n-1}|,X),\ \partial ^i \sigma= \left. \sigma \right| _{\mathrm{conv}(v_0, \cdots , \hat{v_i }, \cdots ,v_n )}$. Let us draw this out.
+       \begin{itemize}
+       \setlength\itemsep{-.2em}
+           \item For $n=1$, $\partial ^0 \sigma=\left. \partial \right| _{\{v_1\} }     ,\ \partial ^1 \sigma= \left. \sigma \right| _{\{v_0\} } $.
+                   \item For $n=2$, $\partial ^0(\sigma)$ {\color{red}todo:figure}. 
+               \end{itemize}We turn this simplicial set into a simplicial $R$-module $S_{\bullet}(X;R)=R^{C(|\Delta ^{\bullet}|,X)}$. So $S_n (X;R)= \{\sum n_{\sigma}\sigma\} $ for $n_{\sigma}\in R, \sigma \colon |\Delta ^n | \to X$. Then $\partial = \sum_{i=0}^{n} (-1)^i  \partial ^i  \colon S_n (X;R) \to S_{n-1}(X;R)$. For instance, $\partial (\sigma)$ that maps $(v_0,v_1) \to X$ is equal to $\sigma(v_1)-\partial (v_0)$. Similarly, $\partial (\sigma )$ mapping the 2-simplex into $X$ is {\color{red}todo:see figure}. From this we get \textbf{singular homology groups} $H_n (X;R):=H_n (S_*(X;R),\sigma)$. These end up being the key invariants of spaces. 
+               If $f \colon X \to Y$ is a map of spaces, set $Sf \colon S_*(X) \to S_*(Y),\ \sigma\mapsto f \circ \sigma$ so we get $f_* \colon S_*X \to S_*Y$ a map of chain complexes.
+
+               The problem with this construction is that its utterly opaque. It's extremely natural and we can write down many properties about it, but what the heck does this mean. The singular chain complex is absolutely vast, but it turns out the homology is computable.
+
+\begin{example}
+Let $x \in X$. We can define a constant map $c_x^n  \colon |\Delta ^n | \to X$, the constant $n$-simplex about $x$. We have $\partial ^i  c^n _x= c^{n-1}_x$. So 
+\[
+    \partial c^n _x=\left( \sum (-1)^i  \right) c_x^{n-1}=
+    \begin{cases}
+        0 &\text{if}\ n \ \text{odd}\\
+        c_x^{n-1}&\text{if} \ n \ \text{even}.
+    \end{cases}
+\] For example, if $X=\{*\} $, these constant simplices are the only maps to $X$ that we have. We get that $S_*(*)= \cdots  \to \Z \xrightarrow 0 \Z \xrightarrow 1 \Z \xrightarrow 0 \Z \to 0 $ (here $R=\Z$ for simplicity). So $H_n (*)= \Z$ if $n=0$ and 0 if $n>0$.
+\end{example}
+{\color{red}todo:poincare lemma} 

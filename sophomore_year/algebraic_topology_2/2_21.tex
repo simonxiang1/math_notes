@@ -1,0 +1,51 @@
+\section{The degenerate simplicial chain complex is acyclic} 
+Let's get to it.
+\subsection{Degenerate simplicial chains}
+Consider a simplicial abelian group $A$, with corresponding chain complex $(A_*, \partial =\sum(-1)^i  \partial ^i )$. There are degeneracy maps $\sigma^i  \colon A_n  \to A_{n+1} $. The images of $\sigma^i $ span a subcomplex $DA_* \subset A_*$, e.g. in  $S_*(X)$. So the degenerate 2-simplices $|\Delta ^2|\xrightarrow{\sigma^0} |\Delta ^1| \xrightarrow{\sigma} X $, where $\sigma^0$ is just projection. We can do this for any $\sigma^i $ as long as the map remains increasing.
+
+\begin{theorem}
+    $H_q(DA_*)=0$ for every $q$, hence the projection $A \to NA_* =A_*/DA_*$ is a quasi-isomorphism.
+\end{theorem}
+\begin{proof}
+    Find a filtration $\{F_p (DA_*)\} $ that is \emph{bounded}; for every $n$, the filtration $F_p(DA_n )$ (an abelian group) has finitely many steps. By the same argument for finite filtrations, if  $H_* (\operatorname{gr}DA_*)=0$ then $H_*(DA_*)=0$. We need relations between face and degeneracy operators. There are face maps $\partial ^i  \colon A_n  \to A_{n-1}$ and boundary maps $\sigma^i  \colon A_n  \to A_{n+1}$ for $i \in [n]$. Then \[
+    \partial ^i \sigma^j =
+    \begin{cases}
+        \sigma^{j-1} \partial ^i  & \text{if} \ i <j,\\
+        \id,& \text{if} \ i \in \{j,j+1\} ,\\
+        \sigma^j \partial ^{i-1}, & \text{if}\ i>j+1.
+    \end{cases}
+\] Using these relations, we see that degenerate chains really do form a subcomplex. We have
+\begin{align*}
+    \partial  \circ \sigma^j &=\sum _i  (-1)^i  \partial ^i \sigma^j \\
+                             &=\sum _{i<j}(-1)^i  \sigma^{j-1}\partial ^i + \sum _{i>j-1}(-1)^i \sigma^j \partial ^{i-1}\in DA_*.
+\end{align*} So $DA_*$ is a subcomplex. Filter $DA_*$ by saying $F_p(DA_n )=\im \sigma^0+ \cdots + \im \sigma^p \subset DA_n $ (if $0 \leq p \leq n$). So $F_pDA_n =0$ for $p<0$ and $DA_n $ for $p>n$. This is a bounded filtration, since $\partial (F_p) \subset F_p$. 
+
+To show that $DA_*$ is acyclic, it suffices to show that $\mathrm{gr}(F_{\bullet}DA_*)=\bigoplus F_p/F_{p-1}$ is acyclic. An element of $F_p/F_{p_1}$ takes the form $\sigma ^px\pmod{F_{p-1}} $. We construct a chain contraction of $\mathrm{gr}_*=F_p/F_{p-1}$, i.e. a map $(\mathrm{gr}_p) \xrightarrow h(\mathrm{gr}_{\varphi })_{*+1}$ such that $\partial h+h\partial =\id$. This is a chain homotopy between our complex and the identity map, which certainly shows that our complex is acyclic. The natural guess for $h$ is a degeneracy map, namely $\sigma_p$. Let $y=\sigma^p x$. Then $\partial y=\partial (\sigma^px)=\sum _{i> p+1}(-1)^i  \sigma^p \sigma^{i-1}x \pmod{F_{p-1}} $. We also compute $\partial (\sigma^p )=\partial (\sigma^p \sigma^p x) =(-1)^{p+1}y-\sigma^p (\partial y)\pmod{F_{p-1}} $ (the steps for this calculation were omitted). This tells us that $h=(-1)^{p+1}\sigma^p$ is a chain contraction.
+\end{proof}
+
+\subsection{Relative homology}
+Let $X$ be a space and $A$ be a subspace with inclusion $i \colon A \to X$. Then we get an injection $i_* \colon S_*A \to S_*X$. Define the \textbf{relative chains} to be $S_*(X,A)=S_*X/S_*A=\coker i_*$. Then we have a short exact sequence of complexes \[
+    0 \to S_*A \xrightarrow{i_*} S_*X \to  S_*(X,A) \to 0
+\] by construction, which gives us a long exact sequence \[
+\cdots \to H_qA \xrightarrow{i_*} H_qX \to H_q(X,A) \xrightarrow{\partial }  H_{q-1}A \to \cdots 
+\] on homology. What is the connecting map $\partial $? For $[c] \in H_q(X,A)$, we take a relative cycle (boundary is zero relative to the singular chains of $A$ 0, and let $\partial [c] =[\partial  c]$ for $c \in S_{q-1}(A)$. So we get a boundary of one degree lower by identifying boundaries. 
+\begin{example}
+    If $A$ is a deformation retract of $X$, then $i+* \colon S_*A \to S_*X$ is a quasi-isomorphism (because $i$ is a homotopy equivalence and so $i_*$ is a chain homotopy equivalence). So the long exact sequence tells us that $H_*(X,A)=0$. In general, the relative homology tells us the failure of the inclusion to be a homotopy equivalence.
+\end{example}
+\begin{remark}
+    There exists a quasi-isomorphism $\mathrm{cone}(i_*)=(S_{*-1}A\oplus S_* X )\xrightarrow{(0, \text{quotient} )}   S_*(X,A)$.
+\end{remark}
+There is a reduced version $i_* \colon \widetilde S_*(A) \to \widetilde S_*(X)$, with  \[
+\begin{tikzcd}
+\cdots \arrow[r] & S_1(A) \arrow[d, "i_*"'] \arrow[r] & S_0(A) \arrow[d, "i_*"'] \arrow[r] & \Z \arrow[d, "="'] \arrow[r] & 0 \\
+\cdots \arrow[r] & S_1(X) \arrow[r]                   & S_0(X) \arrow[r]                   & \Z \arrow[r]                 & 0
+\end{tikzcd}
+\] Then $\coker (i_*)=S_*(X,A)$. In other words, there is a short exact sequence of complexes \[
+    0 \to \widetilde S_*A \xrightarrow{i_*} \widetilde S_*X \to  S_*(X,A) \to 0
+\] which gives us a long exact sequence \[
+\cdots \to \widetilde H_qA \xrightarrow{i_*} \widetilde H_qX \to H_q(X,A) \xrightarrow{\partial }  \widetilde H_{q-1}A \to \cdots 
+\] on reduced homology.
+
+\begin{example}
+    Let $X=|\Delta ^n |$, and $A=\Sigma _{n-1}$ (the geometric boundary of $|\Delta ^q|$), corresponding to $(D^n ,S^{n-1})$. Consider $H_*(|\Delta ^n |,\Sigma _{n-1})$. {\color{red}todo:finish} 
+\end{example}

@@ -1,0 +1,43 @@
+\subsection{I missed a lecture}
+about principal bundles
+\section{Chapter II: Homology and cohomology} 
+We spend a while talking about simplicial sets and things you can do with them, but now we talk about homology and cohomology. This is a consolidation of foundations, with further techniques that may or may not have been covered (homology of products, \emph{co}homology, product structures (cross, cup, cap), etc). Primarily we will talk about singular (co) homology, but also simplicial and cellular (and possibly \u Cech) as well.
+\subsection{Singular homology}
+Let $X$ be a space. This leads to a singular simplicial set $S_{\bullet}(X)$, with $S_n (X)=\Z^{\{\text{maps} \ |\Delta ^n | \xrightarrow{\sigma}  X\} }$. Recall that $|\Delta ^n |=\mathrm{conv}(v_0, \cdots ,v_n ) \subseteq \R^n $. The face maps $\partial _i \colon S_n (X) \to S_{n-1}(X)$ are defined by $\left. \partial _i \sigma \right| _{\mathrm{conv}(v_0, \cdots , \hat{v}_i , \cdots ,v_n )}$. There are also the degeneracy maps $\eta ^i  (\sigma)= \{|\Delta ^{n+1} | \xrightarrow{\Sigma^i }  |\Delta ^n |\xrightarrow{\sigma}X\}  $, where $|\Delta ^{n+1}| \to |\Delta ^n |$ is the $i$th codegeneracy map. Then we have the singular chain complex, where $S_*(X) =\bigoplus _{n \in \Z}S_n (X)$ (where $S_qX=0$ for $q<0 $), with $\partial =\sum (-1)^i  \partial _i $ taking the degree down by one, or $\partial  \colon S_n X \to S_{n-1}X$. The crucial feature is that $\partial \circ \partial =0$, which means we get a chain complex. Here $H_n (X)=H_n (S_*(X))$, and homology is defined as $Z_n (X) /B_n (X)$; the $Z_n (X)$ are $n$-cycles equal to $\ker(\partial  \colon S_n  \to S_{n-1}) $, and the $B_n (X)$ are $n$-boundaries equal to $\im (\partial  \colon S_{n+1} \to S_n $).
+    The indexing satisfies $B_nX \subseteq Z_n X \subseteq S_n X$, which reflect the fact that $\partial ^2=0$.
+
+    Maps $f \colon X \to Y$ functorially induce $S_*(f)=f_* \colon S_*X \to S_*Y$, $f_* \sigma=f \circ \sigma$, where $g_*f_*=(g \circ f)_*$, and we get maps on homology, and so on. There is a variant with singular chains with coefficicents in a  commutative ring $R$. This is the same idea but now with a simplical  $R$-module that sends $n \mapsto  R ^{\{\sigma \colon |\Delta ^n | \to X\} }$. This leads to $S_*(X;R)$ which is a chain complex of $R$-modules, where $S_*(X;R)=S_*(X) \otimes_{\Z}R, \partial =\partial \otimes \id_R$. So we get homology with coefficients $H_*(X;R)$.
+    An $n$-cycle over $\Z$ and $n$-boundary over $\Z$ is also an $n$-boundary or $n$-cycle over $R$. Hence we get a natural map $H_*(X)\otimes R \to H_*(X;R)$ of $R$-modules. We will study the issue of ``is this map an isomorphism''? (It isn't in general).
+
+    Very few calculations of $H_*(X)$ can be done ``by hand''. We can easily compute that if $X= \{ \text{point} \} $, $S_*(X)= (\cdots \to \Z \xrightarrow 1\Z \xrightarrow 0\Z \to 0$, $H_*X=H_0X=\Z$. More generally, if $X \subseteq \R^n $ is star-shaped, $H_*X=H_0X=\Z$. The generator is a constant $|\Delta ^0|\to X$. To show this, assume we have some simplex mapping into a star-shaped set. We can homotope it to a constant simplex at the origin (star-shaped), and this process defines a chain homotopy equivalence on the singular chains of $X $ and the basepoint. Beyond this, thee is next to nothing one can do besides rolling up your sleeves.
+
+    \subsection{Simplicial homology}
+    We probably already know some more techniques for computing homology, like Mayer-Vietoris (which is not obvious, since it requires proving a locality for singular chains). For this course, we discuss simplicial homology, of the  geometric realization of a simplicial set.
+
+    Let $X_{\bullet}$ be a simplicial set, $X=|X_{\bullet}|$. We then have two simplicial abelian groups; $C_{\bullet}(X_{\bullet})$, where $C_n (X_{\bullet})=\Z^{X_n }$. OTOH  we have $S_{\bullet}(X)$, where $S_n (X) = \Z^{C(|\Delta ^n |,X)}$. Therefore we have two chain complexes; $C_*(X_{\bullet})$ the \emph{simplicial chains}, and $S_*(X)$ the \emph{singular chains}. The assertion is that $C_{\bullet}(X_{\bullet})$ is contained in $S_{\bullet}(X)$. Each $\delta  \in X_n $ defines a ``characteristic map'' $\chi_{\delta }\colon |\Delta ^n | \to X=X_{\mathrm{pre}}/\sim$, where $X_{\mathrm{pre}}=\coprod_n X_n \times |\Delta ^n |$. So $\chi_{\delta }$ takes a point $t$ in the simplex and maps it to the equivalence class $[(\delta, t)] \in  X_{\mathrm{pre}}$, or $\chi_{\delta}(t)=[(\delta, t)]$. This leads to a map of simplicial abelian groups $C_{\bullet}(X_{\bullet}) \xrightarrow{\chi} S_{\bullet}(X), \delta \mapsto \chi_{\delta }$, which subsequently leads to a map of chain complexes \[
+        \chi_* \colon C_*(X) \to S_*(X)
+    \] a chain map.
+    \begin{theorem}
+        $\chi_*$ is a \textbf{quasi-isomorphism}, that is to say, it is a chain map inducing an isomorphism on homology.
+    \end{theorem}
+    We have a subcomplex $D_*(X_{\bullet}) \subseteq C_*(X_{\bullet})$, where the $D_*(X_{\bullet})$ are degenerate simplicial chains (images of degeneracy maps) and the $C_*(X_{\bullet})$ are simplicial chains. We have \emph{normalized chains}  $N_*(X_{\bullet}) = C_*(X_{\bullet}) / D_*(X_{\bullet})$ (or non-degenerate) simplicial chains with induced boundary operation. An algebraic fact (valid for all simplicial abelian groups) is that the quotient map $C_*(X_{\bullet}) \xrightarrow{\text{quotient}} N_*(X_{\bullet})$ is a quasi-isomorphism. So \[
+\begin{tikzcd} 
+    H_n(C_*(X_{\bullet})) \arrow[d, "\cong"'] \arrow[r, "\chi_*"] \arrow[r, "\cong"'] & H_n(X) \arrow[ld, "\cong", bend left] \\
+H_n(N_*(X_{\bullet}))                                                             &                                      
+\end{tikzcd}
+    \] 
+\begin{namedthing}{Variant} 
+    Suppose $X_{\bullet}^{\mathrm{semi}}$ is a semi-simplicial set, then $\chi_* \colon N_*(X_{\bullet})=\Z^{X_{\bullet}} \to S_*(|X|)$ is still a quasi-isomorphism.
+\end{namedthing}
+\begin{example}
+    Consider the Klein bottle $K=|K_{\bullet}|$, the geometric realization of a semi-simplical set $K_{\bullet}$. {\color{red}todo:find the picture somehow}  We have $K_0=\{*\} ,K_1=\{a,b,c\} , K_2=\{A,B\} $. So $\partial A=b-c+a, \partial B=a-b+c$. Furthermore $\partial a= *-*=0$, and so $\partial b,\partial c=0$ as well. Then \[
+        N_*\left( 0 \to \Z^{\{A,B\} }\xrightarrow{\partial } \Z^{\{a,b,c\} }\xrightarrow{\partial } \Z^{*}\to 0\right) 
+    \] Reading off the cycles, note that $\partial A,\partial B$ are LI so there is no kernel and $Z_2=0$. We have $Z_1=\Z^{\{a,b,c\} }$, and $Z_0=\Z^{\{*\} }. $ So \[
+    H_n (K)=
+    \begin{cases}
+        0 & n\geq 2,\\
+        \Z_{[*]} & n=0\\
+        \frac{\Z^{\{a,b,c\} }}{a+b-c,a-b+c}=\Z /2_{[a]} \oplus \Z_{[b]} & n=1
+    \end{cases}
+    \] What does it mean to calculate a homology group in full? Not only do we calculate the homology as some abelian groups, we specify a generator for the cycles.
+\end{example}

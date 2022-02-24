@@ -1,0 +1,44 @@
+\section{Simplicial sets} 
+Simplicial sets are a formalism that encompass on one hand ``triangulated spaces'' (things built from simplices), but also the singular chain complex of a space, the classifying space of a group, and more. Let's get to it.
+
+\subsection{Simplices}
+It is convenient to work in the category $\mathsf{Aff} $ of finite-dimensional vector spaces, where objects are vector spaces of finite dimension over $\R$ and morphisms are affine linear maps $A \colon V \to V'$. Affine linear means that for all vectors $u \in V$, the map sending $v \mapsto A(v-u)$ is linear. This means that $Av=Tv+c$ for a constant $c$, where $T$ is linear.
+
+\begin{definition}[]
+    An \textbf{affine basis} for an $n$-dimensional vector space $V$ is an ordered $(n+1$)-tuple $\mathbf v=(v_0, \cdots ,v_n ) \in V^{n+1}$ such that for each $i$, $\{v_j -v_i  \mid j\geq i\} $ form a basis for $V$.
+\end{definition}
+The idea is that we have one too many vectors for a basis, so if you work relative to one vector then they form a basis.
+\begin{example}
+    If $V= \{0\} ,$ then $v_0=0$. If $V=\R$, then we have two distinct elements $v_0,v_1$. In $\R^2$, we need three non-collinear elements in $\R^3$. If $V=\R^3$, we need four non-coplanar elements, and so on. These are affine bases. Affine maps $A \colon V \to V'$ are determined by their effect on an affine basis.
+\end{example}
+
+\begin{definition}[]
+    An \textbf{algebraic} $\mathbf n$\textbf{-simplex} $\Delta =(V;\mathbf v)$ is an $n$-dimensional vector space over $\R$ and an affine basis for it. The corresponding \textbf{geometric simplex} $|\Delta |$ is the convex hull of the vectors in the affine basis $\{v_0, \cdots ,v_n \} $, or $|\Delta |= \mathrm{conv}(v_0,\cdots ,v_n )= \left\{ \sum t_i v_i \mid t_i  \in [0,1], \sum t_i =1 \right\} $.  We view $|\Delta |$ as a subspace of $V$ with its norm topology.
+\end{definition}
+{\color{red}todo:figures} 
+Given algebraic $n$-simplices $\Delta =(V,\mathbf v),\Delta '=(V', \mathbf v') $, there exists a unique isomorphism in $\mathsf{Aff} $ mapping $V\to V'$ carrying $\mathbf v$ to $\mathbf v'$; it induces a homeomorphism $|\Delta | \xrightarrow{\cong} |\Delta '|$. Since they're all the same up to homeomorphism, it is convenient to pick a standard one to work with.
+
+\begin{definition}[]
+    For $n\geq 0$, the \textbf{standard algebraic} $\mathbf n$\textbf{-simplex} $\Delta ^n $ has $V=\R^n =\{ \text{maps} \ \{1,\cdots ,n\} \to \R\} $ with affine basis $\mathbf v=(\mathbf 0,e_1,\cdots ,e_n )$ where the $e_i $ are the standard basis vectors for $\R^n $. The \textbf{standard geometric} $\mathbf n$\textbf{-simplex} $|\Delta ^n |$ is then $|\Delta ^n |= \left\{ t_0 \mathbf 0+ \sum_{i=1}^{n} t_i e_i \,\big|\,t_i  \in [0,1], \sum t_i =1\right\}=\left\{ \sum_{i=1}^{n} t_i e_i \,\big|\,t_i  \in [0,1], \sum t_i \leq1\right\} $.
+\end{definition}
+\subsection{The simplex categories}
+Consider the \emph{non-strict simplex category} $\mathsf{Ord} _{\leq}$, where objects are finite, non-empty, totally ordered sets $(S, <_S)$. Then objects in $\mathsf{Ord} _{\leq}((S,<_S),(T,<_S))$ are non-strictly increasing maps $S \to T$. Similarly, the \emph{strict simplex category} $\mathsf{Ord} _<$ has the same objects as $\mathsf{Ord} _{\leq}$, but morphisms are \emph{strictly} increasing maps. So there is an inclusion functor $\mathsf{Ord} _< \hookrightarrow \mathsf{Ord} _{\leq}$. Every object $(S,>)$ of $\mathsf{Ord} _<$ is isomorphism to $[n]= \{0<1<\cdots <n\} $ where $n=|S|-1\geq 0$. This isomorphism is unique, even in $\mathsf{Ord} _{\leq}$.
+
+In $\mathsf{Ord} _<$, we have \textbf{co-face maps} $\varepsilon ^i  \colon [n-1] \to [n]$, $i=0,\cdots ,n$, where $\varepsilon ^i $ is the unique strictly increasing map whos image \emph{omits} $i$.  Then every map $f \colon [n] \to [m]$ in $\mathsf{Ord} _<$ is a composite of co-face maps. {\color{red}todo: figures}
+
+In $\mathsf{Ord} _{\leq}$, we also have \textbf{co-degeneracy maps} $\eta ^i  \colon [n] \to [n-1]$, $i=1, \cdots ,n-1$, where $\eta^i $ is an increasing injection which sends two distinct adjacent elements to $i$. Every $f \colon [n] \to [m]$ in $\mathsf{Ord} _{\leq }$ factors into $f= \sigma \circ \iota$, where $\sigma$ is as surjective icreasing product of co-degeneracies, and $\iota$ is a strictly increasing product of co-face maps. Then there is a functor $\R ^{\circ } \colon \mathsf{Ord} _{\leq} \to \mathsf{Aff} , (S,<) \mapsto \R^S $ (equal to maps $S \to \R$). Then a simplex $\Delta ^S=(\R^S,\text{affine basis} )$ with affine basis $(0, e_{S_1 },\cdots ,e_{S_n })$ (where $s_1< s_2< \cdots <s_n $, $s_i  \in S$). If $f \colon (S,<) \to (T,<)$ is a map in $\mathsf{Ord} _{\leq}$, it induces a map $A_f \colon \R^S \to \R^T$ sending $\Delta ^S $ to $\Delta ^T$. The moral of the story is that there is a tight relation between finite ordered sets and simplices.
+
+\subsection{Simplicial and semi-simplicial sets}
+Fix a space $X$. Define a functor $F=C(|\Delta ^{\circ}|,X) \colon \left( \mathsf{Ord} _{\leq} \right)^{\mathrm{op}} \to \mathsf{Set}  $, sending $(S,<) \to C(|\Delta ^S|, X)$ (continuous maps from general simplex), $|\Delta ^S| \subseteq \R^S $ to $X$, and a morphism $f \mapsto  (\sigma \mapsto  \sigma \circ A_f)$. This gives a composite of functors \[
+    \begin{tikzcd}
+\mathsf{Ord}_{\leq} \arrow[r, "\text{covariant}"] \arrow[rr, "F"', bend right, shift right] & \mathsf{Top} \arrow[r, "\text{contravariant}"] \arrow[r, "{C(\cdot,X)}"'] & \mathsf{Cat}
+\end{tikzcd}
+\] where $(S,c) \mapsto |\Delta ^S|$.
+\begin{definition}[]
+    A functor $\left( \mathsf{Ord} _{\leq} \right) ^{\mathrm{op}}\to \mathsf{Set} $ is called a \textbf{simplicial set}. A functor $\left( \mathsf{Ord}_<  \right) ^{\mathrm{op}}\to \mathsf{Set} $ is called a \textbf{semi-simplicial set}.
+\end{definition}
+We have seen from our discussion that a space $X$ leads to a simplicial set $C( |\Delta ^{\circ }|, X)$. A semi-simplicial set $Z_{\bullet}$ amounts to sets $Z_n =Z[n]$ ($n\geq 0$) and face maps $\partial ^i  = Z(\varepsilon ^i ) \colon Z_n  \to Z_{n-1}$. It is easy to check that composing co-face maps $\varepsilon ^j  \circ \varepsilon ^i = \varepsilon ^i  \circ \varepsilon ^{j-1}$ when $i<j$. These relations imply the \textbf{face relations}; $\partial ^i  \circ \partial ^j = \partial ^{j-1}\circ \partial ^i $ when $i<j$ (the orders are reversed due to contravariance). A sequence of sets with face maps satsifying these face relation determines a semi-simplicial set up to isomorphism. In a \emph{simplicial} set, we have degeneracy maps induced by the maps $\eta ^i \colon Z_n  \to Z_{n+1}$, with various relations.
+
+A simplicial set or semi-simplicial set gives rise to its \emph{geometric realization}, which will be crucial. We'll talk about this next time.
+
+

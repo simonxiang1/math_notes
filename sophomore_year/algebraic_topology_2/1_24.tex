@@ -1,0 +1,69 @@
+\section{The geometric realization} 
+Recall that a simplicial set $X_{\bullet}$ is a contravariant functor $ X \colon \left( \mathsf{Ord} _{\leq} \right)  ^{\mathrm{op}}\to \mathsf{Set} $, i.e. we have $X_n =X[n]$ (set), where $[n]=\{0<1<2<\cdots <n\} , n\geq 0$. For every $\theta \colon [m] \to [n]$, we have $(\theta_1 \circ \theta_2)^*=\theta_2^* \circ \theta_1^*$, $\left( \id_{[n]} \right) ^*=\id _{X_n }$. From it we build a space $X=|X_{\bullet}|$, the \textbf{geometric realization.} This is done by gluing together higher simplices.
+
+\subsection{Construction}
+\begin{namedthm}{Construction} 
+Think of $X_n $ as the index set for the $n$-simplices. So take $X_n $ as a discrete space and form \[
+X_{\mathrm{pre}}=\coprod _{n\geq 0}X_n \times |\Delta ^n|  = \coprod _{n\geq 0, \sigma \in X_n }|\Delta ^n |.
+\] For every $\theta \colon [p] \to [q]$ in $\mathsf{Ord} _{\leq}$, we have $\theta^* \colon X_q \to X_p$, $\theta_* \colon |\Delta ^p| \to |\Delta ^q|$. Define an equivalence relation $\sim$ on $X_{\mathrm{pre}}$, where $(\theta^* \sigma,x) \sim(\sigma, \theta_*x)$. Define $X=|X_{\bullet }|=X _{\mathrm{pre}}/ \sim$.
+\end{namedthm}
+It is enough to take $\theta$ to be a co-face or co-degeneracy map. E.g. for face maps, we glue edges to higher dimensional simplices, but 2-simplices are crushed under degeneracy maps. So they don't actually show up as a triangle, but as a line.
+
+{\color{red}todo:figure} 
+
+\subsection{The semi-simplicial case}
+
+\begin{remark}
+    We can do the same construction of $\|X_{\bullet}\|$ starting with a \emph{semi-simplicial set} $X _{\cdot } \colon \left( \mathsf{Ord} _< \right)  ^{\mathrm{op}}\to \mathsf{Set} $, ie. have $\theta^*$ just for $\theta \colon [p] \to [q]$ \emph{strictly increasing}. (No degeneracies, just face maps). This is more intuitive because degeneracies are weird!
+\end{remark}
+\begin{example}[The Klein bottle]
+   We will build the Klein bottle $K$ from a semi-simplicial set $K_{\cdot }$. 
+
+   {\color{red}todo:figure} 
+
+   So we have 
+   \begin{align*}
+       K_0&=\{*\},\\
+       K_1&=\{a,b,c\} \\
+       K_2&=\{A,B\} \\
+       K_n &=\O, \ n\geq 3.
+   \end{align*}
+   The co-face maps $\varepsilon ^i \colon K_{n-1} \to K_n$ induce face maps $\partial ^i  \colon K_n  \to K_{n-1}$, and we glue along these: 
+   \begin{align*}
+       \partial ^0(A)&=b,&\partial ^0(B)=a,\\
+       \partial ^1(A)&=c,&\partial ^1(B)=b,\\
+       \partial ^2(A)&=a,&\partial ^2(B)=c.
+   \end{align*}
+   Then there is no choice of $\partial ^i  \colon K_1 \to K_0=\{*\} $. This corresponds to the classical notion of simplicial complexes, or more precisely ``Delta complexes'' using Hatcher's terminology. Our space $K$ comes with the structure of a 2-dimensional  \textbf{CW complex}. In more detail
+   \begin{itemize}
+   \setlength\itemsep{-.2em}
+       \item There is a filtration by subspaces, called a \textbf{skeleton}. Here \[
+               \O = \mathrm{sk}_{-1}(K)\subset \mathrm{sk}_0(K) \subset \mathrm{sk}_1(K) \subset \mathrm{sk}_2(K)=K.
+       \] 
+   \item Moreover, the $(n+1)$-skeleton is a quotient space of the $n$-skeleton disjoint union with simplices, or $\mathrm{sk}_{n+1}(K)= \mathrm{SK}_n (K) \amalg \left( K_{n+1}\times |\Delta ^{n+1}| \right) /\sim$ in which $\sim$ identifies the boundary of $\{\sigma\} \times |\Delta ^{n+1}|$ with points in $\mathrm{sk}_n (K)$.
+   \end{itemize}
+\end{example}
+\begin{prop}
+    For \emph{semi}-simplicial sets $X_{\cdot }$, $|X_{\cdot }|$ is a CW complex with one $n$-cell for each simplex $\sigma \in X_n $.
+\end{prop}
+\begin{proof}
+    Straightforward, an exercise.
+\end{proof}
+Let us properly define CW complexes.
+\begin{definition}[CW Complex]
+    A \textbf{CW complex} $X$ is a Hausdorff space, topologized as the union (direct limit) of a given sequence of subspaces $\mathrm{sk}_k(X)$ for $k=0,1,2,\cdots $, ie. $S \subset X$ is closed iff $S \cap \mathrm{sk}_k(X)$ is closed in $\mathrm{sk}_k(X)$ for every $k$,\footnote{This topology is also known as the \emph{weak} topology, which is where the ``W'' in ``CW'' comes from.} where $\left( \bigcup   \mathrm{sk}_k(X) =X\right) $. The $\mathrm{sk}_0(X)$ are discrete. For $k>0$, $\mathrm{sk}_k(X)$ is obtained from $\mathrm{sk}_k(X)$ is obtained from $\mathrm{sk}_{k-1}(X)$ by \emph{attaching} $k$\emph{-cells}, ie. take the discrete union $\mathrm{sk}_{k-1}(X) \amalg \coprod _{\alpha \in I_k}e_{\alpha }^k$ (where $e_{\alpha }^k$ is the closed $k$-disk $D^k$), and specify the \emph{attaching maps} $c_{\alpha }^k \colon \partial  e_{\alpha }^k=S^{k-1} \to \mathrm{sk}_{k-1}(X)$, $\partial e_{\alpha }^k x \sim c_{\alpha }^k(x) \in \mathrm{sk}_{k-1}(X)$.
+\end{definition}
+
+\subsection{The simplicial case}
+Now we talk about the geometric realization of \emph{simplicial sets}. If $X_n $ is non-empty for some $n$, then it's non-empty for all $n$. 
+\begin{definition}[]
+    $\sigma\in X_n $ is called \textbf{degenerate} if it is in the image of one of the degeneracy maps $X_{n+1}\to X_n $.
+\end{definition}
+These are not ``visible'' in $|X_{\bullet}|$, as they don't add any extra points, nor extra relations. For example, a tetrahedron is crushed by a constant map to a vertex, and is not seen in the image. This leads to the following proposition.
+\begin{prop}
+    For $X_{\bullet}$ \emph{simplicial}, its geometric realization $|X_{\bullet}|$ is again a CW complex with one $n$-cell for each \emph{non-degenerate} simplex $\sigma \in X_n $.
+\end{prop}
+\begin{example}
+    There is a simplicial set $\Delta ^n _{ss}$, which maps $(S,<) \mapsto \mathsf{Ord} _{\leq}(S,[n])$ (these maps are easy to write down). For example, there exists a unique non-degenerate $n$-simplex corresponding to the identity $\id \colon [n] \to [n]$. This $n$-simplex contributes a geometric $n$-simplex, so gives a map $|\Delta ^n | \to |\Delta ^n _{ss}|$. This is a \emph{homeomorphism}. For $|\Delta ^n |$, gluing lower dimensional things don't contribute and degeneracies just get crushed. We conclude that the geometric realization of $\Delta ^n _{ss}$ is precisely the standard $n$-simplex $|\Delta ^n |$.
+\end{example}
+At this point, it is natural to say that playing with degeneracies is a total waste of time, and based off what we have done so far, it really seems to be the case. Next time, we will cover a construction where degeneracies really help, for example how the product of two simplicial sets is a simplicial set, whose geometric realizationis the product of the geometric realization of each simplicial set. In essence, the product is compatible with simplicial sets. This is not the case for semi-simplicial sets.

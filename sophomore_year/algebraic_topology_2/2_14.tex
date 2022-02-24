@@ -1,0 +1,51 @@
+\section{Homotopy-invariance and locality for simplicial chains} 
+Before we discuss that stuff, we will discuss...
+\subsection{Reduced homology}
+The \emph{augmented singular chain complex} of $X$ is the following: \[
+    \widetilde S_*(X)= \left( \cdots \xrightarrow{\partial } \underset{2}{S_2(X)}  \xrightarrow{\partial } \underset{1}{S_1(X)} \xrightarrow{\partial } \underset{0}{S_0(X)} \xrightarrow{\varepsilon } \underset{-1}{\Z}  \to 0 \to \cdots \right) 
+\]The map $\varepsilon $ is called the \emph{augmentation}, which augments the chain complex. For $\sigma \colon |\Delta ^0|\to X \to $, $\varepsilon  \left( \sum n_i  \sigma_i  \right) =\sum n_i $. Why is this a chain complex? For $\sigma \colon |\Delta ^1| \to X$, $\varepsilon  \circ \partial \sigma=\varepsilon \left(\left. \sigma \right| _{\{v_1\} }- \left. \sigma \right| _{\{v_0\} }\right)=1-1=0$. So $\widetilde S_*(S)$ really is a chain complex. We write $\widetilde H_q(X) = H_q(\widetilde S_*(X))$, which is called \textbf{reduced homology} (or \emph{augmented homology}). There is an obvious chain map $\widetilde S_*X \to S_*X$:
+\[
+\begin{tikzcd}
+\cdots \arrow[r] & S_*X \arrow[d, "\id"] \arrow[r] & \Z \arrow[d] \arrow[r] & 0 \\
+\cdots \arrow[r] & S_*X \arrow[r]                  & 0                      &  
+\end{tikzcd}
+\] 
+Note that the other way around doesn't result in a chain map. So there is a map $\widetilde H_* (X) \to H_*X$ resulting from this chain map. Note that $\widetilde S_*$ and $\widetilde H_*$ are \emph{functorial in} $X$ and don't require a basepoint. 
+
+It is clear that $\widetilde H_q(X) \xrightarrow{\cong} H_q(X)$ for every $q>0$ (almost by definition). The interesting this is what happens at the bottom of the complex? Another obvious thing is that $H_*(\O)=0$, $\widetilde H_*(\O)=\Z_{-1}$. In general, $H_0(X) \cong  \Z^{\pi_0(X)}$ (where $\pi_0$ is the set of path-components of $X$). For $x \in X$, the constant 0-simplex $c^0_x \colon |\Delta ^0| \to X$ at $x$, we have $[c^0 _x] \mapsto [x] \in \Z^{\pi_0(X)}$. As for $\widetilde H^0(X)$ (with $X\neq \O$), fix a basepoint $b \in X$. We get that $\widetilde H_0(X) \cong  \Z^{\pi_0(X) \setminus \{b\} }$, that is, $[c^0_x - c^0_b] \mapsto [x].$ In particular, for $X$ path-connected, $\widetilde H_0(X)=0$, and for $X \subseteq \R^n $ star-shaped, the reduced homology $\widetilde H_*(X)=0$.
+
+\subsection{Two fundamental principles}
+There are two fundamental principles;
+\begin{enumerate}[label=(\arabic*)]
+\setlength\itemsep{-.2em}
+    \item The homotopy principle
+    \item The locality principle
+\end{enumerate}
+What are they? First we discuss the homotopy principle. A map $f \colon X \to Y$ induces a map $f_* =S_*f\colon S_*X \to S_*Y$ and so a map $f_*=H_*f \colon H_*X \to H_* Y$. What does a homotopy $F \colon I \times X \to Y$ induce? It induces $F_* \colon S_*(I \times X) \to S_*Y$, but we want an answer in terms of $S_*X$. The answer is the \textbf{homotopy principle}, which says that $F$ induces a \emph{chain homotopy} $h_F \colon S_*(X) \to S_{*+1}(Y)$ from $f_* $ to $g_*$ (or $\left. F \right| _{\{0\} \times X}=f, \left. F \right| _{\{1\} \times X}=g$). In other words, $\partial \circ h_F +h_F \circ \partial =g_* - f_*, S_*X \to S_*Y$. It follows that $f_* = g_* \colon H_*X \to H_*Y$, or the maps induced on homology are \emph{equal}. Hence if $h \colon X \to Y$ and $k \colon Y \to X$ are homotopy inverses, the induced maps on homology $h_* \colon H_*X \to H_*Y, k_* \colon H_*Y \to H_*X$ are inverse isomorphisms. This tells is that homology is an invariant of homotopy type.
+        \begin{example}
+            If $X$ is contractible, then $H_*X=H_0 \Z=\Z$, since this is true of a point.
+        \end{example}
+        Let us move on to locality. Let $X$ be a space, and $\mathcal{U} = \{U_i  \mid i \in I\} $ be a ``cover'' (keep in mind the practical case of a covering by two subsets). In a sense, we want $X= \bigcup_{i \in  I} \mathrm{int}(U_i )$. There are inclusions $u_i  \colon U_i  \to X$, so we get a map on singular chains $\bigoplus _i  S_*(U_i ) \to S_*(X)$. We call this map $u=\bigoplus(u_i )_*$. Define $S_*^{\mathcal{U} }(X)=\im (u)$, which is a subcomplex of $S_*(X)$.
+        \begin{theorem}[Locality]
+            The inclusion $S_*^{\mathcal{U} }(X) \to S_*X$ is a quasi-isomorphism. That is to say, it induces isomorphisms $H_q(S_*^{\mathcal{U} }(X))\xrightarrow{\cong} H_q(X)$.
+        \end{theorem}
+        The brief idea is that we can take our chains and subdivide them by barycentric subdivision, which have smaller domains. Iterate this process to get maps on sufficiently tiny simplices, which will land in one of the sets of our open cover. On the other hand, the overall simplex is homologous to the signed sum of the subdivided simplices (difference is a boundary), which proves that cycles and boundaries in $S_*X$ is homologous to a cycle/boundary in $S_*^{ \mathcal{U} }(X)$.
+        One of the consequences of this is the exactness of the Mayer-Vietoris sequence.
+        \begin{cor}[Mayer-Vietoris]
+            Let $\mathcal{U} =\{U,V\} $. Here 
+\[
+\begin{tikzcd}
+U\cap  V \arrow[d, "j"', hook] \arrow[r, "i", hook] & U \arrow[d, "k", hook] \\
+V \arrow[r, "\ell"', hook]                          & X                     
+\end{tikzcd}
+\] Then we get a short exact sequence of chain complexes \[
+                0 \longrightarrow S_*(U \cap V) \xrightarrow{i_*\oplus j_*} S_*U \oplus S_*V \xrightarrow{k_*-\ell_*}  S_*^{\mathcal{U} }(X) \longrightarrow 0.
+            \] This leads to a long exact sequence on $H_*$, given by \[
+            \to  \cdots H_q(U \cap V) \to H_qU \oplus H_qV \to H_q(S_*^{\mathcal{U} }X)=H_q(X) \xrightarrow{\beta } H_{q-1}(U \cap V)\to \cdots 
+        \] where the equality comes from locality. There is a reduced variant where we replace $S_*$ by $\widetilde S_*$, which is still exact, leading to a Mayer-Vietoris sequence for $\widetilde H_*$.
+        \end{cor}
+        \begin{example}
+            We can now prove by induction that $\widetilde H_*(S^n )\simeq  \Z^n_{[\omega_n ]} $. The generator or fundamental class is given by this; suppose we take $|\Delta ^{n+1}| \cong D^{n+1}$. Then the geometric boundary $\Sigma_n =\partial |\Delta ^{n+1}|\xrightarrow{\cong} S^n $. What we are really looking at is $\widetilde H_*(\Sigma_n )$, which will do us just fine. Let $\iota _{n+1}=\id _{|\Delta ^{n+1}|}\in  S_{n+1}(|\Delta ^{n+1}|)$. Then $\omega_n =\partial \iota_{n+1} $ viewed as living in $S_n (\Sigma _n )$. So $\partial \omega_n =0$ when viewed as living in the ambient simplex. 
+
+            The claim is that $\Z[\omega_n ]=\widetilde H_*(S^n )$. By reduced Mayer-Vietoris (splitting the sphere in half then thickening), we get $\widetilde H_*(S^n ) \underset{\beta }{\xrightarrow{\cong}} \widetilde H_{*-1}(S^{n-1}) $. This is familiar, but it also leads to a proof of our claim; {\color{red}todo:ok} 
+        \end{example}

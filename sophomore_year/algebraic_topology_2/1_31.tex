@@ -1,0 +1,39 @@
+\section{Classifying spaces for categories and groups} 
+This topic will probably take a couple of lectures to do totally. 
+\begin{namedthing}{Aim} 
+   Construct this \textbf{classifying space} $BG$ for a group $G$. 
+\end{namedthing}
+\begin{namedthing}{Significance} 
+    The classifying space classifies principal $G$-bundles (equivalently, regular covering spaces with deck group $G$). The other key reason is that $H_*(BG)$ (or cohomology) is a very interesting invariant of the group $G$, called \textbf{group homology}.
+\end{namedthing}
+This fits nicely into the simplicial approach we have been doing. We follow the approach laid out in {\color{red}todo:rerefence: Segal (1967), classifying spaces and spectral sequences.} We won't touch the part of the paper that concerns spectral sequences. 
+
+We attach to any small category $\mathcal{C} $ a space $B\mathcal{C} $. How to do this? Note that any totally ordered set $(S,<)$ can be made into a category, where objects are elements of $S$, with unique morphism $s \to s'$ in this category if $s \leq s'$ (and no morphisms if $s>s'$). We attach to $\mathcal{C} $ its \textbf{nerve} $N\mathcal{C} $, a simplicial set \[
+    N \mathcal{C} (S,<)= \{\text{functors} \ S \to \mathcal{C} \} .
+\] So $(N\mathcal{C} )_n = \{ \text{functors} \ [n\ \to \mathcal{C} \} $. For $f \colon [n] \to [n]$, we get a map $(N\mathcal{C} )_n  \to (N\mathcal{C} )_m, F \mapsto F \circ f$. Concretely, what is $(N\mathcal{C} )_0$? This is defined as $(N\mathcal{C} )_0= \{ \text{functors} \ [0] \to \mathcal{C} \} =\mathrm{ob}(\mathcal{C} )$. For $(N\mathcal{C} _1)= \{ \text{functors} \ [1] \to \mathcal{C} \} $, this amounts to $\{ X_0\xrightarrow f X_1\} $ morphisms in $\mathcal{C} $. Going on, $(N\mathcal{C} )_2= \{X_0 \xrightarrow{f_1} X_1\xrightarrow{f_2} X_2\} $. In general, $(N\mathcal{C} )_n = \{X_0\xrightarrow{f_1} X_1\xrightarrow{f_2} \cdots \xrightarrow{f_n } X_n \} $.
+
+The face maps $\partial _i  \colon (N\mathcal{C} ) _n \to (N\mathcal{C} )_{n-1}$ omit $X_i $. For example, $\partial ^1(X_0 \xrightarrow{f_1} X_1\xrightarrow{f_2} X_2\xrightarrow{f_3} X_3)=(X_0\xrightarrow{f_2 \circ f_1} X_2 \xrightarrow{f_3} X_3$. Degeneracy maps $(N\mathcal{C} )_n  \xrightarrow{\eta ^i } (N\mathcal{C} )_{n+1}$ put in identity maps. For example, for $\mathcal{C} =[n]$, $N\mathcal{C} =\mathsf{Ord} _{\leq} (\cdot ,[n])=\Delta ^n _{S S}$.
+\begin{definition}[]
+    The \textbf{classifying space} $B\mathcal{C} =| N\mathcal{C} |$, or the geometric realization of the nerve.
+\end{definition}
+
+For a cellular string of $B\mathcal{C} $, $k$-cells correspond to non-degenerate  $k$-simplices. For example, $B[n]=|N[n]|=|\Delta ^n _{S S}|={\Delta ^n } |$.
+
+\subsection{Groups}
+Let $G$ be a group. View $G$ as a category with $\mathrm{ob}(G)= \{*\} $, morphisms $\{*\} \to \{*\} $ parametrizing elements of the group ($\mathrm{mor}(*,*)=G$). Then composition in the category is composition in $G$. The nerve $(NG)_n =G^n $, since $(NG)_n $ corresponding to strings of composable morphisms, but all morphisms are composable since they send one object to one object. The face maps satisfy $\partial ^i (g_1, \cdots ,g_n )= (g_1, ..,g_{i+1}g_i , \cdots ,g_n )$, and the degeneracy maps insert copies of $e$ (the identity of  $G$). From here we get $BG=|NG|$, the geometric realization of this nerve.
+
+\subsection{Products}
+Another ``clean'' story. For $\mathcal{C,D} $ small categories, we get another small category $\mathcal{C \times D} $, where $\mathrm{ob}(\mathcal{C \times D} ), \mathrm{mor}(\mathcal{C\times D} )=\mathrm{mor}\mathcal{C}\times \mathrm{mor}\mathcal{D}  $. It is easy to check that $N(\mathcal{C\times D} ) \cong N\mathcal{C} \times N\mathcal{D} $ as a product of simplicial sets. So $B(\mathcal{C \times D} )=|N\mathcal{C} \times N\mathcal{D}| $ which leads to a natural map $|N\mathcal{C} |\times |N\mathcal{D} |=B\mathcal{C} \times B\mathcal{D} $. This map is a homeomorphism if (e.g.)\footnote{This is overkill, locally finite is enough, but this case will do for us.} $\mathcal{C} $ is finite as a CW complex. 
+
+The observation from {\color{red}todo:referencec segal paper} is the following; take $\mathcal{C} =[1]=\{\bullet \to \bullet\} $. We have seen that $M[1]=|\Delta ^1|=I$. So $B([1] \times \mathcal{D} ) \xrightarrow{\cong} I \times B\mathcal{D} $. What is this category $[1] \times \mathcal{D} $? Objects are pairs $(0,X),(1,X)$ for $X \in \mathrm{ob}\mathcal{D}$. Morphisms $([1] \times \mathcal{D} )((0,X),(0,Y))=\mathcal{D} (X,Y),((1,X),(1,Y))$, and $([1]\times \mathcal{D} )((0,X),(1,Y))=\mathcal{D} (X,Y)$. In other words, two copies of $\mathcal{D} $ with an arrow in between them.
+\begin{lemma}
+    If $F_0,F_1 \colon \mathcal{C}  \to \mathcal{D} $ are functors, then a natural transformation $F_0 \implies F_1$ determines a homotopy $I \times B\mathcal{C} \to B\mathcal{D} $ from $BF_0 \colon B\mathcal{C}  \to B\mathcal{D} $ to $BF_1$.
+\end{lemma}
+So the classfying space turns natural transformations into homotopies.
+\begin{proof}
+    A functor $H \colon [1] \times \mathcal{D}  \to \mathcal{D} $ determines functors $F_0,F_1 \colon \mathcal{C}  \to \mathcal{D} $, since $[1] \times \mathcal{C} = \mathcal{C} _0 \to \mathcal{C} _1$. The arrow gives us a natural transformation $\theta_H \colon F_0 \to F_1$; how so? We have a distinguished morphism $(0,X)\xrightarrow{e_x^{0\to 1}}  (1,X)$ for $(0,X) \in \mathrm{ob }\mathcal{C} $. Set $\theta_H (X)= H(e_X^{0 \to 1})\in  \mathcal{D} (F_0X,F_1X)$. It an exercise to verify that conversely, this data determines a functor $H_{\theta} \colon [1]\times \mathcal{C}  \to \mathcal{D} $. So $H_{\theta} \colon [1] \times \mathcal{C}  \to \mathcal{D} $, and $BH_{\theta} \colon B([1] \times \mathcal{C} ) \simeq I \times B\mathcal{C}  \to B\mathcal{D} $, which is the desired homotopy.
+\end{proof}
+\begin{cor}\label{eqcat} 
+    An equivalence of categories $F \colon \mathcal{C}  \to \mathcal{D} $ induces a homotopy equivalence $B\mathcal{C} \xrightarrow{BF}  B\mathcal{D} $. 
+\end{cor}
+We will see next time that the classifying space of an abelian group is a topological group. We will also apply \cref{eqcat} to see that $BG$ has contractible universal cover.
