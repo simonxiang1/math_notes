@@ -1,0 +1,13 @@
+\section{Dynamic programming} 
+So far we've been doing recursion, which entails solving a problem by formulating it as a series of choices. For example, we pick one choice and recuse on the rest. For the $n$ queens, we decide where to do on the first row, then decide where to go on the rest. The benefits is that this is easy to find an accurate solution for many problems. The problem is that this is usually exponential time.
+
+Dynamic programming can be thought of as ``smart recursion'', or ``recursion without repetition''. Last times example was subsetsum. This tree in principle could have $2^n $ leaves, but we store answers to intermediate problems. We think of recursion graphs as a DAG.
+
+\subsection{Interval scheduling}
+Say that you're an airbnb host and many people are requesting different times to stay at your vacation home, and different people will pay you to stay at different times. We are given a set $I$ of \textbf{intervals} consisting of a start time, finish time, and value $(s_i ,f_i ,w_i )$ and we want to find a disjoint subset of maximum weight. In other words, we want to find $S \subseteq I$ that doesn't overlap $(s_i ,f_i )=\O)$ maximizing weight, or \[
+\sum_{i \in S}w_i \geq \sum _{i \in G}w_i 
+\] for any $G \subseteq I$. How would we write a scheduling function $\mathrm{Sched}(I)$? For now, our goal is the weight of $S$. Pick any interval $i$; then return the maximum $(\mathrm{Sched}(I \setminus i), w_i +\mathrm{Sched}(I \setminus \{i \ \text{or any} \ j \ \text{overlaps} \ i\} )$. How do we make this fast? Pick $i=1$ each time. All recursive calls only ever consider suffixes of $I$, so the number of different inputs is $n+1$.
+
+\subsection{Longest increasing subsequence}
+Given $A_1, A_2, \cdots ,A_n $, we want to find $s_1 <s_2< \cdots <s_k \in [n]$ with $A_{s_1}\leq A_{s_2}\leq \cdots \leq A_{s_k}$ of maximum weight. How do we do this? We claim this corresponds to the maximum weight path of a graph. We build a graph as following: let $f(i):=$ LIS strating with $(i,A_i )$.
+

@@ -1,0 +1,19 @@
+\section{Algorithms and complexity}
+Complexity is the broad classification of different problem types (problems that can be solved by computers). We will spend the first three months of class in polynomial time $P$, specifically the time within $P$. For example, we have insertion sort (complexity $O(n^2)$) vs merge sort (complexity $O( n \log n)$).
+
+Today we look at a way to reuse our computation to do things efficiently, called dynamic programming. Our first example is a classical algorithm we have been using our entire lives.
+
+\subsection{Multiplication}
+I'm not writing this out but we multiplied $331 \times 388$ using the algorithm we learned in elementary school. Then we added two large numbers which was much easier. So adding two $n$-digit numbers is $O(n)$ while multiplying results in $n^2$ digits, so adding them up means that multiplication is $O(n^2)$.
+
+The reason why we don't care about constants in algorithms is that different operations take different amounts of time for different computers. A human would have a larger constant than a computer, the limiter may be writing down the numbers or low RAM. Who knows. The point is, relative time varies so we use big-O notation, which doesn't care.
+
+We have a better algorithm for multiplication than schoolbook multiplication, called \textbf{Karatsuba multiplication}. Consider the numbers $A=5124758048$ and $B=617586337$. Split $A$ and $B$ into two halves as below: \[
+{\color{red}\underset{A_1}{\underbracket{51247}}}  \, {\color{blue}\underset{A_2}{\underbracket{58048}}}   \times 
+{\color{red}\underset{B_1}{\underbracket{61725}}}  \, {\color{blue}\underset{B_2}{\underbracket{86337}}}   
+\] Then $A\cdot B=(10 ^{n /2}A_1+A_2)\cdot (10^{n /2}B_1+B_2)=10^n \cdot A_1B_1+10^{n /2}(A_1B_2+A_2B_1)+A_2B_2$. We have $n$-digit multiplication equal to four instances of $n /2$ digit multiplication plus three additions, so $T(n)=4 T(n /2)+O(n)$ (where $T$ represents $n$-digit multiplication). We solve this using the \textbf{Master theorem}, which says $T(n)=a T\left(\frac{n}{b}\right)-f(n)$. Here $a=4,b=2, f(n)=O(n)$, so $c _{\mathrm{crit}}=\log_ba=2$. Case 1 implies that $T(n)= \Theta (n^{c_{ \mathrm{crit}}})=\Theta(n^2)$.
+
+The total work is the number of nodes times the work of each notes. As each level we multiply by an order of 4. Each node is working at an order of $\frac{n}{2^k}$, so the total work is $4^k \cdot \frac{n}{2^k}=2^kn$. In short, $T(n)=4T(n /2)+O(n)=O(n^2)$. Note that \[
+    (A_1+A_2)(B_1+B_2)=A_1B_1+(A_1B_2+A_2B_1)+A_2B_2\implies A_1B_2+A_2B_1=(A_1+A_2)(B_1+B_2)-A_1B_1-A_2B_2.
+\] So instead of four $\frac{n}{2}$ terms we have three. Then $T(n)=3 T( \frac{n}{2})+O(n)$, running it down means that the total work is now $\left(\frac{3}{2}\right)^kn$. So our time complexity is now $\left( \frac{3}{2} \right) ^{\log_2 n}=n ^{\log_2 \frac{3}{2}}$, which implies $T(n) =3 T\left(\frac{n}{2}\right)+O(n)=n ^{\log_2 3}\approx n ^{1.585}$ (also follows by Master theorem).
+

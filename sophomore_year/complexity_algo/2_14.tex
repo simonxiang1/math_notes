@@ -1,0 +1,25 @@
+\section{Greedy Algorithms} 
+Consider interval scheduling. What do we do for greed?
+\begin{enumerate}[label=(\arabic*)]
+\setlength\itemsep{-.2em}
+    \item Earliest finish=latest start
+    \item Duration (shortest)
+    \item Earliest start (first come first serve)
+    \item Smallest number of intervals it intersects
+\end{enumerate}
+(2) doesn't work (small interval intersecting two), (3) doesn't work (long interval at the beginning). It turns out (1) works and (4) doesn't. For (4), duplicate intervals mess it up, you trick the algorithm (pushing it toward the wrong choice) by duplicating intervals that intersect bad choices. So early finish works in all cases, with runtime $O(n \log n)$.\footnote{Details: first sort the $f_i $ by earliest end time ($\log n$), then take first interval $(s,f)$. Repeatedly remove the first interval $(s',f')$ if $s'<f$.} The point is that it's easy to convince yourself that algorithms work (particularly with greedy algorithms), so we need proofs of correctness.
+
+So how do we go about proving correctness?
+\begin{proof} We use induction on $n$. The base case is $n=0$, which returns $[]$, which is correct. Let $n\geq 1$, $|I|=n$. By the inductive hypothesis, suppose \texttt{GreedySchedule}$(I')$ is correct for every $I,\ |I'| \leq n-1$. For any $t$, define $I_t := \{(s,f) \leq I \mid  s \geq t\} $. In $(s_1,f_1)$=the first to finish in $I$, \texttt{GreedySchedule}$(I)=[(s_1,f_1)]+$\texttt{GreedySchedule}$(I_{f_1})$. Then $|I_{f_1}|\leq n-1$ implies \texttt{GreedySchedule}$(I_{f_1})$ is correct in $I_{f_1}$.
+
+    Let $S^*$ be a true solution for $I$, then define $S^*=(s_1^*,f_1^*), (s_2^*,f_2^*),\cdots ,(s^*_{k^*},f^*_{k^*})$, where $s_1^* < f_1^* \leq s_2^* < f_2^* \leq \cdots  \leq s_{k^*}^* < f_{k^*}^*$. Then \texttt{GreedySchedule} returns from $S$ some $k^* \leq k$. The claim is that $k \leq k^*$. We know $f_1 \leq f_1^*$ by the definition of \texttt{GreedySchedule}. But $f_1^* \leq s_2^*$ by definition, so $I_{f_1}$ contains $\{(s_2^*,f_2^*),(s_3^*,f_3^*),\cdots ,(s_{k^*} ^*,f_{k^*} ^*)\} $. 
+
+    We want to show that $k$ is big. We have $k=|\texttt{GreedySchedule}(I)|=1+|\texttt{GreedySchedule}(I_{f_1})|=1+|\mathrm{OPT}(I_{f_1})|$ by the induction hypothesis. So this is greater than $1+A$, for $A$ \emph{any} disjoint subset of $I_{f_1}$. Take $A=\{(s_2^*,f_2^*),(s_3^*,f_3^*),\cdots ,(s_{k^*} ^*,f_{k^*} ^*)\} $, so $\mathrm{OPT}\geq 1+(k^*-1)=k^*$. Therefore $k \geq k^*$.
+\end{proof}
+\begin{example}
+    Let us discuss another example. Consider files with length $L_1,L_2, \cdots ,L_n $. If placed in order $\pi_1,\pi_2, \cdots ,\pi_n $\footnote{\emph{\textbf{Not}} the homotopy groups!} (permutations of $[n]$), we have $\mathrm{cost}(k)=\sum _{i \colon \pi_i  \leq \pi_k}L_i $. Our goal is to define the layout $\pi$ minimizing the average $\frac{1}{n}\sum _{k=1}^n \mathrm{co st}(k)$. Every file access has to access the first one, so you want to make sure the earliest ones are smallest. How do we prove this?
+
+    Suppose we exist we have some two out of order.
+
+    swapping $\to $ bubble sort. know bubble sort gets to a better solution, which implies quicksort also gets a better solution.
+\end{example}

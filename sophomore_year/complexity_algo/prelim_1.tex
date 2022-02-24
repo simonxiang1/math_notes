@@ -1,0 +1,48 @@
+\section{Preliminary material} 
+I am not a CS major. Here is some reading I had to do to catch up.
+\subsection{Basic algorithm analysis}
+\textbf{Big-Oh notation} (asymptotic notation) is used to analyze runtimes of algorithms. For a function $f(n)$, the notation $O(f(n))$ denotes the set of functions \[
+    O(f(n))= \{g(n) \mid \text{there exists} \ c>0 \ \text{and} \ n_0 \ \text{such that} \ g(n) \leq c \cdot f(n) \ \text{for all} \ n \geq n_0\} 
+\] 
+In essence, big-O is the upper bound for $f$. We use asymptotic notation to simplify functions, for example in place of $f(n):=5n \log n+8n -200$\footnote{In computer science, $\log$ is shorthand for $\log_2$ unless otherwise stated.} we write $O(n \log n)$. This is proven as follows: $5n \log n +8n-200 \leq 5n \log n + 8n \leq 5n \log n +8 n \log n$ (for $n\geq 2$, ensuring $\log n \geq 1$) $\leq 13 n \log n$. So $f(n) \in O(n \log n)$ with $c=13, n_0=2$. Easy things: $O(n ^{c_1}) \subset O (n ^{c_2})$ for $c_1 < c_2$. For $a,b,c>0$ constants we have \[
+    O(a) \subseteq  O( \log n) \subseteq O(n^b) \subseteq O(c^n).
+\] These hold when multiplied by anything positive, for example multiplying by $n$ gives \[
+O(n) \subseteq O(n \log n) \subseteq O(n^{1+b}) \subseteq O(n c^n ).
+\] We write things like $f_1(n)=O(f(n))$ or ``$f_1(n)$ is $O(f(n))$'' or ``the runtime of $f_1(n)$ is $O(f(n))$'' when we really mean $f_1(n) \in O(f(n))$. Sometimes we come across things like $T(n)=2 \log n +O(1)$, which means $T(n) \leq 2 \log n + [\text{some member of} \ O(1)]$.
+
+$\Omega(n)$ gives a lower bound, and $\Theta(n)$ means $f$ is both in $O(n)$ and $\Omega(n)$ (tight bound).
+
+{\color{red}todo:insertion sort, mergesort, quicksort, bubble sort} 
+
+\subsection{Substitution method}
+The process is simple:
+\begin{enumerate}[label=(\arabic*)]
+\setlength\itemsep{-.2em}
+    \item Guess the solution.
+    \item Use induction to find the constants and show that the solution works.
+\end{enumerate}
+``Substitution'' comes from the fact that we substitue the guessed solution for the function when applying the inductive hypothesis to smaller values. This is very good but the caveat is we have to guess the function.
+\begin{example}
+    To determine an upper time bound on $T(n)=2T(\lfloor n /2 \rfloor)+nT(n)=2T(\lfloor n /2 \rfloor)+n$, we guess that the solution is $T(n)=O(n \log n)$. We need to prove that $T(n) \leq cn \log n$ for some $c>0$. Assume this holds for all {\color{red}todo:??} trick: substitute $m=\log n$
+\end{example}
+\subsection{Recurrence trees}
+Recursion trees allow us to guess something reasonable to apply the substitution method to. For example, consider $T(n)=3T(\lfloor n /4 \rfloor)+\Theta(n^2)$. Ignoring floors and ceilings, we create a tree for $T(n)=3T(n /4)+cn^2$ for $c>0$. Assume $n$ is an exact power of four (sloppiness for convenience) so all subproblem sizes are integers. Refer to {\color{red}todo:figure}. Part (a) shows  $T(n)$, (b) shows expanding the tree into an equivalent recurrence. (c) shows expanding each node with cost $T(n /4)$  {\color{red}todo:finish} 
+\subsection{The master method}
+The master method (or theorem) helps solve recurrences of the form $T(n)=a T(n /b) +f(n)$, given $a \geq 1$ and $b>1$ are constants, $f(n)$ is asymptotically positive.
+
+\begin{namedthm}{Master Theorem} 
+    Let $a\geq 1$ and $b>1$ be constants, let $f(n)$ be a function, and let $T(n)$ be defined on the nonnegative integers by the recurrence $T(n)=aT(n /b)+f(n)$, where $n /b$ means either $\lfloor n /b\rfloor$ or $\lceil n /b\rceil$. Then  $T(n)$ has the asymptotic bounds:
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+\item If $f(n)=O(n ^{\log_b a - \varepsilon })$ for some $\varepsilon >0$, then $T(n)= \Theta (n ^{\log _ba})$.
+\item If $f(n)=\Theta(n ^{\log_ba})$, then $T(n)=\Theta(n ^{\log_ba}\log n)$.
+\item If $f(n)=\Omega(n ^{\log_ba +\varepsilon })$ for some $\varepsilon >0$, and if $af(n /b) \leq c f(n)$ for some constant $c<1$ and all sufficiently large $n$, then $T(n)=\Theta(f(n))$.
+    \end{enumerate}
+\end{namedthm}
+{\color{red}todo:something about polynomially larger} 
+\begin{example}
+    Consider $T(n)=9T(n /3)+n$. Here $a=9,b=3,f(n)=n$, and $n ^{\log_ba}=n^{\log_39}=\Theta(n^2)$. Since $f(n)=O(n ^{\log_39-\varepsilon })$ for $\varepsilon =1$, we apply case one of the master theorem and conclude $T(n)=\Theta(n^2)$.
+\end{example}
+\begin{example}
+    Consider $T(n)=T(2n /3)+1$, where $a=1, b=3 /2, f(n)=1$, $n ^{\log _{3/2}1}=1$. Here case two applies, since $f(n)=\Theta(n ^{\log_ba})=\Theta(1)$. So $T(n)=\Theta(\log n)$.
+\end{example}

@@ -1,0 +1,45 @@
+\section{Stable marriage} 
+We want to match $n$ students and $n$ positions. Each student/position has a ranked order of preference. Replace students/positions with men/women and we get \textbf{stable marriage}, where the matching is ``stable''; we need partners to prefer their matches. The goal is the following: given preference lists, find a stable matching.
+
+\begin{example}
+Let $\mathrm{Men}=\{A,B,C\} $ and $\mathrm{Women}=\{X,Y,Z\} $. Here $A$ prefers $Y>X>Z$, $B$ prefers $Y>X>Z$, $C$ prefers $X>Y>Z$. Unanimously the women prefer $A>B>C$. The pairing is then $(A,Y),(B,X),(C,Z)$.
+
+Another example. The preferences are:
+\begin{enumerate}[label=(\Alph*)]
+\setlength\itemsep{-.2em}
+    \item $X>Z>Y$, (X): $B>A>C$
+    \item $Z>X>Y $, (Y): $C>A>B$
+    \item $X>Y>Z$, (Z): $A>B>C$
+\end{enumerate}
+First you form the initial assignments, assigning $(A,X),(B,Y),(C,Z)$. This is not stable. $(B,Y)$ will break up, $(C,Z)$ will break up, $A$ prefers  $Z$, ?? follow the tree, four breakups will go back to where we start. 
+\end{example}It is not obvious that any stable solution exists, and it is quite surprising that we can prove that one exists. This is proven by the algorithm we will give.
+
+\subsection{Gale-Shapley Stable Marriage Algorithm}
+We start with nobody matched. We repeat the following process: Let $\mathrm{Men}=\{A_i \} ,\mathrm{Women}=\{X_i \} $ for $i \in \{1,2,\cdots ,n\} $. For $n=3$, pick any unattached man. If each man $A_i $ has preference $X_{\sigma_i (1)} >X_{\sigma_i (2)}  >\cdots $ for some permutation $\sigma_i  \in S_n $, $A_i $ will ask $X_{\sigma_i (1)}$ on a date. If $X_{\sigma_i (1)}$ is unattached, she will accept (or if she prefers to her current partner). If the man is rejected, the man crosses her off his list (so if we return to $A_i $, the next candidate will be $X_{\sigma_i (2)}$). Repeat forever. We go down to the bottom of the list, where someone will eventually accept. So this matches everybody.
+
+\begin{theorem}
+    The Gale-Shapley Stable Marriage Algorithm returns a stable matching in order $O(n^2)$ time.
+\end{theorem}
+\begin{proof}
+    We need to show that this algorithm terminates first. To do this, we need to make progress every step of the way. In each round, either a man crosses a woman off, or a woman moves up the ladder (improved happiness by rejection). We never uncross the list, and women never get traded down. The maximum number of things we can cross off is $n^2$ (men times women), and you can do $n^2$ improvements per woman. Overall, there are only  $O(n^2)$ rounds. This shows that the algorithm terminates, and the final solution is indeed a matching (if there wasn't, repeated with the unattached man). 
+
+    The question is, is this matching stable? Suppose the matching is not stable. That means there exist $(A,B,X,Y)$ such that $(A,X)$, $(B,Y)$ are matched but (WLOG) $(A,Y)$ would elope. This means $Y>X$ on $A $'s list, and $A>B$ on $Y$'s list. How did $A$ get mapped to $X$? This implies $A$ proposed to $X$ at some point, which means $X$ is at the top of $A$'s list. This can only happen if $Y$ crossed $A$ off. So at some point, $A$ proposed to $Y$ and was rejected. Why? Because at some point, $Y$ was rejected by some $C>A$. This is a problem because no trading down implies that the final match $B>A$ on $Y$'s list, contradicting the assumption. Therefore the marriage is stable.
+\end{proof}
+
+\begin{example}
+    Consider the pairing
+\begin{enumerate}[label=(\Alph*)]
+\setlength\itemsep{-.2em}
+    \item $X>Y>Z$, (X): $C>B>A$
+    \item $Y>Z>X $, (Y): $A>C>B$
+    \item $Z>X>Y$, (Z): $C>B>A$
+\end{enumerate}
+People end up bery unhappy. ?? Here Gale-Shapley is optimal for the men (proposers) and pessimal for women (receivers). That is to say, let  $S_A$ denote the set of possible matches for $A$ in any stable assignment. Then $\mathrm{best}(A)$ is the highest ranked in $S_A$, analogously $\mathrm{worst}(A)$ is the lowest ranked in $S_A$. Gale-Shapley then sends $A \to \mathrm{best}(A)$ for every man $A$ and sends $B\to \mathrm{worst}(B)$ for every woman $B$. This is sort of surprising, let us prove it.
+\end{example}
+\begin{lemma}
+    Each man is only rejected by women who cannot match them in any stable matching.
+\end{lemma}
+\begin{proof}
+    We use induction on the number of steps taken (rounds). After 0 steps, this is true because no man has been rejected by anybody. We know by induction on previous rounds that this is true on the $(k-1)$th round. In a given round, if a man $A$ is rejected by a woman $X$, that means she prefers $B$. This implies that $B$ has $X$ at the top of his list (everybody above $X$ is crossed off). By induction, these rejections resulted in unstable matchings. This implies in any stable matching, $B$ matched to $X$ or lower on his list. So in any stable matching, $X$ is matched to $B$ or higher on her list. This means $A<B$ or $(X,A)$ are not matched. Each man then gets the best possible outcome, or $A \to \mathrm{best}(A)$ for every man $A$.
+\end{proof}
+

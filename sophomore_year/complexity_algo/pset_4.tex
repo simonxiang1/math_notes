@@ -1,0 +1,36 @@
+\section{February 16, 2022: Pset 3} 
+\begin{prob}
+    As written.
+\end{prob}
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+    \setlength\itemsep{-.2em}
+        \item 
+    Following the guidelines in the problem, we provide the following information:
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+        \item \emph{Subproblem}: Find the optimal set of lens covering $[L,j)$ for some $j<H$.
+        \item  \emph{Recurrence}: Sort the lens in increasing order of $f_j $. Let $p(j)$ be the smallest index of the lens compatible with $[s_j ,f_j )$. More precisely, let $p(j)=\min \{s _i \mid s_i \geq f_j \}_{i \in I} $; compatibility means we want $s_i  \geq f_j $ (else we would miss a focal length), and then we take the minimum value. Then define a function \texttt{OPTfocal}$(j)$ that checks if $j=0$ (determining when to end the recurrence), and writes 
+            \begin{equation}\label{dpfocal} 
+                \max(c_j  +\texttt{OPTfocal}(p(j)),\texttt{OPTfocal}(j-1))
+            \end{equation}
+            to the $j$th slot of some array (memo-ization). Here \cref{dpfocal} simply checks if the next best focal length indexed by $p(j)$ is optimal using $\max$ (check if adding the new price changes anything), and if it isn't, defaults to what we already have ($\texttt{OPTfocal}(j-1)$).
+        \item \emph{Correctness}: This is correct because upon calling \texttt{OPTfocal}$(H-1)$, we will run through every possible configuration. Either a choice is optimal or it isn't, and  \texttt{OPTfocal} accounts for both.
+        \item \emph{Runtime}: In total, \texttt{OPTfocal} writes to an array $|\{L,L+1,\cdots ,H-1\}|=H-L $ times. Each call of \texttt{OPTfocal} needs to compute $p(j)$, which is linear (comparing each  $s_i $), therefore this algorithm has a runtime of $O(n(H-L))$.
+    \end{itemize}
+
+\item Consider the algorithm \texttt{GREEDfocal}, which first sorts the inputs by increasing order of $f_j $. Then it chooses lens based off the ``latest end'', or largest $f_i $. This works because for some other solution (of length $k$) with ends $f_i '$, every ending $f_i $ chosen by \texttt{GREEDfocal} will be greater than or equal to $f_i '$ by definition. Therefore there will be less lens to buy, and \texttt{GREEDfocal} is locally optimal.
+    \end{enumerate}
+\end{solution}
+
+\begin{prob}
+    As in the Jupyter notebook.
+\end{prob}
+\begin{solution}
+    Jupyter notebook attached to the Canvas submission.
+    \begin{enumerate}[label=(\alph*)]
+    \setlength\itemsep{-.2em}
+\item The runtime of \texttt{knapsack\_memoized} is $O(nC)$, since for each of the $n$ items drawing out the subproblem tree runs through at most $C$ difference possibilities (depends on cost).
+\item Here the runtime of bottom-up sliding window knapsack is $O(nB)$. Here $C$ is bounded above by $B$, and for each of the $n$ items we iterate through the array (sliding window) at most $B$ times, since we only keep one column.
+    \end{enumerate}
+\end{solution}

@@ -1,0 +1,48 @@
+\section{January 25, 2022: Pset 1} 
+\begin{prob}
+    Give a big-O bound for $T(n)$ given each of the following recursive formulas:
+    \begin{enumerate}[label=(\alph*)]
+    \setlength\itemsep{-.2em}
+\item $T(n)=3T(n /4) + n \log n$ 
+\item $T(n)=2T(n /2)+\sqrt{n} $
+\item $T(n)=5T(n /4)+n$ 
+\item $T(n)=T(2n /3)+T(n /3)+n /6.$
+    \end{enumerate}
+\end{prob}
+\begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+    \setlength\itemsep{-.2em}
+\item We apply the master theorem with $a=3,b=4,$ and $f(n)=n \log n$. We have $c_{\mathrm{crit}}=\log_ba=\log_43\approx 0.79$. We claim that case three applies, where $f(n)=\Omega(n ^{\log_ba+\varepsilon })$ for some $\varepsilon >0$. Let $\varepsilon \approx 0.2$, then $f(n)=\Omega(n ^{\log_ba+\varepsilon }\approx n^{0.79+0.2}\approx n)$, since $n \log n$ grows faster than $n$. It remains to show that $af(n /b)\leq c f(n)$ for some constant $c<1$ and all sufficiently large $n$. Replacing the variables, we get 
+    \[
+        af(n /b)=3f(n /4)=\frac{3}{4}n\log\left( \frac{3n}{4} \right) \leq cf(n)=c n \log n=c f(n)
+    \] for $c=3/4$. So we can apply case three to get that $T(n)=\Theta(n \log n)$.
+\item We apply the master theorem with $a=2,b=2,$ and $f(n)=\sqrt{n} $. We have $c _{\mathrm{crit}}=\log_ba=\log_22=1$. We claim that case one applies, where $f(n)=O(n^{\log_ba-\varepsilon })$ for some $\varepsilon >0$. Let $\varepsilon =\frac{1}{2}$, then $O(n^{\log_ba -\varepsilon })=O(n^{1-\frac{1}{2}})=O(n^{\frac{1}{2}})=O(\sqrt{n} )=f(n)$.
+    Then $T(n)=\Theta(n^{\log_ba})=\Theta(n)$.
+\item We apply the master theorem with $a=5,b=4,$ and $f(n)=n$. We have $c_{\mathrm{crit}}=\log_ba=\log_45\approx 1.16$. We claim that case one applies, where $f(n)=O(n ^{\log_ba -\varepsilon })$ for some $\varepsilon ).0$. Let $\varepsilon =\log_45-1 \approx 0.16$, then $O(n^{\log_ba -\varepsilon })=O(n^{\log_45-\log_45+1})=O(n)=f(n)$. Then $T(n)=\Theta(n^{\log_ba})=\Theta(n^{\log_45})\approx\Theta(n^{1.16})$.
+\item We use a recurrence tree. Each call has cost $\frac{n}{6}$, and the longest path is by following the chain $n,$ then $\frac{2}{3n}$, then $\frac{4}{9n}$, etc. Solving for $\left(\frac{2}{3}\right)^kn=1$ where $k$ is the number of levels, we get that the depth of the tree is $\log _{3 /2}n$. 
+\begin{figure}[H]
+\centering
+ \includegraphics[width=0.8\linewidth]{hw_figures/recursion_tree.jpg}
+ \caption{The recursion tree for $T(n)=T(2n /3)+T(n /3)+ n/6$.} 
+ \label{recursion_tree} 
+\end{figure}
+
+Since the cost of each level is at most $\frac{n}{6}$, multiply by the depth to get the total work being $\frac{n}{6}\cdot \log_{3/ 2}n=\frac{1}{6 \log(3 /2)}n\log n$, which simplifies to $O(n \log n)$ up to constant scaling.
+    \end{enumerate}
+\end{solution}
+
+\begin{prob}
+    As detailed in the problem set.
+\end{prob}
+\begin{solution}
+    Assume each syllable takes one second to pronounce to simplify things. Also assume we pronounce numbers digitwise as follows: 14506 is pronounced ``one four five zero six", etc.
+    \begin{enumerate}[label=(\alph*)]
+    \setlength\itemsep{-.2em}
+\item Note that for $n \in \{0,1,\cdots ,9\} $, $n$ has at most two syllables (se-ven and ze-ro). Let $n$ be an integer, then the number of syllables corresponds to at most the number of digits of $n$ times 2. Define a function $\mathrm{digits}(n)$ that outputs the number of digits of $n$. We see that $\mathrm{digits}(n) $ is bounded above by $\log_{10}(n)+1$; to see this first consider when $n \in \{1, \cdots ,9\} $. Then $\log_{10}(n)=0$, but $n$ has one digit so we add one. So $\mathrm{digits}(n)=1\leq \log_{10}(n)$, since $\log_{10}(n)>0$. This holds for all $n$; for two digit numbers (greater than or equal to $10$ satisfying $\log_{10}(10)=1$, less than $100$ satisfying $\log_{10}(100)=2$), we have $\log_{10}(n)\geq 1$, so $\log_{10}(n)+1 \geq \mathrm{digits}(n)=2$. Therefore $\mathrm{digits}(n)\leq \log_{10}(n)+1$.  
+
+    To find the number of syllables, in the worst case scenario the first digit is a seven and every other digit is either seven or zero, resulting in each digit having two syllables. So $\mathrm{syllables}(n)\leq 2 \mathrm{digits}(n) \leq 2(\log_{10}(n)+1)$. We assumed that each syllable takes one second to pronounce so the function $\mathrm{seconds}(n)$ which returns how many seconds it takes to pronounce a number satisfies $\mathrm{seconds}(n)=\mathrm{syllables}(n) \leq 2(\log_{10}(n)+1)$. Finally, rewrite $2(\log_{10}(n)+1)$ as $\frac{2}{\log 10}\log n+2$, which simplifies to $O(\log n)$ up to constants and weaker terms. Therefore $\mathrm{seconds}(n)=O(\log n)$.
+
+\item Using the ``milestone'' of mentioning the word ``beer'' as in the textbook, each of the $3n+3$ mentions invokes a pronounciation of $n$, which by part (a) has complexity $\log n$. Under previous assumptions (singing an arbitrary $n$ is constant), the time complexity of singing ``$n$ Bottles of Beer'' would be $(3 n+3)\cdot 1=O(n)$. Now for each mention of ``beer'' we also pronounce $n$ with time complexity $O(\log n)$, so in general singing bottles of beer has complexity $(3 n+3)\log n=3n \log n +3 \log n$. Removing lower order terms and scaling up to constants, we get that singing bottles of beer is $O(n \log n)$.
+\item By the same logic as part (c), at each of the $\sum _{i=1}^n  i=\frac{n(n+1)}{2}$ mentions of the name of a gift, we have to say the number $n$ which is $\log n$ by (a). So singing ``The $n$ Days of Christmas'' has complexity $\frac{n(n+1)}{2}\log n=\frac{n^2 \log n}{2}+ \frac{n \log n}{2}$. Scaling up to constants and removing lower order terms gives that singing ``The $n$ days of Christmas'' is $O(n^2 \log n)$.
+    \end{enumerate}
+\end{solution}

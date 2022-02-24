@@ -1,0 +1,30 @@
+\section{Practice problems} 
+ \begin{prob}
+     $n $ local businesses free products, certain times, business $i$ will be giving away free times only at time $T_i $. for each pair $(i,j)$, the amount of time $t_{ij}>0$ to walk from $i$ to $j$ (satisfying the triangle inequality), design an $O(n^2)$ DP algorithm to compute maximum number of businesses,
+\end{prob}
+\begin{solution}
+    how to do this? First solve this as a recursion. Cast the problem as a \textbf{series of choices}; the choices are a sequence of merchants/stalls visited. Possible if $T_i -T_j  \geq t_{ij}$ (can make it in time). 
+
+\begin{verbatim}
+    def solve(choices):
+        for each next choice i
+        if valid (T_i - T_choices) geq t_{i,choices}  
+            solve(choice, t[i])
+        \end{verbatim}Another option is this; ``do I show up to stall $i$''? How good is a set of choices? We need to know where we end up (last stall visited, hard to compare at different stalls) and the number of visits. Define $f(i):=$ maximum number of stalls you can visit before reaching stall $i$'s giveaway. The answer is $\mathrm{max}_j f(j)+1$, such that $T_i  -T_i  \geq T_{ij}$ for every $i$. The reason being we came from somewhere, being $j$. Therefore, this is the \textbf{recurrence}:
+        \begin{verbatim}
+            f(i)=max_j f(j)+1, T_i-T_j\geq t_{ij} 
+        \end{verbatim}This is the \textbf{base case},
+        \begin{verbatim}
+            f(0):=0
+        \end{verbatim}where business 0 is located at ??, $T_0 $. The \textbf{recurrence subproblem} is 
+        \begin{verbatim}
+            f(i):= max number of stalls you can visit 
+            before ending up at stall i's giveaway
+        \end{verbatim}which we solved with the first algorithm. This has space $O(n)$, time $O(n^2)$.
+\end{solution}
+\begin{solution}
+    latex. choices = which word to break after? $f(i)$ = min sum of sequences of gaps before a linebreak after $i$. two solutions end at the same word; what is the cost? subproblem; given word best subproblem.
+
+    If we end at a given word, given that we line break after word, all that matters is the sum of squares before. Write down base case, recurrence, answer. Basecase: $f(0)=0$ no words. Answer: $\min_i f(i)$, wordds $i+1, \cdots ,n$ fit in the line. Recursive subproblem: $f(i)=\min_{j<i} f(j)+$ cost of $i+1 ,\cdots , j$ line.
+\end{solution}
+

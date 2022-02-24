@@ -1,0 +1,15 @@
+\section{Knapsack} 
+A classic example of DP is robbing a store. You have a knapsack, and you can only carry so much weight. The store has $n $ items, each with value $v_i $ and weight $w_i $. You have capacity $C$. What is the max value subset of items to carry with total weight $\leq C$? We could also write this as $\max _{S \subseteq [n], \sum _{i \in S}w_i  \leq c}v_i $. How do we write a recursive solution? 
+\begin{python}
+knapsack(items, C)
+    w,r = items[-1]
+    return max(knapsack(items[:-1],C),
+    knapsack(items[:-1],C-w)+v)
+
+#base cases
+    if C < 0: return -infinity
+    if len(items)=0: return 0
+\end{python}
+What does DP say we are doing? We should make this fast by memoizing. Then the time depends on the number of vertices of our directed acyclic graph (DAG), representing {\color{red}todo:?? two dimensional table} 
+
+{\color{red}todo:sliding window?} 

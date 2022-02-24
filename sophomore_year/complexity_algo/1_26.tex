@@ -1,0 +1,75 @@
+\section{Fibonacci numbers} 
+Fibonacci numbers are a classic example of one of the first algorithms studied in the west. This is a recurrence relation defined by $F_0=0,F_1=1$, and $F_n =F_{n-1}+F_{n-2}$.
+\begin{python}
+   def f(n):
+    if n <= 1: return n
+    return f(n-1) + f(n-2)
+\end{python}
+We write out a \emph{giant} recursion tree just to compute $f(5)$, with 15 nodes, only increasing with each step. This number is getting very big: how long does this take? The number of steps $T(n)=T(n-1)+T(n-2)+2$ has the same recurrence as $F_n $ plus an additional factor 1, so $T(1)=1,T(0)=0,$ and $T(n) \geq T(n-1)+T(n-2)$ which implies $T(n) \geq F_n $. How fast does $F_n $ grow? We estimate it grows exponentially: \[
+F_n  \leq 2 F_{n-1}\leq 4 F_{n-2} \leq \cdots \leq 2^k F_{n-k} \leq \cdots  \leq 2^{n-1}.
+\] This is an upper bound. Is there a lower bound? \[
+F_n  \geq 2 F_{n-2}\geq 4_{n-4}\geq 8 F_{n-6} \geq \cdots  \geq 2^k F_{n-2k}\geq \cdots  \geq2 ^{\frac{n}{2}-1}\approx 1.4^n.
+\] So the Fibonacci numbers grow in between $1.4^n $ and $2^n $. Therefore this is an exponential time algorithm, since the recursion tree is exponentially large. Our current algorithm is kind of dumb. We are doing lots of extra work.
+\begin{python}
+memo = {}
+def f2(n):
+    if n in memo: return memo[n]
+    if n <= 1: return n
+    ans = f2(n-1) + f2(n-2)
+    memo[n] = ans
+    return ans
+\end{python}
+This is \emph{much} faster because we only need to compute each value of $n$ once, so it takes one addition to compute. We can rewrite this recursion tree in a different way where we reuse the nodes. There is a directed acyclic graph on the previous values; this computation graph has $n$ vertices and $2n$ edges. The recursion time is the number of possible paths from $n$ to the base case. However, the ``memo-ized'' recursion is the number of vertices times the time per vertex, which is one addition, giving us $O(n)$ time.
+
+\subsection{Dynamic programming}
+This is the idea of \textbf{dynamic programming}. We will see many more examples of this later. In dynamic programming, we solve recursive problems quickly by storing the answers to the subproblems. There are different ways we can do this:
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item ``Top-down'': Recursion with memo-ization
+    \item ``Bottom-up DP'': Compute the answers bottom to top iteratively
+\end{itemize}
+\begin{python}
+    def fibdp(n):
+    fibs = [0, 1]
+    for i in range(2, n+1):
+        fibs.append(fibs[i-1] + fibs[i-2])
+    return fibs[n]
+\end{python}
+This gets around the (non-theoretical) issue of not being able to call recursion too many times. We can also do what is called a ``sliding window'' DP, where we only store the last couple of recursions and discard the rest, helping with space issues.
+\begin{python}
+    def fibwindow(n):
+    a, b = 0, 1
+    for i in range(n):
+        a, b = b, a + b
+    return a
+\end{python}
+This algorithm is $O(1)$ space and $O(n)$ time, while the previous algorithm is both $O(n)$ space and time. Can we do better than linear time?
+\subsection{Matrix exponentiation method}
+Each step the sliding window algorithm can be thought of as applying a matrix $\left[ 
+    \begin{smallmatrix}
+        0 & 1 \\ 1 & 1
+    \end{smallmatrix}\right] $ to a vector $\left[ 
+\begin{smallmatrix}
+    a \\b
+\end{smallmatrix}\right] $. In essence, $a,b$ starts at $\left[ 
+\begin{smallmatrix}
+    F_0 \\ F_1
+\end{smallmatrix}\right] $ and ends at  \[
+\begin{bmatrix}
+    F_n \\ F_{n+1}
+\end{bmatrix}= 
+\begin{bmatrix}
+    0 & 1 \\ 1 & 1
+\end{bmatrix}^n  \cdot 
+\begin{bmatrix}
+    0 \\ 1
+\end{bmatrix}, \quad 
+\begin{bmatrix}
+    0 & 1 \\ 1  & 1
+\end{bmatrix}^n  = 
+\begin{bmatrix}
+    F_{n-1} & F_n \\F_n  & F_{n+1}
+\end{bmatrix}.
+\] Given $A$, how quickly can we compute $A^n $? We split the squares; $A^{13}=A^{8}A^4A$, and compute each by repeated squaring. So this results in $\log n$ matrix multiplies. Therefore we can compute $F_n $ with $O( \log n)$ arithmetic operations. Numbers get really big; we have $1.4^n  \leq F_n  \leq 2^n $, $F_n =2 ^{\Theta(n)}$ which implies $\log F_n =\Theta(n)$. So writing down $F_n $ takes $\Theta(n)$ bits.
+
+something, assume arithmetic is constant only if numbers are polynomial large, wordram model?

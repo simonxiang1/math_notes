@@ -1,0 +1,149 @@
+\section{Recursion} 
+Recursion is a very common idea used to write correct programs. It means we solve the problem by ``recursively'' solving smaller versions of the \emph{same} problem.
+We have already seen this in various examples; 
+\begin{itemize} 
+\setlength\itemsep{-.2em}
+    \item Multiplication, as in the last class.
+    \item Merge sort- we want to sort an array $X$. We sort the first half, then sort the second half, then merge. This is recursive because we have a problem, and we call the same function on a smaller instance. I
+    \item Towers of Hanoi- see the book.
+\end{itemize}
+\subsection{The $n$ Queens problem}
+Consider the $n$ queens problem. We have an $n$ by $n$ chessboard; can we place queens on the board such that they don't attack each other? The first question is, how many queens? Note that this is capped at $n$, since we only have $n$ rows. When placing queens and it fails, we can go back and try other solutions, this leads to \emph{backtracking}. Forgetting runtime, how would we implement this problem?
+
+The strategy is as follows:
+\begin{enumerate}[label=(\arabic*)]
+\setlength\itemsep{-.2em}
+    \item Recast each answer as a \emph{series of single choices}; (Row 1 Q, Row 2 Q, Row 3 Q, ...)
+    \item Each successive choice is its own recursive call,
+    \item If stuck, return.
+\end{enumerate}
+Returning to the $n$ queens problem.
+\begin{python}
+    def collide(a, b):
+    # a= (row, col), b= (row, col)
+
+    return a[0] == b[0] or a[1] == b[1] or abs (a[0] - b[0]) == abs(a[1] - b[1])
+
+def queens4():
+    for q1 in range(4):
+        for q2 in range(4):
+            #Does placing a queen at (2, q2) collide with (1, q1)?
+            if collide((1,q1), (2, q2)):
+                continue
+            for q3 in range(4):
+                # Does placing a queen at (3, q3) collide with EITHER (1,q1) or (2,q2)?
+
+                if collide((1, q1), (3, q3)) or collide((2, q2), (3, q3)):
+                    continue
+                for q4 in range(4):
+                    if (collide((1, q1), (4, q4)) or collide((2, q2), (4, q4))
+                        or collide((3, q3), (4, q4))):
+                        continue
+                    print(q1, q2, q3, q4)
+
+queens4()
+\end{python}
+{\color{red}todo:fix code} 
+Okay, we've solved the four queens problem. But if we were to do this for eight queens, we would need eight nested loops. This is a huge pain. If we want to do this with general $n$, doing it iteratively is not a good solution at all.
+
+\begin{python}
+    ok
+\end{python}
+{\color{red}todo:dicussion on just returning the first one, exponential time.} This is the general strategy of recursion with backtracking, and is pretty generic.
+
+\subsection{Game Tree Evaluation}
+The question is ``who wins at \texttt{[game]}''? Could be chess, checkers, tic-tac-toe, etc. We have a game state, say for white, and white has many different moves. For each board state, we have many different moves, and so on. {\color{red}todo:figure} 
+
+Most of these alternate, but in principle but they don't have to. At the end we reach some position, say checkmate (for black). In this case black wins. How do we figure out who wins? (Suppose there are no draws). Say we are in the position \texttt{(player, state)}.
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item If the state is now checkmate, we know who wins.
+    \item If we are not in checkmate, we have some moves we can do, each leading to another state. 
+    \item Else, \texttt{winner(player, state)} wins if there exists any move to \texttt{state'} where \texttt{winner(other player, state')=player}.
+    \item The other player wins otherwise.
+\end{itemize}
+We can apply this to draws with some sort of maximum or minimum score. We write this out as a recursion where for each player we try all possibilities and evaluate. If any of them lead to checkmate, that's a good move and we do it. 
+
+So writing a program to evaluate the winner is easy (computable), but finding a winner is hard.
+
+\subsection{Subset Sum}
+In this problem, we are given a set of positive integers $X$, say $[1,4,5]$, and a target $T$ (say 9). The question is this: Find a subset of $X$ that sums to $T$. This is a natural building block in a number of problems. How do we implement this? (Forget time and all of that).
+
+{\color{red}todo:code}
+
+Listing out all subsets is hard.
+\begin{python}
+    def subsetsum(X, T):
+    """Find a subset of X that sums to T.
+
+    Inputs:
+        X: a list of positive integers, e.g. [1, 4, 5]
+        T: a target positive integer, e.g. 9
+
+    Outputs:
+        None or a list that sums to T (e.g., [4, 5])
+    """
+
+    #base cases
+    if T == 0:
+        return []
+    if not X or T < 0:
+        return None
+
+    #recursion
+    take = subsetsum(X[1:], T - X[0])
+    if take is not None:
+        return [X[0]] + take
+    skip = subsetsum(X[1:], T)
+    return skip
+
+print(subsetsum([1, 4, 5], 9))
+
+import random
+vals = [random.randint(10000, 20000) for _ in range(5)]
+T = sum(v * random.randint(0, 1) for v in vals)
+print(f"Instance: {vals} {T}")
+
+print((subsetsum(vals, T)))
+\end{python}
+This code finds \emph{a} solution. What if we want to find a \emph{small} solution?
+{\color{red}todo:code} 
+This solution would be cleaner if we didn't have to rewrite our huge array each time. We do this by rewriting with an index. 
+\begin{python}
+    def subsetsum(X, T, i=0):
+    """Find a subset of X that sums to T.
+
+    Inputs:
+        X: a list of positive integers, e.g. [1, 4, 5]
+        T: a target positive integer, e.g. 9
+        i: index we're looking at [so X[i:] is of interest]
+
+    Outputs:
+        None or a list that sums to T (e.g., [4, 5])
+    """
+
+    #base cases
+    if T == 0:
+        return []
+    if len(X) <= i or T < 0:
+        return None
+
+    #recursion
+    take = subsetsum(X[1:], T - X[0])
+    if take is not None:
+        return [X[0]] + take
+    skip = subsetsum(X[1:], T)
+    return skip
+
+print(subsetsum([1, 4, 5], 9))
+
+import random
+vals = [random.randint(10000, 20000) for _ in range(5)]
+T = sum(v * random.randint(0, 1) for v in vals)
+print(f"Instance: {vals} {T}")
+
+print((subsetsum(vals, T)))
+\end{python}
+Here's the idea; how many different inputs does \texttt{subsetsum} take? {\color{red}todo:2 to the n leaves? internal nodes are the same value?} 
+
+
