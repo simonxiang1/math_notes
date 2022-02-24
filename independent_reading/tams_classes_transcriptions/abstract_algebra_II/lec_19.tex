@@ -1,0 +1,32 @@
+\section{October 11, 2021} 
+I missed this class so I'm transcribing John's notes. Fix $k$ a field of characteristic $p \geq 0$. Recall that a field of characteristic 0 means that repeated addition of any non-zero element is nonzero. For example, $\R,\Q,$ and $\C$ are fields of characteristic 0, while $\F_p = \Z /p$ has characteristic $p$. 
+\begin{definition}[]
+    For $k$ a field and $n \geq 1$, define $\mu _n (k) :=\{\zeta \in k \mid  \zeta ^n =1\} $ to be the set of $n$\textbf{th roots of unity} of $k$.
+\end{definition}
+Note that $\mu_n (k)$ is a group, since for $\zeta, \widetilde \zeta \in \mu _n (k)$ implies $\zeta \widetilde \zeta \in \mu_n (k)$, similarly $\zeta^{-1} \in \mu_n (k)$.
+\begin{definition}[]
+    A group is \textbf{cyclic} if there is an isomorphism $G \simeq  \Z /n$ for some $n \geq 0$.
+\end{definition}
+\begin{example}
+    Let $k=\C$, then $\mu_n (k)= \{e^{2\pi i /n} \mid  n \in \Z\} $. In general, $\mu(\C) \simeq  \Z /n$ as a group, so $\mu(\C)$ is cyclic of order $n$.
+\end{example}
+\begin{prop}
+    Let $k$ be a field of characteristic $p$. Then 
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+\item For all $n\geq 1$, $\mu_n (k)$ is cyclic,
+\item Any finite subgroup $G \subseteq k ^{\times }$ is contained in $\mu_n (k)$ for some $n$,
+\item Any finite subgroup of $k ^{\times }$ is cyclic, 
+\item If $n$ is coprime to $p$ (vacuously true for $p=0$), then there exists a field extension $K /k$ with $|\mu _n (k)|=n$,
+\item If $n=p^r n_0$ where $p \nmid n_0$, $\mu_n (k)=\mu_{n_0}(k)$.
+    \end{enumerate}
+\end{prop}
+\begin{example}
+    If $k$ has characteristic $\neq 2$, then $\mu_2(k)= \{-1,1\} $ (in the characteristic two case, $\mu_2(k)=\{1\} $).
+\end{example}
+\begin{cor}
+    $\F_p ^{\times }\simeq  \Z / (p-1)$ as a group, i.e., $\F_p ^{\times }$ is cyclic.
+\end{cor}
+\begin{proof}
+    To show (4), for $n$ coprime to $p$, let $f(t):=t ^n -1$. Then  $f$ and $f'$ are coprime because $f$ is separable, so we have some field extension $K /k$ with $f$ having $n$ distinct roots for $\deg (f) =n$, which implies $|\mu_n (k)|=n$. For (1), assume that $|\mu _n (k)|=n$, we want to show that $\mu_n (k)$ is cyclic. Suppose $d \mid n$, then $(t^d -1)$ divide $(t ^n -1)$. Then every $d$th root of unity is an $n$th root of unity, and $|\mu_d(k)|=d$. 
+\end{proof}

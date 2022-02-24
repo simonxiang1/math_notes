@@ -1,0 +1,59 @@
+\section{September 22, 2021} 
+It's getting hard to continue without examples involving finite fields, so today we make a digression about other algebraic structures.
+
+\begin{definition}[]
+    A \textbf{monoid} is a triple $(M,m,1)$ where $M$ is a set, a map $m \colon M\times M \to M, \ (x_1,x_2) \mapsto  m(x_1,x_2)=x_1x_2$, and an element $1 \in M$ such that multiplication is associative and $1\cdot x=x$ for all $x \in M$.
+\end{definition}
+You can think of a monoid as a group without inverses. Homomorphisms of monoids are maps $\varphi  \colon M_1 \to M_2$ with $\varphi (1_{M_1})=1_{M_2}$, $\varphi (x_1x_2)=\varphi (x_1)\varphi (x_2)$.
+\begin{example}Some examples of monoids:
+\begin{enumerate}[label=(\arabic*)]
+\setlength\itemsep{-.2em}
+    \item Any group is a monoid.
+    \item $(\R ^{\geq 1}, \text{mult} )$ or $(\R, \text{mult} )$ are monoids with unit one, but are not groups. $(\R^{>1}, \text{mult} )$ has an associative multiplication, but no unit, so is not a monoid.
+\end{enumerate}
+\end{example}
+
+\begin{definition}[]
+    A \textbf{ring} $A$ is a set $A$ with two binary operations (maps $A \times A \to A$) denoted like multiplication and addition
+    with $1 \in A$, such that 
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+\item $(A, \text{mult} ,1) $ is a monoid,
+\item $(A, \text{add} )$ is an abelian group with unit $0 \in A$,
+\item multiplication and addition are distributive: 
+    \begin{align*}
+        a(b+c)&=ab+ac, \\
+        (a+b)c&=ac+bc.
+    \end{align*}
+    \end{itemize}
+    Ring homomorphisms are maps of sets that are homomorphisms of monoids for multiplication and addition, i.e., $\varphi  \colon A_1 \to A_2$ such that $\varphi (1_{A_1})=1_{A_2}$, $\varphi (ab)=\varphi (a)\varphi (b)$, $\varphi (a+b)=\varphi (a)+\varphi (b)$. A ring is \textbf{commutative} if multiplication is commutative.
+\end{definition}
+\begin{example}
+    $\Z,\Q,\R,\C$ are all (commutative) rings. The set of $n \times  n$ complex matrices, denoted $M_n (\C)$, is non-commutative.
+\end{example}
+If $A$ is a ring, then let $A^{\times }= \{a \in A \mid  \exists a ^{-1} \in A \ \text{with} \ a \cdot a ^{-1} = a ^{-1} \cdot  a=1\} $ denote the \textbf{set of units} of $A,$ which always forms a group under multiplication. Sometimes ``ring'' means ``commutative ring''. Sometimes people write ``associative ring'' to mean ``reader, I want to consider non-commutative rings in particular here''.
+
+\begin{definition}[]
+    A \textbf{field} is a commutative ring $k$ such that for all $x \in k$ either $x=0$, or there exists an $x ^{-1} \in k$ such that $x \cdot  x ^{-1} =1$. So a field is a commutative ring with $k ^{\times }= k \setminus \{0\} $.
+\end{definition}
+By convention, $\{0\} $ is a ring with $0=1$, but it's not a field.
+\begin{example}
+    $\Q, \R,$ and $\C$ are all fields, but $\Z$ is not.
+\end{example}
+Suppose $\varphi  \colon A \to B$ is a map of rings. Then $\ker (\varphi ):= \varphi ^{-1}(0)$. Observe that for $x,y \in \ker(\varphi )$, then $x+y \in \ker (\varphi )$. For $x \in \ker (\varphi ), y \in A$, we have $x \cdot y,y\cdot x \in \ker (\varphi )$: \[
+    \varphi (xy)=\varphi (x)\cdot \varphi (y)=0 \cdot \varphi (y)=0.
+\] 
+\begin{definition}[]
+    A \textbf{two-sided ideal} $I \subseteq A$ is a subset closed under addition and left/right multiplication by elements of $ A$, i.e., $x,y \in I \implies x+y \in I$, and $x \in I$, $y \in A$ implies $xy,yx \in I$. If $A$ is commutative, we simply speak of ideals.
+\end{definition}
+If $I \subseteq A$ is a two-sided ideal, there is a unique ring structrure on $A //I$ (the group quotient) such that the map $A \xrightarrow{\pi} A /I$ is a ring map. We need to check that we have addition on $A /I$ as $I \subseteq A$ is a (necessarily) normal subgroup (under addition). For multiplication:
+\[
+\begin{tikzcd}
+    A \times A\arrow[r, "\text{mult} "]\arrow[d] & A \arrow[d, "\pi"]\\
+    \underset{= (A \times  A)  / (I \times I)}{A / I \times  A / I}   \arrow[r, dotted, "?"] & A / I
+\end{tikzcd}
+\] We need that for all $a, b \in A$, all $x,y \in I$, $\pi(a+b)=\pi((a+x)\cdot (b+y))$. For the right hand side, $\pi(ab+xb+ay+xy) \implies  xb+ay+xy \in I$. $\pi(ab) = \pi(ab + \text{something} \in I)$ which implies the equation.
+
+\begin{example}
+    $\Z /n = \Z / n \Z$ has a ring structure so $\Z \to \Z /n$ is a homomorphism.
+\end{example}

@@ -1,0 +1,46 @@
+\section{October 7, 2021} 
+What lecture are we actually on?
+
+\subsection{More on sheaves}
+Recall that for $X=\Spec R$ a topological space, a (structure) sheaf $\mathcal{O} _X$ is a ``notion of functions''. We have $\mathcal{O} _X \colon U \subseteq X \ \text{open}  \mapsto \mathcal{O} _X(U) \in  \mathsf{Ring} $, then a presheaf $V \subseteq U$ implies that $\mathrm{res}_U^V \colon \mathcal{O} _X(U) \to \mathcal{O} _X(V)$ is associative. For a sheaf, $f \in \mathcal{O} (U)$ implies that $f$ is determined by $\left. f \right| _{U_i }$, where the $U_i $ cover $U$. So $\mathcal{O} _X(U) \hookrightarrow  \prod \mathcal{O} _X (U_i )$. Given $f _i  \in  \mathcal{O} (V_i )$ agreeing on $U _{ij}=U _i  \cap  U_j $, then this comes from $f \in \mathcal{O} (U)$. 
+
+    Recall that $\mathcal{C} _X^{\mathrm{pre}}$ is the category of $\mathcal{C} $-valued pressheaves on $X$, which contains the category of sheaves $\mathcal{C} _X$. Fix $A \in  \mathsf{Set} $, and let $A ^{\mathrm{pre}}\in  \mathsf{Set} _X ^{\mathrm{pre}}$ be the constant presheaf with value $A,$ or $A ^{\mathrm{pre}}(U)=A$, $\mathrm{res}=\id$.  Let $A$ be the constant sheaf in $\mathsf{Set} _X$, which has some value $(A)$ on ``small enough'' opens. Then \[
+        A(U)= A\text{-valued closed functions on} \ U = \mathrm{Map}_{\mathrm{cts}}(U,A^{\mathrm{disc}}).
+    \] So $A(U) =A$ if $U$ is connected, and if $U=U_1\amalg U_2$, $A(U)= A \times A$. These functions have a name, being \emph{locally constant} $A$\emph{-valued functions on} $U$. 
+
+    Sheaves are given by local conditions. All $\R$-valued functions on $X$ form a sheaf, contained in the continuous, then differentiable (and analytic), then smooth functions. Recall sections of a map $\pi \colon Z \to X$, $s \colon X \to Z$ with $\pi s(x)=x$. Then for $U \subseteq X$, \emph{sections over} $U$ map $U\xrightarrow{s} Z$ with $\pi s(x)=x$ for $x \in U$. For every topological space $Y$, the sheaf of sets $U \mapsto  \mathrm{Map}_{cts}(U,Y)$ is a $Y$-valued function. This implies that sections $F $ of $Z \to X$ are also sheaves: $F(U)= \{s \colon U \to Z, \ \pi s = \id\} \subseteq \mathrm{Map}(U,Z)$. We need to check the identity axiom: \[
+        \begin{tikzcd}
+{\mathrm{Sect}(U,Z) } \arrow[rr, hook] \arrow[rd, dotted] &                                                & {\mathrm{Maps}(U,Z) \hookrightarrow \prod \mathrm{Map}(U_i ,Z)} \\
+                                                          & {\prod \mathrm{Sect}(U_i ,Z)} \arrow[ru, hook] &                                                                
+\end{tikzcd}
+    \] So \[
+    \begin{tikzcd}
+{\mathrm{Sect}(U,Z)} \arrow[d] \arrow[r, hook] & {\mathrm{Maps}(U,Z)} \arrow[d] \\
+{\prod \mathrm{Sect}(U_i,Z)} \arrow[r, hook]   & {\prod \mathrm{Maps}(U_i,Z)}  
+\end{tikzcd}
+    \] So sections form a sheaf. Why are continuous maps $\mathrm{Map}_{\mathrm{cts}}(U,Y)$ a sheaf? Why do continuous maps glue? Consider 
+    \[
+    \Hom _{\mathsf{Top} }\left( \bigcup_{i \in I} U_i , Y\right)=\Hom _{\mathsf{Top} }\left( \coprod U_{ij} \rightrightarrows \coprod U_i \to  U, Y\right) = \varinjlim\Hom _{\mathsf{Top} }(U_i ,Y).
+    \] This implies that \[
+    \Hom(U,Y) \to \prod \Hom(U_i ,Y) \rightrightarrows \Hom(U _{ij},Y).
+    \] 
+    \subsection{Sheaves vs presheaves}
+    
+    For $F$ a \emph{sheaf}, $F$ is determined by $F(U _{\alpha })$ a basis of opens. Then $U = \bigcup_{\alpha  \in \ \text{basis} } U_{\alpha }$. If $X=\Spec R$, $\mathcal{O} _X$ is the sheaf of rings on $X$. Then for $f \in R$, $\mathcal{O} _X\left( D_f=\Spec f ^{-1} R \right) =f ^{-1} R$. Recall for $x \in X$, we have the notion of the stalk of a presheaf $F$, where $F_x=\varinjlim _{x \in U}F(U)= \{ x \in U _{\alpha }, s_{\alpha }\in F(U _{\alpha })\} $, which is ``equal'' to $F\left(  \bigcap_{x \in U} U \right) .$ For $x \in U$, we have a map $F(U) \to  F_x$. Putting these together, we have a map $F(U) \to  \prod _{x \in U}F_x$. The claim is that the identity axiom for a sheaf forces this map to be injective. To see this, $s \in F(U) \mapsto \{s_x\} _{x \in U}\in \prod _{x \in U}F_x$. Now consider $F(U)\cong \left\{ \prod _{x \in U}s_x \ \text{{\bf compatible} families}\ \in \prod F_x\right\} $, where $\prod s_x$ compatible if for every $x$ there is a representative $\{x \in V \subseteq U, s_V\} $ of $s_x$ such that $\left. s_V \right| Y=s_Y$ for all $y \in V$.
+
+        \begin{theorem}
+            There exists a \textbf{sheafification} function which is left adjoint to the inclusion
+\[
+\begin{tikzcd}
+\mathcal C_X \arrow[r, hook] & \mathcal C_X ^{\mathrm{pre}} \arrow[l, "(-)^{\mathrm{sh}}"', bend right, shift right]
+\end{tikzcd}
+\] 
+            where $F \mapsto F ^{\mathrm{sh}}$, i.e., $\Hom _{\mathcal{C} _X}(F ^{\mathrm{sh}},\mathcal{G} )$ (where $\mathcal{G} $ is a sheaf in both categories) $=\Hom _{\mathcal{C} _X^{\mathrm{pre}}}(F,\mathcal{G} )$. This is equivalent to the following diagram:\[
+            \begin{tikzcd}
+\overset{\text{presheaf}}{F} \arrow[rr] \arrow[rd] &                                                  & \overset{\text{sheaf}}{\mathcal G} \\
+                                                   & F^{\mathrm{sh}} \arrow[ru, "\exists !"', dotted] &                                   
+\end{tikzcd}
+            \] 
+        \end{theorem}
+This implies that if $F$ is a presheaf, then $F ^{\mathrm{sh}}=F$, or $\left( A^{\mathrm{pre}} \right) ^{\mathrm{sh}}=A$. So the construction of stalks of $F$ and $F^{\mathrm{sh}}$ are the same.
+

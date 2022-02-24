@@ -1,0 +1,96 @@
+\section{October 5, 2021} 
+Our first in person lecture! What are sheaves? They are 
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item substitutes for function spaces,
+    \item a geometric inerpretation for modules.
+\end{itemize}
+For $R \mapsto \mathrm{Spec}R \ni \{\lambda \colon R \to k\} $ equal to  eigenvalues for (commutry?) operation on $V / k$. $r \in R \mapsto  r \cdot v = \lambda(r) v$, so eigenspaces are sheaves on $\mathrm{Spec}R$.
+
+To define sheaves, we need $X$ a topological space, $\mathcal{C} $ a category (usually $\mathsf{Set} , \mathsf{Ab} , $ or $\mathsf{Ring} $). A $\mathcal{C} $-valued sheaf on $X$ is a \emph{local} expression on $X$ generalizing propereties of functions. For $U \subseteq X$ open, this leads to $F(U) \in  \mathcal{C} $ ``functions on $U$''.
+
+\subsection{Presheaves}
+
+
+\begin{definition}[]
+    For $X$ a topological space, let $\mathrm{Top}(X)= \mathrm{Open}(X)$ be the poset of open sets in $X$ under inclusion.
+\end{definition}
+\begin{definition}[]
+    A ($\mathcal{C} $-valued) \textbf{presheaf}  is a functor $F \colon \mathrm{Open}(X)^{\mathrm{op}} \to \mathcal{C} $, i.e., $U \subseteq X \mapsto F(U) \in \mathcal{C} $, and $V \subseteq U \mapsto  \mathrm{res}_U^V \colon F(U) \to F(V)$, where $\mathrm{res}$ is the restriction.
+\end{definition}
+For $F,G$, $\mathcal{C} $-valued presheaves, $\varphi \colon F \to G$ means for $V \subseteq U$, the following diagram commutes:
+\[
+    \begin{tikzcd}
+\varphi_U \colon F(U) \arrow[r] \arrow[d, "\mathrm{res}"] & G(U) \arrow[d, "\mathrm{res}"] \\
+\varphi_V \colon F(V) \arrow[r]                           & G(V)                          
+\end{tikzcd}
+\] 
+In other words, a natural transformation. Denote the category of presheaves by $\mathcal{C} _X ^{\mathrm{pre}}$.
+\begin{example}
+    We have the \emph{constant presheaf}, where for $A \in \mathcal{C} $, $A(U)=A$, and $\mathrm{res}=\id$. We also have the \emph{skyscraper} presheaf, where for $x \in X$, $\mathcal{C} =\mathsf{Ab} $,\[
+        \delta _{A,x}(U) = 
+        \begin{cases}
+            A & \text{for} \ x \in U,\\
+            0 & \text{for} \ x \notin U.
+        \end{cases}
+    \] 
+\end{example}
+\begin{example}
+    The important examples of \emph{functions} of any kind. For $X= \R^n $, $\mathcal{C} =\mathsf{Set} , \mathsf{Ab}, \mathsf{Ring} $, then $C(U)$ is the space of continuous $\R$-valued functions, $C^{\infty}$ means smooth, $C^{k}$ means $k$-differentiable. The complex analytic functions on $\mathrm{C}\mathrm{P} ^1$ are all constant-- in general functions don't extend. So instead of functions on the whole space, we keep track of functions on smaller spaces. 
+\end{example}
+\begin{example}
+    Fix a topological space $Y$ (for example $\R$), and consider $\mathrm{Map}_{\mathrm{cont}}(X,Y)$, the continuous maps $X \to Y$. This forms a presheaf by $U \mapsto \mathrm{Map}_{\mathrm{cont}(U,Y)}$.
+\end{example}
+Let's formalize the global and local aspects of a presheaf.
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{l|l} 
+        \textbf{Global}  & \textbf{Local}  \\ \hline
+        Global sections of $F$, $\Gamma (F):= F(X)$. & Stalks for $x \in X$ \\
+        Here $F(U):=$ sections on $U$. & Germs 
+    \end{tabular}
+    \label{global_local} 
+    \caption{Global and local aspects of presheaves.} 
+\end{figure}
+\begin{definition}[]
+    Define the \textbf{stalk of} $x$ by $F_x := \varinjlim _{x \in U} F(U)$. We can think of this by the value of $F$ on the infinite intersection of opens $F\left( \bigcap U \right)  $, but infinite intersection of opens don't make sense, hence our notion. 
+\end{definition} For $\mathcal{C} =\mathsf{Ab} , \mathsf{Set} $, we identify this with the set $\{f_U \in F(U), x\in U\} / f_U \sim f_V $ if they have the same restriction to $W \subseteq  U \cap V$. This equivalence relation is the same as modding by germs of functions. Stalks and germs are talking about the same thing, we usually talk about the stalk of a sheaf and the germ of a function. {\color{red}todo:something about presheavse as taylor series with nonzero radius of convergence on $C^{\infty}$?} 
+
+\subsection{Sheaves}
+
+Now we want to introduce a notion of gluing/descent/patching to make sheaves. Let $U = \bigcup_{i \in  I} U_i $ be a covering of $U$, then functions on $U$ correspond to functions on $U _i $ which match on overlaps. For $f $ on $U$, we have  $f _n $ on $U$, where $\mathrm{res}_U ^{U_i }= \left. f \right| _{U_i }$. If $U_{ij}=U_i  \cap U_j $, then $\left. \left. f \right| _{U_i }   \right| _{U_i  \cap U_j}= \left. \left. f \right| _{U_j } \right| _{U_i  \cap U_j }$.
+
+\begin{definition}[First definition of a sheaf]
+For $F \in \mathcal{C} _X ^{\mathrm{pre}},$ we say $F$ is a \textbf{sheaf} if 
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item \emph{identity}: For a cover $U = \bigcup_{i \in  I} U_i $, $F(U)\xrightarrow{\prod \mathrm{res}_{U}^{U_i }}\prod F(U_i ) $ is a monomorphism (or injective).
+    \item \emph{gluing}: Given sections $\{f _i  \in F(U_i )\} $ agreeing on overlaps, $\left. f_i  \right| _{U_{ij}} =\left. f_j  \right| _{U_{ij}}$ implies there exists an $f \in F(U)$ with $f=\left. f \right| _{U_i }$.
+\end{itemize}
+\end{definition}
+
+We give a little bit more formal definition for those who are into that sort of thing.
+
+\begin{definition}[]
+    We say $F$ is a \textbf{sheaf} if for $U = \bigcup_{i \in  I} U_i $, 
+    \[
+    F(U) \to \prod_{i \in I} F(U_i )\rightrightarrows \prod _{i,j \in I}F(U _{ij})
+    \] $\{f _i \} _{i \in I}, \ \left. f_i  \right| _{U_{ij}}=\left. f_j \right| _{U_{ij}} $ is an \emph{equalizer}.
+\end{definition}
+This is a lot more compact than the previous definition.
+
+\begin{example}
+    We have $F( U \amalg V) \cong F(U) \times F(V)$ for sheaves. 
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+        \item Functions of any kind form sheaves.
+        \item Maps to a fixed target form a sheaf.
+        \item Let $\mathcal{C} =\mathsf{Set} $, $X=$ a topological space (say $S^1 $), and $F \in $ sheaves of sets on $X$. Let $F(U)$ be the sectionsof $\pi \colon Z \to X$ over $U$. For $Z \xrightarrow{\pi}  X$ (eg the universal cover $\R \to S^1 $), we look at the \textbf{sheaf of sections} of $\pi \colon F(U)=$ sections of $\pi ^{-1} (U) \to U$, where a section is a map $s \colon U \to \pi ^{-1}(U)$ such that $\pi s= \id$. These form a presheaf, and we need to check that these form a sheaf. This is very much like a map since we can glue in the same way, in fact sections of $\pi$ are equivalent to maps $X \to Y$. This is the notion of a \emph{graph} of a function, a section of the projection $X \times Y\to X$. 
+
+            Here $F(S^1 )= \O$, but $F(U) \simeq  \Z$ for $U$ an interval. There are no global sections ($\Gamma(F)=\O$), but there are tons of local sections. This is why sheaves are useful. 
+        \item Recall the constant presheaf, $A = \Z \in \mathsf{Ab} $, $\Z(U)= \Z$. Something is off-- the constant presheaf is not actually a sheaf. Given a disjoint union, if the constant presheaf were a sheaf by the sheaf axiom we would have $U \amalg V \mapsto A\times A$ for $U \mapsto A, V\mapsto A$, however for $U,V$ disconnected this would fail. 
+
+            Define the \textbf{constant sheaf} $A^{\mathrm{sheaf}} \colon U \mapsto A $ if $U$ is connected. Then $U \mapsto \prod A$ where each $A$ is a component of $U$. Think of $A$ as a set, and $\mathrm{Map}_{\mathrm{cont}}(U,A)$. We'll see next time there is a way to correct every presheaf.
+    \end{itemize}
+        Our example $\R \to S^1 $ earlier is an example of a \textbf{locally constant} sheaf, which looks like $\Z$ on small enough open sets. The fact that the circle has an interesting topology is captured by the fact that locally it's doing nothing but has some sort of global structure.
+\end{example}

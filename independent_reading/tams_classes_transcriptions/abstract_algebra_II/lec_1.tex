@@ -1,0 +1,31 @@
+\section{January 13, 2020}
+Nostalgic notes...
+\begin{definition}[]
+    A number $\alpha  \in \R$ is said to be \textbf{constructable} if we can construct a line segment of length $|\alpha |$ in a finite number of steps using only a straightedge and compass.
+\end{definition}
+\begin{theorem}
+    If $\alpha ,\beta $ are constructable, then so are $\alpha +\beta $ and $\alpha \beta $.
+\end{theorem}
+\begin{proof}
+    We show $\alpha ,\beta $ are constructable for $\alpha ,\beta >0$ (refer to \cite{fraleigh} \S 32, page 294). Assume $\alpha $ and $\beta $ have been constructed. Construct a line segment $B$ to the line containing $A$ such that it is parallel to the line sgment from $P$ (of length 1) to $A$ containing $B$ (in three steps). This yields congruent triangles $\Delta OAP,\Delta OQB$ respectively, where $Q$ is the intersection of $\overline{OA}$ with the line parallel to $\overline{PA}$ containing $B$. Therefore $\overline{PA}$ is parallel to $\overline{BQ}$, and since $\Delta OAP$ and $\Delta OQB$ are congruent, $\| \overline{OA}\| / \| \overline{OP}\|= \frac{\| \overline{OQ}\|}{\| \overline{OB}\|}$. So $\alpha  /1= \| \overline{OQ}\| / \beta $, which implies $\| \overline{OQ}\|=\alpha \cdot \beta $ and is constructable. 
+\end{proof}
+Similar results with $\alpha /\beta $ ($\beta \neq 0$) and $\alpha -\beta $ imply the following theorem.
+\begin{theorem}
+    The set of all constructable numbers in $\R$ form a field.
+\end{theorem}
+Some ancient questions answered:
+\begin{enumerate}[label=(\arabic*)]
+\setlength\itemsep{-.2em}
+    \item It is impossible to construct a cube with double the volume of another. If $\alpha $ is constructed, consider a cube with volume $\alpha ^3$. Then it is impossible to construct a $\beta $ such that cube having length $\beta $ satisfies $\mathrm{vol}(\beta ^3)=2\alpha ^3$.
+    \item It is impossible to square the circle. Given a circle with area $A$, we cannot find a square with area $A$ (constructed with a compass and straightedge).
+    \item It is impossible to trisect an angle using only a compass and straightedge. (But you can biset an angle in a finite amount of steps!)
+\end{enumerate}
+Some formulas for roots of polynomials in a single variable.
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item \textbf{QUADRATIC:} Known since approximately 1000 BC.
+    \item \textbf{CUBIC}: Known.
+    \item \textbf{QUARTIC}: Use a flowchart.
+    \item \textbf{QUINTIC}: There is no POSSIBLE quintic formula. The reason is that $A_5$ is simple. These are all connected through field extensions and Galois theory.
+\end{itemize}
+

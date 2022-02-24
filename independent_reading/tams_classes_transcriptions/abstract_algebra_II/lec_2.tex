@@ -1,0 +1,37 @@
+\section{January 15, 2020}
+We want coefficients for polynomials from $\Z,\Q,\R,\C, \Z / 6\Z, \Z /5\Z$, etc. 
+\begin{example}[Freshman's dream]
+    If the coefficients are from $\Z /5 \Z$, then $(x+y)^5=x^5+y^5$.
+\end{example}
+\begin{definition}
+    For a ring $R$, then $R[x]= \{a_0+a_1x +a_2 x^2+ \cdots a_m x^m  \mid m \geq 0 \ \text{for all} \ a_i  \in R\} $. $R[x]$ is known as the set of \textbf{polynomials over} $R$. A polynomial has \textbf{degree} $m$, \textbf{leading coefficient} $a_m$, and \textbf{leading term} $a_mx^m$.
+\end{definition}
+\begin{example}
+    For $f(x)=5$, $f(x)$ is a polynomial in $\R[x]$ and has degree 0. 
+\end{example}
+\begin{note}
+    The zero polynomial $f(x)=0$ has degree undefined \emph{by convention}. (Some authors define it as having degree $-1$ or $-\infty$).
+\end{note}
+\begin{note}
+    Don't regard your polynomials as functions in order to check that two polynomials are the same! For example, $f(x)=x,h(x)=x^3$ are both polynomials in $\Z /3 \Z[x]$ (the polynomials of the ring $\Z /3 \Z$). If we were to view them as functions, we get the same function! If $f,h \colon \Z /3 \Z \to \Z /3 \Z,$ then for every $x \in \Z /3 \Z$, $f(x)=h(x)$. As functions, they are equivalent. However $f \neq g$ as polynomials. Two polynomials are \textbf{equal} iff for every $x_i $, the coefficients agree for every $i \geq 0$.
+\end{note}
+\begin{theorem}
+    The set of polynomials over a ring $R$, known as $R[x]$, form a ring under addition and multiplication of polynomials. 
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+\item $0_{R[x]}=0_R$, the zero polynomial.
+\item We view $R$ as a subset of $R[x]$ in this way: for every $
+    \alpha  \in R$, there exists a constant polynomial such that $f(x)=\alpha $.
+\item $R$ is commutative implies that $R[x]$ is commutative.
+\item $R$ has unity $1_R$ implies that $R[x]$ has unity $1_{R[x]}=1$.
+    \end{enumerate}
+\end{theorem}
+\begin{theorem}[Evaluation homomorphism]
+    For a ring $R$ and some $a \in R$, we define the function $\phi _{a} \colon R[x] \to R$ by  $\phi _{a} \colon R[x] \to R$ by $\phi _{a}(f(x))=f(a) \in R$. Then $\phi_a$ is a ring homomorphism. 
+\end{theorem}For $a=0$, the evaluation homomorphism $\phi_0 \colon f(x) \mapsto f(0) $ picks off constant terms of any polynomial.
+\begin{example}
+    Let $R= \Z /6 \Z$. For $f(x)= \overline{2}x+\overline{3}$, $h(x)=\overline{3}x^2+\overline{1}$, we have $\deg(f\cdot h)= \overline{6}x^3 + \overline{ 9}x^2+ \overline{2}x+ \overline{3}\equiv \overline{3}x^2+\overline{2}x+\overline{3}\neq 2 \neq 1+3 = \deg (f) + \deg(h)$. This ring messed up because of zero divisors, zero divisors bad.
+\end{example}
+\begin{lemma}
+    If $R$ has no zero divisors, then $\deg(fg)=\deg(f)+\deg(g)$.
+\end{lemma}

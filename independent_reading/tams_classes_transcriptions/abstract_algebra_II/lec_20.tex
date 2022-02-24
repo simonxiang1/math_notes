@@ -1,0 +1,66 @@
+\section{October 13, 2021} 
+A digression on counting.
+\begin{definition}[Euler's  $\varphi$-function]
+    For $n \geq 1$, $\varphi (n)= | \{1 \leq m \leq n \mid  \gcd(m,n)=1\} $. 
+\end{definition}
+For example, $\varphi (1)=1$, for $n=p$ a prime, $\varphi (p)=p-1$, and $\varphi (8)=4$. Here is why this function is significant:
+
+\begin{lemma}
+    $\varphi (n)=|(\Z / n) ^{\times }|$.
+\end{lemma}
+\begin{proof}
+    If $m$ is coprime to $n$, then there exist $\alpha ,\beta  \in \Z$ such that $\alpha  m + \beta  n = 1$ which implies $m$ is a unit $\pmod n$. Conversely, if $m$ is a unit $\pmod n$, then there exists an $\alpha  \in  \Z$ such that $am=1 \pmod n$, which implies the existence of a $\beta  \in \Z$ such that $\alpha m+\beta m=1$, which implies $\gcd (m,n)=1$.  So \[
+        \underset{\{m \mid  \gcd(m,n)=1\} }{\underset{\subseteq }{\{1,\cdots ,n\} } } \underset{\xrightarrow{\sim} }{\underset{\ }{\xrightarrow{\sim}}}    \underset{(\Z /n)^{\times }}{\underset{\subseteq }{\Z /n} } ,
+    \] and we are done.
+\end{proof}
+\begin{lemma}
+    $(\Z / n ) ^{\times }=\{m \in \Z /n \mid  \mathrm{ord}(m)=n\} $.
+\end{lemma}
+\begin{proof}
+    Recall that for $G$ a finite group, the order of an element $g$ is defined as $\mathrm{ord}(g)=\min \{r > 0 \mid  g^r=1\} $. For $m \in \Z /n$, $\mathrm{ord}(m)=d$, $d \mid n, d\neq n$. This implies that $m+ \cdots + m \ (d\text{-times})=m \cdot d=0$, and $d<n $ implies that $d\neq 0$ so $m$ is not a unit. Conversely, if $\mathrm{ord}(m)=n$, this implies that $d\cdot  m\neq 0$ for all $d \mid  n$, $d\neq n$. Let $\delta  :=\gcd(m,n)$. Then $\frac{n}{\delta } \mid  n$, OTOH \[
+        m \cdot \frac{n}{\delta }= \frac{m}{\delta }\cdot \delta \cdot \frac{n}{\delta }= \frac{m}{\delta }\cdot n=0 \implies  \frac{n}{\delta }=n \implies  \delta =1 \implies \gcd(m,n)=1 \implies m \in (\Z / n)^{\times }.\qedhere
+    \] 
+\end{proof}
+\begin{remark}
+    What this argument really shows is that $\{m \in \Z /n \mid  \mathrm{ord}(m)=d\} = \{ m \in  \Z / n \mid  \gcd(m,n)= \frac{n}{d}\} $.
+\end{remark}
+\begin{cor}
+    $\sum _{d \mid  n}\varphi (d)=n$.
+\end{cor}
+\begin{proof}
+    It is equivalent to show that $\sum _{d \mid n }\varphi  \left( \frac{n}{d} \right) =n$ counts $| \{1 \leq m \leq n \mid  \gcd (m,nd)=d\} $.
+\end{proof}
+\begin{example}
+        If $1 \mid  p$ is prime, $\varphi (p)=p-1$, and $\varphi (1)+\varphi (p)=p$ as stated.
+\end{example}
+Now we return to roots of unity. For any field $k$ such that $| \mu _n (k)| =n$, $\mu _n (k) \simeq  \Z /n$. 
+We'll prove this by induction on $n$. The case $n=1$ is vacuous, assume that the claim is true for all $1 \leq m < n$. Last time we showed that $d \mid  n$, $|\mu _d(k)|=d$. Note that for any root of unit, $\zeta \in  \mu _n (k)$, $\zeta ^n  =1$ implies that $\mathrm{ord}(\zeta) \mid |n$.
+
+\begin{claim}
+    For every $d \mid  n$, $d\neq n$, $| \{\zeta \in \mu _n (k) \mid  \mathrm{ord}(\zeta)=d\zeta\} |=\varphi \left( \frac{n}{d} \right) $.
+\end{claim}
+\begin{proof}
+    If $\mathrm{ord}(\zeta)=d \mid n, d\neq n$ implies that $\zeta ^d=1$ which implies $\zeta \in \mu_d(k)$. By induction, $\mu_d(k) \simeq  \Z /d$. From before, we know that there are exactly $\varphi (d)$ elements of order exactly $d$ in $\Z /d \simeq  \mu_d(k)$.
+\end{proof}
+\begin{cor}
+    There are exactly $\varphi (n)$ many $\zeta \in \mu _n (k)$ such that $\mathrm{ord}(\zeta)=n$.
+\end{cor}
+\begin{proof}
+    We have
+     \begin{align*}
+         n&=\sum _{d \mid n}\left| \{\zeta \in \mu _n  (k) | \mathrm{ord}(\zeta)=d\}  \right| \\
+          &= \underset{d\neq n}{\sum _{d \mid n}} | \{ \mathrm{ord}\zeta =d\} | + \left| \{ \zeta \mid  \mathrm{ord}(\zeta)=n\}  \right| \\
+          &= \underset{d \neq n}{d \mid n} \varphi (d)+ \, \text{mystery term}.
+     \end{align*}
+     We showed that $\sum _{d \mid n}\varphi (d)=n$, which implies that $n- \sum _{d\mid n, d\neq n}\varphi (d)=\varphi (n)=$mystery term.
+\end{proof}
+The key point is that there exists a $\zeta \in \mu_n (k)$ such that $\mathrm{ord}(\zeta)-n$, in fact, $\varphi (n)$ such elements. This leads to a map $\Z / n \to \mu_n (k), 1 \mapsto \zeta$. $\mathrm{ord}(\zeta)=n$ implies this map is injective, and therefore bijective. This could be an approach to showing a group is $\Z /n$-- list all the divisors and count their orders.
+
+\begin{lemma}
+    Let $A$ be a commutative ring  with $p=0$ (with $p>0$ a prime). Define the Frobenius map $\varphi  \colon A \to A$ by $f \mapsto  f^p$. Then $\varphi $ is a homomorphism.
+\end{lemma}
+\begin{proof}
+    Clearly $\varphi (fg)=\varphi (f)\varphi (g)$. To show additivity, we have \[
+        \varphi (f+g):=(f+g)^p=f^p+ {p \choose 1} f^{p-1}g+ \cdots +{p\choose p-1} fg^{p-1}+g^p.
+    \] By a previous homework, ${p\choose i} \equiv 0 \pmod p$ for $0 < i <p$, so this whole picture is equivalent to $f^p + g^p=\varphi (f)+\varphi (g)$. More on this next time.
+\end{proof}

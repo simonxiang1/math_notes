@@ -1,0 +1,50 @@
+\section{September 17, 2021} 
+Last time: we started showing that for $G$ finite, $|G|=p^r \cdot m$ for $p\nmid m$, there exists $G_p \subseteq G$ with $|G_p|=p^r$ (a $p$-Sylow subgroup). By induction, we will show there exist subgroup \[
+H_1 \subseteq H_2 \subseteq  \cdots  \subseteq H_r=G_p \subseteq G
+\] such that $|H_i |=p^i $.
+
+\begin{namedthing}{Digression} 
+   How did these Sylow theorems come about? When people were working on this in the 1900s, Sylow probably had tools like Cauchy's theorem and worked from there. Computing this is hard: if we have a group of order 1000, to show it has a subgroup of order 125, we need to check ${1000\choose 3}$ subsets. The technique of choosing a normal subgroup of order 5, quotienting by it, etc, is powerful.
+\end{namedthing}
+Last time: we argued that if we believe the theorem, then for $i<r$, $N_{G_p}(H_i ) / H_i  \subseteq N_G (H_i ) /H_i $.
+\begin{lemma}\label{pquo} 
+    For $i<r,$ $p \mid  |N_G(H_i ) /H_i |$.
+\end{lemma}
+Assuming \cref{pquo}, then there exists a $\Gamma  \subseteq  N_G(H_i ) / H_i $ being a subgroup of order $p$. Let $\pi \colon N_G(H_i ) \to N_G(H_i ) / H_i $, and define $H_{i+1}=\pi ^{-1}(\Gamma )$. Then $H_i  \subseteq H_{i+1}$ is a normal subgrouop, with $H _{i+1}/H_i  \simeq  \Gamma \simeq  \Z /p$. This implies that \[
+    |H_{i+1}|=\underset{p_i }{\underbrace{|H_i |}} \cdot \underset{p}{\underbrace{|H_{i+1}/H_i |} } .
+\] 
+\begin{proof}[Proof of \cref{pquo}]
+   The idea is to use the $p$-group congruence lemma. Let $H_i $ be a $p$-group, and $X=G /H_i $. Then \[
+   |X|\equiv |X^{H_i }| \pmod p,
+   \] where $|X|=|G /H_i |=|G| /|H_i |=m\cdot p^{r-i}\equiv 0 \pmod p$. The homework this week tells us that $(G /H_i )^{H_i }\simeq  N_G(H_i ) /H_i $. The idea is that given an element $gH_i  \in (G /H_i )^{H_i }$, this implies that for all $h \in H_i $,
+\begin{align*}
+    ghH_i &= gH_i \iff \\
+    g^{-1} h g H_i &=H_i \iff \\
+    g^{-1} h g &\in  H_i \iff \\
+    g &\in N_G (H_i ).
+\end{align*}Therefore \[
+|N_G (H_i )/H_i |= |(G /H_i )^{H_i }|=|G /H_i |\pmod p.\qedhere
+\] 
+\end{proof}
+This concludes the proof of the first Sylow theorem.
+\end{proof}
+
+There are other Sylow theorems, which address the question: How many $p$-Sylow subgroups are there? How do they compare?
+
+\begin{theorem}[Sylow II]\label{sylow2} 
+    All $p$-Sylow subgroups of $G$ a finite group are conjugate, i.e., given $G_p, \widetilde {G_p} \subseteq G$ two $p$-Sylow subgroups, there exists a $g \in G$ such that \[
+        \widetilde {G_p} = G_p g^{-1}=\mathrm{Ad}_g(G_p),
+    \] where $\mathrm{Ad}_g \colon G \to G$ is an isomorphism mapping $G_p$ isomorphically onto $G_p$. In particular, we see that all $p$-Sylow subgroups are isomorphic.
+\end{theorem}
+\begin{proof}
+   We apply the $p$-group congruence lemma. The group will be $G_p$, and set $X = G / \widetilde {G_p} $. By the congruence lemma, $|X|=|X^{G_p}| \pmod p$, and $|X|=|G /\widetilde {G_p} | \neq 0$ because these are both $p$-Sylow subgroups. So $X^{G_p}\neq \O$, which implies there exists some $g \in G$ such that for every $h \in G_p$, $h\cdot g\cdot \widetilde {G_p} =g\cdot \widetilde {G_p} $. Then 
+   \begin{align*}
+       g^{-1}hg \cdot \widetilde {G_p} &= g \cdot \widetilde {G_p} \iff \\
+           g^{-1} h g & \in \widetilde {G_p} \iff \\
+               \mathrm{Ad}_{g^{-1}}(G_p) & \subseteq \widetilde {G_p} 
+   \end{align*}up to signs, and we are done.
+\end{proof}
+\begin{remark}
+    This argument shows that any $p$-subgroup of $G$ can be conjugated into a fixed $p$-Sylow subgroup.
+\end{remark}
+

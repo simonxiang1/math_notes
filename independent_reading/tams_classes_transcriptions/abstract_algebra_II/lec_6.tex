@@ -1,0 +1,59 @@
+\section{September 8, 2021} 
+Observe that all fibers of the map $\pi \colon G \to G /H$ are in \emph{non-canonical} bijection.
+
+\begin{definition}[]
+    A \textbf{fiber} of a map $f \colon X \to Y$ is a subset of $X$ of the form $f^{-1} (y)$ for some $y \in Y$.
+\end{definition}
+We know that $\pi$ is surjective. Therefore, there exists a section $\tau \colon G / H \to G$ such that \[
+\begin{tikzcd}
+G/H \arrow[r, "\tau"] \arrow[rr, "\id_{G/H}"', bend right] & G \arrow[r, "\pi"] & G/H
+\end{tikzcd}
+\] This is called ``choosing coset representatives'', since the fibers of $\pi$ are right $H$-cosets. Then given $x \in G /H$, $\pi ^{-1}(x) = \sigma(x) \cdot H$. This is in bijection with $H$ via the map multiplication on the left with $\sigma(x)$.
+
+\begin{namedthm}{Lagrange's Theorem} 
+    If $G$ and $H$ are finite, then $|G|=|G /H| \cdot |H|$. 
+\end{namedthm}
+\begin{proof}
+    If we have $\pi \colon G \to G /H$, all fibers have order $|H|$.
+\end{proof}
+
+\begin{definition}[]
+    A \textbf{map/morphism/homomorphism} of sets with $G$-action is a map $f \colon X \to Y$ such that $f(gx)=gf(x)$ for all $x \in X$, $g \in G$. A \textbf{isomorphism} of $G$-sets is a morphism $f$ with an inverse $g$ ($fg=\id_Y,\ gf=\id_X$). This is equivalent to $f$ being bijective.
+\end{definition}
+
+\begin{definition}[]
+    For $X$ a $G$-set and $x \in X$, the \textbf{stabilizer} of $x$ is the subgroup $\mathrm{stab}(x)=\mathrm{stab}_G(x)= \{g \in G\mid g \cdot x=x\} $.
+\end{definition} The implicit claim is that $\mathrm{stab}(x)$ is a subgroup. To check this, $1 \in \mathrm{stab}(x)$ as $1 \cdot x=x$. For $g,h \in \mathrm{stab}(x)$, then $(gh)x=g(hx)=gx=x$, so $gh \in \mathrm{stab}(x)$. Finally, if $g \in \mathrm{stab}(x)$, then $x=1\cdot x=g^{-1}\cdot g\cdot x=g^{-1}x$, so $g^{-1} \in \mathrm{stab}(x)$.
+
+\begin{example}
+    Let $X=G/H$, $x = \pi(1) \in G /H$. Then $\mathrm{stab}(x)=H$, since $g \in \mathrm{stab}(x) $ iff $gH=H$ iff $g \in H$.
+\end{example}
+\begin{example}
+    Let $G=S_n $ act on $\{1,\cdots ,n\} =X$. Then $\mathrm{stab}(n)=S _{n-1}$, since we fix $n$ and shuffle $1,\cdots ,n-1$.
+\end{example}
+\begin{lemma}
+    Suppose we are given a $G$-set $X$ and a point $x \in X$ such that 
+    \begin{enumerate}[label=(\alph*)]
+    \setlength\itemsep{-.2em}
+\item $| X / G| =1$ (there exists a unique orbit),
+\item $\mathrm{stab}(x)=H \subseteq G$.
+    \end{enumerate}
+    Then there exists a unique isomorphism of $G$ between $G / H \xrightarrow{\simeq } X$ such that $\pi(1) \mapsto x$.
+\end{lemma}
+\begin{proof}
+     To figure out which way maps should go, recall the universal property of $G /H$.\[
+     \begin{tikzcd}
+G \arrow[d, "\pi"'] \arrow[rd, "\widetilde f"] &   \\
+G/H \arrow[r, "f", dotted]                     & X
+\end{tikzcd}
+\] Define $\widetilde f(g)= gx$. Then by the universal property of quotients, we see that $f$ exists iff $\widetilde f(gh)= \widetilde f(g)$ for all $g \in G, h\in H$.
+
+{\color{red}todo:not sure what happened here} 
+\end{proof}
+
+\begin{lemma}
+    Giving a morphism of all $G$-sets is equivalent to a point $x \in X$, $f(\pi(1))=x$, such that $\mathrm{stab}(x) \supseteq$.
+\end{lemma}
+
+\subsection{The structure of $G$-sets}
+Suppose $G$ acts on $X$. Then $X \simeq  \prod _{ i \in I}G / H$ as a $G$-set for $I$ sosme (?). The construction is as follows: let $I= X /G$. Choose some representatives of each orbit, i.e. a section of the map $X \to  X / G$. For each $i \in I=X /G$, choose $x _i $ in that orbit. For $i \in I$, take $H_i = \mathrm{stab}(x)$. Now apply our previosu result to obtain the deomposition of $X$.

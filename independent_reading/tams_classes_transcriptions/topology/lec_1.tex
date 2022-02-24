@@ -1,0 +1,47 @@
+\section{January 14, 2020}
+Wow, these are pre-corona notes. This really brings me back. I miss Dr.\ Fishman already.
+\begin{namedthing}{Metric spaces} 
+    Let $x,y \in \R$, and $d(x,y)$ denote the distance $|x-y|$, where $d \colon \R\times \R \to \R$. Properties of $d$ include:
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+\item $d \colon \R \times \R\to \R^+ $ and $d(x,y)=0$ iff $x=y$ (non-negativity),
+\item $d(x,y)=d(y,x)$ (symmetry),
+\item $d(x,z) \leq d(x,y) + d(y,z)$ (triangle inequality).
+    \end{enumerate}
+\end{namedthing}
+\begin{definition}[]
+    Let $X$ be a nonempty set. A function $d \colon X \times X \to \R$ is a \textbf{metric} if the following (previous) axioms are satisfied for every $x,y,z \in X$.
+\end{definition}
+In $\R^n $, $\vec{x}=(x_1,\cdots ,x_n ),\vec{y} =(y_1,\cdots ,y_n ) $ (we use $(-)$ to denote vectors and $\langle - \rangle $ to denote sequences). Then $d(\vec{x} ,\vec{y} )= \sqrt{ \sum_{i=1}^{n} (x_i -y_i )^2} $.
+\begin{theorem}
+    $d(\vec x, \vec y)$ is a metric on $\R^n $.
+\end{theorem}
+\begin{proof}
+    It is clear that $d(\vec x, \vec y)$ satisfies conditions (1) and (2). To show that $d(\vec x, \vec y)$ satisfies condition (3), recall that $\|\vec x\|=\sqrt{\sum_{i=1}^{n} x_i  ^2} $, where $\| \vec x\|$ is the \textbf{norm} of $\vec x= (x_1,\cdots ,x_n ) \in \R^n $. Note that $\|\vec x-\vec y\|= \|(x_1-y_1, \cdots ,x_n -y_n )\|= \sqrt{\sum_{i=1}^{n} (x_i -y_i )^2} =d(\vec x,\vec y)$. Let $\vec p = (a_1, \cdots ,a_n )$ and $\vec q=(b_1, \cdots ,b_n )$. Then by the Cauchy-Schwarz inequality, $\sum_{i=1}^{n} | a _i  b _i  | \leq \| \vec p\| \cdot \| \vec q\|$. To prove this, assume $\vec p \neq 0$ and $\vec q \neq 0$. Notice that $0 \leq (x-y)^2 = x^2+y^2-2xy$, or $x^2+y^2 \geq 2xy$ for all $x,y \in \R^n $. Then $2\cdot  \frac{|a_i |}{\| \vec p\|}\cdot  \frac{|b_i |}{\|\vec q\|}\leq \frac{|a_i |^2}{\|\vec p\|^2}+ \frac{|b_i |^2}{\| \vec q\|^2}$. So the statement \[
+    2 \cdot \sum_{i=1}^{n} \frac{|a_i b_i |}{\| \vec p\|\cdot  \|\vec q\|} \leq \sum_{i=1}^{n} \frac{|a_i |^2}{\| \vec p\|^2}+ \sum_{i=1}^{n} \frac{|b_i |^2}{\| \vec q\|^2}
+    \] must also hold for every $i, 1 \leq i \leq n$, which is equivalent to \[
+    2 \cdot \sum_{i=1}^{n} \frac{|a_i  \cdot b_i |}{\| \vec p\|\cdot \| \vec q\|} \leq \frac{1}{\|\vec p\|^2}\sum_{i=1}^{n} |a_i |^2+ \frac{1}{\|\vec q\|}\sum_{i=1}^{n} \sum_{i=1}^{n} |b_i |^2=\frac{\|\vec p\|^2}{\|\vec p\|^2}+ \frac{\|\vec q\|^2}{\|\vec q\|^2}=2.
+\] This implies that $\sum_{i-1}^{n} |a_i  b_i  | \leq \| \vec p\|\cdot  \| \vec q\|, $ and we are done with showing the Cauchy-Schwarz inequality. Now we need to prove Minkowski's inequality. Let $\vec p = (a_1, \cdots , a_n )$ and $\vec q = (b_1 , \cdots , b_n )$. Then Minkowski's inequality states that  \[
+\| \vec p + \vec q \|\leq \| \vec p \|+ \|\vec q\|.
+\] 
+Let $\| \vec p+\vec q\|\neq 0$ (otherwise we are done). Recall the triangle inequality, $|a_i +b_i | \leq |a_i |+|b_i | $ for every $a_i , b_i  \in \R$. Then let $a_i =x-y, b_i =y-z$, yielding $|x-z| \leq |x-y|+|y-z|$. Observe that \[
+    \|\vec q + \vec q\|^2= \sum_{i=1}^{n} |a_i +b_i |^2= \sum_{i=1}^{n} |a_i +b_i | | a_i +b_i | \leq \sum_{i=1}^{n} |a_i +b_i | ( |a_i | + |b_i |)
+\] by the triangle inequality. Then \[
+\sum_{i=1}^{n} |a_i +b_i |(|a_i |+|b_i |) = \sum_{i=1}^{n} |a_i +b_i | |a_i | + \sum_{i=1}^{n} |a_i +b_i| | b_i |,
+\] and by the Cauchy-Schwarz inequality, this is less than or equal to $\| \vec p + \vec q\| \cdot  \| \vec p\| + \|\vec p + \vec q\| \cdot \| \vec q\|. $ Then $\| \vec p + \vec q\|^2 \leq \|\vec p + \vec q\|( \| \vec p\|+\|\vec q\|)$ which implies $\|\vec p+\vec q\|\leq \| \vec p\|+ \|\vec q\|$. Now $d(\vec x,\vec z)= \| \vec x- \vec z\|=\|\vec x -\vec y + \vec y -\vec z\|\leq \| \vec x-\vec y\|+ \|\vec y -\vec z\|=d(\vec x,\vec y)+d(\vec y, \vec z)$ by definition, and we are done.
+\end{proof}
+\begin{example}
+    Let $X \neq \O$. We define the \textbf{discrete metric} on $X$ as following:
+    \[
+        d(x,y)=
+        \begin{cases}
+            0 & \text{if} \ x= y,\\
+            1 & \text{if} \ x \neq y.
+        \end{cases}
+    \] 
+\end{example}
+\begin{example}[$\ell_2$ space]
+   By definition, \[
+   \ell_2= \left\{ \langle x_1,\cdots ,x_n  \rangle , x_i  \in \R \, \Big| \, \sum_{i=1}^{\infty} x_i  ^2 < \infty \right\} .
+   \]  For example, $\langle 1,0,1,\cdots  \rangle \notin \ell_2$, $\langle 1, \frac{1}{2}, \frac{1}{3}, \frac{1}{4}, \cdots  \rangle \in \ell_2$, and $\langle 0,0,0,\cdots  \rangle \in \ell_2$. Let $x,y \in \ell_2$. Define a metric $d(x,y)$ as follows: $d(x,y) := \sqrt{\sum_{i=1}^{\infty} (x_i -y_i )^2} $. We know that $\sqrt{\sum_{i=1}^{n} (x_i -y_i )^2} =\|\vec x_n  - \vec y _n \|\leq \| \vec x _n \|+ \|\vec y _n \| \leq \sum_{i=1}^{\infty} |x_i |^2 + \sum_{i=1}^{\infty} |y_i |^2 < \infty$ in $\ell_2$. Then $\sqrt{\sum_{i=1}^{\infty} (x_i -y_i )^2} $ converges by the monotone convergence theorem.
+\end{example}

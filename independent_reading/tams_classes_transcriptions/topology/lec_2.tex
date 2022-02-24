@@ -1,0 +1,92 @@
+\section{August 31, 2021} 
+We continue with our tour of category theory, in the category (commutative) $\mathsf{Ring} $s where objects are rings and morphisms are homomorphisms. Eventually we will talk about the category of affine schemes, where the opposite category is $\mathsf{Ring} $.
+
+\subsection{Functors}
+Let $\mathsf{Top} $ be the category of topological spaces with continuous maps. Consider the contravariant functor $C \colon \mathsf{Top} \to \mathsf{Vect} _{\R}^{\mathrm{op}},$ where $\mathsf{Vect} _{\R}$ is the category of vector spaces with linear maps. This functor sends $X \mapsto C(X)$, the vector space of $\R$-valued functions on $X$. If we have $X \xrightarrow{\varphi } Y$ a continuous map, then a real valued function on $Y$ is a map $Y \xrightarrow{f} \R$. \[
+\begin{tikzcd}
+X \arrow[rr, "\varphi "] \arrow[rd, "f \circ \varphi "'] &   & Y \arrow[ld, "f"] \\
+                                          & \R &                  
+\end{tikzcd}
+\] So $\varphi $ gets send to the pullback $C(Y) \xrightarrow{\varphi ^* f= f \circ \varphi }   C(X)$. Now given a composition $X \xrightarrow{\varphi } Y \xrightarrow{\psi} Z$, for $C$ to satisfy functorality we need the following diagram to commute:
+\[
+\begin{tikzcd}
+{\Hom(X , Y)\times \Hom(Y,Z)} \arrow[r] \arrow[d] & {\Hom(X,Z)} \arrow[d] \\
+{\Hom(C(X) , C(Y))\times \Hom(C(Y),C(Z))} \arrow[r]            & {\Hom(C(X),C(Z))}         
+\end{tikzcd}
+\] 
+In other words, it doesn't matter if we pull back by $\varphi $ then $\psi$ or we pull back by $(\psi \circ \varphi )$.
+
+There are two ways to compare categories, a useless and a useful way. The useless notion is the category of categories $\mathsf{Cat} $, where objects are categories and morphisms are functors. So given categories $\mathcal{C} ,\mathcal{D} $, elements of $\Hom _{\mathsf{Cat} }(\mathcal{C} ,\mathcal{D} )$ are functors $F \colon \mathcal{C}  \to \mathcal{D} $, and composition is just given by \[
+    \underset{X}{\mathcal{C}}  \overset{F}{\longrightarrow}  \underset{F(X)}{\mathcal{D}}  \overset{G}{\longrightarrow} \underset{G(F(X))}{\mathcal{E} } .
+\] We want to define the idea of an \emph{isomorphism of categories}. A functor $F \colon \mathcal{C}  \to \mathcal{D} $ is an \textbf{isomorphism} if there exists some $G \colon \mathcal{D}  \to \mathcal{C} $ such that $F \circ G=\id_{\mathcal{C} }$ and $G \circ F=\id _{\mathcal{D} }$. On sets of objects, $\mathrm{Ob}(\mathcal{C} )\simeq \mathrm{Ob}(\mathcal{D} )$ as sets. This is a completely useless notion and we will never bring it up again. A better notion is that we shouldn't as for $F \circ G$ and $G \circ F$ to \emph{equal} identities, but to be equivalent to them. This leads into the idea of \emph{natural transformations}.
+
+\subsection{Natural transformations and equivalence of categories}
+The goal is to compare two functors. Suppose we have two functors $F,G \colon \mathcal{C}  \to \mathcal{D} $, and we want to compare them, usually with a down arrow like below.
+\[
+    \begin{tikzcd}
+        \mathcal{C} \arrow[rr, "F", bend left] \arrow[rr, "G"', bend right] & \,\,~ \Big\Downarrow\eta & \mathcal{D}
+\end{tikzcd}
+\] 
+\begin{definition}[]
+    A \textbf{natural transformation} is data $X \in \mathcal{C} $ where $\eta_X \colon F(X) \to G(X), \ \eta_X \in \Hom_{\mathcal{D} }(F(X),G(X))$, such that for $X \in \mathcal{C} ,Y \in \mathcal{D},$ the \emph{naturality diagram} commutes: 
+    \[
+    \begin{tikzcd}
+        F(X) \arrow[r,"\eta_X"]\arrow[d,"F(f)"]& G(X)\arrow[d,"G(f)"]\\
+        F(Y)\arrow[r,"\eta_Y"]& G(Y)
+    \end{tikzcd}
+    \] Natural isomorphisms are natural transformations where $\eta_X,\eta_Y$ are isomorphisms.
+\end{definition}
+
+With our added information, a better way to think about isomorphisms of categories is by considering the \textbf{functor category} $\mathrm{Fun}(\mathcal{C} ,\mathcal{D} )$, where objects are functors $F \colon \mathcal{D}  \to \mathcal{D} $ and morphisms are natural transformations $F \xrightarrow{\eta} G$.
+
+\begin{definition}[]
+    A functor $F \colon \mathcal{C}  \to \mathcal{D} $ is an \textbf{equivalence of categories} if there exists a functor (quasi-inverse) $G \colon \mathcal{D}  \to \mathcal{C} $ and natural isomorphisms $F \circ G\xrightarrow{\eta} \id_{\mathcal{D} },G \circ F \xrightarrow{\eta'} \id_{\mathcal{C} } $ .
+\end{definition}
+\begin{example}
+    Let $\mathcal{C} $ be the category with a single object and $\Hom _{\mathcal{C} }(*,*)=\id$. Let $\mathcal{D} $ be a big category such that for all $x,y \in D$, there exists a unique $X \to Y$. Define a functor $F \colon \mathcal{C}  \to \mathcal{D} $ by letting $* \mapsto  X \in \mathcal{D} $, $\id_* \mapsto \id_X$ by functorality. The claim is that this functor is an equivalence of categories.
+
+    To construct a quasi-inverse $G \colon \mathcal{D}  \to \mathcal{D} $, we have to send $Y \in \mathcal{D} \mapsto * \in \mathcal{C} $. For morphisms, there is only one morphism $Y \to Z$ between objects $Y$ and $Z$. So for a map $G(Y) \to G(Z)$, this is just $\id:=G(f)$. It remains an exercise to check that this preserves composition. To check that this is indeed a quasi-inverse, the easy direction is checking $G \circ F=\id _{\mathcal{C} }$ (in this case literal equality). The hard direction is checking $F \circ G$ sending $Y$ to $X$ through $* \in \mathcal{C} $, but there is a unique isomorphism $Y \to X$.
+
+    In a sense, considering equivalence of categories allows us to ``erase'' giant trivial categories like $\mathcal{D} $.
+\end{example}
+
+\begin{example}\label{matrix} 
+    Consider the category of real finite dimensional vector spaces $\mathsf{Vect} _{\R}^{\mathrm{fd}}$ with morphisms just linear maps. Also consider the Euclidian category $\mathsf{Euc} $, where objects $\langle n \rangle $ are non-negative integers $n \in \Z _{\geq 0}$ and morphisms are defined by $\Hom _{\mathsf{Euc} }(\langle n \rangle ,\langle m \rangle )=\mathrm{Mat}_{n \times m}$ under matrix multiplication. This is the same as a map $\R^n  \to \R^m$, and given a map $\R^m \to \R^k$ we can compose to get a map/matrix $\R^n  \to \R^k$.
+
+    The claim is that $\mathsf{Vect} _{\R}^{\mathrm{fd}}\simeq \mathsf{Euc} $ are equivalent. The obvious functor is ``inclusion'' where $F \colon \mathsf{Euc}  \to \mathsf{Vect} _{\R}^{\mathrm{fd}},\ \langle n \rangle \mapsto \R^n $. This tells us that matrices can be thought of as linear maps, a fact we all know from linear algebra. To construct the inverse, we need to construct a functor $G \colon \mathsf{Vect} _{\R}^{\mathrm{fd}} \to \mathsf{Euc} $. Let $G \colon V \mapsto \langle \dim V \rangle  $: we need to send $f \in \Hom(V,W) \mapsto $ a matrix. Choose a basis for $V$ and $W$, then follow the arrows from $\R^{\dim V}\to \R^{\dim W}$ in the following diagram: 
+    \[
+    \begin{tikzcd}
+        V\arrow[r,"f"]\arrow[d] & W\arrow[d]\\
+        \R^{\dim V}\arrow[r,"\text{matrix of} \ f"]& \R^{\dim W}
+    \end{tikzcd}
+    \] 
+\end{example}
+The idea is that equivalence of categories does violence to the set of objects, but preserves the essential properties of the category.
+
+\begin{definition}[]
+    A functor $F \colon \mathcal{D}  \to \mathcal{D} $ is \textbf{faithful} if $F \colon \Hom _{\mathcal{C} }(X,Y) \hookrightarrow \Hom _{\mathcal{D} }(F(X),F(Y)) $ is injective. We say $F$ is \textbf{fully faithful} if $\Hom _{\mathcal{C} }(X,Y) \xrightarrow{\sim}\Hom _{\mathcal{D} }(F(X),F(Y)) $ is one-to-one and onto. We also say  $F$ is \textbf{essentially surjective} if every $Z \in D$ is isomorphic to F(X) for some $X$.
+\end{definition}
+
+
+\begin{theorem}\label{eoc} 
+    A functor $F \colon \mathcal{C}  \to \mathcal{D} $ is an equivalence of categories iff $F$ is fully faithful and essentially surjective.
+\end{theorem}
+Going back to \cref{matrix}, the functor $\mathsf{Euc} \to \mathsf{Vect} _{\R}^{\mathrm{fd}}$ is fully faithful with $\langle n \rangle \mapsto  \R^n $, $\Hom(\langle n \rangle ,\langle m \rangle )$ is the set of $n \times m$ matrices is $\Hom(\R^n ,\R^m)$. \cref{eoc} allows us to avoid the horrible construction of an inverse by choosing bases and just check properties of the functor itself.
+
+What is preserved by equivalence of categories? 
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item The set of \emph{isomorphism classes} of objects
+    \item Automorphisms of an object
+\end{itemize}
+These two properties allow us to classify groupoids. For example, consider the category of finite sets up to isomorphism $\mathsf{FinSet} ^{\mathrm{iso}}.$ Then objects are equivalent to integers $\Z _{\geq 0}$, and \[
+    \Hom (m,n) =
+    \begin{cases}
+        \O , & m\neq n,\\
+        S_n ,&m=n.
+    \end{cases}
+\] This category is \emph{not} equivalent to the discrete category, since there is no way to faithfully map $S_n \to *$ for $n\geq 2$.
+
+\begin{example}
+On homotopy theory and natural transformations: consider the category 1-$\mathsf{Trunc} $, where objects $X$ are 1-truncated topological spaces, eg $\pi_k(X)=0$ for $k>1$. Morphisms are continuous maps up to homotopy. Then there is the category of groupoids where morphisms are functors. The claim is that these two functors are equivalent: a functor 1-$\mathsf{Trunc} \to \mathsf{Grpd} $ is given by taking $\pi _{\leq 1}$, and we can construct topological spaces from groupoids for the inverse.
+\end{example}
