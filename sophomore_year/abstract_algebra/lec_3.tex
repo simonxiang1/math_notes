@@ -1,0 +1,32 @@
+\section{August 30, 2021}
+%\def\LaVeX{{\rm L\kern-.05em{\sc a}\kern-.08em
+    %V\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+    %\LaVeX
+\begin{example}
+    Here are some examples of group actions:
+\begin{enumerate}[label=(\arabic*)]
+\setlength\itemsep{-.2em}
+    \item Let $G=(\Z,+)$. Then an action of $\Z$ on a set $X$ is equivalent to an isomorphism $T \colon X \xrightarrow{\simeq } X$. Given an action of $\Z$ on $X$, then for $1 \in \Z$, the map $1+(-) \colon X \to X$ is a bijection (since we already have the action of $\Z$). Conversely, given a bijection $T$, define $n+(-) \colon X \to X$ as 
+        \begin{align*}
+            T ^n &= \overset{n \ \text{times} }{\overbrace{T \circ \cdots \circ T} } ,\quad n>0,\\
+                 &=\overset{-n \ \text{times} }{\overbrace{ T ^{-1} \circ \cdots \circ T^{-1}}},\quad n<0\\
+                 &=\id,\quad n=0.
+\end{align*}
+\item Let $G= ( \Z/ n , +) $. (You can check that the quotient projection $\Z \xrightarrow{\pi} \Z /n$ where $m \mapsto m\pmod n$ is a homomorphism.) Then an action of $G$ on $X$ is equivalent to a bijection $T \colon X \xrightarrow{\simeq } X $ such that $T^n =\id$.
+\end{enumerate}
+\end{example}
+\begin{example}
+    If $X$ is a set, then define \[
+    \mathrm{Aut}(X)= \{\sigma \colon X \to X \mid  \sigma \ \text{is a bijection} \} .
+\] Then $\mathrm{Aut}(X)$ is a group under the multiplication $\sigma_1 \cdot  \sigma_2:= \sigma_1 \circ \sigma_2$. There is a canonical action of $\mathrm{Aut}(X)$ on $X$, where $\sigma \cdot  x := \sigma(x)$. An informal claim is that this example is universal. Suppose $G $ acts on $ X$, then we obtain a homomorphism $\varphi  \colon G \to \mathrm{Aut}(X)$, where $g \mapsto (x \mapsto  g \cdot x)$. Conversely, given $\varphi  \colon G \to \mathrm{Aut}(X)$, we obtain an action of $G$ on $X$ by $g \cdot x:= \varphi (g)(x)$.
+\end{example}
+\begin{remark}
+    Let $X= \{1,\cdots ,n\} $, then $\Aut(X)$ is the symmetric group on $n$ letters $S_n $. So we can think of actions of a group $G$ on finite sets as homomorphisms to symmetric groups.
+\end{remark}
+We spend some time talking about the geometric properties of the action of $\Z /5$ on the pentagon (free and transitive actions?).
+\begin{definition}[]
+    If $G$ acts on $X$, then there is an equivalence relation on $X$ where $x\sim y $ iff there exists a $g \in G$ such that $y=gx$. An \textbf{orbit}  of $G$ on $X$ is an equivalence class for this relation. The set of orbits is denoted $X /G$.
+\end{definition}
+\begin{example}
+    Let $G= \Z/5$ act on the vertices of the pentagon, then there is a unique orbit. But if $G $ acts on the set of edges, then there are two orbits of internal and external edges.
+\end{example}

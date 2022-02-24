@@ -1,0 +1,57 @@
+\section{September 27, 2021} 
+Lats time, we introduced the commutative ring $A[t]= \left\{ \sum_{i=0}^{N} a_i  t ^i  \mid  a _i  \in A \right\}  $ of polynomials in one variable $t$. We are headed to developing some field theory and properties of polynomials.
+
+\begin{definition}[]
+    A \textbf{principal ideal domain}, or \textbf{PID}, is a commutative ring $A$ that is a domain such that every ideal $I$ is principal, i.e., $I=A d$ for some $d \in  A$.
+\end{definition}
+\begin{example}
+    $\Z$ is a PID.
+\end{example}
+\begin{prop}\label{polyfieldPID} 
+    For $k$ a field, $k[t]$ is a PID.
+\end{prop}
+\begin{definition}[]
+    A \textbf{Euclidian domain} is a pair $(A, \delta )$ where $A$ is a commutative ring, $\delta  \colon A \to \Z^{ \geq 0}$ such that
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+\item $\delta ^{-1}(0) = \{ 0\} $,
+\item $\delta (xy)= \delta (x) \cdot  \delta (y)$ for all $x,y \in A$,
+\item For every $f \in A$, the map $A _{< \delta (f)}\to  A / f$ is surjective, where for $n \in \Z ^{ \geq 0}$, $A _{ \leq n}:= \{g \in A \mid  \delta (g) < n\} $.
+    \end{itemize}
+\end{definition}
+    In other words, a Euclidian domain is a place where the Euclidian algorithm makes sense. The function of $\delta $ is some measure of ``size'' of the elements of $A$.
+\begin{example}
+    If $A = \Z$, let $\delta  = | \cdot |$, i.e., $\delta (m):= |m|$. Note that given $f \in \Z$ non-zero, then $\Z _{< | f |}= \{ -f+1,-f+2, \cdots ,f-2,f-1\}  \subseteq \Z$ surjecting onto $\Z /f$. In fact, even $\{0,1, \cdots ,f-1\} $ surjects. For example, if a clock is represented as $\Z /12$, the fact that you can represent every element $0, \cdots ,11$ as an element of $\Z /12$ should be true, hence the surjection onto $\Z /f$ condition.
+\end{example}
+\begin{remark}
+    Sometimes we say $A$ is a Euclidian domain to mean that there exists a $\delta $ making $d$ into a Euclidian domain.
+\end{remark}
+
+
+Before we prove \cref{polyfieldPID}, we prove two intermediary results.
+\begin{lemma}\label{polyeuc} 
+    $k[t]$ is a Euclidian domain. 
+\end{lemma}
+\begin{lemma}\label{eucPID} 
+   Any Euclidian domain is a PID. 
+\end{lemma}
+\begin{proof}[Proof of \cref{polyeuc}]
+    Let $\delta (f) := 2^{ \deg f}$, where $\deg f$ is assumed to be greater than zero (if not, let $\deg f = - \infty, 2^{- \infty}=0$). (We can replace 2 with any integer greater than 1.) Clearly $\delta (f)=0 \iff f=0$. We also have
+    \begin{align*}
+        \delta (fg)&=2 ^{\deg (fg)}\\
+                   &=2 ^{\deg(f)+\deg(g)}\\
+                   &=2 ^{\deg(f) }\cdot 2 ^{\deg(g)}\\
+                   &=\delta (f)\cdot \delta (g).
+    \end{align*}Given $f \in k[t]$ non-zero with $\deg f =d$, we want to show that the map $k[t] _{ \deg < d}\to  k[t] / f$ is surjective. Suppose $f = a_d t^d + \cdots + a_0$, then there $a_d$ is non-zero implies a unit in $k$. $k[t] \cdot f = k[t] \cdot  \frac{1}{a_d}\cdot f$ implies that we can replace $f$ by $\frac{1}{a_d}f$ to assume $f$ is \textbf{monic} (leading coefficient is1). Let $\pi \colon k[t] \to k[t] / f$ be the projection. We want to show that for every $g \in k[t]$, $\pi(g)$ is in $\pi \left( k[t]  _{\deg < d}\right) $.
+
+    We proceed by induction on $\deg (g)$. If $\deg(g) < d$ we are done. Otherwise, we can write \[
+    g = b_e t^e + b _{e-1}t ^{e-1}+ \cdots  + b_0
+    \] for $b_e\neq 0$ and some $e ^{\geq d}$. Observe that \[
+    g -b_e \cdot t ^{e-d}\cdot f = b_e t^e - b_e t^e +  \text{lower order terms}, 0 \cdot  t^e,
+\] i.e., $\deg(g -b_e t^{e- d}\cdot f)<e$. This is pretty much the division algorithm. Therefore, by induction, there exists an $h \in k[t] _{<d}$ such that $\pi(h)= \pi(g-b _e t ^{e-d}f)$. But the right hand side obviously equals $\pi(g)$ (since $b_e t ^{e-d}f$ is a multiple of $f$), so we are done.
+\end{proof}
+\begin{proof}[Proof of \cref{eucPID}]
+    Let $I \subseteq A$ be an ideal. If $I = \{0\} $ we are done. Otherwise, let $d \in I$ be a non-zero element with minimal $\delta $, i.e., $d\neq 0$, $d \in I$, $\delta (d) \leq \delta (d')$ for all $d' \in I$ non-zero. Note that this $d$ exists since $\delta $ maps into the integers. Clearly $A \cdot  dd \subseteq I$. We want to show that this is an equality.  Choose some $f \in I$, we want to show that $f \in A \cdot d$. 
+
+    Let $\pi $.?? {\color{red}todo: this proof}  By assumption on $(A, \delta )$, there exists a $\widetilde  f \in A$ with $\delta (f) < \delta (d)$ and $\pi ( \widetilde  f) = \pi(f)$, i.e., $f = \widetilde  f + g \cdot  d$, $g \in A$. Observe that $\widetilde  f = f - g \cdot d \in I$. Since $\delta ( \widetilde  f) < \delta (d)$, 
+\end{proof}

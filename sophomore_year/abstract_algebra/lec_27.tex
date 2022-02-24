@@ -1,0 +1,47 @@
+\section{October 29, 2021} 
+Today we'll talk about modules, the goal being the classification of modules over a PID. The motivation is the following: no one gets excited over the definition of a module. Modules are organizational tools, and serve many purposes:
+\begin{enumerate}[label=(\arabic*)]
+\setlength\itemsep{-.2em}
+    \item Many interesting problems can be phrased in terms of modules. Module theory leads to tools (induction, extensions, homological algebra, ...).
+    \item Properties of modules in the aggregate tell you interesting things about rings.
+\end{enumerate}
+The setup: let $A$ be a ring, possibly non-commutative.
+\begin{definition}[]
+    A (left) $\mathbf A$\textbf{-module} is the data $(M, \mathrm{act})$ where $M=(M,+)$ is an abelian group, $\mathrm{act}\colon A \times M \to M, a,m \mapsto a\cdot m$ such that 
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+\item $a\cdot (m_1+m_2)=a \cdot m_1+a\cdot m_2$ for every $a \in A, m_1,m_2 \in M$,
+\item $a\cdot (b\cdot m)=(a\cdot b)\cdot m$ for every $a,b \in A, m \in M$, 
+\item $(a+b)\cdot m=a\cdot m+b\cdot m$ for every $a,b \in A, m \in M$,
+\item $1\cdot m =m$ for every $m \in M$.
+    \end{itemize}
+    A \textbf{right} $\mathbf A$\textbf{-module} is one with a map $M \times A \to M, (m,a) \mapsto  ma$ such that analogous stuff happens.
+\end{definition}
+Define $A ^{\mathrm{op}}:=A$ as an abelian group, with multiplication $a \overset{\mathrm{op}}{\cdot }b:=ba $. This is a perfectly good procedure, so left $A ^{\mathrm{op}}$-modules are equivalent to right $A$-modules. In particular, left and right $A$-modules are the same when $A$ is commutative.
+We think of groups acting on sets (symmetries), while we think of rings acting on modules.
+\begin{example}
+    Some examples of modules:
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+        \item Let $M=A$ with $\mathrm{act}(a,b):=a\cdot b$, this is an $A$-module.
+        \item For $I \subseteq A$ a (left) ideal (closed under addition and multiplication on the left), then $I$ is a submodule of $A$. Conversely, a submodule of $A$ is a left ideal.
+        \item A $\Z$-module is an abelian group. Specifically, for $M$ a $\Z$-module, then $M$ is an abelian group, and the action must be $(n,m) \to \underset{n \ \text{times} }{\underbrace{m + \cdots +m}  } $ or $(n,m) \to \underset{n \ \text{times} }{\underbrace{=m - \cdots -m}  } $.
+        \item If $A=k$ is a field, then a $k$-module is precisely a vector space over $k$.
+    \end{enumerate}
+\end{example}
+Recall that $G$ acting on $X$ is the same as a map $G \to \Aut(X)$, which is sometimes a convenient perspective. Analogously, for $M$ an abelian group, define $\mathrm{End}_{\mathrm{gps}}(M) := \{\varphi  \colon M \to M \mid \varphi \ \text{is a homomorphism} \} $. Then $\mathrm{End}(M)$ is naturally a ring, where for $\varphi_1,\varphi_2 \in \mathrm{End}(M), (\varphi_1+\varphi_2)(m):= \varphi_1(m)+\varphi_1(m)$. For $(\varphi_1+\varphi_2)  $ to be an endomorphism, we need $M$ to be abelian. Furthermore, $\varphi_1\cdot \varphi_2  := \varphi_1 \circ \varphi_2$, i.e., $(\varphi_1\cdot \varphi_2)(m):= \varphi_1(\varphi_2(m))    $. In this case, $1 \in \mathrm{End}(M)$ is equal to $\id_M$. Then unwinding things, an $A$-module structure on $M$ is equivalent to a ring homomorphism $A \to \mathrm{End}(M), a \mapsto  \varphi_a $, where $\varphi _a(m)=a\cdot m$ (recall we are considering group endomorphisms, which are universal like the automorphism group).
+
+Briefly, a \textbf{homomorphism} of $A$-modules is a map $f \colon M \to N$ such that $f$ is a homomorphism of abelian groups and $f(a\cdot m)=a\cdot f(m)$ for every $a \in A, m \in M$. We use the same language as groups, etc a submodule is closed under stuff, an automorphism of modules is a bijective homomorphism of modules, etc.
+
+    Fix $k$ a field, and let $A=k[t]$. 
+    \begin{namedthm}{Question} 
+        What are $k[t]$-modules?  
+    \end{namedthm}
+    \begin{namedthing}{Answer} 
+        Let $V$ be a $k[t]$-module. Then $V$ is a $k$-module via the homomorphism $k \to k[t]$, also $ t\in k[t]$ determines a map $T := (t \cdot  -) \colon V \to V$ (the action of $t$). Note  that $T$ is a linear transformation (AKA $k$-module endomorphism). For example, $T(\lambda v):= (t \cdot \lambda\cdot v)=(\lambda t)\cdot v= \lambda \cdot (t \cdot v)=\lambda T(v) $ for every $\lambda \in k, v\in V$. Conversely, given $V /k$ a vector space and $T \colon V \to V$ a linear transformation, for $f (t)= \sum_{}^{} a_i  t ^i  \in k[t], f \cdot v := \sum a_i  T ^i (v) \in V$ defines a $k[t]$-module structure.
+    \end{namedthing}
+    \begin{namedthing}{Slogan} 
+        $k[t]$-modules are vector spaces with an endomorphism. 
+    \end{namedthing}
+    Our goal is going to be classification of modules over PIDs. We have two great PIDs, the integers and $k[t]$. One corresponds to finite groups, and the other is the classification of finite dimensional vector spaces with endomorphism. This is the idea of Jordan canonical forms, giving a relationship between vector spaces with endomorphisms and ideals inside the polynomial algebra. They seem unrelated, but the connection between the two is module theory.
+

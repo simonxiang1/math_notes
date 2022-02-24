@@ -1,0 +1,42 @@
+\section{September 20, 2021} 
+Recap of last time: so far we were proving Sylow's theorems. Let $G$ be a finite group, $p$ be a prime, and $p \mid  |G|$. The first Sylow theorem says that there exists a $G_p \subseteq G$, a $p$-Sylow subgroup ($G_p$ is a $p$-group, and pt $|G / G_p|$). The idea of the proof is to use induction with Cauchy's theorem, with $H$ actings on $G /H$.
+
+The second Sylow theorem says that any subgroup $H \subseteq G$ of oreder $p^s$ can be conjugated into $G_p$. In particular, any two $p$-Sylow subgroups are conjugate. A consequence of that is that they're automatically isomorphic. The idea of the proof is to consider the action of $H$ on $G /G_p$.
+
+A new question is this: how many $p$-Sylow subgroups are there? It is not always the case that there is a unique $p$-Sylow subgroup. Let $n_p:=$the number of $p$-Sylow subgroups of $G$. 
+\begin{theorem}[Sylow III]\label{sylow3} 
+   \hspace{0.2cm} 
+
+   \begin{enumerate}[label=(\alph*)]
+   \setlength\itemsep{-.2em}
+       \item $n_p= |G / N_G (G_p)|$,
+        \item $n_p$ divides $|G / G_p|$,
+        \item $n_p=1\pmod p$.
+   \end{enumerate}
+\end{theorem}
+\begin{cor}\label{3ylowcor} 
+    $n_p=1$ iff $G_p$ is normal in $G$.
+\end{cor}
+\begin{proof}[Proof of \cref{3ylowcor}]
+    In this case, by (a), we have \[
+        1=n_p=|G /N_G (G_p)| \iff N_G(G_p)=G
+    \] by Lagrange's theorem. This is equivalent to the fact that $G_p$ is normal.
+\end{proof}
+$n_p$ is always compatible with the restrictions (equal to 1 $\pmod p$, always divides anything). But: sometimes this is the only integer compatible with the restrictions.
+
+\begin{example}
+    Let $p,q$ be two distinct primes, and let $G$ be a group of order $pq$. Suppose $p<q$. Then we claim that $n_q=1$.
+       We know $n_q=1\pmod q$, and  \[
+       n_q \mid  |G/G_q| = |G| / |G_q|=pq/q=p.
+       \] We see that $n_q=1$ or $p$, but since $p<q$, we have $n_q=1$.
+    In particular, any such $G$ has a non-trivial normal subgroup of order $q$.
+\end{example}
+\begin{proof}[Proof of \cref{sylow3}]
+    Let $\Sigma_p := \{p\text{-Sylow subgroups of} \ G\} $. Then $G$ acts on $\Sigma_p$ by conjugation. By \cref{sylow2}, this action is transitive (there is a unique orbit). Moreover, $G_p \in \Sigma_p$, and its stabilizer for this action of $G$ is (by definition) $N_G (G_p)$. We then know that $\Sigma_p \simeq  G / N_G(G_p)$ as a $G$-set. Then (a) follows: \[
+        n_p := |\Sigma_p|=|G /N_G (G_p)|.
+        \] Then (b) also follows:\[
+    |G /G_p| =|G / N_G(G_p)| \cdot |N_G(G_p) / G_p|= n_p \cdot |N_G(G_p) / G_p|. 
+\] For (c), we want to use the $p$-subgroup congruence lemma. Let $G_p$ act on $\Sigma _p \simeq  G / N_G(G_p)$. We obtain \[
+n_p=|\Sigma_p|=|(\Sigma_p)^{G_p}|\pmod p.
+\] We want to show that $\Sigma_p ^{G_p}= \{G_p\} $. Suppose $\widetilde G_p$ is a $p$-Sylow subgroup in $\Sigma_p ^{G_p}$. Unwinding this definition means that for all $g \in G_p$, $g \widetilde G_p g ^{-1} = \widetilde G_p$. This means that $G_p \subseteq N_G( \widetilde G_p)$. Now let $H= N_G(\widetilde G_p)$. Clearly $\widetilde G_p \subseteq H \subseteq G$, this implies that $\widetilde G_p$ is a $p$-Sylow subgroup of $H$. Also, $\widetilde G_p$ is normal in $H$. By (a), $\widetilde G_p$ is the \emph{unique} $p$-Sylow subgroup of $H$. But $G_p \subseteq H$ by assumption, and is a $p$-Sylow subgroup, so $G_p = \widetilde G_p$.
+\end{proof}

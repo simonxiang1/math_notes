@@ -1,0 +1,60 @@
+\section{October 25, 2021} 
+Digression for today and maybe tomorrow: we'll talk about Fermat's two square theorem, which is an application of previous ideas we've discussed (this is a cookie??).
+
+\begin{theorem}[Fermat]\label{twosquare} 
+   Let $p$ be an odd prime, then there exist integers $\alpha ,\beta \in \Z$ such that $p=\alpha ^2+\beta ^2$ iff $p\equiv 1 \pmod 4$.
+\end{theorem}
+\begin{proof}[Proof (partial)]
+    We have $p$ odd, so $p\equiv$ either 1 or 3 $\pmod 4$. For every $\alpha  \in \Z,$ $\alpha ^2=0,1\pmod 4$. If $\alpha $ is even, then $4 \mid \alpha ^2\implies \alpha ^2=0\pmod 4$, and $\alpha $ odd implies $\alpha =2k+1 \implies \alpha ^2= 4k^2+4k+1=1\pmod 4.$ Any number that is 3 $\pmod 4$ is not the sum of two squares. This is the easy direction.
+\end{proof}
+    The other direction is way more subtle. Experimentally, consider the following table:
+    \begin{figure}[H]
+       \centering
+       \begin{tabular}{c|c} 
+           $p$ & $\alpha ^2+\beta ^2$ \\ \hline 
+           3 & bad \\
+           5 & $2^2+1^2$ \\
+           7 & bad \\
+           11 & bad \\
+           13 & $3^2+2^2$ \\
+           17 & $4^2+1^2$ \\
+           19 & bad \\
+           23 & bad \\
+           29 & $5^2+2^2$ \\
+           \vdots & \vdots \\
+           61 & $6^2+5^2$ \\
+           \vdots & \vdots
+       \end{tabular}
+    \caption{Checking Fermat's two square theorem.} 
+    \label{experiment} 
+    \end{figure}
+    For example, $21\equiv 1 \pmod 4$ but is not the sum of two squares, so primeness is a crucial hypothesis. The key ingredient to proving this consists of things we have already done.
+    \begin{definition}[]
+        Define the ring of \textbf{Gaussian integers} $\Z [i] \subseteq \C$ by $\{a +bi \mid a,b \in \Z\} $.
+    \end{definition}
+    \begin{lemma}
+        We have $\Z [i] \simeq  \Z[t] / t^2+1$.
+    \end{lemma}
+    \begin{proof}
+        There exists a unique homomorphism $\Z[t] \xrightarrow{t \mapsto i} \Z[i]$ which factors through $\Z[t] / t^2+1$. The resulting map is obviously surjective, and injectivity follows from a previous homework, where we showed that every element of $\Z[t]$ mod a monic degree two polynomial can be \emph{uniquely} written as $a+ b \cdot t$, with $a,b \in \Z$.
+    \end{proof}
+
+    \begin{theorem}\label{gausseuc} 
+        The Gaussian integers $\Z[i]$ are a Euclidian domain.
+    \end{theorem}
+    Recall that this implies the Gaussian integers are a PID. We will prove \cref{gausseuc} later, but for now let us assume it's true. We can deduce Fermat's theorem from here.
+
+    \begin{proof}[Proof of \cref{twosquare}]
+       Let $p$ be an odd prime where $p \equiv 1\pmod 4$. We want to show there exists $\alpha ,\beta  \in \Z$ such that $p=\alpha ^2+\beta ^2$.
+       \begin{lemma}\label{zip} 
+           $\Z[i]p$ is not a prime ideal if $p\equiv 1 \pmod 4$.
+       \end{lemma}
+       \begin{proof}[Proof of \cref{zip}]
+           It suffices to show that $\Z[i]/ p \Z[i]$ is not a domain. We have $\Z[i] / p \Z[i] = \Z[t] / (p, t^2+1)=\Z / p[t] / t^2+1 = \F_p[t] / (t^2+1)$. By last week's homework, when $p\equiv 1 \pmod 4$ in $\F_p$ there exists a $\sqrt{-1} \in \F_p$. This implies $t^2+1$ factors into $(t + \sqrt{-1} )(t- \sqrt{-1} ) \in \F_p [t]$, which implies $\F_p[t] / (t^2+1) \simeq  \F_p[t] / (t+ \sqrt{-1} ) \times  \F_p [t] / (t - \sqrt{-1} )$ (by the remainder theorem, an old hw) which is just $\F_p \times  \F_p$. This quotient is not an integral domain, since $(1,0)\cdot (0,1)=(0,0)$, so $(p)$ is not prime in $\Z[i]$. 
+       \end{proof}
+       The big idea is that modding out by a reducible polynomial leads to something that is not a field. Assuming \cref{gausseuc}, because $\Z[i]$ is a Euclidian domain (and PID), we have $p= x \cdot y$ for some $x,y \in \Z[i]$ non-units by \cref{zip}. Note that we can't have $x,y \in \Z$. Assume that the complex conjugate $\overline{x}\neq x$, also $| \overline{x}|\neq 1$ since if this were true, this implies that for $x=a+bi, a^2+b^2=1$, which implies $a=\pm 1,b=0$ or $a=0,b=\pm 1$, which implies $x \in  \{1, i , -1 , =i\} \subseteq  \Z[i] ^{\times }$. So $|x |^2= x \cdot  \overline{x} \in \Z$, and $p^2 = |p|^2=|x|^2 \cdot |y|^2$. We have $|x|^2,|y|^2 \in \Z>1$, which implies $|x|^2=|y|^2=p$. So if $x=\alpha +\beta i$, then $|x|^2=\alpha ^2+\beta ^2=p$, and we are done.
+    \end{proof}
+    \begin{remark}
+        If $|x|^2=p$, this implies $x$ is irreducible, since $x=x_1x_2, |x_i |^2=1$ for some $i=1,2$, which subsequently implies that $x_i  \in \Z[i] ^{\times }$.
+    \end{remark}
+    Now to prove \cref{gausseuc}. We'll do this next time.

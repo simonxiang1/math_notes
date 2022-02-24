@@ -1,1 +1,71 @@
 \section{August 27, 2021}
+Last time: we defined groups, sets with an associative binary operation, having a unit/identity and inverses. Algebraic structures are not interesting on their own, but what is interesting is how they talk to each other.
+
+\begin{definition}[]
+    A \textbf{morphism} (or \textbf{homomorphism} or map) of groups from $G$ to $H$ is a function $\varphi \colon G \to H$ such that $\varphi (gh)=\varphi (g)\varphi (h)$ for all $g,h \in G$. We could also say the following diagram commutes: \[
+    \begin{tikzcd}
+        G \times G \arrow[r, "m_G"]\arrow[d, "\varphi \times \varphi" ] & G\arrow[d, "\varphi" ]\\
+        H\times H\arrow[r,"m_H"] & H
+    \end{tikzcd}
+    \] In this case, $m$ refers to the multiplication on $G$ or $H$.
+\end{definition}
+\begin{note}
+    A note on notation: a \emph{morphism} of (thing) is a function between (thing)s preserving all structures. In this case, the structure being preserved is multiplication.
+\end{note}
+
+\begin{prop}
+    Let $\varphi \colon G \to H$ be a group homomorphism. Then 
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+\item $\varphi (1_G)=1_H$,
+\item For all $g \in G$, $\varphi (g ^{-1})=\varphi (g) ^{-1}$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    For (1), \[
+        \varphi (1_G )=\varphi (1_G \cdot 1_G)=\varphi (1_G )\cdot \varphi (1_G )=\varphi (1_G),
+        \]then left multiplying by $\varphi (1_G)^{-1}$ gives \[
+        \varphi (1_G)^{-1} \cdot \varphi (1_G) \cdot \varphi (1_G)=\varphi (1_G)^{-1}\cdot \varphi (1_G) \implies  1_H \cdot \varphi (1_G)=1_H \implies \varphi (1_G)=1_H.
+    \] In other words, $g \cdot h=g$ implies $h=1$. For (2), \[
+    1_H=\varphi (1_G)=\varphi (g \cdot g^{-1})=\varphi (g)\cdot \varphi (g^{-1})\implies \varphi (g^{-1})= \varphi (g )^{-1}.
+    \] The general property that we use is for $x,y \in H$ such that $x \cdot y=1$, then $y=x ^{-1}$. We can show this because $x ^{-1} \cdot x \cdot y=x^{-1}$, so $y=x ^{-1}$.
+\end{proof}
+
+\begin{definition}[]
+    An \textbf{isomorphism} of groups $G,H$ is a map $\varphi  \colon G \to H$ of groups such that there exists a  $g^{-1} \colon H \to G$ such that $\varphi ^{-1} \varphi =\id_G$ and $\varphi  \varphi ^{-1}=\id_H$.
+\end{definition}
+
+\begin{lemma}
+    A homomorphism $\varphi  \colon G \to H$ is an isomorphism iff $\varphi $ is bijective.
+\end{lemma}
+\begin{proof}
+    If $\varphi $ is an isomorphism, proving that $\varphi $ is a bijection is straightforward. Conversely, if $\varphi $ is a bijection, then there exists a unique $\varphi  ^{-1} \colon H \to G$ satisfying the conditions above. We want $\varphi  ^{-1}$ to be a homomorphism, or $\varphi  ^{-1}(g) \cdot \varphi  ^{-1}(h)=\varphi  ^{-1}(g \cdot h)$. Choose $g,h \in H$, then 
+    \begin{align*}
+        \varphi (\varphi ^{-1}(g) \cdot \varphi ^{-1}(h))&=\varphi \varphi  ^{-1} (g) \cdot  \varphi  \varphi (h)=gh\\
+                                                         &=\varphi (\varphi  ^{-1}(gh)),
+    \end{align*}so $\varphi  ^{-1}(g) \cdot \varphi ^{-1}(h) = \varphi ^{-1}(g \cdot h)$ because $\varphi  $ is injective.
+\end{proof}
+
+\begin{definition}[]
+    An \textbf{automorphism} of a group $G$ is an isomorphism $\varphi  \colon G \xrightarrow{\simeq } G $.
+\end{definition}
+\begin{example}
+    Let $G=\R$ under addition and $H=\R^{>0}$ under multiplication. Then $\exp \colon G \to H$ is an isomorphism, where $\exp(g+h)=\exp(g) \cdot \exp(h)$. The inverse of $\exp$ is $\ln$.
+\end{example}
+\begin{namedthing}{Question} 
+   What do groups do? 
+\end{namedthing}
+\begin{namedthing}{Answer} 
+   Like men, groups will be known by their actions.
+\end{namedthing}
+
+\begin{definition}[]
+    A \textbf{group action}, or \textbf{action} of a group $G$ on a set $S$ is a map $G \times S \xrightarrow{\mathrm{act}} S$, $(g,s) \mapsto g \cdot s$ such that $1_G \cdot s=s$ for all $s \in S$, and the following diagram commutes:
+        \[
+        \begin{tikzcd}
+            G \times G \times S \arrow[d, "m \times \id_S"] \arrow[r,"\id_G \times \mathrm{act}"]&G \times S\arrow[d, "\mathrm{act}"] \\
+            G \times S \arrow[r, "\mathrm{act}"] & S 
+        \end{tikzcd}
+    \] In other words, $(g_1 g_2) \cdot s=g_1 \cdot (g_2 \cdot s)$ for all $g_1,g_2 \in G$, $s \in S$. We also impose the condition that $1 \in G$ acts by the identity map, which is equivalent to the fact that any element of $G$ acts by an automorphism of $X$.
+\end{definition}
+We informally denote ``$G$ acts on $X$'' by $G\curvearrowleft X$. For example, $S _n $ acts canonically on $\{1,\cdots ,n\} $ where $S _n  \times \{1,\cdots ,n\} \xrightarrow{\mathrm{act}} \{1,\cdots ,n\} $ sends $(\sigma,i) \mapsto  \sigma(i)$. This puts into context the action of $\Z /2$ on the set $\R^2$.

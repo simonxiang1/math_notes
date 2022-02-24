@@ -1,0 +1,57 @@
+\section{Calculating $\Ext$ (Lec 34)} 
+Recall from last time that for $0 \to M_1 \to M_2 \to M_3 \to 0$ a short exact sequence of $A$-modules and $N$ an $A$-module, then the sequence \[
+    0 \to \Hom(M_3,N) \to \Hom(M_2,N) \to \Hom(M_1,N) \to \Ext^1(M_3,N) \to \Ext^1(M_2,N) \to \Ext^1(M_1,N)
+\] is exact.
+\begin{lemma}
+    For every $A$-module $N$, $\Ext^1_A(A,N)=0$.
+\end{lemma}
+\begin{proof}
+    Given an extension \[
+    0 \to  N \xrightarrow iE \xrightarrow{\pi} A \to 0,
+\] choose $x \in E$ where $\pi(x)=1 \in  A$. Then there exists a unique $\sigma \colon A \to E$, $\sigma(1)=x$, $\pi \sigma=\id$. This implies the sequence splits.
+\end{proof}
+\begin{remark}
+    An $A$-module $P$ is \textbf{projective} if $\Ext_A^1(P,N)=0$ for every $N$ an $A$-module. So $A$ is projective. More generally: any free $A$-module is projective. 
+\end{remark}
+
+The setup is as follows to calculate $\Ext^1$. Let $A$ be a commutative ring, $f \in A$ be a non-zero divisor; if $fg=0$, then $g=0$. This is equivalent to $A \xrightarrow{f \cdot -} A$ being injective.
+\[
+\begin{tikzcd}
+    \Hom(A /f,N) \rar & \underset{=N}{\Hom(A,N)}  \arrow[r,"f\cdot -"]
+             \ar[draw=none]{d}[name=X, anchor=center]{}
+                     & \underset{=N}{\Hom(A,N)}  \ar[rounded corners,
+            to path={ -- ([xshift=2ex]\tikztostart.east)
+                      |- (X.center) \tikztonodes
+                      -| ([xshift=-2ex]\tikztotarget.west)
+                      -- (\tikztotarget)}]{dll}[at end]{} \\      
+\Ext^1(A /f,N) \rar & \underset{0}{\underbrace{\Ext^1(A,N)}}  \rar & \Ext^1(A,N)
+\end{tikzcd}
+\] 
+\begin{prop}
+    Let $f \in A$ be a non-zero divisor. Then for any $A$-module $N$, there exists a canonical isomorphism $\Ext^1_A( A / f ,N) \simeq  N /f$.
+\end{prop}
+\begin{proof}
+    We have 
+    \[
+    0 \to \underset{=M_1}{A}  \xrightarrow{f \cdot -} \underset{=M_2}{A} \to  \underset{=M_3}{(A/f)}  \to 0.
+    \] 
+    By the diagram above, we have an exact sequence $N \xrightarrow{f \cdot -} N \to \Ext_A^1(A /f,N)\to 0$.
+\end{proof}
+
+We give a general strategy for calculating $\Ext^1(M,N)$; choose generators for $M$. \[
+0 \to R :=\ker \to A ^{\oplus I}\to M \to 0
+\] Then we have an exact sequence \[
+N^I = \Hom _A(A ^{\oplus I},N) \to \Hom_A(R,N) \to \Ext^1_A(M,N) \to 0=\Ext_A^1(A ^{\oplus I},N).
+\] A sample application. Take $A$ a PID and $f \in A$ an irreducible element. 
+\begin{prop}\label{extmod} 
+    Every extension of $A /f$ by $A /f ^n $ is isomorphic as an $A$-module to either $A / f ^{n+1}$ or $A /f \oplus A \ f^r$.
+\end{prop}
+\begin{lemma}
+    Suppose $M \simeq  M'$ and an extension $0 \to  N \to E \to M \to 0 \in \Ext_A^1(M,N)$corresponds to $0 \to N \to E' \to M' \to )$ in $\Ext_A^1(M',N)$. Then $E$ and $E'$ are isomorphic. 
+\end{lemma}
+\begin{cor}
+    The action of the group $\Aut_A(M) \times \Aut_A(N)$ acting on $\Ext^1_A(M,N)$ preserves isomorphism classes of underlying $A$-modules of an extension.
+\end{cor}
+\begin{proof}[Proof of \cref{extmod}]
+    By an earlier proposition, $(A / f ) \ 0= (A /f )^{\times }=\Aut(A /f)$ for $f$ maximal acts on $\Ext_A^1(A /f, A / f^n )=(A /f ^n )= A /f$. It is easy to check that the action of $(A /f ) ^{\times }$ on $A /f$ is multiplication. Then there are exactly two orbits of this action, which implies that there are $\leq 2$ isomorphism type for an extension of $A /f$ by $A /f ^n $. But we see two different ones; $0 \to A /f^n  \to A /f \to 0$ and $A /f \oplus A / f^n .$
+\end{proof}

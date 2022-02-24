@@ -1,0 +1,72 @@
+\section{October 20, 2021} 
+Today we'll talk about the recognition criterion for semidirect products.
+
+\begin{definition}[]
+    Given groups $G,H$, an \textbf{extension} of $G$ by $H$ is the data $(E,\pi,i)$ where $E$ is a group, $\pi \colon E \twoheadrightarrow G , i \colon H \hookrightarrow E $, and we have that $\pi i (y)=1$ for every $h \in H$. Then the map $H \xrightarrow i \ker (\pi) \subseteq E$ is an isomorphism, and $\pi$ is surjective iff $E /\ker (\pi) \xrightarrow{\simeq } G $ iff $E /H \xrightarrow{\simeq } G$. In short, $E$ is a group, $H \subseteq E$ is normal, and $E /H \simeq G$.
+\end{definition}
+\begin{note}
+    A note on notation. We write $1 \to H \xrightarrow i E \xrightarrow{\pi} G \to 1$, with an exception by replacing the 1s with 0s. The group $H$ (resp $G$) is uniquely written positively (resp $G$). A sequence like this is a \textbf{short exact sequence} (or SES for short) of groups.
+\end{note}
+\begin{example}
+    Some examples of short exact sequences:
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+        \item $0 \to  \Z /2 \xrightarrow{1 \mapsto 2} \Z/4 \xrightarrow{1 \mapsto 1} \Z /2 \to 0$ is a short exact sequence.
+        \item $0 \to  \Z /2 \xrightarrow{x \mapsto (x,0)} \Z /2 \times \Z /2 \xrightarrow{(x,y)\mapsto y} \Z /2 \to $ is a short exact sequence.
+        \item For every $n,m \geq 1$, $0 \to \Z/n \xrightarrow{1 \mapsto  m} \Z / nm \xrightarrow{ 1 \mapsto  1} \Z / m \to 0$ is a short exact sequence.
+        \item For every $G,H,$ we have $1 \to  H \xrightarrow{h \mapsto (1,h)} G \times H \xrightarrow{(g,h) \mapsto g} G \to 1$ is a short exact sequence.
+        \item Suppose $G$ acts on $H$ by group automorphisms. Then by last time, $1 \to  H \xrightarrow{h \mapsto (1,h)} G \ltimes H \xrightarrow{(g,h) \mapsto g} G \to 1$ is a short exact sequence.
+    \end{enumerate}
+\end{example}
+\begin{namedthing}{Principle} 
+   $G\ltimes H$ is the simplest extension of $G$ by $H$. 
+\end{namedthing}
+\begin{definition}[]
+    A \textbf{map of extensions} of $G$ by $H$ is a commutative diagram \[
+    \begin{tikzcd}
+        1\arrow[r] & H \arrow[d,"\id"]\arrow[r,"i_1"] & E_1 \arrow[r,"\pi_1"]\arrow[d,"f"] & G \arrow[r]\arrow[d,"\id"] & 1\\
+        1\arrow[r] & H \arrow[r,"i_2"] & E_2 \arrow[r,"\pi_2"] & G\arrow[r] & 1
+    \end{tikzcd}
+    \]for $f$ a homomorphism. 
+\end{definition}
+\begin{lemma}
+    Any map $f \colon E_1 \to E_2$ is a group isomorphism, and $f ^{-1}$ is a map of extensions.  
+\end{lemma}
+\begin{proof}
+    Some claims:
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+\item Suppose $g \in E$, with $f(g)=1 \in E_2$, then 
+    \begin{align*}
+        1= \pi_2(1)=\pi_2f(g)=\pi_1(g)& \implies \pi_1(g)=1\\
+                                      &\implies g \in \ker(\pi_1)\\
+                                      &\implies  g \in H \subseteq E\\
+                                      &\implies g= i_1(h).
+    \end{align*}So $1=f(g)=f(i_1(h))=i_2(h)$, which implies $i_2(h)=1$, so $i$ is injective implying that $h=1$, which subsequently implies $g=1$.
+\item $f$ is surjective, $g \in E_2$. Then 
+    \begin{align*}
+        \pi_2(g) \in G = E_1 /H & \implies \exists \gamma  \in E_2 \ \text{s.t.} \ \pi_1(\gamma ) =\pi_2(f(\gamma )) =\pi_2(g)\\
+                                &\implies \pi_2(f(\gamma )\cdot g ^{-1})=1 \\
+                                &\implies \exists h \in H \ \text{s.t.} \ i_2(h)=f(\gamma )\cdot g ^{-1}\\
+                                &\implies g=i_2(h ^{-1} ) \cdot f(\gamma ).
+    \end{align*}Set $\widetilde  \gamma  = i_1(h ^{-1}) \cdot \gamma  \in E_1$, then $f(\widetilde \gamma )-f i_1(h ^{-1})\cdot f(\gamma )=g $ which implies $g \in \im(f)$.\qedhere
+    \end{enumerate}
+\end{proof}
+\begin{definition}[]
+    A \textbf{splitting} of an extension $1 \to H\to E\to G\to 1$ is a map of groups $\sigma \colon G \to E$ such that $\pi \sigma=\id _G$. \[
+    \begin{tikzcd}
+            &                  & G \arrow[d, "\sigma"'] \arrow[rd, "\id"] &             &   \\
+1 \arrow[r] & H \arrow[r, "i"] & E \arrow[r, "\pi"]                       & G \arrow[r] & 1
+\end{tikzcd}
+    \] An extension is said to be \textbf{split} if there exists a splitting.
+\end{definition}
+\begin{example}
+    $0 \to  \Z /2 \to  \Z /4 \to \Z /2 \to 0$ is a non-split extension.
+\end{example}
+Given a split extension, this leads to an action of $G$ on $H$: define ${}^gh :=\sigma(g)h(\sigma(g) ^{-1})$. Then $\pi(\text{RHS} ) = \pi \sigma(g) \pi(h) \pi(\sigma(g)) ^{-1}=g \cdot 1\cdot g ^{-1}=1$, which implies the RHS is in $H$.
+\begin{lemma}
+    Given a splitting $\sigma$ for an extension $1 \to  H \to  E \to  G \to  1$, there exists a unique isomorphism of split extensions $ E \simeq  G \ltimes H$ by this action of $G$ on $H$.
+\end{lemma}
+\begin{proof}
+    An exercise is to show the map $G\ltimes H \xrightarrow{(g,h) \mapsto  i(h)\sigma(g)} E$ is a homomorphism. Then this map is an isomorphism of split extensions. We'll continue this next time.
+\end{proof}

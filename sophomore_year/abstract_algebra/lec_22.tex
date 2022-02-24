@@ -1,0 +1,55 @@
+\section{October 18, 2021} 
+This is the setup- let $G,H$ be groups, and let $G$ act on $H$ by group automorphisms. For $g \in H, h\in H$, $h \mapsto{}^gh $ is the action of $g.$ This leads to a new group $G\ltimes H$ that does something-- what is this something? An action of $G\ltimes H$ is the data of an action of $G$ and an action of $H$ such that something natural happens.
+\begin{example}
+    Let $G= \Z /2, H= \Z, X= \Z$. Then $G$ acts on $H$ by group automorphisms (denote this action $\sigma$), where $\sigma \colon n \mapsto -n $. We also have a $Z$-action $\tau$ (shift up by 1), then $(\sigma\tau )(n)=\sigma(n+1) =-n-1= \tau ^{-1} (-n)=\tau ^{-1} \sigma(n)={}^{\sigma}\tau(\sigma(n)) $.
+\end{example}
+The setup in general goes like this: an action of a semidirect product $G\ltimes H$ on $X$ is an action of $G,H$ such that for every $g \in G, h \in H, x\in X$, $g(h(x))={}^g h \cdot (gx) $. Heuristic: we want the formula $g h g ^{-1} = {}^gh  $ to make sense and be true in $G \ltimes H$. So how do we construct $G\ltimes H$? 
+\begin{definition}
+Consider the setup in the beginning, where $G,H$ are groups and $G$ acts on $H$ by automorphisms. Let the \textbf{semidirect product} $G \ltimes H = G \times H$ as a set, with group multiplication \[
+    (g_1, h_1) \cdot (g_2,h_2):= (g_1g_2, h_1 \cdot {}^{g_1}h_2).
+\] 
+\end{definition}
+\begin{example}
+   If $G$ acts on $H$ trivially, then $G \ltimes H = G \times  H$.
+\end{example}
+The claim is that this indeed forms a group. To check associativity, we have 
+\begin{align*}
+    (g_1,h_1) \cdot [(g_2,h_2) \cdot (g_3,h_3)] &= (g_1,h_1) \cdot (g_2g_3, h_2 {}^{g_2}h_3)\\
+                                                &=(g_1g_2g_3, h_1 {}^{g_1}(h_2 {}^{g_2}h_3))  \\
+                                                &=(g_1g_2g_3, h_1 {}^{g_1}h_2 ^{g_1g_2} h_3)= \cdots 
+\end{align*}
+\begin{example}
+    Some basic structures:
+    \begin{enumerate}[label=(\alph*)]
+    \setlength\itemsep{-.2em}
+\item We have $H \hookrightarrow  G\ltimes H, h \mapsto (1,h)$ a homomorphism. Moreover, the image is a \emph{normal} subgroup: $(g,1) \cdot (1,h) \cdot (g ^{-1} ,1)=(g, {}^gh) \cdot (g^{-1} ,1)=(1, {}^gh) . $ This fits into a sequence \[
+0 \to H \to G\ltimes H \to G \to 0.
+\] 
+\item $G\ltimes H \to G, (g,h)\mapsto g$ is a \emph{surjective} homomorphism with kernel $H= \{(1,h)\} $, which implies $H$ is normal.
+\item $G \to G\ltimes H, g \mapsto (g,1)$ is a \textbf{splitting} of the map from (b), i.e., $G \to G\ltimes H \to G$ is the identity map.
+    \end{enumerate}
+\end{example}
+\begin{note}
+   A note on notation: $G\ltimes H = H \rtimes G$, and  $K \triangleleft G$ means $K$ is normal in $G$. The $\triangleright$ in $G\ltimes H$ tells you  $H$ is the one who is normal, which implies $G$ is the one who acts.
+\end{note}
+Suppose we're given a space $X$ and an action $G \ltimes H$. We need to check the data from before: $H \to G \ltimes H, G \to G\ltimes H \leadsto$ actions of $G$ and $H$ on $X$. To see this, $(g,1) \cdot (1,h) = (g,{}^g h) = (1,{}^g h) \cdot (g,1)  $ implies that for every $x \in X$, 
+\begin{align*}
+    g\cdot (h\cdot x) &= (g,1)(h,1) x\\
+                      &=(g,{}^g h)x=(1,{}^g h)(g,1)x\\
+                      &={}^g h \cdot (g\cdot x). 
+\end{align*}
+Conversely, given $G,H$ actions, $(g,h) \cdot x={}^g h\cdot (g\cdot x) $ defines an action if the compatibility condition holds.
+\begin{example}
+   Some examples of semidirects:
+   \begin{enumerate}[label=(\arabic*)]
+   \setlength\itemsep{-.2em}
+       \item Let $G=k ^{\times }$ act on $k=H$, and $X=k.$ Then  $H$ acts on $k$ by addition, and $G= k ^{\times }$ acts on $k$ by mulitplication.
+        \item For $k=\Z$, this is what we discussed at the beginning of the class. $\Z ^{\times }=\{\pm 1\} \simeq  \Z/2$. Then \[
+        G \ltimes H = \left\{ 
+        \left. \begin{pmatrix}
+            a & b \\ 0 & 1
+\end{pmatrix}\, \right|\, a \in k ^{\times }, b \in k\right\} \subseteq \mathrm{GL}_2(k).
+        \] 
+    \item Let $G= \Z /2= \{1,s\} , H = \Z /n = \{1,r,r^2, \cdots , r ^{n-1}\} $. Then $G$ acts on $H$ by ${}s r= r^{-1} $. Then $G \ltimes H = D_{2n}$, the dihedral group of order $2n$. We have $r^i , r^i  s$ and $s r s ^{-1} = r ^{-1}, s ^2=1, r^n =1$, or $D_{2n}=\langle  r,s \mid r ^n =s ^2=(s r)^2=1\rangle $. $D_{2n}$ is setup to act on a regular  $n$-gon by ``rigid motions'' (isometries in $\R^3$).
+   \end{enumerate}
+\end{example}

@@ -1,0 +1,61 @@
+\section{September 1, 2021} 
+We quickly review equivalence relations.
+\begin{definition}[]
+    An \textbf{equivalence relation} on a set $X$ is a subset $R \subseteq X \times X$ such that:
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+        \item $x\sim x$,
+        \item $x\sim y \iff y \sim x$,
+        \item $x\sim y$ and $y\sim z$ implies $x\sim z$.
+    \end{enumerate}
+\end{definition}
+\begin{example}[The example to end all examples]
+    Given a map $f \colon X \to Y$, we obtain an equivalence relation on $X$ where $x_1\sim x_2$ iff $f(x_1)=f(x_2)$.
+\end{example}
+Now we construct the quotient by an equivalence relation. Given a set $X$ and an equivalence relation $\sim$ on $X$, where is another set $X / \sim$ which receives a canonical projection $\pi \colon X \to X / \sim$, having the following ``universal property'': giving a map of sets $X / \sim \ \xrightarrow{f} Y$ is equivalent to giving a map $X \xrightarrow{\varphi } Y$ such that $x_1\sim x_2$ implies $\varphi (x_1)=\varphi (x_2)$.
+
+    There is an omitted assumption here: given a map $g \colon Y \to Z$ and $f \colon X / \sim \to Y$ corresponding to $\varphi  \colon X \to Y$, the maps $gf$ and $g \varphi $ correspond as well (functorality).
+\begin{remark}
+    Informally, a universal property for a set, group, topological space, etc, is a rule for either mapping into the set or mapping out of the set. Mapping out universal properties look like quotient relations, and it can be hard to tell what points are.
+
+\end{remark}
+
+Consider the identity map $\id \colon X / \sim \to X / \sim(=Y)$. This corresponds to a canonical map $\pi \colon X \to X / \sim$ such that whenever $x_1 \sim x_2$, $\pi(x_1)=\pi(x_2)$. Moreover, by functorality whenever we have some $Y$ and $\varphi $ as before, the following diagram commutes:
+\[
+\begin{tikzcd}
+    X\arrow[d,"\pi"'] \arrow[rd,"\varphi "]& \\
+    X / \sim \arrow[r,"f"]& Y
+\end{tikzcd}
+\] 
+Our relation $\sim$ defines a map $X \xrightarrow{p} \mathcal{P} (X)$ (where $\mathcal{P} (X)$ denotes the power set of $X$) by sending $x \mapsto p(x)\subseteq X$, where $p(x):= \{y \in X \mid x \sim Y\} $. We formallly construct $X / \sim $ by defining it as the image of the map $p$. Then by construction, there exists a unique surjection $\pi$ fitting into \[
+\begin{tikzcd}
+    X \arrow[r, "\pi"] \arrow[r, "p", bend left=49] & X/\sim \ \subseteq \mathcal P(X)
+\end{tikzcd}
+\] 
+\begin{claim}
+    $X / \sim $ satisfies the universal property, i.e., given $\varphi  \colon X \to Y$ with $\varphi (x_1)=\varphi (x_2)$, for every $x_1 \sim x_2$, there exists a unique factorization \[
+    \begin{tikzcd}
+X \arrow[rd, "\varphi"] \arrow[d, "\pi"'] &   \\
+X/\sim \arrow[r, "f", dotted]             & Y        
+    \end{tikzcd}
+    \] 
+\end{claim}
+For the construction of $f$, observe that $\left. \varphi \right| _{p(x)} $ is constant with value $\varphi (x)$, i.e, for every $y \in p(x)$, $\varphi (y)=\varphi (x)$. 
+
+    \begin{proof}
+        We have $y \in p(x)$ iff $x\sim y$ which implies $\varphi (x)=\varphi (y)$. To construct $f $, suppose we have $S \in X /\sim$ (nonempty by assumption), then choose any $x \in S$ and take $f(S):= \varphi (x)$. This is independent of choice by the observation above. Moreover, the diagram commutes.
+    \end{proof}
+    \begin{lemma}\label{eqpi} 
+        Given $x,y \in X$, $x \sim y$ iff $\pi(x)=\pi(y)$.
+    \end{lemma}
+    \begin{proof}
+        We want to show that for $S_1 ,S_2 \in X / \sim$, $S_1=S_2$ or $S_1 \cap S_2 = \O$. Moreover, $X = \coprod _{S \in X /\sim}S$. For the first claim, $z \in \pi(x) \cap \pi(y)$ implies $x \sim z$ and $y \sim z$ implies $z \sim y$. So $x\sim y$ implies $y \in p(x)$. Moreover, for every $w \in p(y)$, this also shows that $w \sim  x$. Then $p(y) \subseteq p(x)$, and by symmetry $p(y)=p(x)$. For the second claim, it suffices to show that $X = \bigcup_{S \in X /\sim} S$, which is clear because $x \in p(x)$ (since $x \sim x$). This gives rise to a partition of $X$ into equivalence classes.
+
+        Now to prove \cref{eqpi}, suppose $\pi(x)=\pi(y)$. We want to show that $x \sim y$. Then by our first claim, there exists a map $\varphi  \colon X \to \{0,1\} $ with $\varphi (z)=1 $ iff $ z \in p(x)$, $\varphi (z)=0$ otherwise, since $\varphi (z_1)=\varphi (z_2)$ for $z_1\sim z_2$. By the universal property, 
+        \[
+        \begin{tikzcd}
+X \arrow[d, "\pi"'] \arrow[rd, "\varphi"] &           \\
+X /\sim \arrow[r, "f", dotted]            & {\{0,1\}}
+\end{tikzcd}
+        \] Clearly $f(x)=f(y)$. But by the above construction, this implies $x\sim y$.
+    \end{proof}

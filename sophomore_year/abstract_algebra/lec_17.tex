@@ -1,0 +1,56 @@
+\section{October 6, 2021} 
+Let's continue with polynomials.
+\begin{definition}[]
+    If $k$ is a field, then a \textbf{field extension} of $k$ is a field $K$ with a (necessarily injective) homomorphism $k \to K$. We denote $K / k$ to mean that $K$ is a field extension over $k$.
+\end{definition}
+\begin{example}
+    $\C /\R$, $\C /\Q$, $\R / \Q$ are all field extensions.
+\end{example}
+\begin{claim}
+    Given a field $k$ and a polynomial $f \in k[t]$, there exists a field extension $K / k$ such that $f$ has a \emph{root} in $K$, i.e., there exists $\lambda \in K$ such that $f(\lambda)=0$.
+\end{claim}
+\begin{example}
+    If $k=\R$ and $f(t)=t^2+1$, then $K=\C$.
+\end{example}
+\begin{proof}
+    Choose some irreducible polynomial $g \in k[t]$ such that $g$ divides $f$.  Take $K:= k[t] /g$. Note that we have a homomorphism $k \to  k[t] \xrightarrow{\pi}  k[t] / g=K$. Also note that $K$ is a field, since $(g) \subseteq k[t]$ is maximal. Take $\lambda:= \pi(t)$.Then $g(\lambda)=g(\pi(t))=\pi(g(t))=0$. So $f=g\cdot h$ implies $f(\lambda)=g(\lambda)\cdot h(\lambda)=0$.
+\end{proof}
+\begin{example}
+    Say $k=\R$ and $f(t)=t^2+1$. Then $K:= \R [t] / t^2+1$. Let $i \in K$ be the image of $t$ (what we just called $\lambda$). On the homework it was shown that every element of $K$ can be written uniquely as $\alpha +\beta i$ for $\alpha ,\beta  \in \R$. Then \[
+        (\alpha +\beta  i)(\gamma +\delta i)=\alpha \gamma +(\alpha \delta +\beta \gamma )i+\beta \delta (i^2).
+    \] Note that $i^2=-1$ by construction since $i$ solves $t^2+1=0$, so $K=\C$.
+\end{example}
+\begin{example}
+    Why do we need an irreducible polynomial in our proof? Take $f(t)= t^2-1=(t-1)(t+1)$, and by the homework there is a natural map \[
+        \R[t] / (t-1)(t+1) \xrightarrow{\overset{\text{homework}}{\simeq}} \underset{\R[t] / t-1}{\underbrace{\R}} \times  \underset{\R[t] / t-1}{\underbrace{\R}} ,
+    \] which is not a field.
+\end{example}
+Given a polynomial $f \in [t]$ of degree $n$, does there exist an extension $K / k $ such that $f$ has  $n$ roots? The answer appears to be yes, but consider $f(t)=t^2$.
+\begin{prop}\label{prodpoly} 
+    Given $f(t) \in k[t]$ monic of degree $n>0$, there exists a field extension $K /k$ and elements $\lambda_1 , \cdots ,\lambda_n \in K$ such that $f=\prod_{i=1}^n (t-\lambda_i )$. 
+\end{prop}Remark: maybe the $\lambda _i $'s are not all distinct.
+\begin{lemma}\label{prodpolylem} 
+    Suppose $k$ is a commutative ring, $f \in k[t]$, and $\lambda \in k$ is a root of $f$, i.e., $f(\lambda)=0\in k$. Then there exists a unique $g \in k[t]$ such that $g(t) \cdot (t-\lambda)=f(t)$.
+\end{lemma}
+\begin{proof}
+    Define $\widetilde f(t) := f(t+\lambda)$, i.e., if $f(t)=a_n  t ^n  + \cdots +a_0$, then $\widetilde f(t)= a_n (t-\lambda)^n  + \cdots +a_0$ which we expand by the binomial theorem. Write $\widetilde f(t)= \widetilde a _n  t ^n  + \widetilde{a_{n-1}}t ^{n-1}+ \cdots + \widetilde a_0 $. By assumption, $\widetilde a_0=\widetilde f(0)=f(\lambda)=0$. Take $\widetilde g(t):=\widetilde a _n  t ^{n-1}+ \widetilde {a _{n-1}} t ^{n-2}+ \cdots +\widetilde {a_1} $, where $\widetilde g \cdot t=\widetilde f$. Then $g := \widetilde g(t-\lambda)$, and \[
+        f=\widetilde f(t-\lambda)=\widetilde g(t-\lambda) \cdot (t-\lambda)=g\cdot (t-\lambda).\qedhere
+    \] 
+\end{proof}
+\begin{proof}[Proof of \cref{prodpoly}]
+    We prove this by induction on degree, with the case $\deg 0$ being trivial. By what we did earlier, there exists $K_0 / k$ and $\lambda_1 \in K_0$ such that $f(\lambda_1)=0$. So we have this embedding $k[t] \subseteq  K_0[t]$. By \cref{prodpolylem}, $f(t)=(t-\lambda_1)\cdot g(t) \in K_0[t]$, where $\deg g = \deg f-1=n-1$. By induction, suppose there exists $K /K_0$ with $\lambda_2,\cdots ,\lambda_n  \in K$ such that $g_9t) = \prod _{i=2}^n  (t-\lambda_i )$. Then $k \subseteq  K_0 \subseteq K$, and $f(t)= \prod _{i=1}^n  (t-\lambda_i )$ in $K[t]$.
+\end{proof}
+Question: given $f$ of degree $n$, when does $f$ have $n$ \emph{distinct} roots?
+\begin{definition}[]
+    We say $f \in k[t]$ of degree $n$ is \textbf{separable} if there exists some field extension $K / k$ such that $f$ has $n$ distinct roots in $K$.
+\end{definition}
+\begin{example}
+    Let $k=\Q$.
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+        \item $t^2+1$ is separable.
+        \item $t^2-1$ is separable.
+        \item $t ^n $ for $n>1$ is not separable.
+        \item $t^3+2 t^2+t=t(t+1)^2$ is not separable.
+    \end{enumerate}
+\end{example}

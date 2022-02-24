@@ -1,0 +1,54 @@
+\section{Extensions (Lec 32)} 
+We know that finitely generated torsion modules over a PID are finite length (``built'' from simple ones), where simple modules are of the form $A / \mathfrak m = A / f$, $f$ irreducible in $A$ (the PID case). Every finite length module is a sum of indecomposable modules.
+
+Today, we talk about the extension problem. 
+\begin{namedthing}{Question} 
+   Given modules $M$ and $N$, what modules arise as extensions of $M$ by $N$? 
+\end{namedthing}
+
+\begin{definition}[]
+    An \textbf{extension} of $M$ by $N$ is the data $(E, i, \pi)$ where $E$ is an $A$-module, and $0 \to N \xrightarrow i E \xrightarrow{\pi} M \to  0$ is a short exact sequence. An \textbf{isomorphism} of extensions $(E, i, \pi) \simeq  (E' ,i', \pi ')$ of $M$ by $N$ is an isomorphism $E \simeq  E'$ of $A$-modules such that the following diagram commutes:
+    \[
+    \begin{tikzcd}
+                                    & E \arrow[rd, "\pi"]    &   \\
+N \arrow[ru, "i"] \arrow[rd, "i'"'] &                        & M \\
+                                    & E' \arrow[ru, "\pi'"'] &  
+\end{tikzcd}
+    \] Then define  $\Ext_A(M,N) = \Ext_A^1(M,N)$ as the set $\{ \text{extensions of} \ M \ \text{by} \ N\} / \text{isomorphisms of extensions} $.
+\end{definition}
+\begin{remark}
+    Yoga: $\Ext_A^1(M,N)$ behaves like $\Hom_A(M,N)$.
+    There is a generalization in homological algebra called $\Ext ^i _A(M,N)$ for all $i\geq 0$ such that $\Ext_A^0(M,N)=\Hom_A(M,N)$. For $A$ a PID, it turns out that  $\Ext_A ^i (M,N)=0$ for $i\geq 2$. That's why we don't need higher $\Ext$'s for our problem.
+\end{remark}
+Developing the yoga: Given a map $\widetilde M \xrightarrow fM$, we get a map $\Hom_A(M,N) \to \Hom_A(\widetilde M ,N)$, where $g \mapsto  g \circ f$. \[
+\begin{tikzcd}
+    \widetilde M \arrow[d,"f"']\arrow[rd] & \\
+    M \arrow[r,"g"'] & N
+\end{tikzcd}
+\] Similarly for extensions, given a short exact sequence $0 \to  N \to E \xrightarrow{\pi} M \to 0$ with $f \colon \widetilde M \to M$, we have \[
+\begin{tikzcd}
+0 \arrow[r] & N \arrow[d, "\id"] \arrow[r, "{n\mapsto (0,i(n))}"] & {E_i^{\flat}:=\{(m\in \widetilde M,x \in E) \mid \pi(x)=f(m) \}} \arrow[r] & \widetilde M \arrow[r] \arrow[d,"f"] & 0 \\
+0 \arrow[r] & N \arrow[r]                                         & E \arrow[r]                                                                & M \arrow[r]                      & 0
+\end{tikzcd} \in \Ext_A^1( \widetilde M,N)
+\] $\widetilde E$ is called the \textbf{pullback extension}. Next is the pushout extension, which is formally dual to what we just did given $N \to \widetilde N$. We expect a map $\Ext^1(M,N) \to \Ext^1(M, \widetilde N)$. Given $0 \to N \to E \to M \to 0$, define 
+\[
+    E_i  ^{\sharp}:= (E\oplus \widetilde N) / (N = \{(i(n), -g(n))\})=\coker (N \xrightarrow{(i,-g)} E\oplus \widetilde N).
+\] Then the following diagram commutes by construction: \[
+\begin{tikzcd}
+0 \arrow[r] & N \arrow[d] \arrow[r]  & E \arrow[r] \arrow[d] & M \arrow[r] \arrow[d, "\id"] & 0 \\
+0 \arrow[r] & \widetilde N \arrow[r,"\text{obvious}" ] & E^{\sharp} \arrow[r]  & M \arrow[r]                             & 0
+\end{tikzcd}
+\] An application is the \textbf{Baer sum}. Observe that $\Hom_A(M,N)$ is an abelian group, $f , g \in \Hom(M,N)$, $(f+g)(m) := f(m)+g(m)$. This is similar for extensions. First, there is a funny way to see the addition on $\Hom$: \[
+\Hom(M,N) \times \Hom(M,N) \xrightarrow{(f,g) \mapsto  f\oplus g} \Hom(M\oplus M, N\oplus N).
+\] There exists maps $M \xrightarrow{ m \mapsto (m,m)} M \times  M \simeq  M \oplus M$, $N \oplus N \xrightarrow{(n_1,n_2) \mapsto  n_1+n_2} N$. This whole relationship is showin in the following diagram: \[
+\begin{tikzcd}
+M \arrow[d] \arrow[rdd, "f+g", near start]   &                     \\
+M\oplus M \arrow[r, "f\oplus g", crossing over,near end] & N\oplus N \arrow[d] \\
+                                 & N                  
+\end{tikzcd}
+\] The Baer sum is defined in the same way. \[
+\begin{tikzcd}
+{\Ext^1(M,N)\times \Ext^1(M,N)} \arrow[r, "{E,E' \mapsto E\oplus E'}"] & {\Ext^1(M\oplus M,N\oplus N)} \arrow[d] &               \\
+                                                                       & {\Ext^1(M,N\oplus N)} \arrow[r]         & {\Ext^1(M,N)}
+\end{tikzcd}
+\] The \textbf{split extension} of $M$ by $N$ is $M\oplus N$ with the obvious $i$ and $\pi$. It is easy to check that this is the unit for the Baer sum: $(M\oplus N) \underset{\text{Baer} }{+} (E,i,\pi)=(E,i,\pi)$. The reason is because split extensions are preserved under pullback and pushouts. One last thing: given $E= (E,i,\pi) \in \Ext^1(M,N)$, define $(-E) := (E,i, -\pi)$, i.e. the extension $0 \to  N \xrightarrow iE \xrightarrow{-\pi} M \to  0$. One can check that this is an inverse with respect to the Baer sum.

@@ -1,0 +1,63 @@
+\section{September 24, 2021} 
+Last time we did a bunch of algebraic stuff, like rings, fields, ideals, and so on.
+\begin{lemma}
+   Every ideal $I$ of $\Z$ has form $n \cdot \Z$ for some $n \in \Z$.
+\end{lemma}
+\begin{proof}
+    This was on the homework. But for the sake of the completeness, here's the proof. Option 1: $I= \{0\} $, and we are done. If $I\neq 0$, there exists some $x \in I$, $x>0$ (since $I$ is closed under additive inverses). Let $n$ be the minimal positive element of $I$. Clearly $n \Z \subseteq I$. Our claim is that $n\Z =I$, or $I \subseteq n\Z$. If this were not true, there exists some positive $y \in I$ such that $y \notin n\Z$. Let $m $ tbe the minimal positive element, if $m>n$ then $m-n \in I$, $m-n >0$. So $m-n \in  n \Z$ by the minimality of $ m$, which implies $m \in  n\Z$. Otherwise, $0 < m \leq n$ contradicting the minimality of $n$ (unless $m=n$).
+\end{proof}
+\begin{cor}
+    Given integers $x,y $ with $\gcd(x,y)=d \geq 0$, there exists $\alpha ,\beta  \in \Z$ such that $\alpha x+\beta y=d$.
+\end{cor}
+\begin{proof}
+    Let $I$ be the ideal $\Z x+ \Z y$, i.e.: $\{ \gamma  x + \delta  y \mid \gamma ,\delta \in \Z \} $. We know that $I= D \cdot \Z$ for some $D \in \Z$. We can assume $D \geq 0$, by construction $\Z x \subseteq \Z D$, or $x \in \Z D$, also $y \in \Z D$. So $D \mid x $ and $D \mid y$, which implies $D \mid  \gcd(x,y)=d$.
+     
+    On the other hand, $\Z D = \Z x+\Z y \implies D=\alpha x+\beta y$ for some $\alpha ,\beta  \in \Z$. So the RHS is divisible by $d$, which implies $d \mid D$, and so $d = D$.
+\end{proof}
+\begin{cor}
+    Given $n \in  \Z$ and $m \in \Z$, then $m $ maps to a unit of $\Z /n$ iff $m$ is coprime to $n$.
+\end{cor}
+\begin{proof}
+    First, suppose $\gcd(m,n)=d >1$. We want to show that $m$ is not a unit mod $n$. This implies \[
+    m \cdot  \frac{n}{d}= \frac{m}{d}\cdot  d \cdot  \frac{n}{d}=0\pmod n.
+    \] Note that $0 < \frac{n}{d}<n$ implies $\frac{n}{d}$ is not zero mood  $n$. If $m$ were invertible, we could multiply the above by $ m ^{-1} $ which implies $\frac{n}{d}=0 \pmod n$, a contraction. On the other hand, if $m$ is coprime to $n,$  this implies the existence of $\alpha ,\beta  \in \Z$ such that $\alpha m+\beta n =1$. Reduce this mod $n$ to see that $\alpha  m= 1\pmod n$, which implies $\alpha =m ^{-1}$.
+\end{proof}
+\begin{cor}
+    If $p$ is prime, then $\Z /p$ is a field.
+\end{cor}
+\begin{proof}
+    Non-zero elements of $\Z /p$ are in bijection with $\{1, \cdots ,p-1\} $ which are all coprime to $p$, which implies they map to units in $\Z / p$.
+\end{proof}
+A note on notation: we denote $\F_p = \Z /p$ when we think about it as as field/ring, the finite field with $p$ elements. A natural question to ask is; what does $\F_p ^{\times }$ look like? The answer is that it's a cyclic group of order $p-1$, i.e., $\F_p ^{\times }\simeq  \Z / (p-1) $ as groups non-canonically. We'll show this ... soon. First some digressions. Another note on notation: if $A$ is a commutative ring, then \[
+    A[t] = \left\{ \sum_{i=0}^{n}a_i  t ^i \ \Big| \ a _i  \in A \right\} .
+\] This is the set of polynomials of one variable with coefficients in $A$.
+In fact, $A[t]$ is a ring. The setup is that that \[
+    \sum_{i=0}^{n} a_i t ^i  + \sum_{i=0}^{m} b_i  t ^i  := \sum (a _i  + b _i  ) t ^i 
+\] and \[
+\left( \sum_{i=0}^{n} a _i  t ^i  \right) \left( \sum_{j=0}^{m} b _j  t ^j  \right) = \sum_{j=0}^{m} \sum_{i=0}^{n} a _i  b _j  t ^{i+j}.
+\] For example, for $\lambda \in A$, $(1+ \lambda t ^{10})(2+4 \cdot t^5)  =2+4 t^5+2 \lambda t ^{10}+4 \lambda t ^{15} $.
+
+\begin{definition}[]
+    An \textbf{integral domain} (often called domain) is a commutative ring $A$ where $xy=0$ implies $x=0$ or $y=0$. We also require $0\neq 1$.
+\end{definition}
+\begin{example}
+    Here are some examples of integral domains:
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+\item Any field is an integral domain.
+\item Any subring of a field is an integral domain, for example $\Z \subseteq \Q$ is an integral domain.
+\item $\Z /4$ is \textbf{not} an integral domain, since $2 \not \equiv 0 \pmod 4$ here, but $2 \cdot  2 \equiv 0 \pmod 4$.
+    \end{enumerate}
+\end{example}
+\begin{claim}
+    If $A$ is an integral domain, then $A[t]$ is as well. A related claim is that for $f(t) \in  A[t]$, let $\deg (f)$ be the minimal integer $n$ such that $f(t) = \sum _{i=0}^n  a_i t ^i $, i.e., the maximal integer $m$ such that the coefficient of $t ^m$ is nonzero. Then \[
+        \deg(fg)=\deg(f)+\deg(g)
+    \] for all $f,g \in A[t]$.
+\end{claim}
+\begin{proof}[Proof of both claims]
+   Let \[
+       f= \underset{\neq 0}{\underbrace{ a _{\deg(f)} }}  t ^{\deg (f)}+ \underset{\text{lower order terms} }{\cdots } ,\quad g = \underset{\neq 0}{\underbrace{b _{\deg (g)}} }t ^{\deg (g)} + \cdots .
+   \]  This implies that \[
+   fg = \underset{\neq 0 \ \text{b/c} \ A \ \text{is a domain} }{\underbrace{a _{\deg (f) g _{\deg(g)}}} } t ^{\deg(f)\deg(g)}+ \underset{ \text{lower order terms} }{\cdots }. \qedhere
+   \] 
+\end{proof}

@@ -1,0 +1,62 @@
+\section{September 29, 2021} 
+Today, we discuss prime and maximal ideals. The general idea is that we want to reduce commutative algebra to field theory. Fix $A$ a commutative ring.
+\begin{definition}[]
+    A \textbf{prime ideal} in $A$ is an ideal $\mathfrak p \subseteq A$ such that $A / \mathfrak p$ is a domain. A \textbf{maximal ideal} in $A$ is an ideal $\mathfrak m \subseteq A$ such that $A / \mathfrak m$ is a field.
+\end{definition}
+\begin{remark}Some remarks:
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+        \item Maximal implies prime ideal.
+        \item Any prime ideal $\mathfrak p \subseteq A$ is not equal to $A$ by convention. Essentially, $A / A =0$, and we assume $1 \neq 0$ in a domain.
+        \item $\{0\} \subseteq A$ is prime (resp maximal) iff $A$ is a domain (resp field).
+        \item Given a field $K$ and a (resp surjective) homomorphism $\varphi  \colon A \to K$, $\ker (\varphi )$ is prime (resp maximal) since $A / \ker (\varphi ) \hookrightarrow  K$.
+        \item By definition, an ideal  $\mathfrak p \subseteq A$ is prime iff
+            \begin{enumerate}[label=(\alph*)]
+            \setlength\itemsep{-.2em}
+                \item $\mathfrak p \neq A$,
+                \item For all $f,g \in A$, $fg \in \mathfrak p$ implies $f \in \mathfrak p$ or $g \in \mathfrak p$.
+            \end{enumerate}
+        \item Claim: An ideal $\mathfrak m \subseteq A$ is maximal iff
+            \begin{enumerate}[label=(\alph*)]
+            \setlength\itemsep{-.2em}
+                \item $\mathfrak m \neq A$,
+                \item For all $\mathfrak m \subseteq I \subseteq A$ an ideal, $I=\mathfrak m$ or $I=A$.
+            \end{enumerate}
+    \end{enumerate}
+\end{remark}
+\begin{lemma}
+    A commutative ring $A$ is a field iff $A$ has exactly two ideals, the trivial ideal $\{0\} $ and $A$ itself.
+\end{lemma}
+\begin{proof}
+    Assume $A$ is a field. Then $0\neq 1$ implies $\{0\}$ and $A$ are distinct ideals, so we have at least two ideals. Given $\{0 \} \subsetneq I \subseteq A$ a non-zero ideal, take $f \in I$ non-zero. As $A$ is a field, $\frac{1}{f} \in A$. Then for all $g \in A$, $g = \frac{g}{f}\cdot f \in I$ which implies $I=A$. 
+    Conversely, if we have exactly two ideals, then $0\neq 1$ (or $I$ would have one ideal) and for all $f \in A$ non-zero,
+    \begin{align*}
+        \underset{\text{ideal} }{\underbrace{A \cdot f} } \neq 0 & \implies A \cdot f=A\\
+                                                                 & \implies \exists f ^{-1} \in A \ \text{s.t.} \ f^{-1} \cdot f=1\\
+                                                                 &\implies A \ \text{is a field.} \qedhere
+    \end{align*}
+\end{proof}
+Ideals generalize the notion of divisibility. The structure of the ideals under inclusion (for the integers for instance) is the same structure as ideals under divisibility. For a field, the idea of divisibility isn't really interesting (2 divides 1 because $2\cdot \frac{1}{2}=1$), but for domains they are, hence this result.
+
+   To prove the earlier claim, given $\mathfrak m \subseteq A$, it is easy to see that ideals $\mathfrak m \subseteq  I \subseteq A$ correspond to ideals in $A / \mathfrak m$, where $I \mapsto I / \mathfrak m$. 
+
+
+\begin{prop}\label{ex} 
+    Given $A$ a non-zero commutative ring, there exists a maximal ideal $\mathfrak m \subseteq A$.
+\end{prop}
+\begin{remark}\hspace{0.2cm} 
+
+   \begin{enumerate}[label=(\arabic*)]
+   \setlength\itemsep{-.2em}
+       \item This produces a non-zero map from $A$ to a field, namely $A / \mathfrak m$.
+        \item It follows that any $I \subsetneq A$ is contained in a maximal ideal: choose a maximal ideal in $A / I$, take its inverse image in $A$.
+        \item The proof is non-constructive and uses Zorn's lemma.
+   \end{enumerate} 
+\end{remark}
+\begin{proof}[Proof of \cref{ex}]
+    Let $S= \{ \text{ideals} \ I \subseteq A, I \neq A\} $. As $A \neq \{0\} $, we have $S \neq \O$ ($\{0\} \in S$). Consider $S$ as partially ordered under inclusions $I \leq J \iff I \subseteq J$. Given a totally ordered subset $\Theta \subseteq S$, this leads to $I _{\Theta}:= \bigcup_{J \in \Theta} J$. 
+    \begin{claim}
+        $I_{\Theta}$ is an ideal with $I_{\Theta}\neq A$.
+    \end{claim}
+    To check this claim, $x, y \in I_{\Theta}$ implies by total orderedness that there exists a  $J \in \Theta$, $x,y \in J$, which implies $x+y \in J \subseteq I _{\Theta}$. $\Theta$ being non-empty implies that $0 \in I _{\Theta}$. For $x \in A$, $y \in I_{\Theta}$ implies that there exists a $J \in \Theta$ such that $y \in J$ which implies that $xy \in J \subseteq I _{\Theta}$. We have $I_{\Theta}\neq A$, otherwise $1 \in I _{\Theta}$ which implies the existence of a $J \in \Theta$ such that $1 \in J$, which implies $A \subseteq J \implies  J=A$, contradicting the definition of $S$. Clearly $J \subseteq I_{\Theta}$ for all $J \in \Theta$, which implies $I_{\Theta}$ is a (least) upper bound for $\Theta$. So Zorn's lemma applies and says there exists a $\mathfrak  m \in S$ a maximal element. By what we did earlier, this means that $\mathfrak m$ is a maximal ideal.
+\end{proof}

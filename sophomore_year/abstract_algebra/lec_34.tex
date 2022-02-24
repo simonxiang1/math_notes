@@ -1,0 +1,60 @@
+\section{More on extensions (Lec 33)} 
+Last time, we introduced $\Ext_A^1(M,N) := \{0 \to  N \to E \to M \to 0\} / \simeq $. We showed that given $N \to  N', M ' \to M$, we have a map $\Ext ^1(M,N) \to \Ext^1(M', N')$ (like $\Hom(M,N) \to \Hom(M',N')$). We deduced that $\Ext^1$ is an abelian group with unit $0 \to  N \to  M\oplus N \to  M \to 0$.
+
+\begin{definition}[]
+    A sequence $M_1 \xrightarrow fM_2 \xrightarrow gM_3$ of abelian groups (or $A$-modules, ...) is \textbf{exact} if $\ker g = \im f$. A sequence $M_1\xrightarrow{f_1} M_2\xrightarrow{f_2} \cdots \xrightarrow{f_n} M_{n+1}$ is an \textbf{exact sequence} (or is \textbf{exact}) if each segement $M_i  \to M _{i+1}\to M_{i+2}$ is exact.
+\end{definition}
+\begin{example}
+    $0 \to N \to E \to  M \to 0$ is a short exact sequence iff it is exact.
+\end{example}
+\begin{namedthing}{Setup} 
+   Let $0 \to  M_1 \to  M_2 \to  M_3 \to 0$ be an exact sequence, and $N$ be all $A$-modules. 
+\end{namedthing}
+Consider the sequence $0 \to \Hom(M_3, N) \to \Hom(M_2,N) \to  \Hom(M_1,N)$. Then $(\varphi  \in \Hom(M_3,N)) \mapsto 0$; \[
+\begin{tikzcd}
+    M_2 \arrow[r]\arrow[rd,"0"] & M_3\arrow[d] \\
+                            & N
+\end{tikzcd}
+\] Since $M_3=M_2 / M_1$, suppose $\psi \in \Hom(M_2, N)$. Is there a $\varphi  \to  \psi$? \[
+\begin{tikzcd}
+M_2 \arrow[rd, "\psi"'] \arrow[r] & M_3=M_2/M_1 \arrow[d, "\exists\varphi ?" description, dotted] \\
+                                  & N                                                    
+\end{tikzcd}
+\] There exists such a $\varphi $ iff $\psi(M_1)=0$. We have $\psi \in \ker(\Hom(M_2,N) $ ?? Notes very unclear. 
+\begin{prop}
+The sequence $0 \to \Hom(M_3, N) \to \Hom(M_2,N) \to  \Hom(M_1,N)$ is exact.
+\end{prop}
+\begin{remark}
+    This is a restatement of the universal property of quotient modules, but in a different notation.
+\end{remark}
+Given $f \colon  M_1 \to N$ (or $f \in \Hom(M_1,N)$), \[
+\begin{tikzcd}
+0 \arrow[r] & M_1 \arrow[d, "f"] \arrow[r, "i"] & M_2 \arrow[r] \arrow[d]  & M_3 \arrow[d, "\id"] \arrow[r] & 0 \\
+0 \arrow[r] & N \arrow[r]                       & \text{pushout} \arrow[r] & M_3 \arrow[r]                  & 0
+\end{tikzcd}
+\] Recall that the pushout is defined as $\widetilde {M_2}:= M_2 \oplus N / \{ ((i(m_1),-f(m_1))\} _{m_1 \in M_1}$ given $\Ext^1(M_3,M_1) \to \Ext^1(M_3,N)$. We claim that the data of a map $\varphi  \colon M_2 \to N$ extending $f$ (or $\left. \varphi  \right| _{M_1}=f$) is equivalent to the data of a splitting of $0 \to N \to  \widetilde {M_2} \to M_3 \to 0$.
+    \begin{proof}
+        A splitting of $0 \to  N \xrightarrow{\widetilde  i} \widetilde {M_2} \to  M_3 \to 0$ is equivalent to a map $\widetilde {M_2} \xrightarrow{\sigma} N$ such that $\sigma \widetilde i =\id _N$. Then $\widetilde {M_2} =M_2\oplus N / M_1$.
+    \end{proof}The upshot is that we have a sequence \[
+\begin{tikzcd}
+    \Hom(M_3,N) \rar & \Hom(M_2,N) \rar
+             \ar[draw=none]{d}[name=X, anchor=center]{}
+                     & \Hom(M_1,N) \ar[rounded corners,
+            to path={ -- ([xshift=2ex]\tikztostart.east)
+                      |- (X.center) \tikztonodes
+                      -| ([xshift=-2ex]\tikztotarget.west)
+                      -- (\tikztotarget)}]{dll}[at end]{} \\      
+    \Ext^1(M_3,N) & {}  & {} 
+\end{tikzcd}
+    \] More is true: we have an exact sequence \[
+\begin{tikzcd}
+    \Hom(M_3,N) \rar & \Hom(M_2,N) \rar
+             \ar[draw=none]{d}[name=X, anchor=center]{}
+                     & \Hom(M_1,N) \ar[rounded corners,
+            to path={ -- ([xshift=2ex]\tikztostart.east)
+                      |- (X.center) \tikztonodes
+                      -| ([xshift=-2ex]\tikztotarget.west)
+                      -- (\tikztotarget)}]{dll}[at end]{} \\      
+    \Ext^1(M_3,N) \rar & \Ext^1(M_2,N) \rar & \Ext^1(M_1,N)
+\end{tikzcd}
+    \] Homework is to show the last part is exact.

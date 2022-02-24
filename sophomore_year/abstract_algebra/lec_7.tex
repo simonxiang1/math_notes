@@ -1,0 +1,80 @@
+\section{September 10, 2021} 
+
+\begin{definition}[]
+    A subgroup $H$ is \textbf{normal} if either
+    \begin{enumerate}[label=(\alph*)]
+    \setlength\itemsep{-.2em}
+        \item $gH=Hg$ as sets for every $g \in G$,
+        \item for every $g \in H, h \in H$, there exists some $\widetilde h \in H$ such that $gh=\widetilde hg$, 
+        \item $gh g ^{-1} \in H$ for every $g \in G,h \in G$,
+        \item $g H g^{-1}=H$.
+    \end{enumerate}
+In other words, $H$ is normal if its left and right cosets coincide.
+\end{definition}
+\begin{lemma}
+    A subgroup $H$ is normal iff there exists a group structure on $G /H$ such that the map $G \xrightarrow{\pi} G /H$ is a homomorphism.
+\end{lemma}
+\begin{proof}
+    If $G /H$ has such a group structure, then we have a commutative diagram \[
+    \begin{tikzcd}
+G\times G \arrow[r, "{m_G,\ g_1,g_2\mapsto g_1g_2}"] \arrow[d, "\pi \times \pi"] & G \arrow[d, "\pi"] \\
+G/H\times G/H=(G\times G)/(H\times H) \arrow[r, dotted, "m_{G/H}"]                       & G/H               
+\end{tikzcd}
+    \] By the universal property, the dotted arrow exists uniquely iff for all $(g_1,g_2) \in G \times G$, $(h_1,h_2) \in H \times H$, 
+    \begin{equation}\label{normal} 
+    \pi(g_1g_2)=\pi(g_1h_2g_2h_2). 
+    \end{equation}
+    The reason is that the left hand side is $\pi \circ m_G(g_1,g_2)$, the right hand side is $(\pi \circ m_G)(g_1h_2,g_2h_2)$, and $(g_1,g_2)\sim (g_1h_1,g_2h_2)$ defines the equivalence relation. The right hand side of \cref{normal} is equal to $\pi(g_1h_1g_2)$.
+
+    Assume $H$ is normal. Then $\pi(g_1h_1g_2)=\pi(g_1g_2g_2^{-1}h_1h_2)$, then by the normality of $H$ the last three terms reduce to get $\pi(g_1g_2)$ which is the left hand side of \cref{normal}. Conversely, if  \cref{normal} holds for every $g_1,g_2,h_1,h_2$, take $g_1=1 \in G$, $g_2=G$, $h_1=h$, $h_2=1$. So $\pi(g)=\pi(1 \cdot h *8g \cdot 1)=\pi(hg)$. This means there exists some $\widetilde h \in H$ such that $g \cdot \widetilde h=hg$, which is true iff $\widetilde h= g ^{-1} h g \in H$.
+\end{proof}
+
+\begin{definition}[]
+   We say
+   \begin{enumerate}[label=(\alph*)]
+   \setlength\itemsep{-.2em}
+       \item Two elements $g,h \in G$ \textbf{commute} if $gh=hg$; 
+        \item $G$ is \textbf{commutative}/\textbf{abelian} if $gh=hg$ for all $g,h \in G$;
+    \item The \textbf{center} $Z(G)$ is the subset $\{z \in G \mid zg=gz \ \text{for all} \ g \in G\} $. 
+   \end{enumerate}
+\end{definition}
+It is easy to see that $Z(G)$ is a normal subgroup of $G$. A related construction is the \textbf{adjoint} action or \textbf{conjugation} action of $G$ on itself. For $g,h \in G$, $\mathrm{Ad}_g(h):=gh g^{-1}$. This defines an action of $G$ on itself with the action map \[
+    G \times G =G \times X \xrightarrow{(g,h) \mapsto  ghg^{-1}=\mathrm{Ad}_g(h)} G
+\] NB:\footnote{Nota Bene} The adjoint action mixes left and right actions of $G$ on itself.
+
+\begin{lemma}
+    The map $\mathrm{Ad}_g\colon G \to G$ is a group homomorphism.
+\end{lemma}
+\begin{proof}
+    Let $h_1,h_2 \in G$. Then \[
+        \mathrm{Ad}_g(h_1) \cdot \mathrm{Ad}_g(h_2)=(g h_1 g^{-1})(g h_2 g^{-1})=gh_1h_2 g^{-1}=\mathrm{Ad}_g(h_1h_2).
+    \] The inverse to $\mathrm{Ad}_g$ is $\mathrm{Ad}_{g^{-1}}$: $\mathrm{Ad}_{g^{-1}} \mathrm{Ad}_g(h)=\mathrm{Ad}_{g^{-1}}ghg^{-1}=g^{-1}(ghg^{-1})g=h .$
+\end{proof}
+
+\begin{definition}[]
+    A \textbf{conjugacy class} in $G$ is an orbit for the adjoint action. Two elements $g_1,g_2$ are \textbf{conjugate} if the lie in the same conjugacy class iff there exists a $g_3 \in G$ such that $g_3g_1g_3^{-1}=g_2$. Write $G / G_{ \mathrm{Ad}}$ for the set of conjugacy classes of $G$.
+\end{definition}
+
+From now on, $p$ is a prime.
+
+\begin{definition}[]
+    A group $G$ is a $p$\textbf{-group} if $G$ is finite, and $|G|=p^r$ for some $r$.
+\end{definition}
+\begin{definition}[]
+    For a group $G$ acting on $X$, the \textbf{fixed point set} of $X$ is the set $X^G= \{x \in X \mid gx=x \ \text{for every} \ g \in G\} $.
+\end{definition}
+\begin{lemma}
+    Suppose $G$ is a $p$-group acting on a finite set $X$. Then $|X|=|X^G| \pmod p$. 
+\end{lemma}
+\begin{proof}
+    Break up $X= \prod _{i=1}^N X_i $, with the $X_i $ being orbits for the $G$-action. For every $i$, choose some $x_i  \in X_i $, $H_i =\mathrm{stab}(x_i )$, so $X_i  \simeq  G/ H _i $. 
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+\item Option 1: $H_i =G \iff x_i  \in X_i ^G$.
+    \item Option 2: $H_i  \neq G \implies |G|=|H_i | \cdot |G/ H_i |\implies P \mid  |G /H _i |$. (Note $p^r=p^s\cdot p^{r-s}$ where $s<r, r-s>0$).
+    \end{itemize}
+    So 
+    \[
+    |X|= \sum _{i=1}^N |X_i | \sum _{i=1}^N |G /H_i |=\sum _{H_i =G}|G  / G|+\sum _{H_i \neq G}| G/ H _i |= |X^G| + \text{divisible by} \ P.
+    \] 
+\end{proof}

@@ -1,0 +1,51 @@
+\section{September 15, 2021} 
+Recap from last time: there were two applications of the $p$-group congruence lemma.
+\begin{enumerate}[label=(\arabic*)]
+\setlength\itemsep{-.2em}
+    \item Let $G$ be a $p$-group, then $Z(G) \neq \{1\} $. The proof idea is to let $G$ act on itself. A corollary is that for $G$ a $p$-group, $|G|=p^r$ for $r>0$. This implies that there exists a normal subgroup $\Z / p \subseteq Z(G)$, so that $G / (\Z /p)$ has order $p ^{r-1}$.
+    \item Cauchy's theorem: Let $G$ be finite and $p$ be prime, and $p \mid  |G|$. Then there exists a $g \in G$ such that $g ^p=1$. This is equivalent to the fact that $\Z /p \to G$ is a non-trivial homomorphism. The proof idea is that $\Z / p$ acts on $Y= G^p=\Hom _{\mathsf{Sets} }(\Z /p, G)$, and contained in this is $\Z /p$ acting on $X= \{(g_1,\cdots ,g_p) \mid  g_1 \cdots g_p=1\} $. (The $p$-group lemma was applied here.)
+\end{enumerate}
+
+ This is the brief heuristic for the Sylow theorems: let $p$ be a prime and $n$ be a positive integer. Then $n=p^r m$, $p \nmid m$. The Sylow theorems give a sor tof ``analogue'' for finite groups. Fix $p$ a prime, $G$ be finite, and $p \mid |G|$.
+
+ \begin{definition}[]
+     A $p$\textbf{-Sylow subgroup of} $G$ is a subgroup $G_p \subseteq G$ such that:
+     \begin{itemize}
+     \setlength\itemsep{-.2em}
+         \item $G_p$ is a $p$-group,
+            \item $p \nmid |G / G_p|$.
+     \end{itemize}
+ \end{definition}
+ \begin{note}
+    By Lagrange's theorem, \[
+    |G /G_p| \cdot |G_p|=|G|.
+\]  So the conditions for a $p$-Sylow subgroup is equivalent to saying $|G_p|=p^r$, where $|G|=p^r \cdot m$, $p \nmid m$.
+ \end{note}
+
+ \begin{theorem}[Sylow I]\label{sylow1} 
+    Sylow subgroups exist, i.e., if $p \mid  |G|$, there exists some $G_p \subseteq G$ a $p$-Sylow subgroup.
+ \end{theorem}
+     This is the easiest Sylow theorem to parse, and probably the hardest one to prove. 
+     \begin{proof}[Proof sketch of \cref{sylow1}]
+     The strategy is to proceed by induction. 
+     \begin{enumerate}[label=(\alph*)]
+     \setlength\itemsep{-.2em}
+         \item For all $1 \leq s \leq r$, we'll show there exists an $H_s \subseteq G$ with $|H_s|=p^r$. The case $s=1$ is by Cauchy's theorem.
+        \item We'll use some observations of $p$-groups to motivate our approach.
+     \end{enumerate}
+   \begin{definition}[]
+       Suppose $H \subseteq G$. Then the \textbf{normalizer} $N_G(H)$ of $H$ is defined by \[
+       \{g \in G \mid  gH g^{-1} =H\} = \{g \in G \mid ghg^{-1} \in H \ \text{for all} \ h \in H\} .
+       \] 
+   \end{definition} 
+   Some easy checks are that $N_G (H)$ is a subgroup, $H$ is normal in $N_G(H)$, and that $N_G(H)$ is the maximal subgroup of $G$ in which $H$ is normal. 
+
+   \begin{prop}\label{norm} 
+   Suppose that $G$ is a $p$-group, $H \subsetneq G$ is a subgroup. Then $N_G (H)\neq H$.
+   \end{prop}
+   \begin{proof}[Proof of \cref{norm}]
+       Suppose $|G|=p^r$, $r \geq 1$. We'll proceed by induction on $r$. If $r=1$, $G \simeq \Z /p$, and $H \subsetneq G \implies H= \{1\} $, and $N_G(H)=\Z /p$. Now assume the result for integers less than $r$, we'll prove it for $r$. Case 1 is that $Z(G) \subsetneq H$. Then there exists a  $z \in Z(G)$ such that $z \notin H$. Clearly $z \in N_G(H)$, and we are done. Case 2 is when $Z(G) \subseteq H$. Then take $G_0 := G / Z(G)$, $H_0:= H/ Z(G)$. As $Z(G)$ is nontrivial,  $|G_0|=p^s$ for some $s<r$. We have $H_0 \subsetneq G_0$ which implies by induction that there exists a  $g_0 \in N _{G_0}(H_0)$, $g_0 \notin H_0$. Lift $g_0$ to an element $g \in G$ and check that $g \in N_G(H)$, $g \notin H$. For the quotient projection $\pi \colon G \to G_0=G /Z(G)$, for $h \in H$, \[
+           \pi(ghg^{-1})=\pi(g)\pi(h)\pi(g^{-1})=g_0 \pi(h) g^{-1}_0 \in H_0.
+       \] By $\pi ^{-1}(H_0)=H$, which implies $g h g^{-1} \in H$. So $g \in N_G(H)$. This argument applies for nilpotent groups more generally.
+   \end{proof}
+   Now for our actual problem: the strategy is to take $N_G(H_s)$, where $|H_s)=p^s$. We show that for $s <r$, $p^{s+1}\mid  |N_G(H_s)|$, then we'll use Cauchy's theorem in $N_G (H_s) / H_s$.

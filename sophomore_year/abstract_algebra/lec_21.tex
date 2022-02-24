@@ -1,0 +1,51 @@
+\section{October 15, 2021} 
+Today we finish up on roots of unity. Assume $k$ is a field of characteristic $p>0$. Last time we showed that this Frobenius map $\varphi   \colon k \to k$, $f \mapsto  f^p$ is a homomorphism. If $k=\F^p$, then this Frobenius map is just the identity: $\varphi (1)= 1, \varphi (2)=2\varphi (1)=2$, and $n^p=\varphi (n)=n$ for every $n$. So $\varphi =\id$, and $n^p=n \pmod p$ for every $n \in \Z$, which is \textbf{Fermat's little theorem}. But for any field $k$ of characteristic $p$, there's always a map \[
+\begin{tikzcd}
+\Z \arrow[rr] \arrow[rd, two heads] &                        & k \arrow[ld] \\
+                                    & \Z /p =\F_p \arrow[ru] &             
+\end{tikzcd}
+\] 
+\begin{claim}
+    $\F_p = \{f \in k \mid \varphi (f)=f\} $.
+\end{claim}
+\begin{proof}
+    The right hand side is equal to the roots of $t^p-t$, and there are less than or equal to $p$ of them, and $p$ of them in $\F_p$.
+\end{proof}
+\begin{lemma}
+    For every $n\geq 1$, $\mu _{np}(k)=\mu _n (k) \subseteq  k ^{\times }$.
+\end{lemma}
+\begin{cor}
+    $\mu _{np ^r}(k)=\mu _n (k)$ for every $r \geq 0$.
+\end{cor}
+\begin{proof}
+    Consider the case where $n=1$. Then $\mu_p(k)= \{1\} $. Suppose $\zeta \in \mu_p(k)$, so $\zeta ^p=1$, which implies $\zeta^p-1=\varphi (\zeta)-\varphi (1)=0$. Therefore $(\zeta-1)^p=0$ (freshman's dream in a field of characteristic $p$), so $\zeta-1=0$ since we're in a domain (field). In the general case, we clearly have $\mu_n (k) \subseteq \mu_{np}(k)$. Conversely, if $\zeta \in \mu _{np}(k)$, we have $\zeta ^{np}=1$ which implies $(\zeta ^n )^p=1$, which means $\zeta ^n  \in \mu_p(k)$. So by earlier, $\zeta ^n =1$, and $\zeta \in \mu _n (k)$.
+\end{proof}
+Now we can prove the rest of \cref{chark} from Monday. We showed that if $p \nmid n$, then there exists a field extension $K /k$ such that $| \mu _n (K)|=n$. (The proof uses the fact that $t ^n -1$ is separable). What we just showed is that if $n=p^rm, p\nmid m$, then there exists a $K /k$ such that $|\mu_n (K)|=|\mu_m(K)|=m$.
+
+Next we claim that for any $n \geq 1$ and any $k$,  $\mu_n (k)$ is cyclic.
+\begin{proof}
+    WLOG, assume $p\nmid n$. Then we have some field extension $K /k$ such that $|\mu _n (K)|=n$. So $\mu _n (k) \subseteq \mu _n (K) \simeq \Z /n$ by last time.  Any subgroup of $\Z /n$ has the form of $d\Z /n\Z$ (or $\Z / \left( \frac{n}{d} \right) \Z$) for some $d \mid n$. This proves the claim that $\mu_n (k)$ is cyclic.
+
+    Our next claim is that any finite subgroup $G \subseteq k^{\times }$ is cyclic. For every $g \in G$, $g ^{|G|}=1$. This implies $G \subseteq \mu_{|G|}(k)$. By the same argument, $G$ is cyclic.
+\end{proof}
+Again, the main corollary is that $\F_p ^{\times }\simeq  \Z / (p-1)$. The same applies as is for any finite field $k$, i.e., $k ^{\times }\simeq \Z / (|k|-1) \Z $. 
+
+This ends our whole schpeal on finite fields. Now we'll explain some constructions with finite groups, probably using this result, and then move on to modules over PIDs. There is a slogan, which is that finite groups get more complicated the more prime factors they have.
+
+\begin{figure}[H]
+   \centering 
+   \begin{tabular}{|c|c|} 
+       \hline 0 & $* $ the trivial group \\ \hline
+       1 & $\Z /p$ for some $p$ \\ \hline
+       2 & $\Z / p \times  \Z / p, \Z / p ^2, \Z / p \ltimes \Z /q$ the \emph{semidirect product} \\ \hline
+   \end{tabular}
+   \label{factorcomp} 
+   \caption{Groups get more complicated the more prime factors they have.} 
+\end{figure}
+What is a semidirect product? Good question. Given two groups $G,H$ and an action of $G$ on $H$ by a group automorphism, for every $g \in G$ the map $H \xrightarrow{\simeq } H$ (act by $g$) is a group homomorphism/automorphism. This is the main example to keep in mind: if $k$ is a commutative ring, take $G = ( k ^{\times }, \text{mult} )$ and $H = (k,+)$. So $G$ acts on $H$ via multiplication. Note that for $\lambda \in  k ^{\times },\ k \xrightarrow{\lambda  \cdot (-)} k$ is a group homomorphism (distributive property of multiplication).
+\begin{note}
+   A note on notation. For $g \in G$, the automorphism $H \xrightarrow{\text{act by} \ g}  H$ is denoted by $ h \mapsto  {}^gh $. 
+\end{note}
+Some basic identities. ${}^g (h_1h_2)=({}^gh_1)({}^gh_2)   $, also ${}^{g_1g_2}(h)={}^{g_1}({}^{g_2} h)  $. Furthermore ${}^g(1)=1 , $ and ${}^1h=h . $
+
+%50 are squares 50 aren't, picture is real numbers? for the hw. find some element that's not a square and adjoin its square root. adjoint $t / (t^2-d)$, quadratic extension for finite fields.
