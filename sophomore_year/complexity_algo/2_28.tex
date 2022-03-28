@@ -1,0 +1,16 @@
+\section{Graph searching} 
+Consider a graph $G=(E,V)$, where $E$ is a set of pairs of elements of $V$. Then $E \leq {V \choose 2} $ if $G$ is directed, and $E \leq  V(V-1)$ if $G$ is directed. Adjacency matrix, adjacency list (how to store). linked list. list comparing complexities. hash table. binary search tree. help i didn't take data structures. i also cannot read the board.
+
+look at the complexity list in the textbook.
+
+Reachability: given $G=(V,E)$ with source $s$, the goal is to find all the vertices $u$ reachable from $s$.
+
+Let visited equal $\{\} $. Depth first search:
+\begin{verbatim}
+def DFS(v)
+    if v in visited return
+    visited.add(v)
+    for w in v.adj:
+        DFS(w) 
+\end{verbatim}
+Now we do Breadth first search (BFS). It visits vertices in order of distance from $s$. prinn's minimum spanning tree algorithm.

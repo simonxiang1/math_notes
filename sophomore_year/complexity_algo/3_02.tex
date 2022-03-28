@@ -1,0 +1,20 @@
+\section{graph reductions} 
+The big idea is to turn things into graphs then run BFS on them.
+\begin{example}
+snakes and ladder, with max $k$ and $n^2$ board size.
+\begin{verbatim}
+#creating the graph G
+for i in [n^2]
+    for j in [k] 
+        if (i+j,y) for j in [k] is in (set of snakes/ladders)
+            create edge (i,y)
+        else
+            create edge (i,i+j) 
+
+#run BFS on the graph
+BFS(G)
+\end{verbatim}
+\end{example}
+\begin{example}
+    mnongolian puzzle, swapping tokens. Let $A$ be an $n \times n$ matrix. make the state of the graph as a vertex (two points  $A_{ij}=n,\ A_{k\ell}=m$). Each vertex is a transformation $((A_{ij},A_{k\ell}),(A_{(i+m,j)},A_{(k+n,\ell)}))$ etc depending on which moves are valid (ie $A_{(i+m,j)},A_{k+n,\ell}$) satisfies $i+m,j,k+n,\ell \in [n]$). Then run BFS on $G$ (graph made according to the above rules) to find the shortest path from $(A_{in},A_{ni})$ to $(A_{ni},A_{in})$.
+\end{example}
