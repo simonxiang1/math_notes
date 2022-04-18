@@ -1,0 +1,89 @@
+\section{Linear programming} 
+Regarding the exam, apparently some of us made ``incomprehensible'' mistakes. Okay onto new topic.
+
+Onto linear programming (LP). Say we can produce cars, trucks, and cars take 2 metal, 1 wood, trucks take 3 metal and 5 wood. We have 12 metal, 15 wood. Trucks carry 2x as much as cars. Question: what to product to maximize amount we can carry?
+
+Let $T$ be amount of trucks and $C$ the amount of car, and we can carry $2T+C$ things. Then $3T+2C \leq 12$ (metal constraint) and $C+5T \leq 15$. Furthermore $T,C \geq 0$.
+{\color{red}todo:figure} orthogonal line, zero inner product?
+
+Formally; we have a \textbf{feasible region}, a set of $(T,C)$ satisfying constraints, and the answer is at a vertex of such feasible region (regardless of objective). Polytopes- intersection of half spaces.
+
+Let's solve this by hand. There are two variables and four constraints. This results in four vertices and two more ``vertices'', intersections of constraints. What about $d$ variables and $n$ constraints? Then vertices are defined by $d$ constraints, and there are at most ${d \choose n}\leq n^d$ vertices. Suppose $T=0$, then $C=0$ or $C=6$ ($C=15$ violates $3T+2C \leq 12$). If $C=0$, then $T=3$ ($T=4$ violates $5T+C \leq 15$). So $3T+2C=12, 5T+C=15$, so $7T=18,$ and $T=18/7,C=15/7$. Plug in our four vertices: $(0,0),(6,0),(0,3),(15/7,18/7)$: the highest yield is the last one, getting $51/7$. Then we are done.
+
+Simple algo: start at a vertex, and walk to a neighbor with a higher objective. A vertex is defined by $d$ constraints, and a neighor is one where you remove one of the three constraints. Repeat.
+\subsection{General linear programming}
+Optimize (max or min) linear objective, subjected to linear constraints ($\geq ,=,\leq$).
+\begin{example}
+    Maximize $5x_1+6x_2-3x_3+x_4$ such that $x_3 \geq x_1+2x_2+3, x_4=x_1+x_2,x_1 \geq 0, x_2 \leq 1$.
+\end{example}
+This can get complicated, so we often walk about the \textbf{standard form} (or symmetric). We change the form and write it in linear algebra terms. We want to maximize $c^Tx$\footnote{$c^T$ refers to coefficients.} for $Ax \leq b$ and $x \geq 0$. What we mean is that after expanding the matrix multiplication, all the resulting constraints from $Ax$ are less than or equal to $b$.
+
+So for our example, $A=\left[ 
+\begin{smallmatrix}
+    3 & 2 \\ 5 & 1
+\end{smallmatrix}\right],b=\left[ 
+\begin{smallmatrix}
+    12 \\ 15
+\end{smallmatrix}\right] ,c=\left[ 
+\begin{smallmatrix}
+    2 \\ 1
+\end{smallmatrix}\right]$. Two other common forms include the \textbf{alternative form} (or asymmetric). Here we want to maximize $c^T$ for $Ax \leq b$. There is also the \textbf{equational form}, which wants to maximize $c^T x$ such that $Ax=b,x \geq 0$.
+\begin{claim}
+    The standard, alternative, and equational forms are equivalent problems. In other words, given an algorithm to solve any one,  we can solve the others by transforming the input or output.
+\end{claim}
+\begin{proof}
+    (Standard form $\to $ alternative form). Simply add a negative identity at the bottom. \[
+    \begin{bmatrix}
+        A \\ -I
+    \end{bmatrix}
+    \begin{bmatrix}
+        x
+    \end{bmatrix}\leq 
+    \begin{bmatrix}
+        b \\0
+    \end{bmatrix}
+    \] So $Ax \leq -x < 0 \iff x \geq 0$.
+
+    (Alternative form $\to $ standard form). Let $x=x'-x''$. So \[
+    Ax\leq b \iff 
+    \left[\begin{array}{c | c} 
+        A & -A 
+    \end{array}\right]
+    \begin{bmatrix}
+        x' \\x''
+    \end{bmatrix}\leq b
+    \] So our objective is to maximize $
+    \left[ 
+    \begin{smallmatrix}
+        c \\ -c
+    \end{smallmatrix}\right] ^T \left[      \begin{smallmatrix}
+       x' \\x'' 
+    \end{smallmatrix}\right] $ such that $\left[ 
+\begin{array}{c|c} 
+    A & -A
+\end{array}\right] \left[ 
+\begin{smallmatrix}
+    x'\\ x''
+\end{smallmatrix}\right] \leq b, x',x'' \geq 0$. 
+
+(Equational $\to $ standard). Given $Ax=b, x \geq 0$, we have $Ax \leq b, Ax \geq b, x \geq 0$. Negative $Ax \geq b$ to get $-Ax \leq -b$, which is, in fact, in standard form.
+
+(Standard $\to $ equational). The trick is to add \emph{slack} variables. We want to go from $Ax \leq b, x \geq 0$ to $Ax=b,x \geq 0$. The former is true iff $Ax+s=b, x \geq 0, s \geq 0$ (the slack variables represent the difference). \[
+\begin{bmatrix}
+    A \\ I
+\end{bmatrix}
+\begin{bmatrix}
+    x \\s
+\end{bmatrix}=b, \ x,s \geq 0, \ \text{maximize} \ 
+\begin{bmatrix}
+    c \\ 0
+\end{bmatrix}^T
+\begin{bmatrix}
+    x \\s
+\end{bmatrix}.\qedhere
+\] 
+\end{proof}
+\subsection{Algorithms to solve LP}
+We briefly discussed the \textbf{simplex algorithm}, which is to walk along the vertices. None of the algorithms we have work well (exponential in worst case scenario) but are pretty good in practice. So they fail in theory (unless smoothing). Then came the \textbf{ellipsoid method}. The point is we have an ellipse around the set of solutions, and we repeatedy shrink it. This works in theory but not very well in practice. Then came long \textbf{interior point methods}, which go through the middle of the region. A popular one runs in $O(n^4 L)$ time, which $L$ represents the bits of precision, $n$ is the number of variables plus the number of constraints. It is an open question whether or not LP is strongly polynomial.
+
+There is a remaining question for the simplex algorithm. We described how it works; find a vertex, find its neighbors, pick a random/best improvement. We did not explain how to start at a vertex. It turns out finding an initial is as hard as LP in general. What we do is look at a different version of the problem with a simple solution (eg $x=0$), and if this is feasible we move around.
