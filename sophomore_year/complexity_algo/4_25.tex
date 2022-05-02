@@ -1,0 +1,19 @@
+\section{Complexity theory} 
+We have seen lots of algorithms to solve many problems. Can we classify problems by difficulty? What can't we solve? The answer to this question ``what can't we solve'' is almost everything. An informal statement: take a known solvable problem, and tweak it, the result is probably not solvable.
+\begin{example}
+    We can solve shortest path. What about the \emph{longest} simple path. Nope. We can solve minimum spanning tree, but what about \textbf{minimum Steiner tree}, just connecting some subset $S \subseteq V$. We don't know how to solve it in polynomial time. 
+
+    We have talked about a min $(s,t)$ cut, what about a max $(s,t)$ cut? We don't know. In flows, we talked about max $(s,t)$ flow. What about multi-commodity flow? Nope, even with just two commodities. We can solve interval packing, which has job packing as an application---what about preferences? We don't know.
+\end{example}
+We can say \emph{something} however about these problems, which is the theory of NP completeness. We classify problems into ``complexity classes''. Let $n$ be the size of the input in bits, and only consider \textbf{decision problems}  (the answer is yes or no).
+\begin{example}
+    Shortest path is an optimization problem. Let $(G,s,t,k)$. To rephrase this as a decision problem, say ``does there exists a $(s,t)$ path in $G$ of length $\leq k$''. Then try different $k$s on some binary search to find the smallest one. The number of bits $n$ wrt $V,E,s,t,k,w$ (where  $w$ represents edge weights) is $V \log V$ for vertices, $E \log V$ for edges, $2 \log V$ for $s,t$,  $E\cdot w$ for edge weights, $w + \log E$ (since $k \leq E \cdot 2^w$). Summing this up, we get $n=O(E \log V+E W)$.
+\end{example}
+Complexity theorists care about classes. The class $P$ contains problems solvable in \textbf{polynomial time}, $n ^{O(1)}$. This includes most problems we covered in class. The class $NP$ contains problems that a solution can be \emph{verified} in polynomial time. A prototypical example is the traveling salesman problem (cycle visiting all cities exactly once). Formally:
+\begin{definition}[NP]
+    There exists a polynomial time verifier $A$ such that \textbf{completeness}  holds: for all $\mathrm{YES}$ instances $x$, there exists a proof $y \in  \{0,1\} ^{\mathrm{Poly}(n)}$ such that $A(x,y)=\mathrm{YES}$. Another condition \textbf{soundness} must hoold: for all $\mathrm{NO}$ instances $x$, there must not exist a proof $y \in \{0,1\} ^{\mathrm{Poly}(n)}$ such that $A(x,y)=\mathrm{YES}$.
+\end{definition}
+We have $P \subseteq NP$. There are some problems not in $NP$, for example, \emph{how many} longest paths are there? Or, does white win this chess position? The final problem is the \textbf{halting problem}, which is not even computable.
+
+
+We can say many problems are \textbf{equally hard}: they are all in $P$ or none in $P$ (NP-completeness). We do this by \textbf{reductions}. To show that problem $A$ is harder than $B$ (say TSP), {\color{red}tragically my laptop ran out of battery at this point in time} 
