@@ -1,1 +1,64 @@
-\section{ok} 
+\section{Computability Theory} 
+Today we talk about \emph{uncomputable} problems, specifically the \textbf{halting problem}.  This is a problem with two inputs, \[
+    \mathrm{Halt}(f,x):= \text{will program} \ f \ \text{halt on input} \ x \ \text{rather than an infinite loop} 
+\] First we show that $\mathrm{Halt}$ is NP-hard. We reduce TSP to  Halt as follows. We write a slow algorithm for TSP (try all paths). Then define 
+\begin{verbatim}
+def TSP(X):
+    (try all solutions)
+    return answer
+
+def f(X):
+    if TSP(x) == False:
+         while 1: pass
+    else: return True
+\end{verbatim}
+This reduces TSP to the halting problem, so TSP is true iff the halting problem is true. We did not use anything about TSP specifically, just \emph{some} slow problem to solve. So we have TSP $\preccurlyeq_P$ Halt (polynomial time reducible),  furthermore $g \preccurlyeq_P$ Halt for every computable function  $g$. This shows the halting problem is as hard as any computable function, but does not show it is not computable at all.
+
+To show Halt is uncomputable, we show a paradox. Suppose Halt is computable then we write the following code with input a program $x$:
+\begin{verbatim}
+import Halt
+
+def g(x):
+    if Halt(x, x):
+        while 1: pass
+    else:
+        return
+\end{verbatim}
+This is a program. What does $g(g)$ do? It asks if $g$ halts on $g$ or not. If it does halt, it doesn't halt. If it doesn't halt, it halts. Neither of these is consistent, a paradox, so we conclude there is no code to solve the halting problem on every input and always terminates with the correct answer.
+
+Suppose you want to solve the halting problem in practice. You could use print statements. If there's a bound on states we can check the amount of states. However the easiest thing we can do it to see how long it's \emph{supposed} to run in. Run $f(x)$ for $L$ steps, for $L$ some large number. If it has terminated, return true, and else false. This is correct if $L$ is bigger than the time it takes to compute $f(x)$ if $(f,x)$ is $n$ bits long.
+
+busy beaver. We can solve it using the halting problem. Define 
+\begin{verbatim}
+def Halt(f,x):
+    L \geq B(|f(x)|)
+    run f(x) for L steps
+    return True if f(x) halts
+\end{verbatim}There exists a solution to Halt on all $n$-bit programs. The code for Halt is $n+O(1)$ bits long. This says that there exists a way of checking smaller programs, but there is no way to check larger programs. How do we know if $L$ is big enough? The answer is you can't.
+
+\subsection*{G\"odel's second incompleteness theorem}
+This says that no consistent set of mathematical axioms can prove their own consistency. Rip ZFC. Define a function 
+\begin{verbatim}
+def FindContradictionInZFC()
+    for s in {0,1}^* 
+        check if S is valid ZFC proof that True = False
+        if so, return s
+\end{verbatim}
+This program halts iff ZFC is inconsistent. Therefore we cannot prove that this program does not halt. So ZFC cannot prove its own consistency, which implies we cannot prove that $\mathrm{FindContradictionInZFC}$ doesn't halt. Say $\mathrm{FindContradictionInZFC}$ has $10^6$ megabytes, therefore we cannot prove any upper bound on $\mathrm{BB}(10^6)$.
+
+This is a lazy upper bound of $10^6$. Can we understand busy beaver numbers better? Let's be more formal about the languages. Let $S(n)$ be the maximum number of steps taken by any $n$ state Turing machine on a blank binary tape before halting. What is a Turing machine? It's a particular formalization of computing, it takes in a tape, and starts at a head. There is an internal state (say 1), and a huge table says that ``if we are at a certain state'' it reads under the tape, and it can
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item edit
+    \item move left or right
+    \item halt
+    \item add a new state
+\end{itemize}
+Then $S(1)=1,S(2)=6,S(3)=21,S(4)=107,$ and $S(5)=47$ million (probably, about 15 of them might halt). We have $S(6)\gg 10^{36000}$, $S(7) \gg 10 ^{10 ^{ \cdots }}$. These number have to grow very fast since they're not computable. By earlier, this is a fixed number where we can't formally prove an upper bound on $B(10^6)$. This is a compilers problem; we have easy to write code, now we compile that code into the smallest Turing machine possible. Aaronson showed we could write this as an 8000 state Turing machine (now 2000), so $S(2000)$ is impossible to prove an upper bound on in ZFC. Another program in $S(741)$, which we don't know if its possible to prove an upper bound, but if it were we could reduce the Riemann hypothesis to a finite number of cases.
+
+\subsection*{Models of computation}
+At the same time Turing was coming up with Turing machines, Alonzo Church was coming up with Church numerals and Lambda calculus. So there are two competing models on how to do computation.
+\begin{theorem}
+    The set of functions computable by Turing machines is equal to the functions computable by Church numerals.
+\end{theorem}
+The Church-Turing Thesis (conjecture) is that both of these are equal to the set of functions computable by any ``physical process''. Computer scientists came up with the \emph{extended} Church-Turing thesis, which says that the set of polynomial time computable functions is the same in every physical process. This statement is probably false, because quantum computers can solve BQP problems. In particular, factoring lies in BQP and factoring probably doesn't lie in P.
