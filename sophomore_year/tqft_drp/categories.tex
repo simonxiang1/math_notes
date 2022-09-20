@@ -1,0 +1,262 @@
+\section{Categories} 
+\begin{definition}[]
+    A \textbf{category} $C$ consists of a collection of objects, for each pair of objects $y_0,y_1$ a set of morphisms $C(y_0,y_1)$, for each object $y$ a distinguished morphism $\id_y \in C(y,y)$, and for each triple of objects a composition law \[
+        \circ \colon C(y_1,y_2) \times C(y_0,y_1) \to C(y_0,y_2)
+    \] such that $\circ $ is associative and $\id_y$ is an identity for $\circ $. This means that for all $f \in C(y_0,y_1)$ we have \[
+    \id _{y_1}\circ f=f \circ \id _{y_0}=f
+\] and for all $f_1 \in C(y_0,y_1), f_2 \in C(y_1,y_2)$ and $f_3 \in C(y_2,y_3)$ we have \[
+(f_3 \circ f_2) \circ f_1=f_3 \circ (f_2 \circ f_1).
+\] We use the notation $y \in C$ for an object of $C$ and $f \colon y_0 \to y_1$ for a morphism $f \in C(y_0,y_1)$.
+\end{definition}
+\begin{definition}[]
+    Let $C$ be a category.
+    \begin{enumerate}[label=(\roman*)]
+    \setlength\itemsep{-.2em}
+\item A morphism $f \in C(y_0,y_1)$ is \textbf{invertible} (or an \textbf{isomorphism}) if there exists $g \in C(y_1,y_0)$ such that $g \circ f=\id _{y_0}$ and $f \circ g=\id _{y_1}$.
+\item If every morphism in $C$ is invertible, then we call $C$ a \textbf{groupoid}.
+    \end{enumerate}
+\end{definition}
+\begin{namedthing}{Reformulation} 
+    We can reformulate this definition in terms of sets and functions. A category $C$ then consists of a set $C_0$ of objects, a set $C_1$ of functions, and structure maps $i \colon C_0 \to C_1$, $s,t \colon C_1 \to C_0$, $c \colon C_1 \times _{C_0} C_1\to C_1$ satisfying certain conditions. The map $i$ attaches to each object $y$ the identity morphism, the structure maps $s,t$ assign to  $f \colon y_0 \to y_1$ the source $s(f)=y_0$ and the target $t(f)=y_1$, and $c$ is composition. The fiber product $C_1 \times _{C_0}C_1$ is the set of pairs $(f_2,f_1) \in C_1 \times C_1$ such that $t(f_1)=s(f_2)$ (so composition is valid).
+\end{namedthing}
+\begin{example}
+    Some examples of categories:
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+        \item Let $C$ be a category with one object, i.e., $C_0= \{*\} $. Then $C_1$ is a set with an identity element and an associative composition law. This is called a \textbf{monoid}. A groupoid with a single object is a \textbf{group}.
+        \item Suppose $C$ is a category with only identity maps. Then $C$ is given canonically by the set $C_0$ of objects, and we identify the category $C$ as this specific set.
+        \item Let $S$ be a set and $G$ a group acting on $S$. There is an associated groupoid $C = S // G$ with objects $C_0=S$ and morphisms $C_1=G \times S$. The source map is projection to the first factor {\color{red}todo:second?} and the target map is the action $G \times S \to S$. Since $g_1(g_2 s)=(g_1g_2)(s)$ this gives associativity, and the fact that $\id_Gs=s$ gives our identity for $s \in S$ as $(\id_G,s)$.
+         \item Assuming we overcome the set theoretic stuff, there is a category $\mathsf{Set} $ whose objects are sets and whose morphisms are functions.
+         \item There are lots of subcategories of $\mathsf{Set} $, including the category $\mathsf{Ab} $ of abelian groups. Objects $A \in \mathsf{Ab} $ are abelian groups and morphisms $f \colon A_0 \to A_1$ are homomorphisms of abelian groups. Similarly, there is a category $\mathsf{Vect} _k$ of vector spaces over a field, a category of rings, and a category of $R$-modules for a fixed ring $R$ (note that $\mathsf{Ab} $ is the case where $R=\Z$). Each of these categories is special since the hom-sets are abelian groups. There is also a category $\mathsf{Top} $ where objects are topological spaces $Y$ and morphisms $f \colon Y_0 \to Y_1$ are continuous maps.
+         \item Let $Y$ be a topological space. The simplest invariant is the \emph{set} $\pi_0 Y$, which imposes the equivalence relation on $Y$ that points $y_0,y_1 \in Y$ are equivalent if there exists a continuous path connecting them, i.e., a continuous map $\gamma \colon [0,1] \to Y$ satisfying $\gamma (0)=y_0, \gamma (1)=y_1$. The \textbf{fundamental groupoid} $C=\pi_{\leq 1}Y $ is defined as follows. The objects $C_0=Y$ are the points of $Y$. The hom-set $C(y_0,y_1)$ is the set of homotopy clsases of maps $\gamma \colon [0,1] \to Y$ satisfying $\gamma (0)=y_0, \gamma (1)=y_1$. The homotopies are taken ``rel boundary'', which means endpoints are fixed in a homotopy. Explicitly, a homotopy is a map \[
+                 \Gamma \colon [0,1]\times [0,1] \to Y
+             \] such that $\Gamma(s,0)=y_0$ and $\Gamma(s,1)=y_1$ for all $s \in [0,1]$. Note that the \emph{automorphism group} $C(y,y)$ {\color{red}todo:need to be auto? since in groupoid morphisms are invertible by def} is the fundamental group $\pi_1(Y,y)$. So $\pi_{\leq 1 }Y$ encodes both $\pi_0Y$ and all of the fundamental groups.
+    \end{itemize}
+\end{example}
+\begin{ex}
+    Given a groupoid $C$ use the morphisms to define an equivalence relation on the objects and so a set $\pi_0 C$ of equivalence classes. Can you do the same for a category that is not a groupoid?
+
+    Define $x\sim y$ for $x,y \in C_0$ if there exists some $f \in C_1$ with $s(f)=x, t(f)=y$. This defines an equivalence relation because  $x\sim x$ by the identity morphism, $x\sim y$ implies $y \sim x$ by the inverse morphism $f ^{-1}$, and $x\sim y, y\sim z$ implies $x\sim z$ by composition $g \circ f$ for $s(g)=y,t(g)=z$. Reflexivity fails if $C$ is not a groupoid. {\color{red}todo:simple check} 
+\end{ex}
+
+\subsection{Functors and natural transformations}
+\begin{definition}[]
+    Let $C,D$ be categories.
+    \begin{enumerate}[label=(\roman*)]
+    \setlength\itemsep{-.2em}
+\item A \textbf{functor} or \textbf{homomorphism} $F \colon C \to D$ is a pair of maps $F_0 \colon C_0 \to D_0, F_1 \colon C_1 \to D_1$ which commute with the structure maps (preserving composition and taking identities to identities).
+\item Suppose $F,G \colon C \to D$ are functors. A \textbf{natural transformation} $\eta $ from $F$ to $G$ is a map of sets $\eta \colon C_0 \to D_1$ such that for all morphisms $(f \colon y_0 \to y_1) \in C_1$ the diagram \[
+\begin{tikzcd}
+Fy_0 \arrow[r, "Ff"] \arrow[d, "\eta(y_0)"'] & Fy_1 \arrow[d, "\eta(y_1)"] \\
+Gy_0 \arrow[r, "Gf"]                         & Gy_1                       
+\end{tikzcd}
+\] commutes. We write $\eta \colon F \to G$, and depict natural transformations in diagrams as following
+            \begin{figure}[H]
+                \centering
+    \begin{tikzcd}
+        C\arrow[rr, "G", bend left] \arrow[rr, "F"', bend right] & \,\,~ \Big\Uparrow\eta & D
+\end{tikzcd}
+            \end{figure} often with a double arrow.
+\item A natural transformation $\eta \colon F \to G$ is an \textbf{isomorphism} if $\eta(y) \colon Fy \to Gy$ is an isomorphism for all $y \in C$.
+    \end{enumerate}
+\end{definition}
+\begin{example}
+    Show that for fixed categories $C,D$ there is a category $\Hom(C,D)$ whose objects are functors and whose morphisms are natural transformations.
+
+    To do this, we need to show that natural transformations are associative and unital. The identity is given by assigning to each $y \in C_0$ the identity map $\id_y \in C_1$, resulting in an identity transformation $\id_F \colon C_0 \to C_1$. For associativity, {\color{red}todo:diagram} 
+\end{example}
+
+\begin{example}
+    {\color{red}todo:double dual} 
+\end{example}
+\begin{example}
+    Let $Y$ be a topological space and $\pi \colon Z \to Y$ a covering space. Then there is a functor $F_{\pi} \colon \pi_{\leq 1}Y \to \mathsf{Set} , y \to  \pi ^{-1}(y)$ which maps each point of $y$ to the fiber over $y$. Any path $\gamma  \colon [0,1] \to Y$ ``lifts'' to an isomorphism $\widetilde {\gamma } \colon \pi ^{-1}(y_0) \to \pi ^{-1}(y_1)$, and the isomorphism is unchanged under homotopy. A map \[
+    \begin{tikzcd}
+Z_0 \arrow[rr, "\varphi"] \arrow[rd, "\pi_0"'] &   & Z_1 \arrow[ld, "\pi_1"] \\
+                                               & Y &                        
+\end{tikzcd}
+    \] of covering spaces induces a natural transformation $\eta _{\varphi }\colon F_{\pi_0} \to F_{\pi_1}$. {\color{red}todo:associates to each hom class a map of fibers $\pi_0 ^{-1}(y) \to \pi_1^{-1}(y)$?} 
+\end{example}
+
+\begin{definition}[]
+    Let $C,D$ be categories. A functor $F \colon C \to D$ is an \textbf{equivalence} if there exists a functor $G \colon D \to C$, and natural isomorphisms $G \circ F \to  \id_C $ and $F \circ G \to \id_D$.
+\end{definition}
+\begin{prop}
+    A functor $F \colon C \to D$ is an equivalence iff:
+    \begin{enumerate}[label=(\roman*)]
+    \setlength\itemsep{-.2em}
+\item For each $d \in D$ there exists a $c \in C$ and an isomorphism $(f (c) \to d) \in D$; and
+\item For each $c_1,c_2 \in C$ the map of hom-sets $F \colon C(c_1,c_2) \to D(F(c_1),F(c_2)) $ is a bijection.
+    \end{enumerate}
+\end{prop}
+If $F$ satisfies (i) it is said to be \textbf{essentially surjective} and if it satisfies (ii) it is \textbf{fully faithful}.
+\begin{proof}
+    Say a functor $F$ is essentially surjective and fully faithful. Then consider a functor $G \colon D \to C$ defined as follows; $G \colon d \mapsto f(c) $ by the isomorphism from essential surjectivity, and $G \colon D(d_1=F(c_1),d_2=F(c_2)) \to C(c_1,c_2)$ by the bijection from $F$ being fully faithful. The converse is also easy; since the isomorphism $G \circ F \to \id_C$ is natural we get a bijection of hom sets, and the natural isomorphism $F \circ G \to \id_D$ gives a bijection $f(c) \to d$ for each $d \in D$. {\color{red}todo:fix this, choice of $c$, detail natural transformations} 
+\end{proof}
+
+\subsection{Symmetric monoidal categories}
+A category is an enhanced version of a set, and a \textbf{symmetric monoidal category} is an enhanced version of a commutative monoid.
+
+\begin{definition}[]
+    If $C',C''$ are categories, then there is a \textbf{Cartesian product} category $C= C' \times C''$. The set of objects is the Cartesian product $C_0=C_0' \times C_0''$ and the set of morphisms is likewise the Cartesian product $C_1=C_1' \times C_1''$. The structure maps consist of $i$ mapping componentwise to the respective identities, composition mapping componentwise, and respective source and target maps.
+\end{definition}
+
+\begin{definition}[]
+    Let $C$ be a category. A \textbf{symmetric monoidal structure} on $C$ consists of an object $1_C \in C$, a functor $\otimes \colon C \otimes C \to C$, and natural isomorphisms \[
+    \begin{tikzcd}
+        C\times C\times C\arrow[rr, "-\otimes(-\otimes -)", bend left] \arrow[rr, "(-\otimes -)\otimes -"', bend right] & \,\,~ \Big\Uparrow\alpha  & C
+\end{tikzcd},
+    \] \[
+        \begin{tikzcd}
+        C\times C\arrow[rr, "(-\otimes -)\circ \tau", bend left] \arrow[rr, "-\otimes -"', bend right] & \,\,~ \Big\Uparrow\sigma  & C
+\end{tikzcd},
+    \] and \[
+        \begin{tikzcd}
+        C\arrow[rr, "\id_C", bend left] \arrow[rr, "1_C \otimes -"', bend right] & \,\,~ \Big\Uparrow\iota  & C
+\end{tikzcd}.
+    \] The quintuple $(1_C, \otimes, \alpha ,\sigma,\iota)$ is required to satisfy the axioms below. The functor $\tau$ is transposition $\tau \colon C \times C \to C\times C, y_1,y_2 \mapsto y_2,y_1$. A crucial axiom is that $\sigma^2=\id.$ So for any $y_1,t_2 \in C$, the composition \[
+    y_1 \otimes y_2 \xrightarrow{\sigma} y_2 \otimes y_1 \xrightarrow{\sigma} y_1 \otimes y_2
+    \] is $\id _{y_1 \otimes y_2}$. The other axioms express compatibility conditions among the extra data. For example, we require that for all $y_1,y_2 \in C$ the diagram
+    \[
+    \begin{tikzcd}
+                                        & (1_C \otimes y_1)\otimes y_2 \arrow[ld] \arrow[rd, "\iota"] &                \\
+1_C \otimes (y_1\otimes y_2) \arrow[rr] &                                                             & y_1\otimes y_2
+\end{tikzcd}
+    \] commutes. We can state the axioms informally as asserting the equality of any two compositions of maps built by tensoring $\alpha ,\sigma,\iota$ with identity maps. These compositions have domain a tensor product of objects $y_1, \cdots ,y_n $ and any number of identity objects $1_C$---ordered and parenthesized arbitrarily---to a tensor product of the same objects, again ordered and parenthesizeed arbitrarily. Coherence theorems show there is a small set of conditions which need to be verified; then arbitrary diagrams of the sort envisioned commute.
+\end{definition}
+Symmetric monoidal \emph{functors} are homomorphisms between symmetric monoidal categeories, but as is typical for categories we express the fact that the identity maps to the identity and tensor product to tensor products through \emph{data}, not as a condition. This leads to higher order conditions.
+\begin{definition}[]
+    Let $C,D$ be symmetric monoidal categories. A \textbf{symmetric monoidal functor} $F \colon C \to D$ is a functor with two additional pieces of data, namely an isomorphism \[
+        1_D \longrightarrow F(1_C)
+    \]  and a natural isomorphism \[
+        \begin{tikzcd}
+            C\times C\arrow[rr, "F(-\otimes -)", bend left] \arrow[rr, "F(-)\otimes F(-)"', bend right] & \,\,~ \Big\Uparrow\psi  & C
+\end{tikzcd}.
+    \] There are many conditions on this data. The first condition expresses compatibility with the associativity morphisms: for all $y_1,y_2,y_3 \in C$ the diagram \[
+   \begin{tikzcd}
+(F(y_1)\otimes F(y_2))\otimes F(y_3) \arrow[r, "\psi"] \arrow[d, "\alpha_D"'] & F(y_1\otimes y_2)\otimes F(y_3) \arrow[d, "\psi"]       \\
+F(y_1)\otimes (F(y_2)\otimes F(y_3)) \arrow[d, "\psi"']                       & F((y_1\otimes y_2)\otimes y_3) \arrow[d, "F(\alpha_C)"] \\
+F(y_1)\otimes F(y_2 \otimes y_3) \arrow[r, "\psi"]                            & F(y_1\otimes (y_2\otimes y_3))                         
+\end{tikzcd} 
+    \] Note the use of $\psi$ vs $F(\alpha_C)$ or $\alpha _D$ (working in the domain vs codomain). Next there is compatibility with the identity data $\iota$: for all $y \in C$ we require that \[\begin{tikzcd}
+F(1_C)\otimes F(y) \arrow[r, "\psi"]                             & F(1_C\otimes Y) \arrow[d, "F(\iota)"] \\
+1_D\otimes F(y) \arrow[u, "1_D \to F(1_C)"] \arrow[r, "\iota_D"] & F(y)                                 
+\end{tikzcd}
+\] {\color{red}todo:so $\psi$ combines and $F(\psi)$ splits? check usage of domain and target categories ($\iota_D$). distinction: since these are natural transformations, is the notation abuse. it should be mapping to an iso. so "composition" is really sending the source/target (same), not the map itself.}. The final condition expresses compatibility with the symmetry $\sigma$: for all $y_1,y_2 \in C$ the diagram \[
+    \begin{tikzcd}
+F(y_1)\otimes F(y_2) \arrow[r, "\psi"] \arrow[d, "\sigma_D"'] & F(y_1\otimes y_2) \arrow[d, "F(\sigma_C)"] \\
+F(y_2)\otimes F(y_1) \arrow[r, "\psi"]                        & F(y_2\otimes y_1)                         
+\end{tikzcd}
+    \] commutes.
+\end{definition}
+
+\begin{example}
+    The prototypical example of a symmetric monoidal category is $(\mathsf{Vect_k},\otimes, k) $ where $\otimes$ denotes the standard tensor product. To show this, we need to check the conditions; we claim our object $1_{\mathsf{Vect_k} } \in  \mathsf{Vect_k} $ is given by $k$, the functor $\otimes  \colon \mathsf{Vect_k}\otimes \mathsf{Vect_k}\to\mathsf{Vect_k} $ is the standard tensor product, and the natural isomorphisms exist.
+
+    First we need to show $\otimes \colon \mathsf{Vect_k}  \otimes \mathsf{Vect_k}\to \mathsf{Vect_k}$ is a functor. It maps objects componentwise by sending $V,W \xrightarrow{\otimes } V\otimes W$, and similarly it sends maps $f,g \xrightarrow{\otimes} f\otimes g$. 
+    Recall that for $f \colon U \to V$ linear and $W$ a vector space, $f \otimes W \colon U\otimes W \to V\otimes W$ is the unique linear map satisfying $(f\otimes W)(u\otimes w)=f(u)\otimes w$ ($W\otimes f$ is similarly  defined), and for $g \colon W \to Z$ we have $(f\otimes g) \colon U\otimes W\to V\otimes Z$ the unique linear map satisfying $(f\otimes g)(u\otimes w)=f(u)\otimes g(w)$. To show functorality, let $f \colon V \to W, g \colon  W \to X, \ell \colon M \to N,h \colon N \to L $ be linear maps. We want to show that \[
+        \underset{V \otimes M \to X\otimes L}{\overset{\otimes ((g,h) \circ (f,\ell))=}{(g \circ f) \otimes (h \circ \ell)}}   = \underset{V\otimes M \to W\otimes N \to X\otimes L}{(g \otimes h) \circ (f\otimes \ell)} 
+    \] Writing it out is the hard part. It follows from the definitions that for $v \in V, m \in M$, we have \[
+    (g \circ f)\otimes (h \circ \ell)(v,m)=g(f(v))\otimes h(\ell(m))
+    \] and \[
+    (g \otimes h) \circ (f\otimes \ell)(v,m)=(g\otimes h)(f(v)\otimes \ell(m))=g(f(v))\otimes h(\ell(m)).
+\] So the two are equal. The tensor product also plays well with identity maps since for $V,W \in  \mathsf{Vect_k} $, $\id_{V,W} \colon (V,W) \to (V,W)$, we have $\otimes (\id _{V,W})=\otimes (V,W)=V\otimes W=\im_{\id_{ V\otimes W}}(V\otimes W)$.
+
+Now to show the natural associativity isomorphism $\alpha $, associate to $(U,V,W)$ the canonical associativity isomorphism $\alpha  \colon (U\otimes V)\otimes W \cong U\otimes (V\otimes W)$. This is given by 
+
+To show that this is really a natural transformation, let $U,V,W, U',V',W' \in \mathsf{Vect_k}$ with a map $f \colon (U,V,W) \to (U',V',W')$. Then the naturality square \[
+    \begin{tikzcd}
+(U\otimes V)\otimes W \arrow[r, "((-\otimes-)\otimes -)f"] \arrow[d, "{\alpha_{U,V,W}}"'] & (U'\otimes V')\otimes W' \arrow[d, "{\alpha_{U',V',W'}}"] \\
+U\otimes (V\otimes W) \arrow[r, "(-\otimes (- \otimes -))f"]                              & U'\otimes (V'\otimes W')                                 
+\end{tikzcd}
+\] certainly commutes. Following an object $(u\otimes v)\otimes w$ across the top map first gives $(f(u)\otimes f(v))\otimes f(w)=(u'\otimes v')\otimes w'$, then composing with the right map gives  $u'\otimes (v'\otimes w')$. Following this element through the left map gives $u\otimes (v\otimes w)$, then composing with the bottom map gives  $f(u)\otimes (f(v)\otimes f(w))=u'\otimes (v'\otimes w')$. Therefore associativity is a natural isomorphism. 
+
+Our natural isomorphism $\sigma$ is given by the isomorphism $\sigma_{V,W} \colon V\otimes W \cong W\otimes V$ which sends $v\otimes w \mapsto w\otimes v$. Drawing out the naturality square, for $V,W, V',W' \in \mathsf{Vect_k}, f\colon (V,W) \to (V',W')$, we have \[
+\begin{tikzcd}
+    V\otimes W \arrow[r,"(-\otimes -)f"]\arrow[d,"\sigma_{V,W}"'] & V' \otimes W' \arrow[d,"\sigma_{V',W'}"]\\
+    W\otimes V \arrow[r,"((-\otimes -) \tau)f"] &W' \otimes V'
+\end{tikzcd}
+\] which commutes by a quick check. It is also easy to check that $\sigma^2=\id$ since $ v\otimes w \xrightarrow{\sigma} w\otimes v \xrightarrow{\sigma} v\otimes w$. Finally, the identity transformation is given by $\iota_V \colon k\otimes V \to V$. To show this is an isomorphism, consider the bilinear projection $\pi \colon k \times V \to V, (k,v) \mapsto  v$. Then by the universal property, the diagram \[
+\begin{tikzcd}
+k \times V \arrow[r, "{(k,v) \mapsto k \otimes v}"] \arrow[rd, "\pi"'] & k\otimes V \arrow[d, "\exists!\iota" description, dotted] \\
+                                                                       & V                                                   
+\end{tikzcd}
+\] commutes, therefore $\iota$ is an isomorphism. Once again, for $f \colon V \to W$ the naturality square is given by \[
+\begin{tikzcd}
+    k\otimes V \arrow[r,"k\otimes f"]\arrow[d,"\iota_V"'] & k\otimes W\arrow[d,"\iota_W"]\\
+    V \arrow[r,"f"] & W
+\end{tikzcd}
+\] which clearly commutes. Therefore $(\mathsf{Vect_k},\otimes, k)$ is a symmetric monoidal category.
+\end{example}
+\begin{definition}[]
+    Let $C,D$ be symmetric monoidal categories and $F, G \colon C \to D$ symmetric monoidal functors. Then a \textbf{symmetric monoidal natural transformation} $\eta \colon F \to G$ is a natural transformation such that the diagrams \[
+    \begin{tikzcd}
+                            &  & F(1_C) \arrow[dd, "\eta(1_C)"] \\
+1_D \arrow[rru] \arrow[rrd] &  &                                \\
+                            &  & G(1_C)                        
+\end{tikzcd}
+    \]  and \[
+   \begin{tikzcd}
+F(y_1)\otimes F(y_2) \arrow[r, "\psi"] \arrow[d, "\eta \otimes \eta"'] & F(y_1\otimes y_2) \arrow[d, "\eta"] \\
+G(y_1)\otimes G(y_2) \arrow[r, "\psi"]                                 & G(y_1\otimes y_2)                  
+\end{tikzcd} 
+    \] commute for all $y_1,y_2 \in C$.
+\end{definition}
+
+\subsection{Bordism Categories} 
+Fix a nonnegative integer $n$.
+\begin{definition}[]
+    Suppose $X,X' \colon Y_0 \to Y_1$ are bordisms between closed $(n-1)$-manifolds $Y_0,Y_1$. A \textbf{diffeomorphism} $F \colon X \to X'$ is a diffeomorphism of manifolds with boundary which commutes with $p,\theta_0, \theta_1$. So we have a diagram \[
+    \begin{tikzcd}
+X \arrow[dd, "F"'] \arrow[rd, "p"] &           \\
+                                   & {\{0,1\}} \\
+X' \arrow[ru, "p'"']               &          
+\end{tikzcd}
+    \]  and similar commutative diagrams involving the $\theta$'s.
+\end{definition}
+\begin{definition}[]
+    Fix $n \in \Z^{\geq 0}$. The \textbf{bordism category} $\mathsf{Bord} _{\langle n-1,n \rangle }$ is the symmetric monoidal category defined as follows.
+    \begin{enumerate}[label=(\roman*)]
+    \setlength\itemsep{-.2em}
+\item Objects are closed $(n-1)$-manifolds.
+\item The hom-set $\mathsf{Bord} _{\langle n-1,n \rangle }(Y_0,Y_1)$ is the set of diffeomorphism classes of bordisms $X \colon Y_0 \to Y_1$.
+\item Composition of  morphisms is by gluing.
+\item For each $Y$ the bordism $[0,1] \times Y$ is $\id_Y \colon Y \to Y$.
+\item The monoidal product is disjoint union.
+\item The empty manifold $\O ^{n-1}$ is the tensor unit (for the symmetric monoidal structure).
+    
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[]
+    An \textbf{isotopy} is a smooth map $F \colon [0,1] \times Y\to Y$ such that $F (t,-) \colon Y \to Y$ is a diffeomorphism for all $t \in [0,1]$. A \textbf{pseudoisotopy} is a diffeomorphism $\widetilde F \colon [0,1] \times Y \to [0,1] \times Y$ which preserves the submanifolds $\{0\} \times Y$ and $\{1\} \times Y$. {\color{red}todo:intuition} 
+\end{definition}
+Equivalently, an isotopy is a path in $\operatorname{Diff}Y$. Diffeomorphisms $f_0,f_1$ are said to be \emph{isotopic} if there exists an isotopy $F \colon f_0 \to f_1$. Isotopies form an equivalence relation, and the set of isotopy classes is $\pi_0 \operatorname{Diff}Y$, often called the \textbf{mapping class group} of $Y$. An isotopy induces a pseudoisotopy 
+\begin{align*}
+    \widetilde F \colon [0,1]\times Y &\to [0,1] \times Y\\
+    (t,y) &\mapsto  (t, F(t,y))
+\end{align*}
+We say $\widetilde F \colon f_0 \to f_1 $ if the induced diffeomorphisms of $Y$ on the boundary of $[0,1] \times Y$ are $f_0$ and $f_1$.
+\begin{example}
+    Let $Y$ be a closed $(n-1)$-manifold and $f \colon Y \to Y$ a diffeomorphism. There is an associated bordism $X_f =[0,1] \times Y$. For $F \colon f_0 \to f_1$ an isotopy, then the bordisms $X_{f_0}$ and $X_{f_1}$ are equal in the hom-set $\mathrm{Bord}_{\langle n-1,n \rangle }(Y,Y)  $. In summary, there is a homomorphism $\pi_0(\operatorname{Diff}Y) \to \mathrm{Bord}_{\langle n-1,n \rangle }(Y,Y)$, not necessarily injective. {\color{red}todo:inutition. pesuoisitopy = diffeo = equiv in bord} 
+\end{example}
+
+
+\subsection{Examples of bordism categories}
+\begin{example}
+    There is a unique $(-1)$-dimensional manifold---the empty manifold $\O ^{-1}$---so $\mathsf{Bord} _{\langle -1,0 \rangle }$ is a category with a single object, hence a monoid. The monoid is the set of morphisms $\mathsf{Bord} _{\langle -1,0 \rangle }(\O^{-1},\O^{-1})$ under composition. The symmetric monoidal structure gives a second composition law, but it is the same as the first (and is necessarily commutative).
+    
+    Namely, the monoid consists of diffeomorphism classes of closed 0-manifolds, so finite unions of points. The set of diffeomorphism classes is $\Z ^{\geq 0}$, and composition/disjoint union both induce addition in $\Z ^{\geq 0}$.
+\end{example}
+{\color{red}todo:bord SO- diffeo clsases of pt+ and pt-. shouldn't it be a two object category then?} 
+\begin{example}
+    Now consider $\mathrm{Bord}_{\langle 1,2 \rangle }$. Objects are closed 1-manifolds, or finite unions of circles. The cylinder can be interpreted as a bordism $X \colon (S^1 )^{\amalg 2} \to \O^1$ (right macaroni); the dual bordism $X^{\vee}$ is a map $X ^{\vee}\colon \O^1 \to (S^1 )^{\amalg 2}$ (left macaroni). Let $\rho \colon S^1  \to S^1 $ be reflection, $f =1 \amalg \rho$ the indicated diffeomorphism of $(S^1 )^{\amalg 2}$, and $X_f$ the associated bordism (istopy). Then 
+    \begin{align*}
+        X \circ X_{\id}\circ X^{\vee}&\simeq  \text{torus} \\
+        X \circ X_{f}\circ X^{\vee}&\simeq  \text{Klein bottle} 
+    \end{align*}
+    These diffeomorphisms become equations in the monoid $\mathrm{Bord}_{\langle 1,2 \rangle }(\O^1,\O^1)$ of diffeomorphism classes of closed 2-manifolds.
+\end{example}
+
+
+

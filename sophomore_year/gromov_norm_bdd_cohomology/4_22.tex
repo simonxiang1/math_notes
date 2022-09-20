@@ -1,0 +1,21 @@
+\section{Mostow Rigidity} 
+hisashiburi.
+\begin{lemma}
+    $\partial \widetilde \varphi $ preserves $\mathfrak V$.
+\end{lemma}
+Why is this true? $\widetilde \varphi $ is a lift of $\varphi $, a homotopy equivalence between $M \to N$. Since simplicial volume is a homotopy invariant, Gromov's proportionality tells us $\|M\|_1= \mathrm{vol}(M)/v_n $ is equal to $\|N\|_1 = \mathrm{vol}(N)/v_n $. Recall that $v_n $ is uniquely achieved by the volume of regular ideal simplices.
+\begin{proof}
+    Suppose there exists a regular ideal simplex $\Delta _r$ such that $\partial  \widetilde \varphi (V(\Delta _r))=V(\widetilde \Delta )$ where $\widetilde \Delta $ is not regular. Then \[
+        \mathrm{vol}\left( \widetilde \Delta  \right) + 2 \varepsilon  < \mathrm{vol}(\Delta _r)=v_n .
+    \] Take an approximation of $\Delta _r$ by a finite straight simplex $\Delta $, then $\mathrm{vol}(\Delta ')> v_n - \varepsilon $. By our smearing argument, we can represent the fundamental class of $M$ as a summation, where $[M]=\sum \lambda_i c_i ,\lambda_i >0$. Each $c_i $ is the projection of some $\Delta '$. Sending this through th emap $\varphi $, this sends $\varphi \colon [M] \to [N]=\sum \lambda_i \mathrm{str}(\varphi _* c_i )$. Now $\mathrm{vol}(\mathrm{str}(\varphi _* c_i ))$ differes from $\mathrm{vol}(\widetilde \Delta )$ by a factor of $\varepsilon $. Computing the volume of $N$ we get a contradiction: \[
+    \mathrm{vol}(N)=\langle [N],\mathrm{vol} \rangle =\sum \lambda_i  \mathrm{vol}(\mathrm{str}(\varphi _*c_i ))< \sum \lambda_i (v_n -\varepsilon )=\left( \sum \lambda_i \right)  \left( v_n -\varepsilon  \right)  \leq (\|M\|_1+\delta  )(v_n-\varepsilon )=(\|N\|_1 + \delta  )(v_n -\varepsilon )
+\] $\varepsilon $ is fixed as the distance between the volumes. We choose $\delta $ very very small, such that $\left( \|N\|_1 + \delta \right) (v_n -\varepsilon )$ is approximately $\|N\|_1\left( v_n -\varepsilon  \right) < \|N\|_1 \cdot v_n $. If we have a map on the boundary taking the vertex set of any regular ideal simplex to another regular ideal simplex, then this has to be the boundary map of an isometry.
+\begin{prop}
+    For $n\geq 3$, $h \colon \partial \H^n  \to \partial \H^n $ a homeomorphism such that $h$ preserves $\mathfrak V$, then $h= \partial F$ for some $F \colon  \H^n  \to \H^n $ a hyperbolic isometry. 
+\end{prop}
+Note that any two regular ideal simplices $\Delta_1,\Delta_2 $ differ by some hyperbolic isometry, since equilateral triangles differ by some Euclidian similary ($\mathrm{stab}(\infty)$). By composing with some $F \in \mathrm{Isom}(\H^n )$, we may assume $h$ fixes the vertices of some regular ideal simplex. The goal is to have $h=\id _{\partial \H^n }$. $\mathrm{Fix}(h)$ contains a dense set in $\partial \H^n $. Then the convex hull $\mathrm{co}(v_0,v_1,v_2,v_3)$ is regular, as well as $\mathrm{co}(v_0,v_1',v_2,v_3)$. The point is that there are exactly two regular simplices containing these points, so they must be the only two regular simplices containing $v_0,v_2,v_3$. Therefore $v_1'$ must be fixed.
+
+The inversion takes $v_1' \to  m_1$ the midpoint of $[v_2,v_3]$, which implies that $m_1 \in \mathrm{Fix}(h)$. Continuing this process gives us the fact that $\mathrm{Fix}(h) $ contains a dense set of $\partial \H^n $.
+
+Now to conclude the proof. By our proposition, $\partial  \widetilde \varphi  = \partial F$ which is $\pi_1$-equivariant, $F \in \mathrm{Isom}(\H^n )$, which implies $F$ is $\pi_1$-equivariant. So $F$ induces an isometry $f \colon M \to N$. We also have an equivariant homotopy $H$ between $\widetilde \varphi $ and $F$. The map $\{H(x,t) \mid 0 \leq t \leq 1\} $ (the geodesic from $\widetilde  \varphi (x)$ to $F(x)$), which means $H$ induces a homotopy between $\varphi $ and $f$. But $f$ is an isometry, and we are done. This concludes Mostow rigidity.
+\end{proof}

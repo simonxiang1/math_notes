@@ -1,0 +1,18 @@
+---  
+title: Class notes
+output: 
+  html_document:
+    toc: yes 
+---
+
+```{r child = '9_02.Rmd'}
+```
+
+```{r child = '9_07.Rmd'}
+```
+
+```{r child = '9_09.Rmd'}
+```
+
+```{r child = '9_12.Rmd'}
+```

@@ -1,0 +1,11 @@
+---
+title: "cockroachdb"
+output: html_document
+date: "2022-09-17"
+---
+
+Tech stack: python, replit, flask, psycopg, ponyOMR, cockroachDB serverless. basically mongoDB.
+```{python}
+print("hello world")
+```
+create a cluster from cockroach. just look at the website (psycopg2), needs connection and set session.

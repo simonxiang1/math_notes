@@ -1,0 +1,63 @@
+\section{ok} 
+Last day of class today wow. Last time we talked about the bounded Euler class associated to a group action on the circle. One is the that the bounded Euler class is trivial iff the action has a global fixed point. The idea is that we can use that point to lift the action. The other thing is that this Euler class captures the action completely up to semiconjugal equivalence. 
+\begin{example}
+    Consider $G=\Z$. Pick $f \in T = \mathrm{Homeo}^+(S^1 )$. Let $\rho \colon \Z \to T$, then $\rho(n)=f^n $. This gives us an action. Something nice is that $\Z$ is amenable, so $H^2_b(\Z ;\R)=0$ as with all amenable groups. We mentioned earlier there is an exact sequence relating these; \[
+        0 \to \Hom(\Z,S^1 ) \to H^2_b(\Z;\Z) \to  H^2_b(\Z;\R)=0
+    \] Therefore $\Hom(\Z,S^1 ) \simeq H^2_b(\Z;\Z)$, and our Euler class $\mathrm{eu}_b^{\Z}(\rho)$ lives here, so it should correspond to some homomorphism into the circle. It turns out that $\varphi (n)=n \cdot  \mathrm{rot}(f)= \mathrm{rot}(f^n )$. Going back to the context of Ghys' theorem, we start with an arbitrary homomorphism and try to understand its action. It says it corresponds to its rotation number, but the rotation number corresponds to another rigid action, giving an Euler class, and this map tells you that this Euler class is equal to the original Euler class, and Ghys' theorem says they are the same action up to semi-conjugacy. In summary, $\mathrm{eu}_b ^{\Z}(\rho')= \delta \varphi =\mathrm{eu}^{\Z}_b(\rho)$, and by Ghys we have $\rho'\sim \rho$.
+\end{example}
+\begin{prop}
+    An action $\rho$ of a group $G$ on $S^1 $ has the bounded Euler class with real coefficients $\mathrm{eu}_b^{\R}(\rho)=0$ iff the action is semiconjugate to an action by rigid rotations. In this case, the rotation number $\mathrm{rot}_{\rho} \colon G \to S^1 $, $g \mapsto  \mathrm{rot}(\rho(g))$ is a homomorphism.
+\end{prop}
+\begin{proof}
+    We have \[
+        0 \to \Hom(G,S^1 ) \to H^2_b(G ;\Z) \to  H^2_b(G;\R)
+    \] with $H^2_b(G;\Z)\ni\mathrm{eu}_b ^{\Z}(\rho) \mapsto  \mathrm{eu}_b ^{\R}(\rho)=0$. Then there exists a $\varphi $ iff $\delta \varphi =\mathrm{eu}_b ^{\Z}(\rho)$.  So $\varphi  \colon G \to S^1  $ acting on $S^1 $ by rigid rotations, leading to an action of $\rho'$ at $G$ on $S^1 $ by rigid rotations. Recall the snake lemma: nvm let's skip that. We check that $\delta \varphi  = \mathrm{eu}_b ^{\Z}(\rho')$. By definition this is equal to $\mathrm{eu}_b ^{\Z}(\rho)$, and applying Ghys' theorem these two are related by semiconjugacy, explaining the first part.
+
+    For the second statement, for rigid rotations the rotation number is exactly the angle of rotation. So $\mathrm{rot}_\rho(g)= \mathrm{rot}(\rho(g))= \mathrm{rot}(\rho'(g))=\varphi (g)$. So $\mathrm{rot}_p=\varphi $, which is a homomorphism.
+\end{proof}
+Note that the ordinary Euler class $\mathrm{eu}(\rho) \in  H^2(\Z ;\Z)= H^2(S^1 ;\Z)=0$. This reflects the fact that we can life $f \in T$ to some $\widetilde f \in  \hat{T}$. The point is that the ordinary Euler class carries no information when we restrict to $\Z$ classes, but the \emph{bounded} Euler class still carries data about the rotation.
+\begin{theorem}[Hirsch-Thurston]
+   If $G$ is amenable, then any action of $G$ on $S^1 $ is semi-conjugate to an action by rigid rotations.  In particular, the rotation number is a homomorphism.
+\end{theorem}
+\begin{prop}
+    Any finite subgroup of $T= \mathrm{Homeo}^+(S^1 )$ is cyclic.
+\end{prop}
+\begin{proof}
+    Let $G \subseteq T$ be finite. We want to deduce that this is cyclic. Finite implies amenable, so we have a homomorphism $ \mathrm{rot }\colon G \to S^1 $. If $G$ is finite, this homomorphism has to be injective. We have $\mathrm{rot}(G)=0 $ iff $g$ has a fixed point on $S^1 $. If $g\neq \id$, the only case where $g$ has a fixed point is that if it fixed everything. So $g$ acts by translation on complementary intervals. Then $G \simeq  \mathrm{rot}(G) \subseteq S^1 $ implies $\mathrm{rot}(G) \simeq  G$ is cyclic.
+\end{proof}
+\begin{cor}
+    A group $G$ cannot act faithfully on $S^1 $ if it has a finite subgroup that is not cyclic.
+\end{cor}
+\begin{example}
+    The mapping class group of a surface $\mathrm{Mod}(S)$ cannot act faithfully on $S^1 $. The reason is that these always contain a Klein-4 group $K \simeq  \Z/2 \times \Z/2$. Realize the Klein-4 group as a group of rotations in $\R^3$. We can rotate around each axis by $\pi$, so they are order two rotations. We can actually write these as matrices: \[
+        a=
+        \begin{bmatrix}
+            1 & & \\ & -1 & \\ & & -1
+        \end{bmatrix},\quad
+        b=
+        \begin{bmatrix}
+            -1 & & \\ & 1 & \\ & & -1
+        \end{bmatrix},\quad
+        c=
+        \begin{bmatrix}
+            -1 & & \\ & -1 & \\ & & 1
+        \end{bmatrix}.
+    \] Then $ab=c, a^2=b^2=c^2=\id$. This tells us that $\{\id,a,b,c\}\simeq  K $, where $a,b$ are the two generators. What does this have to do with surfaces and the mapping class group? Embed $S \hookrightarrow  \R^3$ ``symmetrically'' such that $K$ embeds into the homeomorphism group $\mathrm{Homeo}^+(S)$, and inject $K$ into the mapping class group $\mathrm{Mod}(S)$.
+     
+    In contrast, there is another mapping class group of homeomorphisms preserving a basepoint $\mathrm{Mod}(S,p)$ acts faithfully on $S^1 $. Consider $S \setminus p$ and put a hyperbolic structure on it. Then we have $S^1 $ formed from unique rays coming out of this cusp. Another way to see this is that $\mathrm{Mod}(S,p)$ acts on $\pi_1(S,p)$ by isomorphisms, which is quasi-isomorphic to $\H^2$. So $\mathrm{Mod}(S,p)$ acts on $\partial  \pi_1 (S,p) \simeq  \partial \H^2=S^1 $.
+\end{example}
+Consider another cocycle representing $2\mathrm{eu}_b ^{\Z}$. We can talk about an oriented triple $\mathrm{Or}(x,y,z)$, remove $x$ and this unwraps into an interval $[x, \cdots , y , \cdots , z, \cdots ,x]$ (positive orientation). Then for $G$ acting on $S^1 $, take $g,h,k \in G, x \in G$. This defines a function on triples of elements of $G$ given by \[
+    \mathrm{Or}(g,h,k) = \mathrm{Or}(\rho(g)x,\rho(h)x,\rho(k)x)
+\] which is $G$ invariant. Then $\mathrm{Or}(\ell g, \ell h, \ell k)= \mathrm{Or}(g,h,k)$, turning out to be a cocycle. This defines a 2-cocycle in homogeneous coordinates, representing an $[\mathrm{Or}] \in  H^2_b(G;\Z)$. 
+\begin{theorem}[Thurston]
+    This 2-cocycle describes twice the Euler class, or $[\mathrm{Or}]=2 \cdot \mathrm{eu}_b ^{\Z}(p)$. 
+\end{theorem}
+\begin{cor}
+    $\|\mathrm{eu}_b^{\R}\|_{\infty} \leq 1/2$, leading to Milnor-Wood.
+\end{cor}
+\begin{theorem}[Ghys]
+    If $G$ is countable, $\alpha  \in H^2_b(G;\Z)$ , $\alpha $ can be represented by a cocycle with values in $\{0,1\} $ iff $\alpha =\mathrm{eu}_b^{\Z}(\rho), \rho \colon G \to S^1 $.
+\end{theorem}
+\begin{proof}
+    One direction is by definition, the other is by Ghys. The idea is that the choice of $\{0,1\} $ determines whether the triple has positive or negative orientation, and we can use this to get a ``circular order'' on $G$. This leads to an action of $G$ on  $S^1 $.
+\end{proof}

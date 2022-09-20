@@ -1,0 +1,55 @@
+\section{How homology determines cohomology additively (and cap products)} 
+The algebra problem is this: take some chain complex $\left( C_*, \partial  \right) $ a chain complex over $R$, and $D^*=\bigoplus D^q$, $\delta=\partial ^*, D^q \to  D^{q+1}$, $D^q=\Hom_p(C_q,R)$,  $(D^*,\delta)$ a cochain complex.
+\begin{namedthing}{Problem} 
+   How does $H_* C$ determine $H^* D$? How does the chain homotopy type of $C_*$ lead to the chain homotopy type of $D^*$?
+\end{namedthing}
+For complexes of projectives, ``quasi-isomorphism type of $C_*$ implies the chain homotopy type''. A quasi-isomorphism is a map that induces isomorphisms on homology, which is different from saying the two complexes have the same homology.
+\begin{example}
+    Let $C_*= C_* ^{\mathrm{cell}}(\R \mathrm P^2)= \{0 \to \underset{e_2}{\Z}  \xrightarrow 2 \underset{e_1}{\Z} \xrightarrow 0 \underset{e_0}{\Z} \to 0\} $. Then $H_*(C)= \underset{1}{\Z/2}  \oplus \underset{0}{\Z} $. Dualizing, we get $D^*=\{0 \leftarrow \underset{\eta ^2=2}{\Z}\xleftarrow 2 \underset{\eta^1=1}{\Z} \xleftarrow 0 \underset{\eta^0=0}{\Z} \leftarrow 0  \} $. Then 
+    \begin{align*}
+        &H^0 =\Z \quad[\eta^0]\\
+        &H^1=0\\
+        &H^2= \Z / 2\quad [\eta^2]
+    \end{align*}So the $\Z /2$ moved a degree. Here $H^2 \cong H_1, H^1=H_2=0$. 
+\end{example}
+There is a natural map $\Delta  \colon H^n (D^*)  \to \Hom(H_n C_*, R)$. Namely, $\beta [\zeta]$ (where $\zeta$ is a cocycle representing our cohomology class) is equal to $\{[z]\sim \text{cycle} \mapsto \zeta(z)\} $. This is well-defined. We need to check that boundaries go to zero and coboundaries go to the zero map, and both of these come out from checking the definitions essentially.
+\begin{namedthm}{Universal coefficients for cohomology} 
+    Let $R$ be a PID and $C_*=\bigoplus _{n \geq 0}C_n $ a non-negatively graded complex of free modules.\footnote{Over a PID, every projective module is free.} Let $M$ be some $R$-module. Consider the cochain complex $\Hom_R(C_* ,M)$. Then there is a natural short exact sequence  \[
+        0 \to \mathrm{Ext}^1_R(H_{n-1}C_*,M) \to H^n (\Hom _R(C_*,M))\xrightarrow{\beta } \Hom_R(H_n C_*,M) \to 0
+    \] This sequence splits, but not naturally.
+\end{namedthm}
+\begin{cor}
+    For spaces $X$ and abelian groups $M$, there are natural, non-naturally split, short exact sequences 
+    \[
+        0 \to \mathrm{Ext}^1 _{\Z}(H_{n-1}X,M) \to H^n (X,M) \xrightarrow p \Hom_{\Z}(H_n X,M)\to 0
+    \] 
+\end{cor}
+Now we have to say what $\mathrm{Ext}$ is. This is very similar to $\mathrm{Tor}$, and both fit into the framework of derived functors. We will be very brief and very sketchy. Let's think about $h =\Hom_R(\cdot ,M)$, a functor from $\left( \mathsf{mod} _R \right)^{\mathrm{op}}  \to  \mathsf{mod} _R$ (assuming $R$ is commutative). This functor sends a module $N \mapsto  \Hom(N,M)$, and morphism to the natural thing. The assertion is that $h$ is \textbf{right exact}, or cokernel preserving. 
+Concretely, if we take a short exact sequence $0 \to S \to  N \to Q \to 0$ in $\mathsf{mod} _R$, which we can think of as a short exact sequence $0 \to Q \to N \to S \to 0$ in $\left( \mathsf{mod} _R \right) ^{\mathrm{op}}$. This leads to an exact sequence of modules \[
+    \Hom(Q,M) \to \Hom(N,M) \to \Hom(S,M) \to 0
+\] The assertion is that this is exact, which is right exactness. To define $\mathrm{Ext}_R^*(N,M)$, we choose a projective resolution $P_* \to N$. Set $\mathrm{Ext}^n _R(M,N)=H^n (\Hom(P_* ,M))$ which is parallel to what one does for $\mathrm{Tor}$ using projective resolutions. The fundamental lemma of homological algebra gives well-definedness. 
+    \begin{example}
+        Let $R$ be a PID. Any $N$ has a two step free resolution. So $\mathrm{Ext}^n _R \equiv 0 $ for $n \geq 2$, just as with $\mathrm{Tor}$ over a PID.
+    \end{example}
+    Some facts:
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+        \item $\mathrm{Ext}_0^R(N,M)=\Hom_R(N,M)$.
+        \item $\mathrm{Ext}^n _R(R^m,M)=0$ for all $n>0$, $R$ free (don't need a PID for this)
+        \item $\mathrm{Ext}_R^1(R / (x),M)$ is equal to? We have a free resolution \[
+       0 \to R \xrightarrow xR \to  R /x \to 0 
+   \] Then $\mathrm{Ext}_R^1(R / x,M)=H^1(\underset{0}{M}  \xrightarrow x\underset{1}{M} )=\coker(x\colon M \to M)=M /xM$. Once again we need not $R$ be a PID, but this is most useful over PIDs, since modules of PIDs look like $R^m\oplus \bigoplus R / x_i $, $x_i  \in R$.
+   \item $\Ext^1_{\Z}(\Z /m \supset \Z) \cong \Z /m$. Hence for $A$ a finitely generated abelian group, 
+       \[
+           \Ext_{\Z}^1(A,\Z)=A _{\mathrm{tors}} \ \text{since}\ A \cong \Z^m\oplus \underset{A _{\mathrm{tors}}}{\underbrace{\bigoplus _i  \Z /k_i}}  .
+       \] 
+       This is also true without the finitely generated assumption which we can prove with some limiting argument. Hence from universal coefficients, there exists a non-natural isomorphism between $H^n (X)\cong \Hom(H_n X,\Z)\oplus H_{n-1}(X) _{\mathrm{tors}}.$ In a sense this gives us complete understanding of first cohomology, since $H^1X \cong \Hom(H_1X,\Z)$ is free abelian. This is isomorphic to $\Hom(\pi_1 ^{\mathrm{ab}}X,\Z) \cong \Hom(\pi_1 X,\Z)  .$ (This is also the same as homotopy classes of maps $[X,S^1 ]$).
+
+       This also tells us that $H^2X \cong \Hom(H_2 X,\Z)\oplus H_1(X) _{\mathrm{tors}}$, e.g. $H^2 (\R \mathrm P^2) \cong H_1(\R \mathrm P^2) _{\mathrm{tors}}= \Z /2$, recovering our earlier direct calculation.
+    \end{itemize}
+\begin{example}
+    We calculated way back that $H_*(B \Z/n) \cong \underset{0}{\Z}\ \underset{1}{\Z/n}\ \underset{2}{0}\ \underset{3}{\Z/n}\ \underset{4}{0}\ \cdots $ , which is 2-periodic. So $H^* (\beta  \Z/n) \cong \underset{0}{\Z} \ \underset{1}{0}\ \underset{2}{\Z/n}\ \underset{3}{0} \ \underset{4}{\Z/n} \cdots  $ by universal coefficients, that is the $\Z/n$'s have shifted up one degree.
+\end{example}
+Looking at cohomology with real coefficients $H^n (X;\R)\cong \Hom_{\Z}(H_n X,\R)$, we have seen that for manifolds $M$, this is just de Rham cohomology or $H^n (M;\R) \simeq  H_{DR}(M)$. Then $H^n (X,\Z) \to H^n (X;\R)$, where the image is a copy of $H^n  (X;\Z) / \text{torsion} $. Namely the de Rham cohomology of a manifold contains the integer cohomology mod torsion, which sits as a lattice $H^n (X;\Z) / \mathrm{tors} \hookrightarrow  H^n _{DR}(M)$. This is the lattice of classes of closed  $n$-forms $\alpha $ such that \[
+\int z^* \alpha  \in \Z \ \text{for all smooth cycles} \ z.
+\] These closed forms have ``integral period'' per say. For example, we can think of the $n$-torus as $V /L$ where $V \cong \R^n $ and $L$ is a lattice inside $V$. Then $H^*(V /L,\R)\subset H_{DR}^*(V /) \cong \bigwedge ^*L^V \subset \bigwedge^* V^{V}$.

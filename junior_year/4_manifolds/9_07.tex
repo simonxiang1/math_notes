@@ -1,0 +1,63 @@
+\section{More about the intersection form} 
+\subsection{Cobordism and signature}
+Here $x\cdot  y = \sigma(x,y)$. Through an algebraic lens, $(V,\sigma)$ is a symmetric bilinear form that is non-degenerate over $\R$. Suppose $L \subseteq V$ is an isotropic subspace such that $x\cdot y$ for all $x,y \in L$, and $\dim L = \frac{1}{2}\dim V$. Then the signature $\tau(V, \sigma)=0$.
+\begin{proof}
+    Say $V = L \oplus K$, $L \to K^*$, $\ell \mapsto  \sigma(\ell, \cdot \in K )$. It is injective by non-degeneracy, and $\dim K = \dim L$, so its an isomorphism. This implies $(V, \sigma) \cong \underset{x}{K} \oplus \underset{\alpha }{K^*} $, where $(x+\alpha ) \cdot (x' + \alpha ') = \alpha (x') + x'(x)$. Do the same for $(V, -\sigma)$, so $(V, -\sigma) \cong  (V, \sigma) $ which implies $\tau  = 0$.
+\end{proof}
+\begin{theorem}
+    If there exists an oriented cobordism from $X_1$ to $X_2$, then $\tau(X_1) = \tau(X_2)$. In particular, if $X$ is an oriented boundary, then $\tau(X) =0$.
+\end{theorem}
+\begin{proof}
+    Last time, we saw that $H^2(-X_1 \amalg X_2)$ has a middle dimension isotropic subspace, namely the image of $H^2 Y$. The lemma implies that $\tau(-X_1 \amalg X_2) = 0$, i.e. $\tau(X_1)=\tau(X_2)$.
+\end{proof}
+\begin{example}
+    Some examples:
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+\item We have $S^2 \times S^2 = \partial (D^3 \times S^2)$ which implies that $\tau(S^2 \times S^2) = 0$ (we knew this already).
+\item We have $\tau(\C \mathrm{P^2})=1$, so $\C \mathrm{P^2}$ is \emph{not} an oriented boundary. There exists no oriented cobordism $\C \mathrm{P^2}\sim - \C \mathrm{P^2}$.
+\item For  $\C \mathrm{P^2}\# \overline{\C \mathrm{P^2}}$, we have $\tau=1-1=0$. Is this the boundary of a compact 5-manifold? It is (connect sum is cobordant to the disjoint union), and in general $M^4 \# -M^4$ is also a boundary.
+\item The cylinder $[0,1] \times M$ gives a cobordism from $\O$ to $-M \amalg M$. 
+\item There exists a cobordism from $-M_1 \amalg M_2$ to $-M \# M_2$ which goes by the name of ``attaching a 1-handle''. More references will be in the notes.
+    \end{itemize}
+\end{example}
+\begin{theorem}[Thom, 1952]
+    If $X^4$ is a closed oriented 4-manifold with $\tau(X)=0$, then there exists a compact oriented 5-manifold $Y$ with $\partial  Y =X$. 
+\end{theorem}
+The proof of this theorem uses the Pontryagin-Thom construction.
+
+\subsection{Characteristic vectors}
+Let $(\Lambda, \sigma)$ be a unimodular form, where $\tau$ comes from $\Lambda \otimes \R$. Now look at $\Lambda \otimes \Z /2$. Recall $(\Lambda, \sigma)$ is \emph{even} (or \emph{odd} else) if $x \cdot  x \in  2\Z$ for all $x \in \Lambda$
+\begin{definition}[]
+    A \textbf{characteristic vector} $c \in \Lambda$ is one such that $c \cdot  x \equiv x \cdot  x \pmod 2$ for all $x \in \Lambda$.
+\end{definition}
+\begin{example}
+    If $\Lambda  $ is even, the zero vector $0$ is characteristic. So is any $c=2\lambda, \lambda \in \Lambda$. Let $I_+ = \langle \Z, \mathrm{mult} \rangle $, $I_+ = [1]$m $I_- = -I_+$. Then $p I_+ \oplus q I_-$ is an orthogonal direct sum. \[
+    pI_+ \oplus qI_- = 
+    \begin{bmatrix}
+        I_p & 0 \\ 0 & -I_q
+    \end{bmatrix}
+    \] The vector $1 \in \Z$ is a characteristic vector for $I_{\pm}$. So $e_1 + \cdots + e _{p+q} \in \Z ^{p+q}$ is characteristic for $p I_+ \oplus q I_-$
+\end{example}
+\begin{prop}
+    For any unimodular form, characteristic vectors exist, and form a coset of $2 \Lambda \subseteq  \Lambda$.
+\end{prop}
+\begin{proof}
+    Let $\overline{\Lambda} = \Lambda _{\Z}\otimes \Z /2$ be a mod 2 reduction. It inherits from $x \subseteq \Lambda$ has an image $\overline{x} = x\otimes 1 \in  \overline{\Lambda}$. Our condition $c \cdot  x \equiv x \cdot  x \pmod 2$ for all $x$ means that $\overline{c} \cdot  \overline{x}= \overline{x}\cdot \overline{x}$ for all $\overline{x} \in \overline{\Lambda}$. In $\overline{\Lambda},$ $v \mapsto  v\cdot v  \in \Z /2$ is $\Z /2$-linear, i.e. it lies in $\overline{\Lambda}^*=\Hom _{\Z /2}(\overline{\Lambda}, \Z/2)$. The form on $\overline{\Lambda}$ remains non-degenerate. So there exists a $\overline{c}$ such that $\overline{c}*8 v = v \cdot  v $ for all $v$. Characteristic vectors are lifts of $\overline{c}$ to $\Lambda$, and as such they form a coset of $2\Lambda$.
+\end{proof}
+We will later talk about characteristic classes, which are a different use of characteristic.
+\begin{namedthing}{Observation} 
+If $c, c' \in \Lambda$ are characteristic, then $c \cdot  c - c' \cdot  c' \in 8 \Z$.
+\end{namedthing}
+\begin{proof}
+    Say $c' = c + 2x$. Then \[
+        c' \cdot  c' = c \cdot  c + \underset{\text{even} }{\underbrace{4( c \cdot  x + x \cdot  x)}} ,
+    \] which is a multiple of 8.
+\end{proof}
+\begin{theorem}[Hasse-Minkowski]
+    Two indefinite (there exist $v,w$ with $v \cdot  v >0,w \cdot  w <0$) unimodular forms are isomorphic if they have the same rank $\in  \N$, signature $\in \Z$, and type (even or odd) $\in \Z/2$.
+\end{theorem}
+From Serre's ``A course in arithmetic'', an indefinite \emph{odd} unimodular form is isomorphic to $p I_+ \oplus q I_-$.
+ \begin{example}
+     For $U = (\Z ^2, \cdot )$, it is odd with rank 3 and signature $-1$. By Hasse-Minkowski this is isomorphic to $I_+\oplus 2 I_-$, which is easily checked. In $U\oplus I$, take $v_1 = e_1+e_2+e_3,v_2=e_1+e_3,v_3=e_2+e_3$.  We can check that $v_1^2=1,v_2^2=-1, v_3^2=-1$, which is a $\Z$-basis.
+\end{example}

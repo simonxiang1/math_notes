@@ -1,0 +1,52 @@
+\section{Consequences of Mostow rigidity} 
+Recall we have a homotopy equivalence of manifolds $\varphi  \colon M \to N$ and an $\pi_1$-equivariant map $\widetilde \varphi (\widetilde M= \H^n)  \to  (\widetilde N=\H^n)   $ with boundary $\partial  \widetilde \varphi  \colon \partial \H^n  \to \H^n $ a self-homeomorphism. Then this boundary map $\partial \widetilde \varphi $ must be $\partial F$ for some isometry $F$, which implies $f \colon M \to N$ is an isometry $f \simeq \varphi $. This can be proved in different ways:
+\begin{enumerate}[label=(\arabic*)]
+\setlength\itemsep{-.2em}
+    \item $\partial \varphi $ is a quasi-conformal ergordicity means constant distortion. Here $\pi_1 M$ is ergodic on $\partial \H^n $, which implies $\partial  \widetilde \varphi =\partial F$ is conformal.
+    \item We can view $M=\H^n  /\Gamma $, where $\Gamma \cong \pi_1 M $ acting on $\H^n $ by isometry. Then $\Gamma \leq \mathrm{Isom}(\H^n )$, which is a discrete subgroup (lattice acting by isometries). This is a so called \textbf{cocompact lattice}. Furthermore since the quotient is a manifold this lattice is also torsion free. Let $M=\H^n /\Gamma_1,N=\H^n  / \Gamma_2$. Any $\varphi  \colon \Gamma_1 \xrightarrow{\cong} \Gamma_2 $ is realized by conjugation in $F \in \mathrm{Isom}(\H^n )$, $\varphi (\gamma )=F \gamma F^{-1}$. The reason for this is basically lifting of universal covers. \[
+   \begin{tikzcd}
+\H^n \arrow[r, "\widetilde \varphi=F"] \arrow[d] & \H^n \arrow[d]    \\
+\H^n/\Gamma_1=M \arrow[r, "\varphi"]             & \H^n / \Gamma_2=N
+\end{tikzcd} 
+    \] Here $\varphi $ is a homotopy equivalence, but Mostow rigidity tells us that we can choose $\varphi $ to be an isometry. Then for $\gamma  \in\Gamma_1$, this leads to a diagram \[
+    \begin{tikzcd}
+\H^n \arrow[r, "F"] \arrow[d, "\gamma"'] & \H^n \arrow[d, "\partial(\gamma)=F\gamma F^{-1}"] \\
+\H^n \arrow[r, "F"']                     & \H^n                                             
+\end{tikzcd}
+    \] There are higher analogues for Lie groups, one of them being Margul's super rigidity. It essentially says a linear representation of a higher dimensional lattice comes from a representation of the underlying Lie group.
+\end{enumerate}
+
+
+Some consequences.
+\begin{theorem}
+    For $M=\H^n  / \Gamma$, the following groups are isomorphic and finite if $n \geq 3$.
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+\item $\mathrm{Isom}(M)$.
+\item $N _{\Gamma}/\Gamma$ (the normalizer of $\Gamma$), where $N_{\Gamma}= \{ F \in  \mathrm{Isom}(\H^n )\mid  F \Gamma F^{-1}=\Gamma\} $. In other words, this is the largest subgroup of the ambient group such that $\Gamma$ is a normal subgroup.
+\item $\mathrm{Out}(\Gamma)= \mathrm{Aut}(\Gamma) /  \mathrm{Inn}(\Gamma)$.
+\item $\mathrm{MCG}(M)=  \mathrm{Homeo}(M) / \mathrm{Homeo}_0(M)$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    ($\mathrm{Isom}(M) \cong N_{\Gamma}/\Gamma$): This is a standard process that doesn't have much to do with Mostow rigidity. For $f \in \mathrm{Isom}$ acting on $M$, $\Gamma \colon \H^n  \to M$, we can lift $f$ to the universal cover $F $ which implies $F \Gamma F^{-1} =\Gamma$. Conversely, if $f $ is a normalizer, then $\gamma  \mapsto  F \gamma  F^{-1}$ is an isometry  $\Gamma \cong \Gamma$. Here $\Gamma=\ker(N_{\Gamma}\to  \mathrm{Isom}(M))$, $F$ a life of $\id $ iff $F \in \Gamma$ (the deck group). This is a general argument, we could even replace $\H^n $ with some other geometric group.
+
+    ($N_{\Gamma} / \Gamma \cong \mathrm{Out}(\Gamma)$): One direction is clear. For $F \in N_{\Gamma}$, $\varphi _{\Gamma} \colon \Gamma \to \Gamma, \gamma  \mapsto  F \gamma  F^{-1}$ if $F \in \Gamma$ implies $\partial _F \in \mathrm{Inn}(F)$. 
+    \[
+    \begin{tikzcd}
+    N_{\Gamma} \arrow[r, "F \mapsto \varphi_F"] \arrow[rd, "h"'] & \mathrm{Aut}(\Gamma) \arrow[d] \\
+                                                                 & \mathrm{Out}(\Gamma)          
+    \end{tikzcd}
+    \] 
+    Here $\ker(h) \supseteq \Gamma$. We need to show that $h$ is surjective (Mostow rigidity) and $\ker h = \Gamma$. Pick $\varphi  \in  \mathrm{Aut}(\Gamma)$, then $\varphi _F = \varphi $ up to conjugation (different lifts differ by conjugation). Suppose $\varphi _F=\varphi _{\gamma }$ for $\gamma  \in P, F \in N_{\Gamma}$. Then $\varphi F=\id, F g F ^{-1} = g$ for all $g \in F$. This implies $F$ commutes with all $g \in \Gamma$, and $F=\id$. Here $\mathrm{Fix}(g)= \mathrm{Fix}(F g F^{-1})=F( \mathrm{Fix}(G))$, attracting/repelling implies $F $ fixes $g^+$ and $g^-$. Conjugate $g$ by $\gamma  \in P$, then $g^+ \mapsto  \gamma (g^+)$ (fixed by $F$) by varying $\gamma $.
+    \[
+        \begin{tikzcd}
+\mathrm{Isom}(M) \arrow[r] \arrow[rd, "\cong", hook,red] \arrow[rdd,"\cong"', blue] & \mathrm{Homeo}(M) \arrow[d] \\
+                                                                 & \mathrm{MCG}(M) \arrow[d]   \\
+                                                                 & \mathrm{Out}(M)            
+\end{tikzcd}
+    \] Mostow rigidity tells us the red map is surjective, which implies the blue map is an isomorphism.
+\end{proof}
+Next time we will explain that the isometry group of a closed hyperbolic manifold is finite. Then $\mathrm{Isom}(M)$ acts on $M$ acting on $FM$ (compact), so orbits are discrete, and subsequently finite. Then we need to show the stabilizers are trivial, which is true because isometries cannot fix the frame (otherwise it is trivial).
+
+

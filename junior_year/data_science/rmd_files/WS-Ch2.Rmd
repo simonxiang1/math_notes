@@ -1,0 +1,129 @@
+---
+title: "Chapter 2 and 3 Worksheet"
+output: html_document
+---
+
+## Summarizing Datasets
+
+Load the `murders` dataset by running the following commands:
+
+```{r}
+library(dslabs)
+data("murders")
+help("murders")
+```
+
+Look at the help file to refresh yourself on what is contained in the dataset. You can also get a look at the dataset by running `View()`.
+
+```{r, eval = FALSE}
+View(murders) ## eval = FALSE means that this won't run when we knit.
+```
+
+You can also print the dataset in the notebook with:
+
+```{r, message=FALSE}
+library(knitr)
+kable(murders)
+```
+
+One way to get a quick snapshot of a dataset is to run the `str` command on it. **Based on running `str(murders)`, what are the types of the different columns?**
+
+```{r}
+str(murders)
+```
+
+**Answer:**
+
+**Use the accessor `$` to extract the state abbreviations and assign them to the object `a`. What is the class of this object?**
+
+```{r}
+a <- murders$abb
+print(a)
+```
+
+**Answer:**
+
+It is also possible to access elements of a `data.frame` using double brackets. For example, we could have done `[["state"]]`. **Try this and verify that it works**.
+```{r}
+a <- murders[["abb"]]
+print(a)
+```
+
+## Factors
+
+A `factor` is like a `character`, but with a little bit of extra stuff. A `factor` can only take on a set (usually small) number of values. For example, run this code:
+
+```{r}
+print(murders$region)
+```
+
+and notice at the bottom that the possible levels (Northeast, South, North Central, and West). **Using the `length` and `levels` functions, confirm that there are four levels in `region`.**
+```{r}
+length(murders$region)
+levels(murders$region)
+```
+
+The function `table` takes a vector and returns the frequency of each element. You can quickly see how many states are in each region by applying this function. **Use this function in one line of code to create a table of states per region.**
+
+```{r}
+table(murders$region) ## I think this is what they want?
+```
+
+
+## Some Plots
+
+We will be primarily learning `ggplot2` in this course, but there are some simple plotting features we can use to get a sense of what is going on in the `murders` dataset. Run the following code:
+
+```{r}
+plot(murders$population, 1000000 * murders$total / murders$population)
+```
+
+**Is there a relationship between the population and murders per 1,000,000 people? Explain.**
+
+Pretty flat graph: murder/population seems not to be correlated
+
+## Some Programming
+
+Let's practice your programming fundamentals: writing loops, function, etc. Write a function that computes the sum of the first $n$ squares, i.e., $1^2 + 2^2 + \ldots + n^2$. **Using this function, compute the sum of the first 20 squares.** The following should get you started:
+
+```{r}
+sum_sq <- function(n) {
+    #tot_sum <- 0
+    #for(i in 1:n){
+        #tot_sum <- tot_sum + (i ** 2)
+    #}
+    #return(tot_sum)
+    tot_sum <- sum(c(1:20) * c(1:20))
+    return(tot_sum)
+}
+print(sum_sq(20))
+```
+
+**Answer:**
+
+There are two ways you might have answered the above question: with a loop `for(i in 1:n)` or using the `sum` function. **Repeat the above, using the method you did not use originally.**
+
+**Next, write a function that tests whether an input number `n` is prime.** It should return `TRUE` if the number is prime and `FALSE` otherwise. An easy way to do this is to use a loop `for(i in 2:(n-1))` and check if `n` is divisible by `i` by using `(n %% i == 0)` (for example, `9 %% 3` is 0 because 9 divided by 3 has remainder 0). If at any point in the loop you find `(n %% i == 0)` then return `TRUE`, while if you manage to get through the loop without returning `TRUE` you can return `FALSE`.
+
+```{r}
+is_prime <- function(n) {
+    if (n == 2) {
+        return(TRUE)
+    } else {
+        for(i in 2:(n-1)) {
+            if (n %% i == 0) {
+                return(FALSE)
+            }
+        }
+    }
+    return(TRUE)
+}
+```
+
+**Then, use `sapply`, `sum`, and `is_prime` to count the number of prime numbers less than 100.** (Note that 1 is not prime; also, make sure you return `TRUE` if `n = 2.`)
+
+```{r}
+sum(sapply(2:100, is_prime)) ##sapply applies function to each elem of vector
+```
+
+**Answer:**

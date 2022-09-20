@@ -1,0 +1,72 @@
+# Simulations of random variables
+True randomness is difficult, computers use different ways to "simulate" randomness enough to pass statistical randomness tests. We can use RNG that comes from physical phenomena (cursor movements, typing, entropy on linux). This stuff is not relevant to the class but one can read more on the links on the website.
+
+## Discrete uniform 
+Let $X$ be a random variable, where \[
+x \sim 
+\begin{cases}
+    x_1 & \text{with probability } \frac{1}{n}\\
+    x_2& \text{with probability } \frac{1}{n}\\
+    \vdots& \text{with probability } \frac{1}{n}\\
+    x_n & \text{with probability } \frac{1}{n}.
+\end{cases}
+\]  Humans are not good at  being random number generators.
+
+```{r}
+war <- function () {
+    p_1 <- sample(c(1,2,3),1)
+    #print(p_1)
+    p_2 <- sample(c(1,2,3),1)
+    #print(p_2)
+    if (p_1 == p_2) {
+        return("tie")
+    } else if (p_1 > p_2) {
+        return("one")
+    } else {
+        return("two")
+    }
+}
+war()
+```
+The function `sample` takes a sample of the specified size of elements of some vector with or without replacement with syntax `sample(x, size, replace = FALSE, prob = NULL)`. Here each person gets a card at random, and prints out their cards. It prints out the winner.
+
+if we want to know the probability that this is a tie? We need to repeat this function many many times. We use the function `replicate` for this (wrapper for `sapply`).
+
+```{r}
+nsim = 1000
+many.wars = replicate(nsim, war())
+sum(many.wars == "tie") / nsim
+```
+
+Here we run `wars` 1000 times, sum up the number of times we get a tie, and divide it by the sample size. The value is about `1/3` which adds up.
+
+All of the "important" named distributions have built in functions in `R`. For example, running `?rbinom` tells us how to use the binomial distribution, where size is number of trials, prob is the probability, and the argument `x` is the pmf. The `d` in `dbimon` is for density in the case that your probability distribution is discrete. For two trials, we get two successes with probability 1/4 and two failures with probability 1/4.
+
+```{r}
+dbinom(0, size = 1, prob = 0.5)
+dbinom(1, size = 1, prob = 0.5)
+dbinom(1, size = 2, prob = 0.5)
+dbinom(5, size = 1, prob = 0.5)
+```
+
+The function `pbinom` gives the distribution function. The `q` in `qbinom` is for "quantile" (theoretical way of saying "percentile"), which inverts the cdf. It gives us the _cutoff_ value such that the probability of landing below that value is $p$.
+
+```{r}
+pbinom(1, 2, 0.5)
+qbinom(0.75, size = 2, prob = 0.5)
+qbinom(0.25, size = 2, prob = 0.5)
+qbinom(0.10, size = 2, prob = 0.5)
+```
+
+The `r` in `rbinom` gives random draws.         
+
+```{r}
+rbinom(1, size = 2, prob = 0.5)
+
+sims = rbinom(nsim, size = 2, prob = 0.5)
+#sims
+mean(sims == 2)
+new_sims = rbinom(nsim, size = 20, prob = 0.4)
+hist(new_sims, breaks = seq(-0.5, 20.5, 1)) #making histograms
+```
+

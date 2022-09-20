@@ -1,0 +1,47 @@
+\section{Cap and slant products, plus Poincar\'e duality}  
+Previously: \[
+    \boxed{H^* \ \text{is naturally a graded (unital) ring} } 
+\] The big idea of today is the following: \[
+\boxed{H_{- *}\left( X \right) \ \text{is naturally a graded (unital) module over} \ H^* X} 
+\] Recall the cup product $\smile$ on  $H^*$ comes from 
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item dualized $E-Z$ Zilber map, where $E-Z = \lambda \colon S_*(X \times Y) \to S_*X \otimes S_*Y$. Use $\lambda^{\vee} \colon S^*X \otimes S^* Y \to S^*(X \times Y)$
+    \item diagonal $X \xrightarrow{\mathrm{diag}} X \times X$
+\end{itemize}
+The \textbf{cap product} on the other hand comes from $H^p X \otimes H_nX \to H_{n-p}X, c\otimes x \mapsto  c \smile x$. It is built from the same ingredients. Some formal properties: it makes homology a module over cohomology, where $(b \smile c) \frown x= b \frown (c \frown x)$, $1 \frown x = x$. For $f \colon X \to Y$, for $c \in H^*Y$ take the pullback class $f^* c \frown x$ for $ x \in H_*X$. Then  \[
+    f_*(f^* c \frown x) = c \frown f_*x.
+\] This is also called the ``projection formula''. There is some reason for this nomenclature but Dr.\ Perutz doesn't remember why.
+
+\subsection*{Construction of the cap product}
+We start with $S^* X \otimes S_{-*}X \xrightarrow{\id \otimes \mathrm{diag}_*} S^*X \otimes S_{-*}(X \times X)$. We send this second factor to a tensor product $S _{-*}X \otimes S_{-*}X$ by the Eilenberg-Zilber quasi-isomorphism. Then evaluate cochains on chains by definition to get $\Z \otimes S_{-*}=S _{-*}X$. This defines $\frown \colon S^*X \otimes S_{-*}X \to S _{-*}X$. In summary, \[
+\frown \colon S^* X \otimes S_{-*}X \xrightarrow{\id \otimes \mathrm{diag}_*} S^*X \otimes S_{-*}(X \times X) \xrightarrow{\id\otimes \lambda} S ^*X\otimes S _{-*}X \otimes S_{-*}X\xrightarrow{\mathrm{ev}\otimes \id}  \Z\otimes S _{-*}X = S _{-*X}
+\] For $c = [\phi] \in  H^p X, x=[z] \in H_n X$, $c \frown x = [\phi]\frown [z]=[\phi \frown z]$. Here $S_{-*}X$ means a cochain complex of degree $n$, $S _{-n}X$, cohomology equals $\partial $.
+
+
+\subsection*{Construction of the slant product}
+This is a map $H_p(X) \otimes H^n (X \times Y) \to H ^{n-p}(Y), x\otimes c \mapsto  c /x$. This is not quite division (it is bilinear), but it resembles division in the following sense; for $a \in H^* X, b \in H^* Y$, this leads to $a \times b \in  H^*(X\times )$ (where $a \times b =  \mathrm{pr}^*_x a \smile \mathrm{pr}^*_y b$). Then $(a \times b) / x = a(x) b$ for $x \in H_pX$, and this is how it resembles division.
+
+Let's construct this. We start with $S _{-*}X \otimes S^*(X \times Y) \xrightarrow{\id\otimes \kappa^{\vee}}  S _{-*}X\otimes S^* X\otimes S^* Y$ where $\kappa \colon S_*X \otimes S_* Y \to S_*(X \times Y)$ is the Eilenberg (something) map. Then evaluate like in the cap product. In short, \[
+- / - \colon S _{-*}X \otimes S^*(X \times Y) \xrightarrow{\id\otimes \kappa^{\vee}} S _{-*}X\otimes S^* X\otimes S^* Y \xrightarrow{\mathrm{ev}\otimes \id} S^*Y
+\] What is the point of the slant product? Let the algebraic variety $V$ be the module of vector bundles on $V$, called $\mathcal{M} $. Then $V \times \mathcal{M} $ carries a natural $H^*$ chain $c$, and $H_*V \to H^*M, x \mapsto c / x$. This is used a lot in the theory of algebraic vector bundles, gauge theory, etc. We will soon use it to construct Poincar\'e duality.
+
+About the evaluation map. We have been slightly sloppy with degrees, denoting everything with a $*$, but this should clear things up. Precisely, $\mathrm{ev }\colon  S_m X \otimes  S^n  X \to \Z$, where 
+\[
+\mathrm{ev}(z, \phi)=
+\begin{cases}
+    \phi(z),& \text{if} \ m=n\\
+    0, & \text{otherwise.} 
+\end{cases}
+\] 
+\subsection*{Manifolds}
+Let's talk about topological $n$-manifolds $M$. Some useful notation: for $K \subseteq M$, set  $H_p(M \mid K) = H_p(M,M \setminus K)$. These groups are \textbf{contravariant} with respect to $K$, that is, $K \lhook\joinrel\xrightarrow iL \subseteq M $ implies $i_* \colon H_*(M \mid L) \to H_p(M \mid K) $. The important case is that for $x \in M$, we have groups $\mathrm{or}_x=H_n (M \mid x)=H_n (M, M \setminus \{x\} )$. This is local homology, and it turns out they control orientation of $x$. 
+
+Say $x \in U \subseteq M$ homeomorphic to $\R^n $, our chart. Then there is a map $H_n (M \mid x) \xleftarrow{ \text{excision} } H_n (U \mid x)$ by inclusion, and excision tells us this is an isomorphism. So the rest of the manifold is irrelevant to local homology, and we only need to pay attention to a neighborhood. On the other hand, $\phi \colon (U,x) \xrightarrow{\cong} (\R^n ,0) ,$ which is a copy of $\Z$ in the $n$th degree. What is the generator of this group $\Z$? It is just a single simplex $\sigma \colon |\Delta ^n | \hookrightarrow \R^n  $ with 0 in its interior. 
+
+Note also that a choice of (ordered) basis for $\R^n $ determines a generator. Only the orientation of this basis matters. For example, permuting basis vectors changes the generator of $H_n (\R^n  \mid 0)$ via sign of permutation. This motivates the following definition.
+\begin{definition}[]
+    An \textbf{orientation} for $M^n $ is a coherent family of isomorphisms $\omega_x \colon H_n (M \mid x) \xrightarrow{\cong} \Z  $ for $x \in \Z$.
+\end{definition}
+What does ``coherent'' mean here? And how does this topological definition match the top form definition for smooth manifolds?
+

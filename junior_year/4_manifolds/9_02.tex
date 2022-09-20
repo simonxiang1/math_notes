@@ -1,0 +1,61 @@
+\section{The intersection form over $\R$} 
+Today we will talk about the intersection form  of closed 4-manifolds, its signature, and its cobordism invariance. 
+
+\subsection{Sylvester's law of inertia}
+In the 19th century, ``inertia'' was used in roughly the same way as ``invariance'' today. Let $(V, \cdot )$ be a symmetric bilinear form $[V\ni (x,y) \mapsto  (x \cdot y)\in  \R]$ on a finite dimensional vector space $V /\R$. Assume $(V, \cdot )$ is non-degenerate. Then there exists a basis $(v_1,\cdots ,v_r)$ in which the matrix of the form is \[
+\langle v_i  \cdot v_j  \rangle _{i,j}= 
+\begin{bmatrix}
+    I_p & 0 \\ 0 & -I_q
+\end{bmatrix}.
+\] We have that $\langle V,\cdot  \rangle $ determines $(p,q)$, and any maximal positive definite spanning $\{v_1,\cdots ,v_p\} $ (resp negative definite spanning $\{v_{p+1},\cdots ,v_q\} $) subspace of  $V$ has dimension  $p$ (resp  $q$).
+\begin{proof}[Sketch of proof]
+    Over any field $k$ with $\mathrm{char}(k) \neq 2$, we can find a basis  $(e_1 ,\cdots ,e_r)$ in which the matrix $(v_i  \cdot v_j )_{i,j}$ is \emph{diagonal} (orthonormal basis). Over $\R$, set $f_i  = e_i / \sqrt{|e_i  \cdot e_i |} $. Then $(f_i \cdot f_j ) _{i,j}= \mathrm{diag}(\pm 1, \cdots ,\pm 1)$. Rearrange the basis to make the matrix diagonal as so: 
+    \[
+    \mathrm{diag}(\underset{p}{\underbrace{1,\cdots ,1}} ,\underset{q}{\underbrace{-1,\cdots ,-1}} )
+\] Call this basis $(v_i )$. The next claim is that if $V = V ^+\oplus V^-$ where  $V^+$ is positive definite, $\oplus$ is orthogonal, and $V^-$ is negative definite, then $\dim V^+ = p, \dim V^- = q$. To prove this, note that $V^+ \cap  \mathrm{span}\{v _{p+1},\cdots ,v_{p+q}\} =0$. Use a dimension estimate to get $V = V^+ \oplus \mathrm{span}\{v_{p+1},\cdots ,v_{p+q}\} $ and $\dim V^+ = p$. 
+
+The final claim is that a maximal positive definite subspace has dimension  $p$, and the reason is that its orthogonal complement has a splitting like above.
+\end{proof}
+Define the signature $\tau (v,\cdot ) = p-q = \dim V^+ - \dim V^-$. Complete invariants for a real non-degenerate symmetric bilinear forms are of rank $r(V,\cdot )= \dim = p+q$, where $\tau(V, \cdot ) = p-q$. Note that the rank $r(V, -\sigma)= r(V, \sigma)$ doesn't care about the sign, while $\tau(V,-\sigma)=-\tau(V,\sigma)$. 
+
+So if $M^4$ is a closed oriented 4-manifold, it has an intersection form $\cdot $ on its second integer homology $H_2(M; \Z)\cong  H^2(M;\Z)$, hence a real valued non-degenerate form on $H_2(M;\R)=H_2(M;\Z)\otimes_{\Z}\R=H^2(M;\R)=H^2(M,\Z)\otimes \R$ (extending integers). This has a rank $\dim H^2(M;\R)= b^2(M)$ (the second Betti number) which has signature $\tau(M)$. 
+ \begin{example}
+     Some examples:
+     \begin{itemize}
+     \setlength\itemsep{-.2em}
+         \item For $\C\mathrm{P^2}$, $Q _{\C\mathrm{P^2}}= [I_1], \tau =1$. In general, for an orientation reversed manifold the sign of the fundamental class is flipped, so $\tau(-M)=-\tau(M)$, eg  $\tau(\overline{\C \mathrm{P^2}})= -1$. 
+         \item For $\tau(S^2 \times S^2)$, the intersection form is $\left[ 
+     \begin{smallmatrix}
+         0 & 1 \\ 1 & 0
+     \end{smallmatrix}\right] $ and has signature 0. Or, there exists an orientation reversing diffeomorphism $S ^2 \times S^2 \to  S^2 \times S^2 $implies that $\tau = -\tau$, or $\tau =0$.
+ \item Last time we saw that $Q _{M_1 \# M_2}= Q _{M_1}\oplus Q_{M_2}$, so $\tau(M_1 \# M_2) = \tau(M_1)+\tau(M_2)$. For example, $\tau\left(p \C\mathrm{P^2}\# q \overline{\C \mathrm{P^2}}\right)=p-q$, while $b^2\left( p \C\mathrm{P^2}\# q \overline{\C \mathrm{P^2}} \right) =p+q$. So an oriented 4-manifold $p \C\mathrm{P^2}\# \overline{q \C \mathrm{P^2}}$ determines $p,q$. If $p \C \mathrm{P^2}\# q \overline{\C \mathrm{P^2}}\cong  r \C \mathrm{P^2}\# s \overline{\C \mathrm{P^2}}$, then $p=r$ and $q=s$.
+     \end{itemize}
+\end{example}
+
+\subsection{Cobordism invariance of $\tau$}
+We need to set up Poincar\'e-Lefschetz duality. For $N$ a compact oriented $(d+1)$-manifold with boundary $\partial N$, there are canonical isomorphisms as follows: $H^k (N) \cong  H _{d+1-k}(N, \partial N)$ and $H_k(N) \cong  H ^{d+1-k}(N,\partial N)$. The picture is as follows: for a closed manifold, the intersection pairing is on cycles with complementary dimension. With boundary, we can let one of the loops run into the boundary.
+
+There is a commutative diagram with exact rows as follows; we have $\partial N \overset{i}{\hookrightarrow}  N ^{d+1}$. We write the exact sequence of the pair $(N, \partial N)$ in cohomology. We have \[
+    \begin{tikzcd}
+\cdots \arrow[r] & {H^k(N,\partial N)} \arrow[d, "\cong"'] \arrow[r] & H^k(N) \arrow[d, "\cong"'] \arrow[r, "i^*"]     & H^k(\partial N) \arrow[r] \arrow[d, "D_{\partial N}"] \arrow[d, "\cong"'] & {H^{k+1}(N,\partial N)} \arrow[r] \arrow[d, "\cong"'] & \cdots \\
+\cdots \arrow[r] & H_{d+1-k}(N) \arrow[r]                            & {H_{d+1-k}(N,\partial N)} \arrow[r, "\partial"] & H_{d-k}(\partial N) \arrow[r, "i^*"]                                      & H_{d-k} (N) \arrow[r]                                 & \cdots
+\end{tikzcd}
+\] So the Poincar\'e-Lefschetz duality isomorphisms fit nicely into a commutative diagram.
+\begin{theorem}
+    Say $N ^{2n+1}$ is a compact oriented manifold with boundary $i \colon \partial N \hookrightarrow N $ where $\partial N$ has dimension $2n$ (here $H^*$ uses real coefficients). Define \[
+        L = \im (i^* \colon H^n  (N) \to H^n (\partial  N)) \subseteq  H^n (\partial N).
+    \] Then the following holds:
+    \begin{enumerate}[label=(\roman*)]
+    \setlength\itemsep{-.2em}
+\item $L$ is isotropic for the cup product form, or $x,y \in L $ implies that $x \smile y \in H^{2n}(\partial N)$ is 0.
+\item $\dim L = \frac{1}{2}\dim H^n (\partial N)$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    The proof of (i) is easy; take $x,y \in H^n (N )$ and cup together their restrictions to get
+    \[
+    i^*x \cdot  i^* y =\langle i^* x \smile i^* y , [\partial  N]\rangle = \langle i^* (x \smile y), [\partial N] \rangle = \langle x \smile y , i_*[\partial N] =0\rangle =0.
+\] For the proof of (ii), it's a diagram chase.
+\end{proof}
+The upshot is this; $\tau(\partial  N^5)=0$. We will get to this next time.
+

@@ -1,0 +1,70 @@
+\section{(Co)homology of 4-manifolds} 
+Office hours are Monday from 3-4 PM in PMA 10.136.
+\orbreak
+Recall from algebraic topology that for any path connected space $X$, the Hurewicz map $h \colon \pi_1(X,x) ^{\mathrm{ab}} \to H_1(X)$ induces an isomorphism. For $[S^1 ] \in H_1(S^1 )$, we have $h([\gamma ]) = \gamma _*[S^1 ] \in  H_1 X$, so $\gamma  \colon (S^1 ,*) \to (X,x)$. If one looks in Hatcher, the general idea is that as a map into an abelian group, the Hurewicz map necessarily kills commutators, and that in fact is all it does. A lesser known ``dual'' fact is that \[
+    H^1(X) \cong \Hom (\pi_1 (X), \Z) \cong \Hom(\pi_1(X), \Z) \cong \Hom(H_1 X, \Z).
+\]  For example, if $\pi_1 = \{1\} $, then $H_1 = H^1 = 0$.
+\subsection{Universal coefficients}
+Suppose we look at the second cohomology of a space $H^2(X)$, and specifically we look at the torsion subgroup $H^2(X) _{\mathrm{tors}}$. Universal coefficients says that this is isomorphic to homology one degree down, or $H^2(X) _{\mathrm{tors}} \cong H_1(X) _{\mathrm{tors}}$. On the other hand, if we mod out by torsion we get \[
+    H^2(X) / \mathrm{tors} \underset{\text{eval pairing} }{\xrightarrow{\cong}} \Hom (H_2 X, \Z).
+\]  Recall the list of possible homology and cohomology groups for a closed, oriented, connected, topological 4-manifold $X$.
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item $H^0(X) \cong H_4(X) \cong \Z [X]$, which is canonical. There is a cocycle unit that sends a point to one. $H_4(X) \cong \Z[X]$ depends on the fundamental class, which depends on orientation.
+    \item $H^1(X) \cong H_3(X)$, where $H_1=\Hom(\pi_1, \Z)$.
+    \item $H^2(X) \cong H_2(X)$---note that these two are isomorphic. 
+    \item $H^3(X) \cong H_1(X)$, where $H_1 = \pi_1 ^{\mathrm{ab}}$.
+    \item $H^4(X) \cong H_0(X) = \Z [ \text{pt}] $, this depends on the orientation.
+\end{itemize}
+So the key invariants are $\pi_1$ and $H_2 = H^2$. When $X$ is simply connected, the table simplifies to the following:
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item $H^0(X) \cong H_4(X) \cong \Z [X]$
+    \item $H^1(X) \cong H_3(X) = 0$.
+    \item $H^2(X) \cong H_2(X)$.
+    \item $H^3(X) \cong H_1(X) = 0$.
+    \item $H^4(X) \cong H_0(X) = \Z [ \text{pt.}] $
+\end{itemize} Applying universal coefficients, we see that $H^2 _{\mathrm{tors}} = (H_1) _{\mathrm{tors}}=0$, and $H^2 = \Hom(H_2, \Z)$. So $H^2 $ is a free abelian group identified with its dual via Poincar\'e duality.
+\begin{example}
+    Let's run through our basic stock of examples (subscripts denote homology in that dimension).
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+\item $S^4$ has the CW decomposition is $e_0 \cup e_4$, so $H_*(S^4) = \Z_0 \oplus \Z_4$.
+\item $\C\mathrm{P}^2 = e_0 \cup  e_2 \cup  e_4$, and $H_*(\C\mathrm{P}^2)= \Z_0 \oplus \Z_2 \oplus \Z_4 \cong H^*(\C\mathrm{P}^2)$.
+\item $S^2 \times S^2 = (e_0 \times e_0)\cup (e_0 \times  e_2) \cup (e_2 \times e_0) \cup  (e_2 \times e_2) $ as a product of $S^2 = e_0 \times  e_2$. Reading off the homology, we have $H_*(S^2 \times  S^2) = \Z_0 \oplus \Z_2^2 \oplus \Z_4$.
+\item If $X_1,X_2$ are 4-manifolds as above (smooth, closed, oriented, connected), we discussed how to form their connected sum $X_1 \# X_2$ so they meet along a copy of the 3-sphere. Using the Mayer-Vietoris sequence we can check that $H_i (X_1 \# X_2) = H_i (X_1) \oplus H_i (X_2)$, where $0<i<4$. To do this exercise, think about the effect of passing $X_i \leadsto X_i ^{\circ }$, which itself is a MV exercise.
+    \end{itemize}
+    We can write down more examples---if we wanted to look at $n$ copies of connected sums of $\C \mathrm{P}^2$'s with $n$ copies of the other orientation of $\C\mathrm{P}^2$, we have \[
+        H_*\left( \overset{m}{\#} \C\mathrm{P}^2 \overset{n}{\#} \overline{\C \mathrm{P}^2} \right)  = \Z_0\oplus \Z_2 ^{m+n}\oplus \Z.
+    \] Furthermore, $S^2 \times S^2, \C \mathrm{P}^2 \# \C \mathrm{P}^2, \C \mathrm{P}^2 \# \overline{\C \mathrm{P}^2},$ and $ \overline{\C \mathrm{P}^2} \#   \overline{\C \mathrm{P}^2}$ have the same $H_*$ (additively). 
+\end{example}
+    \subsection{Multiplicative structure}
+    The main thing is the \textbf{cup product}. For all spaces  $Y$ we have the singular chain complex $(S_*(Y), \partial )$. We have the singular \emph{co}chain complex $(S^*Y, \delta)$, where $S^n (Y) = \Hom (S_n Y, \Z)$, and $\delta = \partial  ^{\vee}$. Then there is the cup product map, which is the cochain map $S^* Y \otimes S^* Y \to  S^* Y$. There is a result called the \textbf{Eilenberg-Zilber Theorem}, which concerns natural chain maps $S_*(Y \times Z) \xrightarrow{\lambda}   S_*(Y) \otimes S_* (Z)$ wrt spaces $Y,Z$. The condition we want to impose is that there results a map on $H_0$ such that $\lambda[\mathrm{pt,pt}] \to  [\mathrm{pt}] \otimes [\mathrm{pt}]$. The theorem says that:
+    \begin{enumerate}[label=(\roman*)]
+    \setlength\itemsep{-.2em}
+\item  $\lambda$ exists (and is standard, the so called Alexander-Whitney map)
+\item $\lambda$ is unique up to natural chain homotopies
+\item $\lambda$ is a natural chain homotopy equivalence
+    \end{enumerate}
+    The point is that we get maps $S^* Y \otimes S^* Y \xrightarrow{\lambda^{\vee}}   S^*(Y \times Y)$ sending tensor products of \emph{co}chains to \emph{co}chains of a product. Then apply the \emph{diagonal} map $\mathrm{diag}\colon Y \to Y\times Y , y \mapsto (y,y)$. In summary, this leads to a map\[
+        \smile \colon S^* Y \otimes S^* Y \xrightarrow{\lambda ^{\vee}} S^* (Y \times Y ) \xrightarrow{\mathrm{diag}^*} S^*(Y)
+    \] inducing inducing the cup product \[
+    \smile \colon H^p Y \otimes H^q Y \to   H ^{p+q} Y,\quad [\alpha ]\otimes [\beta ] \mapsto  [\alpha  \smile \beta ]
+    \] by  passing to representatives. The cup product has the properties of being 
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+        \item Associative, makes $H^* Y = \bigoplus _{ p \geq 0}H^p Y$ a graded ring,
+        \item Unital $(1 \in H^0 Y)$,
+        \item Graded commutative, $b \smile a = (-1) ^{|a| \, |b|} a \smile b$.
+    \end{itemize}
+    We still need to discuss the \textbf{cap product}, which is a graded module over $(H^* Y, \smile)$, as follows: \[
+        \frown \colon H^p (Y) \otimes H_q(Y) \to H_{q-p}(Y),
+    \] where $(a\smile b)\frown h = a\frown (b \frown h)$. There is a similar construction using the Eilenberg-Zilber theorem which we will not write out now. However we can better state what the Poincar\'e duality theorem says now.
+     \begin{namedthm}{Poincar\'e Duality} 
+       For $X^n $ a closed oriented topological $n$-manifold, the map   \[
+           D_X \colon H^k(X ) \to H_{n-k} (X), \quad D_X(a) = a \frown \underset{\in H_n (X)}{[X]} 
+       \] is an isomorphism.
+    \end{namedthm}
+    If now $X$ is smooth (as well as the other conditions), say $Y^{n-j} \hookrightarrow X^n , Z^{n-k} \hookrightarrow X^n  $ are compact oriented embedded submanifolds. We have fundamental classes $[Y] \in H_{n-j}(X), [Z] \in H_{n-k}(X)$. Suppose these have Poincar\'e duals $D^{-1} _X [Y] \in  H^j (X), D^{-1}_X[Z ] \in H^k (X)$. We can now cup together their homology classes to get $D^{-1}_X [Y] \smile D^{-1}_X [Z] \in H^{j+k}(X)$. The assertion is that this class is Poincar\'e dual to $[Y \cap  Z]$ (dimension $n-(j+k)$) assuming $Y \transv Z$. So Poincar\'e duality is just intersecting submanifolds. Using this we can compute cup products in the cohomology rings of our basic 4-manifolds, which we will do next time.
+
+

@@ -1,0 +1,14 @@
+---
+title: "cohere"
+output: html_document
+date: "2022-09-17"
+---
+LLMs? Relationship between images and text. Things to do: classify, search, summzarize, geneatate, clister , extract, rewrite.
+
+- Text generation: `co.generate` takes text and makes more. make sure to generate multiple outputs. Example: "In summary", then complete the conclusion. `https://os.cohere.ai/playground/xlarge/generate`
+- Text representation. Creates a numerical representation of text to manipulate somehow. Embeddings are useful since you can build classifiers with them. Use `co.classify`. Other way around as well: `https://pokaidex.art/`. Type of pokemon and description is created by Cohere generate. Use streamit app. Another one is date generator (LMAOOO pulp fiction). `https://urzas.ai/`. These apps get REALLY popular.
+
+Read the docs. Chaining/piping makes things powerful. More difficult tasks can only be performed when broken down into subtasks.
+
+Ai generated math?? 
+ 

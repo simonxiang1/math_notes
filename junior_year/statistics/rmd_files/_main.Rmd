@@ -1,0 +1,59 @@
+---  
+title: Class notes
+site: bookdown::bookdown_site
+output: 
+  bookdown::html_document:
+    toc: yes 
+---
+
+
+<!--chapter:end:index.Rmd-->
+
+
+# Simulations of random variables
+
+Placeholder
+
+
+## Discrete uniform 
+
+<!--chapter:end:9_02.Rmd-->
+
+# ok
+
+<!--chapter:end:9_07.Rmd-->
+
+# 9-09 lecture
+Some variable can be ordered and some can't. An example is majors in college, which are completely unordered (the "mean" of a major makes no sense). For categorical variables, there will be a disjoint and exhaustive number of categories (you can use the "other" category to make this exhaustive). Because what we studied is categorical, there is no meaning to mean/median/etc. However pie charts do make sense (example: pie chart of pies).
+
+Pie charts only work with **non-overlapping** categories. Please do not do that. You can download form responses as `.csv` files. From here we can open these in Excel or your form processor of choice. Put everything (`R`-scripts, data sets, etc) in the same directory. Import the data into `R`-studio.
+
+A data frame is just a speical matrix. Every column corresponds to an observed value, which can be a quantity or a category. Think of data frames as events, subsets of the whole population. We want to create an `R` script that communicates easily with our data set. We will create something called a "working directory" in our console, with the command `setwd` (use quotations around). tables, data frames (problem 3project 4)
+
+kaggle titanic data set. passenger class is categorical and ordinal, gender is categorical. a
+
+
+
+<!--chapter:end:9_09.Rmd-->
+
+
+# 9/12 lecture
+
+Placeholder
+
+
+
+<!--chapter:end:9_12.Rmd-->
+
+
+# Simulations
+
+Placeholder
+
+
+## Problem 1.  
+## Problem 2.  
+## Problem 3.  
+
+<!--chapter:end:m358k-ww3-sims-probs.Rmd-->
+

@@ -1,0 +1,99 @@
+\section{Orientations, framings, and the Pontrjagin-Thom construction} 
+Thom made a profound link between geometric topology (bordism rings) to homotopy theory. The geometric side is the set of \emph{framed} bordism classes of submanifolds of a fixed manifold $M$; the homotopical side is the set of homotopy classes of maps from $M$ into a sphere.
+
+First we review orientations.
+\subsection{Orientations}
+Let $V$ be a real vector space of dimension $n>0$. A \emph{basis} of $V$ is a linear isomorphism $b \colon \R^n  \to V$. Let $\mathcal{B} (V)$ denote the set of all bases of $V$. The group $\mathrm{GL}_n (\R)$ of linear isomorphisms of $\R^n $ acts \textbf{simply transitively} (or regular, transitively and freely) on the right of $\mathcal{B} (V)$ by composition; if $b \colon \R^n  \to V$ and $g  \colon \R^n  \to \R^n $ are isomorphisms, then so is $b \circ g \colon \R^n  \to V$. We say $\mathcal{B} (V)$ is a \textbf{right} $\mathrm{GL}_n (\R)$\textbf{-torsor}. For $b \in \mathcal{B} (V)$ the map $g \mapsto b \circ g$ is a bijection from $\mathrm{GL}_n (\R)$ to $\mathcal{B} (V)$, we use it to topologize $\mathcal{B} (V)$. Since $\mathrm{GL}_n (\R)$ has two components, so does $\mathcal{B} (V)$.
+   \begin{definition}[]
+       An \textbf{orientation} of $V$ is a choice of component of $\mathcal{B} (V)$.
+   \end{definition} 
+   Recall that components of $\mathrm{GL}_n (R)$ are distinguished by the determinant homomorphism $\det \colon \mathrm{GL}_n (\R) \to \R^{\neq 0}$, where the identity component consists of $g \in \mathrm{GL}_n (\R)$ with $\det(g) >0$, and the other component consists of $g$ with $\det(g) <0$. On the other hand, an isomorphism $b \colon \R^n  \to V$ does not have a numerical determinant. Rather, its determinant lives in the \textbf{determinant line} $\Det $. Define \[
+       \Det V= \{\varepsilon  \colon \mathcal{B} (V) \to \R \mid \varepsilon (b \circ g)=\det (g)^{-1}\varepsilon (b) \ \text{for all} \ b \in \mathcal{B} (V), g \in \mathrm{GL}_n (\R)\} .
+   \] {\color{red}todo:do not understand this def} 
+   \begin{remark}
+       Prove these as exercises:
+       \begin{enumerate}[label=(\roman*)]
+       \setlength\itemsep{-.2em}
+           \item Construct a canonical isomorphism $\Det V \xrightarrow{\cong} \bigwedge^n V$ of the determinant line with the highest exterior power. The latter is often taken as the definition. 
+           \item Prove that an orientation is a choice of component of component of $\Det V \setminus \{0\} $. More precisely, construct a map $\mathcal{B} (V)\to \Det V \setminus \{0\} $ which induces a bijection on components.
+            \item Construct the ``determinant'' of an arbitrary linear map $b \colon \R^n  \to V$ as an element of $\Det V$. Show it is nonzero iff $b$ is invertible. 
+            \item More generally, construct the determinant of a linear map $T \colon V \to W$ as a linear map $\det T \colon \Det V \to \Det W$, assuming $\dim V=\dim W$.
+            \item Show a canonical $\{\pm 1\} $-torsor associated to a vector space can also be defined as \[
+                    \mathfrak o (V)= \{\varepsilon  \colon \mathcal{B} (V) \to \{\pm 1\}  \mid  \varepsilon (b \circ g) = \operatorname{sign}\det (g) ^{-1}\varepsilon (b) \ \text {for all}\ b \in \mathcal{B} (V), g \in \mathrm{GL}_n (\R) \} .
+            \] 
+       \end{enumerate}
+       In short, an orientation of $V$ is a point of $\mathfrak o (V)$.
+   \end{remark}
+   \begin{proof}
+       Attempts: {\color{red}todo:check} 
+       \begin{enumerate}[label=(\roman*)]
+       \setlength\itemsep{-.2em}
+           \item The isomorphism is given by sending $\{e_1,\cdots ,e_n \} $ to $e_1 \wedge \cdots \wedge e_n $? What is this def of $\Det$?
+           \item For a basis $\{e_i \} \in \mathcal{B} (V)$, consider the bijection $e_1, \cdots ,e_n  \mapsto e_1 \wedge \cdots \wedge e_n $. This gives a partition of $\mathcal{B} (V)$ by the two components of $\Det V \setminus \{0\} $ (since $\mathrm{GL}_n (\R)$ is partitioned the same way).
+            \item same process?
+            \item ?
+       \end{enumerate}
+   \end{proof}
+   There is a unique 0-dimensional vector space consisting of a single element, the zero vector. The unique basis is the empty set, so $\Det 0$ is canonically isomorphic to $\R$ by definition {\color{red}todo:isn't there only one map?} and $\mathfrak o(V)$ is canonically isomorphic to $\{\pm 1\} $. Note that $\bigwedge^0 (0)=\R$ as $\bigwedge ^0 V=\R$ for \emph{any} real vector space $V$. The real line $\R$ has a canonical orientation: the component $\R^{>0} \subset \R^{\neq 0}$. We denote this orientation as ``+''. The opposite orientation is denoted ``-''.
+   \begin{ex}
+       Suppose $0 \to V' \xrightarrow i V \xrightarrow jV '' \to 0$ is a short exact sequence of finite dimensional vector spaces. Construct a canonical isomorphism $\Det V'' \otimes \Det V' \to \Det V$. Note the order: quotient before sub.
+   \end{ex}
+   \begin{proof}
+       {\color{red}todo:? forgot how to work with tensor} 
+   \end{proof}
+   Let $X$ be a smooth manifold and $V \to X$ a finite rank real vector bundle. For each $x \in X$ there is associated to the fiber $V_x$ over $x$ a canonical $\{\pm 1\} $-torsor $\mathfrak o(V)_x$--- a two element set---which has the two descriptions in (ii) of the exercise.
+   \begin{ex}
+       Use local trivializations of $V \to X$ to construct local trivializations of $\mathfrak o(V) \to X$, where $\mathfrak o(V)= \coprod _{x \in X}\mathfrak o(V)_x$.
+   \end{ex}
+
+   \begin{definition}[]
+       \begin{enumerate}[label=(\roman*)]
+       \setlength\itemsep{-.2em}
+   \item An \textbf{orientation} of a real vector bundle $V \to X$ is a section of $\mathfrak o(V) \to X$.
+   \item If $o \colon X \to \mathfrak o(V)$ is an orientation, then the \textbf{opposite orientation} is the section $-o \colon X \to \mathfrak o(V)$. 
+\item An \textbf{orientation} of a manifold is an orientation of its tangent bundle $TX \to X$.
+       \end{enumerate}
+       Note that orientations may or may not exist, that is, a vector bundle $V \to X$ may or may not be orientable. The notation $-o$ uses the fact that $\mathfrak o(V) \to X$ is a principal $\{\pm 1\} $-bundle: $-o$ is the result of acting $-1$ on $o$.
+   \end{definition}
+   \begin{ex}
+       Construct the \textbf{determinant line bundle} $\Det V \to X$ by carrying out the determinant construction pointwise and proving local trivializations exist. Show that a nonzero section of $\Det V \to X$ determines an orientation.
+   \end{ex}
+
+
+  {\color{red}todo:bordism invariant?}  
+
+  \subsection{Oriented bordism}
+  We discuss bordism on manifolds with orientation. Now the manifolds $Y_0,Y_1$ both carry orientations, as well as the bordism $X$, and the embeddings $\theta_0,\theta_1$ must be orientation preserving {\color{red}todo:check this}. In the dual case, $Y^{\vee}\neq Y$, but rather $-Y$, the manifold with the opposite orientation. The reversal ensures $\theta_0 ^{\vee}$ and $\theta_1^{\vee}$ are orientation preserving.
+
+  Denote the set of oriented bordism classes of $n$-manifolds as $\Omega_n ^{SO}$. There is an oriented bordism ring $\Omega^{SO}$. Some facts:
+  \begin{theorem}
+      \begin{enumerate}[label=(\roman*)]
+      \setlength\itemsep{-.2em}
+          \item There is an isomorphism \[
+                  \Q[y_4,y_8,y _{12},\cdots ] \xrightarrow{\cong} \Omega^{SO}\otimes \Q
+          \] under which $y_{4k}$ maps to the oriented bordism class of the complex project space $\mathbb {CP} ^{2k}$.
+      \item All torsion in $\Omega^{SO}$ is of order 2.
+        \item There is an isomorphism \[
+                \Z[z_4,z_8, z_{12},\cdots ] \xrightarrow{\cong} \Omega^{SO} / \text{torsion} .
+        \] 
+      \end{enumerate}
+  \end{theorem}
+  Let's discuss $\Omega ^{SO}$ in lower dimensions.
+  \begin{itemize}
+  \setlength\itemsep{-.2em}
+      \item $\Omega_0^{SO}\cong \Z$, the generator being an oriented point $\text{pt} _+$.
+      \item $\Omega_1^{SO}=0$. Every closed oriented 1-manifold is a finite disjoint union of circles $S^1 $, and $S^1 =\partial  D^2$.
+  \end{itemize} 
+  {\color{red}todo:rest} 
+  \subsection{Framed bordism and the Pontrjagin-Thom construction}
+  Fix a closed $m$-dimensional manifold $M$. Let $Y \subseteq M$ be a submanifold. Recall that on $Y$ there is a short exact sequence of vector bundles \[
+      0 \to  TY \to \left. TM \right| _Y \to \nu \to 0
+  \] where $\nu$ is the quotient bundle and is called the \textbf{normal bundle} of $Y$ in $M$.
+  \begin{definition}[]
+      A \textbf{framing} of the submanifold $Y \subset M$ is a trivialization of the normal bundle $\nu$.
+  \end{definition}Recall a trivialization of $\nu$ is an isomorphism of vector bundles $\R^q \to \nu$, where $q$ is the codimension of $Y$ in $M$. Equivalently, it is a global basis of sections of $\nu$.
+
+  Let $N$ be a manifold of dimension $q$ and $f \colon M \to N$ smooth. Suppose $p \in N$ is a \textit{regular value} of $f$ and fix a basis $e_1, \cdots ,e_q$ of $T_pN$. Then  $Y:= f ^{-1} (p) \subset M$ is a submanifold and the basis $e_1, \cdots ,e_q$ pulls back to a basis of the normal bundle at each point $y \in Y$. 
+
+
+  {\color{red}todo:lecture 13 back to front, lec 2 exercrses, tensor stuff} 

@@ -1,0 +1,37 @@
+{\color{red}todo:previous lecture} 
+\section{Quasimorphisms on free groups} 
+We talk about Rolli's construction. Consider $F_2=\langle a,b \rangle $. Our first construction lies in $\ell ^{\infty}(\Z_+)= \{\R\text{-valued bounded funtions on} \ \Z_+\} $, or bounded sequences. So $\sup _{n\geq 1}|f(n)|$ must be finite, and denote this $|f|_{\infty}$. Given $f,g \in \ell ^{\infty}(\Z_+)$, define $\varphi  _{f,g}$ on $F_2$. Let $w \in F_2$. Then $w=a ^{m_1}b^{n_1}a ^{m_2}b^{n_2}\cdots a ^{m_k}b ^{n_k}$, $_i ,n_i  \in \Z$, with $m_i ,n _i  \neq 0$ except for $m_1$ or $n_k$. Then our quasimorphism is defined by \[ \varphi _{f,g}(w)=\sum _{i=1}^k f(m_i )+ \sum _{j=1}^k g(n_i )
+\] where we extend $f,g$ to odd functions on $\Z$. An odd function satisfies $f(-n)=-f(n), f(0)=0$; odd functions are purely determined by their positive part, and similarly you can uniquely extend functions defined on the positive integers to an odd function. We need to check that this is a quasimorphism.
+\begin{lemma}
+    $\varphi _{f,g}$ is a quasimorphism, with defect $D(\varphi _{f,g}) \leq 3 \max \{|f|_{\infty}, |g|_{\infty}\} $.
+\end{lemma}
+\begin{proof}
+    Let $u,v \in F_2$. If $G=A*B$ with $u=a_1b_1 \cdots a_kb_k$, $v=a_1',b_1' \cdots a'_{\ell}b'_{\ell}$, when multiplying together you get $a_1b_1 \cdots a_kb_ka_1',b_1' \cdots a'_{\ell}b'_{\ell}$ by concatenation. If $b_k=\id$, and  $a_k^{-1}=a_1'$, and so on, things might cancel. For example. if $u=xay^{-1},v=ya'z^{-1}$, then $uv=xaa'z^{-1}$. Now let $a=a^m, a'=a^n ,  m,n\neq 0, m+n\neq 0$, $a\cdot a'=a ^{m+n}$. Let $a',a'' \in A, a' \cdot a''\neq \id$. Then $\varphi _{f,g}(uv)-\varphi _{f,g}(n)-\varphi _{f,g}(v)= f(m+n)-f(m)-f(n)$ {\color{red}todo:this} 
+\end{proof}
+\begin{lemma}
+    $\overline{\varphi }_{f,g}(w)=\varphi _{f,g}(v)$, where $w=u v uv^{-1}$ is cyclically reduced.
+\end{lemma}
+For example, let $w=a^{10}b^{12}a^{-2}b^3a^{5}b^{-12}a^{-10}$. {\color{red}todo:?} 
+\begin{lemma}
+    We have a linear embedding $\ell ^{\infty}(\Z_+) \to Q(F_2), f\mapsto  \overline{\varphi }_{f,f}$.
+\end{lemma}
+\begin{proof}
+    $\overline{\varphi }_{f,f}\neq 0$ if $f \neq $ 0. Then $\overline{\varphi }_{f,f}(a^n ,b^n )=\varphi _{f,f}(a^n b^n )=f(n)+f(n) = 2f(n)$. $n \in \Z_+$ is arbitrary so $\overline{\varphi }_{f,f}=0$ implies $f=0$.
+\end{proof}
+\begin{theorem}
+    $Q(F_2)$ and $H^2_b(F_2; \R)$ are infinite dimensional. 
+\end{theorem}
+\begin{proof}
+    $\dim Q(F_2)=\infty$ since $\dim \ell ^{\infty}(\Z_+)=\infty$. Then \[
+        Q(F_2)/ H^1(F_2)=\ker (H^2_b(F_2;\R) \to H_2(F_2)\R)=H^2_b(F_2;\R) 
+    \] which implies $H^2_b(F_2;\R)$ is infinite dimensional.
+\end{proof}
+\begin{cor}
+    If $G \twoheadrightarrow F_2$, then $Q(G)$ is $\infty$-dimensional.
+\end{cor}
+\begin{proof}
+    Let $h^* \colon Q(F_2) \hookrightarrow Q(G) $ be the pullback, composing gives our result.
+\end{proof}
+\begin{example}
+    $F_n $ for $n\geq 2$ has the surjective map $\pi_1(S_g) \twoheadrightarrow F_g$, $g \geq 2$. We deduce all these groups have infinite-dimensional quasimorphisms.
+\end{example}

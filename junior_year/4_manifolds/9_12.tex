@@ -1,0 +1,40 @@
+\section{J.H.C Whitehead's Theorem on 4-dimensional homotopy types} 
+\begin{theorem}
+    If $X,X'$ are simply connected, oriented typical 4-manifolds, then any isometry $Q_X \xrightarrow{\cong} Q_X$ of intersection forms comes from an oriented (deg 1) homotopy equivalence $X \to X'$.
+\end{theorem}
+This comes from a 1949 paper by Whitehead called ``\emph{On simply connected 4-dimensional polyhedra}'', with complications due to $H^3$. For manifolds, $H^3=H=0$, so we get a simpler statement and simpler proof.
+
+\subsection{Overview of relevant homotopy theory}
+For a space $X$, call it 0-connected if it's path-connected and for $n\geq 0$, $n$-connected if all based maps $(S^k,*) \to (X,*)$ ($k \leq n$) are based homotopies to constants. In other words, $\pi_k(X,*)=[S^k, X] = 0$ for all $k \leq n$.
+\begin{namedthm}{Hurewicz Theorem} 
+    Consider the Hurewicz map $h_n  \colon \pi_n (X) \to H_n (X), [\gamma ] \mapsto  \gamma ^*[S^n ]$. If $X $ is $(n-1)$-connected (where $n-1 \geq 1$), then $h_n $ is an \textbf{isomorphism}.
+\end{namedthm}
+It is often useful to think of the homotopy groups as $\pi_n (X,*) = [(I^n , \partial I^n ),(X,x)]$, since $S^n  = I^n  /\partial I^n $. In other words, we map the boundary of the $n$-cube to the basepoint. Using this picture, composition is easy to draw. There is a relative version of this setup; for $A \subseteq X$, we have a relative homology group $H_*(X,A)$ and a long exact sequence \[
+    H_k(A) \to H_k(X) \to H_k(X,A) \xrightarrow{\partial }  H_{k-1}(A)
+\] There is something similar for homotopy groups, where $* \subseteq A \subseteq X$. We get relative homotopy groups $\pi_k(X,A)$ sitting in an exact sequence of the same sort: \[
+\cdots \to \pi_k(A) \to \pi_k(X) \to \pi_k(X,A) \to \pi_{k-1}(A) \to \cdots 
+\] The absolute homotopy gives a small clue of what to do; $I^n $ should map to $X$ while $\partial I^n $ should map to $A$. We have $\pi_n (X,A,*) = \{\text{homotopy classes of maps } (I^n ,\partial I^n ,J^{n-1} ) \to (X,A,*)\} $, where $J^{n-1}:= (\partial I^n ) \setminus \left( \{1\} \times I^{n-1}   \right) $, which is the boundary minus the top face. One can think of $J^{n-1}$ as the ``open'' or lidless cardboard box. Then we have the relative Hurewicz map $\pi_n (X,A,*) \to H_n (X,A)$, which is an isomorphism if $(X,A) $ is $(n-1)$-connected $(n-1 \geq 1)$, or has trivial $\pi_k(X,A) ,\ k \leq n-1$.
+
+\subsection{Whitehead's Theorem}
+A map of path-connected spaces $f \colon X \to Y$ is called a \textbf{weak homotopy equivalence} if it induces bijections on $\pi_k(X) \to \pi_k(Y)$ for all $k \in \N$. Some facts:
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item If $X,Y$ have the same homotopy type of a CW complex, a weak homotopy equivalence is a homotopy equivalence. 
+\item If $X,Y$ are simply connected, and $f \colon X \to Y$ is an $H_*$-isomorphism, then it's a weak homotopy equivalence.
+\item If $X$ is a compact smooth manifold, then $X  $ is homotopy equivalent to a finite CW complex.\footnote{Some ways to show this in clude Morse theory which gives a handlebody decomposition, or that X is homotopy equivalent to the nerve of a good covering.}
+\item The same is true for $X$ a compact topological manifold (hard).
+\end{itemize}
+Back to 4 dimensions, let us dicsus the construction of 4-dimensional CW complexes. Start with a wedge sum of $n$ copies of the 2-sphere, $\bigvee^n S^2$. Attach a 4-cell $D^4$ via an attaching map $f \colon \partial D^4 =S^3 \to  \bigvee^n S^2$ which lead to a CW complex $X_f$. This is not yet a 4-manifold and will most likely not be. These spaces tend to be model homotopy types for 4-manifolds. The homotopy type of $X_f$ depends only on the homotopy class of $f$. We can asssume that $f$ respects given basepoints. The main lemma is as follows: 
+\begin{lemma}
+    We have $\pi^3\left( \bigvee^n S^2 \right) \cong \{n \times n \text{ symmetric matrices over } \Z\} $, where $[f] \mapsto  Q_f$.
+\end{lemma}
+Note that $H^*(X_f)= \Z_0 \oplus \Z_2^n  \oplus \Z_4$ with basis $e_1,\cdots ,e_n $ of fundamental classes of the 2-spheres. Then $H^2(X_f)=\Hom(H_2(X_f),\Z)\cong \Z^n $ with dual basis $(e^1 ,\cdots ,e^n )$. Now we can write down the matrix $Q_f$. We have \[
+    (Q_f)_{ij}= \left\langle \underset{H^4(X_f)}{\underbrace{e^i  \smile e^j }}\, , [X_f]  \right\rangle \in \Z.
+\] 
+    In the $n=1$ case, we have $\pi_3 (S^2) \underset{\cong }{\xrightarrow{\text{Hopf invariant} }} \Z $.
+\begin{proof}[Proof of the case where $n=1$]
+    Think of $S^2 = \P^1 \sim \C \mathrm{P^1}\hookrightarrow  \P^2$. We want to know $\pi_3(\P^1)$, which sits inside an exact sequence \[
+        \pi_4(\P^2) \to \pi_4(\P^2,\P^1) \to \pi_3(\P^1) \to \pi_3(\P^2)
+    \] We have a fibration sequence $S^1  \hookrightarrow S^5\to \P^2$ which is a fiber bundle with fiber $S^1 $. This implies that $\pi_3(\P^2)=0,\pi_4(\P^2)=0$. So $(\P^2,\P^1)$ is 4-connected, and $\pi_4(\P^2,\P^1) \cong H_4(\P^2,\P^1) =\Z$.
+\end{proof}
+The proof of this key lemma is the generalization of the Hopf invariant.

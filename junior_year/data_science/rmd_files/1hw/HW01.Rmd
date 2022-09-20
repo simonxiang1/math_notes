@@ -1,0 +1,203 @@
+---
+title: "HW 1"
+author: "SDS 322E"
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
+output:
+  pdf_document:
+    toc: yes
+  html_document:
+    toc: yes
+    toc_float:
+      collapsed: no
+---
+
+```{r global_options, include=FALSE}
+#DO NOT EDIT THIS CHUNK OR ANYTHING ABOVE IT!
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, fig.align = "center", warning = F, message = F, tidy=T, tidy.opts=list(width.cutoff=50))
+```
+
+#### Name: Simon Xiang. EID: `szx58`
+
+**Please submit as an HTML file on Canvas before the due date**
+
+*For all questions, include the R commands/functions that you used to find your answer. Answers without supporting code will not receive credit.*
+
+##### How to submit this assignment
+
+> All homework assignments will be completed using R Markdown. 
+> These `.Rmd` files consist of text/syntax (formatted using Markdown) alongside embedded R code. 
+> When you have completed the assignment (by adding R code inside codeblocks and supporting text outside codeblocks), create your document as follows:
+
+> - Click the "Knit" button (above)
+> - Fix any errors in your code, if applicable
+> - Upload the HTML file to Canvas
+
+---
+
+## Q1 (0.5 pts)
+
+The dataset `quakes` contains information about earthquakes occurring near Fiji since 1964. The first few observations are listed below. 
+
+```{R}
+head(quakes)
+```
+
+**How many observations are there of each variable (i.e., how many rows are there; show using code)? How many variables are there total (i.e., how many columns are in the dataset)? You can read more about the dataset [here](https://stat.ethz.ch/R-manual/R-patched/library/datasets/html/quakes.html)** *Do not forget to include the code you used to find the answer each question*
+
+```{R}
+str(quakes)
+```
+
+*Your typed answer goes here. 1-2 sentences only.*
+
+There are 1000 observations and 5 variables as can be seen in the output of `str(quakes)`.
+
+---
+
+## Q2 (1 pts)
+
+**What are the minimum, maximum, mean, and median values for the variables `mag` and `depth`?** Note that there are many functions that can be used to answer this question. If you chose to work with each variable separately, recall that you can access individual variables in a dataframe using the `$` operator (e.g., `dataset$variable`). Describe your answer in words.
+
+```{R}
+min(quakes$mag)
+max(quakes$mag)
+mean(quakes$mag)
+median(quakes$mag)
+min(quakes$depth)
+max(quakes$depth)
+mean(quakes$depth)
+median(quakes$depth)
+```
+
+*Your typed answer goes here. 1-2 sentences only.*
+
+For mag: minimum = 4, maximum = 6.4, mean = 4.6204, median = 4.6. 
+For depth: minimum = 40, maximum = 680, mean = 311.371, median = 247.
+
+---
+
+## Q3
+
+Recall how logical indexing of a dataframe works in R. To refresh your memory, in the example code below I ask R for the median magnitude for quakes whose longitude is greater than 175.
+
+```{R}
+median(quakes$mag[quakes$long > 175])
+```
+
+Breaking this down a bit, the above line of code is doing the following (*this is just for illustration, the code itself is unnecessarily verbose*):
+```{r}
+mags                           <- quakes$mag
+longs                          <- quakes$long
+is_long_greater_175            <- longs > 175 ## Makes a logical vector
+mags_where_long_is_greater_175 <- mags[is_long_greater_175] ## Indexing using logical vector
+
+median(mags_where_long_is_greater_175)
+```
+
+### 3.1 (0.5 pts) 
+
+**Explain in words what the single line of code is doing**. Remember that the `$` selects a single variable and that `[ ]` are used for indexing whatever object came before (either a single variable or a dataframe).
+
+This line takes the median magnitude of quakes, and only returns those whose longitude is greater than 175.
+
+### 3.2 (1.5 pts) 
+
+**What is the mean of the variable `mag` when `depth` is _greater than_ the median depth? What is the mean of the variable `mag` when `depth` is _less than_ the median depth? What does this suggest about the relationship between an earthquake's depth and its magnitude?**
+
+```{R}
+mean(quakes$mag[quakes$depth > median(quakes$depth)])
+mean(quakes$mag[quakes$depth < median(quakes$depth)])
+```
+
+The mean of mag when depth is greater than median depth is 4.5232, and the mean of mag when depth is less than median depth is 4.7176. This implies that in general, the greater the depth the lower the magnitude.
+
+### 3.3 (1 pts) 
+
+The [standard deviation](https://en.wikipedia.org/wiki/Standard_deviation) of a quantity is a measure of variable that quantity is. For example, the following plot gives [histograms]() of two variables (petal length and petal width from the `iris` dataset). 
+```{r}
+hist(iris$Petal.Length)
+hist(iris$Petal.Width)
+```
+We see that the petal length is more variable than the petal width, which can be measured using the standard deviation (computed using the `sd` function):
+```{r}
+print(sd(iris$Petal.Length))
+print(sd(iris$Petal.Width))
+```
+
+**What is the standard deviation of the variable `lat` when `depth` is *greater than* the median depth? What is the standard deviation of the variable `lat` when `depth` is *less than* the median depth?** What does this suggest about the relationship between an earthquake's latitude and it's depth?**
+
+```{R}
+print(sd(quakes$lat[quakes$depth > median(quakes$depth)]))
+print(sd(quakes$lat[quakes$depth < median(quakes$depth)]))
+```
+
+The standard deviation of latitude when depth is greater than the median is 3.57, and the standard deviation of latitude when depth is less than the median is 6.15. From this we deduce that the latitude is more variable when depth is above average.
+
+---
+
+## Q4 (1 pts)
+
+The variable `depth` is measured in kilometers. **Create a new variable called `depth_m` that gives depth in meters rather than kilometers and add it to the dataset `quakes`.** To help get you started, I have given you code that creates the new variable but fills it with `NA` values. Overwrite the `NA`s below by writing code on the right-hand side of the assignment operator (`<-`) that computes the requested transformation. Print out the first few rows of the updated dataset using `head()`.
+
+```{R}
+# update the code below by replacing the NA with the correct expression to convert to meters
+quakes$depth_m <- quakes$depth * 1000
+head(quakes$depth_m)
+```
+
+
+## Q5
+
+Let's make some plots in base R. 
+
+### 5.1 (1 pts)
+
+**Create a boxplot of `depth` using the `boxplot()` function. Describe where you see the min, max, and median (which you calculated in question 2) in this plot.**
+
+```{R}
+boxplot(quakes$depth)
+```
+
+The min is the bottom line, the max is the top line, and the median is the thick black line that runs through the middle of the grey box.
+
+### 5.2 (1 pts)
+
+**Create a histogram of `depth` using the `hist()` function. What important information does the histogram provide that the boxplot does not?**
+
+```{R}
+# your code here
+boxplot(quakes$depth)
+hist(quakes$depth)
+```
+
+The histogram provides data about each element of `quakes$depth` itself, while boxplot aggregates the data and only displays overall information like median, min/max, etc.
+
+### 5.3 (1 pts) 
+
+__Create a scatterplot by plotting variables `mag` and `stations` against each other using the `plot()` function.__ Note that to generate a scatterplot, the `plot()` takes two arguments: the x-axis variable and the y-axis variable. Describe the relationship between the two variables.
+
+```{R}
+plot(quakes$stations, quakes$mag)
+```
+
+There seems to be a positive correlation with number of stations reporting the earthquake and magnitude. This makes sense because the larger the earthquake, the more likely stations will report it.
+
+### 5.4 (1.5 pts) 
+
+__Create scatterplot of the quakes' geographic locations by plotting `long` on the x-axis and `lat` on the y-axis. Using this plot, and the map/link below (note the two trenches), and some of the techniques you practiced above, are deeper quakes more likely to originate east or west of Fiji?__
+
+*Removed images attached since PdfLaTeX refused to compile them*
+
+```{R fig.width=4, fig.height=4}
+plot(quakes$long, quakes$lat)
+```
+
+Based off of the map and the scatterplot, earthquakes seem to be more likely to occur to the east of Fiji.
+
+
+---
+
+```{R, echo=F}
+## DO NOT DELETE OR MODIFY THIS CHUNK: IT MUST BE PRESENT TO RECEIVE CREDIT FOR THE ASSIGNMENT
+sessionInfo(); Sys.time(); Sys.info()
+```

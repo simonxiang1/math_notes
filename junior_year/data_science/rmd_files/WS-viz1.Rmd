@@ -1,0 +1,201 @@
+---
+title: "WS3"
+author: "SDS322E"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## The easiest way to get ggplot2 is to install the whole tidyverse:
+
+```{R}
+# IF YOU ARE ON YOUR OWN LOCAL VERSION OF R, uncomment and run either of the lines below
+
+## install.packages("tidyverse")
+## library(tidyverse)
+
+## Alternatively, install just ggplot2:
+## install.packages("ggplot2")
+## library(ggplot2)
+```
+
+## If you are on the servers however, this is all you need
+
+```{R}
+# If you are on the servers, just run
+library(ggplot2)
+# or
+library(tidyverse)
+```
+
+```{R}
+#Load of data: just to keep things clean, make sure it's a data frame
+Loblolly <- as.data.frame(Loblolly) 
+
+#show the first 6 rows with head()
+head(Loblolly)
+```
+
+```{R}
+#str() gives lots of info about the dataframe
+str(Loblolly)
+dim(Loblolly) #gives just the shape (rows, columns)
+``` 
+
+Map `age` to the x-axis and `height` to the y-axis.
+To do this, fill in the blanks (replace ??? with dataset name and variable names)
+
+```{R, eval = FALSE}
+# Leave yourself comments as you go! Note when you make changes, etc.
+
+# In the following, replace the ??? with the correct code and change to eval =
+# TRUE to knit
+
+ggplot(data = ???, aes(x = ???, y = ???))
+``` 
+
+Let's add a geometry layer to the empty plot. After the ggplot(), add + geom_point()
+
+```{R, eval = FALSE}
+ggplot(data = ???, aes(x = ???, y = ???)) + ???
+```
+
+Inside of geom_point(), set size to a specific value (integer)
+
+```{R, eval = FALSE}
+ggplot(data = Loblolly, aes(x = age, y = height)) + geom_point(size = ???)
+``` 
+
+Now let's color the points by seed
+Note you can put ggplot layer on a new line (be sure to end line with +)
+
+```{R, eval = FALSE}
+ggplot(data = Loblolly, aes(x = age, y = height, color=Seed)) + 
+  geom_point(size=3)
+```
+
+Set alpha value to change transparency of points. Fill in the blank (replace ??? with a number between 0 and 1)
+
+```{R, eval = FALSE}
+ggplot(data = Loblolly, aes(x = age, y = height, color = Seed)) + 
+  geom_point(size = 4, alpha = ???) 
+``` 
+
+Let's add another geometry layer: add + geom_line() after geom_point() 
+
+```{R, eval = FALSE}
+ggplot(data = Loblolly, aes(x = age, y = height, color = Seed)) + 
+  geom_point(size = 4) + geom_line()
+``` 
+
+Hmm, we get a warning and no lines... "group aesthetic"? We need to tell ggplot which points to connect. We want to connect points by Seed group, so let's map it
+
+```{R, eval = FALSE}
+ggplot(data = Loblolly, aes(x = age, y = height, color = Seed)) + 
+  geom_point(size = 4) + geom_line(aes(group=Seed))
+``` 
+
+Notice the lines are on top of the points! Order matters! Try switching the positions of geom_point(...) and geom_line(...) by putting geom_line(...) first.
+
+
+Every geom has aesthetics that you can map to variables (or set to specific values)
+For example, if you want a different linetype for every Seed, map it in aes()
+
+
+```{R, eval = FALSE}
+ggplot(data = Loblolly, aes(x = age, y = height, color = Seed)) + 
+  geom_point(size = 4) + 
+  geom_line(aes(group=Seed, linetype=Seed))
+``` 
+
+You can make more than one modification to a geom, too! To globally increase the size of the line while still having a separate linetype for every Seed, set size to an integer (OUTSIDE OF AES, since you are not mapping to a variable)
+
+```{R, eval = FALSE}
+ggplot(data = Loblolly, aes(x = age, y = height, color = Seed)) + 
+  geom_point(size = 4) + 
+  geom_line(aes(group = Seed, linetype = Seed), size = 4)
+``` 
+
+We can also change the theme! For example, here is the minimal theme.
+
+```{R, eval = FALSE}
+ggplot(data = Loblolly, aes(x = age, y = height, color = Seed)) + 
+  geom_point(size = 4) + 
+  geom_line(aes(group=Seed, linetype=Seed)) +
+  theme_minimal()
+``` 
+
+Try a different theme like theme_dark()!
+
+We can edit specific theme elements too. This can get advanced, but, for example, we can remove the legend using the following theme() layer:
+
+```{R, eval = FALSE}
+ggplot(data = Loblolly, aes(x = age, y = height, color = Seed)) + 
+  geom_point(size=4) + geom_line(aes(group=Seed)) + 
+  theme(legend.position="none")
+``` 
+
+At the end of the day, a ggplot is just an object (everything is an object in R!) and you can store it. Since the code is getting kind of long, let's save the previous plot as plot1.
+
+```{R, eval = FALSE}
+plot1<- ggplot(data = Loblolly, aes(x = age, y = height, color = Seed)) + 
+  geom_point(size=4) + geom_line(aes(group=Seed)) + 
+  theme(legend.position="none")
+```
+
+Then, we can add stuff to it more easily. Like, let's change the title, y-axis label, and x-axis label:
+
+```{R, eval = FALSE}
+plot1 + ggtitle("Loblolly Pine Growth") + ylab("Height") + xlab("Age") 
+``` 
+
+Note that this doesn't save it. It just prints it out. Let's save these additions by overwritting plot1
+
+```{R, eval = FALSE}
+plot1 <- plot1 + ggtitle("Loblolly Pine Growth") + ylab("Height") + xlab("Age")
+
+plot1
+``` 
+
+Faceting is really cool! Let's take plot1 and create a separate subplot for each Seed, so that you can see its growth trajectory
+
+```{R, eval = FALSE}
+plot1+facet_wrap(~Seed)
+``` 
+
+We can also add trendlines. We will explore this idea more next week, but we can plot the best-fitting regression line through a scatterplot very easily.
+
+Recreate the scatterplot from above: height (y-axis) by age (x-axis). Then, once you've got the scatterplot, add +geom_smooth(method="lm")
+
+```{R, eval = FALSE}
+## 
+```
+
+Once you've got it, try adding color=Seed back into aes. What happens?!
+
+---
+### Exercises!
+
+- There is a very similar dataset in R called `Orange`
+
+- Take a look at it using `head()`, `str()`, `?Orange`, etc.
+
+- What do the variables represent?
+
+- Recreate all of the above plots using `Orange` instead of `Loblolly`
+
+    - Instead of height, examine tree circumference
+
+- Essentially, you will swap out `Seed` for `Tree`, and `height` for `circumference`
+
+```{R, eval = FALSE}
+Orange<-as.data.frame(Orange)
+
+# make some plots!
+# try to reproduce everything we did above!
+```
+
+

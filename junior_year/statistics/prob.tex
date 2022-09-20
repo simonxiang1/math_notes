@@ -1,0 +1,201 @@
+\section{Probability ``review''} 
+
+We ``review'' (learn) probability. INFORMALLY:
+\begin{definition}
+   The ``\textbf{probability}'' of an outcome is the proportion of times it would occur if we observed the random process an infinite amount of times. 
+\end{definition}
+This fact that probabilities stabilize is called the \textbf{Law of Large Numbers}.
+\begin{definition}[]
+    Two outcomes are ``\textbf{disjoint}'' or ``\textbf{mutually exclusive}'' if they cannot both happen. 
+\end{definition}
+For example, rolling a 1 and a 2 are disjoint outcomes, while rolling a 1 and rolling an odd number are not. For disjoint outcomes we can add to find their probabilities. We express this as follows:
+\begin{namedthing}{Addition Rule of Disjoint Outcomes} 
+   If $A_1,A_2$ represent disjoint outcomes, then the probability that one of them occurs is given by \[
+       P(A_1 \cup A_2) = P(A_1) +P(A_2).
+   \] 
+This naturally generalizes to the fact that if we have $k$ disjoint outcomes $A_1,\cdots ,A_k$, then \[
+    P\left( \bigcup_{1 \leq i \leq k}A_i   \right) = \sum _{1 \leq i \leq k}P(A_i ).
+\] 
+\end{namedthing}
+Often times data scientists do not work with individual outcomes but rather \textbf{events}, or sets of outcomes. The addition rule applies as well. What if $A,B$ are not disjoint? Consider a deck of cards, then $P(\text{diamond or face card})=13/52+12/52-3/52$, since we double count diamond face cards. This leads to the general addition rule.
+
+\begin{namedthing}{General Addition Rule} 
+   If $A$ and $B$ are events, then \[
+       P(A \cap B) = P(A)+P(B) - P(A \cap B).
+   \] 
+\end{namedthing}
+\begin{definition}[]
+    A ``\textbf{probability distribution} is a table of all disjoint outcomes and their associated probabilities. A probability distribution must satisfy the following:
+    \begin{enumerate}[label=(\arabic*)]
+    \setlength\itemsep{-.2em}
+        \item The outcomes listed must be disjoint.
+        \item Each probability must be in between 0 and 1.
+        \item The probabilities must total 1.
+    \end{enumerate}
+\end{definition}
+The set of all possible outcomes is called a \textbf{sample space} $S$. For rolling a die, $S=\{1,2,3,4,5,6\} $. Let $D=\{2,3\} $ represent the event where the outcome of rolling a die is 2 or 3. Then $D^c =\{1,4,5,6\} =S \setminus D^c.$ We have $A \cup A^c=S$, $A \cap A^c=\O$, and $P(A \cup A^c)=1$ by definition. This implies that $P(A)=1-P(A^c)$.
+
+\begin{definition}[]
+    Two \emph{processes}  are ``\textbf{independent}'' if knowing the outcome of one provides no useful information about the other. We could also view this as saying that the realization of one does not affect the probability distribution of the other.
+\end{definition}
+\begin{example}
+    Rolling two die is independent. Rolling one provides us no information about the other.
+\end{example}
+\begin{namedthing}{Multiplication Rule for Independent Processes} 
+   If $A$ and $B$ represent events from two different and independent processes, then \[
+       P(A \cup B)=P(A)P(B).
+   \] This generalizes to saying that \[
+   P\left( \bigcup_{1 \leq i \leq k}A_k  \right) = \prod _{1\leq i \leq k} P(A_i ).
+   \] 
+\end{namedthing}
+
+\subsection{Conditional probability}
+Data set: ML algorithm classifies fashion or not, based off of the ``truth''. In this case the correctness of the prediction depends on the truth variable. We can explore these possibilities with a contingency table.
+
+\begin{figure}[H]
+    \centering
+\[
+\begin{tabular}{cccc} 
+    & \texttt{fashion}  &\texttt{not} & Total \\ \hline
+    \texttt{pred-fashion}  & 197 & 22 & 219 \\
+    \texttt{pred-not} & 112 & 1491 & 1603 \\ \hline 
+    Total & 309 & 1513 & 1822 \\
+\end{tabular}
+\]     
+\caption{Contigency table for ML fashion.} 
+\end{figure}
+Let \texttt{mach-learn} denote the ML classifier (includes \texttt{pred-fashion} and \texttt{pred-not}), and let \texttt{truth} denote \texttt{fashion} or \texttt{not}. What if we want to know the chance the ML classifier correctly identifies something being about fashion? Then \[
+    P(\texttt{mach-learn} \text{ is } \texttt{pred-fashion} \text{ given } \texttt{truth} \text{ is } \texttt{fashion} ) = \frac{197}{309} =0.638
+\] On the same vein, what if we sample a photo from the data set and learn that the ML algorithm predicted incorrectly that a photo was not about fashion? Then \[
+    P(\texttt{truth} \text{ is } \texttt{fashion} \text{ given } \texttt{mach-learn} \text{ is } \texttt{pred-not} ) = \frac{112}{1603} =0.070
+\] The probabilities based on a single variable without any regard to other variables are \textbf{marginal probabilities}, in this case the row and column totals for each separate variable. For example, any probability based solely on \texttt{mach-learn} is a marginal probability.\[
+P(\texttt{mach-learn} \text{ is } \texttt{pred-fashion}) = \frac{219}{1822}=0.12
+\] A probability of outcomes for two or more variables is a \textbf{joint probability}. \[
+P(\texttt{mach-learn} \text{ is } \texttt{pred-fashion} \text{ and } \texttt{truth} \text{ is } \texttt{fashion}) = \frac{192}{1822}=0.11
+\] It is common to substitute a comma for ``and''. We use \textbf{table proportions} to summarize joint probabilities.
+
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{cccc} 
+        \hline
+        & \texttt{truth: fashion}  &\texttt{truth: not} & Total \\ \hline
+        \texttt{mach-learn: pred-fashion}  & 0.1081 & 0.0121 & 0.1202 \\
+        \texttt{mach-learn: pred-not} & 0.0615 & 0.8183 & 0.8798 \\ \hline 
+    \end{tabular} 
+\caption{Probability table of the fashion data set.} 
+\end{figure}
+From here we can make a probability distribution of the conditional probabilities. Conditional probability is the probability of an outcome given some condition to be true. For example, the probability that \texttt{truth} is \texttt{fashion}  given \texttt{mach-learn} is \texttt{pred-fashion} is $\frac{197}{219}=0.9$, an example of conditional probability (compute \texttt{truth} under the condition that \texttt{mach-learn}  is \texttt{pred-fashion}). We can write ``given'' with the vertical line $\mid $.
+\begin{definition}[]
+    The \textbf{conditional probability} of outcome $A$ given condition $B$ is given by \[
+        P(A \mid B)= \frac{P(A \cap B)}{P(B)}.
+    \] 
+\end{definition}
+We saw a multiplication rule for independent processes. Here we see one for events that may not be independent.
+\begin{namedthing}{General Multiplication Rule} 
+   If $A$ and $B$ represent two outcomes or events, then \[
+       P(A \cap B) = P(A\mid B)P(B).
+   \]  It is useful to think of $A$ as the outcome of interest and $B$ as the condition.
+\end{namedthing}
+Use tree diagrams. The end leaves give conditional probabilities, and multiplying gives unions of probabilities. 
+
+\begin{namedthing}{Sum of Conditional Probabilities} 
+   Let $A_1, \cdots ,A_k$ represent all the disjoint outcomes for a variable or process. If $B$ is an event, we have \[
+       P(A_1 \mid B) + \cdots + P(A_k \mid B)= 1.
+   \]  We also have that when an event and its complement are conditioned on the same information, the rule for complements holds:\[
+   P(A \mid B) =1- P(A^c\mid B).
+   \] 
+\end{namedthing}
+We are often given a conditional probability of the form $P(A \mid B)$ but would really like to know $P(B\mid A)$. Breast cancer setup; 0.35\% of patients have BC, in 11\% the text gives a false negative, in 7\% gives a false positive. We want to find $P(BC\mid +)= P(BC \cap +) / P(+)$. We have $P(BC\mid +)=P(+\mid BC)P(BC)$ by the generalized multiplication rule, which is equal to $0.89*0.0035=0.00312$ (multiplying leaves on a tree). We also have  
+\[
+    P(+)=P(+ \cap BC) + P( + \cap !BC)=P(BC)P(+\mid BC) + P(!BC)\mid P(+ \mid !BC)=0.0035\cdot 0.89+0.9965\cdot 0.07=0.07288.
+\] This is just summing up leaves again. We conclude that $P(BC \mid +) = P(BC \cap +)/P(+)=\frac{0.00312}{0.07288}\approx 0.0428$. Note that we broke down the probabilities $P(BC \cap +)=P(+\mid BC)P(BC)$ and $P(+)=P(+ \cap !BC)+P(+ \cap BC)=P(+ \mid !BC)P(BC) + P(+ \mid BC)P(BC)$, each into products of conditional and marginal probabilities. Substitute the resulting probability expressions into the numerator and denominator of the original conditional probability to get an application of Bayes' Theorem. \[
+P(BC \mid  +)= \frac{P(+ \mid BC)P(BC)}{P(+\mid !BC)P(!BC) + P(+ \mid BC)P(BC)}
+\] 
+
+\begin{namedthm}{Bayes' Theorem} 
+   We have \[
+       P(A\mid B)= \frac{P(B\mid A)P(A)}{P(B)}.
+   \]  Alternatively, we can write \[
+   P(A_1 \mid B) = \frac{P(B\mid A_1)P(A_1)}{P(B\mid A_1) P(A_1) + P(B\mid A_2)P(A_2) + \cdots + P(B \mid A_k)P(A_k)},
+   \] where $A_2,A_3,\cdots ,A_k$ represent all other possible outcomes of the first variable by the sum of conditional probabilities.
+\end{namedthm}
+Basically Bayes' Theorem is how you calculate probabilites for tree diagrams. To apply Bayes' Theorem there are two steps:
+\begin{enumerate}[label=(\arabic*)]
+\setlength\itemsep{-.2em}
+    \item Identify the marginal probabilities of each possible outcome of the first varaible: $P(A_1), P(A_2), \cdots ,P(A_k)$.
+    \item Then identify the probability of the outcome $B$, conditioned on each possible scenario for the first variable: $P(B\mid A_1), P(B\mid A_2), \cdots ,P(B\mid A_k)$.
+\end{enumerate}
+Applying Bayes' Theorem to a scenario with three outcomes, if we calculate the conditioned probabilities of the first two, we can infer the probability of the third one conditioned on the same statement. This practice of updating beliefs using Bayes' Theorem is the foundation of \emph{Bayesian statistics}.
+
+\subsection{Sampling from a small population}
+Sometimes our sample size is large enough or the population is small enough (sample is 10\% of a population) to sample without replacement. Such a notable fraction changes things significantly.
+\begin{example}
+    If there are 15 people in a class and the professor picks without replacement, then if she picks three times your chance of getting picked is $\frac{14}{15}\cdot \frac{13}{14}\cdot \frac{12}{13}=0.8$. If she picks with replacement (no regard to original selection) then by the multiplication rule for independent processes your probability of not getting picked in three questions is $\frac{14}{15}\cdot \frac{14}{15}\cdot\frac{14}{15}=0.813$.
+\end{example}
+Sampling \textbf{without replacement} means there is no more independence between observations. In the example, the probability for not being picked for the second question was conditioned on the event that you were not picked for the first question.
+
+For a small sample size this is a drastic effect (30 tickets, 7 prizes). However if we change this to 300 tickets then the results are nearly identical. When the sample size is under 10\% observations are nearly independent even when sampling without replacement.
+
+\subsection{Random variables}
+\begin{definition}[]
+    A \textbf{random variable} is a random process with a numerical outcome. Outcomes of $X$ are labelled with a corresponding lowercase letter $x$ and subscripts.
+\end{definition}
+\begin{definition}[]
+    If $X$ takes outcomes $x_1,\cdots ,x_k$ with probabilities $P(X=x_1), \cdots ,P(X=x_k)$, the \textbf{expected value}  of $X$, denoted $E(X)  $ or $\mu$, is the sum of each outcome multiplied by its corresponding probability: \[
+        E(X) = \sum _{i=1}k x_i P(X=x_i ).
+    \] 
+\end{definition}
+\begin{definition}
+    If $X$ takes outcomes $x_1,\cdots ,x_k$ with probabilities $P(X=x_1), \cdots ,P(X=x_k)$ and expected value $\mu = E(X)$, then the \textbf{variance}  of $X$, denoted by $\mathrm{Var}(X)$ or the symbol $\sigma^2$, is defined as follows: \[
+        \sigma^2 = \sum _{j=1}^k(x_j -\mu) ^2P(X=x_j )
+    \] The \textbf{standard deviation} is the square root of variance, defined by $\sigma := \sqrt{\sigma^2} $.
+\end{definition}
+Sometimes it's useful to think of processes as modelled by several random variables. Say John commutes to work 5 days a week, and each commute is an average of 18 minutes. Then his expected commute weekly is given by \[
+    E(W) = E\left(\sum _{i=1}^5 X_i \right)=\sum _{i=1}^5 E(X_i )=5\cdot 18=90.
+\] This demonstrates that expectation is linear.
+\begin{namedthing}{Linearity of Expectation} 
+   Let $\sum a_i X_i $ be a linear combination of random variables. Then \[
+       E\left(\sum a_i x_i \right)= \sum a_i E(X_i ).
+   \] 
+\end{namedthing}
+\begin{namedthing}{Variance of linear combinations} 
+For $\sum a_i X_i $ a linear combination of random variables, we have \[
+    \mathrm{Var}\left( \sum a_i X_i  \right) = \sum a_i ^2 \mathrm{Var}(X_i ).
+\] 
+\end{namedthing}
+{\color{red}todo:normal (triathlon)} 
+\subsection{Bernoulli and geometric distribution}
+Say a health company found 70\% of the people they insure yearly stay below their deductible. Each person is called a \textbf{trial}, with \textbf{probability of success} $p=0.7$. When an individual trial only has two outcomes (\texttt{success} or \texttt{failure}), it is called a \textbf{Bernoulli random variable}.
+\begin{definition}[]
+    If $X$ is a random variable that takes value 1 with probability of success $p$ and 0 with probability 1-p, then $X$ is a Bernoulli random variable with mean and standard deviation \[
+        \mu =p,\quad \sigma=\sqrt{p(1-p)}. 
+    \] 
+\end{definition}
+The geometric distribution describes a waiting time until a success for independent and identically distributed Bernoulli random variables.
+\begin{definition}[]
+    If the probability of success in one trial is $p$ and the probability of failure is $1-p$, then the probability of finding the first success in the $n$\textsuperscript{th} trial is given by \[
+        (1-p) ^{n-1}p.
+    \] Furthermore, we have \[
+    \mu= \frac{1}{p},\quad \sigma^2= \frac{1-p}{p^2},\quad \sigma=\sqrt{\frac{1-p}{p^2}} .
+    \] 
+\end{definition}
+\subsection{Binomial distribution}
+The binomial distribution describes the number of successes in a fixed number of trials. In general, this is given by \[
+    \# \text{ of scenarios} \times P(\text{single scenario}).
+\] Given $k$ successes and $n-k$ failures, then we have $P(\text{single scenario})= p^k(1-p)^{n-k}$. The formula for choosing $k$ successes in $n$ trials is ${n\choose k} $.
+
+\begin{definition}[]
+    Suppose the probability of a single trial being a success is $p$. Then the probability of observing exactly $k$ successes in $n$ independent trials is given by \[
+        {n\choose k} p^k(1-p)^{n-k} = \frac{n!}{k!(n-k)!}p^k (1-p)^{n-k}.
+    \] The mean, variance, and standard deviation of the number of observed successes is are \[
+    \mu = np, \quad \sigma^2= np(1-p),\quad \sigma= \sqrt{np(1-p)} .
+    \] 
+\end{definition}
+To check whether something is binomial, check the following:
+\begin{enumerate}[label=(\arabic*)]
+\setlength\itemsep{-.2em}
+    \item The trials are independent.
+    \item The number of trials $n$ is fixed.
+    \item Each trial outcome can be classified as a success or a failure.
+    \item The probability of a success $p$ is the same for each trial.
+\end{enumerate}

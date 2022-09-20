@@ -1,0 +1,73 @@
+---
+title: "Machine learning workshop"
+output: html_document
+date: "2022-09-17"
+---
+What is machine learning? It allows machines to learn and adapt using algorithms and statistical models to draw inferences from patterns in data.
+
+
+Some applications of machine learning include:
+
+- **Nature**: predicting symmetries in flowers, patterns in seeds, etc
+- **Financial**: boring
+- **Automotive**: self driving cars (scary)
+
+Data is important and comes in many different fields: transport, geographical, cultural, biological, financial, meteorological, scientific, healthcare, DNA. Models are all built off of data. It can be defined as "facts and statistics collected together for reference and _analysis_".
+Data should split into three sets:
+
+- **Training dataset**: This refers to the sample of data used to _fit_ the model. This is used to make the model.
+- **Validation dataset**: The sample of data used to provide an _unbiased evaluation_ of a model fit on the training dataset while _tuning model hyperparameters_.
+These can be used to save data used to tune things and make the model more accurate as you go along.
+- **Testing dataset**: The sample of data used to provide an unbiased evaluation of a _final model_ fit on the training dataset. This is how you test your dataset after your model is done.
+
+What's the different between AI, ML, and DL? In general: \[
+DL \subseteq ML \subseteq AI.
+\]AI is hardcoding an algorithm to do the same thing over and over again based off a set of rules. Machine learning tells computers to learn based off of previous experiences. Deep learning specifically focuses on teaching machines to learn like the human brain. Example: fruits.
+
+## Types of machine learning
+
+Some types of machine learning include:
+
+- **Supervised**: Task driven. It knows what data is tied to as an outcome (annotations), and uses it to make connections.
+- **Unsupervised**: No annotations. What's the difference between cats and dogs? It's given data (sounds, fur, breed) and uses its best judgement to split it up.
+- **Reinforcement**: Like training a dog: rewards machine for doing things correctly.
+
+## Making an ML model
+
+This is the process for making an ML model (just google how to do it in python).
+
+1. Collect and/or find data. Find data, and find a correlation. Based on collected data, see the relevance to predicted outcomes. Make sure no errors in data collected (randomly collected, margin of error).
+2. Analyze patterns in data, form connections. Visualize using plots/graphs/figures, utilize existing experience, etc.
+3. Based on connections formed in 2, determine inputs (independent variables, features) and outputs (dependent variables, classes) relevant to your scenario.
+4. Test several models. Will you need to pre-process? What types are applicable? How to split training, validation, and testing data (used nested for loops to test)? Ex: linear regression. What results in fast and/or accurate models? 
+5. Iterate through 1-3 (as necessary) until desired accuracy or other outcome is achieved. For example, which ML models are best, do they provide similar outcomes, etc.
+
+Patterns: regression (linear, quadratic), binary classification, multiclass classification, vector machines, clustering (agglomerative and single linkage), and more.
+
+## Examples
+Scatterplot: groupings (binary). Use a decision tree: $x_1 < 3.5$ leads to `yes` and `no`, make more stuff (python libraries).
+
+## Ideas
+NLP: writing blog posts, summarizing articles, moderation on forums.
+Google cloud: statcast, modelling (data sets), kaggle. 
+ML model: needs some stats (python).
+
+# Machine learning deployments
+
+Life cycle: first define the problem. Then you collect and clean data (structured and unstructured), and define the goal computationally. _Feature engineering_ refers to the most important features an ML model should be built on. Then you deploy.
+
+Use PyTorch or TensorFlow. Why do you need a step after training? Harsh reality is that most models won't get deployed. Big step from training to inference. What do you need to take care of?
+
+- Package the model: The model exists as a python class. We need to make it something that can be deployed. 
+- Host the model on a server
+- Server has to have auto scaling (handling large amount of users), global availability, latency.
+- API: get input and send output back
+- Model versioning: iterative process.
+- Batch predictions
+
+Flask or serverless platforms, (simple deployments). Doesn't adapt, hard to measure performance natively. Also needs a dedicated backend.
+Serverless machine learning deployment. Google cloud: downloads from local. Easier to manage, tracking is still not straightforward.
+
+Deploy with TF serving. Pretrained model (resnt).
+
+

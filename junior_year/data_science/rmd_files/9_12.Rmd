@@ -1,0 +1,49 @@
+# 9/12 lecture
+ 
+Look at the book to see what you missed if you miss class. Let's talk about pipes. They are a very powerful idea in `R`.
+
+```{r, results = 'hide', message = FALSE}
+library(tidyverse)
+library(dslabs)
+```
+
+```{r, results = 'hide'}
+head(murders)
+murders %>% head()
+murders |> head()
+```
+
+This is the syntax for a pipe (two ways). All three of these are the same. The first one is loaded up with the tidyverse, and the second is a new addition.
+
+## Refresher: Loblolly Dataset
+
+This is a data set on trees built into `R`.
+```{r}
+head(Loblolly)
+ggplot(Loblolly, aes(x = age, y = height, color = Seed)) + geom_point(size = 4, alpha = 0.3) + geom_line() + xlab("Age") + ylab("Height") + ## These are examples of labels
+    theme_bw() + theme(legend.position = "none") + ## This is a theme layer
+        ggtitle("A good plot")
+```
+Chinese Traditional Buns
+
+The general term for things we add to these plots are called "layers". There are other layers that are not geoms (like the theme layer).
+We can actually save plots with `<-`.
+
+```{r}
+p <- ggplot(Loblolly, aes(x = age, y = height, color = Seed)) + 
+    geom_point(size = 4, alpha = 0.3) + theme_bw()
+p + geom_line(aes(group = Chick)) #adds lines
+p + theme(legend.position = "none") #no lines but removes legends
+```
+
+Why would we want to do this? We can add things to `p` with the plus sign, to avoid typing out long commands over and over again. So far we have only seen `geom_` layers, `theme_` layers, and `ggtitle` and `xlab` and `ylab`. A `scale_` layer changes the _scale_ of an aesthetic map.
+
+___todo: murders plot___
+<!--```{r}-->
+<!--p <- ggplot(murders, aes(x = population, y = total))-->
+<!--p <- p + geom_point() + scale_x_log10() + scale_y_log10()-->
+<!--p <- theme_bw() + geom_smooth(method = "lm", se = FALSE)-->
+<!--plot(p)-->
+<!--```-->
+ 
+Faceting is also an important thing. Facets let us make multiple plots based on one of the variables in the data set.

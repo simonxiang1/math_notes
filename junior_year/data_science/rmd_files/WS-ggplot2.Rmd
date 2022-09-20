@@ -1,0 +1,111 @@
+---
+title: "Worksheetl - Visualzation II"
+author: "SDS322E"
+date: ""
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+We will practice our visualization chops on the `msleep` dataset, which is loaded up along with the `tidyverse`. So load the tidyverse (along with some other packages) with
+
+```{r, message = FALSE}
+library(tidyverse)
+library(knitr)
+```
+
+and look at the dataset:
+
+```{r}
+head(msleep)
+```
+
+At the moment, `msleep` is stored in an object called a "tibble", which is a fancy version of a `data.frame`. For now, let's convert `msleep` to a `data.frame`.
+
+```{r}
+print(class(msleep))
+msleep <- as.data.frame(msleep)
+print(class(msleep))
+```
+
+## Task 1
+
+Run `?msleep` and read a description of the dataset. **How many of the columns of `msleep` are measures of the amount of sleep an animal gets?**
+
+**Answer:**
+
+## Task 2
+
+Make a scatterplot of `sleep_total` on the y-axis and `sleep_rem` on the x-axis with `ggplot`. **Roughly speaking, what is the relationship between the two variables?**
+
+```{r}
+## your code here
+```
+
+**Answer:**
+
+## Task 3
+
+Later in the course we will learn about *linear regression*. At a high-level, a linear regression of a variable $y$ on another variable $x$ fits a straight line of the form \$y = mx + b\$, where $m$ is the slope of the linear and $b$ is the $y$-intercept; points won't fall exactly on the line, but the line is constructed so that the points will be "close" to the line.
+
+A linear regression of total sleep time on REM sleep time can be added by adding the layer `geom_smooth(method = "lm", se = FALSE)` to your figure. **Using this line, is the relationship between REM time and total sleep time increasing or decreasing?**
+
+```{r}
+## Your code here
+```
+
+**Answer:**
+
+## Task 4
+
+The figure above is not particularly attractive. Do the following: Spruce it up by **doing the following:**
+
+-   Add better labels to the `x`-axis and `y`-axis using the `xlab` and `ylab` layers; include the units of measurement in the label.
+
+-   Add a better title using the `ggtitle` layer.
+
+-   Change the theme to anything other than the default theme using a `theme_` layer. You can get extra options for the theme by loading the `ggthemes` package.
+
+```{r}
+## your code here
+```
+
+## Task 5
+
+**Color the points (BUT NOT THE SMOOTH) in your previous plot according to the log (base 10) of body weight. Is there a relationship between REM sleep, total sleep, and body weight?** Change the scale for the color to the `vidiris` color pallete by adding the `scale_color_viridis_c()` layer as well.
+
+```{r}
+## your code here
+```
+
+**Answer:**
+
+## Task 6
+
+**Instead of mapping log body weight to color, map it to size. Which do you prefer?** To make it easier to see the points, add the option `alpha = 0.3` to `geom_point` (NOTE: as an option, not as part of the aesthetic mapping! remind yourself why by making it an aesthetic if needed!)
+
+```{r}
+## your code here
+```
+
+**Answer:**
+
+## Task 7
+
+**Keep the size of the points according to body weight, but now color the points by the whether the animal is a carnivore, omnivore, etc. Comment on any relationships you see.**
+
+Try to improve on the output of just making these changes! For example you might
+
+-   Change `scale_color_viridis_c` to something else (you will need to do this anyway since `vore` is not numeric)
+
+-   Add different regression lines for each value of `vore`
+
+-   Change the labels of the two legends (you probably will need to do some independent research to figure out how to do this.)
+
+```{r}
+## your code here
+```
+
+**Answer:**

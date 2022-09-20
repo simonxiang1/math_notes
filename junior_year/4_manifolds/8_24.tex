@@ -1,0 +1,49 @@
+\section{Classifying 4-manifolds} 
+This is arguably the biggest mystery in geometric topology. 
+\begin{namedthing}{Question} 
+   What is the classification of closed, simply connected, smooth 4-manifolds up to diffeomorphism?
+\end{namedthing}
+Why do we say simply connected? We want to avoid algorithmic decidability issues involving $\pi_1$ of multiply connected manifolds. The question of whether $\langle g_1, \cdots ,g_{\varphi } \mid  r_1 ,\cdots , r_q\rangle $ is the trivial group is an algorithmically unsolvable problem. There are ways to build a 4-manifold with fundamental group isomorphic group, so a classification scheme runs into a lot of danger of being a solution to this algorithmically unsolvable problem.
+
+It turns out that the oriented homotopy type $ X$ of such a manifold (smooth or not) can be encoded in a \emph{unimodular} symmetric bilinear form $\sigma_X$ over $\Z$. What is a symmetric bilinear form over $\Z$? We need
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item an abelian group $H$,
+    \item a function $\sigma \colon H \times H \to \Z$ that is linear in each variable, and $\sigma(x,y) = \sigma(y, x)$.
+\end{itemize}
+Unimodular means that the map $H \to \Hom(H, \Z), x \mapsto  \sigma(x, -)$ to its dual is an isomorphic. This implies that $H$ is free abelian of finite rank. The claim is that attaching such a form knows the homotopy type of $X$. Namely, $H_X = H^2(X,\Z)$ and $\sigma_X(x,y)= \langle (x\smile y) \in H^4(X, \Z), [X] \in H_4(X,\Z) \rangle $ where $[X]$ is the fundamental class for the orientation and $\langle  \rangle $ is the evaluation pairing. This actually makes sense for a simply connected 4-dimensional Poincar\'e complex, which is a 4-dimensional CW complex that obeys Poincar\'e duality.
+Part of the story of surgery theory is that we start off with a blob that becomes a 4-manifold, and it turns out that blob needs to be a Poincar\'e complex. It follows from Poincar\'e duality and the universal coefficients theorem that this pairing is unimodular.
+
+One way of getting at it is to say that $H^2(X) \cong_{\mathrm{PD}} H_2(X)$, so $\sigma_X$ is a pairing on second homology. In these terms, $\sigma_X$ is the \emph{intersection form}. If $\Sigma_1$ and $\Sigma_2$ are closed oriented surfaces embedded in $X$ (smooth), then $\sigma_X (\mathrm{PD}[\Sigma_1],\mathrm{PD}[\Sigma_2]) = \Sigma_1 \cdot \Sigma_2$ (where $\cdot $ is the oriented intersection number). To make things concrete, we can express a unimodular symmetric bilinear form $(H, \sigma)$ in terms of a symmetric matrix $Q$ over $\Z$. We pick an integer basis $(e_1, \cdots ,e_j )$ for $H$, then $Q_{ij}=\sigma(e_i ,e_j )$. Unimodularity implise that $\det Q = \pm 1$, and this pairing is a reversible process. Since we can change the basis, a unimodular form gives us a matrix $Q$ as above modulo  $\Z$-equivalence, where $Q \sim M^T Q M$ where $M \in  \mathrm{GL}(\Z^b) $.
+
+A more precise version of the question is this:
+\begin{namedthing}{Question} 
+    \begin{enumerate}[label=(\roman*)]
+    \setlength\itemsep{-.2em}
+        \item Which unimodular forms $(H,\sigma)$ arise as intersection forms of simply connected smooth closed oriented 4-manifolds?
+        \item What are the possible diffeomorphism types of 4-manifolds representing a given form?
+    \end{enumerate}
+\end{namedthing}
+Working with topological simply connected, oriented, closed 4-manifolds up to homeomorphism, Mike Freedman from the early 80s showed that all unimodular forms arise. For example, the $E_8$ lattice and the Leech lattice all arise as topological 4-manifolds. When smoothable, 4-manifolds are homeomorphic iff they have isomorphic intersection forms. Essentially, Freedman showed that the theory of surgery which breaks down in 4 dimensions, can be amended when working with topological manifolds up to \emph{homeo}morphism rather than smooth manifolds up to \emph{diffeo}morphism.
+
+We have formed a question and solved it in the topological category so to speak. Let's see what's different in the smooth category. Not all unimodular forms arise from \emph{smooth} manifolds.
+\begin{theorem}[Rokhlin, 1952]
+    Suppose that $X^4$ is a smooth, closed, oriented, simply connected 4-manifold with \emph{even} intersection form ($\sigma_X (x,x) \in 2\Z$). Then the \emph{signature} (number of positive eigenvalues of $Q$ minus the number of eeigenvalues) of $\sigma_X$ is divisible by 16. 
+\end{theorem}
+If we take the signature of an even unimodular form, this is always divisible by 8 (by algebra). For example the $E_8$ form is positive definite, so the signature and rank are both 8. Rokhlin says that the for the form coming from a 4-manifold, looking at its signature and dividing by 8 is not merely an integer but an \emph{even} integer. So $E_8$ cannot arise, but $E_8\oplus E_8$ possibly could. There are many proofs but none are easy; some use the Pontryagin-Thom construction to make a connection with the stable homotopy group $\pi_{3+n}(S^n ) \cong \Z /24$. We will prove this theorem but not by that route.
+
+Matters stood here for more or less three decades. In 1982, this graduate student Simon Donaldson came up with an unbelievable beautiful proof of an unbelievable beautiful theorem.
+\begin{namedthm}{Donaldson's Diagonalizability Theorem} 
+    If a positive definite ($\sigma(x,x) > 0$ for all $x \neq 0$) unimodular form $\sigma$ arises as the intersection form of a smooth closed oriented simply connected 4-manifold, then $\sigma$ can be represented by the identity matrix.
+\end{namedthm}
+The number of isomorphism classes of unimodular positive definite forms of rank 32 is greater than $10 ^{16}$. Donaldson says that precisely one of those come up as a 4-manifold. The proof uses \textbf{gauge theory}, the geometric analysis of a PDE with gauge symmetry, in particular the Yangs-Mills instanton. We will prove this but not using the Yangs-Mills instanton, but an alternative method brought in by Witten in 1994, the \textbf{Seiberg-Witten equations}, which arose by the work of Seiberg and Witten in string theory.
+These new equations bypassed many of the difficulties of instantons.
+
+In summary:
+\begin{enumerate}[label=(\roman*)]
+\setlength\itemsep{-.2em}
+    \item Nearly complete answers arise via SW theory.
+    \item SW \emph{invariants} distinguish many diffeomorphism types.
+\end{enumerate}
+A complete answer is not known and will require completely new ideas.
+
