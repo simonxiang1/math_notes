@@ -73,10 +73,10 @@ data.frame(table(ChickWeight$Diet))[2] %/% 12
 
 There are 23 distinct chicks, 12 distinct time points, and 2 distinct diet conditions. At the start of the experiment (time = 0), we have diet condition
 
-1. has 18 chicks
-2. has 10 chicks
-3. has 10 chicks
-4. has 9 chicks
+1.  has 18 chicks
+2.  has 10 chicks
+3.  has 10 chicks
+4.  has 9 chicks
 
 ### Question 2.1: (2 pts)
 

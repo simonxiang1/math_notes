@@ -1,0 +1,56 @@
+\section{Variational Characterization} 
+{\color{red}todo:beginning of this lecture} 
+\begin{lemma}
+    A harmonic form strictly minimizes $L^2$ norm within its de Rham cohomology class.
+\end{lemma}
+\begin{proof}
+    For $\alpha  \in H_g^k, d\alpha  = 0, d^* \alpha  = 0, \| \alpha \|^2 _{L^2}=\int_M g(\alpha ,\alpha ) \mathrm{vol}_g$. Then 
+    \begin{align*}
+        \| \alpha  +d \gamma \|^2 &= \langle \alpha  + d\gamma , \alpha  + d \gamma  \rangle _{L^2}\\
+                                  &= \| \alpha \|^2_{L^2}+ \|d \gamma \|^2 _{L^2}+ 2 \langle \gamma , d^* \alpha  \rangle _{L^2}\\
+                                  &> \| \alpha \|^2 _{L^2}
+    \end{align*}for $d\gamma \neq 0$. Conversely, it's easy to check that a  minimizer for an $L^2$ norm in a fixed cohomology class is harmonic. Take some minimizer $\eta$, and look at $\left. \frac{d}{dt} \right| _{t=0}\left( \| \eta  + t d \gamma \|^2 _{L^2} \right) $.
+\end{proof}
+We are in the world of calculus of variations. Here's the Hodge theorem.
+\subsection{The Hodge Theorem}
+Note that in $\Omega^k$, we have $\left( \im d^* \right) ^{\perp}= \ker d$. Then $\Omega^k = \ker d \oplus \im d^*$---this would follow formally in a \emph{Hilbert space}, but the $L^2$ norm on $\Omega^k$ is \emph{incomplete}. Nothing is for free.
+\begin{namedthm}{Hodge Theorem} 
+    We have $L^2$-orthogonal decompositions; $\Omega^k = \ker d \oplus \im d^*,\ \ker d = \mathcal H_g ^k \oplus \im d$ (where $\mathcal H_g^k = \ker d \cap  \ker d^*$. Hence the map  \[
+        \mathcal H_g^k \to H_{\mathrm{DR}}^k (M) = \frac{\ker d}{\im d}, \quad \eta \mapsto  [\eta]
+    \] is an \textbf{isomorphism}.
+\end{namedthm}
+At this point in the course we will not go into the proof. Later in the course we will discuss the types of techniques needed to prove this. The proof involves Hilbert space completions of $\Omega^k$ in which the existence of $L^2$ minimizers is a formality. There is something called an ``elliptic regularity'' step to prove that these minimizers lie in $\Omega^k$ and not its completions.
+
+Hodge, being an algebraic geometer, did not think to recruit a collaborator who was an expert in the type of analysis that Hilbert developed. Of course, some mathematicians came in and fixed all the issues later (von Weyl, Kodaira).
+
+\subsection{Hodge theory and self duality}
+Now we come to the 4-dimensional case, where we relate Hodge theory to self duality. Let $X^4_g$ be a compact Riemannian (we only need the conformal class of $g$, or $g \sim \lambda g$ for $\lambda \colon x \to (0, \infty) \subseteq \R$) oriented 4-manifold. The codifferential for 2-forms is $d^* = -*d* \colon  \Omega^2 \to \Omega$. For $\eta \in \Omega^2$, $\eta \in \ker (d + d^*)$ or harmonic iff $*\eta \in \ker(d+d^*)$. If $\eta \in \mathcal H^2 _g$, then $\eta ^{\pm}= \frac{1}{2}(\eta \pm *\eta)\in \mathcal H^2_g$. Also, a self-dual 2-form is harmonic iff it's closed. The upshot is that $\mathcal H^2 _g = \mathcal H^+ \oplus \mathcal H^-,$ where $\mathcal H ^{\pm}= \mathcal H^2 \cap \Omega^{\pm}$. In otherwords, $\mathcal H^2_g$ is the sum of the self dual harmonic forms and the anti-self dual harmonic forms. OTOH, we have $\mathcal H^2 \xrightarrow{\cong } H _{\mathrm{DR}}^2 (X)$ by the Hodge theorem.
+If $\omega \in \mathcal H^+$, then \[
+    \int_X \omega \frown \omega = \int (\omega * \omega) \smile 0) = \int |\omega|^2 \mathrm{vol} >0.
+\] If $\omega \in \mathcal H^-$, then \[
+\int \omega \wedge \omega = -\int |\omega|^2 \mathrm{vol}<0.
+\] We have the second Betti number $b^2(X)= b^+ + b^-$, and $\tau(X) = b^+ - B^-$, where $b^{\pm}=\dim \mathcal H^{\pm}$.
+
+\subsection{The self-duality complex}
+Perhaps this is the title of one of the lesser known paper of Sigmund Freud. We are still on $(X^4, g)$ our compact, oriented 4-dimensional Riemannian manifold. We examine the cochain complexes 
+\[
+0 \to \Omega^0 \xrightarrow d\Omega^1 \xrightarrow{d^+} \Omega^+ \to 0
+\] as follows. Consider $d^+ \alpha  = (d\alpha )^+ = \frac{1}{2}(1 +*)d\alpha $ as a cochain complex $\left( \mathcal E^*, \delta \right) $. The result we want to explain is the following.
+\begin{theorem}
+    The cohomology of $\mathcal E^*$ is 
+    \begin{align*}
+        H^0(\mathcal E) &= H^0 _{\mathrm{DR}}(X)\\
+        H^1(\mathcal E) &\cong  H^1 _{\mathrm{DR}}(X)\\
+        H^2(\mathcal E) &\cong \mathcal H^+ _g.
+    \end{align*}
+\end{theorem}
+This is the prototype of things that come up in gauge theory a lot, specifically one often looks at 1-forms simultaneously in the kernel of $d^+$ and the codifferential adjoint of $d$.
+\begin{proof}
+    It is easy to check the $H^0$ case. For $\alpha  \in \Omega^1$, we have $d\alpha  + d^+ \alpha  + d^- \alpha $, so \[
+        \int_X d\alpha  \wedge d\alpha  = \| d^+ \alpha \|^2_{L^2}- \| d^- \alpha \|^2 = \int_X d(\alpha  \frown d\alpha ) \underset{\text{Stokes}}{=} 0.
+    \]  So $\| d^+ \alpha \|_{L^2}= \| d^- \alpha \|_{L^2}$, and $\ker d^+ = \ker d^- = \ker d$. Hence $H^1(\mathcal E) \to H^1 _{\mathrm{DR}}(X), \ [\alpha ]\mapsto  [\alpha ]$ is an isomorphism.
+
+    We want $\mathcal H^+_g$ identified with $\omega \in \frac{\Omega^+}{\im d}$. Then $\omega = \omega _{\text{harm} }+ d\alpha  + * d\eta$, OTOH $*\omega = \omega$ since we assumed it to be self dual. Then $d\alpha  + *d \eta = 2d^+ \alpha $.
+\end{proof}
+
+

@@ -1,5 +1,7 @@
 \newpage
 \section{Problems} 
+\subsection{Groups}
+
 Here we write up some problems.
 %\begin{ex}
     %If $H,K$ are subgroups, then $H \cap K$ is a subgroup since $1_G \in H \cap K, $ and $H \cap K$ is closed under multiplication and inverses. However $H \cup K$ is not a subgroup; take $h \in H \setminus K$ and $k \in K \setminus H$; then if $hk \in H \cup K$, it must be true that $hk \in (H \cup K) \setminus (H \cap K)$, since $H$ and $K$ are closed under multiplication. WLOG if $hk \in H \setminus (H \cap K)$, this is a contradiction since $(H \setminus (H \cap K)) \subset H$ which is closed under multiplication, but $k\notin (H \setminus (H \cap K))$.
@@ -31,7 +33,10 @@ For $\Z / n$ in general, $\Aut(\Z / n) \cong (\Z / n ) ^{\times }$ through the a
     Yes. For $n=2$, consider the isosceles triangle. For $n=3$ and above, consider the $n$-gon divided into $n$ isosceles triangles with vertex at the center. Cut out an arrow out of each all with the same orientation. Then these subsets of $\R^2$ have rotational symmetry with isometry group $\Z /n$, but no reflectional or translational symmetry. 
 \end{ex}
 \begin{ex}[Even more isometry groups] 
-    Intuition says yes. By Cayley's theorem, we can view any group as a subgroup of some symmetric group. {\color{red}todo:how to construct polytope from subset of $S_n $? infinite case?} 
+    No. We have that $\mathrm{Isom}(\R^n ) \cong \R^n  \rtimes O(n)$; $\R^n $ represents the translations, and $O(n)$ is the set of distance preserving transformations (reflections and rotations) of $\R^n $ fixing the origin. Let $\rho$ be a transfomration and $\mu$ be a translation. Then $\rho ^{-1} \mu \rho $ is a translation. Here $O(n)$ acts on $\R^n $ in the natural way (as linear transformations are automorphisms). When composing isometries, the translation component should first apply the rotation of the first component before applying the translation of the second, encoded in the relation \[
+        (v_1 ^n , o_1) \cdot (v^n_2, o_2) = (v_1 ^n o_1(v_2^n )), o_1o_2)
+    \] which implies that $\mathrm{Isom}(\R^n ) \cong  \R^n \rtimes O(n)$.
+    {\color{red}todo:} $\Z$ acts on $\Q$? $\Q / \Z$? Assume 
 \end{ex}
 \begin{ex}[Unfree groups]
     Finite groups cannot be free. $\Z^2$ cannot be free as it has the relation $[x,y]$.
@@ -49,9 +54,7 @@ For $\Z / n$ in general, $\Aut(\Z / n) \cong (\Z / n ) ^{\times }$ through the a
     \begin{enumerate}[label=(\arabic*)]
     \setlength\itemsep{-.2em}
         \item We have $\langle x,y\mid  xyx^{-1}y^{-1}\rangle $ isomorphic to $\Z^2$, since the commutator relation makes the generators commute and words reduce to $x^n y^m$ for $n,m \in \Z$, precisely $\Z^2$.
-        \item These groups are not isomorphic. From the relation $ts t^{-1}=s ^{-1}$, we deduce that $t s^n  t^{-1}=s ^{-n}$, since \[
-                s ^{-n}=(tst ^{-1})^n = \cdots (tst ^{-1})(tst ^{-1}) \cdots = \cdots (t s ^2 t^{-1})\cdots =t s^n  t^{-1},
-        \]  and abelianizing results in a non-trivial relation $s ^{2n}=1$. {\color{red}todo:double check this} 
+        \item These groups are isomorphic since $t = t^{-1}$ by the relation $t^2=0$.
         \item Abelianize to get $\langle x,y \mid x^{2014}=y ^{2014} \rangle $, which is a non-trivial relation. So this group is non-trivial.
         \item For $\langle x,y \mid xyx=yxy \rangle $, note that $xyxy=x^2yx=yxy^2$, and abelianizing this relation $x^2yx=yxy^2$ gives a non-trivial relation $x^2=y^2$ (abelianizing the original group also leads to $\langle x,y \mid x=y \rangle \cong \Z$).
     \end{enumerate}
@@ -60,7 +63,7 @@ For $\Z / n$ in general, $\Aut(\Z / n) \cong (\Z / n ) ^{\times }$ through the a
     We want to show that for every presentation $\langle S\mid R \rangle $ there is a positive relation $\langle S' \mid R' \rangle $ with $\langle S' \mid R' \rangle \cong  \langle S \mid R \rangle $ and $|S'| \leq |S|+1$, $|R'| \leq |R| +1$.
      \[
          \langle a,b,c,d \mid ab ^{-1} c ^{-1} d ab, b a^{-1} b ^{-1} cda \rangle 
-     \] Add a new generator $s'$ and the relation that {\color{red}todo:have to add $|S|$ generators? how to reduce arbitrary relations} 
+     \] Add a new generator $s'$ and the relation that (deemed unimportant exercise)
 \end{ex}
 \begin{ex}[Abelianization]
     Some problems about abelianization:
@@ -164,7 +167,7 @@ Then if we consider the map $a \mapsto \left(
     {\color{red}todo: arbitrary word?} 
 \end{ex}
 \begin{ex}[Surface groups]
-    First let $n=m$, then the groups $G_n $ and $G_m$ have the same generators and relations, and are therefore isomorphic. Now suppose $n\neq m$. Abelianization cancels all the relations, and we are left with two free groups of different sizes ($G_n =F _{2n}, G_m = F_{2m}$) which are not isomorphic by assumption. So $G_n  \cong  G_m $ iff $n=m$. $G_n $ is only abelian for $n=1$, since for $n=2$ the pair of generators $a_2,b_1$ do not commute with each other (since $[a_2,b_1]$ is not a relation).
+    First let $n=m$, then the groups $G_n $ and $G_m$ have the same generators and relations, and are therefore isomorphic. Now suppose $n\neq m$. Abelianization cancels all the relations, and we are left with two free groups of different sizes ($G_n =F _{2n}, G_m = F_{2m}$) which are not isomorphic by assumption. So $G_n  \cong  G_m $ iff $n=m$. $G_n $ is only abelian for $n=1$, since for $n=2$ the pair of generators $a_2,b_1$ do not commute with each other (since $[a_2,b_1]$ is not a relation){\color{red}todo:fix this part} .
 \end{ex}
 \begin{ex}[Coxeter groups]
     \begin{enumerate}[label=(\arabic*)]
@@ -175,7 +178,7 @@ Then if we consider the map $a \mapsto \left(
 (\overline{s}_j \overline{s}_k)^2=\overline{s}_j \overline{s}_k\overline{s}_j \overline{s}_k=\overline{s}_j \overline{s}_k\overline{s}_j ^{-1}\overline{s}_k^{-1}=[\overline{s}_j ,\overline{s}_k]=1.
 \] This implies that $\overline{s}_j $ and $\overline{s}_k$ commute.
 \item To see that $\langle s_1,s_2,s_3\mid (s_1s_2)^2,(s_1s_3)^2,(s_2s_3)^2 \rangle \cong (\Z /2)^3$, map $s_1 \mapsto (s_1s_2), s_2 \mapsto (s_2s_3)$, and $s_3 \mapsto (s_1s_3)$.
-\item The isometry group of a regular $n$-gon $D_n $ can be viewed as a Coxeter group as follows; consider the presentation $D_n =\langle s,t \mid s^n,t^2, (st)^2 \rangle $. Send $s \mapsto st$ and $t \mapsto t$, then this presentation becomes $\langle st, t \mid (st)^2,t^2, (t(st))^^{-n} \rangle $ since $(st)^2=1$ implies 
+\item The isometry group of a regular $n$-gon $D_n $ can be viewed as a Coxeter group as follows; consider the presentation $D_n =\langle s,t \mid s^n,t^2, (st)^2 \rangle $. Send $s \mapsto st$ and $t \mapsto t$, then this presentation becomes $\langle st, t \mid (st)^2,t^2, (t(st))^{-n} \rangle $ since $(st)^2=1$ implies 
     \[
         s=t^{-1}s^{-1}t^{-1}=(tst)^{-1}=(t(st))^{-1},\quad s^n =(t(st))^{-n}.
     \] 
@@ -230,7 +233,7 @@ a finitely generated group that is not finitely presented
     \begin{pmatrix}
         1 & 1 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1
     \end{pmatrix}.
-    \] It should be the case that $\varphi (1,1)=\varphi ((0,1)+(1,0))=\varphi ((1,0)+(0,1))=\varphi ((0,1))\varphi ((1,0)) = \varphi ((1,0))\varphi ((0,1))$. However, \[
+    \] It should be the case that $\varphi (1,1)=\varphi ((0,1)+(1,0))=\varphi ((1,0)+(0,1))=\varphi ((0,1))\varphi ((1,0)) = \varphi ((1,0))\varphi ((0,1))$. {\color{red}todo:}  However, \[
     \varphi ((0,1))\varphi ((1,0))=
     \begin{pmatrix}
         1 & 0 & 0 \\ 0 & 1 & 1 \\ 0 & 0 & 1
@@ -282,7 +285,7 @@ a finitely generated group that is not finitely presented
 \] First consider the extension \[
 1 \to  \Z \xrightarrow 3 \Z \xrightarrow{\pi} \Z /3 \to 1.
 \] Then consider the extension \[
-1 \to \Z \xrightarrow i \Z \rtimes \Z /3 \xrightarrow{\pi} \Z /3 \to 1.
+1 \to \Z \xrightarrow i \Z \rtimes_{\varphi _n } \Z /3 \xrightarrow{\pi} \Z /3 \to 1.
 \] Finally consider the extension \[
 1 \to \Z \xrightarrow i \Z \oplus \Z /3 \xrightarrow{\pi} \Z /3 \to 1.
 \] 
@@ -311,3 +314,9 @@ a finitely generated group that is not finitely presented
 
     Now let $\vartheta \in \Aut(G)$, the twisting of $\varphi \colon G \to \Aut(G)$, $1 \mapsto \vartheta$ is represented by the relation $t ^{-1} x_a t = x _{\vartheta(a)}$, so the semidirect has the relations of $G$ as well as this extra generator and twisting relation. This is precisely $G *_{\vartheta}$.
 \end{ex}
+
+\subsection{Cayley graphs}
+\begin{ex}[Petersen graph]
+    
+\end{ex}
+

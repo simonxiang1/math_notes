@@ -1,0 +1,38 @@
+\section{Complex structures and self duality, Hodge theory} 
+Last time we talked about $n$-dimensional complex vector spaces $V$ with $I = i \cdot  -$ acts on $V$. Then $\Hom _{\R}(V, \C) = V ^{1,0}\oplus V ^{0,1}$ where $I^*=i$ acts on $V ^{1,0}$, and $I^* = -i $ acts on $V^{0,1}$. We then took exterior powers $\bigwedge ^k _{\C}\Hom_{\R}(V,\C) = \bigwedge _{\C}^k \left( V ^{1,0}\oplus V^{0,1} \right)= \bigoplus _{p+q=k}\Lambda ^{p,q} $, where $\Lambda^{p,q}= \mathrm{span}\{a_1 \wedge \cdots \wedge a_p \wedge b_1 \wedge \cdots \wedge b_q \mid a_j  \in V^{1,0}, b_j  \in V^{0,1}\} \cong \Lambda^p V^{1,0}\otimes \Lambda^q V^{0,1}$. Observe that $\Lambda^kI^*$ acts on $\bigwedge ^k _{\C}\Hom _{\R} (V,\C)$ which acts on $i ^{p-q}$ on $\Lambda^{p,q}$.
+
+These are complex forms in some sense, let us say something about real forms. On one hand, one could look at $\bigwedge^k _{\R}\Hom _{\R}(V,\R)$, or the complexification $\bigwedge _{\C}^k \Hom _{\R}(V,\C)$. Canonically we have
+\[
+    \left( \bigwedge _{\R}^k \Hom _{\R}(V,\R) \right) \otimes \C = \bigwedge _{\C}^k\Hom _{\R}(V,\C)
+\] 
+which says that passing to exterior powers canonically commutes with extending to scalars. So $\left( \bigwedge _{\R}^k \Hom _{\R}(V,\R) \right) \otimes \C = \bigoplus \Lambda^{p,q}$, e.g. $V = T_x M,\ \left( \Lambda^k T^*_x M \right) \otimes \C = \bigoplus \Lambda^{p,q}$. We understand that $\Lambda^{q,p}= \overline{\Lambda^{p,q}}$ by taking the complex conjugate of $\C$. Then we have real forms $\Lambda^k _{\R}\Hom(V,\R) \subseteq \bigoplus \Lambda^{p,q}$, where $\omega= \sum_{p+q=k} \omega _{p,q}$, $\omega _{q,p}= \overline{\omega _{p,q}}$. 
+
+Let's look at this in complex dimension 2, real dimension 4. In the model case where $V = \C^2$, this has standard basis $\{e_1,e_2\} $, and $V ^{1,0}$ has complex dual $\{e^1,e^2\} $ where $e^j (e_k)= \delta _{jk}$, $e^j $ is $\C$-linear. $V^{0,1}$ then has basis given by the conjugates $\overline{e_1}, \overline{e_2}$ which are $\C$-antilinear. Then we are interested by the 2-forms 
+\[
+\Lambda^2 \Hom _{\R}(V, \C) = \left( \Lambda^2_{\R}\Hom _{\R}(V,\R) \right)\otimes \C = \underset{e^1 \wedge e^2}{\Lambda^{2,0}} \oplus \underset{e_1 \wedge \overline{e^1}}{\Lambda^{1,1}} \oplus \underset{\overline{e^1}, \overline{e^2}}{\Lambda^{0,2}} 
+\]($e_1 \wedge \overline{e^2}, e_2 \wedge \overline{e^1}, e^2\wedge\overline{e^2}$ also lie in $\Lambda^{1,1}$). We can regard $\C^2$ as a real, oriented inner product space with basis $\left( e^1, \overline{e^1}, e^2, \overline{e^2} \right) $. Then $\Lambda^2 _{\R}\C^2= \Lambda^+ \oplus \Lambda^-$, where \[
+\Lambda^+ = \left( \Lambda^{2,0} \oplus \Lambda^{0,2}\right) _{\R} \oplus \R(e^1 \wedge \overline{e^1} + e^2 \wedge \overline{e^2}),
+\] and
+$\Lambda^- = \Lambda^{1,1}_- = \{\eta \in \Lambda^{1,1}\mid  \eta \wedge \omega = 0\} $.
+This is a fairly trivial decomposition of 6-dimensional vector spaces; when we bring Hodge theory into the mix, we find that this trivial matter has a highly non-trivial aspect by the Hodge index theorem.
+
+\subsection{Hodge theory}
+\begin{namedthing}{Goal} 
+    Look at $(H^2(X^4;\R) ,Q_X) \cong  (H^2_{\mathrm{DR}}(X))$  which comes with form $\left( [\alpha ],[\beta ] \right)= \int_X \alpha \wedge \beta  $. These two are canonically identified with a map called ``integration''. Say we have a conformal class of Riemannian metrics $[g]$, which leads to an orthogonal deomposition $H^2_{\mathrm{DR}}(X) = \mathcal H^+ _{[g]}\oplus \mathcal H^- _{[g]}$, so metrics give rise to a positive and negative definite decomposition of cohomology. Specifically, $\mathcal H_g^+$ is the space of  2-forms  $g$ which are self dual and harmonic, while $\mathcal H^- _g$ is the same but anti-self dual.  \textbf{Harmonic forms} are the subject of Hodge theory.
+\end{namedthing}
+
+The first part of Hodge theory is something called the \textbf{co-differential}. Here $M^n $ is a manifold, then we have the exterior derivative $d \colon \Omega^k _M \to \Omega^{k+1}_M$. Assume an orientation exists and choose one, plus a Riemannian metric $g$ (a symmetric pairing on each tangent space). We use these to construct the co-differential $d^* \colon \Omega^k \to \Omega^{k-1}$. There are two ways to define this:
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item We have the Hodge star $* \colon \bigwedge^k T^*M \to \bigwedge ^{n-k}T^*M$ depending on the metric and the orientation. Then $d^* = \left( -1 \right) ^{k+1}* ^{-1} \circ d \circ *$, where we conjugate the exterior derivative by the Hodge star. This indeed lowers the degree by one. $*$ is nearly an involution, where $* \circ * = \pm \id$. So this is just $\left( -1 \right) ^{k+1}(-1) ^{k(n-k)}* \circ d \circ * =\boxed{  (-1)^{kn+1} * \circ d \circ *}$. Since $d^2=0$, it follows that $\left( d^* \right) ^2 = \pm * d * * d * = \pm * d d * = 0$.
+    \item We have an $L^2$ inner product on $k$-forms: $ \langle  \alpha_1, \alpha_2\rangle _{L^2}= \int _M g(\alpha_1,\alpha_2) \mathrm{vol}_g$, where $\alpha_1 \in  \Lambda^k_C$ has compact support, $\alpha_2 \in \Omega^k$. We claim that \[
+    \langle d^* \alpha_1, \alpha_2 \rangle _{L^2}= \langle \alpha_1, d\alpha_2 \rangle _{L^2}.
+\] This is supposed to be a combination of the construction of the Hodge star with Stokes theorem and integration by parts. That is to say, if we look at $\int_M d(\alpha \wedge \beta )$ where $\deg(\alpha )=k, \deg(\beta )=n-k-1$, $\alpha $ has compact support, Stokes says that this integral is zero. On the other hand,  $\int_M d \alpha \wedge \beta  + (-1)^k \int _M \alpha  \wedge d \beta $ which is integration by parts. This relation plus the definition of the Hodge star implies our claim.
+\end{itemize} 
+\subsection{Harmonic forms}
+Let's bring in harmonic forms now. The Hodge Laplacian $\Delta  = (d+d^*)^2 = d \circ d^* + d ^* \circ d$ is a degree two differential operator $\Lambda^k \to \Lambda^k$. The \textbf{harmonic} $k$\textbf{-forms} are defined as $\mathcal H^K =\ker \Delta $, or the kernel of the Laplacian. Clearly $\ker(d + d^*) \subseteq \mathcal H^k$, but the reverse inclusion holds if $M$ is compact ($\ker(d+d^*) = \mathcal H^k$). Consider a form 
+\[
+\langle \alpha ,\Delta \alpha  \rangle _{L^2}= \langle \alpha , d^* d \alpha  + dd^* \alpha  \rangle _{L^2}= \langle d^*\alpha , d\alpha  \rangle_{L^2} + \langle d^*\alpha , d^*\alpha  \rangle _{L^2}= \| d\alpha \|_{L^2}^2 + \| d^* \alpha \|_{L^2}.
+\] 
+This proves the claim, since if the LHS is zero then the two positive terms on the RHS must be zero. Next time we go on with Hodge theory and we will state the Hodge theorem, and combine it with self duality.
+
