@@ -4,9 +4,11 @@
 
 %basic math stuff
 \usepackage{pythonhighlight} 
-\usepackage{amsmath, amssymb, amsthm}
+\usepackage{amsmath, amssymb}
+\usepackage{amsthm}
 \usepackage{mathrsfs, mathtools}
-\usepackage{hyperref}
+%\usepackage{hyperref}
+\usepackage{bookmark}
 \usepackage[capitalize, noabbrev]{cleveref}
 \usepackage{xfrac}
 \usepackage{tikz-cd}
@@ -31,42 +33,41 @@
 \setcounter{tocdepth}{2} 
 
 %microtype, font, color support, cl
-\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+%\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
 \usepackage{adforn}
-\usepackage[charter,cal=cmcal]{mathdesign}
+%\usepackage[charter,cal=cmcal]{mathdesign}
 %\usepackage[cmintegrals,cmbraces]{newtxmath}
 %\usepackage{ebgaramond-maths}
 \usepackage[T1]{fontenc}
 \usepackage{CJKutf8} %cjk languages
 
 %references
-\usepackage[backend=biber,style=alphabetic,maxbibnames=99]{biblatex}
-\DeclareLabelalphaTemplate{
-    \labelelement{
-        \field[final]{shorthand}
-        \field{label}
-        \field[strwidth=3,strside=left, ifnames=1]{labelname}
-        \field[strwidth=1,strside=left]{labelname}
-    }
-    \labelelement{
-        \field[strwidth=2,strside=right]{year}
-    }
-}
-\DeclareFieldFormat{labelalpha}{\textbf{\scriptsize #1}}
+%\usepackage[backend=biber,style=alphabetic,maxbibnames=99]{biblatex}
+%\DeclareLabelalphaTemplate{
+    %\labelelement{
+        %\field[final]{shorthand}
+        %\field{label}
+        %\field[strwidth=3,strside=left, ifnames=1]{labelname}
+        %\field[strwidth=1,strside=left]{labelname}
+    %}
+    %\labelelement{
+        %\field[strwidth=2,strside=right]{year}
+    %}
+%}
+%\DeclareFieldFormat{labelalpha}{\textbf{\scriptsize #1}}
 
-\usepackage{fancyhdr}
-\fancyhf{}
- \fancyhead[RO,LE]{\small\thepage}
- \fancyhead[LO]{\small\itshape\nouppercase{\leftmark}}
- \fancyhead[RE]{\small\itshape Lecture Notes}
- \setlength{\headheight}{11.0pt}
-\pagestyle{fancy}
+%\usepackage{fancyhdr}
+%\fancyhf{}
+ %\fancyhead[RO,LE]{\small\thepage}
+ %\fancyhead[LO]{\small\itshape\nouppercase{\leftmark}}
+ %\fancyhead[RE]{\small\itshape Lecture Notes}
+ %\setlength{\headheight}{11.0pt}
+%\pagestyle{fancy}
 
 %figures
 \usepackage{import}
 \usepackage{xifthen}
 \usepackage{pdfpages}
-\usepackage{transparent}
 \newcommand{\incfig}[2][1]{%
     \def\svgwidth{#1\columnwidth}
     \import{./figures/}{#2.pdf_tex}

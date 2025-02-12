@@ -1,0 +1,46 @@
+\section{The period map and the integer lattice, continued} 
+Let $X^4$ be a closed, oriented manifold, and $P \colon \mathcal C(X) \to \mathrm{Gr}^- \subseteq \mathrm{Gr}_{b^-(X)}(H^2_{\mathrm{DR}}(X))$, where $\mathcal C(X)$ is the set of conformal structures. Then $P[g] = \mathcal H^- _{[g]}= \{g\text{-ASD harmonic functions} \} $. So $\mathcal H_{[g]}^- (\Z) = \mathcal H^-_{[g]} \cap  H^2(X,\Z) \subseteq H^2 _{\mathrm{DR}}(X) = P[g] \cap H^2(X,\Z)$. The generic non-existence theorem says that for generic $[g], b^+ >0$, we have  $\mathcal H ^- _{[g]}(\Z) = 0$.
+For $S_c \subseteq \mathrm{Gr}^- $ (submanifolds of codimension $b^+$), the claim is that $P \transv c$ for each $c$. Hence $P^{-1}(S_c)$ is a codimension $b^+$ submanifold of $\mathcal C(X)$.
+The theorem holds since generic conformal structures don't lie in the countable union $\bigcup_{c} P^{-1}(S_c)$.
+
+\begin{remark}
+    In families of conformal structures, $\mathcal H _{[g]}^- (\Z) \neq 0$ occurs with codimension $b^+$ in the parameter space.
+\end{remark}
+We need to understand the manifold structure of $\mathcal C(X)$. 
+
+\subsection{Conformal structures as maps $\Lambda ^- \to \Lambda^+$}
+Let $V$ be a 4-dimensional oriented vector space. Choose a reference inner product $g_0$, which gives rise to a splitting $\Lambda^2V = \Lambda_0^+ \oplus \Lambda_0^-$. If $\Lambda^-$ is another 3-dimensional subspace of $\Lambda^2V$ that is negative definite with respect to the squaring form $\eta \mapsto \eta \wedge \eta$, then the projection $\Lambda^- \xrightarrow{\cong} \Lambda_0^-$ is an isomorphism. So $\Lambda^- = \Gamma_ m = \mathrm{graph}\left(m \colon \Lambda_0^-  \to \Lambda_0^+\right)$, where $ m \subseteq \Hom(\Lambda_0^-, \Lambda_0^+)$.
+
+We could ask which linear maps $m$ give rise to a negative definite subspace. For $m \in \Hom (\Lambda_0^-, \Lambda_0^+)$, $\Gamma_m$ is negative definite iff $|m| _{\mathrm{op}}<1$. Then $g(\eta) = \eta ^2$, and 
+\[
+    g(\alpha  + m\alpha  ) = g(\alpha ) + g(m\alpha ) = \underset{<0}{\underbrace{\left( -|\alpha |^2 + |m\alpha |^2 \right)}}  \mathrm{vol}.
+\] 
+\begin{prop}
+    The map $m \mapsto \Gamma_m$ identifies linear maps $\Lambda_0^- \to \Lambda_0^+$ of operation norm $<1$, with negative definite 3-dimensional subspaces of $\Lambda^2V$. Then conformal structures are in bijection with the set $\left\{m \,\big|\, |m| < 1\right\} $.
+\end{prop}
+This tells us that conformal structures are not identified by some complicated manifold, but just some ball in a vector space.
+\begin{remark}
+    If $\Lambda^- = \Gamma_m$, then $\Lambda^+ = (\Lambda^-) ^+ = \gamma _{m^*}$, where $m^*$ is adjoint to $m$.
+\end{remark}
+This is the linear algebra picture, the globalization is essentially immediate. The conformal structures on our 4-manifold are identified with vector bundle maps $\Lambda_{g_0} ^- \xrightarrow{m}  \Lambda_{g_0} ^+$ with reference metric $g_0$, with the property that $|m_x| _{\mathrm{op}}<1$ for all $x \in X$. Here $X$ is compact, and $c \mapsto  C^r$ is a bundle map, an open subset of a Banach space.
+
+We compute that \[
+    D_{[g_0]}P \colon T_{[g_0]}\mathcal C(X) \to  T_{P[g_0]}\mathrm{Gr}^- = C^r(X, \Hom(\Lambda_{g_0}^-, \Lambda_{g_0}^+)) \to \Hom (\mathcal H^-, \mathcal H^+).
+\] 
+\begin{prop}
+    For $m$ a bundle map, $\alpha ^- \in \mathcal H^-$, \[
+        (D_{[g_0]}P)(m) (\alpha ^-) = m(\alpha ^-)_{\mathrm{harm} } \in \mathcal H^+.
+    \] So this is a harmonic orthogonal projection $\Omega_{g_0}^+ = \mathcal H^+ \oplus \im d^+\to \mathcal H^+$ (conformal self-duality complex).
+\end{prop}
+This is the claimed answer, and it is as clean as can be. In differential topology, often you are faced with scary tasks like differentiating a map between complex structures. If you can unravel to the point where you can really formulate what you need, it is more feasible to guess what the answer should be and go from there.
+
+We use this to show that $P\transv S_c$, i.e., $T_{P[g]}\mathrm{Gr}^- = T_{P[g]}S_c + \im D_{[g]}P$. We need that $\im DP$ spans the normal space $T_{P_{g_0}}\mathrm{Gr}^- / T_{p_g}S_c = N_{P_g}(S_c)$. We have \[
+    N_J S_c = \frac{T_J \mathrm{Gr}^-}{T_J S_c} = \frac{\Hom (J,J^{\perp})}{\{\theta \in \Hom(J, J^{\perp}) \mid  J(c) = 0\} \underset{\theta \mapsto  \theta(c)}{\xrightarrow{\cong}}  J^{\perp}}.
+\] Unraveling this lot, we find out that what we need to prove is the following:
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item If $\alpha  ^- \in \mathcal H^-_g$ represents $0\neq c \in H^2(X,\Z)$, then for all $\alpha  ^+ \in \mathcal H^+_g,$ there exists a bundle map $m \colon \Lambda_g^- \to \Lambda_g^+$ with the property that $m(\alpha ^-) _{\mathrm{harm}} = \alpha ^+$.
+\end{itemize}
+If not, then there exist forms $\alpha ^{\pm}\in \mathcal H ^{\pm}_g$ such that $\alpha ^+ \perp _{L^2}m(\alpha ^-)_{\mathrm{harm}}$ for all $m$. So $0 = \langle \alpha ^+, m(\alpha ^-) _{\mathrm{harm}} \rangle _{L^2} = \langle \alpha ^+, m(\alpha ^-) \rangle _{L^2}$ for all $m$. For such a vanishing to hold for all bundle maps $m$ seems very strong. Say there exists an $x \in X$ where $\alpha _x^+ \neq 0, \alpha _x^- \neq 0$. Use bundle maps $m$ supported by $x$ to get a contradiction. We conclude that either $\alpha ^+ $ or $\alpha ^-$ must be identically zero on some open set. There is a unique continuation principle that says a harmonic form vanishing to infinite order of a point vanishes everywhere. Hence $\alpha ^- = 0$ or $\alpha ^+ =0$ implies they both are zero, or $\alpha ^+ = \alpha ^- = 0$. 
+
+Next time, complex geometry.

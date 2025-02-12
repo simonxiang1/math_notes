@@ -1,0 +1,44 @@
+\section{The moduli space of instantons on the line bundle} 
+We will also preview Seiberg-Witten invariants today. Let $(X^4,g)$ be our closed Riemannian oriented 4-manifold, and $L \to X$ our hermitian line bundle. We were talking about our space of connections $\mathcal A_L = \{\text{unitary covariant derivatives in }  L\} $ which $\mathcal G = C ^{\infty}(X, S^1 )$ acts on. Then we had our quotient $\mathcal B_L = \mathcal A_L / \mathcal G$; things simplify if we choose a reference connection $\nabla _{\mathrm{ref}} \in \mathcal A_L$. We had the Coulomb gauge slice $\mathcal S _L = \nabla _{\mathrm{ref}}+ i\ker d^*$. Then $\mathcal S_L \xrightarrow{\cong} \mathcal A_L / \mathcal G^0$ (the identity component of $\mathcal G$), and $\mathcal B_L = \mathcal S_L / \pi_0 \mathcal G = \mathcal S_L / H^1(X;\Z)$. So 
+$\mathcal B_L \cong  \left( \mathcal P = \frac{H^1(X;\R)}{H^1(X;\Z)}\cong  \left( S^1  \right) ^{b_1(X)} \right) \times \left( \im d^* \right) $. 
+
+\subsection{Instantons}
+We have $\nabla \in \mathcal A_L, F_{\nabla}^+ = 0$. We observed that the existence of such a $\nabla$ implies \[
+    c_1(L ) \in  H^2 _{\Z }\cap  \mathcal H _{[g]}^- \subseteq H^2 _{\mathrm{DR}}(X).
+\] We claimed that the converse holds.
+\begin{proof}
+    Say  $c_1(:) \in H^2 _{\Z}\cap  \mathcal H^- _{[g]}$. Pick some random connection $\nabla_0 \in \mathcal A_L$. We have $ \frac{i}{2\pi}\left[ F_{\nabla_0} \right] = c_1(L) \in H^2_{\Z}$. By the Hodge theorem, there exists a  harmonic 2-form representative for $c_1(L)$, given by $\eta \in \mathcal H^2_{[g]}, [\eta] \in c_1(L)$. Then $\eta$ is anti self dual. We would like to find a covariant derivative $\nabla$ such that $\frac{i}{2\pi}F_{\nabla}=\eta$, because that is then an instanton. If $\eta - \frac{i}{2\pi}F _{\nabla_0}=d a$, then $\nabla = \nabla_0-2\pi i a$ has curvature $F _{\nabla}= F_{\nabla_0}-2\pi i da = \eta$. 
+\end{proof}
+This most definitely only works for line bundles. Curvature can be entirely captured by the cohomology class (while for higher vector bundles it only captures a portion through the trace), and is mediated by the simple expression $da$.
+
+\subsection{Uniqueness of instantons}
+The simple reason that instantons are not unique is that they are invariant under the gauge group, so if you have one, you have a whole gauge orbit of them. The question is how it parametrizes the gauge orbit. Let $\mathcal I_L \subseteq \mathcal A_L$ denote the space of instantons.
+\begin{prop}
+    The subspace $\mathcal I_L / \mathcal G \subseteq  \mathcal B_L$ is isomorphic to the Picard torus $\mathcal P$.
+\end{prop}
+\begin{proof}
+    Say $\nabla \in  \mathcal I$. Recall that $d^+ =\frac{1}{2}\left( \id + * \right) \circ d\colon \Omega^1  \to \Omega^+_g$. Then $\nabla + ia \in  \mathcal I_L \iff d^+ a = 0$. We need to look at $\ker d^+$. Recall the self duality complex $\mathcal E^*$, given by: \[
+    0 \to \mathcal E^0 \to  \mathcal E^1 \to  \mathcal E^2 \to 0, 
+    \] where \[
+    0 \to \Omega^0 \xrightarrow d \Omega^1\xrightarrow{d^+} \Omega^+ \to 0
+\] by definition. Computing the cohomology, $H^1(\mathcal E) = \frac{\ker d^+}{\im d}=\frac{\ker d}{\im d}= H^1_{\mathrm{DR}}(X)$. For $\mathcal I_L \cap  \mathcal S_L = \nabla  + i (\ker d^+ \cap  \ker d^*) = \nabla = i \mathcal H^1_g = \nabla + i H^1_{\mathrm{DR}}(X)$. Then \[
+\mathcal I_L / \mathcal G = (\mathcal I_L \cap  \mathcal S_L) / H^1 (X ; \Z) = [\nabla] + \underset{\mathcal P}{\underbrace{\frac{i}{2\pi}\cdot \frac{H^1_{\mathrm{DR}}(X)}{H^1(X;\Z)}}
+} \] where $\mathcal I_L / \mathcal G$ sits in $\mathcal B_L = \mathcal A_L / \mathcal G = \mathcal S_L / (H^1(X;\Z)=\pi_0\mathcal G)$.
+\end{proof} 
+We have $\mathcal I_L / \mathcal G = (\mathcal I_ L \cap \mathcal S_L) / \pi_0 \mathcal G$ cut out as a manifold. Then $F$ is defined on $\mathcal A_L$, $F(\nabla) = F_{\nabla}^+$. We are interested in $F^{-1}(0) / \mathcal G$. Instead look at $F'(\nabla) = (F(\nabla), d^*(\nabla - \nabla _{\mathrm{ref}})$, where $(F')^{-1}(0) \subseteq \mathcal S_L$. We have \[
+    \ker DF' = \ker (d^+ \oplus d^*) = \mathcal H^1,
+\] while \[
+\coker DF' = \coker (d^+ \oplus d^*) = \Omega^+/\im d\oplus \coker d^* = \mathcal H^+ \oplus \R.
+\] The cokernel is not zero, but has constant rank by the constant rank theorem, a corollary of the inverse function theorem. ${ F'} ^{-1}(0)$ is a \emph{clean} level set, i.e., submanifold of a domain. This is true in finite dimensions, or when your spaces are Banach spaces; we need to address this! We will fix this later using Sobolev spaces.
+
+\subsection{Preview of Seiberg-Witten theory}
+On any oriented manifold $M$, there is a set $\mathrm{Spin}^c(M)$, which is the set of  $\mathrm{spin}^c$-structures on $M$ modulo isomorphism. When it's non-empty, it's a torsor for $H^2(M;\Z)$. The set $\mathrm{Spin}^c (M)$ is natural under oriented diffeomorphism. In dimension 4, , $\mathrm{Sp in}^c (X)\neq \O$. Given $\mathfrak s \in \mathrm{Sp in}^c$ a $\mathrm{sp in}^c$-structure, we get a pair of rank 2 hermitian vector bundles $\mathbb S^+ \to X$, $\mathbb S^- \to X$ and a bundle map $T^*X \xrightarrow{\rho} \Hom(\mathbb S^+, \mathbb S^-)$ which satisfies certain properties (a Clifford relation). These are the positive and negative spinor bundles. 
+There is a notion of a \emph{spin connection} in $\mathbb S^+$, which induce a unitary connection in the line bundle $\Lambda^2 \mathbb S^+$, where $\nabla \mapsto  \nabla^t$. This correspondence turns out to be a bijection. The \textbf{Seiberg-Witten configuration space} $\mathcal C$ is given by \[
+    \mathcal C = \{ \text{spin connections in } \mathbb S^+\} \times  \Gamma (\mathbb S^+).
+\] Then $\mathcal G = C ^{\infty}(X, U(1))$ acts on $\mathcal C$, where $u\cdot (\nabla, \phi) = (u \cdot \nabla, u\phi)$, and $u \cdot \nabla^t = \nabla^t - 2(du) u^{-1}$. Because of the passage from spinor line bundles to line bundles we have to tweak our original equation and add a 2. The action of $\mathcal G$ on $\mathcal C$ is \emph{free} except where $\phi \equiv 0$. Then $\mathcal C^*$ is local where $\phi \not \equiv 0$, and  \[
+\mathcal B^* \subseteq \mathcal C^* / \mathcal G \cong  \mathcal P \times (\im d^*) \times \frac{\left( \Gamma(\mathbb S^+) \setminus \{0\}  \right) }{U(1)}.
+\] We write down a gauge invariant equation on $\mathcal C$, which gives rise to a moduli space of solutions $\mathcal M\subseteq  \mathcal C / \mathcal G$. When $\mathcal M$ avoids the locus $\phi \equiv 0$, then $\mathcal M \subseteq \mathcal B^*$. It turns out that it carries a fundamental homology class $[\mathcal M]$ in  the homology $H_*(\mathcal B^*)$. This class is the \textbf{Seiberg-Witten invariant} for the specified $\mathrm{sp in}^c$-structure.
+
+
+
+

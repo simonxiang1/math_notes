@@ -1,0 +1,50 @@
+\section{Connections, gauge transformations, instantons in line bundles} 
+Last time we discussed instantons in the case of line bundles. We will come back to the theorem giving criteria for the existence of instantons in line bundles later. Today we discuss the space of connections in a line bundle, and also the quotient space (or orbit space) of covariant derivatives modulo the action of the gauge group. 
+
+\begin{namedthing}{Notation} 
+Let $X^4$ be a closed oriented 4-manifold, $L \to X$ be a hermitian line bundle (complex vector bundle of rank 1). Denote the space of unitary covariant derivatives in $L$ by $\mathcal A_X = \nabla = \Omega^1_X (\mathfrak u(L))$, where $\mathfrak u(L)$ denotes skew invariant endomorphisms of $L$. This is equal to $\nabla + i \Omega^1_X$, a reference covariant derivative plus imaginary 1-forms. 
+\end{namedthing}
+
+We use the $C ^{\infty}$ topology on $\Omega^1_X$ (hence on $\mathcal A_X$). 
+For any compact $M^n $, for any vector bundle $E \to M$, there is a $C ^{\infty}$ topology on $C^{\infty}(M;E)$. We will not get into the functional analysis details of this; it is defined by a translation invariant metric, making $C ^{\infty}(M;E)$ a topological vector space (more specifically a \emph{Fr\'echet space}). The metric is defined by a sequence of $C ^{\infty}$ norms. 
+We will not go into it anymore, but we will say the following. Say a compact set $K \subseteq U$ open in $M^n $, where $U \cong  \R^n $, so we have a chart. Say $\left. E \right| _U \to U$ is trivialized, or isomorphic to $\C^r $. So sections of $E$ supported in $K$ are functions $\R^n  \to \R^r$ supported in $k$. For sections $(s_n )$, $s$ supported in $k$, to say that $s_n  \to s$ in $C ^{\infty}$ means that $s _n \to s$ uniformly and also the sequence of partial derivatives\[
+\frac{\partial ^{\alpha }}{\partial  x ^{\alpha }}s_n  \to \frac{\partial  ^{\alpha }}{\partial  x ^{\alpha }}s 
+\] converges uniformly for all multi-indices $\alpha $.
+
+We have our space $\mathcal A_L = \nabla \to i \Omega^1_M$ an affine Fr\'echet space. We also have the gauge group $\mathcal G_L$ of unitary gauge transformations which is just
+$C ^{\infty}(X, U(L))$. Gauge transformations necessarily act by complex scalars, which on the complex line have norm 1. So this is the space of circle valued functions $C ^{\infty}(X, U(1))$. $\mathcal G_L$ also has a $C ^{\infty}$ topology and acts on the space of covariant derivatives. In the case of line bundles, the action is simply given by $u \cdot \nabla = \nabla - (du) u^{-1}$. Then we have the orbit space $\mathcal B_L = \mathcal A_L / \mathcal G_L$.
+
+Nothing about this quotient space is given for free. For example, it is not terribly obvious that this quotient space is Hausdorff. It turns out that it is Hausdorff, even if we replace $L$ by a higher rank bundle. In the line bundle case there's a concrete picture. We find that $\mathcal B_L \cong  (\text{Fr\'echet space} ) \times (S^1 ) ^{b_1(X)}$ which is Hausdorff, much more than that rather something nice. There is no such simple picture in higher rank.
+
+\begin{namedthing}{Observations} 
+   Let $X$ be connected.
+   \begin{itemize}
+   \setlength\itemsep{-.2em}
+       \item There is a subgroup  $U(1)  \subseteq \mathcal G)L$ (continuous gauge transformations)
+\item This subgroup acts trivially on $\mathcal A_L$, or $du = 0$.
+\item The quotient $\mathcal G_L / U(1)$ acts \emph{freely} on covariant derivatives.
+   \end{itemize}
+\end{namedthing}
+What is the group of connected components $\pi_0(\mathcal G_L)$? This is the group of homotopy classes $X \to S^1 $, which is the first cohomology group $H^1(X,\Z)$. One way to see the bijection is that $H^1(X,\Z) \subseteq H^1_{\mathrm{DR}}(X)$ as the integer lattice, then map $[u] \mapsto  [du] \in H^1_{\mathrm{DR}}(X)$.
+We can concretely write down the identity component $\mathcal G_L^0 \subseteq \mathcal G_L$, which consists of gauge transformations $u$ which have a \emph{logarithm}: \[
+u = e^{i\xi},\quad \xi \colon X \to \R.
+\] It acts on covariant derivatives as follows:
+\[
+    \left( e ^{i\xi} \right) \cdot \nabla = \nabla - i d \xi.
+\] So it acts on $\mathcal A_L$ by adding an exact 1-form. Fix a reference covariant derivative $\nabla$. Then $\mathcal A_L / \mathcal G^0_L \cong  i\left( \frac{ \Omega^1_X}{ d(\Omega^0_X)} \right) $. 
+\subsection{Gauge fixing}
+We talk about the gauge slice, or gauge fixing. The Hodge decomposition implies that $\Omega^1_X = d \Omega^0_X \oplus \ker d^*$. We take the ``\emph{Coulomb gauge slice}'', defined by \[
+\mathcal S = \nabla + i\ker d^* \subseteq \mathcal A_L.
+\] Then projection $\mathcal S \to \mathcal A_L / \mathcal G_L^0$ is a homeomorphism $\mathcal S \xrightarrow[\text{homeo}]{\cong } \mathcal A_L / \mathcal G^0_L $. There is nothing quite so simple for higher dimensional vector bundles. The nomenclature comes the fact that line bundles is a good language for describing electromagnetism. The Coulomb condition measure some condition for measuring the potential of the divergence of some electric field.
+
+We have that $\pi_0 \mathcal G_L = H^1(X,\Z)$ acts on $\mathcal A_L / \mathcal G^0_L = \mathcal S_L$. We know it acts because the whole gauge group acts, but what is the action specifically? Take a gauge transformation $u$, then \[
+    u \cdot \nabla = \nabla - (du) u^{-1} = \nabla - d(\log u)
+\] for $d(\log u)$ a closed 1-form. Even though $\log u$ is not well defined as a random branch of the complex logarithm, $d (\log u)$ is. Then the class $[d (\log u)] \in H^1(X;\Z)$ lives in the first integer cohomology. We can find a function $\xi$ such that the closed 1-form $d(\log u) + d\xi$ is harmonic, or co-closed (in $\ker d^*$). Then $\nabla + d (\log u) = d \xi$ lies in $\mathcal S_L$. This describes the action of $H^1(X;\Z)$ on $\mathcal S_L$.
+Then the orbit space \[
+    \mathcal B_L = \mathcal A_L /\mathcal G_L \cong  \mathcal S_L / \pi_0 \mathcal G_L \cong  \underset{\text{Picard torus} }{\underbrace{\frac{H^1(X;\R)}{H^1(X;\Z)}}} \times \im d^*.
+\] What we use here is that $\mathcal S_L = \nabla + i\ker d^*$, but $\ker d^*=\mathcal H^1 \oplus \im  d^*$ by the Hodge decomposition. The Picard torus is given by $\mathcal P \cong  \left( S^1  \right) ^{b_1(X)}$.
+
+\subsection{Curvature}
+We will not get to instantons, but at least we can cover curvature. Observe that $F_{u \cdot \nabla} = u F_{\nabla}u^{-1},$ but since $u \in U(1)$ (for line bundles), this is just $F_{\nabla}$. So for line bundles, curvature is fully \emph{gauge invariant}. Then \[
+F _{\nabla+ ia}= F_{\nabla}-i\,da,
+\] so curvature is basically the exterior derivative. Then $F$ is defined on $\mathcal B_L$. Suppose that for instance we want to think about the set of gauge orbits of connections that have the same curvature as $\nabla$, or $\{\nabla' \in \mathcal A_L \mid  F_{\nabla'}= F_{\nabla}\} / \mathcal G_L$; this lies in $P \times \im d^*$.  Prescribing curvature is a copy of $\mathcal P$, where $\mathcal P \times 0 \subseteq \mathcal P \times \im d^*$.

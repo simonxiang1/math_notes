@@ -1,0 +1,175 @@
+\newcommand\N{\ensuremath{\mathbb{N}}} 
+\newcommand\R{\ensuremath{\mathbb{R}}} 
+\newcommand\A{\ensuremath{\mathbb{A}}} %affine space
+\newcommand\Z{\ensuremath{\mathbb{Z}}} 
+\renewcommand\O{\ensuremath{\emptyset}} 
+\newcommand\Q{\ensuremath{\mathbb{Q}}} 
+\newcommand\C{\ensuremath{\mathbb{C}}}
+\newcommand\F{\ensuremath{\mathbb{F}}} %field
+\newcommand\E{\ensuremath{\mathbb{E}}} %field extension
+\renewcommand\P{\ensuremath{\mathbb{P}}} %projective space
+\renewcommand\H{\ensuremath{\mathbb{H}}} %hyperbolic space
+\newcommand\im{\ensuremath{\operatorname{im}}} %image
+\newcommand\rank{\ensuremath{\operatorname{rank}}} %rank
+\newcommand\id{\ensuremath{\operatorname{id}}} %identity map
+\newcommand\grad{\ensuremath{\operatorname{grad}}} %gradient
+\newcommand\curl{\ensuremath{\operatorname{curl}}} %gurl
+\renewcommand\div{\ensuremath{\operatorname{div}}} %divergence
+\newcommand\Gr{\ensuremath{\operatorname{Gr}}} %grassmannian
+\newcommand\Hom{\ensuremath{\operatorname{Hom}}} %linear mappings
+
+\documentclass[xcolor=dvipsnames]{beamer} 
+\usetheme{Copenhagen} 
+\beamertemplatenavigationsymbolsempty
+\definecolor{burntorange}{RGB}{191,87,0}
+\definecolor{utgrey}{RGB}{51,63,72} 
+
+\setbeamercolor{palette primary}{bg=burntorange,fg=white}
+\setbeamercolor{palette secondary}{bg=burntorange,fg=white}
+\setbeamercolor{palette tertiary}{bg=burntorange,fg=white}
+\setbeamercolor{palette quaternary}{bg=burntorange,fg=white}
+\setbeamercolor{structure}{fg=burntorange} % itemize, enumerate, etc
+\setbeamercolor{section in toc}{fg=burntorange} % TOC sections
+\setbeamercolor{subsection in head/foot}{bg=burntorange,fg=white}
+\setbeamercolor{block title example}{fg=white,bg=burntorange}
+%\setbeamercolor{block body example}{fg=white,bg=burntorange}
+
+\usepackage[utf8]{inputenc} 
+\usepackage{float}
+\usepackage{tikz} 
+\usepackage{tikz-cd} 
+\renewcommand\qedsymbol{$\boxtimes$}
+\title{Convergence of the unadjusted Langevin algorithm} 
+\subtitle{} 
+\author{Simon Xiang} 
+\institute{University of Texas at Austin} 
+\begin{document} 
+    \begin{frame}
+        \titlepage
+    \end{frame}
+
+    %\begin{frame}
+        %\frametitle{Prerequisites} 
+        %Here are some things I'll assume you know about:
+        %\begin{itemize}
+            %\item Linear algebra, including quotient spaces, exact sequences,
+            %\item Basic multivariable calculus,
+            %\item What an open set is,
+        %\end{itemize}
+        %It would be helpful to know 
+        %\begin{itemize}
+            %\item Basic algebraic structures, notably groups and algebras,
+            %\item And some topology.
+        %\end{itemize}
+    %\end{frame}
+
+    \begin{frame}
+        \frametitle{Motivation} 
+        \begin{exampleblock}{Question} 
+
+        For $f \colon \R^n   \to \R$, assuming we have oracle access to $\nabla f$, how would we sample from the probability distribution $\nu \sim e ^{-f}$?
+        \end{exampleblock}
+       \begin{itemize}
+       \setlength\itemsep{-.2em}
+           \item As the step size $\eta \to  0$, the \textbf{discretized unadjusted Langevin algorithm} recovers \textbf{Langevin dynamics}, a continuous time stochastic process converging to $\nu$.
+           \item If the \textbf{log-Sobolev inequality} is satisfied, this algorithm converges at an exponential rate, or $\mathcal{O} (\log n)$ time.
+       \end{itemize}
+    \end{frame}
+    
+
+    \begin{frame}
+    \frametitle{KL Divergence and the log-Sobolev inequality} 
+    Let $\rho, \nu$ be probability distributions on  $\R^n $.
+    \begin{definition}
+       The \textbf{Kullback-Liebler (KL) divergence} of $\rho $ with respect to $\nu$ is defined by \[
+       H_{\nu}(\rho)= \int_{\R^n } \rho(x) \log \frac{\rho(x)}{\nu(x)} \, dx.
+       \] 
+    \end{definition}
+    \begin{definition}
+ For all smooth $g \colon \mathbb R^n \to \mathbb R$ and $\alpha<0$ with $\mathbb E_{\nu}[g^{2}]< \infty$, the \textbf{log-Sobolev inequality (LSI)}  is given by \[
+\mathbb E_{\nu}[g^{2} \log g^{2}]-\mathbb E_{\nu}[g^{2}]\log \mathbb E_{\nu}[g^{2}] \leq \frac{2}{\alpha}\mathbb E_{\nu}[ \|\nabla g\|^{2}].
+\]
+    \end{definition}
+    \end{frame}
+    \begin{frame}
+    \frametitle{Equivalence} 
+    \begin{definition}
+        
+The \emph{relative Fisher information}  is given by 
+\[
+J_{\nu}(\rho)=\int_{\mathbb R^n}^{} \rho(x)\left\|  \nabla \log \frac{\rho(x)}{\nu(x)}\right\|^{2} \, dx.
+\] 
+\end{definition} 
+    \begin{block}{Proposition} 
+The log-Sobolev inequality is equivalent to the following relation between KL divergence and Fisher information for all $\rho$: \[
+H_{\nu}(\rho) \leq \frac{1}{2\alpha } J_{\nu}(\rho).
+\] 
+    \end{block}
+    To obtain this inequality from LSI, choose $g^2=\frac{\rho}{\nu}$. To obtain LSI from this inequality, choose $\rho = \frac{g^2\nu}{\mathbb E_{\nu} [g^2]}$.
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Langevin dynamics and the Fokker-Planck equation} 
+        \begin{definition}[]
+            For a target distribution $\nu \sim e ^{-f}$, the  \textbf{Langevin dynamics} is a continuous time stochastic process $(X_t)_{t \geq 0}$ in $\R^n $ that evolves by the following SDE: \[
+            d X_{t}= - \nabla f (X_{t})dt + \sqrt{ 2 } d W_{t}
+            \] where $(W_t)_{t\geq 0}$ is the $n$-dimensional Brownian motion.
+        \end{definition}
+        \begin{definition}[]
+           If $(X_t)_{t \geq 0}$ evolves following the Langevin dynamics, then its pdf $(\rho_t)_{t\geq 0}$ evolves by the \textbf{Fokker-Planck equation} \[
+               \frac{ \partial \rho _t }{ \partial t } = \nabla \cdot  (\rho _t \nabla f)+ \Delta \rho _t= \nabla \cdot  \left( \rho _t \nabla \log \frac{\rho _t}{\nu} \right)
+           \] 
+           where $\nabla \cdot $ is divergence and $\Delta $ is the Laplacian.
+        \end{definition}
+    \end{frame}
+
+    \begin{frame}
+    \frametitle{Convergence} 
+    \begin{lemma}
+        Along the Langevin dynamics (or Fokker-Planck equation), \[
+        \frac{d}{dt}H_{\nu}(\rho _t)=-J_{\nu}(\rho _t).
+        \] 
+    \end{lemma}
+    \begin{proof}
+        Recall that the time derivative of KL divergence along any flow is \[
+        \frac{d}{dt}H_{\nu}(\rho_t)=\frac{d}{dt}\int_{\R^n }^{}\rho_t \log \frac{\rho_t}{\nu}  \, dx = \int_{\R^n } \frac{\partial \rho_t }{\partial  t} \log \frac{\rho_t}{\nu}\, dx
+        \] as the second part from the chain rule vanishes. Then along the Fokker-Planck equation this integrates by parts to $-J_{\nu}(\rho_t)$.
+    \end{proof}
+    Since $J_{\nu}(\rho) \geq 0$, the KL divergence with respect to  $\nu$ is decreasing and $\rho_t \to  \nu$.
+    \end{frame}
+
+
+    \begin{frame}
+        \frametitle{Rate of convergence} 
+        \begin{theorem}
+            Suppose $\nu$ satisfies LSI with $\alpha >0$. Then along the Langevin dynamics, \[
+           H_{\nu}(\rho _t)\leq e ^{-2 \alpha t}H_{\nu}(\rho_{0}). 
+            \] 
+        \end{theorem}
+        \begin{proof}
+            Applying our lemma and the fact that LSI is equivalent to $H_{\nu}(\rho) \leq \frac{1}{2\alpha }J_{\nu}(\rho)$, we have \[
+            \frac{d}{dt}H_{\nu}(\rho_t)=-J_{\nu}(\rho_t) \leq -2\alpha  H_{\nu}(\rho_t).
+            \] Integrating yields the bound $H_{\nu}(\rho_t)\leq  e ^{-2\alpha t }H_{\nu}(\rho_0)$ as desired.
+        \end{proof}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{The discretized unadjusted Langevin algorithm} 
+        \begin{definition}[]
+            The \textbf{Unadjusted Langevin Algorithm (ULA)} with step size $\eta >0 $ is the discrete-time algorithm  \[
+            x_{k+1}=x_k-\eta \nabla f(x_k) + \sqrt{2 \eta} z_k
+            \] where $z_k \sim N(0,1)$ is an independent Gaussian random variable in  $\R^n $. Let $\rho_k$ denote the probability distribution of  $x_k$ evolving along ULA.
+        \end{definition}
+        \begin{itemize}
+        \setlength\itemsep{-.2em}
+            \item Comparing to $d X_{t}= - \nabla f (X_{t})dt + \sqrt{ 2 } d W_{t}$, as $\eta \to  0$ we see how ULA recovers the Langevin dynamics.
+            \item For fixed $\eta>0$, ULA converges to a biased limiting distribution  $\nu_{\eta}\neq \nu$. So KL divergence sadly does not converge to 0 along ULA, and has an asymptotic bias $H_{\nu}(\nu_{\eta})> 0$.
+        \end{itemize}
+        
+    \end{frame}
+
+\begin{frame}
+    \frametitle{Conclusion} 
+    Thank you for listening! Reference: \url{https://arxiv.org/abs/1903.08568}
+\end{frame}
+\end{document}

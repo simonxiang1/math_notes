@@ -1,0 +1,57 @@
+\section{$K 3$ surfaces and periods} 
+New topic: covariant derivatives, curvature, and gauge transformations.
+\subsection{$K 3$ surfaces}
+\begin{definition}[]
+    A $K3$ \textbf{surface}  $(X,J)$ is a compact complex surface with $b^1(X) = 0$ with admits:
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+        \item a K\"ahler structure $g+i\omega$
+        \item a nowhere vanishing holomorphic 2-form $\sigma$
+    \end{itemize} i.e., has local holomorphic coordinates $(z_1,z_2)$, $\sigma = h(z_1,z_2)dz_1 \wedge dz_2$ where $h$ is holomorphic and non-zero.
+\end{definition}
+Any \emph{other} holomorphic 2-form $\sigma'$ is $\sigma' =f \sigma$, where $f$ is holomorphic on $X$. The maximum modulus theorem then implies that $f$ is constant, so $H^0(\mathcal A^2)$ (global holomorphic 2-forms) is $\C \sigma$ which implies $h ^{20}=\dim H^0(\mathcal A^2) = \dim \mathcal H ^{20}=1$, since $h ^{02}= h ^{20}=1$ and $\mathcal H ^{02}= \overline{\mathcal H ^{20}}$.
+Last time we ended with the Hodge index theorem, which says that for a H\"ahler surface (compact), $b^+ = 1 + h ^{02} + h ^{20}=3$. So $b^+(K 3) = 3$. Moreover we get that the self dual harmonic forms $\mathcal H ^+ _g$ are spanned by the real part of  $\C\sigma\oplus\C \overline{\sigma}\oplus \R \omega$ (where elements of $\C \overline{\sigma}$ look like $a\alpha +\overline{a}\overline{\sigma}$ for $a \in \C$).
+
+There is a magic formula, a version of the Riemann-Roch theorem which says that \[
+    \sum (-1)^q h ^{0,q}= \frac{1}{12}\left( c_1^2 (TX)+ c_2(TX) \right) [X]
+\] leading to a beautiful characterisation of the Euler characteristic, where $\chi(X) = c_2(TX)[X] = 24$. Here $b^1=0$ by assumption, so $\chi(X) = 2+ b^2$. This implies that $b^2 = 22$, $b^+ = 3$, and so $b^-= 19$. Then you have a Hodge structure $H^2(X) \otimes \C = \mathcal H ^{20}\oplus \mathcal H ^{11}\oplus \mathcal H ^{02}$. Knowing $\C \sigma$, we get $\mathcal H ^{20}= \C \sigma$, $\mathcal H ^{02}=\overline{\C \sigma}$, and $\mathcal H ^{11}= \left( \C \sigma \oplus \C \overline{\sigma} \right) ^{\perp}$, where $[\eta] \in H^2 _{\mathrm{DR}}(X,\C)$, and $\int_X\eta \wedge \sigma =\int_X \eta \wedge \overline{\sigma}=0$. Here $\C\sigma$ is by the Hodge theorem; note that $\int \sigma \wedge \sigma = 0,$ while $\int \sigma \wedge \overline{\sigma}>0$. 
+We can record the Hodge structure of a $K 3$ surface $(X,J)$ as its \textbf{period point} $\C \sigma$ in the \textbf{period domain} \[
+    P = \left\{ \C \sigma \in \mathbb P (H^2(X,\C) )\,\Big|\,  \int \sigma \wedge \sigma = 0, \int \sigma \wedge \overline{\sigma}>0 \right\} 
+\] This is a 20-dimensional complex manifold; $H^2(X,\C)$ is 22 dimensional, projection takes this down to 21 dimensions, the quadratic equation $\sigma \wedge \sigma$ takes this down to 20 dimensions, and $\sigma \wedge \overline{\sigma}$ is an open condition. This is equivalent to the Hodge structure. It is a fact that all points of $P$ occur as period points. It is not quite true that the period point determines the $K 3$ structure up to isomorphism, but ``nearly''.
+Some $K 3$ surfaces are ``algebraic'', i.e. there exists a K\"ahler class $[\omega] \in H^2\Z$. For example:
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item quartic surfaces in $\C \mathrm{P^3}$
+    \item quadric and cubic in $\C \mathrm{P^4}$
+    \item double cover of $\C \mathrm{P^2}$
+    \item  branched along a smooth sextic curve
+\end{itemize}
+This takes the dimension down to 19. We briefly mentioned the N\'eron-Severi group $\mathrm{NS}(X,J) = H ^{11}\cap H^2_{\Z}$, the classes of complex curves on $X$. Then $\rho(X) = rk \mathrm{NS}$, the ``Picard point'', and $\rho \geq 1$ for $X$ algebraic. Having $\rho$ \emph{big} is \emph{special}, e.g. for a \emph{generic} quartic surface, $\rho = 1$. This ends our sketchy overview of $K 3$ surfaces.
+
+\subsection{Connections and vector bundles}
+We move toward Gauge theory proper. To set a convention, let $E \to X$ be a smooth complex vector bundle, with a Hermitian inner product $h $ in $E$.
+
+\begin{definition}[]
+    A \textbf{covariant derivative} (also known as a \textbf{connection}) $\nabla \in E$ is a $\C$-linear map $\nabla \colon C^{\infty} (X,E)\to C ^{\infty}(X, T^*X \otimes _{\R}E) $ from the space of sections to the sections of the cotangent bundle tensored with $E$. It has the property that for a $C ^{\infty}$ function $f$ and section $s$, we want to the Liebniz rule to hold in a sense, or \[
+        \nabla  (fs) = df \otimes s + f \nabla s
+    \] where $df$ is the exterior derivative of $f$ (a 1-form). It is called \textbf{unitary} (with respect to a Hermitian inner product $h$) if \[
+    d(h(s_1,s_2)) = h (\nabla s_1,s_2) + h(s_1, \nabla s_2).
+    \] In other words, we want the connection to obey some form of the product rule.
+\end{definition}
+
+For any vector field $V \in C ^{\infty}(X,TX)$, we get $\nabla_V \colon C ^{\infty}(X,E) \to C ^{\infty}(X,E)$; for $\nabla_V s$, contract $X$ into $\nabla s$. It is a quick and easy check that $\nabla$ is a \emph{local operator}, that is to say, $(\nabla s)(x)$ depends only on the germ of $s$ near $x$ (in fact this is a weaker statement, it only depends on the first order of the germ of $s$). 
+
+\begin{example}
+In the trivial line bundle $\C$, the projection $X \times \C \to \C$, a section of the covariant derivative amounts to a $\C$-linear map $\nabla \colon C ^{\infty} (X,\C)\to C ^{\infty}(T ^* X \otimes \C)$ obeying the Liebniz rule. For example, the exterior derivative $d$ does the job, called the trivial covariant derivative. If we use the obvious Hermitian metric on $\C$ (given by the standard Hermitian metric of $\C$ independent of where you are on $X$), then $d$ is unital. This is essentially the product rule. 
+    
+
+    If $V$ is a complex vector space, we get a trivial vector bundle $V = V \times X \to X$, which carries a trivial connection as well; $d_V = d \otimes \id _V$.
+\end{example}
+The difference $\nabla - \nabla '$ between two covariant derivatives $E \to X$ has the property of being linear over functions($C ^{\infty}(X)$-linear), or 
+\begin{align*}
+    \nabla (fs ) &= df \otimes s  + f \nabla s\\
+    \nabla' (fs ) &= df \otimes s  + f \nabla' s 
+\end{align*} Taking the difference will result in something linear over functions. So $(\nabla-  \nabla')s = \alpha s$, where $\alpha _x \in \mathrm{End}_{\C}(E_x)$. What we find is that given a covariant derivative $\nabla$ in $E$, the space of covariant derivatives is given by $\nabla$ plus the vector bundle consisting of the cotangent bundle tensored with endormorphisms of $E$
+, or \[
+    \{ \text{covariant derivatives in } E\} = \nabla + C ^{\infty}\left(X, T^*X\otimes _{\R}\mathrm{End}_{\C}E\right)
+\] The space of covariant derivatives is an affine vector space modelled on the vector space of 1-forms valued in $\mathrm{End}(E)$. In some sense they are pretty straightforward objects. We will continue with this on Wednesday.

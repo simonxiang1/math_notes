@@ -1,0 +1,61 @@
+\section{Hodge Theory on complex surfaces} 
+Today we will discuss the Hodge index theorem and KS surfaces.
+\subsection{K\"ahler manifolds}
+Let $X$ be a complex manifold (holomorphic atlas), and $J$ be a complex structure, where $J \colon TX \to TX$, $J = i \cdot -$. Then we have the \textbf{hermitian metric} on $X:$ \[
+h_x \colon T_x X \times T_x X \to \C
+\] for all $x \in X$.\footnote{Something about this is different from the quantum mechanical definition.} It satisfies the following properties:
+\begin{itemize}
+\setlength\itemsep{-.2em}
+    \item It is $\R$-bilinear,
+    \item $h_x(Ju,v) = ih_x(u,v) = -h_x(u,Jv)$,
+    \item $h_x(v,n) =  \overline{h_x(v,v)}$,
+    \item $h_x(u,u \in \R) > 0$ for every $u \neq 0$.
+\end{itemize}Then $h = g+ i\omega$, where $g$ is a Riemannian metric for $J \in O(g)$, and $\omega$ is a 2-form, where $\omega (J_n ,J_v) =  \omega(u,v)$. Think of $J$ as given. Then $\omega \leftrightarrow g$, with $g(u,v) =\omega (u, Jv)$, etc. So $\Lambda^2(X) \otimes \C = \Lambda^{2,0}\oplus \Lambda_{1,1}\otimes \alpha ^{0,2}$, with eigenvalues $i^2,i^0, i ^{-2}$, since this is $i ^{p-q}$ on $\Lambda^{p-q}$. This distinguishes $\omega$ as a $(1,1)$-form since it lives in the right eigenvalue of $J$. 
+We can think of $h$ as determining and being determined by this $(1,1)$-form $\omega$, such that $\omega(v, Jv)>0$ for all $v\neq 0$.
+\begin{definition}[]
+    A \textbf{K\"ahler manifold} $(X,J,h = g+i \omega)$ is a complex manifold plus a hermitian metric $h$ such that $d\omega =0$. In other words, its imaginary part $\omega$ is a closed 2-form.    
+\end{definition}
+This is a mysterious yet natural condition, since 2-forms being closed is something to think about. Instead of $h$, you can specify a closed positive $(1,1)$-form $\omega$ (positive means $\omega(v,Jv) >0$). Here $g$ is called a \textbf{K\"ahler metric} and $\omega$ is called a \textbf{K\"ahler form}. So K\"ahler forms are the harmonious intersection between complex, symplectic, and Riemannian geometry.
+\begin{example}
+    Some examples:
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+        \item For the complex tori $T = \C^n  /$lattice, it has a complex structure and $\omega$ an intersection form on $\C^n $, which is translation invariant.
+        \item  A crucial example is $\C \mathrm{P^N }$. The assertion is that this carries a unique K\"ahler form $\omega_{\C \mathrm{P^N }}$ such that it is as symmetric as can be, that is, $\omega _{\C\mathrm{P^N}}$ is invariant under the action of $PU(N+1)$ on $\C \mathrm{P^N}$. So $\int _{\C \mathrm{P^1}}\omega _{\C\mathrm{P^N}}=1$. We will see this form often as the curvature of a line bundle. In general we have a K\"ahler class $[\omega] \in H^2_{\mathrm{DR}}(X)$, but in this case $[\omega _{\C \mathrm{P^N}}]$ actually lies in the integer lattice $H^2_{\Z}$.
+        \item If $X \subseteq \C \mathrm{P^N}$ is a complex submanifold, then the restriction $\left. \omega _{\C \mathrm{P^N}} \right| _X$ is a K\"ahler form. Then smooth algebraic varieties (things cut out of $\C \mathrm{P^N}$ with homogeneous equations) admit K\"ahler forms, moreover \emph{integral} K\"ahler forms ($[\omega] \in H^2_{\Z}$).
+            \item The \textbf{Kodaira embedding theorem} says that if $X$ a complex complex manifold admits an integral K\"ahler form, then $X$ embeds in $\C \mathrm{P^N}$ for sufficiently large $N$. For example, integral K\"ahler forms are extremely cheap for Riemann surfaces; take any volume form with integral one. Then by Kodaira's theorem this embeds in complex projective space.
+            \item \textbf{Chow's theorem} says that $X$ is furthermore algebraic. So the Riemann surface is actually cut out by homogeneous polynomial equations.
+    \end{itemize}
+\end{example}
+
+\subsection{Hodge theory}
+We will only make assertions here, no proofs. For $(X,J, h = g+ i\omega)$ a compact K\"ahler manifold, the $(p,q)$-components of a $g$-harmonic $k$-form are still harmonic. The differential forms split up as $\Omega^k \otimes \C = \bigoplus_{p+q=k} \Lambda^{p,q}$. It turns out that the \emph{harmonic} $k$-forms split up the same way; $\mathcal H^k \otimes \C = \bigoplus _{p+q=k}\mathcal H^{p,q}$,  where $\mathcal H ^{p,q}$ is $\Lambda ^{p,q}\cap (\mathcal H^k\otimes \C)$. This turns out to be \emph{extremely} useful.
+
+Recall that $\overline{\Lambda^{p,q}}= \Lambda^{q,p}$. So $\mathcal H ^{p-q}= \mathcal H ^{q,p}$. We have $h ^{p,q}= \dim \mathcal H ^{p,q}$, so the Betti number is given by $b^k = \sum _{p+q=k}h ^{p,q}$, where $h ^{qp}= h ^{pq}$.
+\begin{definition}[]
+    A \textbf{Hodge structure} of weight $k$ on an abelian group $H _{\Z}$ is a vector space decomposition \[
+    H _{\Z}\otimes \C = \bigoplus _{p+q=k}H ^{p,q}, \quad H ^{q,p}=\overline{ H ^{p,q}}.
+    \] 
+\end{definition}
+For $X$ compact K\"ahler, we get a weight $k$ Hodge structure on $H^k(X;\Z)$, because
+\[
+H^k (X;\Z)\otimes \Z \cong \mathcal H^k \otimes \C = \bigoplus \mathcal H ^{p,q}.
+\] Note that this is is a similar flavor to the things we've been talking about our Riemannian 4-manifolds, with the decomposition into the self dual and anti-self dual parts. The word ``period map'' is really borrowed from Hodge theory. 
+Even more is true. The space $\mathcal H ^{p,q}$ is canonically identified with a gadget form complex analytic geometry, the $q$-th \emph{sheaf cohomology} $H^q(X;\mathcal A^p)$, where  $\mathcal A^p  = \Lambda_{\mathcal O_X}^p(J^*X)$ is the $p$-th exterior power of the holomorphic cotangent sheaf, and $\mathcal O_X$ is the sheaf of holomorphic functions. For example, if $X$ is a compact Riemann surface, \[
+    \underset{\dim 2g}{\underbrace{H^1(X, \C)}}  = \underset{g, \text{ holomorphic 1-forms}}{\underbrace{H^0(J^*X)}}  \oplus \underset{g}{\underbrace{H^1(\mathcal O_X)}} 
+\] We cannot say much about $H^1$ and $H^2$, but $H^0(\mathcal A^p)$ is the set of holomorphic $p$-forms, which is locally (on $(z_1, \cdots ,z_n )$) the sum $\sum _{|I| = p}f_I dz_I$ for $f_I$ holomorphic.
+
+\subsection{Complex K\"ahler surfaces}
+We have $H^2 (X;\C ) = \mathcal H ^{2,0}\cong  H^0(\mathcal A^2)\oplus \mathcal H ^{1,1}\cong  H^1(\mathcal A^1) \oplus \mathcal H^{0,2}\cong  H^2 (\mathcal O)$, where $\mathcal H^{2,0}\leftrightarrow \mathcal H^{0,2}$ and $\mathcal H^{1,1}\leftrightarrow \mathcal H^{1,1}$ by complex conjugation. We saw (pointwise) that $\Lambda^2 \otimes \C = \Lambda^+ \otimes \C \oplus \Lambda^- \otimes \C$. We observed that $\Lambda^+ \otimes \C = \Lambda^{2,0}\otimes \C \cdot \omega \oplus \Lambda^{0,2}$, and $\Lambda^- \otimes \C = \Lambda^{1,1}_0$ for $\omega ^{\perp}$. What we can do is apply this \emph{globally} to harmonic 2-forms; what we get is that self-dual harmonic forms complexified consist of the the harmonic $(2,0)$ forms, harmonic $(0,2)$ forms, and complex copies of the K\"ahler form $\omega$. \[
+\mathcal H^+ \otimes \C = \mathcal H ^{2,0}\otimes \C \cdot  \omega \oplus \mathcal H ^{0,2},
+\] where $\mathcal H^- = \mathcal H ^{1,1}_0$ for $\omega ^+ \subseteq \mathcal H ^{1,1}$. This just follows from the pointwise calculation we just did. This immediately implies what we call the Hodge index theorem.
+\begin{namedthm}{Hodge index theorem} 
+   For $X$ a compact K\"ahler surface, 
+   \begin{itemize}
+   \setlength\itemsep{-.2em}
+       \item $b^+ = 1 + 2 h ^{2,0}$. 
+       \item Moreover, the wedge product form on $\mathcal H^{1,1}, \eta \mapsto  \int _X \eta \wedge \eta$ has ``signature'' $(1, b^- -1)$.
+   \end{itemize}
+\end{namedthm}
+For example, if you look at the N\'eron-Severi group $\mathrm{NS}(X) = \mathcal H ^{1,1} \cap  H^2_{\Z}$, it has a complex curve $C \subseteq X$, and $PD[C] \in  \mathrm{NS}(X)$. So the intersection form on $\mathrm{NS}(X)$ is negative definite on $\perp $ to $[\omega]$.
+

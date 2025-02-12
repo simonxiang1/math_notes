@@ -1,0 +1,43 @@
+\section{Spinors, continued} 
+We had $k$ a field, $(V,q)$ a quadratic $k$-space (vector space with a quadratic form on it). We build from that the Clifford algebra $\mathrm{Cl}(V,q) = \mathrm{Cl}^0 \oplus \mathrm{Cl}^1$, a $\Z/2$-graded associative unital $k$-algebra. If $\dim V = n$, then $\dim \mathrm{Cl}(V,q)= 2^n $. We began on spinors; a \textbf{spinor module} over some extension field $K$ is a $\Z/2$-graded $ K$-vector space $S = S^+ \oplus S^-$, with a representation $\rho \colon \mathrm{Cl}(V,q)\otimes K \to \mathrm{sEnd}(S)$, where  
+\begin{equation*}
+    \mathrm{Cl^0}\mapsto 
+    \begin{bmatrix}
+        *  & 0 \\ 0 & *
+    \end{bmatrix},\quad
+    \mathrm{Cl^0}\mapsto 
+    \begin{bmatrix}
+        0  & * \\ * & 0
+    \end{bmatrix}
+\end{equation*}
+The spinor condition is that $\rho$ is actually an isomorphism of $\Z /2$-graded $K$-algebras.
+\subsection{Construction of spinor modules}
+Say $(V_k, q_k) \cong  (L \oplus L ^{\vee}, \mathrm{ev})$ with $\lambda\in L, \mu \in  L ^{\vee}$. Then $\mathrm{ev}(\lambda + \mu) = \mu(\lambda)$. If $q$ is non-degenerate of even rank and $K$ is algebraically closed ($\C$), fixing the rank all non-degenerate forms are isomorphic. Set $S = \Lambda ^* L ^{\vee}= \Lambda ^{\mathrm{ev}}L ^{\vee}\oplus \Lambda ^{\mathrm{odd}}L ^{\vee}$. When $\dim L = m$, we have \[
+    \dim \mathrm{Cl}(V) = 2^{2m}= (2^m)^2,
+\] so we want $\dim S = 2^m$ where $(S^+ = \Lambda ^{\mathrm{ev}}L ^{\vee})\oplus (S^- = \Lambda ^{\mathrm{odd}}L ^{\vee})$. We have that $\lambda \in  L$ leads to an ``annihilation operator'' $a(\lambda) = \iota_{\lambda} \colon \Lambda^k L ^{\vee} \to \Lambda^{k-1}L ^{\vee}$, and $\mu \in L ^{\vee}$ leads to a ``creation operator'' $c(\mu) = \mu \wedge - \colon \Lambda^k L ^{\vee} \to \Lambda^{k+1}L ^{\vee}$. The formula is that \[
+\rho \colon L \oplus L ^{\vee} \to \mathrm{End}^1(S), \quad \rho (\lambda, \mu) = c(\mu) - a(\lambda).
+\] One can check that the Clifford relations lead to an isomorphism $\rho \colon \mathrm{Cl}(L\oplus L^{\vee}) \to \mathrm{sEnd}(S)$. The easy case is where $\dim L = 1$. Then $L \oplus L ^{\vee}$ with $e \in L$ and $e^{\vee}\in  L ^{\vee}$ has basis $1, e, e ^{\vee}, ee ^{\vee} $, for the Clifford algebra, where $S = K \oplus L ^{\vee}$. Then \[
+\rho(1)=
+\begin{bmatrix}
+    1 & 0 \\ 0 & 1
+\end{bmatrix},\quad \rho(e) = 
+\begin{bmatrix}
+    0 & -1 \\ 0 & 0
+\end{bmatrix},\quad \rho(e^{\vee})=
+\begin{bmatrix}
+    0 & 0 \\ 1 & 0 
+\end{bmatrix},\quad \rho(ee ^v) = 
+\begin{bmatrix}
+    1 & 0 \\ 0 & -1
+\end{bmatrix} 
+\] which are isomorphic to  $\mathrm{sEnd}(S)$. In general, say $L = L_1\oplus \cdots \oplus L_m$ is a sum of lines, where $\mathrm{Cl}(L \oplus L ^{\vee}) \cong \widetilde{\bigotimes} _i \mathrm{Cl}(L_i \oplus L_i  ^{\vee})$, and $\Lambda^* L ^{\vee}\cong  \widetilde{\bigotimes} \Lambda^* L_i  ^{\vee} $, $\rho = \bigotimes \rho_i $ isomorphisms. For example, $\mathrm{Cl}(\R^4, |\cdot |^2)\otimes \C \xrightarrow{\cong } \mathrm{sEnd}(\Lambda^* \C^2)$, where $S^+ = \Lambda^0\oplus \Lambda^2, S = \Lambda^1$.
+
+So far, we have the Clifford algebras and spinor modules. The next thing is the rigidity of spinors, and from this we get a projective (scalar ambiguity) action of $O(V)$ on $S$, or alternatively, on the Clifford algebra $\mathrm{Cl}(V,q)$ itself by invertible automorphisms. Differentiate to get a projective action of the Lie algebra of $O(V)$ on $\mathrm{Cl}(V,q)$ by inner derivations. This can be made concrete, or there is a formula. The spin groups allow us to resolve the scalar ambiguity, and in some sense that is what spin groups are for.
+
+\subsection{Rigidity over $\C$}
+The spinor module $S = S^+ \oplus S^- $ and its parity reversed version $\Pi S = S^- \oplus S^+$ are the only indecomposable representations. Every finite dimensional $\Z/2$-graded representation of $\mathrm{Cl}(V,q)$ is isomorphic to $S ^{\oplus r}\oplus \left( \Pi S \right) ^{\oplus s}$. Why? It is a standard fact from algebra is that the endormorphism of a vector space has  $S$ as its unique indecomposable (left) module. Since $\mathrm{Cl}(V,q) \cong  \mathrm{End}(S)$ (as an ungraded algebra), any module is a sum of copies of $S$. We need to account for the $\Z /2$-grading. The reason is the following; the even Clifford algebra $\mathrm{Cl}^0 (V,q) \cong  \mathrm{End}(S^+) \times \mathrm{End}(S^-)$, so its center $Z = \C \times \C$ reads off the decomposition of $S$ into $S^+ \oplus S^-$ by looking at extension spaces of central involutions. 
+This corresponds to a central involution $\omega \in \mathrm{Cl}^0(V,q)$, where $\omega^2= 1$. Given a Clifford module $T$ which is indecomposable, we know that $T \cong  S$ in an ungraded sense. We read off the $+,-$ parts from the eigenspaces of $\omega$. Now $\omega = e_1 e_1^{\vee} \cdots e_m e_m^{\vee}$.
+
+Now we come to the projective action. For $g \in O(V)$, this implies that $\mathrm{Cl}(g) \in \Aut  \mathrm{Cl}(V,q),  v_1 \cdots v_k \mapsto  gv_1 \cdots gv_k$. We have the action $\rho \colon \mathrm{Cl}(V,q) \to \mathrm{sEnd}(S)$, but we can also look at the representation $\rho \circ \mathrm{Cl}(g)$. By rigidity, these two representations are isomorphic, that is, there exists some $\overline{g} \colon S \to S$ so that $\rho \circ \mathrm{Cl}(g) \circ \overline{g} = \overline{g} \circ \mathrm{Cl}(g)$. We have that $\overline{g}$ is defined up to scalars, that is, we get a representation $\Theta \colon  g \to \Aut(S) / K ^{\times }  \mapsto \overline{g} $. The claim is that $[\rho \circ \mathrm{Cl}(g) ] \circ \overline{g} = \overline{g} \circ \rho$.
+
+

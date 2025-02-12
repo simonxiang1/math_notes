@@ -1,0 +1,66 @@
+\section{Elliptic operators and their symbols} 
+Last time, for vector bundles $E \to M, F\to M$ vector bundles, we discussed the operator $\mathcal D \colon \Gamma(E) \to \Gamma(F)$. Then $\mathcal D$ is a 1st order operator iff $\mathcal D = L \circ j^1$. For every $f \in C ^{\infty}(M)$, we have the zeroth order $[\mathcal D,f]$, where $j^1 s \in \Gamma (J^1 E)$, $L \colon J^1 E  \to F$. So that's a fancy way of saying 1st order operators only depend on first order derivatives. The symbol \[
+    \frac{\mathcal D(E,F)_1}{\mathcal D(E,F)_0} \xrightarrow[\sigma^1]{\cong } \Gamma (\Hom(T^*M\otimes E,F))
+\] sends for $\xi_x \in T_x^* M$, $\sigma^1_{\mathcal D}(\xi_x) \colon E_x \to F_x$, where $\xi_x = (df)_x$, $\sigma^1_{\mathcal D}(\xi_x) = [\mathcal D, f]_x$. 
+\begin{example}
+    For the exterior derivative $d \colon \Omega^k_M \to \Omega^{k+1}_M$, we have $\sigma^1_d(\xi_x) \colon \Lambda^k_x  \to \Lambda^{k+1}_x$, since $[d,f] = df \wedge -$. So the symbol expresses that  $\xi_x $ is wedged with something else.
+\end{example}
+\begin{example}
+    Consider the Dirac operator, with the trivial $\C^2$ bundle on $\C^3$. Then \[
+    \mathcal D = \sigma_1 \frac{\partial }{\partial x_1}+ \sigma_2 \frac{\partial }{\partial x_2}+ \sigma_3 \frac{\partial }{\partial x_3}.
+    \] The matrices are then given by \[
+    \sigma_1 = 
+    \begin{bmatrix}
+        0 & 1 \\ 1 & 0
+    \end{bmatrix},\quad 
+    \sigma_2 = 
+    \begin{bmatrix}
+        i & 0 \\ 0 & -i 
+    \end{bmatrix}, \quad
+    \sigma_3 = 
+    \begin{bmatrix}
+        0 & 1 \\ -1 & 0 
+    \end{bmatrix}
+\] These are matrices chosen with the property that $\sigma_k ^2 = -I$, and $\sigma_j \sigma_k + \sigma_k \sigma_j  = 0$ if $j\neq k$. Then the symbol $\sigma^1_{\mathcal D}(dx_j ) = \sigma_j $.
+\end{example}
+The reason why this operator was introduced is because it squares to the geometer's Laplacian, or $\mathcal D^2 = -\sum \frac{\partial ^2}{\partial x_j ^2}$ (minus of the Laplacian). 
+\begin{example}[Formal adjoints]
+    Suppose we have the formal adjoints $E,F$ with hermitian metrics (for example bundles) or Euclidian if they're real. Let $g$ be a Riemannian metric on $M$. We have a first order operator $\mathcal D \colon \Gamma (E) \to \Gamma (F)$. Then a formal adjoint $\Gamma (E)\xleftarrow{\mathcal D^*} \Gamma (F)$ goes in the opposite direction, and is characterized by the fact that $\langle \mathcal D s, s' \rangle = \langle s, \mathcal D^* s' \rangle $ for  every $s \in \Gamma (E)$, $s' \in \Gamma (F)$. These are $L^2$ inner products, or $\int_M \left. (Ds,s') d\mu \right| _g$. Then if you think for a little bit, the following two expressions\[
+            \langle t, [f,\mathcal D]s \rangle _{L^2(F)}= \langle [D^*,f]t,s \rangle _{L^2(E)}
+    \] are the same. This tells us that the symbol of a formal adjoint applied to some cotangent vector is the same as the symbol of $\mathcal D$ applied to $\xi$, the taking the adjoint operator. In other words, \[
+            \langle t, [f,\mathcal D]s \rangle _{L^2(F)}= \langle [D^*,f]t,s \rangle _{L^2(E)} \implies 
+    \sigma^1 _{\mathcal D^*}(\xi) = -(\sigma^1_{\mathcal D}(\xi))^T.
+    \] 
+\end{example}
+\begin{example}
+    We can compute the symbol of $d^* \colon \Omega^k_M \to \Omega^{k-1}_M$; its symbol is simply given by $\sigma^1_{d^*}(\xi) = - \sigma^1_d(\xi)^* = -(\xi \wedge - )^*$. We just have to work out what the wedging operation is, which turns out to be pretty simple. Here we use the metric on forms induced by the Riemannian metric. So by a little bit of algebra, \[
+        \sigma^1_{d^*}(\xi_x) = -i(\xi^{\flat}_x),\quad  \Lambda ^k _x \to \Lambda  ^{k-1}_x,\ \xi^{\flat}\in T_x M,\ \xi_x = g(\xi^{\flat}, -).
+    \] We have not yet seen a formula for $d^*$, but in a sense this gives one.
+\end{example}
+\begin{definition}[]
+    The first order operator $\mathcal D \in \mathcal D_1(E,F)$ is called \textbf{elliptic} if $\sigma^1_{\mathcal D}(\xi_x) \colon E_x \to F_x$ is a vector space isomorphism for all $x \in M$ and for all $(\xi_x \neq 0) \in T_x ^* M$.
+\end{definition}
+\begin{example}
+    The Dirac operator $\mathcal D$ over $\R^3$ is elliptic since for $\sigma^1 _{\mathcal D}(\xi_x) \colon \C^2 \to \C^2$, we have $\sigma^1_{\mathcal D}(\xi)^2 = - |\xi|^2I$. This follows from the commutation relations between the matrices.
+\end{example}
+\begin{example}
+    The exterior derivative takes $k$-forms to $k+1$-forms; this cannot be elliptic since the domain and codomain have different dimensions. But if we add it to the codimension and think of it as an operator on forms of arbitrary (mixed) degree, this has a chance of being elliptic. \[
+    d \oplus d^* \colon \Omega^*_M \to \Omega^*_M
+\] The symbol $\sigma^1 _{d\oplus d^*}(\xi_x) \colon \Lambda^*_x \to \Lambda^*_x$ is given by $\sigma^1(\xi) = (\xi \wedge -) - i(\xi^{\flat})$. It is not immediately obvious that this is an isomorphism, but you can check readily that $\sigma^1 _{d\oplus d^*}(\xi)^2 = -|\xi|^2\id$.
+\end{example}
+\begin{definition}[]
+    A 1st order operator on $\mathcal \colon \Gamma (E) \to \Gamma (E)$ is called a \textbf{Dirac operator} if its symbol $\sigma^1 _{\mathcal D}(\xi)^2 = -|\xi|^2 \id$. 
+\end{definition}
+\begin{example}
+    The \textbf{quantum Dirac operator}  on $\R^3$ is $d\oplus d^*$.
+\end{example}
+These examples are formally self adjoint, or $\mathcal D^* = \mathcal D$ (along with all operators of geometric interest). For a Dirac operator, $\sigma^1_{\mathcal D^*}=\sigma^1 _{\mathcal D}$, so $\mathcal D - \mathcal D^*$ is a 0th order operator. Some Dirac operators are $\Z/2$-graded, i.e. $E = E ^{\mathrm{ev}}\oplus E ^{\mathrm{odd}}$, where $\mathcal D \colon \Gamma(E ^{\mathrm{ev}}) \leftrightarrows \Gamma (E ^{\mathrm{odd}})  $. 
+\begin{example}
+    Let $(X^4, g)$ be a compact oriented Riemannian manifold, then \[
+        d^* \oplus d^+ \colon \Omega^1_X \to \Omega^0_X \oplus \Omega^+_g,\quad \alpha  \mapsto  d^* \alpha  \oplus (d\alpha )^+.
+    \] The symbol $\sigma^1 (\xi) \colon \Lambda^1_x \to \Lambda^0_x \oplus \Lambda^+_x$ is given by $\sigma^1(\xi) = -i(\xi ^{\flat})\oplus (\xi \wedge -)^+$. A quick check with an orthonormal basis on $\R^4$ shows that if $\xi\neq 0$, then $\sigma^1(\xi)$ is an isomorphism.
+\end{example}
+\subsection{Higher order operators and the Laplacian}
+We have $n$th order operators $\mathcal D \colon \Gamma (E) \to \Gamma (F)$ vector spaces $\mathcal D_n (E,F)$, where $\mathcal D  \in \mathcal D_n (E,F) \iff [\mathcal D,f] \in \mathcal D_{n-1}(E,F)$ for every $f \in C ^{\infty}(M)$. Once again there is a story with jets; this is equivalent to saying that $\mathcal D = L \circ j^n $ for some $L \colon J^n E \to F$, where $J^n E$ is the bundle of $n$-jets of sections of $E$. Sections have the same $n$-jets at $x$ iff they have the same Taylor expansion to some order in the coordinates at $x$. There is an isomorphism $\sigma^n  \colon \frac{\mathcal D_n  (E,F)}{\mathcal D_m(E,F)}\to \Gamma \left(\mathrm{Sym}^n (T^*X)\otimes E,F\right)$, which means degree $n$ homogeneous polynomial functions on a vector space $T_x^* M$. As in the first order case, we can set up this isomorphism abstractly, or write it down in terms of commutators and functions. The formula is that for $\xi \in T_x^*M$, $\xi = (df)_*$ \[
+        \sigma^n _{\mathcal D}(\underset{n}{\underbrace{\xi,\cdots ,\xi}} ) \colon E_x \to F_x,\quad \frac{1}{n!}\left[ \cdots \left[\left[\mathcal D,f\right],f\right] \cdots f\right]
+    \] for $n$ copies of $f$, which is a linear map. This actually respects composition, that is, for $D_1 \in \mathcal D_m (E,F)$, $D_2 \in \mathcal D_n (F,G)$, their composite $D_2 \circ D_1 \in \mathcal D_{m+n}(E,G)$ with symbol given by $\sigma ^{m+1}_{D_2 \circ D_1}= \sigma^n _{D_2}\circ \mathcal D^m_{D_1}$.

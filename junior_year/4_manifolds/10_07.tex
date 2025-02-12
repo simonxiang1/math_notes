@@ -1,0 +1,69 @@
+\section{Gauge transformations, curvature, and characteristic classes} 
+\subsection{Gauge transformations}
+Let $E \to M$ be a complex vector bundle. A \textbf{gauge transformation} is an automorphism $ u \colon E \xrightarrow{\cong } E $, which form a group $G_E$. There is a bundle (\emph{not} a principle bundle) of Lie groups \[
+\begin{tikzcd}
+\mathrm{GL}(E) \arrow[rr, phantom] \arrow[rd] & \subset & \mathrm{End}_{\C}E \arrow[ld] \\
+                                              & M       &                              
+\end{tikzcd}
+\] with $G_E$ the group of sections of $\mathrm{GL}(E) \to M$. When a hermitian metric in $E$ is given, consider the \textbf{unitary} gauge transformations (sections of $U(E) \to M$). If $u \colon E \to E'$ is a vector bundle isomorphism, a covariant derivative $\nabla$ in $E$ induces $\Delta '$ in $E'$. Then \[
+\Delta '_v = u \circ \nabla_v \circ  u^{-1}
+\] for all vector fields $v$. So $G_E$ acts on the left on $\mathcal{C} _E = \{\text{covariant derivatives in } E\} $, and \[
+u \cdot \nabla = u \circ \nabla \circ u^{-1}.
+\] Some cultural confusion; in physics (QFT), they will sometimes describe the unitary group as the gauge group. In math, it's the group of gauge transformations. What mathematicians call the structure group is what physicists call the gauge group.
+
+\subsection{Curvature}
+What is the curvature of this induced covariant derivative (pullback)? It is exactly what you think it is; \[
+F _{u \cdot \nabla}= u \circ F_{\nabla} \circ u^{-1}.
+\] If you have a flat connection, e.g. if $F _{\nabla}=0$ (a flat connection), then $F_{u \cdot \nabla}=0$ for every $u \in G_E$. There are some formulas that one can work out relatively simply.
+\begin{lemma}
+    Suppose we want to compare the gauge transformation $u$ acting on $\nabla$ given by $u \cdot  \nabla$, and $\nabla$. It is given by  \[
+        u \cdot \nabla - \nabla = -(\nabla_u) _{u^{-1}}, 
+    \] where $(\nabla_u)_s = [\nabla,u]s= \nabla(us)-u\nabla s$. 
+\end{lemma}
+\begin{proof}
+    This is just the product rule; apply the Liebniz rule for $\nabla$ to $s = u u^{-1} s$ for $s$ a section of $E$, or $\nabla s =\nabla(u u^{-1} s)$.
+\end{proof}
+\begin{example}
+    Some noteworthy cases:
+    \begin{itemize}
+    \setlength\itemsep{-.2em}
+\item For the trivialized bundle, $\nabla = d+A$, where $A$ is an endomorphism valued 1-form. Then $u(d+A) - (d+A) = -[d+A,u]u^{-1}$.
+\item For a line bundle (rank $E=1$), any automorphism of $E_x$ is multiplication by a complex number. We can think of a gauge transformation $u \in G_E$ as a complex valued function on $M$, or $u \colon M \to \C$. The formula simplifies; we have $u \cdot \nabla- \nabla = -(du)u^{-1}$.
+    \end{itemize}
+\end{example}
+\begin{namedthm}{Bianchi identity} 
+    Consider the exterior derivative $d_{\nabla}$ associated with $\nabla$ and apply it to the curvature 2-form $F _{\nabla}\in \Omega^2_M(\mathrm{End}E)$. Taking the commutator, we have \[
+        [d_{\nabla},F_{\nabla}]=0.
+    \] 
+\end{namedthm}
+\begin{proof}
+    In local coordinates $(x_1,ijk\cdots ,x_n )$, write $F_{\nabla} =\sum _{i,j}F_{ij}dx_{ij}$ (where $dx_{ij}=dx_i \wedge dx_j $). Write $\nabla_i =\nabla_{\partial  /\partial x_i }$. Then
+    \begin{align*}
+        [d_{\nabla},F_{\nabla}]&= \sum [\nabla _i , F_{jk}] dx_{ijk}\\
+                               &= \sum_{i,j,k} [\nabla_i , [\nabla_j ,\nabla_k]] dx_{ijk}\\
+                               &=2\sum _{i<j<k}\left([\nabla_i ,[\nabla_j ,\nabla_k] + [\nabla_j ,[\nabla_k,\nabla_i ]]+[\nabla_k,[\nabla_i ,\nabla_j ]\right)dx_{ijk}
+    \end{align*}which are all zero by the Jacobian of the derivative.
+\end{proof}
+If we consider trivialized bundles $\nabla=d+A$, the Bianchi identity is equivalent to saying that \[
+    d(F _{d_A})= F_{\nabla} \wedge A - A \wedge F_{\nabla}.
+\] 
+\subsection{A little bit of Chern-Weil theory}
+This has to deal with the topological significance of curvature.
+\begin{lemma}
+    The $\C$-valued 2-form given by $\tr F_{\nabla}\in \Omega^2_M(\C)$ is closed ($d(\tr F_{\nabla})=0)$ and its cohomology class in $H^2_{\mathrm{DR}}(M,\C)$ is independent of the covariant derivative $\nabla$.
+\end{lemma}
+\begin{proof}
+    Bianchi says that in a local trivialization $d F_{\nabla}=F_{\nabla} \wedge A - A \wedge F_{\nabla}$, we have $\nabla=d+A$. Taking the trace $\tr(d F_{\nabla})$, we have \[
+        \tr(dF_{\nabla})= \tr( \text{commutator} )=0.
+    \] On the other hand, $\tr(dF_{\nabla})=d(\tr F_{\nabla})$. This shows closedness. Now we want to show that $\tr F_{\nabla'}-\tr F_{\nabla}=d(\text{something} )$. We have $\nabla'= \nabla +a$, and $F_{\nabla'}= F_{\nabla}+[d _{\nabla'}a] + a \nabla$, which implies that $\tr F_{\nabla'}= \tr F_{\nabla}+ \tr [d_{\nabla'}a]$. It turns out that $\tr[d_{\nabla'}a]= \tr da^{-1}$, i.e., $\tr F_{\nabla+a}-\tr F_{\nabla}= d(\tr a)$.
+\end{proof}
+
+So from $E$ we get a cohomology class \[
+    c_1(E) = \left[ \frac{i}{2\pi}\tr F_{\nabla} \right] \in H^2_{\mathrm{DR}}(M),
+\] called the \textbf{first Chern class}. If $f \colon N \to M$ is a smooth map, then $f ^* E \to N$ carries a pullback connection $f^* \nabla$ with curvature $F_{f ^* \nabla}= f^* F_{\nabla}$. From this we get right away that the first Chern class is natural, or $c_1(f^*E) = f^* c_1(E)$. This exactly says that $c_1$ is a \textbf{characteristic class} for complex vector bundles. It is essentially immediate that $c_1(E_1\oplus E_2) = c_1(E_1)+c_1(E_2)$, as $\oplus$ carries a direct sum covariant derivative $\nabla^1 \oplus \nabla^2$. 
+
+If we choose $\nabla$ \emph{unitary}, then $\tr F_{\nabla}$ is an \emph{imaginary} 2-form. So $\frac{i}{2 \pi}F_{\nabla}$ is \textbf{real}, or $c_1$ lives in a \emph{real} (not complex) de Rham cohomology. Why the $2\pi$? It turns out that this implies the Chern class is actually integral, or $c_1(E) \in H^2_{\Z}\subseteq H^2_{\mathrm{DR}}$. Chern-Weil theory goes on to consider more complicated expressions involving the curvature, e.g., \[
+    \left[\frac{1}{8\pi^2}\tr \left(F_{\nabla}\wedge F_{\nabla}\right)\right] = c_2(E) - \frac{1}{2}c_1(E)^2.
+\] We can check that this is closed an independent of the choice of covariant derivative, and we finish by writing down the identity that represents this. \[
+\tr F_{\nabla+a}^2 - \tr F^2_{\nabla}= d \tr \underset{\mathrm{CS}(a)}{\underbrace{\left\{ [a \wedge d_{\nabla},a]+ \frac{2}{3}a \wedge a \wedge a \right\} }} .
+\] This $\mathrm{CS}(a)$ is called the \textbf{Chern-Simons functional}, which is key in the gauge theory on 3-manifolds.
