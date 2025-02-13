@@ -1,5 +1,5 @@
 # Math Notes
-These are a collection of (sometimes incomplete) notes I live-TeXed during my undergraduate studies at UT Austin.
+These are a collection of notes I TeXed (often live in class) during my undergraduate studies at UT Austin. They are often incomplete.
 
 ## Reading Projects
 - [Langevin MCMC (slides)](independent_reading/langevin_MCMC_drp/drp_slides.pdf) — mentored by [Bobby Shi](https://rhshi.github.io/) in Summer 2023. 
@@ -10,13 +10,13 @@ These are a collection of (sometimes incomplete) notes I live-TeXed during my un
 ## Junior
 - [4-manifolds](junior_year/4_manifolds/master_notes.pdf)
 
-At this point I switched to obsidian for note taking. No plan to publish those notes as of now.
+At this point I switched to Obsidian for note taking. No plan to publish those notes as of now.
 
 ## Sophomore
 ### Spring 2022
 - [Algorithms](sophomore_year/algorithms/master_notes.pdf)
-- [Gromov Norm and Bounded Cohomology](sophomore_year/gromov_norm_bdd_cohomology/master_notes.pdf)
-- [Algebraic Topology II](sophomore_year/algebraic_topology_2/master_notes.pdf)
+- [Gromov Norm and Bounded Cohomology](sophomore_year/gromov_norm_bdd_cohomology/master_notes.pdf) (graduate, topics)
+- [Algebraic Topology II](sophomore_year/algebraic_topology_2/master_notes.pdf) (graduate, topics)
 
 ### Fall 2021
 - [Abstract Algebra](sophomore_year/abstract_algebra/master_notes.pdf) (graduate)
