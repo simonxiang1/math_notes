@@ -1,11 +1,11 @@
 # Math Notes
-These are a collection of (sometimes incomplete) notes I live-TeXed during my undergrad at UT Austin.
+These are a collection of (sometimes incomplete) notes I live-TeXed during my undergraduate studies at UT Austin.
 
 ## Reading Projects
-- [Langevin MCMC (slides)](independent_reading/langevin_MCMC_drp/drp_slides.pdf) Mentored by [Bobby Shi](https://rhshi.github.io/) in Summer 2023. 
-- [Topological Quantum Field Theory](independent_reading/tqft_drp/master_notes.pdf) Mentored by [Will Stewart](https://www.sfb1624.uni-hamburg.de/people/associated-researchers/stewart.html) in Spring 2022. [Talk slides](independent_reading/tqft_drp/slides/drp_slides.pdf))
-- [Category Theory (slides)](independent_reading/yoneda_drp/drp_slides.pdf) Mentored by [Rok Gregorik](https://sites.google.com/view/rokgregoric/home) in Fall 2021.
-- [De Rham Cohomology](independent_reading/cohomology_drp/master_notes.pdf): Mentored by [Arun Debray](https://adebray.github.io/) in Spring 2020. [Talk slides](independent_reading/cohomology_drp/drp_slides.pdf))
+- [Langevin MCMC (slides)](independent_reading/langevin_MCMC_drp/drp_slides.pdf) — mentored by [Bobby Shi](https://rhshi.github.io/) in Summer 2023. 
+- [Topological Quantum Field Theory](independent_reading/tqft_drp/master_notes.pdf) — mentored by [Will Stewart](https://www.sfb1624.uni-hamburg.de/people/associated-researchers/stewart.html) in Spring 2022. ([*Talk slides*](independent_reading/tqft_drp/slides/drp_slides.pdf))
+- [Category Theory (slides)](independent_reading/yoneda_drp/drp_slides.pdf) — mentored by [Rok Gregorik](https://sites.google.com/view/rokgregoric/home) in Fall 2021.
+- [De Rham Cohomology](independent_reading/cohomology_drp/master_notes.pdf) — mentored by [Arun Debray](https://adebray.github.io/) in Spring 2020. ([*Talk slides*](independent_reading/cohomology_drp/drp_slides.pdf))
 
 ## Junior
 - [4-manifolds](junior_year/4_manifolds/master_notes.pdf)
